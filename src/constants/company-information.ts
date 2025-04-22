@@ -5,7 +5,7 @@ export const CompanyHoursOperations = "Lun-Vie de 8:30 a 18:15"
 
 // Contact
 export const CompanyWhatsappLink = "https://wa.me/56997832409";
-export const CompanyWhatsappNumber = 56997832409;
+export const CompanyWhatsappNumber = "+56 9 9783 2409";
 export const CompanyEmail = ""
 export const CompanyInstagram = "https://www.instagram.com/garagego.cl/"
 export const CompanyFacebook = "https://www.facebook.com/garagego.cl"
