@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
+import { CompanyDescription, CompanyName } from "@/constants/company-information";
 import { inter } from "@/config/fonts";
 
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Garage Go",
-  description: "El mejor servicio automotriz al precio más conveniente. Reserva ahora tu servicio y vamos a buscar y a dejar tu vehículo a domicilio",
+  title: CompanyName,
+  description: CompanyDescription,
 };
 
 export default function RootLayout({
