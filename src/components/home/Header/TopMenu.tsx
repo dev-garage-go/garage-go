@@ -4,8 +4,8 @@ import Image from 'next/image';
 import { CompanyFacebook, CompanyInstagram, } from '@/constants';
 
 import { Instagram, Facebook, GarageGoLogo } from '@/assets';
-import { WhatsAppButton } from './WhatsAppButton';
-import { BookingButton } from './BookingButton';
+import { WhatsAppButton } from '../Buttons/WhatsAppButton';
+import { BookingButton } from '../Buttons/BookingButton';
 
 
 export const TopMenu = () => {
