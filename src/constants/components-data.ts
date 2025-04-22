@@ -1,4 +1,4 @@
-export const HeaderOptions = [
+export const HeaderLinksOptions: HeaderOption[] = [
   {
     title: "Inicio",
     path: "/"

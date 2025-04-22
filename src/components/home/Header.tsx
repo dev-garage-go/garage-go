@@ -8,11 +8,12 @@ import { IoCloseCircle, IoReorderThreeOutline } from "react-icons/io5";
 
 import { Instagram, Facebook, GarageGoLogo } from '@/assets';
 import { useState } from 'react'
+import { HeaderOption } from './HeaderOption';
 import {
   CompanyFacebook,
   CompanyInstagram,
   CompanyWhatsappLink,
-  HeaderOptions
+  HeaderLinksOptions
 } from '@/constants';
 
 export const Header = () => {
@@ -106,23 +107,10 @@ export const Header = () => {
 
           {/* Links menu - Desktop */}
           <div className="hidden sm:flex justify-between items-center">
-            <ul
-              className={"w-full bg-primaryBlue-500 flex justify-center items-center"}>
-              {HeaderOptions.map((option) => (
-                <li key={option.title}>
-                  <Link
-                    href={option.path}
-                    className={clsx(
-                      "hidden sm:block px-4 py-3 text-center transition-colors text-sm font-light",
-                      pathname === option.path
-                        ? "bg-white text-primaryBlue-500 border border-primaryBlue-500"
-                        : "text-white hover:bg-primaryBlue-700"
-                    )}
-                  >
-                    {option.title}
-                  </Link>
-                </li>
-              ))}
+            <ul className="w-full bg-primaryBlue-500 flex justify-center items-center">
+              <HeaderOption
+                options={HeaderLinksOptions}
+              />
             </ul>
           </div>
 
@@ -140,25 +128,10 @@ export const Header = () => {
               </button>
 
               <ul className="flex-col sm:hidden mt-20">
-                {HeaderOptions.map((option) => (
-                  <li
-                    key={option.title}
-                    className='grid grid-cols-1 gap-8 bg-primaryBlue-500 m-4 rounded-md'
-                  >
-                    <Link
-                      href={option.path}
-                      onClick={() => setMenuOpen(false)} // cierra el menú al hacer click
-                      className={clsx(
-                        "block px-4 py-3 text-sm font-light transition-colors rounded-md",
-                        pathname === option.path
-                          ? "bg-white text-primaryBlue-500 border border-primaryBlue-500"
-                          : "text-white hover:bg-primaryBlue-700"
-                      )}
-                    >
-                      {option.title}
-                    </Link>
-                  </li>
-                ))}
+                <HeaderOption
+                  mobile
+                  options={HeaderLinksOptions}
+                />
               </ul>
 
 
