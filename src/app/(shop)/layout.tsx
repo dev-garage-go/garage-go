@@ -6,7 +6,7 @@ export default function HomeLayout({
 }) {
   return (
     <div>
-      <h1>Hello Root Layout Root Name</h1>
+      {children}
     </div>
   );
 }
