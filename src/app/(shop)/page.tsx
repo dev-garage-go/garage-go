@@ -2,7 +2,7 @@ import { Header } from "@/components";
 
 export default function HomePage() {
   return (
-    <div>
+    <div className="relative">
       <Header />
     </div>
   );
