@@ -1,10 +1,10 @@
 "use client"
 
 import { useState } from "react"
-import { HeaderLinksOptions } from "@/constants"
 import { IoReorderThreeOutline } from "react-icons/io5"
-import { HeaderOption } from "@/components"
-import { SideBar } from "./SideBar"
+
+import { HeaderOption, SideBar } from "@/components"
+import { HeaderLinksOptions } from "@/constants"
 
 export const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)

@@ -1,8 +1,6 @@
 import { IoCloseCircle } from "react-icons/io5"
-import { HeaderOption } from "./HeaderOption"
-import { WhatsAppButton } from "./WhatsAppButton"
-import { BookingButton } from "./BookingButton"
 import { HeaderLinksOptions } from "@/constants"
+import { HeaderOption, WhatsAppButton, BookingButton } from "@/components"
 
 interface SideBarProps {
   menuOpen: boolean
@@ -19,15 +17,16 @@ export const SideBar = ({ menuOpen, setMenuOpen }: SideBarProps) => {
       `}
       onClick={() => setMenuOpen(false)}
     >
-      {/* Sidebar en sí */}
+      {/* Sidebar menu */}
       <aside
         className={`
           fixed top-0 left-0 w-full h-full bg-white shadow-lg z-50
           transform transition-transform duration-300
           ${menuOpen ? "translate-x-0" : "-translate-x-full"}
         `}
-        onClick={(e) => e.stopPropagation()} // evita cerrar al clickear adentro
+        onClick={(e) => e.stopPropagation()} // avoid closing when clicking inside the sidebar
       >
+        {/* Button to close sidebar */}
         <button
           className='absolute right-4 top-4'
           onClick={() => setMenuOpen(false)}
