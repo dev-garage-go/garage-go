@@ -8,3 +8,6 @@ export * from './home/Header/SideBar';
 export * from './home/Header/TopMenu';
 export * from './home/Hero/Hero';
 export * from './home/Hero/HeroButtons';
+export * from './home/Services/BranCarousel';
+export * from './home/Services/ServiceCard';
+export * from './home/Services/Services';
