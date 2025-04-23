@@ -169,7 +169,7 @@ export const Footer = () => {
       </div>
 
       {/* Bottom section of footer */}
-      <section className='bg-white text-center text-black py-4 border-t border-gray-300'>
+      <section className='bg-white text-center text-black p-4 border-t border-gray-300'>
         <p className="text-sm xl:text-base">
           {CompanyCopyRight}
         </p>
