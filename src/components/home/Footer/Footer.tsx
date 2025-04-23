@@ -1,7 +1,8 @@
 import Link from "next/link"
 import Image from 'next/image'
 
-import { GarageGoLogoFooter, MediosPago, TelefonoBlanco } from '@/assets';
+import { GarageGoLogoFooter, MediosPago } from '@/assets';
+import { IoArrowForward, IoCall, IoLogoFacebook, IoLogoInstagram, IoMailSharp } from "react-icons/io5";
 import {
   CompanyEmail,
   CompanyEmailLink,
@@ -13,7 +14,6 @@ import {
   CompanyAddress,
   CompanyCopyRight
 } from '@/constants';
-import { IoArrowForward, IoCall, IoLogoFacebook, IoLogoInstagram, IoMailSharp } from "react-icons/io5";
 
 export const Footer = () => {
   return (
@@ -21,7 +21,7 @@ export const Footer = () => {
       <div className='flex justify-center bg-primaryBlue-900 text-white p-6 xl:p-8'>
         <div className="flex flex-col justify-start items-start sm:grid sm:grid-cols-3 w-full my-5 sm:mx-5 sm:my-10 xl:mx-40 xl:my-20">
 
-          {/* Fist column */}
+          {/* Garage Go image */}
           <div className="relative w-full max-w-48 sm:max-w-xs h-10 sm:h-16 md:h-28 mb-10 xl:mb-20">
             <Image
               src={GarageGoLogoFooter}
@@ -30,7 +30,6 @@ export const Footer = () => {
               className="object-contain"
             />
           </div>
-
 
           <section className='sm:col-start-1 sm:col-end-2'>
             {/* Texts */}
@@ -42,7 +41,9 @@ export const Footer = () => {
               {/* Btns to contact */}
               <div className="flex flex-col justify-start items-start mt-6 sm:mt-10">
                 <Link
+                  rel="noopener noreferrer"
                   href={CompanyWhatsappLink}
+                  target="_blank"
                   className="text-sm xl:text-base cursor-pointer hover:underline flex justify-center items-center gap-2 px-4 py-2">
                   <IoCall
                     size={20}
@@ -54,8 +55,10 @@ export const Footer = () => {
                 </Link>
 
                 <Link
+                  rel="noopener noreferrer"
                   href={CompanyEmailLink}
-                  className="cursor-pointer hover:underline flex justify-center items-center gap-2 px-4 py-2">
+                  target="_blank"
+                  className="bg-red-200  cursor-pointer hover:underline flex justify-center items-center gap-2 px-4 py-2">
                   <IoMailSharp
                     size={20}
                     className="w-4 h-4 xl:h-5 xl:w-5"
@@ -102,7 +105,6 @@ export const Footer = () => {
                 className="object-contain"
               />
             </div>
-
           </section>
 
           {/* Mobile divisor */}
@@ -114,7 +116,9 @@ export const Footer = () => {
             </p>
             <div className="flex flex-col gap-3 sm:gap-4 items-start justify-start mt-6 sm:mt-10">
               <Link
+                rel="noopener noreferrer"
                 href={CompanyInstagram}
+                target="_blank"
                 className="flex items-center justify-center gap-2 hover:underline cursor-pointer">
                 <IoLogoInstagram
                   size={20}
@@ -125,7 +129,9 @@ export const Footer = () => {
                 </p>
               </Link>
               <Link
+                rel="noopener noreferrer"
                 href={CompanyFacebook}
+                target="_blank"
                 className="flex items-center justify-center gap-2 hover:underline cursor-pointer">
                 <IoLogoFacebook
                   size={20}
