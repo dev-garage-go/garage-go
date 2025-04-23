@@ -14,11 +14,11 @@ export const Services = () => {
   const extraServices = ServicesData.slice(5);
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-10 md:py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-[#2D31FA] mb-4">
+          <h2 className="text-4xl font-bold text-primaryBlue-500 mb-4">
             Todos los servicios
             <br />
             que necesita tu auto
@@ -29,12 +29,12 @@ export const Services = () => {
               {"★".repeat(5)}
             </div>
             <span className="text-gray-700 font-medium">4.7</span>
-            <span className="text-[#2D31FA] ml-2 font-medium">Servicios más solicitados</span>
+            <span className="text-primaryBlue-500 ml-2 font-medium">Servicios más solicitados</span>
           </div>
         </div>
 
-        {/* Servicios principales */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {/* Main services */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {firstServices.slice(0, 3).map((service, index) => (
             <ServiceCard
               key={index}
@@ -44,7 +44,7 @@ export const Services = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 mt-8">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-8">
           <div className="md:col-span-3">
             <ServiceCard
               {...firstServices[3]}
@@ -59,7 +59,7 @@ export const Services = () => {
           </div>
         </div>
 
-        {/* Servicios adicionales como bloque animado */}
+        {/* Aditional services as animated block */}
         <AnimatePresence initial={false}>
           {viewAll && (
             <motion.div
@@ -69,7 +69,7 @@ export const Services = () => {
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.4, ease: "easeInOut" }}
             >
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
                 {extraServices.map((service, index) => (
                   <ServiceCard
                     key={service.title}
@@ -82,17 +82,17 @@ export const Services = () => {
           )}
         </AnimatePresence>
 
-        {/* Botón toggle */}
+        {/* Toggle button */}
         <div className="text-center mt-12">
           <button
             onClick={() => setViewAll(!viewAll)}
-            className="bg-[#2D31FA] text-white px-8 py-3 rounded-lg hover:opacity-90 font-medium transition"
+            className="bg-primaryBlue-500 text-white px-8 py-3 rounded-lg hover:opacity-90 font-medium transition"
           >
             {viewAll ? "Ver menos" : "Ver todos"}
           </button>
         </div>
 
-        {/* Carrusel */}
+        {/* Carousel */}
         <div className="mt-16">
           <BrandCarousel />
         </div>
