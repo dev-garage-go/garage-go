@@ -58,7 +58,7 @@ export const Footer = () => {
                   rel="noopener noreferrer"
                   href={CompanyEmailLink}
                   target="_blank"
-                  className="bg-red-200  cursor-pointer hover:underline flex justify-center items-center gap-2 px-4 py-2">
+                  className="cursor-pointer hover:underline flex justify-center items-center gap-2 px-4 py-2">
                   <IoMailSharp
                     size={20}
                     className="w-4 h-4 xl:h-5 xl:w-5"
