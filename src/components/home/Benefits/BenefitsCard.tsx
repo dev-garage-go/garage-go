@@ -10,7 +10,7 @@ interface Props {
 export const BenefitsCard = ({ btnString, image, name }: Props) => {
   return (
     // Frame
-    <div className='relative flex flex-col h-full bg-white shadow-xl' key={name}>
+    <div className='relative flex flex-col h-full w-full max-w-sm bg-white shadow-xl' key={name}>
       {/* Name of benefit */}
       <div className='flex justify-center items-center p-6 w-full bg-primaryBlue-500'>
         <p className='text-sm md:text-base text-white'>
@@ -36,7 +36,6 @@ export const BenefitsCard = ({ btnString, image, name }: Props) => {
         </div>
 
       </div>
-
     </div>
   )
 }

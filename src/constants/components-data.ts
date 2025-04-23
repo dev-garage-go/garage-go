@@ -27,7 +27,6 @@ export const HeaderLinksOptions: HeaderOptionInterface[] = [
   },
 ]
 
-
 export const ServicesData: ServicesInterface[] = [
   {
     title: "Mantencion por kilometraje",
@@ -91,3 +90,26 @@ export const ServicesData: ServicesInterface[] = [
     features: ["super-check"]
   }
 ];
+
+export const BenefitsData: BenefitsInterface[] = [
+  {
+    name: "30% en Mantencion por kilometraje",
+    btnString: "Agenda ahora",
+    image: Revision
+  },
+  {
+    name: "15% en Cambio de aceita",
+    btnString: "Agenda ahora",
+    image: Revision
+  },
+  {
+    name: "Gestion de Revision Tecnica",
+    btnString: "Cotiza ahora",
+    image: Revision
+  },
+  {
+    name: "4x3 en Neumaticos",
+    btnString: "Cotiza ahora",
+    image: Revision
+  },
+]
