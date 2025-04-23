@@ -9,18 +9,20 @@ import {
   CompanyHoursOperations,
   CompanyInstagram,
   CompanyWhatsappLink,
-  CompanyPhoneNumber
+  CompanyPhoneNumber,
+  CompanyAddress,
+  CompanyCopyRight
 } from '@/constants';
 import { IoArrowForward, IoCall, IoLogoFacebook, IoLogoInstagram, IoMailSharp } from "react-icons/io5";
 
 export const Footer = () => {
   return (
     <footer>
-      <div className='flex justify-center bg-primaryBlue-900 text-white p-8'>
-        <div className="grid grid-cols-3 w-full mx-40 my-20">
+      <div className='flex justify-center bg-primaryBlue-900 text-white p-6 xl:p-8'>
+        <div className="flex flex-col justify-start items-start sm:grid sm:grid-cols-3 w-full my-5 sm:mx-5 sm:my-10 xl:mx-40 xl:my-20">
 
           {/* Fist column */}
-          <div className="relative w-full max-w-xs h-28 mb-20">
+          <div className="relative w-full max-w-48 sm:max-w-xs h-10 sm:h-16 md:h-28 mb-10 xl:mb-20">
             <Image
               src={GarageGoLogoFooter}
               alt="Descripción"
@@ -29,22 +31,24 @@ export const Footer = () => {
             />
           </div>
 
-          <section className='col-start-1 col-end-2'>
+
+          <section className='sm:col-start-1 sm:col-end-2'>
             {/* Texts */}
             <div className="flex flex-col">
-              <p className="text-base">
-                Cordillera 580, Salida Lo Boza Pudahuel.
+              <p className="text-sm xl:text-base">
+                {CompanyAddress}
               </p>
 
               {/* Btns to contact */}
-              <div className="flex flex-col justify-start items-start mt-10">
+              <div className="flex flex-col justify-start items-start mt-6 sm:mt-10">
                 <Link
                   href={CompanyWhatsappLink}
-                  className="cursor-pointer hover:underline text-base flex justify-center items-center gap-2 px-4 py-2">
+                  className="text-sm xl:text-base cursor-pointer hover:underline flex justify-center items-center gap-2 px-4 py-2">
                   <IoCall
                     size={20}
+                    className="w-4 h-4 xl:h-5 xl:w-5"
                   />
-                  <p className="text-base">
+                  <p className="text-sm xl:text-base">
                     {CompanyPhoneNumber}
                   </p>
                 </Link>
@@ -54,36 +58,43 @@ export const Footer = () => {
                   className="cursor-pointer hover:underline flex justify-center items-center gap-2 px-4 py-2">
                   <IoMailSharp
                     size={20}
+                    className="w-4 h-4 xl:h-5 xl:w-5"
                   />
-                  <p className="text-base">
+                  <p className="text-sm xl:text-base">
                     {CompanyEmail}
                   </p>
                 </Link>
               </div>
 
-              <div className="mt-10">
-                <p className="text-base">
+              <div className="mt-6 sm:mt-10">
+                <p className="text-sm xl:text-base">
                   Horario de atencion
                 </p>
-                <p className="text-base">
+                <p className="text-sm xl:text-base">
                   {CompanyHoursOperations}
                 </p>
               </div>
             </div>
 
-            <div className="flex flex-col gap-2 mt-10 w-full max-w-64">
-              <button className="font-light flex gap-2 items-center justify-center py-2 border border-white rounded">
+            <div className="flex flex-col gap-3 sm:gap-2 mt-6 sm:mt-10 w-full max-w-52 sm:max-w-64">
+              <button className="text-sm xl:text-base font-light flex gap-2 items-center justify-center py-2 border border-white rounded">
                 Politicas de privacidad
-                <IoArrowForward />
+                <IoArrowForward
+                  size={20}
+                  className="w-4 h-4 xl:h-5 xl:w-5"
+                />
               </button>
-              <button className="font-light flex gap-2 items-center justify-center py-2 border border-white rounded">
+              <button className="text-sm xl:text-base font-light flex gap-2 items-center justify-center py-2 border border-white rounded">
                 Terminos y condiciones
-                <IoArrowForward />
+                <IoArrowForward
+                  size={20}
+                  className="w-4 h-4 xl:h-5 xl:w-5"
+                />
               </button>
             </div>
 
             {/* Payment method */}
-            <div className="relative mt-20 w-full h-20">
+            <div className="relative mt-6 sm:mt-10 xl:mt-20 w-full h-20">
               <Image
                 src={MediosPago}
                 fill
@@ -94,42 +105,62 @@ export const Footer = () => {
 
           </section>
 
-          <section className="col-start-2 col-end-3 justify-between items-center">
-            <p>Siguenos en nuestras redes sociales</p>
-            <div className="flex flex-col gap-4 items-start justify-start mt-10">
-              <button className="flex items-center justify-center gap-2 hover:underline cursor-pointer">
+          {/* Mobile divisor */}
+          <div className="h-0.5 w-full rounded bg-white opacity-30 mt-4 mb-10 sm:hidden" />
+
+          <section className="sm:col-start-2 col-end-3 justify-between items-center">
+            <p className="text-sm xl:text-base">
+              Siguenos en nuestras redes sociales
+            </p>
+            <div className="flex flex-col gap-3 sm:gap-4 items-start justify-start mt-6 sm:mt-10">
+              <Link
+                href={CompanyInstagram}
+                className="flex items-center justify-center gap-2 hover:underline cursor-pointer">
                 <IoLogoInstagram
                   size={20}
+                  className="w-4 h-4 xl:h-5 xl:w-5"
                 />
-                <p>Instagram</p>
-              </button>
-              <button className="flex items-center justify-center gap-2 hover:underline cursor-pointer">
+                <p className="text-sm xl:text-base">
+                  Instagram
+                </p>
+              </Link>
+              <Link
+                href={CompanyFacebook}
+                className="flex items-center justify-center gap-2 hover:underline cursor-pointer">
                 <IoLogoFacebook
                   size={20}
+                  className="w-4 h-4 xl:h-5 xl:w-5"
                 />
-                <p>Facebook</p>
-              </button>
+                <p className="text-sm xl:text-base">
+                  Facebook
+                </p>
+              </Link>
             </div>
           </section>
 
-          <section className="col-start-3 col-end-4">
+          {/* Mobile divisor */}
+          <div className="h-0.5 w-full rounded bg-white opacity-30 my-10 sm:hidden" />
+
+          <section className="sm:col-start-3 sm:col-end-4">
             <form className="flex flex-col justify-center w-full gap-4 max-w-md">
-              <p>Escribenos y uno de nuestros ejecutivos resolvera tus dudas</p>
+              <p className="text-sm xl:text-base">
+                Escribenos y uno de nuestros ejecutivos resolvera tus dudas
+              </p>
 
               <input
-                className="rounded h-10"
+                className="text-sm xl:text-base rounded h-8 xl:h-10"
                 type="text" />
               <input
-                className="rounded h-10"
+                className="text-sm xl:text-base rounded h-8 xl:h-10"
                 type="text" />
               <textarea name="description"
-                className="rounded h-40 "
+                className="text-sm xl:text-base rounded h-32 xl:h-40 "
                 placeholder=""
                 id="">
               </textarea>
 
               <button
-                className="w-full p-3 bg-primaryPink-500 rounded mt-5">
+                className="text-sm xl:text-base w-full p-2 xl:p-3 bg-primaryPink-500 rounded mt-5">
                 Enviar
               </button>
             </form>
@@ -139,7 +170,9 @@ export const Footer = () => {
 
       {/* Bottom section of footer */}
       <section className='bg-white text-center text-black py-4 border-t border-gray-300'>
-        <p>©2019 - 2025 Garage Go. Todos los derechos reservados.</p>
+        <p className="text-sm xl:text-base">
+          {CompanyCopyRight}
+        </p>
       </section>
     </footer>
   )
