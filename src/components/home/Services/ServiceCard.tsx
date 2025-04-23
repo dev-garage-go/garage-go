@@ -3,12 +3,6 @@
 import Image from "next/image";
 import { Garantia, PickDelivery, SuperCheck } from "@/assets";
 
-interface ButtonProps {
-  text: string;
-  variant: string;
-  icon?: string;
-}
-
 interface Props {
   title: string;
   price?: number;

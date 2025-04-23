@@ -1,6 +1,6 @@
 import { Aceite, CambioNeumaticos, CambioParabrisas, ChequeoPreventivo, Mantencion, Revision } from "@/assets";
 
-export const HeaderLinksOptions: HeaderOption[] = [
+export const HeaderLinksOptions: HeaderOptionInterface[] = [
   {
     title: "Inicio",
     path: "/"
@@ -28,7 +28,7 @@ export const HeaderLinksOptions: HeaderOption[] = [
 ]
 
 
-export const ServicesData = [
+export const ServicesData: ServicesInterface[] = [
   {
     title: "Mantencion por kilometraje",
     price: 189900,
@@ -53,7 +53,6 @@ export const ServicesData = [
     image: CambioNeumaticos,
     discount: "3x4",
     features: ["pick-delivery", "super-check", "garantia"],
-    isWide: true,
     buttons: [
       {
         text: "Revisa tu talla",

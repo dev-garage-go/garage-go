@@ -1,4 +1,4 @@
-interface HeaderOption {
+interface HeaderOptionInterface {
   title: string,
   path: string
 }

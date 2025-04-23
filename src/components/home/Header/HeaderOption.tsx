@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 
 interface Props {
   mobile?: boolean
-  options: HeaderOption[]
+  options: HeaderOptionInterface[]
 }
 
 export const HeaderOption = ({ mobile, options }: Props) => {
