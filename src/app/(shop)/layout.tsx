@@ -1,12 +1,15 @@
+import { Footer, Header } from "@/components";
 
 export default function HomeLayout({
- children
+  children
 }: {
- children: React.ReactNode;
+  children: React.ReactNode;
 }) {
   return (
-    <div>
+    <>
+      <Header />
       {children}
-    </div>
+      <Footer />
+    </>
   );
 }

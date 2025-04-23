@@ -1,0 +1,1 @@
+export const Mujer = "/images/chica_1.png"

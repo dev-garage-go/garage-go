@@ -1,11 +1,9 @@
-import { Header, Footer } from "@/components";
+import { Hero } from "@/components";
 
 export default function HomePage() {
   return (
-    <div className="relative">
-      <Header />
-      <div className="h-screen bg-white" />
-      <Footer />
-    </div>
+    <main className="relative bg-white min-h-screen ">
+      <Hero />
+    </main>
   );
 }
