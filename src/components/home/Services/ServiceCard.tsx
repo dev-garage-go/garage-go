@@ -1,5 +1,6 @@
 "use client"
 
+import Image from "next/image";
 import { Garantia, PickDelivery, SuperCheck } from "@/assets";
 
 interface ButtonProps {
@@ -42,8 +43,13 @@ export const ServiceCard = ({
       </div>
 
       <div className="bg-white rounded-2xl shadow-md flex-1 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-        <div className="relative">
-          <img src={image} alt={title} className="w-full h-48 object-cover" />
+        <div className="relative w-full h-48">
+          <Image
+            fill
+            src={image}
+            alt={title}
+            className="object-cover"
+          />
           {discount && (
             <span className="absolute top-4 left-4 bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-medium">
               {discount}
@@ -54,11 +60,13 @@ export const ServiceCard = ({
         <div className="p-6 flex flex-col flex-1">
           <div className="flex gap-4 mb-auto">
             {features.map((feature, index) => (
-              <img
+              <Image
+                height={24}
+                width={50}
                 key={index}
                 src={featureIcons[feature]}
                 alt={feature}
-                className="h-6"
+                className="object-contain"
               />
             ))}
           </div>
@@ -77,7 +85,7 @@ export const ServiceCard = ({
             ) : (
               <>
                 {price && (
-                  <div className="bg-[#1E1B4B] text-white px-4 py-2 rounded-lg font-medium mr-auto">
+                  <div className="flex items-center bg-[#1E1B4B] text-white text-center px-4 py-2 rounded-lg font-medium mr-auto">
                     Desde $ {price.toLocaleString('es-CL')}
                   </div>
                 )}

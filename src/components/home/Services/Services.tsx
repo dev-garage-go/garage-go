@@ -2,9 +2,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  GoogleIcon,
-} from '@/assets';
+
+import { GoogleIcon } from '@/assets';
 import { BrandCarousel, ServiceCard } from '@/components';
 import { ServicesData } from '@/constants';
 
@@ -60,28 +59,30 @@ export const Services = () => {
           </div>
         </div>
 
-        {/* Servicios adicionales animados individualmente */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-          <AnimatePresence>
-            {viewAll &&
-              extraServices.map((service, index) => (
-                <motion.div
-                  key={service.title}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: 20 }}
-                  transition={{ duration: 1, delay: index * 0.05 }}
-                >
+        {/* Servicios adicionales como bloque animado */}
+        <AnimatePresence initial={false}>
+          {viewAll && (
+            <motion.div
+              layout
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.4, ease: "easeInOut" }}
+            >
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
+                {extraServices.map((service, index) => (
                   <ServiceCard
+                    key={service.title}
                     {...service}
                     func={() => console.log(`Agendar: ${service.title}`)}
                   />
-                </motion.div>
-              ))}
-          </AnimatePresence>
-        </div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
-        {/* Botón */}
+        {/* Botón toggle */}
         <div className="text-center mt-12">
           <button
             onClick={() => setViewAll(!viewAll)}
@@ -91,7 +92,7 @@ export const Services = () => {
           </button>
         </div>
 
-        {/* Carrusel de marcas */}
+        {/* Carrusel */}
         <div className="mt-16">
           <BrandCarousel />
         </div>
