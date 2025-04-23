@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { IoLogoWhatsapp } from "react-icons/io5";
-import { CompanyWhatsappLink, CompanyWhatsappNumber } from '@/constants'
+import { CompanyWhatsappLink, CompanyPhoneNumber } from '@/constants'
 
 export const WhatsAppButton = () => {
   return (
@@ -13,7 +13,7 @@ export const WhatsAppButton = () => {
         size={20}
         className='text-white'
       />
-      {CompanyWhatsappNumber}
+      {CompanyPhoneNumber}
     </Link>
   )
 }
