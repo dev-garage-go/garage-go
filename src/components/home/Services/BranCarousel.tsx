@@ -40,7 +40,7 @@ export const BrandCarousel = () => {
   }, []);
 
   return (
-    <div className="overflow-hidden relative w-full bg-gray-50">  {/* Cambiado de max-w-5xl a max-w-7xl */}
+    <div className="mt-16 overflow-hidden relative w-full bg-gray-50">  {/* Cambiado de max-w-5xl a max-w-7xl */}
       <div
         className="flex transition-transform duration-100 ease-linear"
         style={{ transform: `translateX(${position}px)` }}

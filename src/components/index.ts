@@ -1,3 +1,5 @@
+export * from './home/Benefits/Benefits';
+export * from './home/Benefits/BenefitsCard';
 export * from './home/Buttons/BookingButton';
 export * from './home/Buttons/WhatsAppButton';
 export * from './home/Footer/Footer';

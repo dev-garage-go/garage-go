@@ -14,7 +14,7 @@ export const Services = () => {
   const extraServices = ServicesData.slice(5);
 
   return (
-    <section className="py-10 md:py-16 bg-gray-50">
+    <section>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -90,11 +90,6 @@ export const Services = () => {
           >
             {viewAll ? "Ver menos" : "Ver todos"}
           </button>
-        </div>
-
-        {/* Carousel */}
-        <div className="mt-16">
-          <BrandCarousel />
         </div>
       </div>
     </section>
