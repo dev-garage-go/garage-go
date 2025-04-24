@@ -1,12 +1,25 @@
 import type { Metadata } from "next";
-import { CompanyDescription, CompanyName } from "@/constants/company-information";
+import { CompanyDescription, CompanyName } from "@/constants";
 import { montserrat } from "@/config/fonts";
 
 import "./globals.css";
 
+const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+
+const titleMetadata = {
+  template: CompanyName + ' - %s',
+  default: CompanyName + ' - Home'
+}
+
 export const metadata: Metadata = {
-  title: CompanyName,
+  metadataBase: new URL(baseURL),
+  title: titleMetadata,
   description: CompanyDescription,
+  openGraph: {
+    title: titleMetadata,
+    description: CompanyDescription,
+    images: [`/imgs/logo.png`]
+  }
 };
 
 export default function RootLayout({
