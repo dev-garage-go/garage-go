@@ -14,11 +14,11 @@ export const ReviewCard = ({ name, opinion, profilePicture, score }: Props) => {
   return (
     <div className='flex justify-center items-center bg-primaryBlue-500 w-fit p-6 rounded-lg shadow-md'>
 
-      {/* container */}
+      {/* Container items*/}
       <div className='flex flex-col w-full max-w-xs'>
         {/* Profile image */}
-        <div className='flex justify-start items-center gap-2 sm:gap-4'>
-          <div className='relative h-12 w-12 rounded-full border-2 border-white'>
+        <div className='flex justify-start items-center gap-4'>
+          <div className='flex justify-center items-center relative h-12 w-12 ring-2 ring-white ring-offset-2 ring-offset-blue-600 rounded-full'>
             <Image
               src={profilePicture}
               alt=''
@@ -41,7 +41,7 @@ export const ReviewCard = ({ name, opinion, profilePicture, score }: Props) => {
 
         {/* Text */}
         <div>
-          <p className='text-sm text-white mt-4 w-full max-w-xs'>
+          <p className='text-sm text-white mt-4 '>
             {opinion}
           </p>
         </div>
