@@ -1,10 +1,11 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 import { GoogleIcon } from '@/assets';
-import { BrandCarousel, ServiceCard } from '@/components';
+import { ServiceCard } from '@/components';
 import { ServicesData } from '@/constants';
 
 export const Services = () => {
@@ -24,7 +25,13 @@ export const Services = () => {
             que necesita tu auto
           </h2>
           <div className="flex items-center justify-center gap-2">
-            <img src={GoogleIcon} alt="Google" className="h-5" />
+            <Image
+              width={20}
+              height={20}
+              src={GoogleIcon}
+              alt="Google"
+              className="object-contain"
+            />
             <div className="flex text-yellow-400">
               {"★".repeat(5)}
             </div>
