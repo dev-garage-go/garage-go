@@ -5,11 +5,11 @@ import { CompanySuppliersImages } from '@/constants'
 
 export const BrandsAndLocation = () => {
   return (
-    <section className='container-section'>
+    <section>
 
       <div className='flex flex-col w-full h-full'>
         {/* Title and bg blue */}
-        <div className='flex flex-col justify-center items-center bg-primaryBlue-300 w-full py-12'>
+        <div className='flex flex-col justify-center items-center bg-primaryBlue-300 w-full py-6 sm:py-8 md:py-10 xl:py-12'>
           <h3 className='title-h3 text-center text-white'>
             Trabajamos con las
             <br />
@@ -23,22 +23,26 @@ export const BrandsAndLocation = () => {
         </div>
 
         {/* Company suppliers */}
-        <div className='flex justify-center items-center bg-gray-100 w-full h-56'>
+        <div className="flex flex-wrap justify-center 2xl:justify-between items-center gap-4 w-full sm:p-6 md:py-8 lg:py-10 xl:py-16 bg-gray-100">
           {CompanySuppliersImages.map((supplier, index) => (
-            <div className='relative flex justify-center items-center h-full w-full'>
+            <div
+              key={index}
+              className="relative flex justify-between items-center rounded-md
+                 w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 2xl:w-32 2xl:h-32"
+            >
               <Image
-                key={index}
                 src={supplier.image}
-                fill
                 alt={supplier.name}
-                className='object-contain p-7 opacity-45'
+                fill
+                className="object-contain p-4 opacity-70"
               />
             </div>
           ))}
         </div>
 
+
         {/* Map */}
-        <div className='relative w-full h-[550px] bg-red-300'>
+        <div className='relative w-full h-60 sm:h-72 xl:h-[550px] bg-red-300'>
           <Image
             fill
             priority
