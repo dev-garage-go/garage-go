@@ -1,6 +1,3 @@
-const pathImages = "/images/"
-const pathCarsBrandLogos = "/images/"
-
 // Hero
 export const Mujer = "/images/chica_1.png"
 
@@ -15,6 +12,7 @@ export const GoogleIcon = '/images/icono_google.svg';
 
 export const SuperCheck = '/images/super-check.svg';
 export const Garantia = '/images/garantia.svg';
+export const PickDelivery = '/images/pick-delivery.svg';
 
 // Bran carousel
 export const Audi = '/cars_brand_logos/audi.png';
@@ -28,7 +26,7 @@ export const Jeep = '/cars_brand_logos/jeep.png';
 
 // Banner
 export const AgendaCotiza = "/images/agenda_cotiza.png"
-export const PickAndDelivery = '/images/pick&delivery.png';
+export const PickAndDelivery = '/images/pick-and-delivery.png';
 export const PagaOnline = '/images/paga_en_linea.png'
 export const Playero = '/images/playero.png'
 
