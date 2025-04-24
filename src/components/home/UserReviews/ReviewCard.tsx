@@ -23,7 +23,7 @@ export const ReviewCard = ({ name, opinion, profilePicture, score }: Props) => {
               fill
               src={profilePicture}
               alt='user profile pictures'
-              className='object-cover rounded-fullw-auto h-auto'
+              className='object-cover rounded-full w-auto h-auto'
             />
           </div>
 
