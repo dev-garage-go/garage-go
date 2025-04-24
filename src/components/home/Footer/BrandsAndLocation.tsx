@@ -1,3 +1,4 @@
+import { CompanySuppliersImages } from '@/constants'
 import Image from 'next/image'
 import React from 'react'
 
@@ -5,7 +6,8 @@ export const BrandsAndLocation = () => {
   return (
     <section className='container-section'>
 
-      <div className='flex flex-col w-full'>
+      <div className='flex flex-col w-full h-full'>
+        {/* Title and bg blue */}
         <div className='flex flex-col justify-center items-center bg-primaryBlue-300 w-full py-12'>
           <h3 className='title-h3 text-center text-white'>
             Trabajamos con las
@@ -19,11 +21,25 @@ export const BrandsAndLocation = () => {
           </p>
         </div>
 
-        <div className='h-60 bg-gray-100 w-full'>
+        {/* Company suppliers */}
+        <div className='flex justify-center items-center bg-gray-100 w-full h-56'>
+          {CompanySuppliersImages.map((supplier, index) => (
+            <div className='relative flex justify-center items-center h-full w-full'>
+              <Image
+                key={index}
+                src={supplier.image}
+                fill
+                alt={supplier.name}
+                className='object-contain p-7 opacity-45'
+              />
+            </div>
+          ))}
+        </div>
+        {/* Map */}
+        <div className='w-full h-72'>
           <Image
+            alt=''
             src={""}
-            fill
-            alt='location'
             className='object-cover'
           />
         </div>

@@ -46,7 +46,8 @@ export const ProfilePic5 = `${pathImages}/profile-pic5.avif`
 export const HavalH6 = `${pathImages}/haval_h6gt.png`
 
 // Company suppliers
-export const Bosh = `${pathSuppliers}/bosh.svg`
+export const Bosh = `${pathSuppliers}/bosch.svg`
+export const BoshWideImg = `${pathSuppliers}/bosch-logo.svg`
 export const Bridgestone = `${pathSuppliers}/bridgestone.svg`
 export const Dunlop = `${pathSuppliers}/dunlop.svg`
 export const Falken = `${pathSuppliers}/falken.svg`

@@ -1,7 +1,7 @@
 import {
   Aceite,
   AgendaCotiza,
-  Bosh,
+  BoshWideImg,
   Bridgestone,
   CambioNeumaticos,
   CambioParabrisas,
@@ -236,10 +236,6 @@ export const FAQsData: FAQsInterface[] = [
 
 export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
   {
-    name: "Bosh",
-    image: Bosh
-  },
-  {
     name: "Bridgestone",
     image: Bridgestone
   },
@@ -256,6 +252,10 @@ export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
     image: Goodyear
   },
   {
+    name: "Bosh",
+    image: BoshWideImg
+  },
+  {
     name: "Hankook",
     image: Hankook
   },
@@ -268,11 +268,11 @@ export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
     image: Mobil
   },
   {
-    name: "",
+    name: "Repsol",
     image: Repsol
   },
   {
-    name: "",
+    name: "Thule",
     image: Thule
   },
 ]
