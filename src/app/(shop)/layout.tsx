@@ -1,4 +1,4 @@
-import { Footer, Header } from "@/components";
+import { FooterJoined, Header } from "@/components";
 
 export default function HomeLayout({
   children
@@ -9,7 +9,7 @@ export default function HomeLayout({
     <>
       <Header />
       {children}
-      <Footer />
+      <FooterJoined />
     </>
   );
 }

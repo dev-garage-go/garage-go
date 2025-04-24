@@ -22,6 +22,14 @@
  @apply text-xl md:text-2xl xl:text-3xl font-semibold px-2
 }
 
+.title-h3 {
+ @apply text-lg md:text-xl xl:text-2xl font-medium px-2
+}
+
 .description-of-title-h2 {
  @apply text-base md:text-lg xl:text-xl text-center px-2
+}
+
+.description-of-title-h3 {
+ @apply text-sm md:text-base xl:text-lg text-center px-2
 }
