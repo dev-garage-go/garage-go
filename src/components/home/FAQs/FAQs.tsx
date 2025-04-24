@@ -1,36 +1,12 @@
-'use client'
-
 import Image from 'next/image'
-import React from 'react'
+
 import { FAQsDisclosure } from '@/components'
 import { HavalH6 } from '@/assets'
-
-const FAQsData = [
-  {
-    question: '¿Cómo funciona Garage Go?',
-    answer: 'Puedes agendar, cotizar y reservar directo a través de nuestra web o chateando con nuestros ejecutivos por WhatsApp. Elegí la modalidad de retiro o presencial, ¡y listo!',
-  },
-  {
-    question: '¿Cuánto es la garantía del servicio?',
-    answer: 'Todos nuestros servicios cuentan con un período de garantía de 10.000 kms a partir de la fecha de entrega del vehículo.',
-  },
-  {
-    question: '¿Pick&deliver tiene garantía?',
-    answer: 'Sí, contamos con seguro de accidentes personales y cobertura para tu vehículo de ida y vuelta.',
-  },
-  {
-    question: '¿Cómo cancelar un servicio?',
-    answer: 'Una vez agendado y cancelado el servicio, contás con un período previo al retiro o entrega de la unidad para solicitar un reembolso.',
-  },
-  {
-    question: '¿Qué medios de pago aceptan?',
-    answer: 'Aceptamos todo tipo de pagos. Podés pagar tu servicio contra entrega con débito, crédito, link de pago o POS Getnet.',
-  },
-]
+import { FAQsData } from '@/constants'
 
 export const FAQs = () => {
   return (
-    <section className='container-section bg-gray-100 py-16'>
+    <section className='container-section bg-gray-100 pb-32'>
       <div className='flex flex-col-reverse lg:flex-row w-full max-w-7xl mx-auto padding-central-page gap-10'>
 
         {/* Wrapper sticky */}

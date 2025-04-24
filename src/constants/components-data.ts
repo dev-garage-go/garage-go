@@ -200,3 +200,26 @@ export const UserReviewsData = [
     opinion: "Recomiendo mucho esta empresa y servicio"
   },
 ]
+
+export const FAQsData = [
+  {
+    question: '¿Cómo funciona Garage Go?',
+    answer: 'Puedes agendar, cotizar y reservar directo a través de nuestra web o chateando con nuestros ejecutivos por WhatsApp. Elegí la modalidad de retiro o presencial, ¡y listo!',
+  },
+  {
+    question: '¿Cuánto es la garantía del servicio?',
+    answer: 'Todos nuestros servicios cuentan con un período de garantía de 10.000 kms a partir de la fecha de entrega del vehículo.',
+  },
+  {
+    question: '¿Pick&delivery tiene garantía?',
+    answer: 'Sí, contamos con seguro de accidentes personales y cobertura para tu vehículo de ida y vuelta.',
+  },
+  {
+    question: '¿Cómo cancelar un servicio?',
+    answer: 'Una vez agendado y cancelado el servicio, contás con un período previo al retiro o entrega de la unidad para solicitar un reembolso.',
+  },
+  {
+    question: '¿Qué medios de pago aceptan?',
+    answer: 'Aceptamos todo tipo de pagos. Podés pagar tu servicio contra entrega con débito, crédito, link de pago o POS Getnet.',
+  },
+]

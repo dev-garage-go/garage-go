@@ -4,11 +4,11 @@ export default function HomePage() {
   return (
     <main className="relative bg-white min-h-screen ">
       <Hero />
-      <div className="py-10 md:py-16">
-        <Services />
-        <Benefits />
-        <BrandCarousel />
-        <Banner />
+      <Services />
+      <Benefits />
+      <BrandCarousel />
+      <Banner />
+      <div className="bg-gray-100 h-full">
         <UserReviews />
         <FAQs />
       </div>
