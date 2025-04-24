@@ -145,7 +145,7 @@ export const BenefitsData: BenefitsInterface[] = [
   },
 ]
 
-export const BannerInformation = [
+export const BannerInformation: BannerDisccountsInterface[] = [
   {
     title: "Agenda y cotiza en línea",
     description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",
@@ -168,7 +168,7 @@ export const BannerInformation = [
   },
 ]
 
-export const UserReviewsData = [
+export const UserReviewsData: ReviewsInterface[] = [
   {
     name: "Valeria Avendaño",
     profilePicture: ProfilePic1,
@@ -201,7 +201,7 @@ export const UserReviewsData = [
   },
 ]
 
-export const FAQsData = [
+export const FAQsData: FAQsInterface[] = [
   {
     question: '¿Cómo funciona Garage Go?',
     answer: 'Puedes agendar, cotizar y reservar directo a través de nuestra web o chateando con nuestros ejecutivos por WhatsApp. Elegí la modalidad de retiro o presencial, ¡y listo!',
