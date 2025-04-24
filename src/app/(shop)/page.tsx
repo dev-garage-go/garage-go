@@ -4,10 +4,10 @@ export default function HomePage() {
   return (
     <main className="relative bg-white min-h-screen ">
       <Hero />
-      <div className="py-10 md:py-16 bg-gray-50">
+      <div className="py-10 md:py-16">
         <Services />
         <Benefits />
-        {/* <BrandCarousel /> */}
+        <BrandCarousel />
       </div>
     </main>
   );

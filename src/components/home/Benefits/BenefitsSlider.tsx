@@ -12,9 +12,35 @@ import 'swiper/css';
 import 'swiper/css/free-mode';
 import 'swiper/css/pagination';
 
-
 // import required modules
 import { FreeMode, Pagination } from 'swiper/modules';
+
+const SliderBreakpoints = {
+  320: {
+    slidesPerView: 1.2,
+    spaceBetween: 15,
+  },
+  640: {
+    slidesPerView: 1.6,
+    spaceBetween: 15,
+  },
+  768: {
+    slidesPerView: 1.8,
+    spaceBetween: 20,
+  },
+  1024: {
+    slidesPerView: 2.4,
+    spaceBetween: 25,
+  },
+  1920: {
+    slidesPerView: 3.4,
+    spaceBetween: 28,
+  },
+  2560: {
+    slidesPerView: 4.2,
+    spaceBetween: 30,
+  },
+}
 
 export const BenefitsSlider = () => {
   return (
@@ -23,32 +49,7 @@ export const BenefitsSlider = () => {
         freeMode={true}
         pagination={{ clickable: true }}
         modules={[FreeMode, Pagination]}
-        breakpoints={{
-          320: {
-            slidesPerView: 1.2,
-            spaceBetween: 15,
-          },
-          640: {
-            slidesPerView: 1.6,
-            spaceBetween: 15,
-          },
-          768: {
-            slidesPerView: 1.8,
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 2.4,
-            spaceBetween: 25,
-          },
-          1920: {
-            slidesPerView: 3.4,
-            spaceBetween: 28,
-          },
-          2560: {
-            slidesPerView: 4.2,
-            spaceBetween: 30,
-          },
-        }}
+        breakpoints={SliderBreakpoints}
       >
         {BenefitsData.map((benefit, index) => (
           <SwiperSlide
