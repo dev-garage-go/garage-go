@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { BenefitsCard } from './BenefitsCard'
 import { BenefitsSlider } from './BenefitsSlider'
 
-
+// TODO:Eliminar imports
 export const Benefits = () => {
   return (
     <section>

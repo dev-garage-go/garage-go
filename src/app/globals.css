@@ -5,3 +5,7 @@
 .btn-base-style {
   @apply flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm
 }
+
+.padding-central-page {
+  @apply px-4 sm:px-6 lg:px-8
+}

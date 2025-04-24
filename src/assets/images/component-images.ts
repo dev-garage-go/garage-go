@@ -22,3 +22,6 @@ export const Fiat = '/cars_brand_logos/fiat.png';
 export const Ford = '/cars_brand_logos/ford.png';
 export const Hyundai = '/cars_brand_logos/hyundai.png';
 export const Jeep = '/cars_brand_logos/jeep.png';
+
+// Banner
+export const AgendaCotiza = "/images/agenda_cotiza.png"

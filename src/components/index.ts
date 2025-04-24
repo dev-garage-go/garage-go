@@ -1,4 +1,5 @@
 export * from './home/Banner/Banner';
+export * from './home/Banner/BannerCard';
 export * from './home/Banner/BannerSlider';
 export * from './home/Benefits/Benefits';
 export * from './home/Benefits/BenefitsCard';
