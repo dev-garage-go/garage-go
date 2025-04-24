@@ -112,4 +112,19 @@ export const BenefitsData: BenefitsInterface[] = [
     btnString: "Cotiza ahora",
     image: Revision
   },
+  {
+    name: "20% Cambio de bateria",
+    btnString: "Cotiza ahora",
+    image: Revision
+  },
+  {
+    name: "15% Chequeo preventivo",
+    btnString: "Cotiza ahora",
+    image: Revision
+  },
+  {
+    name: "10% Revision tecnica",
+    btnString: "Cotiza ahora",
+    image: Revision
+  },
 ]

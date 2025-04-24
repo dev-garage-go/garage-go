@@ -18,27 +18,47 @@ import { FreeMode, Pagination } from 'swiper/modules';
 
 export const BenefitsSlider = () => {
   return (
-    <>
+    <div className="w-full p-6 sm:px-10 xl:px-20 overflow-visible">
       <Swiper
-        slidesPerView={3}
-        spaceBetween={30}
         freeMode={true}
-        pagination={{
-          clickable: true,
-        }}
+        pagination={{ clickable: true }}
         modules={[FreeMode, Pagination]}
-        className="w-full max-w-[calc(85%)] bg-red-100"
+        breakpoints={{
+          320: {
+            slidesPerView: 1.2,
+            spaceBetween: 15,
+          },
+          640: {
+            slidesPerView: 1.6,
+            spaceBetween: 15,
+          },
+          768: {
+            slidesPerView: 1.8,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 2.4,
+            spaceBetween: 25,
+          },
+          1920: {
+            slidesPerView: 3.4,
+            spaceBetween: 28,
+          },
+          2560: {
+            slidesPerView: 4.2,
+            spaceBetween: 30,
+          },
+        }}
       >
-
         {BenefitsData.map((benefit, index) => (
           <SwiperSlide
             key={index}
-            className='overflow-visible p-14'
+            className="pb-14"
           >
             <BenefitsCard {...benefit} />
           </SwiperSlide>
         ))}
       </Swiper>
-    </>
+    </div>
   )
 }
