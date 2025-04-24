@@ -31,3 +31,10 @@ export const AgendaCotiza = "/images/agenda_cotiza.png"
 export const PickAndDelivery = '/images/pick&delivery.png';
 export const PagaOnline = '/images/paga_en_linea.png'
 export const Playero = '/images/playero.png'
+
+// Profile
+export const ProfilePic1 = "/images/profile-pic1.jpg"
+export const ProfilePic2 = "/images/profile-pic2.jpeg"
+export const ProfilePic3 = "/images/profile-pic3.jpg"
+export const ProfilePic4 = "/images/profile-pic4.jpg"
+export const ProfilePic5 = "/images/profile-pic5.avif"

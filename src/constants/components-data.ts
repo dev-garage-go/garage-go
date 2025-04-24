@@ -8,6 +8,11 @@ import {
   PagaOnline,
   PickAndDelivery,
   Playero,
+  ProfilePic1,
+  ProfilePic2,
+  ProfilePic3,
+  ProfilePic4,
+  ProfilePic5,
   Revision
 } from "@/assets";
 
@@ -166,31 +171,31 @@ export const BannerInformation = [
 export const UserReviewsData = [
   {
     name: "Valeria Avendaño",
-    profilePicture: "",
+    profilePicture: ProfilePic1,
     score: 4.2,
     opinion: "Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos."
   },
   {
     name: "Alejandro Cisera",
-    profilePicture: "",
+    profilePicture: ProfilePic2,
     score: 4,
     opinion: "Excelente, recomendado, puntuales y responsables, es primera vez que hago la mantención con retiro y entrega de mi vehiculo y aunque estaba asustada todo fue muy profesional."
   },
   {
     name: "Carlos Aventura",
-    profilePicture: "",
+    profilePicture: ProfilePic3,
     score: 4.5,
     opinion: "excelente atención, servicio entregado en el tiempo y forma acordado, totalmente recomendado"
   },
   {
     name: "Eric Zambrano",
-    profilePicture: "",
+    profilePicture: ProfilePic4,
     score: 4,
     opinion: "Retiraron y vinieron a dejar mi auto a la casa, sin costo Lo entregaron limpio por dentro y por fuera, siempre fueron transparentes con los procedimientos que requeria mi vehiculo"
   },
   {
     name: "Elias Maldonado",
-    profilePicture: "",
+    profilePicture: ProfilePic5,
     score: 5,
     opinion: "Recomiendo mucho esta empresa y servicio"
   },
