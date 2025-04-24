@@ -1,4 +1,4 @@
-import { Benefits, BrandCarousel, Hero, Services } from "@/components";
+import { Banner, Benefits, BrandCarousel, Hero, Services } from "@/components";
 
 export default function HomePage() {
   return (
@@ -8,6 +8,7 @@ export default function HomePage() {
         <Services />
         <Benefits />
         <BrandCarousel />
+        <Banner />
       </div>
     </main>
   );

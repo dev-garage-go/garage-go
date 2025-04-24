@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CompanyDescription, CompanyName } from "@/constants/company-information";
-import { inter } from "@/config/fonts";
+import { montserrat } from "@/config/fonts";
 
 import "./globals.css";
 
@@ -16,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-      <body className={inter.className}>
+      <body className={montserrat.className}>
         {children}
       </body>
     </html>
