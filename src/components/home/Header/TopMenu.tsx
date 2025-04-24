@@ -12,7 +12,7 @@ export const TopMenu = () => {
   return (
     <div className="flex justify-between items-center p-3 md:p-4">
       {/* Company Logo */}
-      <div className="relative h-8 w-20 sm:w-28 sm:h-10 bg-red-300 flex justify-start">
+      <div className="relative h-8 w-20 sm:w-28 sm:h-10 flex justify-start">
         <Image
           src={GarageGoLogo}
           fill
