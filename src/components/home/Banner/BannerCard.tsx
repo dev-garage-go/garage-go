@@ -10,18 +10,18 @@ interface Props {
 
 export const BannerCard = ({ description, image, title }: Props) => {
   return (
-    <div className='flex justify-center items-center py-20'>
-      <div className='relative flex items-center w-full max-w-5xl h-96 bg-primaryBlue-900 rounded-3xl shadow-xl overflow-hidden px-10 py-12'>
+    <div className='flex justify-center items-center py-10 md:py-20'>
+      <div className='relative flex items-center w-full max-w-5xl h-72 md:h-96 bg-primaryBlue-900 rounded-3xl shadow-xl overflow-hidden p-6 md:px-10 md:py-12'>
         {/* Texto */}
-        <div className='relative w-1/2 text-white flex flex-col justify-center'>
-          <h2 className='text-2xl font-semibold mb-4'>{title}</h2>
-          <p className='text-base leading-relaxed'>
+        <div className='relative w-full sm:w-1/2 text-white flex flex-col justify-center'>
+          <h2 className='text-xl md:text-2xl font-semibold mb-4'>{title}</h2>
+          <p className='text-sm md:text-base leading-relaxed'>
             {description}
           </p>
         </div>
 
         {/* Imagen: posicionada dentro del contenedor azul */}
-        <div className='absolute bottom-0 right-0 h-full w-1/2'>
+        <div className='hidden sm:block absolute bottom-0 right-0 h-full w-1/2'>
           <Image
             src={image}
             alt='mujer'

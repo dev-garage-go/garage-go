@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { BannerCard } from '@/components';
 import { BannerInformation } from '@/constants';
 
@@ -16,6 +16,17 @@ import 'swiper/css/pagination';
 import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
 
 export const BannerSlider = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const updateSize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
   return (
     <>
       <Swiper
@@ -25,7 +36,7 @@ export const BannerSlider = () => {
         pagination={{
           clickable: true,
         }}
-        navigation={true}
+        navigation={!isMobile}
         modules={[Pagination, Navigation]}
         className="w-full h-full"
       >
