@@ -1,10 +1,18 @@
 import {
   Aceite,
   AgendaCotiza,
+  Bosh,
+  Bridgestone,
   CambioNeumaticos,
   CambioParabrisas,
   ChequeoPreventivo,
+  Dunlop,
+  Falken,
+  Goodyear,
+  Hankook,
+  Keko,
   Mantencion,
+  Mobil,
   PagaOnline,
   PickAndDelivery,
   Playero,
@@ -13,7 +21,9 @@ import {
   ProfilePic3,
   ProfilePic4,
   ProfilePic5,
-  Revision
+  Repsol,
+  Revision,
+  Thule
 } from "@/assets";
 
 export const HeaderLinksOptions: HeaderOptionInterface[] = [
@@ -221,5 +231,48 @@ export const FAQsData: FAQsInterface[] = [
   {
     question: '¿Qué medios de pago aceptan?',
     answer: 'Aceptamos todo tipo de pagos. Podés pagar tu servicio contra entrega con débito, crédito, link de pago o POS Getnet.',
+  },
+]
+
+export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
+  {
+    name: "Bosh",
+    image: Bosh
+  },
+  {
+    name: "Bridgestone",
+    image: Bridgestone
+  },
+  {
+    name: "Dunlop",
+    image: Dunlop
+  },
+  {
+    name: "Falken",
+    image: Falken
+  },
+  {
+    name: "Goodyear",
+    image: Goodyear
+  },
+  {
+    name: "Hankook",
+    image: Hankook
+  },
+  {
+    name: "Keko",
+    image: Keko
+  },
+  {
+    name: "Mobil",
+    image: Mobil
+  },
+  {
+    name: "",
+    image: Repsol
+  },
+  {
+    name: "",
+    image: Thule
   },
 ]
