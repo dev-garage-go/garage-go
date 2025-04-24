@@ -57,3 +57,6 @@ export const Keko = `${pathSuppliers}/keko.svg`
 export const Mobil = `${pathSuppliers}/mobil.svg`
 export const Repsol = `${pathSuppliers}/repsol.svg`
 export const Thule = `${pathSuppliers}/thule.svg`
+
+// Footer
+export const CompanyLocation = `${pathImages}/company-location.png`

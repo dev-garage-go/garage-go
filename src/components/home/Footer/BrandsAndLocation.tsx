@@ -1,6 +1,7 @@
-import { CompanySuppliersImages } from '@/constants'
 import Image from 'next/image'
-import React from 'react'
+
+import { CompanyLocation } from '@/assets'
+import { CompanySuppliersImages } from '@/constants'
 
 export const BrandsAndLocation = () => {
   return (
@@ -35,11 +36,14 @@ export const BrandsAndLocation = () => {
             </div>
           ))}
         </div>
+
         {/* Map */}
-        <div className='w-full h-72'>
+        <div className='relative w-full h-[550px] bg-red-300'>
           <Image
-            alt=''
-            src={""}
+            fill
+            priority
+            alt='location of company'
+            src={CompanyLocation}
             className='object-cover'
           />
         </div>
