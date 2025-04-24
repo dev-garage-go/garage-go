@@ -4,7 +4,7 @@ export const Benefits = () => {
   return (
     <section>
       <div className='container-section'>
-        <h2 className='title-h2'>Beneficios y promociones</h2>
+        <h2 className='title-h2 text-center'>Beneficios y promociones</h2>
         <p className='description-of-title-h2'>
           Siempre tenemos algo mas para ti, accede
           <br />

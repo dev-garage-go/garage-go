@@ -4,7 +4,7 @@ import { ReviewSlider } from './ReviewSlider'
 export const UserReviews = () => {
   return (
     <section className='container-section bg-gray-100'>
-      <h2 className='title-h2'>
+      <h2 className='title-h2 text-center'>
         ¿Aun no te decides?
       </h2>
       <p className='description-of-title-h2'>

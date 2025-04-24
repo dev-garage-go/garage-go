@@ -19,7 +19,7 @@
 }
 
 .title-h2 {
- @apply text-xl md:text-2xl xl:text-3xl font-semibold px-2 text-center
+ @apply text-xl md:text-2xl xl:text-3xl font-semibold px-2
 }
 
 .description-of-title-h2 {
