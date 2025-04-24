@@ -17,6 +17,8 @@ export * from './home/Hero/HeroButtons';
 export * from './home/Services/BranCarousel';
 export * from './home/Services/ServiceCard';
 export * from './home/Services/Services';
+export * from './home/UserReviews/GoogleRating';
 export * from './home/UserReviews/ReviewCard';
 export * from './home/UserReviews/ReviewSlider';
+export * from './home/UserReviews/StarRating';
 export * from './home/UserReviews/UserReviews';

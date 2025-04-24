@@ -1,5 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
+import { StarRating } from './StarRating'
+import { GoogleRating } from './GoogleRating';
 
 interface Props {
   name: string,
@@ -30,9 +32,10 @@ export const ReviewCard = ({ name, opinion, profilePicture, score }: Props) => {
             <p className='text-white '>
               {name}
             </p>
-            <p className='text-white'>
-              {score}
-            </p>
+
+            <GoogleRating
+              score={score}
+            />
           </div>
         </div>
 
