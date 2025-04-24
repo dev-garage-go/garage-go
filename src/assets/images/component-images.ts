@@ -1,46 +1,49 @@
-const pathSuppliers = "/company_suppliers"
+// Paths base
+const pathImages = '/images'
+const carsLogos = '/cars_brand_logos'
+const pathSuppliers = '/company_suppliers'
 
 // Hero
-export const Mujer = "/images/chica_1.png"
+export const Mujer = `${pathImages}/chica_1.png`
 
 // Services
-export const Mantencion = '/images/mantencion_kilometraje.jpg';
-export const Revision = '/images/cambio_de_bateria.jpg';
-export const Aceite = '/images/amortiguadores.jpg';
-export const CambioNeumaticos = '/images/cambio_de_neumatico.jpg';
-export const CambioParabrisas = '/images/cambio_prabrisas.jpg';
-export const ChequeoPreventivo = '/images/checkeo_preventivo.jpg';
-export const GoogleIcon = '/images/icono_google.svg';
+export const Mantencion = `${pathImages}/mantencion_kilometraje.jpg`
+export const Revision = `${pathImages}/cambio_de_bateria.jpg`
+export const Aceite = `${pathImages}/amortiguadores.jpg`
+export const CambioNeumaticos = `${pathImages}/cambio_de_neumatico.jpg`
+export const CambioParabrisas = `${pathImages}/cambio_prabrisas.jpg`
+export const ChequeoPreventivo = `${pathImages}/checkeo_preventivo.jpg`
+export const GoogleIcon = `${pathImages}/icono_google.svg`
 
-export const SuperCheck = '/images/super-check.svg';
-export const Garantia = '/images/garantia.svg';
-export const PickDelivery = '/images/pick-delivery.svg';
+export const SuperCheck = `${pathImages}/super-check.svg`
+export const Garantia = `${pathImages}/garantia.svg`
+export const PickDelivery = `${pathImages}/pick-delivery.svg`
 
-// Bran carousel
-export const Audi = '/cars_brand_logos/audi.png';
-export const Bmw = '/cars_brand_logos/bmw.png';
-export const Chevrolet = '/cars_brand_logos/chevrolet.png';
-export const Citroen = '/cars_brand_logos/citroen.png';
-export const Fiat = '/cars_brand_logos/fiat.png';
-export const Ford = '/cars_brand_logos/ford.png';
-export const Hyundai = '/cars_brand_logos/hyundai.png';
-export const Jeep = '/cars_brand_logos/jeep.png';
+// Brand carousel
+export const Audi = `${carsLogos}/audi.png`
+export const Bmw = `${carsLogos}/bmw.png`
+export const Chevrolet = `${carsLogos}/chevrolet.png`
+export const Citroen = `${carsLogos}/citroen.png`
+export const Fiat = `${carsLogos}/fiat.png`
+export const Ford = `${carsLogos}/ford.png`
+export const Hyundai = `${carsLogos}/hyundai.png`
+export const Jeep = `${carsLogos}/jeep.png`
 
 // Banner
-export const AgendaCotiza = "/images/agenda_cotiza.png"
-export const PickAndDelivery = '/images/pick-and-delivery.png';
-export const PagaOnline = '/images/paga_en_linea.png'
-export const Playero = '/images/playero.png'
+export const AgendaCotiza = `${pathImages}/agenda_cotiza.png`
+export const PickAndDelivery = `${pathImages}/pick-and-delivery.png`
+export const PagaOnline = `${pathImages}/paga_en_linea.png`
+export const Playero = `${pathImages}/playero.png`
 
 // Profile
-export const ProfilePic1 = "/images/profile-pic1.jpg"
-export const ProfilePic2 = "/images/profile-pic2.jpeg"
-export const ProfilePic3 = "/images/profile-pic3.jpg"
-export const ProfilePic4 = "/images/profile-pic4.jpg"
-export const ProfilePic5 = "/images/profile-pic5.avif"
+export const ProfilePic1 = `${pathImages}/profile-pic1.jpg`
+export const ProfilePic2 = `${pathImages}/profile-pic2.jpeg`
+export const ProfilePic3 = `${pathImages}/profile-pic3.jpg`
+export const ProfilePic4 = `${pathImages}/profile-pic4.jpg`
+export const ProfilePic5 = `${pathImages}/profile-pic5.avif`
 
 // FAQs
-export const HavalH6 = "/images/haval_h6gt.png"
+export const HavalH6 = `${pathImages}/haval_h6gt.png`
 
 // Company suppliers
 export const Bosh = `${pathSuppliers}/bosh.svg`
