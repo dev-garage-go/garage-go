@@ -41,7 +41,7 @@ export const ServiceCard = ({
             fill
             src={image}
             alt={title}
-            className="object-cover"
+            className="object-cover w-auto h-auto"
           />
           {/* Discount symbol */}
           {discount && (

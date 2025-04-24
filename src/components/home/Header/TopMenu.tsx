@@ -10,15 +10,15 @@ import { BookingButton } from '../Buttons/BookingButton';
 
 export const TopMenu = () => {
   return (
-    <div className="flex justify-between items-center p-4">
+    <div className="flex justify-between items-center p-3 md:p-4">
       {/* Company Logo */}
-      <div className="flex justify-start">
+      <div className="relative h-8 w-20 sm:w-28 sm:h-10 flex justify-start">
         <Image
           src={GarageGoLogo}
-          width={80}
-          height={80}
+          fill
+          priority
           alt="Garage Go"
-          className="object-contain w-20 sm:w-24"
+          className="object-contain w-auto h-auto"
         />
       </div>
 
@@ -29,25 +29,27 @@ export const TopMenu = () => {
             href={CompanyInstagram}
             className="text-primaryBlue-500 hover:opacity-80 rounded-lg"
           >
-            <Image
-              src={Instagram}
-              width={10}
-              height={10}
-              alt="Instagram"
-              className="w-5 h-5"
-            />
+            <div className='relative w-4 h-4 md:w-5 md:h-5'>
+              <Image
+                src={Instagram}
+                fill
+                alt="Instagram"
+                className="object-contain w-auto h-auto"
+              />
+            </div>
           </Link>
           <Link
             href={CompanyFacebook}
             className="text-primaryBlue-500 hover:opacity-80 rounded-lg"
           >
-            <Image
-              src={Facebook}
-              width={10}
-              height={10}
-              alt="Facebook"
-              className="w-5 h-5"
-            />
+            <div className='relative w-4 h-4 md:w-5 md:h-5'>
+              <Image
+                src={Facebook}
+                fill
+                alt="Facebook"
+                className="object-contain w-auto h-auto"
+              />
+            </div>
           </Link>
         </div>
 
