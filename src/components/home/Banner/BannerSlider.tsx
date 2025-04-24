@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import { BannerCard } from '@/components';
+import { BannerInformation } from '@/constants';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -18,17 +19,22 @@ export const BannerSlider = () => {
   return (
     <>
       <Swiper
-        cssMode={true}
+        slidesPerView={1}
+        spaceBetween={30}
+        loop={true}
+        pagination={{
+          clickable: true,
+        }}
         navigation={true}
-        pagination={true}
-        mousewheel={true}
-        keyboard={true}
-        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
-        className="mySwiper"
+        modules={[Pagination, Navigation]}
+        className="w-full h-full"
       >
-        <SwiperSlide>
-          <BannerCard />
-        </SwiperSlide>
+
+        {BannerInformation.map((item, index) => (
+          <SwiperSlide key={index}>
+            <BannerCard {...item} />
+          </SwiperSlide>
+        ))}
       </Swiper>
     </>
   );

@@ -1,4 +1,4 @@
-import { Aceite, CambioNeumaticos, CambioParabrisas, ChequeoPreventivo, Mantencion, Revision } from "@/assets";
+import { Aceite, AgendaCotiza, CambioNeumaticos, CambioParabrisas, ChequeoPreventivo, Mantencion, Revision } from "@/assets";
 
 export const HeaderLinksOptions: HeaderOptionInterface[] = [
   {
@@ -126,5 +126,33 @@ export const BenefitsData: BenefitsInterface[] = [
     name: "10% Revision tecnica",
     btnString: "Cotiza ahora",
     image: Revision
+  },
+]
+
+export const BannerInformation = [
+  {
+    title: "Agenda y cotiza en línea",
+    description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",
+    image: AgendaCotiza
+  },
+  {
+    title: "Agenda y cotiza en línea",
+    description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",
+    image: AgendaCotiza
+  },
+  {
+    title: "Agenda y cotiza en línea",
+    description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",
+    image: AgendaCotiza
+  },
+  {
+    title: "Agenda y cotiza en línea",
+    description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",
+    image: AgendaCotiza
+  },
+  {
+    title: "Agenda y cotiza en línea",
+    description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",
+    image: AgendaCotiza
   },
 ]
