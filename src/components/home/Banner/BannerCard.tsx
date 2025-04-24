@@ -10,7 +10,7 @@ interface Props {
 
 export const BannerCard = ({ description, image, title }: Props) => {
   return (
-    <div className='flex justify-center items-center py-10 md:py-20'>
+    <div className='flex justify-center items-center py-8 md:py-10 xl:py-12 2xl:py-20'>
       <div className='relative flex items-center w-full max-w-5xl h-72 md:h-96 bg-primaryBlue-900 rounded-3xl shadow-xl overflow-hidden p-6 md:px-10 md:py-12'>
         {/* Texto */}
         <div className='relative w-full sm:w-1/2 text-white flex flex-col justify-center'>

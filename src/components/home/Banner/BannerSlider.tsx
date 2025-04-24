@@ -20,7 +20,7 @@ export const BannerSlider = () => {
 
   useEffect(() => {
     const updateSize = () => {
-      setIsMobile(window.innerWidth < 768);
+      setIsMobile(window.innerWidth < 1024);
     };
     updateSize();
     window.addEventListener('resize', updateSize);
@@ -42,7 +42,7 @@ export const BannerSlider = () => {
       >
 
         {BannerInformation.map((item, index) => (
-          <SwiperSlide key={index}>
+          <SwiperSlide key={index} className='px-4 sm:px-6 md:px-10 xl:px-0'>
             <BannerCard {...item} />
           </SwiperSlide>
         ))}
