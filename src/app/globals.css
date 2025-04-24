@@ -13,3 +13,11 @@
 .padding-central-page {
   @apply px-4 sm:px-6 lg:px-8
 }
+
+.title-h2 {
+ @apply text-xl md:text-2xl xl:text-3xl font-semibold px-2 text-center
+}
+
+.description-of-title-h2 {
+ @apply text-base md:text-lg text-center px-2
+}
