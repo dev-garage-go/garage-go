@@ -51,13 +51,14 @@ export const BrandCarousel = () => {
             key={`${logo.id}-${index}`}
             className="flex-none w-[180px] px-6 flex items-center justify-center" // Ajustado tamaño y padding
           >
-            <Image
-              width={100}
-              height={100}
-              src={logo.image}
-              alt={logo.id}
-              className="w-20 h-auto object-contain grayscale hover:grayscale-0 transition-all"
-            />
+            <div className='relative w-20 h-20 md:w-24 md:h-24'>
+              <Image
+                fill
+                src={logo.image}
+                alt={logo.id}
+                className="w-auto h-auto object-contain grayscale hover:grayscale-0 transition-all"
+              />
+            </div>
           </div>
         ))}
       </div>

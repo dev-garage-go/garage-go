@@ -34,7 +34,7 @@ export const BrandsAndLocation = () => {
                 src={supplier.image}
                 alt={supplier.name}
                 fill
-                className="object-contain p-4 opacity-70"
+                className="object-contain p-4 opacity-70 w-auto h-auto"
               />
             </div>
           ))}
@@ -48,7 +48,7 @@ export const BrandsAndLocation = () => {
             priority
             alt='location of company'
             src={CompanyLocation}
-            className='object-cover'
+            className='object-cover w-auto h-auto'
           />
         </div>
       </div>

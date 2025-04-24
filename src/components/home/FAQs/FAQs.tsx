@@ -22,7 +22,7 @@ export const FAQs = () => {
               alt='haval h6'
               fill
               priority
-              className='object-contain z-10 px-10 sm:p-20 xl:p-0'
+              className='object-contain z-10 px-10 sm:p-20 xl:p-0 w-auto h-auto'
             />
           </div>
         </div>

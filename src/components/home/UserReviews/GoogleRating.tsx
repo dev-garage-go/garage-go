@@ -14,6 +14,7 @@ export const GoogleRating = ({ score }: Props) => {
         width={10}
         src={GoogleIcon}
         alt='google icon'
+        className='object-contain'
       />
       <StarRating
         rating={score}

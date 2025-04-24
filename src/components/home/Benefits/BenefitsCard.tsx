@@ -26,7 +26,7 @@ export const BenefitsCard = ({ btnString, image, name }: Props) => {
             fill
             src={image}
             alt={name}
-            className='object-cover rounded-lg'
+            className='object-cover rounded-lg w-auto h-auto'
           />
         </div>
 

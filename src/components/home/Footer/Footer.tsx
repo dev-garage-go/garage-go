@@ -27,7 +27,7 @@ export const Footer = () => {
               src={GarageGoLogoFooter}
               alt="Descripción"
               fill
-              className="object-contain"
+              className="object-contain w-auto h-auto"
             />
           </div>
 
@@ -102,7 +102,7 @@ export const Footer = () => {
                 src={MediosPago}
                 fill
                 alt="medios de pago"
-                className="object-contain"
+                className="object-contain w-auto h-auto"
               />
             </div>
           </section>

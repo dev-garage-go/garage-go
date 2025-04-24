@@ -26,7 +26,7 @@ export const BannerCard = ({ description, image, title }: Props) => {
             src={image}
             alt='mujer'
             fill
-            className='object-contain'
+            className='object-contain w-auto h-auto'
           />
         </div>
       </div>

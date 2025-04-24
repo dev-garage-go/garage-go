@@ -28,9 +28,10 @@ export const Hero = () => {
           <div className="relative flex justify-center items-center h-[450px]">
             <Image
               fill
+              priority
               src={Mujer}
               alt="Mujer conduciendo feliz"
-              className="absolute bottom-0 object-contain"
+              className="absolute bottom-0 object-contain w-auto h-auto"
             />
           </div>
 
