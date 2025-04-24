@@ -6,6 +6,8 @@ export * from './home/Benefits/BenefitsCard';
 export * from './home/Benefits/BenefitsSlider';
 export * from './home/Buttons/BookingButton';
 export * from './home/Buttons/WhatsAppButton';
+export * from './home/FAQs/FAQsDisclosure';
+export * from './home/FAQs/FAQs';
 export * from './home/Footer/Footer';
 export * from './home/Header/Header';
 export * from './home/Header/HeaderOption';
