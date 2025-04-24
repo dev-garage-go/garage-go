@@ -3,7 +3,7 @@ import { BannerSlider } from '@/components'
 
 export const Banner = () => {
   return (
-    <section className='relativepadding-central-page flex flex-col justify-center items-center mt-32'>
+    <section className='relative padding-central-page flex flex-col justify-center items-center mt-32'>
       <h2 className='title-h2'>
         En Garage Go, encuentra la mejor
         <br />
@@ -11,7 +11,7 @@ export const Banner = () => {
       </h2>
 
       {/* Bg gray */}
-      <div className='absolute bottom-0 bg-gray-100 w-full h-full max-h-52 md:max-h-80' />
+      <div className='absolute bottom-0 bg-gray-100 w-full h-full max-h-40' />
 
       <BannerSlider />
     </section>
