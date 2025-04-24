@@ -11,6 +11,7 @@ import {
   Hyundai,
   Jeep
 } from '@/assets';
+import Image from 'next/image';
 
 const brandLogos = [
   { id: 'audi', image: Audi },
@@ -40,7 +41,7 @@ export const BrandCarousel = () => {
   }, []);
 
   return (
-    <div className="mt-16 overflow-hidden relative w-full bg-gray-50">  {/* Cambiado de max-w-5xl a max-w-7xl */}
+    <div className="mt-16 overflow-hidden relative w-full">  {/* Cambiado de max-w-5xl a max-w-7xl */}
       <div
         className="flex transition-transform duration-100 ease-linear"
         style={{ transform: `translateX(${position}px)` }}
@@ -50,7 +51,9 @@ export const BrandCarousel = () => {
             key={`${logo.id}-${index}`}
             className="flex-none w-[180px] px-6 flex items-center justify-center" // Ajustado tamaño y padding
           >
-            <img
+            <Image
+              width={100}
+              height={100}
               src={logo.image}
               alt={logo.id}
               className="w-20 h-auto object-contain grayscale hover:grayscale-0 transition-all"
