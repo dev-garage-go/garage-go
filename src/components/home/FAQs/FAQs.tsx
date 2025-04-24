@@ -7,36 +7,37 @@ import { HavalH6 } from '@/assets'
 const FAQsData = [
   {
     question: '¿Cómo funciona Garage Go?',
-    answer: 'Podés agendar, cotizar y reservar a través de nuestra web o WhatsApp...',
+    answer: 'Puedes agendar, cotizar y reservar directo a través de de nuestra chateando con nuestros ejecutivo por WhatsApp, elige la modali retiro o preséncialos y listo.',
   },
   {
-    question: '¿Cuánto es la garantía del servicio?',
-    answer: 'Pick&deliver tiene garantía de satisfacción por 7 días hábiles...',
+    question: '¿Cuanto es la garantía del servicio?',
+    answer: 'Todos nuestros servicios cuentan con un periódo de garantía de 10.000 kms. A partir de la fecha de la entrega del vehículo.',
   },
   {
-    question: '¿Cómo funciona Garage Go?',
-    answer: 'Podés agendar, cotizar y reservar a través de nuestra web o WhatsApp...',
+    question: '¿Pick&deliver tiene garantía?',
+    answer: 'Sí, contamos con seguro de accidentes personales y seguro sobr Tu vehículo estará cubierto de ida y vuelta.',
   },
   {
-    question: '¿Cuánto es la garantía del servicio?',
-    answer: 'Pick&deliver tiene garantía de satisfacción por 7 días hábiles...',
+    question: '¿Cómo cancelar un servicio?',
+    answer: 'Una vez agendado y cancelado el servicio cuentas con un period previas al retiro o entrega de la unidad para solicitar un reembols agendar tu servicio.',
   },
   {
-    question: '¿Cómo funciona Garage Go?',
-    answer: 'Podés agendar, cotizar y reservar a través de nuestra web o WhatsApp...',
-  },
-  {
-    question: '¿Cuánto es la garantía del servicio?',
-    answer: 'Pick&deliver tiene garantía de satisfacción por 7 días hábiles...',
+    question: '¿Que medios de pago aceptan?',
+    answer: 'Aceptamos todo medio de pagos, Paga directo tu servicio contra línea con débito, crédito, también contamos con link de pago y p POS Getnet.',
   },
 ]
 
 export const FAQs = () => {
   return (
-    <section className='container-section bg-gray-300'>
+    <section className='container-section bg-gray-100'>
 
-      <div className='flex justify-center items-center w-full max-w-6xl bg-red-100'>
-        <div className='relative h-72 w-full max-w-md bg-green-200'>
+      <div className='relative flex justify-center items-center w-full max-w-7xl padding-central-page'>
+        <div className='relative h-96 w-full z-10'>
+          {/* Blue circles */}
+          <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full h-[400px] w-[400px] border-8 border-primaryBlue-500' />
+          <div className='absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 rounded-full h-80 w-80 bg-primaryBlue-500' />
+
+          {/* Main image */}
           <Image
             src={HavalH6}
             alt='haval h6'
@@ -45,8 +46,8 @@ export const FAQs = () => {
           />
         </div>
 
-        <div className='flex-col justify-end items-center w-full'>
-          <h2 className='title-h2'>
+        <div className='flex flex-col justify-start w-full px-10 ml-10'>
+          <h2 className='text-3xl font-bold text-start'>
             Preguntas frecuentes
           </h2>
           <div className='mt-10'>
