@@ -1,3 +1,5 @@
+const pathSuppliers = "/company_suppliers"
+
 // Hero
 export const Mujer = "/images/chica_1.png"
 
@@ -39,3 +41,15 @@ export const ProfilePic5 = "/images/profile-pic5.avif"
 
 // FAQs
 export const HavalH6 = "/images/haval_h6gt.png"
+
+// Company suppliers
+export const Bosh = `${pathSuppliers}/bosh.svg`
+export const Bridgestone = `${pathSuppliers}/bridgestone.svg`
+export const Dunlop = `${pathSuppliers}/dunlop.svg`
+export const Falken = `${pathSuppliers}/falken.svg`
+export const Goodyear = `${pathSuppliers}/goodyear.svg`
+export const Hankook = `${pathSuppliers}/hankook.svg`
+export const Keko = `${pathSuppliers}/keko.svg`
+export const Mobil = `${pathSuppliers}/mobil.svg`
+export const Repsol = `${pathSuppliers}/repsol.svg`
+export const Thule = `${pathSuppliers}/thule.svg`
