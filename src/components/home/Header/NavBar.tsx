@@ -21,7 +21,7 @@ export const NavBar = () => {
       {/* Mobile - Hamburger btn */}
       <button
         onClick={() => setMenuOpen(true)}
-        className='block sm:hidden px-4 py-3  items-center'
+        className='block sm:hidden px-4 py-3 items-center'
       >
         <IoReorderThreeOutline
           size={26}
