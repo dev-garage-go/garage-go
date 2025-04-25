@@ -39,7 +39,7 @@
 }
 
 .description-of-title-h1 {
- @apply text-lg md:text-xl xl:text-2xl px-2
+ @apply text-lg md:text-xl xl:text-2xl
 }
 
 .description-of-title-h2 {
