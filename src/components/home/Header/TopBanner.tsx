@@ -1,10 +1,11 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
-import { useEffect, useState } from "react"
 
-// The banner must be used with "title and description" or with "hasVehicleData = true, vehicleName and vehiclePatent"
+import { SegmentNameMap } from "@/constants"
+
 interface Props {
   title?: string
   description?: string
@@ -13,17 +14,8 @@ interface Props {
   vehiclePatent?: string
 }
 
-// Can added more mappings
-const segmentNameMap: Record<string, string> = {
-  services: "Servicios",
-  battery_change: "Cambio de batería",
-  mileage_maintenance: "Mantención por kilometraje",
-  oil_change: "Cambio de aceite",
-  preventive_check: "Checkeo preventivo",
-  technical_revision: "Revisión técnica",
-  tire_change: "Cambio de cubiertas",
-}
-
+// The banner must be used with "title and description" or with "hasVehicleData = true, vehicleName and vehiclePatent"
+// It must not be combined between groups.
 export const TopBanner = ({ description, title, vehiclePatent, vehicleName, hasVehicleData = false }: Props) => {
   const router = useRouter()
   const pathname = usePathname()
@@ -36,7 +28,7 @@ export const TopBanner = ({ description, title, vehiclePatent, vehicleName, hasV
   }, [pathname])
 
   return (
-    <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 pt-28 sm:pt-32 bg-primaryBlue-300">
+    <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 xl:pb-7 pt-28 sm:pt-32 bg-primaryBlue-300">
       <div className="flex justify-center items-center w-full">
         <div className="grid grid-cols-6">
           <div className={
@@ -51,7 +43,7 @@ export const TopBanner = ({ description, title, vehiclePatent, vehicleName, hasV
               </Link>
               {pathSegments.map((segment, index) => {
                 const href = "/" + pathSegments.slice(0, index + 1).join("/")
-                const name = segmentNameMap[segment] || decodeURIComponent(segment)
+                const name = SegmentNameMap[segment] || decodeURIComponent(segment)
                 const isLast = index === pathSegments.length - 1
 
                 return (
