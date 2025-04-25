@@ -1,6 +1,7 @@
 import Image from "next/image";
+
 import { Services } from "@/assets";
-import { TopBanner } from "@/components";
+import { TopBanner, ServicesGrid } from "@/components";
 
 export default function ServicesPage() {
   return (
@@ -10,6 +11,7 @@ export default function ServicesPage() {
         description="Todo lo que necesita tu auto al precio más conveniente y un solo lugar."
       />
 
+      {/* Main image */}
       <div className="hidden xl:block absolute top-20 right-72 z-20 w-[600px] h-[400px]">
         <Image
           src={Services}
@@ -19,6 +21,18 @@ export default function ServicesPage() {
           className="object-contain w-auto h-auto"
         />
       </div>
+
+      <section className="container-section">
+        {/* Title section */}
+        <h2 className='title-h2 text-center text-primaryBlue-500'>
+          Agenda, cotiza, reserva y
+          <br />
+          paga en linea. Asi de fácil es con Garage Go!
+        </h2>
+
+        {/* Grid */}
+        <ServicesGrid />
+      </section>
     </div>
   );
 }

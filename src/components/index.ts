@@ -27,3 +27,6 @@ export * from './home/UserReviews/ReviewCard';
 export * from './home/UserReviews/ReviewSlider';
 export * from './home/UserReviews/StarRating';
 export * from './home/UserReviews/UserReviews';
+
+// Services page
+export * from './services-page/ServicesGrid';
