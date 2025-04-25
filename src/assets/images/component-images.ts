@@ -14,6 +14,7 @@ export const CambioNeumaticos = `${pathImages}/cambio_de_neumatico.jpg`
 export const CambioParabrisas = `${pathImages}/cambio_prabrisas.jpg`
 export const ChequeoPreventivo = `${pathImages}/checkeo_preventivo.jpg`
 export const GoogleIcon = `${pathImages}/icono_google.svg`
+export const Services = `${pathImages}/servicios.png`
 
 export const SuperCheck = `${pathImages}/super-check.svg`
 export const Garantia = `${pathImages}/garantia.svg`
