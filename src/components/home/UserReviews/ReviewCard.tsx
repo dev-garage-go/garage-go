@@ -12,7 +12,7 @@ interface Props {
 
 export const ReviewCard = ({ name, opinion, profilePicture, score }: Props) => {
   return (
-    <div className='flex justify-center items-center bg-primaryBlue-500 w-fit p-6 rounded-lg shadow-md'>
+    <div className='flex justify-center items-center bg-primaryBlue-500 w-fit p-6 rounded-lg shadow-xl shadow-slate-400'>
 
       {/* Container items*/}
       <div className='flex flex-col w-full max-w-xs'>
