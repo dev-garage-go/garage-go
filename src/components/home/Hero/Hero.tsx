@@ -25,7 +25,7 @@ export const Hero = () => {
             </div>
           </div>
 
-          <div className="relative flex justify-center items-center h-[450px]">
+          <div className="relative flex justify-center items-center mt-10 md:mt-0 h-72 sm:h-80 md:h-[450px]">
             <Image
               fill
               priority
