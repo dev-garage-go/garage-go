@@ -42,7 +42,7 @@ export const BannerSlider = () => {
       >
 
         {BannerInformation.map((item, index) => (
-          <SwiperSlide key={index} className='px-4 sm:px-6 md:px-10 xl:px-0'>
+          <SwiperSlide key={index} className='padding-banner'>
             <BannerCard {...item} />
           </SwiperSlide>
         ))}

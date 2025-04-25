@@ -32,12 +32,15 @@ export default function ServicesPage() {
 
         {/* Grid */}
         <ServicesGrid />
-        <div className="pb-from-footer">
+        <div className="pb-from-footer padding-banner">
           <BannerCard
             title="¿BUSCAS ALGO MÁS ESPECÍFICO?"
             description="Si no encontraste el servicio que requieres Puedes hablar con uno de nuestros ejecutivos Y solicitar una diagnóstico y cotizacion de Lo que estas buscando."
             image={HombreServicios}
             imageAlt="persona viendo su celular"
+            hasButton
+            buttonStyle="bg-primaryPink-500"
+            buttonString="Chatea con nosotros"
           />
         </div>
       </section>
