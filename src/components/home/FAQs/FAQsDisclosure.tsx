@@ -26,7 +26,7 @@ export const FAQsDisclosure = ({ answer, question }: Props) => {
                 }`}
             />
           </DisclosureButton>
-          <DisclosurePanel className="text-sm md:text-base xl:text-lg text-gray-700 font-light">
+          <DisclosurePanel className="text-sm md:text-base xl:text-lg text-gray-700 font-light mt-2">
             {answer}
           </DisclosurePanel>
         </>
