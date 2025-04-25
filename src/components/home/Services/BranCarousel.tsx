@@ -51,7 +51,7 @@ export const BrandCarousel = () => {
             key={`${logo.id}-${index}`}
             className="flex-none w-[180px] px-6 flex items-center justify-center" // Ajustado tamaño y padding
           >
-            <div className='relative w-20 h-20 md:w-24 md:h-24'>
+            <div className='relative w-14 h-14 md:w-16 md:h-16'>
               <Image
                 fill
                 src={logo.image}
