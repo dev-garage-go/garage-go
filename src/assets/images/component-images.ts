@@ -44,6 +44,7 @@ export const ProfilePic5 = `${pathImages}/profile-pic5.avif`
 
 // FAQs
 export const HavalH6 = `${pathImages}/haval_h6gt.png`
+export const HavalH6Circle = `${pathImages}/haval-circle.png`
 
 // Company suppliers
 export const Bosh = `${pathSuppliers}/bosch.svg`
