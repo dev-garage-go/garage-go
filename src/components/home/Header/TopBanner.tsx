@@ -36,12 +36,15 @@ export const TopBanner = ({ description, title, vehiclePatent, vehicleName, hasV
   }, [pathname])
 
   return (
-    <section className="w-full px-36 pb-6 pt-32 bg-primaryBlue-300">
+    <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 pt-28 sm:pt-32 bg-primaryBlue-300">
       <div className="flex justify-center items-center w-full">
         <div className="grid grid-cols-6">
-          <div className={`flex flex-wrap ${hasVehicleData ? 'col-start-1 col-end-3' : 'col-start-2 col-end-4'}`}>
+          <div className={
+            `flex flex-wrap ${hasVehicleData
+              ? 'col-start-1 col-end-6 xl:col-end-3'
+              : 'col-start-1 col-end-6 xl:col-start-2 xl:col-end-4'}`}>
             {/* Breadcrumbs */}
-            <div className={`text-sm flex w-full justify-start items-center text-white ${hasBreadCrumbs ? "block" : "hidden"}`}>
+            <div className={`text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white ${hasBreadCrumbs ? "block" : "hidden"}`}>
               <Link href="/" className="hover:font-medium duration-200 capitalize">
                 Inicio
                 <span className="px-2">{">"}</span>
@@ -73,19 +76,19 @@ export const TopBanner = ({ description, title, vehiclePatent, vehicleName, hasV
 
               {!hasVehicleData ? (
                 <>
-                  <h1 className="title-h1 uppercase text-white mt-4">{title}</h1>
-                  <p className="description-of-title-h1 mt-4 text-white">{description}</p>
+                  <h1 className="title-h1 uppercase text-white">{title}</h1>
+                  <p className="description-of-title-h1 mt-1 sm:mt-2 xl:mt-4 text-white">{description}</p>
                 </>
               ) : (
                 <>
-                  <h2 className="text-xl md:text-2xl xl:text-4xl font-bold text-white">
+                  <h2 className="text-2xl md:text-2xl xl:text-4xl font-bold text-white">
                     Patente:
                     <span className="uppercase">{" " + vehiclePatent}</span>
                   </h2>
-                  <div className="flex justify-between items-center w-full">
-                    <p className="description-of-title-h1 mt-2 uppercase text-white">{vehicleName}</p>
+                  <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
+                    <p className="text-base sm:text-lg xl:text-xl uppercase text-white">{vehicleName}</p>
                     <button
-                      className="text-sm bg-primaryBlue-900 px-10 py-0.5 rounded-md text-white"
+                      className="hidden md:block text-sm bg-primaryBlue-900 px-6 xl:px-10 py-0.5 rounded-md text-white"
                       onClick={() => router.back()}
                     >
                       Volver
