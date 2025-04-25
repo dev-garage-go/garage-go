@@ -10,7 +10,7 @@ import { BookingButton } from '../Buttons/BookingButton';
 
 export const TopMenu = () => {
   return (
-    <div className="flex justify-between items-center p-3 md:p-4">
+    <div className="flex justify-between items-center py-2 px-4">
       {/* Company Logo */}
       <div className="relative h-8 w-20 sm:w-28 sm:h-10 flex justify-start">
         <Image

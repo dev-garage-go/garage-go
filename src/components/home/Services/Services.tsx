@@ -16,7 +16,7 @@ export const Services = () => {
 
   return (
     <section>
-      <div className="padding-central-page">
+      <div className="padding-central-page max-w-page">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-primaryBlue-500 mb-4">

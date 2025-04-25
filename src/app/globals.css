@@ -10,8 +10,12 @@
   @apply flex items-center gap-2 px-4 py-2 rounded-lg text-white text-sm
 }
 
+.max-w-page {
+  @apply max-w-7xl mx-auto
+}
+
 .padding-central-page {
-  @apply px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto
+  @apply px-4 sm:px-6 lg:px-8 
 }
 
 .container-section {
