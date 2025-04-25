@@ -12,7 +12,7 @@ export default function ServicesPage() {
       />
 
       {/* Main image */}
-      <div className="hidden xl:block absolute top-20 right-72 z-20 w-[600px] h-[400px]">
+      <div className="hidden xl:block absolute top-20 right-72 w-[600px] h-[400px]">
         <Image
           src={Services}
           alt="persona feliz con los servicios"
