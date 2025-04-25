@@ -1,3 +1,5 @@
+"use client"
+
 import { IoCloseCircle } from "react-icons/io5"
 import { HeaderLinksOptions } from "@/constants"
 import { HeaderOption, WhatsAppButton, BookingButton } from "@/components"
@@ -35,7 +37,15 @@ export const SideBar = ({ menuOpen, setMenuOpen }: SideBarProps) => {
         </button>
 
         <ul className="flex-col mt-20 px-4">
-          <HeaderOption mobile options={HeaderLinksOptions} />
+          {
+            HeaderLinksOptions.map((opt, index) => (
+              <HeaderOption
+                mobile
+                key={index}
+                {...opt}
+              />
+            ))
+          }
         </ul>
 
         <div className='flex gap-3 justify-center items-center mt-20'>

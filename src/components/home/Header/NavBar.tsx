@@ -1,6 +1,7 @@
 "use client"
 
-import { useState } from "react"
+import { usePathname } from "next/navigation"
+import { useEffect, useState } from "react"
 import { IoReorderThreeOutline } from "react-icons/io5"
 
 import { HeaderOption, SideBar } from "@/components"
@@ -8,6 +9,12 @@ import { HeaderLinksOptions } from "@/constants"
 
 export const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
+  const pathname = usePathname();
+
+  // If the path changes the sidebar will close.
+  useEffect(() => {
+    setMenuOpen(false)
+  },[pathname])
 
   return (
     <nav className="bg-primaryBlue-500">
@@ -31,9 +38,12 @@ export const NavBar = () => {
       {/* Desktop - Links menu */}
       <div className="hidden sm:flex justify-between items-center">
         <ul className="w-full bg-primaryBlue-500 flex justify-center items-center">
-          <HeaderOption
-            options={HeaderLinksOptions}
-          />
+          {
+            HeaderLinksOptions.map((opt, index) => (
+              <HeaderOption key={index} {...opt}
+              />
+            ))
+          }
         </ul>
       </div>
     </nav>
