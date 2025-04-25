@@ -11,8 +11,8 @@ export const FAQs = () => {
 
         {/* Wrapper sticky */}
         {/* prevents the content from being distorted when a response is opened */}
-        <div className='w-full lg:w-1/2 sticky top-10 h-[300px] md:h-[350px] xl:h-[400px] bg-red-300'>
-          <div className='relative w-full h-full bg-red-100'>
+        <div className='w-full lg:w-1/2 sticky top-10 h-[300px] md:h-[350px] xl:h-[400px]'>
+          <div className='relative w-full h-full'>
             {/* Main image */}
             <Image
               src={HavalH6Circle}
