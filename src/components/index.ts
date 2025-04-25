@@ -15,6 +15,7 @@ export * from './home/Header/Header';
 export * from './home/Header/HeaderOption';
 export * from './home/Header/NavBar';
 export * from './home/Header/SideBar';
+export * from './home/Header/TopBanner';
 export * from './home/Header/TopMenu';
 export * from './home/Hero/Hero';
 export * from './home/Hero/HeroButtons';
