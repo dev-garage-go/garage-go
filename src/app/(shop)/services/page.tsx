@@ -1,7 +1,7 @@
 import Image from "next/image";
 
-import { Services } from "@/assets";
-import { TopBanner, ServicesGrid } from "@/components";
+import { HombreServicios, Services } from "@/assets";
+import { TopBanner, ServicesGrid, BannerCard } from "@/components";
 
 export default function ServicesPage() {
   return (
@@ -33,7 +33,12 @@ export default function ServicesPage() {
         {/* Grid */}
         <ServicesGrid />
         <div className="pb-from-footer">
-
+          <BannerCard
+            title="¿BUSCAS ALGO MÁS ESPECÍFICO?"
+            description="Si no encontraste el servicio que requieres Puedes hablar con uno de nuestros ejecutivos Y solicitar una diagnóstico y cotizacion de Lo que estas buscando."
+            image={HombreServicios}
+            imageAlt="persona viendo su celular"
+          />
         </div>
       </section>
     </div>

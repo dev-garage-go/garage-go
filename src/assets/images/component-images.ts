@@ -35,6 +35,8 @@ export const AgendaCotiza = `${pathImages}/agenda_cotiza.png`
 export const PickAndDelivery = `${pathImages}/pick-and-delivery.png`
 export const PagaOnline = `${pathImages}/paga_en_linea.png`
 export const Playero = `${pathImages}/playero.png`
+export const PersonaCelular = `${pathImages}/persona-celular.jpg`
+export const HombreServicios = `${pathImages}/hombre_servicios.png`
 
 // Profile
 export const ProfilePic1 = `${pathImages}/profile-pic1.jpg`

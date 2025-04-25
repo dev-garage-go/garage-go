@@ -159,22 +159,26 @@ export const BannerInformation: BannerDisccountsInterface[] = [
   {
     title: "Agenda y cotiza en línea",
     description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",
-    image: AgendaCotiza
+    image: AgendaCotiza,
+    imageAlt: "agenda y cotiza"
   },
   {
     title: "Pick&Delivery",
     description: "Mejor que un delivery! Al solicitar tu servicio elige Pick&delivery vamos a buscar y a retirar tu vehículo a domicilio. Al llegar a nuestro hub recibirás una llamada confirmando su llegada Y despacho de vuelta a casa",
-    image: PickAndDelivery
+    image: PickAndDelivery,
+    imageAlt: "pick and delivery"
   },
   {
     title: "Paga en Línea",
     description: "Hacer más fácil el cuidado de tu auto, también es hacer más fácil y cómodo el pago de tus servicio, cancela directo al contratar Tu servicio en nuestra web",
-    image: PagaOnline
+    image: PagaOnline,
+    imageAlt: "paga online"
   },
   {
     title: "Todo en un solo lugar",
     description: "En Garage Go! Contamos con un amplio Hub de más de 1.200 mt2 Equipado con todo lo necesario para entregar el mejor servicio. Conoce siempre la ubicación de tu auto, de casa a Garage y de garage a tu casa.",
-    image: Playero
+    image: Playero,
+    imageAlt: "imagen de un playero"
   },
 ]
 
