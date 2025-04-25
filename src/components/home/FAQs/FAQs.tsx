@@ -6,7 +6,7 @@ import { FAQsData } from '@/constants'
 
 export const FAQs = () => {
   return (
-    <section className='container-section bg-gray-100 pb-24 sm:pb-28 md:pb-32'>
+    <section className='container-section bg-gray-100 pb-from-footer'>
       <div className='flex flex-col-reverse lg:flex-row w-full max-w-7xl mx-auto padding-central-page gap-10'>
 
         {/* Wrapper sticky */}
