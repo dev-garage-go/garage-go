@@ -33,23 +33,23 @@ export const HeaderLinksOptions: HeaderOptionInterface[] = [
   },
   {
     title: "Servicios",
-    path: "/services"
+    path: "/" // path will be: /services
   },
   {
     title: "Herramientas",
-    path: "/tools"
+    path: "/" // path will be: /tools
   },
   {
     title: "Pick&delivery",
-    path: "/pick_delivery"
+    path: "/" // path will be: /pick_delivery
   },
   {
     title: "Servicio empresas",
-    path: "/corporates_service"
+    path: "/" // path: will be /corporates_service
   },
   {
     title: "Blog",
-    path: "/blog"
+    path: "/" // path will be: /blog
   },
 ]
 
