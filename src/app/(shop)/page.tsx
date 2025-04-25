@@ -2,7 +2,7 @@ import { Banner, Benefits, BrandCarousel, FAQs, Hero, Services, UserReviews } fr
 
 export default function HomePage() {
   return (
-    <main className="relative bg-white min-h-screen mt-32">
+    <main className="new-page">
       <Hero />
       <Services />
       <Benefits />
