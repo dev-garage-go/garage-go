@@ -44,9 +44,9 @@ const SliderBreakpoints = {
 
 export const BenefitsSlider = () => {
   return (
-    <div className="w-full p-6 sm:px-10 xl:px-20 overflow-visible">
+    <div className="w-full p-6 sm:px-10 xl:px-20">
       <Swiper
-        className=''
+        className='!overflow-visible'
         freeMode={true}
         pagination={{ clickable: true }}
         modules={[FreeMode, Pagination]}

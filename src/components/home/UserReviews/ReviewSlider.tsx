@@ -44,8 +44,9 @@ const SliderBreakpoints = {
 
 export const ReviewSlider = () => {
   return (
-    <div className="w-full p-6 sm:px-10 xl:px-20 overflow-visible">
+    <div className="w-full p-6 sm:px-10 xl:px-20">
       <Swiper
+        className='!overflow-visible'
         freeMode={true}
         pagination={{ clickable: true }}
         modules={[FreeMode, Pagination]}
