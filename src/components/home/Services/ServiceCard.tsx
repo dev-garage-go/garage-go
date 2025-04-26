@@ -25,6 +25,8 @@ export const ServiceCard = ({
   buttons,
   path
 }: Props) => {
+
+  // Map the 'features' with their images
   const featureIcons: Record<string, string> = {
     'pick-delivery': PickDelivery,
     'super-check': SuperCheck,
