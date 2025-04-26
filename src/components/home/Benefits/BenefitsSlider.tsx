@@ -30,11 +30,11 @@ const SliderBreakpoints = {
   },
   1024: {
     slidesPerView: 2.4,
-    spaceBetween: 25,
+    spaceBetween: 23,
   },
   1920: {
     slidesPerView: 3.4,
-    spaceBetween: 28,
+    spaceBetween: 23,
   },
   2560: {
     slidesPerView: 4.2,
