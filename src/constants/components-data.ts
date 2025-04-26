@@ -26,6 +26,8 @@ import {
   Thule
 } from "@/assets";
 
+const srvPath = '/services'
+
 export const HeaderLinksOptions: HeaderOptionInterface[] = [
   {
     title: "Inicio",
@@ -59,19 +61,22 @@ export const ServicesData: ServicesInterface[] = [
     price: 189900,
     image: Mantencion,
     discount: "25% Dcto",
-    features: ["pick-delivery", "super-check", "garantia"]
+    features: ["pick-delivery", "super-check", "garantia"],
+    path: `${srvPath}/mileage_maintenance`
   },
   {
     title: "Gestión de revisión técnica",
     price: 48990,
     image: Revision,
-    features: ["pick-delivery"]
+    features: ["pick-delivery"],
+    path: `${srvPath}/technical_revision`
   },
   {
     title: "Cambio de aceite",
     price: 78990,
     image: Aceite,
-    features: ["super-check", "garantia"]
+    features: ["super-check", "garantia"],
+    path: `${srvPath}/oil_change`
   },
   {
     title: "Cambio de neumáticos",
@@ -88,32 +93,37 @@ export const ServicesData: ServicesInterface[] = [
         variant: "secondary",
         icon: "→"
       }
-    ]
+    ],
+    path: `${srvPath}/tire_change`
   },
   {
     title: "Servicio de frenos",
     price: 35990,
     image: Aceite,
-    features: ["super-check", "garantia"]
+    features: ["super-check", "garantia"],
+    path: `${srvPath}/brake_services`
   },
   {
     title: "Cambio de batería",
     price: 65990,
     image: Revision,
     discount: "25% Dcto",
-    features: ["pick-delivery", "super-check", "garantia"]
+    features: ["pick-delivery", "super-check", "garantia"],
+    path: `${srvPath}/battery_change`
   },
   {
     title: "Cambio de parabrisas",
     price: 125990,
     image: CambioParabrisas,
-    features: ["pick-delivery"]
+    features: ["pick-delivery"],
+    path: `${srvPath}/windshield_replacement`
   },
   {
     title: "Checkeo preventivo",
     price: 149990,
     image: ChequeoPreventivo,
-    features: ["super-check"]
+    features: ["super-check"],
+    path: `${srvPath}/preventive_check`
   }
 ];
 

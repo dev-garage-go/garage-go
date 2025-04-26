@@ -2,15 +2,17 @@
 
 import Image from "next/image";
 import { Garantia, PickDelivery, SuperCheck } from "@/assets";
+import Link from "next/link";
 
 interface Props {
-  title: string;
-  price?: number;
-  image: string;
-  discount?: string;
-  features?: string[];
-  func: () => void;
-  buttons?: ButtonProps[];
+  title: string
+  price?: number
+  image: string
+  discount?: string
+  features?: string[]
+  func: () => void
+  buttons?: ButtonProps[]
+  path: string
 }
 
 export const ServiceCard = ({
@@ -20,7 +22,8 @@ export const ServiceCard = ({
   discount,
   features = [],
   func,
-  buttons
+  buttons,
+  path
 }: Props) => {
   const featureIcons: Record<string, string> = {
     'pick-delivery': PickDelivery,
@@ -29,7 +32,10 @@ export const ServiceCard = ({
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <Link
+      className="h-full flex flex-col"
+      href={path}
+    >
       <div className="bg-primaryBlue-500 text-white py-3 px-4 rounded-t-2xl font-medium mb-1">
         {title}
       </div>
@@ -95,6 +101,6 @@ export const ServiceCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
