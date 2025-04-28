@@ -26,7 +26,7 @@ export default function MileageMaintenancePage() {
         <ServicePageButtons />
 
         <section className='container-section'>
-          <h2 className='title-h2'>¿Como funciona?</h2>
+          <h2 className='title-h2 font-semibold'>¿Como funciona?</h2>
           <p className='description-of-title-h2'>Darle el mejor cuidado a tu auto es muy facil</p>
 
           <div className='max-w-page padding-central-page grid-steps-central-page'>
@@ -38,7 +38,7 @@ export default function MileageMaintenancePage() {
 
         {/* Title and FAQs section */}
         <section className='container-section max-w-page w-full'>
-          <h2 className='title-h2 text-center'>
+          <h2 className='title-h2 font-semibold text-center'>
             ¿Qué debes saber sobre tu
             <br />
             Mantencion por Kilometraje?
@@ -61,14 +61,16 @@ export default function MileageMaintenancePage() {
         {/* Gray section */}
         <section className='container-section pb-from-footer w-full bg-gray-200'>
 
-          <div className='grid grid-cols-1 md:grid-cols-2 w-full bg-red-100 max-w-page'>
-            <div>
-              <h2>Estos servicios te pueden interesar</h2>
+          <div className='flex flex-col sm:flex-row w-full bg-red-100 max-w-page'>
+            <div className='w-full'>
+              <h3 className='title-h3'>Estos servicios te pueden interesar</h3>
               <button>
                 Ver todos
               </button>
+            </div>
 
-              <div className='grid grid-cols-1 sm:grid-cols-2'>
+            <div className='w-full '>
+              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
                 {ServicesData.slice(0, 2).map((service, index) => (
                   <ServiceCard {...service} key={index} />
                 ))}

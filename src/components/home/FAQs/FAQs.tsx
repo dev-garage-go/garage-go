@@ -26,7 +26,7 @@ export const FAQs = () => {
 
         {/* Title and FAQs */}
         <div className='w-full lg:w-1/2 px-4'>
-          <h2 className='title-h2 text-center md:text-start mb-10'>
+          <h2 className='title-h2 font-semibold text-center md:text-start mb-10'>
             Preguntas frecuentes
           </h2>
           <div className='space-y-4'>

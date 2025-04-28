@@ -13,7 +13,7 @@ export const Services = () => {
       <div className="padding-central-page max-w-page">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="title-h2 text-primaryBlue-500 mb-4">
+          <h2 className="title-h2 font-semibold text-primaryBlue-500 mb-4">
             Todos los servicios
             <br />
             que necesita tu auto

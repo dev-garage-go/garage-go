@@ -24,7 +24,7 @@ export default function ServicesPage() {
 
       <section className="container-section">
         {/* Title section */}
-        <h2 className='title-h2 text-center text-primaryBlue-500'>
+        <h2 className='title-h2 font-semibold text-center text-primaryBlue-500'>
           Agenda, cotiza, reserva y
           <br />
           paga en linea. Asi de fácil es con Garage Go!
