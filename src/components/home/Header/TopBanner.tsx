@@ -110,13 +110,15 @@ export const TopBanner = ({
         </div>
       </section>
       {withImage && (
-        <div className="relative w-full h-52">
+        <div className="relative w-full h-64">
           <Image
-            src={imageSrc ?? ''}
-            alt={imageAlt ?? ''}
+            src={imageSrc!}
+            alt={imageAlt!}
+            fill
+            className="object-cover"
           />
 
-          <div className="absolute bottom-0 h-20 bg-white opacity-30 w-full">
+          <div className="absolute bottom-0 h-16 bg-white opacity-80 w-full flex justify-center items-center gap-14">
             {featuresImages?.map((feature, index) => (
               <Image
                 height={24}
@@ -124,7 +126,7 @@ export const TopBanner = ({
                 key={index}
                 src={FeatureIconsMap[feature]}
                 alt={feature}
-                className="object-contain"
+                className="object-contain z-20 opacity-100"
               />
             ))}
           </div>
