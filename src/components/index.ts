@@ -1,11 +1,12 @@
+export * from './Buttons/BookingButton';
+export * from './Buttons/ServicePageButtons';
+export * from './Buttons/WhatsAppButton';
 export * from './home/Banner/Banner';
 export * from './home/Banner/BannerCard';
 export * from './home/Banner/BannerSlider';
 export * from './home/Benefits/Benefits';
 export * from './home/Benefits/BenefitsCard';
 export * from './home/Benefits/BenefitsSlider';
-export * from './home/Buttons/BookingButton';
-export * from './home/Buttons/WhatsAppButton';
 export * from './home/FAQs/FAQs';
 export * from './home/FAQs/FAQsDisclosure';
 export * from './home/Footer/BrandsAndLocation';
@@ -27,6 +28,4 @@ export * from './home/UserReviews/ReviewCard';
 export * from './home/UserReviews/ReviewSlider';
 export * from './home/UserReviews/StarRating';
 export * from './home/UserReviews/UserReviews';
-
-// Services page
 export * from './services-page/ServicesGrid';
