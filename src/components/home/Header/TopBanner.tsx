@@ -52,7 +52,7 @@ export const TopBanner = ({
                 ? 'col-start-1 col-end-6 xl:col-end-3'
                 : 'col-start-1 col-end-6 xl:col-start-2 xl:col-end-4'}`}>
               {/* Breadcrumbs */}
-              <div className={`text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white ${hasBreadCrumbs ? "block" : "hidden"}`}>
+              <div className={`text-xs truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white ${hasBreadCrumbs ? "block" : "hidden"}`}>
                 <Link href="/" className="hover:font-medium duration-200 capitalize">
                   Inicio
                   <span className="px-2">{">"}</span>
@@ -110,7 +110,7 @@ export const TopBanner = ({
         </div>
       </section>
       {withImage && (
-        <div className="relative w-full h-64">
+        <div className="relative w-full h-40 sm:h-52 md:h-64">
           <Image
             src={imageSrc!}
             alt={imageAlt!}
@@ -118,7 +118,7 @@ export const TopBanner = ({
             className="object-cover"
           />
 
-          <div className="absolute bottom-0 h-16 bg-white opacity-80 w-full flex justify-center items-center gap-14">
+          <div className="absolute bottom-0 h-12 sm:h-14 md:h-16 bg-white opacity-80 w-full flex justify-center items-center gap-10 sm:gap-12 md:gap-14">
             {featuresImages?.map((feature, index) => (
               <Image
                 height={24}
@@ -126,7 +126,7 @@ export const TopBanner = ({
                 key={index}
                 src={FeatureIconsMap[feature]}
                 alt={feature}
-                className="object-contain z-20 opacity-100"
+                className="object-contain z-20 opacity-100 p-1 sm:p-0"
               />
             ))}
           </div>
