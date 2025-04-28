@@ -1,5 +1,5 @@
 import { FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
-import { StepsTechnicalRevision, TechnicalRevisionFAQs } from '@/constants';
+import { StepsTiresChange, TechnicalRevisionFAQs } from '@/constants';
 import { Mantencion } from '@/assets';
 
 export default function TiresChangePage() {
@@ -31,7 +31,7 @@ export default function TiresChangePage() {
         <p className='description-of-title-h2'>Cotiza, confirma y nos encargaremos de todo</p>
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
-          {StepsTechnicalRevision.map((item, index) => (
+          {StepsTiresChange.map((item, index) => (
             <StepsCard {...item} key={index + item.title} />
           ))}
         </div>

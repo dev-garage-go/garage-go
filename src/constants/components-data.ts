@@ -389,6 +389,33 @@ export const StepsOilAndFilterChange: StepsServicesPagesInterface[] = [
   },
 ]
 
+export const StepsTiresChange: StepsServicesPagesInterface[] = [
+  {
+    title: '1. Ingresa a nuestro cotizador',
+    description: 'Completa los datos de ancho, perfil y aro de tus neumáticosticos',
+    imageUrl: SeleccionaTuServicio,
+    imageAlt: 'persona seleccionando su servicio'
+  },
+  {
+    title: '2. Retiro a domicilio',
+    description: 'Una vez agendado, retiraremos tu vehículo a domicilio.',
+    imageUrl: RetiroDomicilio,
+    imageAlt: 'retiramos tu vehiculo a domicilio'
+  },
+  {
+    title: '3. Cambio y balanceo',
+    description: 'Tus cambio incluye instalación, balanceo y servicios adicionales.',
+    imageUrl: RevisionTecnica,
+    imageAlt: 'taller de vehiculos'
+  },
+  {
+    title: '4. Entrega a domicilio',
+    description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
+    imageUrl: EntregaDomicilio,
+    imageAlt: 'entregamos el vehiculo a tu domicilio'
+  },
+]
+
 // FAQs services pages
 export const TechnicalRevisionFAQs: ServicesPagesFAQs[] = [
   {
