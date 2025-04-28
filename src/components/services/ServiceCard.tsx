@@ -58,7 +58,7 @@ export const ServiceCard = ({
               <Image
                 height={24}
                 width={50}
-                key={index}
+                key={index + feature}
                 src={FeatureIconsMap[feature]}
                 alt={feature}
                 className="object-contain"

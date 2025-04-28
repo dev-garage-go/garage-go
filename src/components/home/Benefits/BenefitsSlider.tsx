@@ -54,7 +54,7 @@ export const BenefitsSlider = () => {
       >
         {BenefitsData.map((benefit, index) => (
           <SwiperSlide
-            key={index}
+            key={index + benefit.name}
             className="pb-14"
           >
             <BenefitsCard {...benefit} />

@@ -32,7 +32,7 @@ export const FAQs = () => {
           <div className='space-y-4'>
             {
               FAQsData.map((faq, index) => (
-                <FAQsDisclosure key={index} {...faq} />
+                <FAQsDisclosure key={index + faq.question} {...faq} />
               ))
             }
           </div>

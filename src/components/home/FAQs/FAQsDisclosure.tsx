@@ -32,7 +32,7 @@ export const FAQsDisclosure = ({ answer, question, hasAnswerItems, answersItems 
             {hasAnswerItems ? (
               <>
                 {answersItems?.map((answer, index) => (
-                  <p key={index}>
+                  <p key={index + answer}>
                     - {answer} <br />
                   </p>
                 ))}

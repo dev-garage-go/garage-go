@@ -7,7 +7,7 @@ export const ServicesGrid = () => {
   return (
     <div className="max-w-page padding-central-page grid-central-page">
       {ServicesData.map((service, index) => (
-        <ServiceCard key={index} {...service} />
+        <ServiceCard key={index + service.title} {...service} />
       ))}
     </div>
   )

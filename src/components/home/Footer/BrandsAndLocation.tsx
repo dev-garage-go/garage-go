@@ -26,7 +26,7 @@ export const BrandsAndLocation = () => {
         <div className="flex flex-wrap justify-center 2xl:justify-between items-center gap-4 w-full sm:p-6 md:py-8 lg:py-10 xl:py-16 bg-gray-100">
           {CompanySuppliersImages.map((supplier, index) => (
             <div
-              key={index}
+              key={index + supplier.name}
               className="relative flex justify-between items-center rounded-md
                  w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 2xl:w-32 2xl:h-32"
             >

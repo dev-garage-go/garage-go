@@ -125,7 +125,7 @@ export const TopBanner = ({
               <Image
                 height={24}
                 width={50}
-                key={index}
+                key={index + feature}
                 src={FeatureIconsMap[feature]}
                 alt={feature}
                 className="object-contain z-20 opacity-100 p-1 sm:p-0"

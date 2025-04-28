@@ -54,7 +54,7 @@ export const ReviewSlider = () => {
       >
         {UserReviewsData.map((item, index) => (
           <SwiperSlide
-            key={index}
+            key={index + item.name}
             className="pb-14"
           >
             <ReviewCard {...item} />

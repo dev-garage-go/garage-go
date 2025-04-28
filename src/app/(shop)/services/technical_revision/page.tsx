@@ -32,7 +32,7 @@ export default function TechnicalRevisionPage() {
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
           {StepsTechnicalRevision.map((item, index) => (
-            <StepsCard {...item} key={index} />
+            <StepsCard {...item} key={index + item.title} />
           ))}
         </div>
       </section>
@@ -47,7 +47,7 @@ export default function TechnicalRevisionPage() {
 
         <div className='faqs-services-pages'>
           {TechnicalRevisionFAQs.map((faq, index) => (
-            <FAQsDisclosure {...faq} key={index} />
+            <FAQsDisclosure {...faq} key={index + faq.question} />
           ))}
         </div>
 

@@ -37,7 +37,7 @@ export const Services = () => {
         {/* Main services */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {firstServices.slice(0, 3).map((service, index) => (
-            <ServiceCard key={index} {...service} />
+            <ServiceCard key={index + service.title} {...service} />
           ))}
         </div>
 

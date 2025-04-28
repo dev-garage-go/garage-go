@@ -41,7 +41,7 @@ export const SideBar = ({ menuOpen, setMenuOpen }: SideBarProps) => {
             HeaderLinksOptions.map((opt, index) => (
               <HeaderOption
                 mobile
-                key={index}
+                key={index + opt.title}
                 {...opt}
               />
             ))

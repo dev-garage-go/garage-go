@@ -32,7 +32,7 @@ export default function OilAndFilterChangePage() {
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
           {StepsOilAndFilterChange.map((item, index) => (
-            <StepsCard {...item} key={index} />
+            <StepsCard {...item} key={index + item.title} />
           ))}
         </div>
       </section>
@@ -47,7 +47,7 @@ export default function OilAndFilterChangePage() {
 
         <div className='faqs-services-pages'>
           {OildAndFilterChangeFAQs.map((faq, index) => (
-            <FAQsDisclosure {...faq} key={index} />
+            <FAQsDisclosure {...faq} key={index + faq.question} />
           ))}
         </div>
 

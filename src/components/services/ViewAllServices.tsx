@@ -24,7 +24,7 @@ export const ViewAllServices = ({ extraServices }: Props) => {
           >
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
               {extraServices.map((service, index) => (
-                <ServiceCard key={index} {...service} />
+                <ServiceCard key={index + service.title} {...service} />
               ))}
             </div>
           </motion.div>
