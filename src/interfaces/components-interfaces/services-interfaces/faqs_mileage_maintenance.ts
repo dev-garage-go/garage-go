@@ -1,4 +1,4 @@
-interface FAQsMileageMaintenance {
+interface ServicesPagesFAQs {
   hasAnswerItems?: boolean,
   answersItems?: string[]
   question: string

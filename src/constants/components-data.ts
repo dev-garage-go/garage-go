@@ -306,6 +306,7 @@ export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
   },
 ]
 
+// Steps services pages
 export const StepsMileageMaintenance: StepsMileageMaintenceInterface[] = [
   {
     title: '1. Selecciona tu servicio',
@@ -333,7 +334,26 @@ export const StepsMileageMaintenance: StepsMileageMaintenceInterface[] = [
   },
 ]
 
-export const MileageMaintenanceFAQs: FAQsMileageMaintenance[] = [
+// FAQs services pages
+export const TechnicalRevisionFAQs: ServicesPagesFAQs[] = [
+  {
+    question: '¿Que es la Gestión de RT?',
+    answer: 'La Revisión técnica es un control obligatorio y pre requisito para acceder a los permisos municipales de circulación. En Chile es de carácter obligatorio para asegurar el correcto funcionamiento al momento de circular'
+  },
+  {
+    question: '¿Cómo evitar el rechazo?',
+    answer: 'Antes de presentarlo realizaremos un super check de 35 puntos, en este diagnóstico nos aseguramos de que el vehículo cumpla con los estándares mínimos para circular.'
+  },
+  {
+    question: '¿Qué pasa si el vehículo no aprueba?',
+    answer: 'Con el diagnóstico presentado por la PRT, te presentaremos un presupuesto para solucionar los desperfectos y presentarlo nuevamente.'
+  },
+  {
+    question: '¿Que medios de pago aceptan?',
+    answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos via POS Getnet.'
+  },
+]
+export const MileageMaintenanceFAQs: ServicesPagesFAQs[] = [
   {
     question: 'Servicios incluidos',
     hasAnswerItems: true,
