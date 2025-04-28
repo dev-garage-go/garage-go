@@ -92,7 +92,7 @@ export const ServicesData: ServicesInterface[] = [
     price: 78990,
     image: Aceite,
     features: ["super-check", "garantia"],
-    path: `${srvPath}/oil_change`
+    path: `${srvPath}/oil_and_filter_change`
   },
   {
     title: "Cambio de neumáticos",
