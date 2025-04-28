@@ -43,25 +43,17 @@ export const Services = () => {
         {/* Main services */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {firstServices.slice(0, 3).map((service, index) => (
-            <ServiceCard
-              key={index}
-              {...service}
-              func={() => console.log(`Agendar: ${service.title}`)}
-            />
+            <ServiceCard key={index} {...service} />
           ))}
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-8">
           <div className="md:col-span-3">
-            <ServiceCard
-              {...firstServices[3]}
-              func={() => console.log(`Agendar: ${firstServices[3].title}`)}
-            />
+            <ServiceCard {...firstServices[3]} />
           </div>
           <div className="md:col-span-2">
             <ServiceCard
               {...firstServices[4]}
-              func={() => console.log(`Agendar: ${firstServices[4].title}`)}
             />
           </div>
         </div>
@@ -78,11 +70,7 @@ export const Services = () => {
             >
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
                 {extraServices.map((service, index) => (
-                  <ServiceCard
-                    key={service.title}
-                    {...service}
-                    func={() => console.log(`Agendar: ${service.title}`)}
-                  />
+                  <ServiceCard key={index} {...service} />
                 ))}
               </div>
             </motion.div>

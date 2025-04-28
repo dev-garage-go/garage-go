@@ -1,5 +1,5 @@
-import { FAQsDisclosure, ServicePageButtons, StepsCard, TopBanner } from '@/components';
-import { MileageMaintenanceFAQs, StepsMileageMaintenance } from '@/constants';
+import { FAQsDisclosure, ServiceCard, ServicePageButtons, StepsCard, TopBanner } from '@/components';
+import { MileageMaintenanceFAQs, ServicesData, StepsMileageMaintenance } from '@/constants';
 import { Mantencion } from '@/assets';
 
 export default function MileageMaintenancePage() {
@@ -68,8 +68,10 @@ export default function MileageMaintenancePage() {
                 Ver todos
               </button>
 
-              <div>
-                {/* Service card */}
+              <div className='grid grid-cols-1 sm:grid-cols-2'>
+                {ServicesData.slice(0, 2).map((service, index) => (
+                  <ServiceCard {...service} key={index} />
+                ))}
               </div>
             </div>
           </div>

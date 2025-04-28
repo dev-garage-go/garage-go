@@ -10,7 +10,6 @@ interface Props {
   image: string
   discount?: string
   features?: string[]
-  func: () => void
   buttons?: ButtonProps[]
   path: string
 }
@@ -21,7 +20,6 @@ export const ServiceCard = ({
   image,
   discount,
   features = [],
-  func,
   buttons,
   path
 }: Props) => {
@@ -87,7 +85,7 @@ export const ServiceCard = ({
                   </div>
                 )}
                 <button
-                  onClick={func}
+                  onClick={() => console.log(title)}
                   className="text-sm xl:text-base border border-primaryBlue-500 text-primaryBlue-500 px-6 py-2 rounded-lg hover:bg-blue-50 font-medium flex items-center gap-1"
                 >
                   Agendar <span className="text-lg">→</span>
