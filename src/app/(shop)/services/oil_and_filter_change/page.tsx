@@ -1,5 +1,5 @@
 import { FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
-import { StepsTechnicalRevision, TechnicalRevisionFAQs } from '@/constants';
+import { OildAndFilterChangeFAQs, StepsTechnicalRevision } from '@/constants';
 import { Mantencion } from '@/assets';
 
 export default function OilAndFilterChangePage() {
@@ -46,7 +46,7 @@ export default function OilAndFilterChangePage() {
         </h2>
 
         <div className='faqs-services-pages'>
-          {TechnicalRevisionFAQs.map((faq, index) => (
+          {OildAndFilterChangeFAQs.map((faq, index) => (
             <FAQsDisclosure {...faq} key={index} />
           ))}
         </div>
@@ -60,8 +60,8 @@ export default function OilAndFilterChangePage() {
 
       {/* Gray section */}
       <OtherServices
-        searchServicesFrom={5}
-        searchServicesTo={7}
+        searchServicesFrom={4}
+        searchServicesTo={6}
       />
     </div>
   );

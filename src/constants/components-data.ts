@@ -401,3 +401,18 @@ export const MileageMaintenanceFAQs: ServicesPagesFAQs[] = [
     answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
   },
 ]
+
+export const OildAndFilterChangeFAQs: ServicesPagesFAQs[] = [
+  {
+    question: '¿Por qué debo realizarlo?',
+    answer: 'El aceite es el corazón del motor, y su cambio regular es clave para mantenerlo en óptimas condiciones. Lubrica las piezas internas, reduce el desgaste, disipa el calor y prolonga la vida útil del motor mejorándotelas su desempeño y evitando fallas costosas a futuro.'
+  },
+  {
+    question: '¿Cada cuanto tiempo se realiza?',
+    answer: 'La frecuencia del cambio de aceite y filtro depende del tipo de aceite y el uso del vehículo. En general, se recomienda hacerlo cada 10,000 km o cada 6 meses, según las indicaciones del fabricante.'
+  },
+  {
+    question: '¿Que medios de pago aceptan?',
+    answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
+  },
+]
