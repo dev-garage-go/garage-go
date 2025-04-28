@@ -7,6 +7,8 @@ import { usePathname, useRouter } from "next/navigation"
 
 import { FeatureIconsMap, SegmentNameMap } from "@/constants"
 
+type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
+
 interface Props {
   title?: string
   description?: string
@@ -16,7 +18,7 @@ interface Props {
   withImage?: boolean
   imageSrc?: string
   imageAlt?: string
-  featuresImages?: string[]
+  featuresImages?: PossibleFeatures[]
 }
 
 // The banner must be used with "title and description" or with "hasVehicleData = true, vehicleName and vehiclePatent"
