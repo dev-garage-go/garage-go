@@ -26,6 +26,7 @@ export * from './home/UserReviews/ReviewSlider';
 export * from './home/UserReviews/StarRating';
 export * from './home/UserReviews/UserReviews';
 export * from './services/BranCarousel';
+export * from './services/OtherServices';
 export * from './services/ServiceCard';
 export * from './services/Services';
 export * from './services/ServicesGrid';

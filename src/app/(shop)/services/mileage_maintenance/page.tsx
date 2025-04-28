@@ -1,6 +1,7 @@
-import { FAQsDisclosure, ServiceCard, ServicePageButtons, StepsCard, TopBanner } from '@/components';
+import { FAQsDisclosure, OtherServices, ServiceCard, ServicePageButtons, StepsCard, TopBanner } from '@/components';
 import { MileageMaintenanceFAQs, ServicesData, StepsMileageMaintenance } from '@/constants';
 import { Mantencion } from '@/assets';
+import Link from 'next/link';
 
 export default function MileageMaintenancePage() {
   return (
@@ -59,27 +60,10 @@ export default function MileageMaintenancePage() {
         </section>
 
         {/* Gray section */}
-        <section className='container-section pb-from-footer w-full bg-gray-200'>
-
-          <div className='flex flex-col sm:flex-row w-full bg-red-100 max-w-page'>
-            <div className='w-full'>
-              <h3 className='title-h3'>Estos servicios te pueden interesar</h3>
-              <button>
-                Ver todos
-              </button>
-            </div>
-
-            <div className='w-full '>
-              <div className='grid grid-cols-1 sm:grid-cols-2 gap-4'>
-                {ServicesData.slice(0, 2).map((service, index) => (
-                  <ServiceCard {...service} key={index} />
-                ))}
-              </div>
-            </div>
-          </div>
-
-        </section>
-
+        <OtherServices
+          searchServicesFrom={3}
+          searchServicesTo={5}
+        />
       </div>
     </div>
   );
