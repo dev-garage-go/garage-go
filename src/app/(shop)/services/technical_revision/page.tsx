@@ -1,5 +1,5 @@
 import { FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
-import { StepsMileageMaintenance, StepsTechnicalRevision, TechnicalRevisionFAQs } from '@/constants';
+import { StepsTechnicalRevision, TechnicalRevisionFAQs } from '@/constants';
 import { Mantencion } from '@/assets';
 
 export default function TechnicalRevisionPage() {
@@ -16,7 +16,7 @@ export default function TechnicalRevisionPage() {
       />
 
       <div className='container-section'>
-        <h3 className='title-h3 text-center'>
+        <h3 className='title-h3 font-light text-center'>
           Reserva tu gestión de Revisión Técnica
           <br />
           desde los $39.900
@@ -27,7 +27,7 @@ export default function TechnicalRevisionPage() {
       </div>
 
       <section className='container-section'>
-        <h2 className='title-h2 font-semibold'>¿Como funciona?</h2>
+        <h2 className='title-h2 font-medium'>¿Como funciona?</h2>
         <p className='description-of-title-h2'>Ahorrate todo el tramite que nosotros lo llevamos por ti.</p>
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
