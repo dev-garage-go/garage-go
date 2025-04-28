@@ -20,6 +20,12 @@ export const SuperCheck = `${pathImages}/super-check.svg`
 export const Garantia = `${pathImages}/garantia.svg`
 export const PickDelivery = `${pathImages}/pick-delivery.svg`
 
+export const SeleccionaTuServicio = `${pathImages}/selecciona_servicio.jpg`
+export const RetiroDomicilio = `${pathImages}/retiro_domicilio.jpg`
+export const ServicioDomicilio = `${pathImages}/servicio_domicilio.jpg`
+export const EntregaDomicilio = `${pathImages}/entrega_domicilio.jpg`
+
+
 // Brand carousel
 export const Audi = `${carsLogos}/audi.png`
 export const Bmw = `${carsLogos}/bmw.png`

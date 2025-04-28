@@ -7,6 +7,7 @@ import {
   CambioParabrisas,
   ChequeoPreventivo,
   Dunlop,
+  EntregaDomicilio,
   Falken,
   Garantia,
   Goodyear,
@@ -24,7 +25,10 @@ import {
   ProfilePic4,
   ProfilePic5,
   Repsol,
+  RetiroDomicilio,
   Revision,
+  SeleccionaTuServicio,
+  ServicioDomicilio,
   SuperCheck,
   Thule
 } from "@/assets";
@@ -299,5 +303,32 @@ export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
   {
     name: "Thule",
     image: Thule
+  },
+]
+
+export const StepsMileageMaintenance = [
+  {
+    title: '1. Selecciona tu servicio',
+    description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
+    imageUrl: SeleccionaTuServicio,
+    imageAlt: 'persona seleccionando su servicio'
+  },
+  {
+    title: '2. Retiro a domicilio',
+    description: 'Una vez agendado, retiraremos tu vehículo a domicilio,',
+    imageUrl: RetiroDomicilio,
+    imageAlt: 'retiramos tu vehiculo a domicilio'
+  },
+  {
+    title: '3. Servicio y seguimiento',
+    description: 'Realizamos tu servicio directo en nuestro HUB.',
+    imageUrl: ServicioDomicilio,
+    imageAlt: 'taller de vehiculos'
+  },
+  {
+    title: '4. Entrega a domicilio',
+    description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
+    imageUrl: EntregaDomicilio,
+    imageAlt: 'entregamos el vehiculo a tu domicilio'
   },
 ]

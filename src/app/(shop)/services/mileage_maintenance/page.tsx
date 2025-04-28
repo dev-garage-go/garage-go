@@ -1,5 +1,6 @@
+import { ServicePageButtons, StepsCard, TopBanner } from '@/components';
+import { StepsMileageMaintenance } from '@/constants';
 import { Mantencion } from '@/assets';
-import { ServicePageButtons, TopBanner } from '@/components';
 
 export default function MileageMaintenancePage() {
   return (
@@ -23,8 +24,24 @@ export default function MileageMaintenancePage() {
         {/* Buttons */}
         <ServicePageButtons />
 
-        <h2 className='title-h2 mt-20'>¿Como funciona?</h2>
-        <p className='description-of-title-h2'>Darle el mejor cuidado a tu auto es muy facil</p>
+        <section className='container-section'>
+          <h2 className='title-h2'>¿Como funciona?</h2>
+          <p className='description-of-title-h2'>Darle el mejor cuidado a tu auto es muy facil</p>
+
+          <div className='max-w-page padding-central-page grid-steps-central-page'>
+            {StepsMileageMaintenance.map((item, index) => (
+              <StepsCard {...item} key={index} />
+            ))}
+          </div>
+        </section>
+        <section className='container-section'>
+          <h2 className='title-h2 text-center'>
+            ¿Qué debes saber sobre tu
+            <br />
+            Mantencion por Kilometraje?
+          </h2>
+
+        </section>
       </div>
     </div>
   );
