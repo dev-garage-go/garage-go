@@ -1,5 +1,5 @@
 import { FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
-import { OildAndFilterChangeFAQs, StepsTechnicalRevision } from '@/constants';
+import { OildAndFilterChangeFAQs, StepsOilAndFilterChange } from '@/constants';
 import { Mantencion } from '@/assets';
 
 export default function OilAndFilterChangePage() {
@@ -31,7 +31,7 @@ export default function OilAndFilterChangePage() {
         <p className='description-of-title-h2'>Tu cambio de aceite y filtro, tal como lo exige el fabricante.</p>
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
-          {StepsTechnicalRevision.map((item, index) => (
+          {StepsOilAndFilterChange.map((item, index) => (
             <StepsCard {...item} key={index} />
           ))}
         </div>

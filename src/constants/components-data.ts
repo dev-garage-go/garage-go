@@ -362,6 +362,33 @@ export const StepsTechnicalRevision: StepsServicesPagesInterface[] = [
   },
 ]
 
+export const StepsOilAndFilterChange: StepsServicesPagesInterface[] = [
+  {
+    title: '1. Selecciona tu servicio',
+    description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
+    imageUrl: SeleccionaTuServicio,
+    imageAlt: 'persona seleccionando su servicio'
+  },
+  {
+    title: '2. Preséntate con tu vehiculo',
+    description: 'Te esperamos directo en nuestro HUB. Consulta por Pick&delivery',
+    imageUrl: RetiroDomicilio,
+    imageAlt: 'retiramos tu vehiculo a domicilio'
+  },
+  {
+    title: '3. Realizamos el servicio',
+    description: 'Tu cambio de aceite y filtro según los requerimientos del fabricante.',
+    imageUrl: RevisionTecnica,
+    imageAlt: 'taller de vehiculos'
+  },
+  {
+    title: '4. Entrega de la unidad',
+    description: 'Te avisaremos cuando tu auto este listo para que lo retires.',
+    imageUrl: EntregaDomicilio,
+    imageAlt: 'entregamos el vehiculo a tu domicilio'
+  },
+]
+
 // FAQs services pages
 export const TechnicalRevisionFAQs: ServicesPagesFAQs[] = [
   {
