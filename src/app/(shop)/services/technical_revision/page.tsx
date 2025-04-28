@@ -1,5 +1,5 @@
 import { FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
-import { StepsMileageMaintenance, TechnicalRevisionFAQs } from '@/constants';
+import { StepsMileageMaintenance, StepsTechnicalRevision, TechnicalRevisionFAQs } from '@/constants';
 import { Mantencion } from '@/assets';
 
 export default function TechnicalRevisionPage() {
@@ -17,9 +17,9 @@ export default function TechnicalRevisionPage() {
 
       <div className='container-section'>
         <h3 className='title-h3 text-center'>
-          Reserva tu mantención por kilometraje desde los $189.990
+          Reserva tu gestión de Revisión Técnica
           <br />
-          Y obtén un 25% De descuento.
+          desde los $39.900
         </h3>
 
         {/* Buttons */}
@@ -28,10 +28,10 @@ export default function TechnicalRevisionPage() {
 
       <section className='container-section'>
         <h2 className='title-h2 font-semibold'>¿Como funciona?</h2>
-        <p className='description-of-title-h2'>Darle el mejor cuidado a tu auto es muy facil</p>
+        <p className='description-of-title-h2'>Ahorrate todo el tramite que nosotros lo llevamos por ti.</p>
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
-          {StepsMileageMaintenance.map((item, index) => (
+          {StepsTechnicalRevision.map((item, index) => (
             <StepsCard {...item} key={index} />
           ))}
         </div>
@@ -39,7 +39,7 @@ export default function TechnicalRevisionPage() {
 
       {/* Title and FAQs section */}
       <section className='container-section max-w-page w-full'>
-        <h2 className='title-h2 font-semibold text-center'>
+        <h2 className='title-h2 font-medium text-center'>
           ¿Qué debes saber sobre tu
           <br />
           Gestión de Revisión Técnica?
@@ -60,8 +60,8 @@ export default function TechnicalRevisionPage() {
 
       {/* Gray section */}
       <OtherServices
-        searchServicesFrom={3}
-        searchServicesTo={5}
+        searchServicesFrom={5}
+        searchServicesTo={7}
       />
     </div>
   );

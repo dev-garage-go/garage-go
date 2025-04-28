@@ -24,6 +24,7 @@ export const SeleccionaTuServicio = `${pathImages}/selecciona_servicio.jpg`
 export const RetiroDomicilio = `${pathImages}/retiro_domicilio.jpg`
 export const ServicioDomicilio = `${pathImages}/servicio_domicilio.jpg`
 export const EntregaDomicilio = `${pathImages}/entrega_domicilio.jpg`
+export const RevisionTecnica = `${pathImages}/revision_tecnica.jpg`
 
 
 // Brand carousel

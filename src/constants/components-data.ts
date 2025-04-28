@@ -27,6 +27,7 @@ import {
   Repsol,
   RetiroDomicilio,
   Revision,
+  RevisionTecnica,
   SeleccionaTuServicio,
   ServicioDomicilio,
   SuperCheck,
@@ -307,7 +308,7 @@ export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
 ]
 
 // Steps services pages
-export const StepsMileageMaintenance: StepsMileageMaintenceInterface[] = [
+export const StepsMileageMaintenance: StepsServicesPagesInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
@@ -324,6 +325,33 @@ export const StepsMileageMaintenance: StepsMileageMaintenceInterface[] = [
     title: '3. Servicio y seguimiento',
     description: 'Realizamos tu servicio directo en nuestro HUB.',
     imageUrl: ServicioDomicilio,
+    imageAlt: 'taller de vehiculos'
+  },
+  {
+    title: '4. Entrega a domicilio',
+    description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
+    imageUrl: EntregaDomicilio,
+    imageAlt: 'entregamos el vehiculo a tu domicilio'
+  },
+]
+
+export const StepsTechnicalRevision: StepsServicesPagesInterface[] = [
+  {
+    title: '1. Selecciona tu servicio',
+    description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
+    imageUrl: SeleccionaTuServicio,
+    imageAlt: 'persona seleccionando su servicio'
+  },
+  {
+    title: '2. Retiro a domicilio',
+    description: 'Una vez agendado, retiraremos tu vehículo a domicilio,',
+    imageUrl: RetiroDomicilio,
+    imageAlt: 'retiramos tu vehiculo a domicilio'
+  },
+  {
+    title: '3. Lo llevamos a la planta',
+    description: 'Antes realizaremos un super check Y si no pasa, te presentaremos una cotizacion para resolverlo.',
+    imageUrl: RevisionTecnica,
     imageAlt: 'taller de vehiculos'
   },
   {
@@ -353,6 +381,7 @@ export const TechnicalRevisionFAQs: ServicesPagesFAQs[] = [
     answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos via POS Getnet.'
   },
 ]
+
 export const MileageMaintenanceFAQs: ServicesPagesFAQs[] = [
   {
     question: 'Servicios incluidos',
