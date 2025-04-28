@@ -30,3 +30,4 @@ export * from './services/ServiceCard';
 export * from './services/Services';
 export * from './services/ServicesGrid';
 export * from './services/StepsCard';
+export * from './services/ViewAllServices';

@@ -1,16 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 import { GoogleIcon } from '@/assets';
-import { ServiceCard } from '@/components';
+import { ServiceCard, ViewAllServices } from '@/components';
 import { ServicesData } from '@/constants';
 
 export const Services = () => {
-  const [viewAll, setViewAll] = useState(false);
-
   const firstServices = ServicesData.slice(0, 5);
   const extraServices = ServicesData.slice(5);
 
@@ -19,7 +13,7 @@ export const Services = () => {
       <div className="padding-central-page max-w-page">
         {/* Header */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-primaryBlue-500 mb-4">
+          <h2 className="title-h2 text-primaryBlue-500 mb-4">
             Todos los servicios
             <br />
             que necesita tu auto
@@ -59,33 +53,7 @@ export const Services = () => {
         </div>
 
         {/* Aditional services as animated block */}
-        <AnimatePresence initial={false}>
-          {viewAll && (
-            <motion.div
-              layout
-              initial={{ height: 0, opacity: 0 }}
-              animate={{ height: "auto", opacity: 1 }}
-              exit={{ height: 0, opacity: 0 }}
-              transition={{ duration: 0.4, ease: "easeInOut" }}
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
-                {extraServices.map((service, index) => (
-                  <ServiceCard key={index} {...service} />
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Toggle button */}
-        <div className="text-center mt-12">
-          <button
-            onClick={() => setViewAll(!viewAll)}
-            className="bg-primaryBlue-500 text-white px-8 py-3 rounded-lg hover:opacity-90 font-medium transition"
-          >
-            {viewAll ? "Ver menos" : "Ver todos"}
-          </button>
-        </div>
+        <ViewAllServices extraServices={extraServices} />
       </div>
     </section>
   );
