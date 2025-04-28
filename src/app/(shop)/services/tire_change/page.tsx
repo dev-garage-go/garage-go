@@ -1,5 +1,5 @@
 import { FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
-import { StepsTiresChange, TechnicalRevisionFAQs } from '@/constants';
+import { StepsTiresChange, TiresChangeFAQs } from '@/constants';
 import { Mantencion } from '@/assets';
 
 export default function TiresChangePage() {
@@ -49,7 +49,7 @@ export default function TiresChangePage() {
         </h2>
 
         <div className='faqs-services-pages'>
-          {TechnicalRevisionFAQs.map((faq, index) => (
+          {TiresChangeFAQs.map((faq, index) => (
             <FAQsDisclosure {...faq} key={index + faq.question} />
           ))}
         </div>
