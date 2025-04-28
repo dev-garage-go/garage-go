@@ -8,6 +8,7 @@ import {
   ChequeoPreventivo,
   Dunlop,
   Falken,
+  Garantia,
   Goodyear,
   Hankook,
   Keko,
@@ -15,6 +16,7 @@ import {
   Mobil,
   PagaOnline,
   PickAndDelivery,
+  PickDelivery,
   Playero,
   ProfilePic1,
   ProfilePic2,
@@ -23,10 +25,19 @@ import {
   ProfilePic5,
   Repsol,
   Revision,
+  SuperCheck,
   Thule
 } from "@/assets";
 
 const srvPath = '/services'
+
+// Map the 'features' with their images
+export const FeatureIconsMap: Record<string, string> = {
+  'pick-delivery': PickDelivery,
+  'super-check': SuperCheck,
+  'garantia': Garantia,
+};
+
 
 export const HeaderLinksOptions: HeaderOptionInterface[] = [
   {

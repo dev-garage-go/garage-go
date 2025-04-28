@@ -1,7 +1,7 @@
 "use client"
 
+import { FeatureIconsMap } from "@/constants";
 import Image from "next/image";
-import { Garantia, PickDelivery, SuperCheck } from "@/assets";
 import Link from "next/link";
 
 interface Props {
@@ -26,12 +26,6 @@ export const ServiceCard = ({
   path
 }: Props) => {
 
-  // Map the 'features' with their images
-  const featureIcons: Record<string, string> = {
-    'pick-delivery': PickDelivery,
-    'super-check': SuperCheck,
-    'garantia': Garantia,
-  };
 
   return (
     <Link
@@ -67,7 +61,7 @@ export const ServiceCard = ({
                 height={24}
                 width={50}
                 key={index}
-                src={featureIcons[feature]}
+                src={FeatureIconsMap[feature]}
                 alt={feature}
                 className="object-contain"
               />
