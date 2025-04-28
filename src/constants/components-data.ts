@@ -306,7 +306,7 @@ export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
   },
 ]
 
-export const StepsMileageMaintenance = [
+export const StepsMileageMaintenance: StepsMileageMaintenceInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
@@ -330,5 +330,25 @@ export const StepsMileageMaintenance = [
     description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
     imageUrl: EntregaDomicilio,
     imageAlt: 'entregamos el vehiculo a tu domicilio'
+  },
+]
+
+export const MileageMaintenanceFAQs: FAQsMileageMaintenance[] = [
+  {
+    question: 'Servicios incluidos',
+    hasAnswerItems: true,
+    answersItems: ['Cambio aceite', 'Cambio filtro de aceite', 'Cambios filtro de polen', 'Cambio filtro de aire', 'Aseo de frenos', 'Rotación de neumáticos', 'Relleno de fluidos', 'Lavado express de cortesía', 'Super check de 35 puntos', 'Retiro y entrega a domicilio']
+  },
+  {
+    question: '¿Cuanto es la garantía del servicio?',
+    answer: 'Todos nuestros servicios cuentan con un periódo de garantía de 6 meses o 10.000 kms. A partir de la fecha de la entrega del vehículo.'
+  },
+  {
+    question: '¿Cómo cancelar un servicio?',
+    answer: 'Una vez agendado y cancelado el servicio cuentas con un periodo de 2 horas previas al retiro o entrega de la unidad para solicitar un reembolso o re agendar tu servicio.'
+  },
+  {
+    question: '¿Que medios de pago aceptan?',
+    answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
   },
 ]
