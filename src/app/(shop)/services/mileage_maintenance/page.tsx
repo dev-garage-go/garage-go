@@ -45,7 +45,7 @@ export default function MileageMaintenancePage() {
           Mantencion por Kilometraje?
         </h2>
 
-        <div className='space-y-4 w-full lg:w-2/4 mt-6 px-6 sm:px-10 md:px-20 lg:px-0'>
+        <div className='faqs-services-pages'>
           {MileageMaintenanceFAQs.map((faq, index) => (
             <FAQsDisclosure {...faq} key={index} />
           ))}
