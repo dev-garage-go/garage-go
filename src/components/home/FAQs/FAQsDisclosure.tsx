@@ -9,12 +9,14 @@ import { IoChevronDown } from 'react-icons/io5'
 
 interface Props {
   question: string,
-  answer: string,
+  answer?: string,
+  hasAnswerItems?: boolean
+  answersItems?: string[]
 }
 
-export const FAQsDisclosure = ({ answer, question }: Props) => {
+export const FAQsDisclosure = ({ answer, question, hasAnswerItems, answersItems }: Props) => {
   return (
-    <Disclosure as="div" className=" py-2" defaultOpen={false}>
+    <Disclosure as="div" className="py-2" defaultOpen={false}>
       {({ open }) => (
         <>
           <DisclosureButton className="group flex w-full items-center justify-between">
@@ -27,7 +29,19 @@ export const FAQsDisclosure = ({ answer, question }: Props) => {
             />
           </DisclosureButton>
           <DisclosurePanel className="text-sm md:text-base xl:text-lg text-gray-700 font-light mt-2">
-            {answer}
+            {hasAnswerItems ? (
+              <>
+                {answersItems?.map((answer, index) => (
+                  <p key={index}>
+                    - {answer} <br />
+                  </p>
+                ))}
+              </>
+            ) : (
+              <>
+                {answer}
+              </>
+            )}
           </DisclosurePanel>
         </>
       )}
