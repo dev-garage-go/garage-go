@@ -12,10 +12,11 @@ interface Props {
 
 export const ReviewCard = ({ name, opinion, profilePicture, score }: Props) => {
   return (
-    <div className='flex justify-center items-center bg-primaryBlue-500 w-fit p-6 rounded-lg shadow-xl shadow-slate-400'>
+    <div className='flex justify-center items-start bg-primaryBlue-500 w-full max-w-md h-60 px-6
+     py-10 rounded-lg shadow-xl shadow-slate-400'>
 
       {/* Container items*/}
-      <div className='flex flex-col w-full max-w-xs'>
+      <div className='flex flex-col w-full max-w-sm'>
         {/* Profile image */}
         <div className='flex justify-start items-center gap-4'>
           <div className='flex justify-center items-center relative h-12 w-12 ring-2 ring-white ring-offset-2 ring-offset-blue-600 rounded-full'>
@@ -40,8 +41,9 @@ export const ReviewCard = ({ name, opinion, profilePicture, score }: Props) => {
         </div>
 
         {/* Text */}
-        <div>
-          <p className='text-sm text-white mt-4 '>
+        {/* truncate overflow-hidden text-ellipsis whitespace-nowrap */}
+        <div className="overflow-hidden">
+          <p className="text-sm text-white mt-4 line-clamp-5">
             {opinion}
           </p>
         </div>

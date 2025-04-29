@@ -213,6 +213,12 @@ export const UserReviewsData: ReviewsInterface[] = [
     name: "Valeria Avendaño",
     profilePicture: ProfilePic1,
     score: 4.2,
+    opinion: "Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos."
+  },
+  {
+    name: "Valeria Avendaño",
+    profilePicture: ProfilePic1,
+    score: 4.2,
     opinion: "Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos."
   },
   {

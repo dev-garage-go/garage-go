@@ -36,9 +36,17 @@ const config: Config = {
           900: '#7E1232',
         },
       },
+      lineClamp: {
+        3: '3',
+        4: '4',
+        5: '5',
+        6: '6'
+      }
     },
   },
   darkMode: 'class',
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+  ],
 }
 export default config
