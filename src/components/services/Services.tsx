@@ -35,17 +35,23 @@ export const Services = () => {
         </div>
 
         {/* Main services */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 xl:gap-8">
           {firstServices.slice(0, 3).map((service, index) => (
-            <ServiceCard key={index + service.title} {...service} />
+            <div
+              key={index + service.title}
+              className={`col-span-1 ${index === 0 ? 'sm:col-span-2 lg:col-span-1' : 'sm:col-span-1'
+                }`}
+            >
+              <ServiceCard {...service} />
+            </div>
           ))}
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 mt-8">
-          <div className="md:col-span-3">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 mt-8">
+          <div className="col-span-1 lg:col-span-3">
             <ServiceCard {...firstServices[3]} />
           </div>
-          <div className="md:col-span-2">
+          <div className="col-span-1 lg:col-span-2">
             <ServiceCard
               {...firstServices[4]}
             />

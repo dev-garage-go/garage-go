@@ -22,7 +22,7 @@ export const ViewAllServices = ({ extraServices }: Props) => {
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
           >
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-8">
               {extraServices.map((service, index) => (
                 <ServiceCard key={index + service.title} {...service} />
               ))}
