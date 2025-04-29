@@ -1,6 +1,9 @@
+import Image from 'next/image';
+import { IoInformationCircleOutline } from 'react-icons/io5';
+
 import { FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
 import { StepsTiresChange, TiresChangeFAQs } from '@/constants';
-import { Mantencion } from '@/assets';
+import { Mantencion, ServicioDomicilio } from '@/assets';
 
 export default function TiresChangePage() {
   return (
@@ -37,7 +40,53 @@ export default function TiresChangePage() {
         </div>
       </section>
 
-      {/* TODO: Benefits and promotions section */}
+      {/* Benefits and promotions section */}
+      <section className='container-section w-full'>
+        <div className='flex flex-col items-center justify-center bg-gray-100 w-full py-16'>
+          <h2 className='title-h2'>Beneficios y promociones</h2>
+          <p className='mt-4'>4x3 en neumáticos, más seguridad y más ahorro con Garage Go!</p>
+
+          {/* Main container */}
+          <div className='flex w-full justify-center items-center gap-10 h-full max-w-page mt-10'>
+            {/* Image card */}
+            <div className="relative h-80 w-80 rounded-3xl bg-white flex items-center justify-center overflow-hidden shadow-xl">
+              <div className="relative w-72 h-72 rounded-2xl overflow-hidden">
+                <Image
+                  src={ServicioDomicilio}
+                  alt="servicios domicilio"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+
+            {/* Text */}
+            <div className='flex flex-col justify-start items-center gap-10'>
+              <div>
+                <p className='font-medium mb-6'>¿Qué incluye el servicio?</p>
+                <div className='flex flex-col gap-4 justify-start items-start px-10 font-light'>
+                  <span>Instalación y balanceo para un desempeño óptimo.</span>
+                  <span>Super Check de 35 puntos para revisar el estado general de tu auto.</span>
+                  <span>Lavado completo para que tu vehículo quede impecable.</span>
+                  <span>Pick&delivery: Retiramos tu auto y te lo entregamos listo, sin que tengas que moverte de tu casa u oficina.</span>
+                </div>
+              </div>
+
+              {/* More information */}
+              <div className='flex justify-start items-center gap-2 w-full'>
+                <IoInformationCircleOutline
+                  size={20}
+                  className='text-primaryBlue-500'
+                />
+                <p className='text-primaryBlue-500 font-light hover:font-normal duration-200 cursor-pointer'>
+                  Bases y condiciones de la promocion
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
 
 
       {/* Title and FAQs section */}
