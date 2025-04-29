@@ -24,9 +24,10 @@ export const BannerCard = ({
 }: Props) => {
   return (
     <div className='flex justify-center items-center py-8 md:py-10 xl:py-12'>
-      <div className='relative flex items-center w-full max-w-5xl h-72 md:h-96 bg-primaryBlue-900 rounded-3xl shadow-xl shadow-gray-400 overflow-hidden p-6 md:px-10 md:py-12'>
+      <div className='relative flex items-center w-full lg:max-w-6xl h-72 md:h-96 lg:h-[470px] bg-primaryBlue-900
+      rounded-3xl shadow-xl shadow-gray-400 p-6 md:p-12 lg:p-20'>
         {/* Title and description */}
-        <div className={`relative w-full sm:w-1/2 text-white flex flex-col justify-center ${hasButton ? 'gap-10' : 'gap-0'}`}>
+        <div className={`relative w-full lg:w-1/2 text-white flex flex-col justify-center ${hasButton ? 'gap-10' : 'gap-0'}`}>
           <div>
             <h2 className='text-lg md:text-2xl font-semibold mb-4'>{title}</h2>
             <p className='text-sm md:text-base leading-relaxed'>
@@ -47,7 +48,7 @@ export const BannerCard = ({
         </div>
 
         {/* Image */}
-        <div className='hidden sm:block absolute bottom-0 right-0 h-full w-1/2'>
+        <div className='hidden lg:block absolute bottom-0 right-0 h-full w-1/2'>
           <Image
             priority
             src={image}

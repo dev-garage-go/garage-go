@@ -30,6 +30,7 @@ export const BannerSlider = () => {
   return (
     <>
       <Swiper
+        className="w-full h-full !overflow-visible"
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
@@ -38,11 +39,10 @@ export const BannerSlider = () => {
         }}
         navigation={!isMobile}
         modules={[Pagination, Navigation]}
-        className="w-full h-full"
       >
 
         {BannerInformation.map((item, index) => (
-          <SwiperSlide key={index + item.title} className='padding-banner'>
+          <SwiperSlide key={index + item.title} className='padding-banner mb-4 sm:mb-0'>
             <BannerCard {...item} />
           </SwiperSlide>
         ))}
