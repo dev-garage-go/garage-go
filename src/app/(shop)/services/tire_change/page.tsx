@@ -42,15 +42,15 @@ export default function TiresChangePage() {
 
       {/* Benefits and promotions section */}
       <section className='container-section w-full'>
-        <div className='flex flex-col items-center justify-center bg-gray-100 w-full py-16'>
+        <div className='flex flex-col items-center justify-center bg-gray-100 w-full py-10 md:py-16'>
           <h2 className='title-h2'>Beneficios y promociones</h2>
-          <p className='mt-4'>4x3 en neumáticos, más seguridad y más ahorro con Garage Go!</p>
+          <p className='description-of-title-h2 mt-4 font-light'>4x3 en neumáticos, más seguridad y más ahorro con Garage Go!</p>
 
           {/* Main container */}
-          <div className='flex w-full justify-center items-center gap-10 h-full max-w-page mt-10'>
+          <div className='flex flex-col md:flex-row w-full justify-center items-center gap-10 h-full max-w-page mt-10'>
             {/* Image card */}
-            <div className="relative h-80 w-80 rounded-3xl bg-white flex items-center justify-center overflow-hidden shadow-xl">
-              <div className="relative w-72 h-72 rounded-2xl overflow-hidden">
+            <div className="relative h-60 w-60 md:h-80 md:w-80 rounded-3xl bg-white flex items-center justify-center overflow-hidden shadow-xl">
+              <div className="relative h-56 w-56 md:w-72 md:h-72 rounded-2xl overflow-hidden">
                 <Image
                   src={ServicioDomicilio}
                   alt="servicios domicilio"
@@ -61,7 +61,7 @@ export default function TiresChangePage() {
             </div>
 
             {/* Text */}
-            <div className='flex flex-col justify-start items-center gap-10'>
+            <div className='flex flex-col justify-start items-center px-6 md:px-0 gap-10'>
               <div>
                 <p className='font-medium mb-6'>¿Qué incluye el servicio?</p>
                 <div className='flex flex-col gap-4 justify-start items-start px-10 font-light'>
