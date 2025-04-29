@@ -1,4 +1,4 @@
-import { Banner, Benefits, BrandCarousel, FAQs, Hero, Services, UserReviews } from "@/components";
+import { Banner, Benefits, FAQs, Hero, CarsBrandsCarousel, Services, UserReviews } from "@/components";
 
 export default function HomePage() {
   return (
@@ -6,7 +6,7 @@ export default function HomePage() {
       <Hero />
       <Services />
       <Benefits />
-      <BrandCarousel />
+      <CarsBrandsCarousel />
       <Banner />
       <div className="bg-gray-100 h-full">
         <UserReviews />
