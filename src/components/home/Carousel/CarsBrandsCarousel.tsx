@@ -1,5 +1,8 @@
 "use client"
 
+import Image from 'next/image';
+import { Carousel } from '@/components';
+
 import {
   Audi,
   Bmw,
@@ -10,8 +13,6 @@ import {
   Hyundai,
   Jeep
 } from '@/assets';
-import Image from 'next/image';
-import { Carousel } from './Carousel'; // Asegúrate de la ruta correcta
 
 const brandLogos = [
   { id: 'audi', image: Audi },

@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface Props<T> {
   items: T[];
   renderItem: (item: T) => React.ReactNode;
   itemWidth?: number;
-  scrollSpeed?: number; // en milisegundos por desplazamiento
+  scrollSpeed?: number; // milliseconds per displacement
   isInfinite?: boolean;
   direction?: 'left' | 'right';
-  gap?: number;
+  gap?: number; // px
 }
 
 export const Carousel = <T,>({
@@ -38,8 +38,6 @@ export const Carousel = <T,>({
 
     const interval = setInterval(() => {
       setPosition((prev) => {
-        const containerWidth = containerRef.current?.offsetWidth || 0;
-        const totalWidth = clonedItems.length * (itemWidth + gap);
         const step = direction === 'left' ? -1 : 1;
         let nextPosition = prev + step;
 
