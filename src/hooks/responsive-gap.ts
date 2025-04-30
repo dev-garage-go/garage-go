@@ -3,22 +3,22 @@
 import { useEffect, useState } from "react";
 
 export const useResponsiveGap = () => {
-  const [gap, setGap] = useState(16); // default
+  const [gap, setGap] = useState(60); // default
 
   useEffect(() => {
     const updateGap = () => {
       if (window.innerWidth >= 1536) { // 2xl
-        setGap(120);
+        setGap(135);
       } else if (window.innerWidth >= 1280) { // xl
-        setGap(84)
+        setGap(120)
       } else if (window.innerWidth >= 1024) { // lg
-        setGap(68);
+        setGap(105);
       } else if (window.innerWidth >= 768) { // md
-        setGap(52);
+        setGap(90);
       } else if (window.innerWidth >= 640) { // sm
-        setGap(36);
+        setGap(75);
       } else {
-        setGap(30);
+        setGap(60);
       }
     };
 
