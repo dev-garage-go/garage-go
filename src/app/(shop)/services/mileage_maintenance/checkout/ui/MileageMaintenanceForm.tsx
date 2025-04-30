@@ -18,9 +18,9 @@ export const MileageMaintenanceForm = () => {
   const { register, formState: { errors } } = useForm<FormInputs>()
 
   return (
-    <form className="border border-gray-900 rounded-2xl w-full py-4 px-10">
+    <form className="border border-gray-900 rounded-3xl w-full py-4 px-10">
       <section className="flex flex-col gap-4">
-        <h4 className="mb-6">1. Datos personales</h4>
+        <h4 className="font-medium mb-6">1. Datos personales</h4>
 
         {/* Nombre y apellido */}
         <div className="flex w-full justify-between items-start gap-4">
@@ -42,7 +42,7 @@ export const MileageMaintenanceForm = () => {
           </div>
 
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm  ml-6">
+            <label className="text-sm ml-6">
               Apellido
             </label>
             <input
@@ -62,7 +62,7 @@ export const MileageMaintenanceForm = () => {
         {/* Telefono y correo  */}
         <div className="flex w-full justify-between items-start gap-4">
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm  ml-6">
+            <label className="text-sm ml-6">
               Telefono
             </label>
             <input
@@ -79,7 +79,7 @@ export const MileageMaintenanceForm = () => {
           </div>
 
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm  ml-6">
+            <label className="text-sm ml-6">
               Email
             </label>
             <input
@@ -99,12 +99,12 @@ export const MileageMaintenanceForm = () => {
 
       {/* Formulario del vehiculo */}
       <section className="flex flex-col gap-4">
-        <h4 className="mt-10 mb-6">2. Datos del vehiculo</h4>
+        <h4 className="font-medium mt-10 mb-6">2. Datos del vehiculo</h4>
 
         {/* Modelo de auto y marca  */}
         <div className="flex w-full justify-between items-start gap-4">
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm  ml-6">
+            <label className="text-sm ml-6">
               Modelo
             </label>
             <input
@@ -121,7 +121,7 @@ export const MileageMaintenanceForm = () => {
           </div>
 
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm  ml-6">
+            <label className="text-sm ml-6">
               Marca
             </label>
             <input
@@ -141,7 +141,7 @@ export const MileageMaintenanceForm = () => {
         {/* Año y kilometraje  */}
         <div className="flex w-full justify-between items-start gap-4">
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm  ml-6">
+            <label className="text-sm ml-6">
               Año
             </label>
             <input
@@ -158,7 +158,7 @@ export const MileageMaintenanceForm = () => {
           </div>
 
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm  ml-6">
+            <label className="text-sm ml-6">
               Kilometraje
             </label>
             <input
@@ -177,8 +177,19 @@ export const MileageMaintenanceForm = () => {
       </section>
 
       {/* Vehicle data */}
-      <div>
-
+      <div className="grid grid-cols-3 items-end w-full bg-gray-100 rounded-2xl p-4 mt-10 mb-20">
+        <div className="flex flex-col">
+          <p className="font-medium">TGPL67</p>
+          <p className="text-gray-500">Haval H6 GT</p>
+        </div>
+        <div className="text-primaryBlue-500">
+          <p>10.000 kms.</p>
+        </div>
+        <div>
+          <button className="text-sm text-primaryBlue-500 hover:text-primaryBlue-600 hover:font-medium duration-200 transition-all">
+            Ingresar otra patente
+          </button>
+        </div>
       </div>
     </form>
   )
