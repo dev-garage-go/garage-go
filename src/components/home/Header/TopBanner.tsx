@@ -55,7 +55,7 @@ export const TopBanner = ({
                 : 'col-start-1 col-end-6 xl:col-start-2 xl:col-end-4'}`}>
               {/* Breadcrumbs */}
               <div className={`text-xs truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white ${hasBreadCrumbs ? "block" : "hidden"}`}>
-                <Link href="/" className="hover:font-medium duration-200 capitalize">
+                <Link href="/" className="hover:font-medium duration-200">
                   Inicio
                   <span className="px-2">{">"}</span>
                 </Link>
@@ -68,14 +68,14 @@ export const TopBanner = ({
                     <div key={href} className="flex items-center">
                       {!isLast ? (
                         <>
-                          <Link href={href} className="hover:font-medium duration-200 capitalize">
-                            {name}
+                          <Link href={href} className="hover:font-medium duration-200">
+                            {name.charAt(0).toUpperCase() + name.slice(1)}
                           </Link>
                           <span className="px-2">{">"}</span>
                         </>
                       ) : (
-                        <span className="capitalize">
-                          {name}
+                        <span>
+                          {name.charAt(0).toUpperCase() + name.slice(1)}
                         </span> // last element no clickeable
                       )}
                     </div>
