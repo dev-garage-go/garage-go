@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
+import { formatNumberWithDots } from '@/utils';
 
 type FormInputs = {
   name: string;
@@ -10,12 +11,12 @@ type FormInputs = {
   email: string;
   carBrand: string;
   carModel: string;
-  carKm: number;
+  carKm: string;
   carYear: number;
 }
 
 export const MileageMaintenanceForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>()
+  const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormInputs>()
 
   // Funcion que se ejecuta al enviar el formulario
   const onSumbit = (data: FormInputs) => {
@@ -178,7 +179,14 @@ export const MileageMaintenanceForm = () => {
                   "border-red-400": errors.carKm
                 }
               )}
-              {...register("carKm", { required: true })}
+              {...register("carKm", {
+                required: true,
+                onChange: (e) => {
+                  const raw = e.target.value;
+                  const formatted = formatNumberWithDots(raw); // Set the value by putting points instead of 1200km put 1.200km.
+                  setValue("carKm", formatted); // Update the value of input
+                }
+              })}
             />
           </div>
         </div>
