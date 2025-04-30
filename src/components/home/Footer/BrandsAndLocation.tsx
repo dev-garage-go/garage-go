@@ -7,7 +7,7 @@ export const BrandsAndLocation = () => {
   return (
     <section>
 
-      <div className='flex flex-col w-full h-full'>
+      <div className='flex flex-col w-full'>
         {/* Title and bg blue */}
         <div className='flex flex-col justify-center items-center bg-primaryBlue-300 w-full py-6 sm:py-8 md:py-10 xl:py-12'>
           <h3 className='title-h3 text-center text-white'>
@@ -23,7 +23,7 @@ export const BrandsAndLocation = () => {
         </div>
 
         {/* Company suppliers */}
-        <div className="flex flex-wrap justify-center 2xl:justify-between items-center gap-4 w-full sm:p-6 md:py-8 lg:py-10 xl:py-16 bg-gray-100">
+        <div className="w-full py-6 lg:py-14 bg-gray-100">
           <SuppliersBrandsCarousel />
         </div>
 

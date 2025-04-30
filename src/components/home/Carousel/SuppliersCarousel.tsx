@@ -2,6 +2,7 @@
 
 import Image from 'next/image';
 import { Carousel } from '@/components';
+import { useResponsiveGap } from '@/hooks';
 
 import {
   BoshWideImg,
@@ -28,27 +29,27 @@ const suppliersLogos = [
 ];
 
 const SuppliersLogo = ({ logo }: { logo: { id: string; image: string } }) => (
-  <div className='relative w-14 h-14 md:w-16 md:h-16'>
+  <div className='relative w-32 h-32 md:w-40 md:h-40 lg:text-lg'>
     <Image
       fill
       src={logo.image}
       alt={logo.id}
-      className="w-auto h-auto object-contain grayscale hover:grayscale-0 transition-all"
+      className="w-auto h-auto object-contain grayscale transition-all opacity-80"
     />
   </div>
 );
 
 export const SuppliersBrandsCarousel = () => {
   return (
-    <div className="mt-16">
+    <div>
       <Carousel
         isInfinite
         items={suppliersLogos}
         renderItem={(logo) => <SuppliersLogo logo={logo} />}
         itemWidth={180}
-        gap={24}
+        gap={useResponsiveGap()}
         scrollSpeed={20}
-        direction='left'
+        direction='right'
       />
     </div>
   );

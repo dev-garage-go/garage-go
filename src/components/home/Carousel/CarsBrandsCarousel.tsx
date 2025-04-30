@@ -1,6 +1,7 @@
 "use client"
 
 import Image from 'next/image';
+import { useResponsiveGap } from '@/hooks';
 import { Carousel } from '@/components';
 
 import {
@@ -44,7 +45,7 @@ export const CarsBrandsCarousel = () => {
         items={brandLogos}
         renderItem={(logo) => <BrandLogo logo={logo} />}
         itemWidth={180}
-        gap={24}
+        gap={useResponsiveGap()}
         scrollSpeed={20}
         direction='left'
       />
