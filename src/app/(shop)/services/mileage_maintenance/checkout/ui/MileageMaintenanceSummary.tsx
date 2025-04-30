@@ -2,7 +2,7 @@ import { IoClose } from "react-icons/io5"
 
 export const MileageMaintenanceSummary = () => {
   return (
-    <section className='flex flex-col px-4 gap-4'>
+    <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
       <h4 className="font-semibold ml-6">Resumen de tu servicio</h4>
 
       {/* Mantencion por kilometraje */}
@@ -10,7 +10,7 @@ export const MileageMaintenanceSummary = () => {
         {/* Title and cross */}
         <div className="flex justify-between items-center">
           <h4 className="font-semibold">Mantencion por kilometraje</h4>
-          <div className="text-xs text-gray-300 flex items-center gap-1 hover:font-medium hover:text-gray-400 duration-200 transition-all cursor-pointer">
+          <div className="text-xs text-gray-400 flex items-center gap-1 hover:font-medium hover:text-gray-500 duration-200 transition-all cursor-pointer">
             <p>Quitar</p>
             <IoClose
               size={16}
@@ -33,7 +33,7 @@ export const MileageMaintenanceSummary = () => {
         {/* Title and cross */}
         <div className="flex justify-between items-center">
           <h4 className="font-semibold">Servicio de frenos</h4>
-          <div className="text-xs text-gray-300 flex items-center gap-1 hover:font-medium hover:text-gray-400 duration-200 transition-all cursor-pointer">
+          <div className="text-xs text-gray-400 flex items-center gap-1 hover:font-medium hover:text-gray-500 duration-200 transition-all cursor-pointer">
             <p>Quitar</p>
             <IoClose
               size={16}
@@ -60,7 +60,7 @@ export const MileageMaintenanceSummary = () => {
             type="text"
           />
 
-          <button className="py-2 px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
+          <button className="py-2 px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
             Canjear
           </button>
         </div>
