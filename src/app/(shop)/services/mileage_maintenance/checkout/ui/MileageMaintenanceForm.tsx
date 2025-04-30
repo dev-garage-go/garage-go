@@ -41,7 +41,7 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                "input-form",
                 {
                   "border-red-400": errors.name
                 }
@@ -58,7 +58,7 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                "input-form",
                 {
                   "border-red-400": errors.lastName
                 }
@@ -78,7 +78,7 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                "input-form",
                 {
                   "border-red-400": errors.phone
                 }
@@ -95,7 +95,7 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                "input-form",
                 {
                   "border-red-400": errors.email
                 }
@@ -120,7 +120,7 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                "input-form",
                 {
                   "border-red-400": errors.carBrand
                 }
@@ -137,7 +137,7 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                "input-form",
                 {
                   "border-red-400": errors.carBrand
                 }
@@ -157,7 +157,7 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                "input-form",
                 {
                   "border-red-400": errors.carYear
                 }
@@ -174,7 +174,7 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                "input-form",
                 {
                   "border-red-400": errors.carKm
                 }

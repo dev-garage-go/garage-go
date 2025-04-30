@@ -76,3 +76,7 @@
 .carousel-container {
   @apply w-full py-6 sm:py-8 md:py-10 lg:py-14
 }
+
+.input-form {
+  @apply py-2 px-4 border w-full rounded-2xl bg-white border-gray-300
+}
