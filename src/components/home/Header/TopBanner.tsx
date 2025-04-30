@@ -98,7 +98,7 @@ export const TopBanner = ({
                     <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
                       <p className="text-base sm:text-lg xl:text-xl uppercase text-white">{vehicleName}</p>
                       <button
-                        className="hidden md:block text-sm bg-primaryBlue-900 px-6 xl:px-10 py-0.5 rounded-md text-white"
+                        className="hidden md:block text-sm bg-primaryBlue-900 hover:brightness-125 hover:scale-110 duration-200 transition-all px-6 xl:px-10 py-0.5 rounded-md text-white"
                         onClick={() => router.back()}
                       >
                         Volver

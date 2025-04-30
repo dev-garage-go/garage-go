@@ -14,13 +14,13 @@ const config: Config = {
           50: '#CED4FE',
           100: '#A8B3FB',
           200: '#8392F7',
-          300: '#5F73F2',
-          400: '#3D55EC',
+          300: '#455FF5',
+          400: '#1C37E4',
           500: '#1C37E4', // base
           600: '#152ECB',
           700: '#1025B0',
           800: '#0B1E95',
-          900: '#071679',
+          900: '#0D1A51',
         },
         // rosados personalizados
         primaryPink: {

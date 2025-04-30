@@ -29,12 +29,12 @@ export const MileageMaintenanceForm = () => {
       onSubmit={handleSubmit(onSumbit)}
     >
       <section className="flex flex-col gap-4">
-        <h4 className="font-medium">1. Datos personales</h4>
+        <h4 className="font-medium text-primaryBlue-900">1. Datos personales</h4>
 
         {/* Nombre y apellido */}
         <div className="input-form-container mt-4 md:mt-6">
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
+            <label className="text-sm ml-4 lg:ml-6">
               Nombre
             </label>
             <input
@@ -46,7 +46,7 @@ export const MileageMaintenanceForm = () => {
           </div>
 
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
+            <label className="text-sm ml-4 lg:ml-6">
               Apellido
             </label>
             <input
@@ -61,7 +61,7 @@ export const MileageMaintenanceForm = () => {
         {/* Telefono y correo  */}
         <div className="input-form-container">
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
+            <label className="text-sm ml-4 lg:ml-6">
               Telefono
             </label>
             <input
@@ -73,7 +73,7 @@ export const MileageMaintenanceForm = () => {
           </div>
 
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
+            <label className="text-sm ml-4 lg:ml-6">
               Email
             </label>
             <input
@@ -88,12 +88,12 @@ export const MileageMaintenanceForm = () => {
 
       {/* Formulario del vehiculo */}
       <section className="flex flex-col gap-4">
-        <h4 className="font-medium mt-14 md:mt-10 mb-4 md:mb-6">2. Datos del vehiculo</h4>
+        <h4 className="font-medium mt-14 md:mt-10 mb-4 md:mb-6 text-primaryBlue-900">2. Datos del vehiculo</h4>
 
         {/* Marca y modelo del auto  */}
         <div className="input-form-container">
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
+            <label className="text-sm ml-4 lg:ml-6">
               Marca
             </label>
             <input
@@ -105,7 +105,7 @@ export const MileageMaintenanceForm = () => {
           </div>
 
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
+            <label className="text-sm ml-4 lg:ml-6">
               Modelo
             </label>
             <input
@@ -120,7 +120,7 @@ export const MileageMaintenanceForm = () => {
         {/* Año y kilometraje  */}
         <div className="input-form-container">
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
+            <label className="text-sm ml-4 lg:ml-6">
               Año
             </label>
             <input
@@ -132,7 +132,7 @@ export const MileageMaintenanceForm = () => {
           </div>
 
           <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
+            <label className="text-sm ml-4 lg:ml-6">
               Kilometraje
             </label>
             <input
@@ -155,7 +155,7 @@ export const MileageMaintenanceForm = () => {
       {/* Vehicle data */}
       <div className="grid grid-cols-1 lg:grid-cols-3 items-end w-full bg-gray-100 rounded-2xl p-4 mt-10 mb-20">
         <div className="flex flex-col">
-          <p className="font-medium">TGPL67</p>
+          <p className="font-medium text-primaryBlue-900">TGPL67</p>
           <div className="flex justify-between w-full lg:hidden text-primaryBlue-500">
             <p className="text-gray-500">Haval H6 GT</p>
             <p>10.000 kms.</p>
@@ -166,7 +166,7 @@ export const MileageMaintenanceForm = () => {
           <p>10.000 kms.</p>
         </div>
         <div>
-          <button className="mt-4 lg:mt-0 text-sm text-primaryBlue-500 hover:text-primaryBlue-600 hover:font-medium duration-200 transition-all">
+          <button className="mt-4 lg:mt-0 text-sm text-primaryBlue-400 hover:font-medium duration-200 transition-all">
             Ingresar otra patente
           </button>
         </div>
