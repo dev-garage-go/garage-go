@@ -13,7 +13,6 @@ interface Props {
 export const HeaderOption = ({ mobile = false, title, path }: Props) => {
   const pathname = usePathname()
 
-  // TODO: Reemplazar el bg-gray-100 de tailwind por los custom grays
   return (
     <>
       {mobile ? (
@@ -26,7 +25,7 @@ export const HeaderOption = ({ mobile = false, title, path }: Props) => {
             className={clsx(
               "block px-4 py-3 text-sm font-light transition-colors rounded-md",
               pathname === path
-                ? "bg-gray-100 text-primaryBlue-500"
+                ? "bg-customGray-100 text-primaryBlue-500"
                 : "text-white hover:bg-primaryBlue-700 duration-300"
             )}
           >
@@ -41,7 +40,7 @@ export const HeaderOption = ({ mobile = false, title, path }: Props) => {
               className={clsx(
                 "hidden sm:block px-4 py-2 text-center transition-colors text-sm font-light",
                 pathname === path
-                  ? "bg-gray-100 text-primaryBlue-500"
+                  ? "bg-customGray-100 text-primaryBlue-500"
                   : "text-white hover:bg-primaryBlue-700 duration-300"
               )}
             >

@@ -30,12 +30,13 @@ export const ServiceCard = ({
       className="h-full flex flex-col"
       href={path}
     >
-      <div className="bg-primaryBlue-500 text-white py-3 px-4 font-medium mb-1">
-        {title}
-      </div>
 
       {/* Main image */}
-      <div className="bg-white shadow-md flex-1 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+      <div className="bg-customGray-200 shadow-xl hover:-translate-y-1 shadow-customGray-400 flex-1 flex flex-col transition-all duration-300">
+        <div className="bg-primaryBlue-500 text-white py-3 px-4 font-medium">
+          {title}
+        </div>
+
         <div className="relative w-full h-56">
           <Image
             fill

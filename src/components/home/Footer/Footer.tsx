@@ -155,17 +155,17 @@ export const Footer = () => {
 
               <input
                 placeholder=""
-                className="text-sm xl:text-base rounded h-10 md:h-12 text-black p-2 font-medium"
+                className="text-sm xl:text-base rounded h-10 md:h-12 text-black p-2 font-medium bg-customGray-100"
                 type="text"
               />
               <input
                 placeholder=""
-                className="text-sm xl:text-base rounded h-10 md:h-12 text-black p-2 font-medium"
+                className="text-sm xl:text-base rounded h-10 md:h-12 text-black p-2 font-medium bg-customGray-100"
                 type="text"
               />
               <textarea name="description"
                 placeholder=""
-                className="text-sm xl:text-base rounded h-32 xl:h-40 text-black p-2 font-medium"
+                className="text-sm xl:text-base rounded h-32 xl:h-40 text-black p-2 font-medium bg-customGray-100"
               >
               </textarea>
 

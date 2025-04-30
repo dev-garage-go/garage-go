@@ -11,11 +11,11 @@ const config: Config = {
       colors: {
         // azules personalizados
         primaryBlue: {
-          50: '#CED4FE',
+          50: '#DBE0FA',
           100: '#A8B3FB',
           200: '#8392F7',
           300: '#455FF5',
-          400: '#1C37E4',
+          400: '#3D55EC',
           500: '#1C37E4', // base
           600: '#152ECB',
           700: '#1025B0',
@@ -35,6 +35,19 @@ const config: Config = {
           800: '#9C193F',
           900: '#7E1232',
         },
+        // grises personalizados
+        customGray: {
+          // 50: '',
+          100: '#EFEFEF',
+          200: '#E8E8E8',
+          // 300: '',
+          400: '#B6B6B6',
+          500: '#808080',
+          // 600: '',
+          // 700: '',
+          // 800: '',
+          // 900: '',
+        }
       },
       lineClamp: {
         3: '3',
@@ -45,8 +58,6 @@ const config: Config = {
     },
   },
   darkMode: 'class',
-  plugins: [
-    require('@tailwindcss/line-clamp'),
-  ],
+  plugins: [],
 }
 export default config
