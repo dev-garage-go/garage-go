@@ -17,15 +17,15 @@ import {
 } from '@/assets';
 
 const suppliersLogos = [
-  { id: 'Bridgestone', image: Bridgestone },
-  { id: 'Dunlop', image: Dunlop },
-  { id: 'Falken', image: Falken },
-  { id: 'Goodyear', image: Goodyear },
-  { id: 'Bosh', image: BoshWideImg },
-  { id: 'Hankook', image: Hankook },
-  { id: 'Keko', image: Keko },
-  { id: 'Repsol', image: Repsol },
-  { id: 'Thule', image: Thule }
+  { id: 'bridgestone', image: Bridgestone },
+  { id: 'dunlop', image: Dunlop },
+  { id: 'falken', image: Falken },
+  { id: 'goodyear', image: Goodyear },
+  { id: 'bosh', image: BoshWideImg },
+  { id: 'hankook', image: Hankook },
+  { id: 'keko', image: Keko },
+  { id: 'repsol', image: Repsol },
+  { id: 'thule', image: Thule }
 ];
 
 const SuppliersLogo = ({ logo }: { logo: { id: string; image: string } }) => (

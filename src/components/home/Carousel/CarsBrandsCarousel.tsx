@@ -27,7 +27,7 @@ const brandLogos = [
 ];
 
 const BrandLogo = ({ logo }: { logo: { id: string; image: string } }) => (
-  <div className='relative w-14 h-14 md:w-16 md:h-16'>
+  <div className='relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16'>
     <Image
       fill
       src={logo.image}
