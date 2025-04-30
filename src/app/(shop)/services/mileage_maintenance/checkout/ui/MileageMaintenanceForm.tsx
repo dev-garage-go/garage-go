@@ -162,11 +162,11 @@ export const MileageMaintenanceForm = () => {
           </div>
 
         </div>
-        <div className="hidden lg:block text-primaryBlue-500">
-          <p>10.000 kms.</p>
+        <div className="hidden lg:block">
+          <p className="font-medium text-primaryBlue-500">10.000 kms.</p>
         </div>
         <div>
-          <button className="mt-4 lg:mt-0 text-sm text-primaryBlue-400 hover:font-medium duration-200 transition-all">
+          <button className="text-xs mt-4 lg:mt-0 text-primaryBlue-400 hover:font-medium duration-200 transition-all">
             Ingresar otra patente
           </button>
         </div>
