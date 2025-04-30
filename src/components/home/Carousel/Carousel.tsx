@@ -3,8 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 
 interface Props<T> {
-  items: T[];
-  renderItem: (item: T) => React.ReactNode;
+  items: T[]; // expects an array of objects
+  renderItem: (item: T) => React.ReactNode; // this function should tell the carousel how each item to be rendered from the array (items) should look like.
   itemWidth?: number;
   scrollSpeed?: number; // milliseconds per displacement
   isInfinite?: boolean;
@@ -25,6 +25,7 @@ export const Carousel = <T,>({
   const [position, setPosition] = useState(0);
   const [clonedItems, setClonedItems] = useState<T[]>([]);
 
+  // Cloned items to infinite effect
   useEffect(() => {
     if (isInfinite && items.length > 0) {
       setClonedItems([...items, ...items, ...items]);
@@ -33,10 +34,13 @@ export const Carousel = <T,>({
     }
   }, [items, isInfinite]);
 
+  // Move automatically from 'position' = 0
   useEffect(() => {
     if (!isInfinite || items.length === 0) return;
 
     const interval = setInterval(() => {
+      // 'prev' = This is the functional form of setState
+      // It allows you to update the state (position) based on its previous value, it is necessary because the setInterval runs outside the normal React cycle and can have an old version of the state if not used in this way
       setPosition((prev) => {
         const step = direction === 'left' ? -1 : 1;
         let nextPosition = prev + step;

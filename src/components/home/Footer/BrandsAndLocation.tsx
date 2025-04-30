@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { CompanyLocation } from '@/assets'
-import { CompanySuppliersImages } from '@/constants'
+import { SuppliersBrandsCarousel } from '@/components';
 
 export const BrandsAndLocation = () => {
   return (
@@ -24,20 +24,7 @@ export const BrandsAndLocation = () => {
 
         {/* Company suppliers */}
         <div className="flex flex-wrap justify-center 2xl:justify-between items-center gap-4 w-full sm:p-6 md:py-8 lg:py-10 xl:py-16 bg-gray-100">
-          {CompanySuppliersImages.map((supplier, index) => (
-            <div
-              key={index + supplier.name}
-              className="relative flex justify-between items-center rounded-md
-                 w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 2xl:w-32 2xl:h-32"
-            >
-              <Image
-                src={supplier.image}
-                alt={supplier.name}
-                fill
-                className="object-contain p-4 opacity-70 w-auto h-auto"
-              />
-            </div>
-          ))}
+          <SuppliersBrandsCarousel />
         </div>
 
 

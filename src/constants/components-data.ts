@@ -1,20 +1,12 @@
 import {
   Aceite,
   AgendaCotiza,
-  BoshWideImg,
-  Bridgestone,
   CambioNeumaticos,
   CambioParabrisas,
   ChequeoPreventivo,
-  Dunlop,
   EntregaDomicilio,
-  Falken,
   Garantia,
-  Goodyear,
-  Hankook,
-  Keko,
   Mantencion,
-  Mobil,
   PagaOnline,
   PickAndDelivery,
   PickDelivery,
@@ -24,14 +16,12 @@ import {
   ProfilePic3,
   ProfilePic4,
   ProfilePic5,
-  Repsol,
   RetiroDomicilio,
   Revision,
   RevisionTecnica,
   SeleccionaTuServicio,
   ServicioDomicilio,
   SuperCheck,
-  Thule
 } from "@/assets";
 
 const srvPath = '/services'
@@ -267,49 +257,6 @@ export const FAQsData: FAQsInterface[] = [
   {
     question: '¿Qué medios de pago aceptan?',
     answer: 'Aceptamos todo tipo de pagos. Podés pagar tu servicio contra entrega con débito, crédito, link de pago o POS Getnet.',
-  },
-]
-
-export const CompanySuppliersImages: CompanySuppliersImagesInterface[] = [
-  {
-    name: "Bridgestone",
-    image: Bridgestone
-  },
-  {
-    name: "Dunlop",
-    image: Dunlop
-  },
-  {
-    name: "Falken",
-    image: Falken
-  },
-  {
-    name: "Goodyear",
-    image: Goodyear
-  },
-  {
-    name: "Bosh",
-    image: BoshWideImg
-  },
-  {
-    name: "Hankook",
-    image: Hankook
-  },
-  {
-    name: "Keko",
-    image: Keko
-  },
-  {
-    name: "Mobil",
-    image: Mobil
-  },
-  {
-    name: "Repsol",
-    image: Repsol
-  },
-  {
-    name: "Thule",
-    image: Thule
   },
 ]
 
