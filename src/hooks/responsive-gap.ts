@@ -7,16 +7,18 @@ export const useResponsiveGap = () => {
 
   useEffect(() => {
     const updateGap = () => {
-      if (window.innerWidth >= 1280) { // xl
-        setGap(60);
+      if (window.innerWidth >= 1536) { // 2xl
+        setGap(120);
+      } else if (window.innerWidth >= 1280) { // xl
+        setGap(84)
       } else if (window.innerWidth >= 1024) { // lg
-        setGap(40);
+        setGap(68);
       } else if (window.innerWidth >= 768) { // md
-        setGap(32);
+        setGap(52);
       } else if (window.innerWidth >= 640) { // sm
-        setGap(24);
+        setGap(36);
       } else {
-        setGap(16);
+        setGap(30);
       }
     };
 

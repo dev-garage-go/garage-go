@@ -23,7 +23,7 @@ export const BrandsAndLocation = () => {
         </div>
 
         {/* Company suppliers */}
-        <div className="w-full py-6 lg:py-14 bg-gray-100">
+        <div className="carousel-container bg-gray-100">
           <SuppliersBrandsCarousel />
         </div>
 
