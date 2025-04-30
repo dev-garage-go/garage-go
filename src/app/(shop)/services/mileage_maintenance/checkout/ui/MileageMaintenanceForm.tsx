@@ -40,12 +40,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx(
-                "input-form",
-                {
-                  "border-red-400": errors.name
-                }
-              )}
+              className={clsx("input-form", { "border-red-400": errors.name })}
               {...register("name", { required: true })}
             />
           </div>
@@ -57,12 +52,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx(
-                "input-form",
-                {
-                  "border-red-400": errors.lastName
-                }
-              )}
+              className={clsx("input-form", { "border-red-400": errors.lastName })}
               {...register("lastName", { required: true })}
             />
           </div>
@@ -77,12 +67,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx(
-                "input-form",
-                {
-                  "border-red-400": errors.phone
-                }
-              )}
+              className={clsx("input-form", { "border-red-400": errors.phone })}
               {...register("phone", { required: true })}
             />
           </div>
@@ -94,12 +79,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx(
-                "input-form",
-                {
-                  "border-red-400": errors.email
-                }
-              )}
+              className={clsx("input-form", { "border-red-400": errors.email })}
               {...register("email", { required: true })}
             />
           </div>
@@ -119,12 +99,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx(
-                "input-form",
-                {
-                  "border-red-400": errors.carBrand
-                }
-              )}
+              className={clsx("input-form", { "border-red-400": errors.carBrand })}
               {...register("carBrand", { required: true })}
             />
           </div>
@@ -136,12 +111,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx(
-                "input-form",
-                {
-                  "border-red-400": errors.carBrand
-                }
-              )}
+              className={clsx("input-form", { "border-red-400": errors.carBrand })}
               {...register("carModel", { required: true })}
             />
           </div>
@@ -156,12 +126,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx(
-                "input-form",
-                {
-                  "border-red-400": errors.carYear
-                }
-              )}
+              className={clsx("input-form", { "border-red-400": errors.carYear })}
               {...register("carYear", { required: true })}
             />
           </div>
@@ -173,12 +138,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx(
-                "input-form",
-                {
-                  "border-red-400": errors.carKm
-                }
-              )}
+              className={clsx("input-form", { "border-red-400": errors.carKm })}
               {...register("carKm", {
                 required: true,
                 onChange: (e) => {
