@@ -6,12 +6,14 @@ export default function HomePage() {
       <Hero />
       <Services />
       <Benefits />
-      <CarsBrandsCarousel />
+      <div className="pt-20 sm:pt-24 md:pt-28 xl:pt-32">
+        <CarsBrandsCarousel />
+      </div>
       <Banner />
-      <div className="bg-gray-100 h-full">
+      <section className="bg-gray-100 h-full">
         <UserReviews />
         <FAQs />
-      </div>
+      </section>
     </main>
   );
 }

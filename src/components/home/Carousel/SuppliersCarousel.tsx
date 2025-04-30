@@ -29,7 +29,7 @@ const suppliersLogos = [
 ];
 
 const SuppliersLogo = ({ logo }: { logo: { id: string; image: string } }) => (
-  <div className='carousel-images-container'>
+  <div className='relative w-24 h-24 sm:h-28 sm:w-28 md:w-32 md:h-32 lg:w-36 lg:h-36'>
     <Image
       fill
       src={logo.image}

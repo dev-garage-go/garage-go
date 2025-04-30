@@ -39,7 +39,7 @@ const BrandLogo = ({ logo }: { logo: { id: string; image: string } }) => (
 
 export const CarsBrandsCarousel = () => {
   return (
-    <div className="mt-16">
+    <div>
       <Carousel
         isInfinite
         items={brandLogos}

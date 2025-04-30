@@ -3,7 +3,7 @@ import { BannerSlider } from '@/components'
 
 export const Banner = () => {
   return (
-    <section className='relative padding-central-page flex flex-col justify-center items-center mt-32'>
+    <section className='relative padding-central-page container-section'>
       <h2 className='title-h2 text-center'>
         En Garage Go, encuentra la mejor
         <br />
