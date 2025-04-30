@@ -10,15 +10,23 @@ type FormInputs = {
   email: string;
   carBrand: string;
   carModel: string;
-  carKm: string;
-  carYear: string;
+  carKm: number;
+  carYear: number;
 }
 
 export const MileageMaintenanceForm = () => {
-  const { register, formState: { errors } } = useForm<FormInputs>()
+  const { register, handleSubmit, formState: { errors } } = useForm<FormInputs>()
+
+  // Funcion que se ejecuta al enviar el formulario
+  const onSumbit = (data: FormInputs) => {
+    console.log(data)
+  }
 
   return (
-    <form className="border border-gray-900 rounded-3xl w-full py-4 px-10">
+    <form
+      className="border border-gray-900 rounded-3xl w-full py-4 px-10"
+      onSubmit={handleSubmit(onSumbit)}
+    >
       <section className="flex flex-col gap-4">
         <h4 className="font-medium mb-6">1. Datos personales</h4>
 
@@ -101,25 +109,8 @@ export const MileageMaintenanceForm = () => {
       <section className="flex flex-col gap-4">
         <h4 className="font-medium mt-10 mb-6">2. Datos del vehiculo</h4>
 
-        {/* Modelo de auto y marca  */}
+        {/* Marca y modelo del auto  */}
         <div className="flex w-full justify-between items-start gap-4">
-          <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-6">
-              Modelo
-            </label>
-            <input
-              type="text"
-              autoFocus
-              className={clsx(
-                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
-                {
-                  "border-red-400": errors.carBrand
-                }
-              )}
-              {...register("carModel", { required: true })}
-            />
-          </div>
-
           <div className="flex w-full flex-col mb-2">
             <label className="text-sm ml-6">
               Marca
@@ -134,6 +125,23 @@ export const MileageMaintenanceForm = () => {
                 }
               )}
               {...register("carBrand", { required: true })}
+            />
+          </div>
+
+          <div className="flex w-full flex-col mb-2">
+            <label className="text-sm ml-6">
+              Modelo
+            </label>
+            <input
+              type="text"
+              autoFocus
+              className={clsx(
+                "py-2 px-4 border w-full rounded-2xl bg-white border-gray-300",
+                {
+                  "border-red-400": errors.carBrand
+                }
+              )}
+              {...register("carModel", { required: true })}
             />
           </div>
         </div>
