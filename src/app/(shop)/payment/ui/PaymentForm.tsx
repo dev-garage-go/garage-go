@@ -3,32 +3,40 @@
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Getnet, MercadoPago, Webpay } from "@/assets";
+import PaymentOption from "./PaymentOption";
 
-type paymentMethods = 'mercado-page' | 'getnet' | 'webpay'
+type PaymentMethods = '' | 'mercado-pago' | 'getnet' | 'webpay'
 
 type FormInputs = {
   cardNumber: number;
   ownerName: string;
   expiresIn: number;
   cvv: string;
-  paymentMethod: paymentMethods;
+  paymentMethod: PaymentMethods;
 }
 
-const options = [
+interface PaymentOptions {
+  method: PaymentMethods,
+  name: string,
+  description: string,
+  imageSrc: string
+}
+
+const options: PaymentOptions[] = [
   {
-    id: "webpay",
+    method: "webpay",
     name: "Webpay Plus",
     description: "Tarjetas de débito, crédito y prepago.",
     imageSrc: Webpay,
   },
   {
-    id: "getnet",
+    method: "getnet",
     name: "Transferencia",
     description: "Botón de pago para transferencias bancarias",
     imageSrc: Getnet,
   },
   {
-    id: "mercadopago",
+    method: "mercado-pago",
     name: "Billetera virtual",
     description: "Tarjetas de débito, crédito y prepago.",
     imageSrc: MercadoPago,
@@ -36,7 +44,27 @@ const options = [
 ];
 
 export const PaymentForm = () => {
-  const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormInputs>()
+  const {
+    register,
+    watch,
+    setValue,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<FormInputs>({
+    defaultValues: {
+      paymentMethod: '' // El metodo de pago comienza siendo ''
+    }
+  })
+
+  const selectedPayment = watch("paymentMethod")
+
+  const handleSelect = (method: PaymentMethods) => {
+    if (selectedPayment === method) {
+      setValue("paymentMethod", ""); // Si ya está seleccionado, lo deselecciona
+    } else {
+      setValue("paymentMethod", method);
+    }
+  };
 
   // Funcion que se ejecuta al enviar el formulario
   const onSumbit = (data: FormInputs) => {
@@ -108,11 +136,24 @@ export const PaymentForm = () => {
       </section>
 
       {/* Otros medios de pago */}
-      <section className="flex flex-col gap-4">
-        <h4 className="font-medium mt-14 md:mt-10 mb-4 md:mb-6 text-primaryBlue-900">Otros medios de pago</h4>
+      <section className="flex flex-col gap-4 mb-20">
+        <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">Otros medios de pago</h4>
 
-        {/* TODO: Metodos de pago */}
-
+        {/* Metodos de pago */}
+        <div className="flex flex-col w-full gap-4">
+          {options.map((option, index) => (
+            <PaymentOption
+              key={option.method + index}
+              method={option.method}
+              name={option.name}
+              description={option.description}
+              imageSrc={option.imageSrc}
+              checked={selectedPayment === option.method}
+              onClick={() => handleSelect(option.method)}
+              register={register("paymentMethod", { required: true })}
+            />
+          ))}
+        </div>
       </section>
     </form>
   )
