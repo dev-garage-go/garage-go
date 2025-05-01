@@ -71,3 +71,8 @@ export const Thule = `${pathSuppliers}/thule.svg`
 
 // Footer
 export const CompanyLocation = `${pathImages}/company-location.png`
+
+// Payment methods
+export const MercadoPago = `${pathImages}/mercado-pago.svg`
+export const Getnet = `${pathImages}/getnet.webp`
+export const Webpay = `${pathImages}/webpay.webp`
