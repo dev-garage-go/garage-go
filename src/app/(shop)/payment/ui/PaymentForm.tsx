@@ -4,13 +4,15 @@ import clsx from "clsx";
 import { useForm } from "react-hook-form";
 import { Getnet, MercadoPago, Webpay } from "@/assets";
 import PaymentOption from "./PaymentOption";
+import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
+import { FaCcMastercard, FaCcVisa, FaCreditCard } from "react-icons/fa";
 
 type PaymentMethods = '' | 'mercado-pago' | 'getnet' | 'webpay'
 
 type FormInputs = {
-  cardNumber: number;
+  cardNumber: string;
   ownerName: string;
-  expiresIn: number;
+  expiresIn: string;
   cvv: string;
   paymentMethod: PaymentMethods;
 }
@@ -56,8 +58,37 @@ export const PaymentForm = () => {
     }
   })
 
+  const cardNumber = watch("cardNumber") || "";
+  const expiry = watch("expiresIn") || "";
   const selectedPayment = watch("paymentMethod")
 
+  const cardType = detectCardType(cardNumber);
+
+  // Coloca un espacio luego de 4 numeros 1234 5678
+  const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatCardNumber(e.target.value);
+    setValue("cardNumber", formatted);
+  };
+
+  // Coloca una / en el formato MM/YY
+  const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatExpiry(e.target.value);
+    setValue("expiresIn", formatted);
+  };
+
+  // Renderiza un icono de card u otro en base a los numeros de tarjeta
+  const renderCardIcon = () => {
+    switch (cardType) {
+      case "visa":
+        return <FaCcVisa className="text-blue-600 text-2xl" />;
+      case "mastercard":
+        return <FaCcMastercard className="text-red-600 text-2xl" />;
+      default:
+        return <FaCreditCard className="text-gray-400 text-2xl" />;
+    }
+  };
+
+  // Permite que el usuario pueda deseleccionar un metodo de pago
   const handleSelect = (method: PaymentMethods) => {
     if (selectedPayment === method) {
       setValue("paymentMethod", ''); // Si ya está seleccionado, lo deselecciona
@@ -90,9 +121,18 @@ export const PaymentForm = () => {
           <input
             type="text"
             autoFocus
-            className={clsx("payment-input-form", { "border-red-400": errors.cardNumber })}
-            {...register("cardNumber", { required: true })}
+            placeholder="1234 5678 9012 3456"
+            maxLength={19}
+            className={clsx("relative payment-input-form", { "border-red-400": errors.cardNumber })}
+            {...register("cardNumber", {
+              onChange: (e) => { handleCardNumberChange(e) },
+              required: true
+            })}
           />
+          {/* Card icon */}
+          <div className="absolute right-3 top-1/2 -translate-y-1/2">
+            {renderCardIcon()}
+          </div>
         </div>
 
         <div className="flex w-full flex-col mb-2">
@@ -116,8 +156,13 @@ export const PaymentForm = () => {
             <input
               type="text"
               autoFocus
+              maxLength={5}
+              placeholder="MM/YY"
               className={clsx("payment-input-form", { "border-red-400": errors.expiresIn })}
-              {...register("expiresIn", { required: true })}
+              {...register("expiresIn", {
+                onChange: (e) => { handleExpiryChange(e) },
+                required: true
+              })}
             />
           </div>
 
