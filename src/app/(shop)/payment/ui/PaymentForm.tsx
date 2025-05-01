@@ -60,7 +60,7 @@ export const PaymentForm = () => {
 
   const handleSelect = (method: PaymentMethods) => {
     if (selectedPayment === method) {
-      setValue("paymentMethod", ""); // Si ya está seleccionado, lo deselecciona
+      setValue("paymentMethod", ''); // Si ya está seleccionado, lo deselecciona
     } else {
       setValue("paymentMethod", method);
     }

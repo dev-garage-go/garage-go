@@ -13,13 +13,16 @@ type PaymentOptionProps = {
   onClick: () => void;
 };
 
-export default function PaymentOption({ method, name, description, imageSrc, checked, register }: PaymentOptionProps) {
+export default function PaymentOption({ method, name, description, imageSrc, checked, register, onClick }: PaymentOptionProps) {
   return (
-    <label className={`flex cursor-pointer bg-white w-full border border-gray-300 shadow-lg py-1 px-4 rounded-2xl gap-4
-      ${checked ? "border-primaryBlue-500 shadow-md bg-blue-50" : "border-gray-300 hover:bg-gray-50"}`
-    }>
+    <button
+      type="button"
+      onClick={onClick}
+      className={`flex gap-4 cursor-pointer bg-white w-full border border-gray-300 shadow-lg px-4 rounded-2xl 
+        hover:scale-105 duration-300 transition-all ${checked ? "border-primaryBlue-400 bg-blue-50" : "border-gray-300 "}`
+      }>
 
-      <div className="relative flex h-20 w-32 items-center gap-4">
+      <div className="relative flex h-20 w-28 items-center">
         <Image
           src={imageSrc}
           alt={name}
@@ -30,9 +33,9 @@ export default function PaymentOption({ method, name, description, imageSrc, che
 
       <div className="flex w-full justify-between items-center">
         {/* Text */}
-        <div className="flex flex-col">
+        <div className="flex flex-col items-start justify-center">
           <h4 className="text-base font-semibold text-blue-900">{name}</h4>
-          <p className="text-sm text-gray-500">{description}</p>
+          <p className="text-sm text-customGray-500">{description}</p>
         </div>
 
         {/* Input radio */}
@@ -44,7 +47,7 @@ export default function PaymentOption({ method, name, description, imageSrc, che
 
             {/* Custom input radio */}
             <div
-              className={`w-5 h-5 rounded-full border-2 ${checked ? "bg-primaryBlue-500 border-primaryBlue-500" : "border-primaryBlue-900"}`}
+              className={`w-5 h-5 rounded-full border-4 ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
             />
 
             <input
@@ -57,6 +60,6 @@ export default function PaymentOption({ method, name, description, imageSrc, che
           </label>
         </div>
       </div>
-    </label>
+    </button>
   );
 }
