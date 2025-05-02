@@ -2,15 +2,13 @@
 
 import { FaCreditCard } from "react-icons/fa";
 import { SiMastercard, SiVisa } from "react-icons/si";
-import { Getnet, MercadoPago, Webpay } from "@/assets";
 
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 
 import PaymentOption from "./PaymentOption";
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
-
-type PaymentMethods = '' | 'mercado-pago' | 'getnet' | 'webpay'
+import { PaymentMethodsOptions } from "@/constants";
 
 type FormInputs = {
   cardNumber: string;
@@ -19,34 +17,6 @@ type FormInputs = {
   cvv: number;
   paymentMethod: PaymentMethods;
 }
-
-interface PaymentOptions {
-  method: PaymentMethods,
-  name: string,
-  description: string,
-  imageSrc: string
-}
-
-const options: PaymentOptions[] = [
-  {
-    method: "webpay",
-    name: "Webpay Plus",
-    description: "Tarjetas de débito, crédito y prepago.",
-    imageSrc: Webpay,
-  },
-  {
-    method: "getnet",
-    name: "Transferencia",
-    description: "Botón de pago para transferencias bancarias",
-    imageSrc: Getnet,
-  },
-  {
-    method: "mercado-pago",
-    name: "Billetera virtual",
-    description: "Tarjetas de débito, crédito y prepago.",
-    imageSrc: MercadoPago,
-  },
-];
 
 export const PaymentForm = () => {
   const {
@@ -62,7 +32,6 @@ export const PaymentForm = () => {
   })
 
   const cardNumber = watch("cardNumber") || "";
-  const expiry = watch("expiresIn") || "";
   const selectedPayment = watch("paymentMethod")
 
   const cardType = detectCardType(cardNumber);
@@ -194,7 +163,7 @@ export const PaymentForm = () => {
 
         {/* Metodos de pago */}
         <div className="flex flex-col w-full gap-4">
-          {options.map((option, index) => (
+          {PaymentMethodsOptions.map((option, index) => (
             <PaymentOption
               key={option.method + index}
               method={option.method}
