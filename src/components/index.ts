@@ -1,4 +1,5 @@
 export * from './general/buttons/BookingButton';
+export * from './general/buttons/InformationButton';
 export * from './general/buttons/ServicePageButtons';
 export * from './general/buttons/WhatsAppButton';
 export * from './home/Banner/Banner';

@@ -1,11 +1,13 @@
 "use client"
 
-import { Promotion4x3 } from "@/assets";
-import clsx from "clsx";
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { IoAlertCircleOutline } from "react-icons/io5";
+import clsx from "clsx";
+
+import { Promotion4x3 } from "@/assets";
+import { InformationButton } from "@/components";
+import { formatNumberWithDots } from '@/utils';
 
 type FormInputs = {
   cardNumber: string;
@@ -21,6 +23,12 @@ const TypesTiresOptions: { label: string; value: TireUsage }[] = [
   { label: 'Ciudad', value: 'ciudad' },
   { label: 'Offroad', value: 'offroad' },
   { label: 'Intermedio', value: 'intermedio' }
+]
+
+const AddMoreServices: { name: string, price: number }[] = [
+  { name: "Gestión de revisión técnica", price: 48990 },
+  { name: "Diagnostico automotriz", price: 65990 },
+  { name: "Servicio de frenos", price: 35990 }
 ]
 
 export const QuotesForm = () => {
@@ -55,7 +63,7 @@ export const QuotesForm = () => {
 
           {/* Title and subtitle */}
           <div>
-            <h4 className="font-semibold text-primaryBlue-900">Cambio de neumaticos</h4>
+            <h4 className="title-h4">Cambio de neumaticos</h4>
             <p className="text-sm text-primaryBlue-900">Configura tu servicio antes de continuar</p>
           </div>
 
@@ -79,12 +87,10 @@ export const QuotesForm = () => {
             <div className="flex justify-between items-center w-full">
               <div className="flex flex-col">
                 <p>Promocion 4x3</p>
-                <div className="flex w-full items-center justify-start gap-1">
-                  <IoAlertCircleOutline
-                    className="text-primaryBlue-500"
-                  />
-                  <p className="text-xs text-primaryBlue-500">Bases y condiciones de la promocion</p>
-                </div>
+                <InformationButton
+                  text="Bases y condiciones de la promocion"
+                  onClick={() => console.log("Promotion info")}
+                />
               </div>
 
               <div className="relative h-14 w-14">
@@ -123,7 +129,7 @@ export const QuotesForm = () => {
                   className="sr-only"
                 />
 
-                <p className="font-semibold text-primaryBlue-900">1</p>
+                <p className="title-h4">1</p>
               </div>
 
               {/* 2 Tire */}
@@ -140,7 +146,7 @@ export const QuotesForm = () => {
                   className="sr-only"
                 />
 
-                <p className="font-semibold text-primaryBlue-900">2</p>
+                <p className="title-h4">2</p>
               </div>
 
               {/* 3 Tire */}
@@ -157,7 +163,7 @@ export const QuotesForm = () => {
                   className="sr-only"
                 />
 
-                <p className="font-semibold text-primaryBlue-900">3</p>
+                <p className="title-h4">3</p>
               </div>
 
               {/* 4 Tire */}
@@ -174,7 +180,7 @@ export const QuotesForm = () => {
                   className="sr-only"
                 />
 
-                <p className="font-semibold text-primaryBlue-900">4</p>
+                <p className="title-h4">4</p>
               </div>
 
             </div>
@@ -206,6 +212,54 @@ export const QuotesForm = () => {
           </div>
         </div>
 
+        {/* Tires size input */}
+        <div className="flex flex-col gap-2 w-full mt-4">
+          <h4 className="title-h4">Ingresa tu medida</h4>
+          <div className="flex justify-center items-center gap-2 p-2 rounded-xl shadow-lg bg-white w-full ">
+            <input
+              className="py-2 px-4 border w-full rounded-md bg-gray-100 placeholder-primaryBlue-400 placeholder:font-light placeholder:text-customGray-400"
+              placeholder="Ancho / Perfil / Aro"
+              type="text"
+            />
+
+            <button className="py-2 px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
+              Aceptar
+            </button>
+          </div>
+          <div className="mt-2">
+            <InformationButton
+              text="Medida de tus neumaticos"
+              onClick={() => console.log("Tires sizes info")}
+            />
+          </div>
+        </div>
+
+        {/* Add more services */}
+        <div className="flex flex-col gap-4 my-10">
+          <h4 className="title-h4">¿Quieres agregar algo mas?</h4>
+
+          <div className="flex flex-col gap-4 w-full">
+            {AddMoreServices.map((service, index) => (
+              <div
+                key={service.name + index}
+                className="flex justify-between items-center bg-gray-100 py-4 px-6 rounded-xl"
+              >
+                <div className="flex flex-col">
+                  <h4 className="font-semibold text-primaryBlue-500">
+                    {service.name}
+                  </h4>
+                  <p className="font-semibold text-primaryBlue-900">
+                    ${formatNumberWithDots(service.price)}
+                  </p>
+                </div>
+                <button className="text-center bg-transparent border border-primaryBlue-500 text-primaryBlue-500
+                 rounded-xl px-6 py-2 hover:bg-primaryBlue-500 hover:text-white duration-200 transition-all">
+                  Agregar
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
     </form>
   )
