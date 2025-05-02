@@ -88,3 +88,7 @@
 .input-form-container {
   @apply flex w-full flex-col md:flex-row md:justify-between items-start gap-3 md:gap-4
 }
+
+.summary-container {
+  @apply flex flex-col py-4 px-4 md:px-6 shadow-md bg-white rounded-2xl border border-gray-100
+}

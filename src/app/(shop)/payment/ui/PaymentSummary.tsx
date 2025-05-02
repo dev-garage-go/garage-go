@@ -4,10 +4,12 @@ import { IoClose } from "react-icons/io5"
 export const PaymentSummary = () => {
   return (
     <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
-      <h4 className="font-semibold ml-6 text-primaryBlue-900">Resumen de tu servicio</h4>
+      <h4 className="font-semibold ml-4 md:ml-6 text-primaryBlue-900">
+        Resumen de tu servicio
+      </h4>
 
       {/* Mileage maintenance */}
-      <div className="flex flex-col py-4 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
+      <div className="summary-container">
         {/* Title and cross */}
         <div className="flex justify-between items-center">
           <h4 className="font-semibold text-primaryBlue-900">Mantencion por kilometraje</h4>
@@ -30,7 +32,7 @@ export const PaymentSummary = () => {
       </div>
 
       {/* Brake service */}
-      <div className="flex flex-col py-4 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
+      <div className="summary-container">
         {/* Title and cross */}
         <div className="flex justify-between items-center">
           <h4 className="font-semibold text-primaryBlue-900">Servicio de frenos</h4>
@@ -52,7 +54,7 @@ export const PaymentSummary = () => {
       </div>
 
       {/* Subtotal, total */}
-      <div className="flex flex-col py-4 px-6 shadow-lg gap-2 bg-white rounded-2xl border border-gray-100">
+      <div className="summary-container gap-2">
         <div className="flex justify-between items-center w-full">
           <p className="font-semibold text-primaryBlue-900">Subtotal</p>
           <p className="font-semibold text-primaryBlue-900">$225.890</p>

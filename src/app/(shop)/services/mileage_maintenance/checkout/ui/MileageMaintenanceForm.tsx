@@ -153,7 +153,7 @@ export const MileageMaintenanceForm = () => {
       </section>
 
       {/* Vehicle data */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 items-end w-full bg-gray-100 rounded-2xl p-4 mt-10 mb-20">
+      <div className="grid grid-cols-1 lg:grid-cols-3 items-end w-full bg-gray-100 rounded-2xl p-4 mt-10 mb-10 md:mb-20">
         <div className="flex flex-col">
           <p className="font-medium text-primaryBlue-900">TGPL67</p>
           <div className="flex justify-between w-full lg:hidden text-primaryBlue-500">
