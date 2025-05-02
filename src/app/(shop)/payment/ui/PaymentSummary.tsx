@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { IoClose } from "react-icons/io5"
 
 export const PaymentSummary = () => {
@@ -5,8 +6,8 @@ export const PaymentSummary = () => {
     <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
       <h4 className="font-semibold ml-6 text-primaryBlue-900">Resumen de tu servicio</h4>
 
-      {/* Mantencion por kilometraje */}
-      <div className="flex flex-col py-3 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
+      {/* Mileage maintenance */}
+      <div className="flex flex-col py-4 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
         {/* Title and cross */}
         <div className="flex justify-between items-center">
           <h4 className="font-semibold text-primaryBlue-900">Mantencion por kilometraje</h4>
@@ -28,8 +29,8 @@ export const PaymentSummary = () => {
         </div>
       </div>
 
-      {/* Servicio de frenos */}
-      <div className="flex flex-col py-3 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
+      {/* Brake service */}
+      <div className="flex flex-col py-4 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
         {/* Title and cross */}
         <div className="flex justify-between items-center">
           <h4 className="font-semibold text-primaryBlue-900">Servicio de frenos</h4>
@@ -50,24 +51,8 @@ export const PaymentSummary = () => {
         </div>
       </div>
 
-      {/* Cupon */}
-      <div className="flex flex-col">
-        <h4 className="font-semibold ml-4 text-primaryBlue-900">Tengo un cupon</h4>
-        <div className="flex justify-center items-center gap-2 p-2 rounded-xl shadow-lg bg-white">
-          <input
-            className="py-2 px-4 border w-full rounded-md bg-gray-100 placeholder-primaryBlue-400 placeholder:font-semibold"
-            placeholder="N°"
-            type="text"
-          />
-
-          <button className="py-2 px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
-            Canjear
-          </button>
-        </div>
-      </div>
-
       {/* Subtotal, total */}
-      <div className="flex flex-col py-3 px-6 shadow-lg gap-2 bg-white rounded-2xl pb-20 border border-gray-100">
+      <div className="flex flex-col py-4 px-6 shadow-lg gap-2 bg-white rounded-2xl border border-gray-100">
         <div className="flex justify-between items-center w-full">
           <p className="font-semibold text-primaryBlue-900">Subtotal</p>
           <p className="font-semibold text-primaryBlue-900">$225.890</p>
@@ -76,18 +61,21 @@ export const PaymentSummary = () => {
           <p className="font-semibold text-primaryBlue-900">Dctos</p>
           <p className="font-semibold text-primaryBlue-900">$0</p>
         </div>
-        <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
-        <div className="flex justify-between items-center w-full">
-          <p className="font-semibold text-primaryBlue-400">Total a pagar</p>
-          <p className="font-semibold text-primaryBlue-400">$225.890</p>
-        </div>
-        <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
 
-        <div className="flex justify-center items-center w-full mt-10">
-          <button className="px-10 py-2 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
-            Continuar
-          </button>
+        <div className="flex justify-between items-center w-full mt-4 bg-primaryBlue-400 rounded-xl py-2 px-4">
+          <p className="font-semibold text-white">Total a pagar</p>
+          <p className="font-semibold text-white">$225.890</p>
         </div>
+      </div>
+
+      {/* Pay button */}
+      <div className="flex justify-center items-center w-full mt-10">
+        <Link
+          href={"/payment"}
+          className="block text-center w-full max-w-lg py-2 bg-primaryBlue-900 text-white font-semibold rounded-md
+          hover:brightness-125 hover:scale-105 transition-all duration-200">
+          Ir a pagar
+        </Link>
       </div>
     </section>
   )

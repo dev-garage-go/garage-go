@@ -6,7 +6,7 @@ export const MileageMaintenanceSummary = () => {
       <h4 className="font-semibold ml-6 text-primaryBlue-900">Resumen de tu servicio</h4>
 
       {/* Mantencion por kilometraje */}
-      <div className="flex flex-col py-3 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
+      <div className="flex flex-col py-4 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
         {/* Title and cross */}
         <div className="flex justify-between items-center">
           <h4 className="font-semibold text-primaryBlue-900">Mantencion por kilometraje</h4>
@@ -29,7 +29,7 @@ export const MileageMaintenanceSummary = () => {
       </div>
 
       {/* Servicio de frenos */}
-      <div className="flex flex-col py-3 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
+      <div className="flex flex-col py-4 px-6 shadow-lg bg-white rounded-2xl border border-gray-100">
         {/* Title and cross */}
         <div className="flex justify-between items-center">
           <h4 className="font-semibold text-primaryBlue-900">Servicio de frenos</h4>
@@ -67,7 +67,7 @@ export const MileageMaintenanceSummary = () => {
       </div>
 
       {/* Subtotal, total */}
-      <div className="flex flex-col py-3 px-6 shadow-lg gap-2 bg-white rounded-2xl pb-20 border border-gray-100">
+      <div className="flex flex-col py-4 px-6 shadow-lg gap-2 bg-white rounded-2xl pb-20 border border-gray-100">
         <div className="flex justify-between items-center w-full">
           <p className="font-semibold text-primaryBlue-900">Subtotal</p>
           <p className="font-semibold text-primaryBlue-900">$225.890</p>
