@@ -38,26 +38,19 @@ export default function PaymentOption({ method, name, description, imageSrc, che
           <p className="text-sm text-customGray-500">{description}</p>
         </div>
 
-        {/* Input radio */}
+        {/* Custom input radio */}
         <div>
-          <label
-            htmlFor={name}
-            className=""
-          >
+          <div className={`w-5 h-5 rounded-full border-4 
+            ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
+          />
 
-            {/* Custom input radio */}
-            <div
-              className={`w-5 h-5 rounded-full border-4 ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
-            />
-
-            <input
-              id={method}
-              type="radio"
-              value={method}
-              {...register}
-              className="sr-only"
-            />
-          </label>
+          <input
+            id={method}
+            type="radio"
+            value={method}
+            {...register}
+            className="sr-only"
+          />
         </div>
       </div>
     </button>

@@ -1,11 +1,14 @@
 "use client"
 
+import { FaCreditCard } from "react-icons/fa";
+import { SiMastercard, SiVisa } from "react-icons/si";
+import { Getnet, MercadoPago, Webpay } from "@/assets";
+
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
-import { Getnet, MercadoPago, Webpay } from "@/assets";
+
 import PaymentOption from "./PaymentOption";
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
-import { FaCcMastercard, FaCcVisa, FaCreditCard } from "react-icons/fa";
 
 type PaymentMethods = '' | 'mercado-pago' | 'getnet' | 'webpay'
 
@@ -13,7 +16,7 @@ type FormInputs = {
   cardNumber: string;
   ownerName: string;
   expiresIn: string;
-  cvv: string;
+  cvv: number;
   paymentMethod: PaymentMethods;
 }
 
@@ -80,9 +83,9 @@ export const PaymentForm = () => {
   const renderCardIcon = () => {
     switch (cardType) {
       case "visa":
-        return <FaCcVisa className="text-blue-600 text-2xl" />;
+        return <SiVisa className="text-primaryBlue-400 text-3xl" />;
       case "mastercard":
-        return <FaCcMastercard className="text-red-600 text-2xl" />;
+        return <SiMastercard className="text-orange-500 text-2xl" />;
       default:
         return <FaCreditCard className="text-gray-400 text-2xl" />;
     }
@@ -118,21 +121,25 @@ export const PaymentForm = () => {
           <label className="text-sm mb-1 text-primaryBlue-900">
             Número de tarjeta
           </label>
-          <input
-            type="text"
-            autoFocus
-            placeholder="1234 5678 9012 3456"
-            maxLength={19}
-            className={clsx("relative payment-input-form", { "border-red-400": errors.cardNumber })}
-            {...register("cardNumber", {
-              onChange: (e) => { handleCardNumberChange(e) },
-              required: true
-            })}
-          />
-          {/* Card icon */}
-          <div className="absolute right-3 top-1/2 -translate-y-1/2">
-            {renderCardIcon()}
+
+          <div className="relative">
+            <input
+              type="text"
+              autoFocus
+              placeholder="1234 5678 9012 3456"
+              maxLength={19}
+              className={clsx("payment-input-form", { "border-red-400": errors.cardNumber })}
+              {...register("cardNumber", {
+                onChange: (e) => { handleCardNumberChange(e) },
+                required: true
+              })}
+            />
+
+            <div className="absolute top-1/2 -translate-y-1/2 right-3">
+              {renderCardIcon()}
+            </div>
           </div>
+
         </div>
 
         <div className="flex w-full flex-col mb-2">
@@ -171,6 +178,7 @@ export const PaymentForm = () => {
               CVV
             </label>
             <input
+              maxLength={3}
               type="text"
               autoFocus
               className={clsx("payment-input-form", { "border-red-400": errors.cvv })}
