@@ -1,3 +1,4 @@
+export * from './checkout/Summary';
 export * from './general/buttons/BookingButton';
 export * from './general/buttons/InformationButton';
 export * from './general/buttons/ServicePageButtons';
