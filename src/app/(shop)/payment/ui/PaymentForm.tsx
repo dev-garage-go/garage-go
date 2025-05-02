@@ -63,7 +63,7 @@ export const PaymentForm = () => {
 
   return (
     <form
-      className="border border-gray-900 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10"
+      className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10"
       onSubmit={handleSubmit(onSumbit)}
     >
       <section className="flex flex-col gap-4">
@@ -147,7 +147,7 @@ export const PaymentForm = () => {
       </section>
 
       {/* Other payment methods */}
-      <section className="flex flex-col gap-4 mb-20">
+      <section className="flex flex-col gap-4">
         <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">Otros medios de pago</h4>
 
         {/* Payment methods options */}
@@ -164,6 +164,17 @@ export const PaymentForm = () => {
               register={register("paymentMethod", { required: true })}
             />
           ))}
+        </div>
+
+        {/* Terms and conditions */}
+        <div className="flex justify-center items-center w-full gap-2 mt-4 mb-10">
+          <input
+            type="checkbox"
+            className="h-4 w-4 accent-primaryBlue-500"
+          />
+          <p className="text-xs font-normal text-primaryBlue-900">
+            Acepto los términos y condiciones y políticas de privacidad de Garage Go.
+          </p>
         </div>
       </section>
     </form>

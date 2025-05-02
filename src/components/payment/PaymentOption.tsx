@@ -18,7 +18,7 @@ export const PaymentOption = ({ method, name, description, imageSrc, checked, re
     <button
       type="button"
       onClick={onClick}
-      className={`flex gap-4 cursor-pointer bg-white w-full border border-gray-300 shadow-lg px-4 rounded-2xl 
+      className={`flex gap-4 cursor-pointer bg-white w-full border border-gray-300 shadow-md px-4 rounded-2xl 
         hover:scale-105 duration-300 transition-all ${checked ? "border-primaryBlue-400 bg-blue-50" : "border-gray-300 "}`
       }>
 
