@@ -25,7 +25,7 @@ export const MileageMaintenanceForm = () => {
 
   return (
     <form
-      className="border border-gray-900 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10"
+      className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10"
       onSubmit={handleSubmit(onSumbit)}
     >
       <section className="flex flex-col gap-4">
