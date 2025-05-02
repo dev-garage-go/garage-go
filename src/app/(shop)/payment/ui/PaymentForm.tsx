@@ -167,12 +167,12 @@ export const PaymentForm = () => {
         </div>
 
         {/* Terms and conditions */}
-        <div className="flex justify-center items-center w-full gap-2 mt-4 mb-10">
+        <div className="flex justify-center items-start w-full gap-2 mt-4 mb-10">
           <input
             type="checkbox"
             className="h-4 w-4 accent-primaryBlue-500"
           />
-          <p className="text-xs font-normal text-primaryBlue-900">
+          <p className=" text-xs font-normal text-primaryBlue-900">
             Acepto los términos y condiciones y políticas de privacidad de Garage Go.
           </p>
         </div>

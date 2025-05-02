@@ -12,7 +12,7 @@ const config: Config = {
         // azules personalizados
         primaryBlue: {
           50: '#DBE0FA',
-          100: '#A8B3FB',
+          100: '#CFD5FC',
           200: '#8392F7',
           300: '#455FF5',
           400: '#3D55EC',
