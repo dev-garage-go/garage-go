@@ -1,11 +1,9 @@
 "use client"
 
-import { RenderCardIcon } from './RenderCardIcon';
-import { PaymentOption } from "./PaymentOption";
-
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 
+import { RenderCardIcon, PaymentOption } from '@/components';
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
 
