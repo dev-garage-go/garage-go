@@ -6,7 +6,8 @@ export const SegmentNameMap: Record<string, string> = {
   oil_and_filter_change: "Cambio de aceite y filtro",
   preventive_check: "Checkeo preventivo",
   technical_revision: "Revisión técnica",
-  tire_change: "Cambio de cubiertas",
+  tires_change: "Cambio de cubiertas",
   checkout: "Agendamiento",
   payment: "Pasarela de pago",
+  quotas: "Cotización",
 }

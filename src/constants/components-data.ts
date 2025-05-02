@@ -100,7 +100,7 @@ export const ServicesData: ServicesInterface[] = [
         icon: "→"
       }
     ],
-    path: `${srvPath}/tire_change`
+    path: `${srvPath}/tires_change`
   },
   {
     title: "Servicio de frenos",
