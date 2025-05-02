@@ -1,12 +1,11 @@
 "use client"
 
-import { FaCreditCard } from "react-icons/fa";
-import { SiMastercard, SiVisa } from "react-icons/si";
+import { RenderCardIcon } from './RenderCardIcon';
+import { PaymentOption } from "./PaymentOption";
 
 import clsx from "clsx";
 import { useForm } from "react-hook-form";
 
-import PaymentOption from "./PaymentOption";
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
 
@@ -34,42 +33,32 @@ export const PaymentForm = () => {
   const cardNumber = watch("cardNumber") || "";
   const selectedPayment = watch("paymentMethod")
 
+  // Payment utils funcs
+  // Detect the type of card - ex: visa or mastercard
   const cardType = detectCardType(cardNumber);
 
-  // Coloca un espacio luego de 4 numeros 1234 5678
+  // Every 4 digits leave a spaces - ex: 1234 5678
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatCardNumber(e.target.value);
     setValue("cardNumber", formatted);
   };
 
-  // Coloca una / en el formato MM/YY
+  // Write a slash / in the MM/YY format - ex: 04/28
   const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatExpiry(e.target.value);
     setValue("expiresIn", formatted);
   };
 
-  // Renderiza un icono de card u otro en base a los numeros de tarjeta
-  const renderCardIcon = () => {
-    switch (cardType) {
-      case "visa":
-        return <SiVisa className="text-primaryBlue-400 text-3xl" />;
-      case "mastercard":
-        return <SiMastercard className="text-orange-500 text-2xl" />;
-      default:
-        return <FaCreditCard className="text-gray-400 text-2xl" />;
-    }
-  };
-
-  // Permite que el usuario pueda deseleccionar un metodo de pago
+  // Allows that user can diselect a payment method
   const handleSelect = (method: PaymentMethods) => {
     if (selectedPayment === method) {
-      setValue("paymentMethod", ''); // Si ya está seleccionado, lo deselecciona
+      setValue("paymentMethod", ''); // If it is already selected, deselect it
     } else {
       setValue("paymentMethod", method);
     }
   };
 
-  // Funcion que se ejecuta al enviar el formulario
+  // Function that will be executed when the form is submitted
   const onSumbit = (data: FormInputs) => {
     console.log(data)
   }
@@ -85,7 +74,7 @@ export const PaymentForm = () => {
           <p className="text-sm font-medium text-primaryBlue-900">Pago con tarjeta de credito</p>
         </div>
 
-        {/* Numero de tarjeta y titular */}
+        {/* Card number and Owner */}
         <div className="flex w-full flex-col mb-2">
           <label className="text-sm mb-1 text-primaryBlue-900">
             Número de tarjeta
@@ -105,7 +94,7 @@ export const PaymentForm = () => {
             />
 
             <div className="absolute top-1/2 -translate-y-1/2 right-3">
-              {renderCardIcon()}
+              <RenderCardIcon cardType={cardType} />
             </div>
           </div>
 
@@ -123,7 +112,7 @@ export const PaymentForm = () => {
           />
         </div>
 
-        {/* Expiracion y cvv de tarjeta  */}
+        {/* Expiry and CVV card  */}
         <div className="flex w-full justify-start items-center gap-4">
           <div className="flex w-32 flex-col mb-2">
             <label className="text-sm mb-1 text-primaryBlue-900">
@@ -157,11 +146,11 @@ export const PaymentForm = () => {
         </div>
       </section>
 
-      {/* Otros medios de pago */}
+      {/* Other payment methods */}
       <section className="flex flex-col gap-4 mb-20">
         <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">Otros medios de pago</h4>
 
-        {/* Metodos de pago */}
+        {/* Payment methods options */}
         <div className="flex flex-col w-full gap-4">
           {PaymentMethodsOptions.map((option, index) => (
             <PaymentOption

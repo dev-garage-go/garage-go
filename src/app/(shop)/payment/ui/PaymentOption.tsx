@@ -13,7 +13,7 @@ type PaymentOptionProps = {
   onClick: () => void;
 };
 
-export default function PaymentOption({ method, name, description, imageSrc, checked, register, onClick }: PaymentOptionProps) {
+export const PaymentOption = ({ method, name, description, imageSrc, checked, register, onClick }: PaymentOptionProps) => {
   return (
     <button
       type="button"
