@@ -82,7 +82,7 @@
 }
 
 .payment-input-form {
-  @apply py-2 px-4 border w-full rounded-md bg-white border-gray-300
+  @apply py-2 px-4 border w-full rounded-md bg-white border-gray-300 font-medium text-primaryBlue-900 placeholder:font-normal placeholder:text-customGray-400
 }
 
 .input-form-container {

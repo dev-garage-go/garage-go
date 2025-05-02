@@ -107,6 +107,7 @@ export const PaymentForm = () => {
           <input
             type="text"
             autoFocus
+            placeholder='John Doe'
             className={clsx("payment-input-form", { "border-red-400": errors.ownerName })}
             {...register("ownerName", { required: true })}
           />
@@ -122,7 +123,7 @@ export const PaymentForm = () => {
               type="text"
               autoFocus
               maxLength={5}
-              placeholder="MM/YY"
+              placeholder="04/28"
               className={clsx("payment-input-form", { "border-red-400": errors.expiresIn })}
               {...register("expiresIn", {
                 onChange: (e) => { handleExpiryChange(e) },
@@ -139,6 +140,7 @@ export const PaymentForm = () => {
               maxLength={3}
               type="text"
               autoFocus
+              placeholder='323'
               className={clsx("payment-input-form", { "border-red-400": errors.cvv })}
               {...register("cvv", { required: true })}
             />
