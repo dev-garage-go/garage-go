@@ -29,7 +29,7 @@ export const BrandsAndLocation = () => {
 
 
         {/* Map */}
-        <div className='relative w-full h-60 sm:h-72 xl:h-[550px] bg-red-300'>
+        <div className='relative w-full h-60 sm:h-72 xl:h-[550px]'>
           <Image
             fill
             priority

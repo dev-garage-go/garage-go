@@ -7,5 +7,6 @@ export const SegmentNameMap: Record<string, string> = {
   preventive_check: "Checkeo preventivo",
   technical_revision: "Revisión técnica",
   tire_change: "Cambio de cubiertas",
-  checkout: "Agendamiento"
+  checkout: "Agendamiento",
+  payment: "Pasarela de pago",
 }
