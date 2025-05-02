@@ -252,7 +252,7 @@ export const QuotesForm = () => {
                     ${formatNumberWithDots(service.price)}
                   </p>
                 </div>
-                <button className="text-center bg-transparent border border-primaryBlue-500 text-primaryBlue-500
+                <button className="text-sm text-center bg-transparent border border-primaryBlue-500 text-primaryBlue-500
                  rounded-xl px-6 py-2 hover:bg-primaryBlue-500 hover:text-white duration-200 transition-all">
                   Agregar
                 </button>
