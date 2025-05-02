@@ -76,3 +76,6 @@ export const CompanyLocation = `${pathImages}/company-location.png`
 export const MercadoPago = `${pathImages}/mercado-pago.svg`
 export const Getnet = `${pathImages}/getnet.webp`
 export const Webpay = `${pathImages}/webpay.webp`
+
+// Tires change promotions
+export const Promotion4x3 = `${pathImages}/4x3.png`
