@@ -86,7 +86,14 @@ export const QuotesForm = () => {
             promotionChecked={promotion}
             register={register("promotion")}
             handleSelect={() => handleSelectPromotion(true)}
-            handleInformationButton={() => console.log("infomation button action")}
+            informationButtonData={{
+              text: "Bases y condicionies de la promocion",
+              hasModal: true,
+              modal: {
+                title: "Condiciones",
+                description: "Promoción 4x3 aplica a la compra de 3 neumáticos de igual medida y marca. Confirma tu descuento al cotizar.Marcas participantes, Dunlop, Falken, Bridgestone, Goodyear, Sumitomo, Roadx, Ohtsu y Mirage desde aro 15. Sujeto a disponibilidad. Incluye sin costo los servicios de instalación, Super Check, lavado.Retiro y entrega disponible sólo en la Región Metropolitana, sujeto a disponibilidad.No acumulable con otros descuentos o promociones.Promoción válida hasta el 31 de marzo de 2025 o hasta agotar stock.",
+              }
+            }}
           />
         </div>
 
@@ -143,10 +150,7 @@ export const QuotesForm = () => {
             </button>
           </div>
           <div className="mt-2">
-            <InformationButton
-              text="Medida de tus neumaticos"
-              onClick={() => console.log("Tires sizes info")}
-            />
+            <InformationButton text="Medida de tus neumaticos" />
           </div>
         </div>
 

@@ -1,4 +1,5 @@
 export * from './checkout/AddServiceCard';
+export * from './checkout/InformationModal';
 export * from './checkout/PromotionCard';
 export * from './checkout/Summary';
 export * from './general/buttons/BookingButton';

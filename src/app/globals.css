@@ -96,3 +96,7 @@
 .summary-container {
   @apply flex flex-col py-4 px-4 md:px-6 shadow-md bg-white rounded-2xl border border-gray-100
 }
+
+.modal-animated {
+  @apply absolute top-full mt-2 left-0 z-50 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-200 ease-out origin-top
+}

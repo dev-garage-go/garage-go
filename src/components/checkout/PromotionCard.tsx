@@ -13,7 +13,16 @@ interface Props {
   promotionChecked: boolean
   register: UseFormRegisterReturn
   handleSelect: () => void
-  handleInformationButton?: () => void
+  informationButtonData: {
+    text: string
+    hasModal?: boolean,
+    modal?: {
+      title?: string,
+      description?: string,
+      imageSrc?: string,
+      imageAlt?: string
+    }
+  }
 }
 
 export const PromotionCard = ({
@@ -24,8 +33,11 @@ export const PromotionCard = ({
   handleSelect,
   promotionChecked,
   register,
-  handleInformationButton = () => { } // by default is an empty func
+  informationButtonData
 }: Props) => {
+
+  const modal = informationButtonData.modal
+
   return (
     <div
       onClick={handleSelect}
@@ -48,8 +60,14 @@ export const PromotionCard = ({
             {title}
           </p>
           <InformationButton
-            text="Bases y condiciones de la promocion"
-            onClick={handleInformationButton}
+            text={informationButtonData.text}
+            hasModal={informationButtonData.hasModal}
+            modalInfo={{
+              title: modal?.title,
+              description: modal?.description,
+              imageSrc: modal?.imageSrc,
+              imageAlt: modal?.imageAlt
+            }}
           />
         </div>
 
