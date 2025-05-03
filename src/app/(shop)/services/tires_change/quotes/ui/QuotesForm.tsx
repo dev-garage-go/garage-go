@@ -1,18 +1,23 @@
 "use client"
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Promotion4x3 } from "@/assets";
-import { InformationButton, RadioButton, SwitchButton } from "@/components";
+import { AddServiceCard, InformationButton, RadioButton, SwitchButton } from "@/components";
 import { formatNumberWithDots } from '@/utils';
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
 import { QuantityTires, TireUsage } from "@/interfaces";
+import { FaWineGlassEmpty } from "react-icons/fa6";
+import { PromotionCard } from "@/components";
+
+type TypesTiresOptions = 'ciudad' | 'offroad' | 'intermedio'
 
 type FormInputs = {
   promotion: boolean;
   quantityTires: number;
+  typeTires: TypesTiresOptions;
 }
 
 const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
@@ -22,7 +27,7 @@ const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
   { label: "Cuatro cubiertas", value: 4 },
 ]
 
-const TypesTiresOptions: { label: string; value: TireUsage }[] = [
+const TypesTires: { label: string; value: TireUsage }[] = [
   { label: 'Ciudad', value: 'ciudad' },
   { label: 'Offroad', value: 'offroad' },
   { label: 'Intermedio', value: 'intermedio' }
@@ -41,17 +46,45 @@ export const QuotesForm = () => {
     setValue,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormInputs>()
+  } = useForm<FormInputs>({
+    defaultValues: {
+      promotion: false,
+      quantityTires: 0,
+      typeTires: 'ciudad'
+    }
+  })
 
-  const [promotion, setPromotion] = useState<boolean>(false)
-  const [typeTireSelected, setTypeTireSelected] = useState<TireUsage>('ciudad')
-  const [quantityTires, setQuantityTires] = useState<QuantityTires>(0)
+  const promotion = watch("promotion")
+  const quantityTires = watch("quantityTires")
+  const typeTires = watch("typeTires")
+
+  useEffect(() => {
+    console.log('promotion: ', promotion)
+    console.log('quantityTires: ', quantityTires)
+    console.log('typeTires: ', typeTires)
+  }, [promotion, quantityTires, typeTires])
+
+  const handleTypeTires = (type: TypesTiresOptions) => {
+    if (typeTires === type) {
+      setValue("typeTires", "ciudad")
+    } else {
+      setValue("typeTires", type)
+    }
+  }
+
+  const handleSelectPromotion = (state: boolean) => {
+    if (promotion === state) {
+      setValue("promotion", false)
+    } else {
+      setValue("promotion", true)
+    }
+  }
 
   const handleSelectQuantityTires = (quantity: QuantityTires) => {
     if (quantityTires === quantity) {
-      setQuantityTires(0)
+      setValue("quantityTires", 0)
     } else {
-      setQuantityTires(quantity)
+      setValue("quantityTires", quantity)
     }
   }
 
@@ -75,35 +108,15 @@ export const QuotesForm = () => {
           </div>
 
           {/* Promotion 4x3 */}
-          <button className="flex items-center justify-start gap-4 w-full bg-customGray-100 rounded-xl py-2 px-4 mt-4">
-            <div>
-              <RadioButton
-                checked={promotion}
-                option="4x3"
-                register={register("promotion")}
-              />
-            </div>
-
-            <div className="flex justify-between items-center w-full">
-              <div className="flex flex-col items-start justify-center">
-                <p>Promocion 4x3</p>
-                <InformationButton
-                  text="Bases y condiciones de la promocion"
-                  onClick={() => console.log("Promotion info")}
-                />
-              </div>
-
-              <div className="relative h-14 w-14">
-                <Image
-                  src={Promotion4x3}
-                  alt="promotion 4x3"
-                  fill
-                  className="object-contain w-auto h-auto"
-                />
-              </div>
-            </div>
-
-          </button>
+          <PromotionCard
+            className="mt-4"
+            imageSrc={Promotion4x3}
+            imageAlt="promocion 4x3 cubiertas"
+            promotionChecked={promotion}
+            register={register("promotion")}
+            handleSelect={() => handleSelectPromotion(true)}
+            handleInformationButton={() => console.log("infomation button action")}
+          />
         </div>
 
         {/* Container - Choose tires quantity and types  */}
@@ -131,13 +144,13 @@ export const QuotesForm = () => {
           <div className="flex flex-col gap-4">
             <h4 className="text-primaryBlue-900 font-semibold">Uso de los neumaticos</h4>
             {/* Switches */}
-            {TypesTiresOptions.map(({ label, value }) => (
+            {TypesTires.map(({ label, value }) => (
               <div key={value} className="flex items-center justify-between w-full">
                 <span className="text-md">{label}</span>
                 <SwitchButton
                   value={value}
-                  valueSelected={typeTireSelected}
-                  setValueSelected={setTypeTireSelected}
+                  valueSelected={typeTires}
+                  setValueSelected={() => handleTypeTires(value)}
                 />
               </div>
             ))}
@@ -172,23 +185,10 @@ export const QuotesForm = () => {
 
           <div className="flex flex-col gap-4 w-full">
             {AddMoreServices.map((service, index) => (
-              <div
+              <AddServiceCard
                 key={service.name + index}
-                className="flex justify-between items-center bg-gray-100 py-4 px-6 rounded-xl"
-              >
-                <div className="flex flex-col">
-                  <h4 className="font-semibold text-primaryBlue-500">
-                    {service.name}
-                  </h4>
-                  <p className="font-semibold text-primaryBlue-900">
-                    ${formatNumberWithDots(service.price)}
-                  </p>
-                </div>
-                <button className="text-sm text-center bg-transparent border border-primaryBlue-500 text-primaryBlue-500
-                 rounded-xl px-6 py-2 hover:bg-primaryBlue-500 hover:text-white duration-200 transition-all">
-                  Agregar
-                </button>
-              </div>
+                {...service}
+              />
             ))}
           </div>
         </div>
