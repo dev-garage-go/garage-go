@@ -1,43 +1,19 @@
 "use client"
 
-import Image from "next/image";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Promotion4x3 } from "@/assets";
-import { AddServiceCard, InformationButton, RadioButton, SwitchButton } from "@/components";
-import { formatNumberWithDots } from '@/utils';
-import { TiresQuantitySelector } from "./TiresQuantitySelector";
-import { QuantityTires, TireUsage } from "@/interfaces";
-import { FaWineGlassEmpty } from "react-icons/fa6";
-import { PromotionCard } from "@/components";
+import { QuantityTires, TypesTiresOptions } from "@/interfaces";
+import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
-type TypesTiresOptions = 'ciudad' | 'offroad' | 'intermedio'
+import { TiresQuantitySelector } from "./TiresQuantitySelector";
+import { AddServiceCard, InformationButton, SwitchButton, PromotionCard } from "@/components";
 
 type FormInputs = {
   promotion: boolean;
-  quantityTires: number;
+  quantityTires: QuantityTires;
   typeTires: TypesTiresOptions;
 }
-
-const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
-  { label: "Una cubierta", value: 1 },
-  { label: "Dos cubiertas", value: 2 },
-  { label: "Tres cubiertas", value: 3 },
-  { label: "Cuatro cubiertas", value: 4 },
-]
-
-const TypesTires: { label: string; value: TireUsage }[] = [
-  { label: 'Ciudad', value: 'ciudad' },
-  { label: 'Offroad', value: 'offroad' },
-  { label: 'Intermedio', value: 'intermedio' }
-]
-
-const AddMoreServices: { name: string, price: number }[] = [
-  { name: "Gestión de revisión técnica", price: 48990 },
-  { name: "Diagnostico automotriz", price: 65990 },
-  { name: "Servicio de frenos", price: 35990 }
-]
 
 export const QuotesForm = () => {
   const {
@@ -57,12 +33,6 @@ export const QuotesForm = () => {
   const promotion = watch("promotion")
   const quantityTires = watch("quantityTires")
   const typeTires = watch("typeTires")
-
-  useEffect(() => {
-    console.log('promotion: ', promotion)
-    console.log('quantityTires: ', quantityTires)
-    console.log('typeTires: ', typeTires)
-  }, [promotion, quantityTires, typeTires])
 
   const handleTypeTires = (type: TypesTiresOptions) => {
     if (typeTires === type) {

@@ -23,6 +23,7 @@ import {
   ServicioDomicilio,
   SuperCheck,
 } from "@/assets";
+import { QuantityTires, TypesTiresOptions } from "@/interfaces";
 
 const srvPath = '/services'
 
@@ -442,4 +443,23 @@ export const TiresChangeFAQs: ServicesPagesFAQs[] = [
     question: '¿Que medios de pago aceptan?',
     answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
   },
+]
+
+export const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
+  { label: "Una cubierta", value: 1 },
+  { label: "Dos cubiertas", value: 2 },
+  { label: "Tres cubiertas", value: 3 },
+  { label: "Cuatro cubiertas", value: 4 },
+]
+
+export const TypesTires: { label: string; value: TypesTiresOptions }[] = [
+  { label: 'Ciudad', value: 'ciudad' },
+  { label: 'Offroad', value: 'offroad' },
+  { label: 'Intermedio', value: 'intermedio' }
+]
+
+export const AddMoreServices: { name: string, price: number }[] = [
+  { name: "Gestión de revisión técnica", price: 48990 },
+  { name: "Diagnostico automotriz", price: 65990 },
+  { name: "Servicio de frenos", price: 35990 }
 ]
