@@ -79,6 +79,7 @@ export const QuotesForm = () => {
 
           {/* Promotion 4x3 */}
           <PromotionCard
+            title="Promocion 4x3"
             className="mt-4"
             imageSrc={Promotion4x3}
             imageAlt="promocion 4x3 cubiertas"
@@ -90,7 +91,7 @@ export const QuotesForm = () => {
         </div>
 
         {/* Container - Choose tires quantity and types  */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-2">
 
           {/* Quantity */}
           <div className="flex flex-col gap-4">
@@ -116,7 +117,7 @@ export const QuotesForm = () => {
             {/* Switches */}
             {TypesTires.map(({ label, value }) => (
               <div key={value} className="flex items-center justify-between w-full">
-                <span className="text-md">{label}</span>
+                <span className="text-sm md:text-base">{label}</span>
                 <SwitchButton
                   value={value}
                   valueSelected={typeTires}
@@ -137,7 +138,7 @@ export const QuotesForm = () => {
               type="text"
             />
 
-            <button className="py-2 px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
+            <button className="py-2 px-3 md:px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
               Aceptar
             </button>
           </div>

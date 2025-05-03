@@ -18,7 +18,7 @@ export const InformationButton = ({ text, onClick }: Props) => {
           size={14}
           className="text-primaryBlue-500"
         />
-        <p className="text-xs text-primaryBlue-500">{text}</p>
+        <p className="text-start text-xs text-primaryBlue-500 text-wrap">{text}</p>
       </div>
     </button>
   )

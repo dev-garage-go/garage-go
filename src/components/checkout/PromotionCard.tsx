@@ -6,6 +6,7 @@ import { RadioButton, InformationButton } from '@/components'
 import clsx from 'clsx'
 
 interface Props {
+  title: string
   className?: string
   imageSrc: string
   imageAlt: string
@@ -16,6 +17,7 @@ interface Props {
 }
 
 export const PromotionCard = ({
+  title,
   className,
   imageSrc,
   imageAlt,
@@ -28,7 +30,7 @@ export const PromotionCard = ({
     <div
       onClick={handleSelect}
       className={clsx(`${className} flex justify-start items-center cursor-pointer gap-4 w-full bg-customGray-100
-         hover:scale-105 transition-all duration-300 rounded-xl py-2 px-4`, {
+         hover:scale-105 transition-all duration-300 rounded-xl py-4 md:py-2 px-4`, {
         "bg-primaryBlue-50": promotionChecked
       })}
     >
@@ -41,15 +43,17 @@ export const PromotionCard = ({
       </div>
 
       <div className="flex justify-between items-center w-full">
-        <div className="flex flex-col items-start justify-center">
-          <p>Promocion 4x3</p>
+        <div className="flex flex-col items-start gap-1 justify-center">
+          <p className='text-sm md:text-base font-medium'>
+            {title}
+          </p>
           <InformationButton
             text="Bases y condiciones de la promocion"
             onClick={handleInformationButton}
           />
         </div>
 
-        <div className="relative h-14 w-14">
+        <div className="hidden md:relative h-14 w-14">
           <Image
             src={imageSrc}
             alt={imageAlt}
