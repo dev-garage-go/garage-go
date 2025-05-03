@@ -24,7 +24,7 @@ export const AddServiceCard = ({ name, price }: Props) => {
           Agregar
         </button>
       </div>
-      <button className={`${baseBtnStyle} hidden md:block bg-red-300`}>
+      <button className={`${baseBtnStyle} hidden md:block`}>
         Agregar
       </button>
     </div>
