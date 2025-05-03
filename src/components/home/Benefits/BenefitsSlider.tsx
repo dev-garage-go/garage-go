@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useRef, useState } from 'react';
 import { BenefitsCard } from '@/components';
 import { BenefitsData } from '@/constants';
 

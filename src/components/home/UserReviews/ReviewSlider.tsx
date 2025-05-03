@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useRef, useState } from 'react';
-import { BenefitsCard, ReviewCard } from '@/components';
-import { BenefitsData, UserReviewsData } from '@/constants';
+import { ReviewCard } from '@/components';
+import { UserReviewsData } from '@/constants';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';

@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import React from 'react'
-import { CompanyWhatsappLink } from '../../../constants/company-information';
+import { CompanyWhatsappLink } from '@/constants';
 
 export const HeroButtons = () => {
   return (

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BannerCard } from '@/components';
 import { BannerInformation } from '@/constants';
 
@@ -13,7 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 // import required modules
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 
 export const BannerSlider = () => {
   const [isMobile, setIsMobile] = useState(false);
