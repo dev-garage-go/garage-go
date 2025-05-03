@@ -9,22 +9,26 @@ interface Props {
 
 export const InformationModal = ({ imageAlt, imageSrc, description, title }: Props) => {
   return (
-    <div className="xl:w-[600px] xl:p-8 bg-white border border-gray-200 rounded-xl shadow-lg text-sm text-gray-800">
-      <div className="flex flex-col justify-start items-start gap-4">
-        <p className="text-xs font-medium text-primaryBlue-900">{title}</p>
-        <p className="text-xs text-start text-wrap">{description}</p>
+    <div className={`${imageSrc ? 'p-4' : 'xl:p-8'} xl:w-[600px] bg-white border border-gray-200 rounded-xl shadow-lg text-sm text-gray-800`}>
+      {title && description && (
+        <div className="flex flex-col justify-start items-start gap-4">
+          <p className="text-xs font-medium text-primaryBlue-900">{title}</p>
+          <p className="text-xs text-start text-wrap">{description}</p>
+        </div>
+      )}
 
-        {imageSrc && (
-          <div className="relative w-64 h-40">
+      {imageSrc && (
+        <div className="flex justify-center items-center w-full h-full">
+          <div className="relative w-[600px] h-48">
             <Image
               fill
               src={imageSrc}
-              alt={imageAlt ?? ""}
-              className="object-contain w-auto h-auto"
+              alt={imageAlt ?? "information image"}
+              className="object-cover w-auto h-auto rounded-xl"
             />
           </div>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

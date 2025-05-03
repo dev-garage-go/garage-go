@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 
-import { Promotion4x3 } from "@/assets";
+import { InfoRuedas, Promotion4x3 } from "@/assets";
 import { QuantityTires, TypesTiresOptions } from "@/interfaces";
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
@@ -150,7 +150,14 @@ export const QuotesForm = () => {
             </button>
           </div>
           <div className="mt-2">
-            <InformationButton text="Medida de tus neumaticos" />
+            <InformationButton
+              text="Medida de tus neumaticos"
+              hasModal={true}
+              modalInfo={{
+                imageSrc: InfoRuedas,
+                imageAlt: "informacion sobre el rodado de las ruedas"
+              }}
+            />
           </div>
         </div>
 
