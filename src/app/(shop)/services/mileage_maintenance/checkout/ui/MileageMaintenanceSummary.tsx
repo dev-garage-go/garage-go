@@ -1,94 +1,30 @@
-import { IoClose } from "react-icons/io5"
+import { Summary } from "@/components"
 
 export const MileageMaintenanceSummary = () => {
   return (
-    <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
-      <h4 className="font-semibold ml-4 md:ml-6 text-primaryBlue-900">Resumen de tu servicio</h4>
-
-      {/* Mantencion por kilometraje */}
-      <div className="summary-container">
-        {/* Title and cross */}
-        <div className="flex justify-between items-center">
-          <h4 className="font-semibold text-primaryBlue-900">Mantencion por kilometraje</h4>
-          <div className="text-xs text-gray-400 flex items-center gap-1 hover:font-medium hover:text-gray-500 duration-200 transition-all cursor-pointer">
-            <p>Quitar</p>
-            <IoClose
-              size={16}
-            />
-          </div>
-        </div>
-
-        <p className="text-sm mt-2">
-          Servicio por pauta segun fabricante incluye super check De 35 puntos, lavado express de cortesia en nuestro Hub Ubicado en cordillera S80, pudahuel.
-        </p>
-
-        <div className="flex justify-end items-center gap-3 mt-4">
-          <p className="text-sm text-primaryBlue-400">Valor referencial 10.000 kms</p>
-          <p className="font-semibold">$189.000</p>
-        </div>
-      </div>
-
-      {/* Servicio de frenos */}
-      <div className="summary-container">
-        {/* Title and cross */}
-        <div className="flex justify-between items-center">
-          <h4 className="font-semibold text-primaryBlue-900">Servicio de frenos</h4>
-          <div className="text-xs text-gray-400 flex items-center gap-1 hover:font-medium hover:text-gray-500 duration-200 transition-all cursor-pointer">
-            <p>Quitar</p>
-            <IoClose
-              size={16}
-            />
-          </div>
-        </div>
-
-        <p className="text-sm mt-2">
-          Revision y limpieza de ambos ejes
-        </p>
-
-        <div className="flex justify-end items-center gap-3 mt-4">
-          <p className="font-semibold">$35.990</p>
-        </div>
-      </div>
-
-      {/* Cupon */}
-      <div className="flex flex-col">
-        <h4 className="font-semibold ml-4 text-primaryBlue-900">Tengo un cupon</h4>
-        <div className="flex justify-center items-center gap-2 p-2 rounded-xl shadow-lg bg-white">
-          <input
-            className="py-2 px-4 border w-full rounded-md bg-gray-100 placeholder-primaryBlue-400 placeholder:font-semibold"
-            placeholder="N°"
-            type="text"
-          />
-
-          <button className="py-2 px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
-            Canjear
-          </button>
-        </div>
-      </div>
-
-      {/* Subtotal, total */}
-      <div className="summary-container gap-2 pb-20">
-        <div className="flex justify-between items-center w-full">
-          <p className="font-semibold text-primaryBlue-900">Subtotal</p>
-          <p className="font-semibold text-primaryBlue-900">$225.890</p>
-        </div>
-        <div className="flex justify-between items-center w-full">
-          <p className="font-semibold text-primaryBlue-900">Dctos</p>
-          <p className="font-semibold text-primaryBlue-900">$0</p>
-        </div>
-        <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
-        <div className="flex justify-between items-center w-full">
-          <p className="font-semibold text-primaryBlue-400">Total a pagar</p>
-          <p className="font-semibold text-primaryBlue-400">$225.890</p>
-        </div>
-        <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
-
-        <div className="flex justify-center items-center w-full mt-10">
-          <button className="px-10 py-2 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
-            Continuar
-          </button>
-        </div>
-      </div>
-    </section>
+    <Summary
+      mainService={{
+        name: "Mantención por kilometraje",
+        description: "Servicio por pauta segun fabricante incluye super check De 35 puntos, lavado express de cortesía en nuestra Hub Ubicado en cordillera 580, pudahuel.",
+        hasPrice: true,
+        price: 189900,
+        referenceValue: "Valor referencial 10.000 kms"
+      }}
+      secundaryService={{
+        name: "Servicio de frenos",
+        description: "Revisión y limpieza de ambos ejes",
+        price: 35990
+      }}
+      coupon={{
+        hasCoupon: true,
+      }}
+      summary={{
+        subtotal: 225890,
+        dctos: 0,
+        total: 225890,
+        btnString: "Continuar",
+        // btnAction: () => console.log("action"),
+      }}
+    />
   )
 }

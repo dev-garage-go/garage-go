@@ -15,7 +15,8 @@ interface Props {
     price: number,
   }
   coupon: {
-    number: string,
+    hasCoupon: boolean,
+    number?: string,
   }
   summary: {
     subtotal: number,
@@ -57,7 +58,7 @@ export const Summary = ({ mainService, secundaryService, coupon, summary }: Prop
             {mainService.referenceValue}
           </p>
           <p className="font-semibold">
-            {mainService.hasPrice ?? "$" + formatNumberWithDots(mainService.price)}
+            {mainService.hasPrice ? "$" + formatNumberWithDots(mainService.price) : ''}
           </p>
         </div>
       </div>
@@ -89,23 +90,27 @@ export const Summary = ({ mainService, secundaryService, coupon, summary }: Prop
       </div>
 
       {/* Coupon */}
-      <div className="flex flex-col">
-        <h4 className="font-semibold ml-4 text-primaryBlue-900">
-          Tengo un cupon
-        </h4>
-        <div className="flex justify-center items-center gap-2 p-2 rounded-xl shadow-lg bg-white">
-          <input
-            value={coupon.number}
-            className="py-2 px-4 border w-full rounded-md bg-gray-100 placeholder-primaryBlue-400 placeholder:font-semibold"
-            placeholder="N°"
-            type="text"
-          />
+      {
+        coupon.hasCoupon && (
+          <div className="flex flex-col">
+            <h4 className="font-semibold ml-4 text-primaryBlue-900">
+              Tengo un cupon
+            </h4>
+            <div className="flex justify-center items-center gap-2 p-2 rounded-xl shadow-lg bg-white">
+              <input
+                value={coupon.number}
+                className="py-2 px-4 border w-full rounded-md bg-gray-100 placeholder-primaryBlue-400 placeholder:font-semibold"
+                placeholder="N°"
+                type="text"
+              />
 
-          <button className="py-2 px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
-            Canjear
-          </button>
-        </div>
-      </div>
+              <button className="py-2 px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
+                Canjear
+              </button>
+            </div>
+          </div>
+        )
+      }
 
       {/* Summary - dctos, subtotal, total */}
       <div className="summary-container gap-2 pb-20">

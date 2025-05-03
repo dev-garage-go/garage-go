@@ -16,7 +16,7 @@ export const QuotesSummary = () => {
         price: 35990
       }}
       coupon={{
-        number: ''
+        hasCoupon: true,
       }}
       summary={{
         subtotal: 35990,
