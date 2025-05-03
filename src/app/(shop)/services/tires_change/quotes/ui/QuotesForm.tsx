@@ -5,18 +5,22 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 
 import { Promotion4x3 } from "@/assets";
-import { InformationButton, SwitchButton } from "@/components";
+import { InformationButton, RadioButton, SwitchButton } from "@/components";
 import { formatNumberWithDots } from '@/utils';
+import { TiresQuantitySelector } from "./TiresQuantitySelector";
+import { QuantityTires, TireUsage } from "@/interfaces";
 
 type FormInputs = {
-  cardNumber: string;
-  ownerName: string;
-  expiresIn: string;
-  cvv: number;
-  paymentMethod: PaymentMethods;
+  promotion: boolean;
+  quantityTires: number;
 }
 
-type TireUsage = 'ciudad' | 'offroad' | 'intermedio'
+const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
+  { label: "Una cubierta", value: 1 },
+  { label: "Dos cubiertas", value: 2 },
+  { label: "Tres cubiertas", value: 3 },
+  { label: "Cuatro cubiertas", value: 4 },
+]
 
 const TypesTiresOptions: { label: string; value: TireUsage }[] = [
   { label: 'Ciudad', value: 'ciudad' },
@@ -37,15 +41,19 @@ export const QuotesForm = () => {
     setValue,
     handleSubmit,
     formState: { errors }
-  } = useForm<FormInputs>({
-    defaultValues: {
-      paymentMethod: '' // El metodo de pago comienza siendo ''
-    }
-  })
+  } = useForm<FormInputs>()
 
+  const [promotion, setPromotion] = useState<boolean>(false)
   const [typeTireSelected, setTypeTireSelected] = useState<TireUsage>('ciudad')
+  const [quantityTires, setQuantityTires] = useState<QuantityTires>(0)
 
-  const checked = false
+  const handleSelectQuantityTires = (quantity: QuantityTires) => {
+    if (quantityTires === quantity) {
+      setQuantityTires(0)
+    } else {
+      setQuantityTires(quantity)
+    }
+  }
 
   // Function that will be executed when the form is submitted
   const onSumbit = (data: FormInputs) => {
@@ -67,24 +75,17 @@ export const QuotesForm = () => {
           </div>
 
           {/* Promotion 4x3 */}
-          <div className="flex items-center justify-start gap-4 w-full bg-customGray-100 rounded-xl py-2 px-4 mt-4">
-
+          <button className="flex items-center justify-start gap-4 w-full bg-customGray-100 rounded-xl py-2 px-4 mt-4">
             <div>
-              <div className={`w-5 h-5 rounded-full border-4 
-                ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
-              />
-
-              <input
-                id={"4x3"}
-                type="radio"
-                value={"4x3"}
-                {...register}
-                className="sr-only"
+              <RadioButton
+                checked={promotion}
+                option="4x3"
+                register={register("promotion")}
               />
             </div>
 
             <div className="flex justify-between items-center w-full">
-              <div className="flex flex-col">
+              <div className="flex flex-col items-start justify-center">
                 <p>Promocion 4x3</p>
                 <InformationButton
                   text="Bases y condiciones de la promocion"
@@ -102,7 +103,7 @@ export const QuotesForm = () => {
               </div>
             </div>
 
-          </div>
+          </button>
         </div>
 
         {/* Container - Choose tires quantity and types  */}
@@ -114,74 +115,15 @@ export const QuotesForm = () => {
 
             {/* Selects quantity of tires - inputs radios */}
             <div className="flex w-full justify-start gap-8 items-center px-2">
-              {/* 1 Tire */}
-              <div className="flex flex-col gap-4 justify-center items-center">
-                <div className={`w-5 h-5 rounded-full border-4 
-                ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
+              {QuantityTiresOptions.map((option, index) => (
+                <TiresQuantitySelector
+                  key={option.label + index}
+                  quantity={option.value}
+                  checked={quantityTires === option.value}
+                  register={register("quantityTires")}
+                  onClick={() => handleSelectQuantityTires(option.value)}
                 />
-
-                <input
-                  id={"4x3"}
-                  type="radio"
-                  value={"4x3"}
-                  {...register}
-                  className="sr-only"
-                />
-
-                <p className="title-h4">1</p>
-              </div>
-
-              {/* 2 Tire */}
-              <div className="flex flex-col gap-4 justify-center items-center">
-                <div className={`w-5 h-5 rounded-full border-4 
-                ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
-                />
-
-                <input
-                  id={"4x3"}
-                  type="radio"
-                  value={"4x3"}
-                  {...register}
-                  className="sr-only"
-                />
-
-                <p className="title-h4">2</p>
-              </div>
-
-              {/* 3 Tire */}
-              <div className="flex flex-col gap-4 justify-center items-center">
-                <div className={`w-5 h-5 rounded-full border-4 
-                ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
-                />
-
-                <input
-                  id={"4x3"}
-                  type="radio"
-                  value={"4x3"}
-                  {...register}
-                  className="sr-only"
-                />
-
-                <p className="title-h4">3</p>
-              </div>
-
-              {/* 4 Tire */}
-              <div className="flex flex-col gap-4 justify-center items-center">
-                <div className={`w-5 h-5 rounded-full border-4 
-                ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
-                />
-
-                <input
-                  id={"4x3"}
-                  type="radio"
-                  value={"4x3"}
-                  {...register}
-                  className="sr-only"
-                />
-
-                <p className="title-h4">4</p>
-              </div>
-
+              ))}
             </div>
           </div>
 
