@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { UseFormRegisterReturn } from "react-hook-form";
+import { RadioButton } from "@/components";
 
 type PaymentOptionProps = {
   method: string;
@@ -40,16 +41,11 @@ export const PaymentOption = ({ method, name, description, imageSrc, checked, re
 
         {/* Custom input radio */}
         <div>
-          <div className={`hidden md:w-5 md:h-5 rounded-full border-4 
-            ${checked ? "bg-primaryBlue-400 border-primaryBlue-400" : "border-primaryBlue-900"}`}
-          />
-
-          <input
-            id={method}
-            type="radio"
-            value={method}
-            {...register}
-            className="sr-only"
+          <RadioButton
+            option={method}
+            checked={checked}
+            register={register}
+            className="hidden md:block"
           />
         </div>
       </div>

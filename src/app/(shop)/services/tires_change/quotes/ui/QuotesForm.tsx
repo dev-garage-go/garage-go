@@ -3,10 +3,9 @@
 import Image from "next/image";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import clsx from "clsx";
 
 import { Promotion4x3 } from "@/assets";
-import { InformationButton } from "@/components";
+import { InformationButton, SwitchButton } from "@/components";
 import { formatNumberWithDots } from '@/utils';
 
 type FormInputs = {
@@ -193,20 +192,11 @@ export const QuotesForm = () => {
             {TypesTiresOptions.map(({ label, value }) => (
               <div key={value} className="flex items-center justify-between w-full">
                 <span className="text-md">{label}</span>
-                <button
-                  onClick={() => setTypeTireSelected(value)}
-                  className={clsx(
-                    'relative w-12 h-6 rounded-full transition-colors duration-300',
-                    typeTireSelected === value ? 'bg-primaryBlue-900' : 'bg-customGray-400'
-                  )}
-                >
-                  <span
-                    className={clsx(
-                      'absolute top-0.5 left-0.5 w-5 h-5 rounded-full bg-white transition-transform duration-300',
-                      typeTireSelected === value ? 'translate-x-6' : ''
-                    )}
-                  />
-                </button>
+                <SwitchButton
+                  value={value}
+                  valueSelected={typeTireSelected}
+                  setValueSelected={setTypeTireSelected}
+                />
               </div>
             ))}
           </div>
