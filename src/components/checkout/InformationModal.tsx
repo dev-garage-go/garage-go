@@ -11,8 +11,8 @@ interface Props {
 
 export const InformationModal = ({ imageAlt, imageSrc, description, title }: Props) => {
   return (
-    <div className={`${imageSrc ? 'p-2 xl:p-4' : 'p-4 xl:p-8'} w-80 sm:w-[450px] xl:w-[600px] bg-white border z-50
-     border-gray-200 rounded-xl shadow-lg text-sm text-gray-800`}>
+    <div className={`w-80 sm:w-[450px] xl:w-[600px] bg-white border border-gray-200 rounded-xl 
+    shadow-lg text-sm text-gray-800 ${imageSrc ? 'p-2 xl:p-4' : 'p-4 xl:p-8'}`}>
       {title && description && (
         <div className="flex flex-col justify-start items-start gap-4">
           <p className="text-xs font-medium text-primaryBlue-900">{title}</p>

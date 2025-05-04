@@ -98,5 +98,5 @@
 }
 
 .modal-animated {
-  @apply absolute top-full mt-2 -left-5 z-50 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-200 ease-out origin-top
+  @apply absolute top-full mt-2 -left-5 z-50 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out origin-top
 }
