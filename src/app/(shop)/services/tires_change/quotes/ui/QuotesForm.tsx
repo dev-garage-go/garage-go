@@ -2,7 +2,7 @@
 
 import { useForm } from "react-hook-form";
 
-import { InfoRuedas, Promotion4x3 } from "@/assets";
+import { InfoRuedas, Promotion4x3Tires } from "@/assets";
 import { QuantityTires, TypesTiresOptions } from "@/interfaces";
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
@@ -81,7 +81,7 @@ export const QuotesForm = () => {
           <PromotionCard
             title="Promocion 4x3"
             className="mt-4"
-            imageSrc={Promotion4x3}
+            imageSrc={Promotion4x3Tires}
             imageAlt="promocion 4x3 cubiertas"
             promotionChecked={promotion}
             register={register("promotion")}

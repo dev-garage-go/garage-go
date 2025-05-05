@@ -78,6 +78,6 @@ export const Getnet = `${pathImages}/getnet.webp`
 export const Webpay = `${pathImages}/webpay.webp`
 
 // Tires change promotions
-export const Promotion4x3 = `${pathImages}/4x3-promotion.jpg`
+export const Promotion4x3Tires = `${pathImages}/promotion-4x3-tires.jpg`
 export const ChangeTiresPromotion = `${pathImages}/change-tires-promotion.jpg`
 export const InfoRuedas = `${pathImages}/info-ruedas.jpg`

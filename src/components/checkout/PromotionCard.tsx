@@ -71,7 +71,7 @@ export const PromotionCard = ({
           />
         </div>
 
-        <div className="hidden md:relative h-14 w-14">
+        <div className="hidden md:block relative h-14 w-14">
           <Image
             src={imageSrc}
             alt={imageAlt}
