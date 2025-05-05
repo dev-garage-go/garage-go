@@ -5,6 +5,7 @@ import {
   DisclosureButton,
   DisclosurePanel
 } from '@headlessui/react'
+import Image from 'next/image'
 import { IoChevronDown } from 'react-icons/io5'
 
 interface Props {
@@ -12,9 +13,11 @@ interface Props {
   answer?: string,
   hasAnswerItems?: boolean
   answersItems?: string[]
+  imageSrc?: string
+  imageAlt?: string
 }
 
-export const FAQsDisclosure = ({ answer, question, hasAnswerItems, answersItems }: Props) => {
+export const FAQsDisclosure = ({ answer, question, hasAnswerItems, answersItems, imageSrc, imageAlt }: Props) => {
   return (
     <Disclosure as="div" className="py-2" defaultOpen={false}>
       {({ open }) => (
@@ -41,6 +44,17 @@ export const FAQsDisclosure = ({ answer, question, hasAnswerItems, answersItems 
               <>
                 {answer}
               </>
+            )}
+            {/* Image */}
+            {imageSrc && (
+              <div className='relative w-full h-48 rounded-xl mt-4'>
+                <Image
+                  fill
+                  src={imageSrc}
+                  alt={imageAlt ?? 'information image'}
+                  className='object-cover w-auto h-auto rounded-xl'
+                />
+              </div>
             )}
           </DisclosurePanel>
         </>

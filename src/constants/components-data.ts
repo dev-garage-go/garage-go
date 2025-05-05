@@ -6,6 +6,7 @@ import {
   ChequeoPreventivo,
   EntregaDomicilio,
   Garantia,
+  InfoRuedas,
   Mantencion,
   PagaOnline,
   PickAndDelivery,
@@ -428,7 +429,9 @@ export const OildAndFilterChangeFAQs: ServicesPagesFAQs[] = [
 export const TiresChangeFAQs: ServicesPagesFAQs[] = [
   {
     question: '¿Qué datos necesito para cotizar?',
-    answer: 'Para poder cotizar tus neumáticos es necesario contar con las medidas de ancho, perfil y aro. Esta información esta al costado de tus neumáticostico.'
+    answer: 'Para poder cotizar tus neumáticos es necesario contar con las medidas de ancho, perfil y aro. Esta información esta al costado de tus neumáticostico.',
+    imageSrc: InfoRuedas,
+    imageAlt: 'informacion de cubiertas'
   },
   {
     question: '¿Qué incluye el servicio?',

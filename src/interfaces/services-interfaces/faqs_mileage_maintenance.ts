@@ -3,4 +3,6 @@ interface ServicesPagesFAQs {
   answersItems?: string[]
   question: string
   answer?: string
+  imageSrc?: string
+  imageAlt?: string
 }

@@ -42,7 +42,7 @@ export default function OilAndFilterChangePage() {
         <h2 className='title-h2 font-medium text-center'>
           ¿Qué debes saber sobre tu
           <br />
-          Gestión de Revisión Técnica?
+          Cambio de aceite?
         </h2>
 
         <div className='faqs-services-pages'>
