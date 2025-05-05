@@ -3,7 +3,7 @@ import { IoInformationCircleOutline } from 'react-icons/io5';
 
 import { BookingServiceButton, FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
 import { StepsTiresChange, TiresChangeFAQs } from '@/constants';
-import { Mantencion, ServicioDomicilio } from '@/assets';
+import { ChangeTiresPromotion, Mantencion, ServicioDomicilio } from '@/assets';
 
 export default function TiresChangePage() {
   return (
@@ -52,8 +52,8 @@ export default function TiresChangePage() {
             <div className="relative h-60 w-60 md:h-80 md:w-80 rounded-3xl bg-white flex items-center justify-center overflow-hidden shadow-xl">
               <div className="relative h-56 w-56 md:w-72 md:h-72 rounded-2xl overflow-hidden">
                 <Image
-                  src={ServicioDomicilio}
-                  alt="servicios domicilio"
+                  src={ChangeTiresPromotion}
+                  alt="promocion de cambio de cubiertas"
                   fill
                   className="object-cover"
                 />
