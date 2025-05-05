@@ -10,7 +10,7 @@ export const BrandsAndLocation = () => {
       <div className='flex flex-col w-full'>
         {/* Title and bg blue */}
         <div className='flex flex-col justify-center items-center bg-primaryBlue-300 w-full py-6 sm:py-8 md:py-10 xl:py-12'>
-          <h3 className='title-h3 text-center text-white'>
+          <h3 className='title-h2 text-center text-white'>
             Trabajamos con las
             <br />
             mejores marcas
