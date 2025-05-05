@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { CompanyFacebook, CompanyInstagram, } from '@/constants';
 
 import { Instagram, Facebook, GarageGoLogo } from '@/assets';
-import { WhatsAppButton, BookingButton } from '@/components';
+import { WhatsAppButton, BookingHeaderButton } from '@/components';
 
 export const TopMenu = () => {
   return (
@@ -57,7 +57,7 @@ export const TopMenu = () => {
         {/* Whatsapp and booking btns */}
         <div className="flex flex-wrap justify-center gap-4">
           <WhatsAppButton />
-          <BookingButton />
+          <BookingHeaderButton />
         </div>
       </div>
     </div>

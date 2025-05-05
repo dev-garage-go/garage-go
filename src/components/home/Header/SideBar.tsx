@@ -2,7 +2,7 @@
 
 import { IoCloseCircle } from "react-icons/io5"
 import { HeaderLinksOptions } from "@/constants"
-import { HeaderOption, WhatsAppButton, BookingButton } from "@/components"
+import { HeaderOption, WhatsAppButton, BookingHeaderButton } from "@/components"
 
 interface SideBarProps {
   menuOpen: boolean
@@ -50,7 +50,7 @@ export const SideBar = ({ menuOpen, setMenuOpen }: SideBarProps) => {
 
         <div className='flex gap-3 justify-center items-center mt-20'>
           <WhatsAppButton />
-          <BookingButton />
+          <BookingHeaderButton />
         </div>
       </aside>
     </div>

@@ -1,4 +1,4 @@
-import { FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
+import { BookingServiceButton, FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
 import { OildAndFilterChangeFAQs, StepsOilAndFilterChange } from '@/constants';
 import { Mantencion } from '@/assets';
 
@@ -51,10 +51,8 @@ export default function OilAndFilterChangePage() {
           ))}
         </div>
 
-        <div className='flex justify-center items-center w-full mb-10 mt-4'>
-          <button className='text-sm sm:text-base bg-primaryBlue-900 rounded-md px-10 sm:px-14 md:px-20 py-2 text-center text-white'>
-            Agenda Ahora
-          </button>
+        <div className='flex justify-center items-center w-full mb-10 md:mb-28 xl:mb-36 mt-4 md:mt-6'>
+          <BookingServiceButton />
         </div>
       </section>
 
