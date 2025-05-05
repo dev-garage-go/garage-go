@@ -51,7 +51,7 @@ export default function MileageMaintenancePage() {
           ))}
         </div>
 
-        <div className='flex justify-center items-center w-full mb-10 md:mb-28 xl:mb-36 mt-4 md:mt-6'>
+        <div className='flex justify-center items-center w-full mb-10 md:mb-28 lg:mb-36 mt-4 md:mt-6'>
           <BookingServiceButton />
         </div>
       </section>

@@ -35,6 +35,11 @@ const config: Config = {
           800: '#9C193F',
           900: '#7E1232',
         },
+        // verdes personalizados
+        secundaryGreen: {
+          500: '#72C074',
+          600: '#56A758'
+        },
         // grises personalizados
         customGray: {
           // 50: '',

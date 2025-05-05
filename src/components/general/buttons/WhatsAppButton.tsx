@@ -7,7 +7,7 @@ export const WhatsAppButton = () => {
     <Link
       href={CompanyWhatsappLink}
       target="_blank"
-      className="btn-base-style bg-green-500 hover:bg-green-600 shadow-sm"
+      className="btn-base-style bg-secundaryGreen-500 hover:bg-secundaryGreen-600 duration-300 shadow-sm"
     >
       <IoLogoWhatsapp
         size={20}
