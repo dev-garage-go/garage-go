@@ -5,9 +5,8 @@ import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 
 interface Props {
-  children: ReactNode
-  anchorRef: React.RefObject<HTMLElement>
-
+  children: ReactNode // elemento que aparecera al activarse HoverPortal
+  anchorRef: React.RefObject<HTMLElement> // referencia al elemento trigger - el que dispara el hover
 }
 
 export const HoverPortal = ({ children, anchorRef }: Props) => {
@@ -15,22 +14,27 @@ export const HoverPortal = ({ children, anchorRef }: Props) => {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
+    // calcula la posición del anchorRef
     const updatePosition = () => {
       if (anchorRef.current) {
-        const rect = anchorRef.current.getBoundingClientRect()
+        const rect = anchorRef.current.getBoundingClientRect() // obtiene la posición del elemento en la pantalla
         setPosition({
-          top: rect.bottom + window.scrollY + 8, // +8px espacio entre botón y modal
-          left: rect.left + window.scrollX,
+          top: rect.bottom + window.scrollY + 8, // ajusta a top del botón + scroll + 8px
+          left: rect.left + window.scrollX, // ajusta a la posicion left del botón + scroll
         })
       }
     }
 
+    // se ejecuta la funcion cada vez que se monta el elemento
     updatePosition()
+
+    // listeners que actualizan la posición si el usuario hace scroll y el tamaño de la pantalla cambia
     window.addEventListener('scroll', updatePosition)
     window.addEventListener('resize', updatePosition)
     setMounted(true)
 
     return () => {
+      // limpieza de los event listeners para evitar memory leaks
       window.removeEventListener('scroll', updatePosition)
       window.removeEventListener('resize', updatePosition)
     }
@@ -53,6 +57,6 @@ export const HoverPortal = ({ children, anchorRef }: Props) => {
     >
       {children}
     </motion.div>,
-    document.getElementById('modal-root')!
+    document.getElementById('modal-root')! // div que se encuentra fuera del flujo normal DOM
   )
 }
