@@ -2,21 +2,31 @@
 
 import { InformationModal } from "@/components"
 import { IoAlertCircleOutline } from "react-icons/io5"
+import { useRef, useState } from "react"
+import { HoverPortal } from "@/components/checkout/HoverPortal"
 
 interface Props {
-  text: string,
+  text: string
   hasModal?: boolean
   modalInfo?: {
-    title?: string,
-    description?: string,
-    imageSrc?: string,
+    title?: string
+    description?: string
+    imageSrc?: string
     imageAlt?: string
   }
 }
 
 export const InformationButton = ({ text, hasModal = false, modalInfo }: Props) => {
+  const ref = useRef<HTMLDivElement>(null)
+  const [hovered, setHovered] = useState(false)
+
   return (
-    <div className="relative group inline-block text-left">
+    <div
+      ref={ref}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="relative inline-block text-left"
+    >
       <div className="flex items-center gap-1 cursor-pointer">
         <IoAlertCircleOutline
           size={14}
@@ -27,10 +37,10 @@ export const InformationButton = ({ text, hasModal = false, modalInfo }: Props) 
         </p>
       </div>
 
-      {hasModal && (
-        <div className="modal-animated">
+      {hasModal && hovered && (
+        <HoverPortal anchorRef={ref}>
           <InformationModal {...modalInfo} />
-        </div>
+        </HoverPortal>
       )}
     </div>
   )

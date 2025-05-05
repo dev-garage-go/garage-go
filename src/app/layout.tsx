@@ -33,6 +33,7 @@ export default function RootLayout({
     <html lang="es">
       <body className={montserrat.className}>
         {children}
+        <div id="modal-root" />
       </body>
     </html>
   );
