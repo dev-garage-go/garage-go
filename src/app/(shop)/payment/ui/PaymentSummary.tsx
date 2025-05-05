@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { IoClose } from "react-icons/io5"
 
 export const PaymentSummary = () => {
@@ -72,12 +71,12 @@ export const PaymentSummary = () => {
 
       {/* Pay button */}
       <div className="flex justify-center items-center w-full mt-10">
-        <Link
-          href={"/payment"}
+        <button
+          // TODO: onClick={() => console.log('Ejecuta logica de pago')}
           className="block text-center w-full max-w-lg py-2 bg-primaryBlue-900 text-white font-semibold rounded-md
           hover:brightness-125 hover:scale-105 transition-all duration-200">
           Ir a pagar
-        </Link>
+        </button>
       </div>
     </section>
   )
