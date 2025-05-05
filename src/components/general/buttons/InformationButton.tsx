@@ -1,9 +1,8 @@
 'use client'
 
-import { InformationModal } from "@/components"
-import { IoAlertCircleOutline } from "react-icons/io5"
 import { useRef, useState } from "react"
-import { HoverPortal } from "@/components/checkout/HoverPortal"
+import { IoAlertCircleOutline } from "react-icons/io5"
+import { InformationModal, HoverPortal } from "@/components"
 
 interface Props {
   text: string

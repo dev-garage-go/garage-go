@@ -1,5 +1,4 @@
 export * from './checkout/AddServiceCard';
-export * from './checkout/InformationModal';
 export * from './checkout/PromotionCard';
 export * from './checkout/Summary';
 export * from './general/buttons/BookingButton';
@@ -8,6 +7,8 @@ export * from './general/buttons/RadioButton';
 export * from './general/buttons/ServicePageButtons';
 export * from './general/buttons/SwitchButton';
 export * from './general/buttons/WhatsAppButton';
+export * from './general/ui/HoverPortal';
+export * from './general/ui/InformationModal';
 export * from './home/Banner/Banner';
 export * from './home/Banner/BannerCard';
 export * from './home/Banner/BannerSlider';
