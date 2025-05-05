@@ -117,7 +117,7 @@ export const TopBanner = ({
             src={imageSrc!}
             alt={imageAlt!}
             fill
-            className="object-cover"
+            className="object-cover w-auto h-auto"
           />
 
           <div className="absolute bottom-0 h-12 sm:h-14 md:h-16 bg-white opacity-80 w-full flex justify-center items-center gap-10 sm:gap-12 md:gap-14">

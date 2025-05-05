@@ -55,7 +55,7 @@ export default function TiresChangePage() {
                   src={ChangeTiresPromotion}
                   alt="promocion de cambio de cubiertas"
                   fill
-                  className="object-cover"
+                  className="object-cover w-auto h-auto"
                 />
               </div>
             </div>
