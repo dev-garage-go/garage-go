@@ -6,6 +6,11 @@
 @import 'swiper/css/navigation';
 @import 'swiper/css/pagination';
 
+/* Loader */
+.loader {
+  @apply w-4 h-4 border-2 border-blue-400 border-t-transparent border-solid rounded-full animate-spin;
+}
+
 /* Page sizes */
 .max-w-page {
   @apply max-w-7xl mx-auto
