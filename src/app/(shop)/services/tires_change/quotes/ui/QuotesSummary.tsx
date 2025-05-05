@@ -23,7 +23,6 @@ export const QuotesSummary = () => {
         dctos: 5000,
         total: 30990,
         btnString: "Continuar",
-        // btnAction: () => console.log("action"),
       }}
     />
   )

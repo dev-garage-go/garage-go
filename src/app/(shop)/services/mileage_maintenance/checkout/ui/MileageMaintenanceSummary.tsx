@@ -23,7 +23,6 @@ export const MileageMaintenanceSummary = () => {
         dctos: 0,
         total: 225890,
         btnString: "Continuar",
-        // btnAction: () => console.log("action"),
       }}
     />
   )
