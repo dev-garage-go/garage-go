@@ -15,7 +15,7 @@ export * from './home/Banner/BannerSlider';
 export * from './home/Benefits/Benefits';
 export * from './home/Benefits/BenefitsCard';
 export * from './home/Benefits/BenefitsSlider';
-export * from './home/Carousel/Carousel';
+export * from './general/ui/Carousel';
 export * from './home/Carousel/CarsBrandsCarousel';
 export * from './home/Carousel/SuppliersCarousel';
 export * from './home/FAQs/FAQs';
