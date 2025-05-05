@@ -42,7 +42,7 @@ export const TopBanner = ({
 
   useEffect(() => {
     setHasBreadCrumbs(pathSegments.length > 0)
-  }, [pathname])
+  }, [pathSegments.length])
 
   return (
     <>
