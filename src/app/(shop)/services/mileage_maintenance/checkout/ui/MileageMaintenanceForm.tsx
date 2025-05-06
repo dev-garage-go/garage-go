@@ -1,33 +1,14 @@
 "use client"
 
 import clsx from "clsx";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 import { formatNumberWithDots } from '@/utils';
 
-type FormInputs = {
-  name: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  carBrand: string;
-  carModel: string;
-  carKm: string;
-  carYear: number;
-}
-
 export const MileageMaintenanceForm = () => {
-  const { register, setValue, handleSubmit, formState: { errors } } = useForm<FormInputs>()
-
-  // Funcion que se ejecuta al enviar el formulario
-  const onSumbit = (data: FormInputs) => {
-    console.log(data)
-  }
+  const { register, setValue, formState: { errors } } = useFormContext()
 
   return (
-    <form
-      className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10"
-      onSubmit={handleSubmit(onSumbit)}
-    >
+    <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10">
       <section className="flex flex-col gap-4">
         <h4 className="font-medium text-primaryBlue-900">1. Datos personales</h4>
 
@@ -171,6 +152,6 @@ export const MileageMaintenanceForm = () => {
           </button>
         </div>
       </div>
-    </form>
+    </div>
   )
 }
