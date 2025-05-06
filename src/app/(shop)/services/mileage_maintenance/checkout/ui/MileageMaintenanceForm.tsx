@@ -6,10 +6,13 @@ import { Hour, MileageMaintenanceFormInputs } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, SchedulePicker } from "@/components";
 
 export const MileageMaintenanceForm = () => {
-  const { register, control, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
+  const { register, control, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
 
   const [calendarPicker, setCalendarPicker] = useState(true)
   const [schedulePicker, setSchedulePicker] = useState(false)
+
+  setValue("booking.serviceId", "uuid-123")
+  setValue("booking.serviceName", "mantencion por kilometraje")
 
   return (
     <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10">
@@ -126,6 +129,61 @@ export const MileageMaintenanceForm = () => {
             </Controller>
           )
         }
+      </section>
+
+      {/* Direccion del usuario */}
+      <section className="flex flex-col gap-4">
+        <h4 className="font-medium mt-14 md:mt-10 mb-4 md:mb-6 text-primaryBlue-900">3. Dirección</h4>
+
+        {/* Direccion y tipo de domicilio */}
+        <div className="input-form-container mt-4 md:mt-6">
+          <div className="flex w-full flex-col mb-2">
+            <label className="text-sm ml-4">
+              Ingresa tu dirección. Calle, número y comuna
+            </label>
+            <input
+              type="text"
+              autoFocus
+              className={`${errors.user?.name ? "input-form-error" : "input-form"}`}
+              {...register("user.name", { required: true })}
+            />
+            {errors.user?.name && <ErrorMessage message="Se requiere su nombre" className="mt-1 ml-2" />}
+          </div>
+
+          <div className="flex w-full max-w-36 flex-col mb-2">
+            <label className="text-sm ml-4">
+              Selecciona
+            </label>
+            <input
+              type="text"
+              autoFocus
+              className={`${errors.user?.lastName ? "input-form-error" : "input-form"}`}
+              {...register("user.lastName", { required: true })}
+            />
+            {errors.user?.lastName && <ErrorMessage message="Se requiere su apellido" className="mt-1 ml-2" />}
+          </div>
+        </div>
+
+        {/* Info adicional */}
+        <div className="input-form-container mt-4 md:mt-6">
+          <div className="flex w-full flex-col mb-2">
+            <label className="text-sm ml-4">
+              Información adicional
+            </label>
+            <input
+              type="text"
+              autoFocus
+              placeholder="N depto, oficina, piso"
+              className={`${errors.user?.name ? "input-form-error" : "input-form"}`}
+              {...register("user.name", { required: true })}
+            />
+            {errors.user?.name && <ErrorMessage message="Se requiere su nombre" className="mt-1 ml-2" />}
+          </div>
+
+          {/* Div vacio para mantener el mismo espacio */}
+          <div className="flex w-full">
+          </div>
+        </div>
       </section>
 
       {/* Vehicle data */}
