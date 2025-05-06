@@ -4,6 +4,7 @@ import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 import { formatNumberWithDots } from '@/utils';
 import { MileageMaintenanceFormInputs } from "@/interfaces";
+import { ErrorMessage } from "@/components";
 
 export const MileageMaintenanceForm = () => {
   const { register, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
@@ -16,16 +17,16 @@ export const MileageMaintenanceForm = () => {
         {/* Nombre y apellido */}
         <div className="input-form-container mt-4 md:mt-6">
           <div className="flex w-full flex-col mb-2">
-            {/* TODO: Renderizar el mensaje de error {} */}
             <label className="text-sm ml-4 lg:ml-6">
               Nombre
             </label>
             <input
               type="text"
               autoFocus
-              className={clsx("input-form", { "border-red-400": errors.name })}
+              className={`${errors.name ? "input-form-error" : "input-form"}`}
               {...register("name", { required: true })}
             />
+            {errors.name && <ErrorMessage message="Se requiere su nombre" className="mt-1 ml-2" />}
           </div>
 
           <div className="flex w-full flex-col mb-2">
@@ -35,9 +36,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx("input-form", { "border-red-400": errors.lastName })}
+              className={`${errors.lastName ? "input-form-error" : "input-form"}`}
               {...register("lastName", { required: true })}
             />
+            {errors.lastName && <ErrorMessage message="Se requiere su apellido" className="mt-1 ml-2" />}
           </div>
         </div>
 
@@ -50,9 +52,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx("input-form", { "border-red-400": errors.phone })}
+              className={`${errors.phone ? "input-form-error" : "input-form"}`}
               {...register("phone", { required: true })}
             />
+            {errors.phone && <ErrorMessage message="Se requiere su telefono" className="mt-1 ml-2" />}
           </div>
 
           <div className="flex w-full flex-col mb-2">
@@ -62,9 +65,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx("input-form", { "border-red-400": errors.email })}
+              className={`${errors.email ? "input-form-error" : "input-form"}`}
               {...register("email", { required: true })}
             />
+            {errors.email && <ErrorMessage message="Se requiere su email" className="mt-1 ml-2" />}
           </div>
         </div>
       </section>
@@ -82,9 +86,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx("input-form", { "border-red-400": errors.carBrand })}
+              className={`${errors.carBrand ? "input-form-error" : "input-form"}`}
               {...register("carBrand", { required: true })}
             />
+            {errors.carBrand && <ErrorMessage message="Detalle la marca del vehiculo" className="mt-1 ml-2" />}
           </div>
 
           <div className="flex w-full flex-col mb-2">
@@ -94,9 +99,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx("input-form", { "border-red-400": errors.carBrand })}
+              className={`${errors.carModel ? "input-form-error" : "input-form"}`}
               {...register("carModel", { required: true })}
             />
+            {errors.carModel && <ErrorMessage message="Detalle el modelo del vehiculo" className="mt-1 ml-2" />}
           </div>
         </div>
 
@@ -109,9 +115,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx("input-form", { "border-red-400": errors.carYear })}
+              className={`${errors.carYear ? "input-form-error" : "input-form"}`}
               {...register("carYear", { required: true })}
             />
+            {errors.carYear && <ErrorMessage message="Detalle el año del vehiculo" className="mt-1 ml-2" />}
           </div>
 
           <div className="flex w-full flex-col mb-2">
@@ -121,7 +128,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={clsx("input-form", { "border-red-400": errors.carKm })}
+              className={`${errors.carKm ? "input-form-error" : "input-form"}`}
               {...register("carKm", {
                 required: true,
                 onChange: (e) => {
@@ -131,6 +138,7 @@ export const MileageMaintenanceForm = () => {
                 }
               })}
             />
+            {errors.carKm && <ErrorMessage message="Detalle el kilometraje del vehiculo" className="mt-1 ml-2" />}
           </div>
         </div>
       </section>

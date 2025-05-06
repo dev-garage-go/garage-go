@@ -1,10 +1,15 @@
 import { IoAlertCircleSharp } from "react-icons/io5"
 
-export const ErrorMessage = (message: string) => {
+interface Props {
+  message: string
+  className?: string
+}
+
+export const ErrorMessage = ({ message, className }: Props) => {
   return (
-    <div className="flex justify-start items-center gap-2">
+    <div className={`flex justify-start items-center gap-1 w-full ${className}`}>
       <IoAlertCircleSharp size={14} className="text-red-400" />
-      <p className='text-red-400 text-xs pb-2'>
+      <p className='text-red-400 text-xs'>
         {message}
       </p>
     </div>
