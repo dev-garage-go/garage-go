@@ -1,9 +1,8 @@
 "use client"
 
 import { useFormContext } from "react-hook-form";
-import { formatNumberWithDots } from '@/utils';
 import { MileageMaintenanceFormInputs } from "@/interfaces";
-import { ErrorMessage } from "@/components";
+import { CalendarToBooking, ErrorMessage } from "@/components";
 
 export const MileageMaintenanceForm = () => {
   const { register, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
@@ -74,72 +73,10 @@ export const MileageMaintenanceForm = () => {
 
       {/* Formulario del vehiculo */}
       <section className="flex flex-col gap-4">
-        <h4 className="font-medium mt-14 md:mt-10 mb-4 md:mb-6 text-primaryBlue-900">2. Datos del vehiculo</h4>
+        <h4 className="font-medium mt-14 md:mt-10 mb-4 md:mb-6 text-primaryBlue-900">2. Día y horario</h4>
 
-        {/* Marca y modelo del auto  */}
-        <div className="input-form-container">
-          <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-4 lg:ml-6">
-              Marca
-            </label>
-            <input
-              type="text"
-              autoFocus
-              className={`${errors.carBrand ? "input-form-error" : "input-form"}`}
-              {...register("carBrand", { required: true })}
-            />
-            {errors.carBrand && <ErrorMessage message="Detalle la marca del vehiculo" className="mt-1 ml-2" />}
-          </div>
-
-          <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-4 lg:ml-6">
-              Modelo
-            </label>
-            <input
-              type="text"
-              autoFocus
-              className={`${errors.carModel ? "input-form-error" : "input-form"}`}
-              {...register("carModel", { required: true })}
-            />
-            {errors.carModel && <ErrorMessage message="Detalle el modelo del vehiculo" className="mt-1 ml-2" />}
-          </div>
-        </div>
-
-        {/* Año y kilometraje  */}
-        <div className="input-form-container">
-          <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-4 lg:ml-6">
-              Año
-            </label>
-            <input
-              type="text"
-              autoFocus
-              className={`${errors.carYear ? "input-form-error" : "input-form"}`}
-              {...register("carYear", { required: true })}
-            />
-            {errors.carYear && <ErrorMessage message="Detalle el año del vehiculo" className="mt-1 ml-2" />}
-          </div>
-
-          <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-4 lg:ml-6">
-              Kilometraje
-            </label>
-            <input
-              type="text"
-              autoFocus
-              className={`${errors.carKm ? "input-form-error" : "input-form"}`}
-              {...register("carKm", {
-                required: true,
-                onChange: (e) => {
-                  const raw = e.target.value;
-                  const formatted = formatNumberWithDots(raw); // Set the value by putting points instead of 1200km put 1.200km.
-                  setValue("carKm", formatted); // Update the value of input
-                }
-              })}
-            />
-            {errors.carKm && <ErrorMessage message="Detalle el kilometraje del vehiculo" className="mt-1 ml-2" />}
-          </div>
-        </div>
+        {/* Calendario */}
+        <CalendarToBooking />
       </section>
 
       {/* Vehicle data */}

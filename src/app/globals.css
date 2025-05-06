@@ -109,3 +109,41 @@
 .modal-animated {
   @apply absolute top-full mt-2 -left-5 z-50 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out origin-top
 }
+
+
+
+/* ! Calendar styles */
+
+/* Ocultar cabecera */
+.ant-picker-calendar .ant-picker-calendar-header {
+  display: none !important;
+}
+
+/* Estilo para días seleccionados */
+.ant-picker-calendar .ant-picker-calendar-date-selected .ant-picker-calendar-date-value {
+  background-color: #0c1c3d !important;
+  color: white !important;
+  border-radius: 50% !important;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Estilo para días con hover (opcional) */
+.ant-picker-calendar .ant-picker-calendar-date:hover .ant-picker-calendar-date-value {
+  background-color: #f0f0f0 !important;
+  border-radius: 50%;
+}
+
+/* Días comunes */
+.ant-picker-calendar .ant-picker-calendar-date-value {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  text-align: center;
+  display: inline-block;
+  border-radius: 50%;
+}
