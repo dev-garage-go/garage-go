@@ -1,8 +1,7 @@
 "use client"
 
-import React, { useRef, useState } from 'react';
-import { BenefitsCard, ReviewCard } from '@/components';
-import { BenefitsData, UserReviewsData } from '@/constants';
+import { ReviewCard } from '@/components';
+import { UserReviewsData } from '@/constants';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -54,7 +53,7 @@ export const ReviewSlider = () => {
       >
         {UserReviewsData.map((item, index) => (
           <SwiperSlide
-            key={index}
+            key={index + item.name}
             className="pb-14"
           >
             <ReviewCard {...item} />

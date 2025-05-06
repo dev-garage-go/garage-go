@@ -4,15 +4,16 @@ import Image from 'next/image';
 import { CompanyFacebook, CompanyInstagram, } from '@/constants';
 
 import { Instagram, Facebook, GarageGoLogo } from '@/assets';
-import { WhatsAppButton } from '../Buttons/WhatsAppButton';
-import { BookingButton } from '../Buttons/BookingButton';
-
+import { WhatsAppButton, BookingHeaderButton } from '@/components';
 
 export const TopMenu = () => {
   return (
     <div className="flex justify-between items-center py-2 px-4">
       {/* Company Logo */}
-      <div className="relative h-8 w-20 sm:w-28 sm:h-10 flex justify-start">
+      <Link
+        href={'/'}
+        className="relative h-8 w-20 sm:w-28 sm:h-10 flex justify-start"
+      >
         <Image
           src={GarageGoLogo}
           fill
@@ -20,7 +21,7 @@ export const TopMenu = () => {
           alt="Garage Go"
           className="object-contain w-auto h-auto"
         />
-      </div>
+      </Link>
 
       {/* Social networks */}
       <div className="hidden sm:flex justify-center items-center gap-4">
@@ -56,7 +57,7 @@ export const TopMenu = () => {
         {/* Whatsapp and booking btns */}
         <div className="flex flex-wrap justify-center gap-4">
           <WhatsAppButton />
-          <BookingButton />
+          <BookingHeaderButton />
         </div>
       </div>
     </div>

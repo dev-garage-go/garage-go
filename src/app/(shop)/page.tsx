@@ -1,17 +1,19 @@
-import { Banner, Benefits, BrandCarousel, FAQs, Hero, Services, UserReviews } from "@/components";
+import { Banner, Benefits, FAQs, Hero, CarsBrandsCarousel, Services, UserReviews } from "@/components";
 
 export default function HomePage() {
   return (
-    <main className="relative bg-white min-h-screen mt-32">
+    <main className="new-page">
       <Hero />
       <Services />
       <Benefits />
-      <BrandCarousel />
+      <div className="pt-20 sm:pt-24 md:pt-28 xl:pt-32">
+        <CarsBrandsCarousel />
+      </div>
       <Banner />
-      <div className="bg-gray-100 h-full">
+      <section className="bg-gray-100 h-full">
         <UserReviews />
         <FAQs />
-      </div>
+      </section>
     </main>
   );
 }

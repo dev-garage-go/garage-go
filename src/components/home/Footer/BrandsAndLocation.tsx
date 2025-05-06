@@ -1,16 +1,16 @@
 import Image from 'next/image'
 
 import { CompanyLocation } from '@/assets'
-import { CompanySuppliersImages } from '@/constants'
+import { SuppliersBrandsCarousel } from '@/components';
 
 export const BrandsAndLocation = () => {
   return (
     <section>
 
-      <div className='flex flex-col w-full h-full'>
+      <div className='flex flex-col w-full'>
         {/* Title and bg blue */}
         <div className='flex flex-col justify-center items-center bg-primaryBlue-300 w-full py-6 sm:py-8 md:py-10 xl:py-12'>
-          <h3 className='title-h3 text-center text-white'>
+          <h3 className='title-h2 text-center text-white'>
             Trabajamos con las
             <br />
             mejores marcas
@@ -23,26 +23,13 @@ export const BrandsAndLocation = () => {
         </div>
 
         {/* Company suppliers */}
-        <div className="flex flex-wrap justify-center 2xl:justify-between items-center gap-4 w-full sm:p-6 md:py-8 lg:py-10 xl:py-16 bg-gray-100">
-          {CompanySuppliersImages.map((supplier, index) => (
-            <div
-              key={index}
-              className="relative flex justify-between items-center rounded-md
-                 w-20 h-20 md:w-24 md:h-24 xl:w-28 xl:h-28 2xl:w-32 2xl:h-32"
-            >
-              <Image
-                src={supplier.image}
-                alt={supplier.name}
-                fill
-                className="object-contain p-4 opacity-70 w-auto h-auto"
-              />
-            </div>
-          ))}
+        <div className="carousel-container bg-gray-100">
+          <SuppliersBrandsCarousel />
         </div>
 
 
         {/* Map */}
-        <div className='relative w-full h-60 sm:h-72 xl:h-[550px] bg-red-300'>
+        <div className='relative w-full h-60 sm:h-72 xl:h-[550px]'>
           <Image
             fill
             priority

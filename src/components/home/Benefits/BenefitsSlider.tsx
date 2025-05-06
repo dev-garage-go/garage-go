@@ -1,6 +1,5 @@
 "use client"
 
-import React, { useRef, useState } from 'react';
 import { BenefitsCard } from '@/components';
 import { BenefitsData } from '@/constants';
 
@@ -30,11 +29,11 @@ const SliderBreakpoints = {
   },
   1024: {
     slidesPerView: 2.4,
-    spaceBetween: 25,
+    spaceBetween: 23,
   },
   1920: {
     slidesPerView: 3.4,
-    spaceBetween: 28,
+    spaceBetween: 23,
   },
   2560: {
     slidesPerView: 4.2,
@@ -54,7 +53,7 @@ export const BenefitsSlider = () => {
       >
         {BenefitsData.map((benefit, index) => (
           <SwiperSlide
-            key={index}
+            key={index + benefit.name}
             className="pb-14"
           >
             <BenefitsCard {...benefit} />

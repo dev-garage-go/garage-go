@@ -11,4 +11,5 @@ interface ServicesInterface {
   discount?: string,
   features: string[],
   buttons?: ButtonProps[]
+  path: string
 }

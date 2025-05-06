@@ -1,16 +1,17 @@
 "use client"
 
+import { FeatureIconsMap } from "@/constants";
 import Image from "next/image";
-import { Garantia, PickDelivery, SuperCheck } from "@/assets";
+import Link from "next/link";
 
 interface Props {
-  title: string;
-  price?: number;
-  image: string;
-  discount?: string;
-  features?: string[];
-  func: () => void;
-  buttons?: ButtonProps[];
+  title: string
+  price?: number
+  image: string
+  discount?: string
+  features?: string[]
+  buttons?: ButtonProps[]
+  path: string
 }
 
 export const ServiceCard = ({
@@ -19,29 +20,29 @@ export const ServiceCard = ({
   image,
   discount,
   features = [],
-  func,
-  buttons
+  buttons,
+  path
 }: Props) => {
-  const featureIcons: Record<string, string> = {
-    'pick-delivery': PickDelivery,
-    'super-check': SuperCheck,
-    'garantia': Garantia,
-  };
+
 
   return (
-    <div className="h-full flex flex-col">
-      <div className="bg-primaryBlue-500 text-white py-3 px-4 rounded-t-2xl font-medium mb-1">
-        {title}
-      </div>
+    <Link
+      className="h-full flex flex-col"
+      href={path}
+    >
 
       {/* Main image */}
-      <div className="bg-white rounded-2xl shadow-md flex-1 flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
-        <div className="relative w-full h-48">
+      <div className="bg-customGray-200 shadow-xl hover:-translate-y-1 shadow-customGray-400 flex-1 flex flex-col transition-all duration-300">
+        <div className="bg-primaryBlue-500 text-white py-3 px-4 font-medium">
+          {title}
+        </div>
+
+        <div className="relative w-full h-56">
           <Image
             fill
             src={image}
             alt={title}
-            className="object-cover w-auto h-auto"
+            className="object-cover w-auto h-auto rounded-3xl p-2"
           />
           {/* Discount symbol */}
           {discount && (
@@ -58,8 +59,8 @@ export const ServiceCard = ({
               <Image
                 height={24}
                 width={50}
-                key={index}
-                src={featureIcons[feature]}
+                key={index + feature}
+                src={FeatureIconsMap[feature]}
                 alt={feature}
                 className="object-contain"
               />
@@ -85,7 +86,7 @@ export const ServiceCard = ({
                   </div>
                 )}
                 <button
-                  onClick={func}
+                  onClick={() => console.log(title)}
                   className="text-sm xl:text-base border border-primaryBlue-500 text-primaryBlue-500 px-6 py-2 rounded-lg hover:bg-blue-50 font-medium flex items-center gap-1"
                 >
                   Agendar <span className="text-lg">→</span>
@@ -95,6 +96,6 @@ export const ServiceCard = ({
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };

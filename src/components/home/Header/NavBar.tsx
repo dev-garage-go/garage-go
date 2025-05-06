@@ -40,7 +40,7 @@ export const NavBar = () => {
         <ul className="w-full bg-primaryBlue-500 flex justify-center items-center">
           {
             HeaderLinksOptions.map((opt, index) => (
-              <HeaderOption key={index} {...opt}
+              <HeaderOption key={index + opt.title} {...opt}
               />
             ))
           }

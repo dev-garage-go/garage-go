@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BannerCard } from '@/components';
 import { BannerInformation } from '@/constants';
 
@@ -13,7 +13,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 // import required modules
-import { Navigation, Pagination, Mousewheel, Keyboard } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 
 export const BannerSlider = () => {
   const [isMobile, setIsMobile] = useState(false);
@@ -30,6 +30,7 @@ export const BannerSlider = () => {
   return (
     <>
       <Swiper
+        className="w-full h-full !overflow-visible"
         slidesPerView={1}
         spaceBetween={30}
         loop={true}
@@ -38,11 +39,10 @@ export const BannerSlider = () => {
         }}
         navigation={!isMobile}
         modules={[Pagination, Navigation]}
-        className="w-full h-full"
       >
 
         {BannerInformation.map((item, index) => (
-          <SwiperSlide key={index} className='px-4 sm:px-6 md:px-10 xl:px-0'>
+          <SwiperSlide key={index + item.title} className='padding-banner mb-4 sm:mb-0'>
             <BannerCard {...item} />
           </SwiperSlide>
         ))}

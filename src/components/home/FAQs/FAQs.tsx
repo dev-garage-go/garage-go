@@ -6,7 +6,7 @@ import { FAQsData } from '@/constants'
 
 export const FAQs = () => {
   return (
-    <section className='container-section bg-gray-100 pb-24 sm:pb-28 md:pb-32'>
+    <section className='container-section bg-gray-100 pb-from-footer'>
       <div className='flex flex-col-reverse lg:flex-row w-full max-w-7xl mx-auto padding-central-page gap-10'>
 
         {/* Wrapper sticky */}
@@ -26,13 +26,13 @@ export const FAQs = () => {
 
         {/* Title and FAQs */}
         <div className='w-full lg:w-1/2 px-4'>
-          <h2 className='title-h2 text-center md:text-start mb-10'>
+          <h2 className='title-h2 font-semibold text-center md:text-start mb-10'>
             Preguntas frecuentes
           </h2>
           <div className='space-y-4'>
             {
               FAQsData.map((faq, index) => (
-                <FAQsDisclosure key={index} {...faq} />
+                <FAQsDisclosure key={index + faq.question} {...faq} />
               ))
             }
           </div>
