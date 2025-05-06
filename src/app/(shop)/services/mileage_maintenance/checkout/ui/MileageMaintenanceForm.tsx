@@ -1,6 +1,5 @@
 "use client"
 
-import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 import { formatNumberWithDots } from '@/utils';
 import { MileageMaintenanceFormInputs } from "@/interfaces";
