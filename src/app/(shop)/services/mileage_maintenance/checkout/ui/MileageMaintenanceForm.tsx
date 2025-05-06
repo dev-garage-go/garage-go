@@ -1,12 +1,12 @@
 "use client"
 
 import { useState } from "react";
-import { useFormContext } from "react-hook-form";
-import { MileageMaintenanceFormInputs } from "@/interfaces";
+import { Controller, useFormContext } from "react-hook-form";
+import { Hour, MileageMaintenanceFormInputs } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, SchedulePicker } from "@/components";
 
 export const MileageMaintenanceForm = () => {
-  const { register, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
+  const { register, control, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
 
   const [calendarPicker, setCalendarPicker] = useState(true)
   const [schedulePicker, setSchedulePicker] = useState(false)
@@ -25,10 +25,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={`${errors.name ? "input-form-error" : "input-form"}`}
-              {...register("name", { required: true })}
+              className={`${errors.user?.name ? "input-form-error" : "input-form"}`}
+              {...register("user.name", { required: true })}
             />
-            {errors.name && <ErrorMessage message="Se requiere su nombre" className="mt-1 ml-2" />}
+            {errors.user?.name && <ErrorMessage message="Se requiere su nombre" className="mt-1 ml-2" />}
           </div>
 
           <div className="flex w-full flex-col mb-2">
@@ -38,10 +38,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={`${errors.lastName ? "input-form-error" : "input-form"}`}
-              {...register("lastName", { required: true })}
+              className={`${errors.user?.lastName ? "input-form-error" : "input-form"}`}
+              {...register("user.lastName", { required: true })}
             />
-            {errors.lastName && <ErrorMessage message="Se requiere su apellido" className="mt-1 ml-2" />}
+            {errors.user?.lastName && <ErrorMessage message="Se requiere su apellido" className="mt-1 ml-2" />}
           </div>
         </div>
 
@@ -54,10 +54,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={`${errors.phone ? "input-form-error" : "input-form"}`}
-              {...register("phone", { required: true })}
+              className={`${errors.user?.phone ? "input-form-error" : "input-form"}`}
+              {...register("user.phone", { required: true })}
             />
-            {errors.phone && <ErrorMessage message="Se requiere su telefono" className="mt-1 ml-2" />}
+            {errors.user?.phone && <ErrorMessage message="Se requiere su telefono" className="mt-1 ml-2" />}
           </div>
 
           <div className="flex w-full flex-col mb-2">
@@ -67,10 +67,10 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              className={`${errors.email ? "input-form-error" : "input-form"}`}
-              {...register("email", { required: true })}
+              className={`${errors.user?.email ? "input-form-error" : "input-form"}`}
+              {...register("user.email", { required: true })}
             />
-            {errors.email && <ErrorMessage message="Se requiere su email" className="mt-1 ml-2" />}
+            {errors.user?.email && <ErrorMessage message="Se requiere su email" className="mt-1 ml-2" />}
           </div>
         </div>
       </section>
@@ -82,6 +82,7 @@ export const MileageMaintenanceForm = () => {
         {/* Switch calendar and hour */}
         <div className="flex justify-start items-center gap-4">
           <button
+            type="button"
             onClick={() => {
               setCalendarPicker(true)
               setSchedulePicker(false)
@@ -90,6 +91,7 @@ export const MileageMaintenanceForm = () => {
             Calendario
           </button>
           <button
+            type="button"
             onClick={() => {
               setSchedulePicker(true)
               setCalendarPicker(false)
@@ -101,9 +103,27 @@ export const MileageMaintenanceForm = () => {
 
         {
           calendarPicker ? (
-            <CalendarPicker />
+            <Controller // controlador de react-hook-form para componentes externos
+              name="booking.date" // equivalente a register("booking.date")
+              control={control}
+              render={({ field }) => (
+                <CalendarPicker
+                  onChange={field.onChange}
+                />
+              )}
+            >
+            </Controller>
           ) : (
-            <SchedulePicker />
+            <Controller
+              name="booking.time"
+              control={control}
+              render={({ field }) => (
+                <SchedulePicker
+                  onChange={field.onChange}
+                />
+              )}
+            >
+            </Controller>
           )
         }
       </section>

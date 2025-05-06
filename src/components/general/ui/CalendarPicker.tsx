@@ -24,15 +24,18 @@ import esES from 'antd/es/locale/es_ES';
 dayjs.extend(localeData);
 dayjs.locale('es');
 
-export const CalendarPicker = () => {
+
+interface Props {
+  onChange: (value: Dayjs | string) => void
+}
+
+export const CalendarPicker = ({ onChange }: Props) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
   const onSelect: CalendarProps<Dayjs>['onSelect'] = (date) => {
-    setSelectedDate(date);
-    console.log(date.format('DD-MM-YYYY'));
+    setSelectedDate(date)
+    onChange(date.format('DD-MM-YY'))
   };
-
-  // Custom style to day cells
 
   return (
     <ConfigProvider locale={esES}>
