@@ -24,7 +24,7 @@ import esES from 'antd/es/locale/es_ES';
 dayjs.extend(localeData);
 dayjs.locale('es');
 
-export const CalendarToBooking = () => {
+export const CalendarPicker = () => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
   const onSelect: CalendarProps<Dayjs>['onSelect'] = (date) => {

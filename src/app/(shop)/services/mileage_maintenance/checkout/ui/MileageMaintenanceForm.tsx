@@ -1,11 +1,15 @@
 "use client"
 
+import { useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { MileageMaintenanceFormInputs } from "@/interfaces";
-import { CalendarToBooking, ErrorMessage } from "@/components";
+import { CalendarPicker, ErrorMessage, SchedulePicker } from "@/components";
 
 export const MileageMaintenanceForm = () => {
   const { register, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
+
+  const [calendarPicker, setCalendarPicker] = useState(true)
+  const [schedulePicker, setSchedulePicker] = useState(false)
 
   return (
     <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10">
@@ -71,12 +75,37 @@ export const MileageMaintenanceForm = () => {
         </div>
       </section>
 
-      {/* Formulario del vehiculo */}
+      {/* Calendario y selector de hora */}
       <section className="flex flex-col gap-4">
         <h4 className="font-medium mt-14 md:mt-10 mb-4 md:mb-6 text-primaryBlue-900">2. Día y horario</h4>
 
-        {/* Calendario */}
-        <CalendarToBooking />
+        {/* Switch calendar and hour */}
+        <div className="flex justify-start items-center gap-4">
+          <button
+            onClick={() => {
+              setCalendarPicker(true)
+              setSchedulePicker(false)
+            }}
+            className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${calendarPicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
+            Calendario
+          </button>
+          <button
+            onClick={() => {
+              setSchedulePicker(true)
+              setCalendarPicker(false)
+            }}
+            className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${schedulePicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
+            Horario
+          </button>
+        </div>
+
+        {
+          calendarPicker ? (
+            <CalendarPicker />
+          ) : (
+            <SchedulePicker />
+          )
+        }
       </section>
 
       {/* Vehicle data */}
