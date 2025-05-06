@@ -3,23 +3,13 @@
 import { FormProvider, useForm } from "react-hook-form";
 import { MileageMaintenanceForm } from "./MileageMaintenanceForm";
 import { MileageMaintenanceSummary } from "./MileageMaintenanceSummary";
-
-type FormInputs = {
-  name: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  carBrand: string;
-  carModel: string;
-  carKm: string;
-  carYear: number;
-}
+import { MileageMaintenanceFormInputs } from "@/interfaces";
 
 export const MileageMaintenanceWrapper = () => {
-  const methods = useForm<FormInputs>()
+  const methods = useForm<MileageMaintenanceFormInputs>()
 
   // Funcion que se ejecuta al enviar el formulario
-  const onSubmit = (data: FormInputs) => {
+  const onSubmit = (data: MileageMaintenanceFormInputs) => {
     console.log(data)
   }
 

@@ -9,6 +9,7 @@ export * from './general/buttons/ServicePageButtons';
 export * from './general/buttons/SwitchButton';
 export * from './general/buttons/WhatsAppButton';
 export * from './general/ui/Carousel';
+export * from './general/ui/ErrorMessage';
 export * from './general/ui/HoverPortal';
 export * from './general/ui/InformationModal';
 export * from './home/Banner/Banner';

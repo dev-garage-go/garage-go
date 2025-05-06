@@ -3,9 +3,10 @@
 import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 import { formatNumberWithDots } from '@/utils';
+import { MileageMaintenanceFormInputs } from "@/interfaces";
 
 export const MileageMaintenanceForm = () => {
-  const { register, setValue, formState: { errors } } = useFormContext()
+  const { register, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
 
   return (
     <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10">
@@ -15,6 +16,7 @@ export const MileageMaintenanceForm = () => {
         {/* Nombre y apellido */}
         <div className="input-form-container mt-4 md:mt-6">
           <div className="flex w-full flex-col mb-2">
+            {/* TODO: Renderizar el mensaje de error {} */}
             <label className="text-sm ml-4 lg:ml-6">
               Nombre
             </label>
