@@ -1,4 +1,4 @@
-interface HeaderOptionInterface {
+export interface HeaderOptionInterface {
   title: string,
   path: string
 }
