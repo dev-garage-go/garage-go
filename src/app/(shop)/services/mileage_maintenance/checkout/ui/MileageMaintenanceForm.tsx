@@ -158,7 +158,7 @@ export const MileageMaintenanceForm = () => {
             {errors.user?.address && <ErrorMessage message="Se requiere su dirección" className="mt-1 ml-2" />}
           </div>
 
-          <div className="flex w-full max-w-48 flex-col mb-2">
+          <div className="flex w-full max-w-44 flex-col mb-2">
             <Controller
               name="user.typeAddress"
               control={control}

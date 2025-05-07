@@ -87,7 +87,7 @@
 }
 
 .input-form-error {
-  @apply py-2 px-4 border w-full rounded-2xl bg-white border-red-300
+  @apply py-3 px-4 border w-full rounded-2xl text-sm bg-white border-red-300
 }
 
 .input-form {
