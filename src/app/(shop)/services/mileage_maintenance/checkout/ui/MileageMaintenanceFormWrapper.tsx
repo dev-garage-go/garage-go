@@ -8,8 +8,8 @@ import { MileageMaintenanceFormInputs } from "@/interfaces";
 export const MileageMaintenanceFormWrapper = () => {
   const methods = useForm<MileageMaintenanceFormInputs>({
     defaultValues: {
-      user: {
-        typeAddress: 'casa'
+      booking: {
+        serviceName: "mantencion por kilometraje"
       }
     }
   })

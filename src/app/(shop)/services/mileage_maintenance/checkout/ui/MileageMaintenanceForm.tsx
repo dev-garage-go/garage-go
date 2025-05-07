@@ -1,8 +1,8 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { MileageMaintenanceFormInputs, SelectOptions } from "@/interfaces";
+import { MileageMaintenanceFormInputs } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, SchedulePicker, Select } from "@/components";
 
 const addressTypes = [
@@ -12,27 +12,10 @@ const addressTypes = [
 ]
 
 export const MileageMaintenanceForm = () => {
-  const { register, control, watch, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
+  const { register, control, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
 
   const [calendarPicker, setCalendarPicker] = useState(true)
   const [schedulePicker, setSchedulePicker] = useState(false)
-
-  setValue("booking.serviceName", "mantencion por kilometraje")
-
-  // Vigila cuando los campos reciben cambios
-  const userAddress = watch('user.address')
-  const userTypeAddress = watch('user.typeAddress')
-  const userAdditionalInfo = watch('user.additionalInfo')
-
-  useEffect(() => {
-    register('user.address', { required: true })
-    register('user.typeAddress', { required: 'Selecciona un tipo de domicilio' })
-    register('user.additionalInfo')
-
-    // console.log(userAddress)
-    console.log(userTypeAddress)
-    // console.log(userAdditionalInfo)
-  }, [register, userTypeAddress])
 
   return (
     <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10">
@@ -169,19 +152,26 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               placeholder="Calle, numero y comuna"
-              className={`${errors.user?.name ? "input-form-error" : "input-form"}`}
-              {...register("user.name", { required: true })}
+              className={`${errors.user?.address ? "input-form-error" : "input-form"}`}
+              {...register("user.address", { required: true })}
             />
-            {errors.user?.name && <ErrorMessage message="Se requiere su nombre" className="mt-1 ml-2" />}
+            {errors.user?.address && <ErrorMessage message="Se requiere su dirección" className="mt-1 ml-2" />}
           </div>
 
           <div className="flex w-full max-w-48 flex-col mb-2">
-            <Select
-              value={userTypeAddress}
-              onChange={(val) => setValue('user.typeAddress', val)}
-              error={errors.user?.typeAddress?.message}
-              label="Selecciona"
-              options={addressTypes}
+            <Controller
+              name="user.typeAddress"
+              control={control}
+              rules={{ required: 'Selecciona un tipo de domicilio' }}
+              render={({ field, fieldState }) => (
+                <Select
+                  value={field.value}
+                  onChange={field.onChange}
+                  error={fieldState.error?.message}
+                  label="Selecciona"
+                  options={addressTypes}
+                />
+              )}
             />
           </div>
         </div>
@@ -196,10 +186,9 @@ export const MileageMaintenanceForm = () => {
               type="text"
               autoFocus
               placeholder="Nº depto, oficina, piso"
-              className={`${errors.user?.name ? "input-form-error" : "input-form"}`}
-              {...register("user.name", { required: true })}
+              className={"input-form"}
+              {...register("user.additionalInfo")}
             />
-            {errors.user?.name && <ErrorMessage message="Se requiere su nombre" className="mt-1 ml-2" />}
           </div>
 
           {/* Div vacio para mantener el mismo espacio */}
