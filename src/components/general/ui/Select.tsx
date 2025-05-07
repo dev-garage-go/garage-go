@@ -15,8 +15,6 @@ interface Props {
   error?: string
 }
 
-// relative w-full cursor-pointer rounded-xl bg-white py-3 pl-4 pr-10 text-left text-primaryBlue-900 shadow-sm ring-1 ring-inset ring-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500 text-sm
-
 export const Select = ({ options, label, onChange, value, error }: Props) => {
   return (
     <div className="flex w-full flex-col mb-2">
@@ -54,7 +52,7 @@ export const Select = ({ options, label, onChange, value, error }: Props) => {
           </div>
         )}
       </Listbox>
-      {error && (<ErrorMessage message={error} />)}
+      {error && (<ErrorMessage message={error} className='mt-1 ml-2' />)}
     </div>
   )
 }

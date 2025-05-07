@@ -86,6 +86,16 @@
   @apply w-full py-6 sm:py-8 md:py-10 lg:py-14
 }
 
+/* Forms */
+
+.form-container {
+  @apply border border-customGray-600 rounded-3xl w-full p-4 md:p-6 lg:p-10
+}
+
+.input-form-container {
+  @apply flex w-full flex-col md:flex-row md:justify-between items-start gap-3 md:gap-4
+}
+
 .input-form-error {
   @apply py-3 px-4 border w-full rounded-2xl text-sm bg-white border-red-300
 }
@@ -96,10 +106,6 @@
 
 .payment-input-form {
   @apply py-3 px-4 border w-full rounded-md bg-white border-gray-300 font-medium text-primaryBlue-900 placeholder:font-normal text-sm placeholder:text-sm placeholder:text-customGray-400 focus:border-primaryBlue-100 focus:ring-1 focus:ring-primaryBlue-100 outline-none transition-all duration-300
-}
-
-.input-form-container {
-  @apply flex w-full flex-col md:flex-row md:justify-between items-start gap-3 md:gap-4
 }
 
 .summary-container {
