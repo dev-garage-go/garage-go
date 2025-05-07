@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { MileageMaintenanceFormInputs } from "@/interfaces";
-import { CalendarPicker, ErrorMessage, SchedulePicker, Select } from "@/components";
+import { CalendarPicker, ErrorMessage, InformationButton, SchedulePicker, Select } from "@/components";
 
 const addressTypes = [
   { id: 1, value: 'casa' },
@@ -108,7 +108,14 @@ export const MileageMaintenanceForm = () => {
       {/* Calendario y selector de hora */}
       <section className="flex flex-col gap-4">
         <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">2. Día y horario</h4>
-
+        <InformationButton
+          text="Conocer más detalles"
+          hasModal
+          modalInfo={{
+            title: "Agendamiento",
+            description: "Se requiere que seleccione una fecha y luego un horario para poder agendar su servicio",
+          }}
+        />
         {/* Switch calendar and hour */}
         <div className="flex justify-start items-center gap-4">
           <button

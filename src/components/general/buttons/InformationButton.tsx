@@ -24,7 +24,7 @@ export const InformationButton = ({ text, hasModal = false, modalInfo }: Props) 
       ref={ref}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="relative inline-block text-left"
+      className="relative inline-block w-fit text-left"
     >
       <div className="flex items-center gap-1 cursor-pointer">
         <IoAlertCircleOutline
