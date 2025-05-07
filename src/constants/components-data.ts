@@ -24,7 +24,7 @@ import {
   ServicioDomicilio,
   SuperCheck,
 } from "@/assets";
-import { QuantityTires, TypesTiresOptions } from "@/interfaces";
+import { QuantityTires } from "@/interfaces";
 
 const srvPath = '/services'
 
@@ -35,7 +35,7 @@ export const FeatureIconsMap: Record<string, string> = {
   'garantia': Garantia,
 };
 
-
+// Header options to navigate
 export const HeaderLinksOptions: HeaderOptionInterface[] = [
   {
     title: "Inicio",
@@ -453,12 +453,6 @@ export const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
   { label: "Dos cubiertas", value: 2 },
   { label: "Tres cubiertas", value: 3 },
   { label: "Cuatro cubiertas", value: 4 },
-]
-
-export const TypesTires: { label: string; value: TypesTiresOptions }[] = [
-  { label: 'Ciudad', value: 'ciudad' },
-  { label: 'Offroad', value: 'offroad' },
-  { label: 'Intermedio', value: 'intermedio' }
 ]
 
 export const AddMoreServices: { name: string, price: number }[] = [

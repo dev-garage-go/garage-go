@@ -1,21 +1,42 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+
+// Controller -> controlador de react-hook-form recomendado para manejar para componentes externos o componentes que no contienen <inputs>
+// useFormContext -> permite acceder al contexto del formulario y que otros componentes {children} reciban las props o los valoros que espera el <form>
 import { Controller, useFormContext } from "react-hook-form";
 import { MileageMaintenanceFormInputs } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, InformationButton, SchedulePicker, Select } from "@/components";
 
-const addressTypes = [
-  { id: 1, value: 'casa' },
-  { id: 2, value: 'oficina' },
-  { id: 3, value: 'depto' }
-]
+
 
 export const MileageMaintenanceForm = () => {
   const { register, control, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
 
+  // Switch calendar y schedule pickers
   const [calendarPicker, setCalendarPicker] = useState(true)
   const [schedulePicker, setSchedulePicker] = useState(false)
+
+  // Errors
+  const scheduleError = errors.booking?.time
+  const calendarError = errors.booking?.date
+
+  const handleSwitchErrors = () => {
+    // Si hay un error en el calendario se le muestra el calendario al usuario para que seleccione una fecha
+    if (calendarError) {
+      setCalendarPicker(true)
+      setSchedulePicker(false)
+
+    } else if (scheduleError) {
+      // Si ya selecciono una fecha en el calendario pero no un horario, se le muestra el selector de horarios
+      setSchedulePicker(true)
+      setCalendarPicker(false)
+    }
+  }
+
+  useEffect(() => {
+    handleSwitchErrors()
+  }, [scheduleError, calendarError])
 
   return (
     <div className="form-container">
@@ -138,36 +159,37 @@ export const MileageMaintenanceForm = () => {
           </button>
         </div>
 
-        {
-          calendarPicker ? (
-            // controlador de react-hook-form para componentes externos
-            <Controller
-              name="booking.date" // equivalente a register("booking.date")
-              control={control}
-              rules={{ required: 'Seleccione una fecha de agendamiento' }}
-              render={({ field, fieldState }) => (
-                <CalendarPicker
-                  error={fieldState.error?.message}
-                  onChange={field.onChange}
-                />
-              )}
-            >
-            </Controller>
-          ) : (
-            <Controller
-              name="booking.time"
-              control={control}
-              rules={{ required: 'Seleccione un horario de agendamiento' }}
-              render={({ field, fieldState }) => (
-                <SchedulePicker
-                  error={fieldState.error?.message}
-                  onChange={field.onChange}
-                />
-              )}
-            >
-            </Controller>
-          )
-        }
+        <Controller
+          name="booking.date" // equivalente a register("booking.date")
+          control={control}
+          rules={{ required: 'Seleccione una fecha de agendamiento' }}
+          render={({ field, fieldState }) => (
+            calendarPicker ? (
+              <CalendarPicker
+                error={fieldState.error?.message}
+                onChange={field.onChange}
+              />
+            ) : <></>
+          )}
+        >
+        </Controller>
+
+        <Controller
+          name="booking.time" // equivalente a register("booking.time")
+          control={control}
+          rules={{ required: 'Seleccione un horario de agendamiento' }}
+          render={({ field, fieldState }) => (
+            schedulePicker ? (
+              <SchedulePicker
+                error={fieldState.error?.message}
+                onChange={field.onChange}
+              />
+            ) : <></>
+          )}
+        >
+        </Controller>
+
+
       </section>
 
       {/* Direccion del usuario */}
