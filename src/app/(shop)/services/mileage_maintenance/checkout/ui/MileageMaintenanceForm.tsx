@@ -140,11 +140,14 @@ export const MileageMaintenanceForm = () => {
 
         {
           calendarPicker ? (
-            <Controller // controlador de react-hook-form para componentes externos
+            // controlador de react-hook-form para componentes externos
+            <Controller
               name="booking.date" // equivalente a register("booking.date")
               control={control}
-              render={({ field }) => (
+              rules={{ required: 'Seleccione una fecha de agendamiento' }}
+              render={({ field, fieldState }) => (
                 <CalendarPicker
+                  error={fieldState.error?.message}
                   onChange={field.onChange}
                 />
               )}
@@ -154,8 +157,10 @@ export const MileageMaintenanceForm = () => {
             <Controller
               name="booking.time"
               control={control}
-              render={({ field }) => (
+              rules={{ required: 'Seleccione un horario de agendamiento' }}
+              render={({ field, fieldState }) => (
                 <SchedulePicker
+                  error={fieldState.error?.message}
                   onChange={field.onChange}
                 />
               )}

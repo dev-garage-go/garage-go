@@ -12,6 +12,7 @@
 'use client';
 
 import { useState } from 'react';
+import { ErrorMessage } from './ErrorMessage';
 
 import dayjs, { Dayjs } from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';
@@ -27,9 +28,10 @@ dayjs.locale('es');
 
 interface Props {
   onChange: (value: Dayjs | string) => void
+  error?: string
 }
 
-export const CalendarPicker = ({ onChange }: Props) => {
+export const CalendarPicker = ({ onChange, error }: Props) => {
   const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
 
   const onSelect: CalendarProps<Dayjs>['onSelect'] = (date) => {
@@ -39,6 +41,7 @@ export const CalendarPicker = ({ onChange }: Props) => {
 
   return (
     <ConfigProvider locale={esES}>
+      {error && (<ErrorMessage message={error} className='mt-1 ml-2' />)}
       <div className='w-full max-w-sm border rounded-2xl p-4 bg-white shadow-md'>
         <Typography.Text className="block mb-2 font-semibold text-primaryBlue-900">
           Días disponibles
