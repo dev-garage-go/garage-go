@@ -3,6 +3,7 @@ export * from './components-interfaces/benefits';
 export * from './components-interfaces/faqs-data';
 export * from './components-interfaces/header-options';
 export * from './components-interfaces/reviews';
+export * from './components-interfaces/select-options';
 export * from './components-interfaces/suppliers-images';
 export * from './components-interfaces/tires-change';
 export * from './forms/mileage-maintenance';

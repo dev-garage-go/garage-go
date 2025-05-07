@@ -1,24 +1,38 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { MileageMaintenanceFormInputs } from "@/interfaces";
+import { MileageMaintenanceFormInputs, SelectOptions } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, SchedulePicker, Select } from "@/components";
 
 const addressTypes = [
-  { id: 1, value: 'Casa' },
-  { id: 2, value: 'Oficina' },
-  { id: 3, value: 'Depto' }
+  { id: 1, value: 'casa' },
+  { id: 2, value: 'oficina' },
+  { id: 3, value: 'depto' }
 ]
 
 export const MileageMaintenanceForm = () => {
-  const { register, control, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
+  const { register, control, watch, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
 
   const [calendarPicker, setCalendarPicker] = useState(true)
   const [schedulePicker, setSchedulePicker] = useState(false)
 
-  setValue("booking.serviceId", "uuid-123")
   setValue("booking.serviceName", "mantencion por kilometraje")
+
+  // Vigila cuando los campos reciben cambios
+  const userAddress = watch('user.address')
+  const userTypeAddress = watch('user.typeAddress')
+  const userAdditionalInfo = watch('user.additionalInfo')
+
+  useEffect(() => {
+    register('user.address', { required: true })
+    register('user.typeAddress', { required: 'Selecciona un tipo de domicilio' })
+    register('user.additionalInfo')
+
+    // console.log(userAddress)
+    console.log(userTypeAddress)
+    // console.log(userAdditionalInfo)
+  }, [register, userTypeAddress])
 
   return (
     <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10">
@@ -163,6 +177,9 @@ export const MileageMaintenanceForm = () => {
 
           <div className="flex w-full max-w-48 flex-col mb-2">
             <Select
+              value={userTypeAddress}
+              onChange={(val) => setValue('user.typeAddress', val)}
+              error={errors.user?.typeAddress?.message}
               label="Selecciona"
               options={addressTypes}
             />

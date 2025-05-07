@@ -6,6 +6,9 @@ export type MileageMaintenanceFormInputs = {
     lastName: string;
     phone: string;
     email: string;
+    address: string,
+    typeAddress: string
+    additionalInfo?: string
   },
   vehicle: {
     licensePlate?: string
@@ -15,7 +18,6 @@ export type MileageMaintenanceFormInputs = {
     carYear: number;
   },
   booking: {
-    serviceId: string,
     serviceName: string,
     date: Dayjs,
     time: string,

@@ -6,7 +6,13 @@ import { MileageMaintenanceSummary } from "./MileageMaintenanceSummary";
 import { MileageMaintenanceFormInputs } from "@/interfaces";
 
 export const MileageMaintenanceFormWrapper = () => {
-  const methods = useForm<MileageMaintenanceFormInputs>()
+  const methods = useForm<MileageMaintenanceFormInputs>({
+    defaultValues: {
+      user: {
+        typeAddress: 'casa'
+      }
+    }
+  })
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceFormInputs) => {
