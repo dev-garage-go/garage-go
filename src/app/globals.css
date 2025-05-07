@@ -97,11 +97,15 @@
 }
 
 .input-form-error {
-  @apply py-3 px-4 border w-full rounded-2xl text-sm bg-white border-red-300
+  @apply py-3 px-4 border w-full rounded-2xl bg-red-50 border-red-300 font-medium text-primaryBlue-900 placeholder:font-normal placeholder:text-customGray-400 text-sm placeholder:text-sm focus:bg-white focus:border-primaryBlue-100 focus:ring-1 focus:ring-primaryBlue-100 outline-none transition-all duration-300
 }
 
 .input-form {
   @apply py-3 px-4 border w-full rounded-2xl bg-white border-gray-300 font-medium text-primaryBlue-900 placeholder:font-normal placeholder:text-customGray-400 text-sm placeholder:text-sm focus:border-primaryBlue-100 focus:ring-1 focus:ring-primaryBlue-100 outline-none transition-all duration-300
+}
+
+.payment-input-error-form {
+  @apply py-3 px-4 border w-full rounded-md bg-red-50 border-red-300 font-medium text-primaryBlue-900 placeholder:font-normal text-sm placeholder:text-sm placeholder:text-customGray-400 focus:bg-white focus:border-primaryBlue-100 focus:ring-1 focus:ring-primaryBlue-100 outline-none transition-all duration-300
 }
 
 .payment-input-form {
