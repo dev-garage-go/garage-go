@@ -24,7 +24,18 @@ import {
   ServicioDomicilio,
   SuperCheck,
 } from "@/assets";
-import { QuantityTires } from "@/interfaces";
+
+import {
+  BannerDisccountsInterface,
+  BenefitsInterface,
+  FAQsInterface,
+  HeaderOptionInterface,
+  QuantityTires,
+  ReviewsInterface,
+  ServicesInterface,
+  ServicesPagesFAQs,
+  StepsServicesPagesInterface
+} from "@/interfaces";
 
 const srvPath = '/services'
 

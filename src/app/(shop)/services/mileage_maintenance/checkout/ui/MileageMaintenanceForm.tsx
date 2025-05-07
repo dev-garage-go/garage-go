@@ -1,14 +1,14 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Controller -> controlador de react-hook-form recomendado para manejar para componentes externos o componentes que no contienen <inputs>
 // useFormContext -> permite acceder al contexto del formulario y que otros componentes {children} reciban las props o los valoros que espera el <form>
 import { Controller, useFormContext } from "react-hook-form";
+
 import { MileageMaintenanceFormInputs } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, InformationButton, SchedulePicker, Select } from "@/components";
-
-
+import { AddressTypes } from "@/constants";
 
 export const MileageMaintenanceForm = () => {
   const { register, control, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
@@ -223,7 +223,7 @@ export const MileageMaintenanceForm = () => {
                   onChange={field.onChange}
                   error={fieldState.error?.message}
                   label="Selecciona"
-                  options={addressTypes}
+                  options={AddressTypes}
                 />
               )}
             />
