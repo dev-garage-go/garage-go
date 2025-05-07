@@ -1,5 +1,5 @@
 import { TopBanner } from "@/components";
-import { PaymentForm, PaymentSummary } from "./ui";
+import { PaymentFormWrapper } from "./ui";
 
 export default function PaymentPage() {
   return (
@@ -10,12 +10,7 @@ export default function PaymentPage() {
         vehiclePatent="TGPL67"
       />
 
-      <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
-          <PaymentForm />
-          <PaymentSummary />
-        </div>
-      </section>
+      <PaymentFormWrapper />
     </div>
   );
 }

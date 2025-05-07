@@ -1,32 +1,15 @@
 "use client"
 
 import clsx from "clsx";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import { RenderCardIcon, PaymentOption } from '@/components';
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
-
-type FormInputs = {
-  cardNumber: string;
-  ownerName: string;
-  expiresIn: string;
-  cvv: number;
-  paymentMethod: PaymentMethods;
-}
+import { PaymentMethods } from "@/interfaces";
 
 export const PaymentForm = () => {
-  const {
-    register,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormInputs>({
-    defaultValues: {
-      paymentMethod: '' // El metodo de pago comienza siendo ''
-    }
-  })
+  const { watch, setValue, register, formState: { errors } } = useFormContext()
 
   const cardNumber = watch("cardNumber") || "";
   const selectedPayment = watch("paymentMethod")
@@ -56,16 +39,8 @@ export const PaymentForm = () => {
     }
   };
 
-  // Function that will be executed when the form is submitted
-  const onSumbit = (data: FormInputs) => {
-    console.log(data)
-  }
-
   return (
-    <form
-      className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10"
-      onSubmit={handleSubmit(onSumbit)}
-    >
+    <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10">
       <section className="flex flex-col gap-4">
         <div className="flex flex-col justify-center items-start gap-6 mb-4">
           <h4 className="font-medium text-primaryBlue-900">Selecciona el metodo de pago</h4>
@@ -177,6 +152,6 @@ export const PaymentForm = () => {
           </p>
         </div>
       </section>
-    </form>
+    </div>
   )
 }

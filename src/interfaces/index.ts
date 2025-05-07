@@ -7,6 +7,7 @@ export * from './components-interfaces/select-options';
 export * from './components-interfaces/suppliers-images';
 export * from './components-interfaces/tires-change';
 export * from './forms/mileage-maintenance';
+export * from './forms/payment';
 export * from './forms/schedules';
 export * from './payment/payment-methods';
 export * from './services-interfaces/faqs_mileage_maintenance';

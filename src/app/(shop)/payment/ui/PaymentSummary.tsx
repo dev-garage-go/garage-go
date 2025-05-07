@@ -72,7 +72,7 @@ export const PaymentSummary = () => {
       {/* Pay button */}
       <div className="flex justify-center items-center w-full mt-10">
         <button
-          // TODO: onClick={() => console.log('Ejecuta logica de pago')}
+          type="submit"
           className="block text-center w-full max-w-lg py-2 bg-primaryBlue-900 text-white font-semibold rounded-md
           hover:brightness-125 hover:scale-105 transition-all duration-200">
           Ir a pagar
