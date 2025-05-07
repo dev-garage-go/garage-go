@@ -14,6 +14,7 @@ export * from './general/ui/ErrorMessage';
 export * from './general/ui/HoverPortal';
 export * from './general/ui/InformationModal';
 export * from './general/ui/SchedulePicker';
+export * from './general/ui/Select';
 export * from './home/Banner/Banner';
 export * from './home/Banner/BannerCard';
 export * from './home/Banner/BannerSlider';

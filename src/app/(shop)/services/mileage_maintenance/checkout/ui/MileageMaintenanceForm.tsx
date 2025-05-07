@@ -2,8 +2,14 @@
 
 import { useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
-import { Hour, MileageMaintenanceFormInputs } from "@/interfaces";
-import { CalendarPicker, ErrorMessage, SchedulePicker } from "@/components";
+import { MileageMaintenanceFormInputs } from "@/interfaces";
+import { CalendarPicker, ErrorMessage, SchedulePicker, Select } from "@/components";
+
+const addressTypes = [
+  { id: 1, value: 'Casa' },
+  { id: 2, value: 'Oficina' },
+  { id: 3, value: 'Depto' }
+]
 
 export const MileageMaintenanceForm = () => {
   const { register, control, setValue, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
@@ -28,6 +34,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
+              placeholder="John"
               className={`${errors.user?.name ? "input-form-error" : "input-form"}`}
               {...register("user.name", { required: true })}
             />
@@ -41,6 +48,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
+              placeholder="Doe"
               className={`${errors.user?.lastName ? "input-form-error" : "input-form"}`}
               {...register("user.lastName", { required: true })}
             />
@@ -57,6 +65,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
+              placeholder="+56912345678"
               className={`${errors.user?.phone ? "input-form-error" : "input-form"}`}
               {...register("user.phone", { required: true })}
             />
@@ -70,6 +79,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
+              placeholder="john-doe@gmail.com"
               className={`${errors.user?.email ? "input-form-error" : "input-form"}`}
               {...register("user.email", { required: true })}
             />
@@ -139,28 +149,23 @@ export const MileageMaintenanceForm = () => {
         <div className="input-form-container mt-4 md:mt-6">
           <div className="flex w-full flex-col mb-2">
             <label className="text-sm ml-4">
-              Ingresa tu dirección. Calle, número y comuna
+              Ingresa tu dirección
             </label>
             <input
               type="text"
               autoFocus
+              placeholder="Calle, numero y comuna"
               className={`${errors.user?.name ? "input-form-error" : "input-form"}`}
               {...register("user.name", { required: true })}
             />
             {errors.user?.name && <ErrorMessage message="Se requiere su nombre" className="mt-1 ml-2" />}
           </div>
 
-          <div className="flex w-full max-w-36 flex-col mb-2">
-            <label className="text-sm ml-4">
-              Selecciona
-            </label>
-            <input
-              type="text"
-              autoFocus
-              className={`${errors.user?.lastName ? "input-form-error" : "input-form"}`}
-              {...register("user.lastName", { required: true })}
+          <div className="flex w-full max-w-48 flex-col mb-2">
+            <Select
+              label="Selecciona"
+              options={addressTypes}
             />
-            {errors.user?.lastName && <ErrorMessage message="Se requiere su apellido" className="mt-1 ml-2" />}
           </div>
         </div>
 
@@ -173,7 +178,7 @@ export const MileageMaintenanceForm = () => {
             <input
               type="text"
               autoFocus
-              placeholder="N depto, oficina, piso"
+              placeholder="Nº depto, oficina, piso"
               className={`${errors.user?.name ? "input-form-error" : "input-form"}`}
               {...register("user.name", { required: true })}
             />
