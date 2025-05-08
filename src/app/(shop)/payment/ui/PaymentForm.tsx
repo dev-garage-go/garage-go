@@ -144,8 +144,8 @@ export const PaymentForm = () => {
         <div className="flex flex-col w-full gap-4">
           {PaymentMethodsOptions.map((option, index) => (
             <PaymentOption
-              key={option.method + index}
-              method={option.method}
+              key={option.method! + index}
+              method={option.method!}
               name={option.name}
               description={option.description}
               imageSrc={option.imageSrc}

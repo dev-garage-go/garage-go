@@ -1,6 +1,6 @@
 export type PaymentGatewayMethods = | 'mercado-pago' | 'getnet' | 'webpay' | undefined
 
-export interface PaymentMethodsOptions {
+export interface PaymentMethodsOptionsInterface {
   method: PaymentGatewayMethods,
   name: string,
   description: string,

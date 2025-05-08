@@ -1,6 +1,7 @@
 import { Getnet, MercadoPago, Webpay } from "@/assets";
+import { PaymentMethodsOptionsInterface } from "@/interfaces";
 
-export const PaymentMethodsOptions: PaymentMethodsOptions[] = [
+export const PaymentMethodsOptions: PaymentMethodsOptionsInterface[] = [
   {
     method: "webpay",
     name: "Webpay Plus",
