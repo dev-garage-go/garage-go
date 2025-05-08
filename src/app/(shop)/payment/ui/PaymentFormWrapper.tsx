@@ -3,70 +3,68 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { PaymentForm } from './PaymentForm'
 import { PaymentSummary } from './PaymentSummary'
-import { PaymentFormData } from '@/schemas'
-import { useEffect, useState } from 'react'
+import { PaymentFormData, paymentFormSchema } from '@/schemas'
+import { zodResolver } from '@hookform/resolvers/zod'
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormData>({
-    shouldFocusError: true
+    resolver: zodResolver(paymentFormSchema),
+    shouldFocusError: true,
+    defaultValues: {
+      methodSelected: undefined,
+      userCard: {
+        cardNumber: "",
+        ownerName: "",
+        expiresIn: "",
+        cvv: "",
+      },
+      paymentGateway: undefined,
+    }
   })
-  const paymentMethod = methods.watch("methodSelected")
 
-  useEffect(() => {
-    console.log("Method 😉: ", paymentMethod)
-    methods.setValue("methodSelected", paymentMethod)
-  }, [paymentMethod])
+  const { setValue, handleSubmit, watch } = methods
 
-  const hasPaymentGatewaySelected = methods.watch("paymentGateway");
+  // TODO: Hacer que el calendario funcione
 
-  const hasCardNumber = methods.watch("userCard.cardNumber");
-  const hasCardCVV = methods.watch("userCard.cvv");
-  const hasCardExpiry = methods.watch("userCard.expiresIn");
-  const hasOwnerName = methods.watch("userCard.ownerName");
+  const hasPaymentGateway = watch("paymentGateway");
+  const card = watch("userCard");
 
   const hasCardData = () => {
-    return hasCardNumber || hasCardExpiry || hasCardCVV || hasOwnerName
-  }
-  // Card data validator
-  const setPaymentMethod = () => {
-    if (hasCardData() && !hasPaymentGatewaySelected) {
-      methods.setValue("methodSelected", "user-card", { shouldValidate: true })
-      methods.setValue("paymentGateway", undefined)
-      return true
-
-    } else if (hasPaymentGatewaySelected != undefined && !hasCardData()) {
-      methods.setValue("methodSelected", "payment-gateway", { shouldValidate: true })
-      methods.setValue("userCard", undefined)
-      return true
-
-    } else {
-      methods.setValue("methodSelected", undefined, { shouldValidate: true })
-      return false
-    }
-  }
-
-  const validateAllFields = (method: string | undefined) => {
-    if (method != undefined) {
-      if (paymentMethod === method && hasCardData()) {
-        return true
-
-      } else if (paymentMethod === method && hasPaymentGatewaySelected) {
-        return true
-
-      } else { return false }
-    } else { return false }
+    return !!card?.cardNumber || !!card?.expiresIn || !!card?.cvv || !!card?.ownerName
   }
 
   const onSubmit = (data: PaymentFormData) => {
-    if (setPaymentMethod() && validateAllFields(paymentMethod)) {
-      console.log(data)
-    } else console.log("sin data")
+    console.log(data)
+
+    const hasCard = hasCardData()
+    const hasGateway = !!hasPaymentGateway
+
+    if (hasCard && !hasGateway) {
+      setValue("methodSelected", "user-card")
+    } else if (!hasCard && hasGateway) {
+      setValue("methodSelected", "payment-gateway")
+    } else if (!hasCard && !hasGateway) {
+      setValue("methodSelected", undefined)
+    }
+
+    console.log("punto 1")
+    const result = methods.trigger() // vuelve a ejecutar la validación con Zod
+
+    console.log("punto 2")
+    result.then(valid => {
+      if (valid) {
+        console.log("✅ DATA VÁLIDA:", methods.getValues())
+      } else {
+        console.log("❌ ERRORES EN EL FORMULARIO")
+      }
+    })
   }
+
 
   return (
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
       <FormProvider {...methods}>
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <PaymentForm />
             <PaymentSummary />

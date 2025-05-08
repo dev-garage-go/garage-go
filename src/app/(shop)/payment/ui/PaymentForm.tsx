@@ -17,8 +17,6 @@ export const PaymentForm = () => {
   const paymentMethodSelected = watch("methodSelected")
 
   const useCardMethodSelected = paymentMethodSelected === "user-card"
-  const paymentGatewayMethodSelected = paymentMethodSelected === "payment-gateway"
-
 
   // Payment utils funcs
   // Detect the type of card - ex: visa or mastercard

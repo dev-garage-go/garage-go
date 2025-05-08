@@ -8,7 +8,7 @@ const userCardSchema = z.object({
   cvv: z.string().length(3, 'CVV inválido')
 })
 
-const paymentFormSchema = z.object({
+export const paymentFormSchema = z.object({
   methodSelected: z.optional(z.enum(['user-card', 'payment-gateway'])),
   userCard: z.optional(userCardSchema),
   paymentGateway: z.optional(z.enum(['mercado-pago', 'getnet', 'webpay']))
