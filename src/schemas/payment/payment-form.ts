@@ -8,9 +8,9 @@ const userCardSchema = z.object({
 })
 
 const paymentFormSchema = z.object({
-  methodSelected: z.enum(['user-card', 'payment-gateway']),
+  methodSelected: z.optional(z.enum(['user-card', 'payment-gateway'])),
   userCard: z.optional(userCardSchema),
-  paymentGateway: z.optional(z.enum(['', 'mercado-pago', 'getnet', 'webpay']))
+  paymentGateway: z.optional(z.enum(['mercado-pago', 'getnet', 'webpay']))
 }).superRefine((data, ctx) => {
   if (data.methodSelected === 'user-card') {
     if (!data.userCard) {

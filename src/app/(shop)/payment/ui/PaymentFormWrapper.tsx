@@ -3,17 +3,53 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { PaymentForm } from './PaymentForm'
 import { PaymentSummary } from './PaymentSummary'
-import { PaymentMethodFormInputs } from '@/interfaces'
+import { PaymentFormData } from '@/schemas'
+import { useEffect, useState } from 'react'
 
 export const PaymentFormWrapper = () => {
-  const methods = useForm<PaymentMethodFormInputs>({
-    defaultValues: {
-      paymentMethod: ''
-    }
+  const methods = useForm<PaymentFormData>({
+    shouldFocusError: true
   })
+  const paymentMethod = methods.watch("methodSelected")
 
-  const onSubmit = (data: PaymentMethodFormInputs) => {
-    console.log(data)
+  useEffect(() => {
+    console.log('method', paymentMethod)
+  }, [paymentMethod])
+
+  // Card data validator
+  const setPaymentMethod = () => {
+    const hasPaymentGatewaySelected = methods.watch("paymentGateway");
+
+    const hasCardNumber = methods.watch("userCard.cardNumber");
+    const hasCardCVV = methods.watch("userCard.cvv");
+    const hasCardExpiry = methods.watch("userCard.expiresIn");
+    const hasOwnerName = methods.watch("userCard.ownerName");
+
+    const hasCardData = () => {
+      if (hasCardNumber || hasCardExpiry || hasCardCVV || hasOwnerName) return true
+      else false
+    }
+
+    if (hasCardData() && !hasPaymentGatewaySelected) {
+      methods.setValue("methodSelected", "user-card")
+      methods.setValue("paymentGateway", undefined)
+      return true
+
+    } else if (hasPaymentGatewaySelected != undefined && !hasCardData()) {
+      methods.setValue("methodSelected", "payment-gateway")
+      methods.setValue("userCard", undefined)
+      return true
+
+    } else {
+      methods.setValue("methodSelected", undefined)
+      return false
+    }
+  }
+
+  const onSubmit = (data: PaymentFormData) => {
+    if (setPaymentMethod()) {
+      console.log(data)
+    } else console.log("sin data")
   }
 
   return (

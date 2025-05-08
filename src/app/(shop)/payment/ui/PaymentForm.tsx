@@ -5,14 +5,20 @@ import { useFormContext } from "react-hook-form";
 import { RenderCardIcon, PaymentOption, ErrorMessage } from '@/components';
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
-import { PaymentMethods } from "@/interfaces";
+import { PaymentGatewayMethods } from "@/interfaces";
 import { PaymentFormData } from "@/schemas";
+
 
 export const PaymentForm = () => {
   const { watch, setValue, register, formState: { errors } } = useFormContext<PaymentFormData>()
 
   const cardNumber = watch("userCard.cardNumber") || "";
-  const selectedPayment = watch("paymentGateway")
+  const paymentGatewayOption = watch("paymentGateway")
+  const paymentMethodSelected = watch("methodSelected")
+
+  const useCardMethodSelected = paymentMethodSelected === "user-card"
+  const paymentGatewayMethodSelected = paymentMethodSelected === "payment-gateway"
+
 
   // Payment utils funcs
   // Detect the type of card - ex: visa or mastercard
@@ -31,9 +37,9 @@ export const PaymentForm = () => {
   };
 
   // Allows that user can diselect a payment method
-  const handleSelect = (method: PaymentMethods) => {
-    if (selectedPayment === method) {
-      setValue("paymentGateway", ''); // If it is already selected, deselect it
+  const handleSelect = (method: PaymentGatewayMethods) => {
+    if (paymentGatewayOption === method) {
+      setValue("paymentGateway", undefined); // If it is already selected, deselect it
     } else {
       setValue("paymentGateway", method);
     }
@@ -56,12 +62,13 @@ export const PaymentForm = () => {
           <div className="relative">
             <input
               type="text"
-              autoFocus
               placeholder="1234 5678 9012 3456"
               maxLength={19}
-              className={`${errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
+              className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cardNumber", {
-                onChange: (e) => { handleCardNumberChange(e) },
+                onChange: (e) => {
+                  handleCardNumberChange(e)
+                },
                 required: true
               })}
             />
@@ -70,7 +77,9 @@ export const PaymentForm = () => {
               <RenderCardIcon cardType={cardType} />
             </div>
           </div>
-          {errors.userCard?.cardNumber && <ErrorMessage message="Escriba el numero de su tarjeta" className="mt-1 ml-2" />}
+          {useCardMethodSelected && errors.userCard?.cardNumber && (
+            <ErrorMessage message="Escriba el numero de su tarjeta" className="mt-1 ml-2" />
+          )}
         </div>
 
         <div className="flex w-full flex-col mb-2">
@@ -79,12 +88,13 @@ export const PaymentForm = () => {
           </label>
           <input
             type="text"
-            autoFocus
             placeholder='John Doe'
-            className={`${errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
+            className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
             {...register("userCard.ownerName", { required: true })}
           />
-          {errors.userCard?.cardNumber && <ErrorMessage message="Escriba el nombre del titular de la tarjeta" className="mt-1 ml-2" />}
+          {useCardMethodSelected && errors.userCard?.cardNumber && (
+            <ErrorMessage message="Escriba el nombre del titular de la tarjeta" className="mt-1 ml-2" />
+          )}
         </div>
 
         {/* Expiry and CVV card  */}
@@ -95,16 +105,17 @@ export const PaymentForm = () => {
             </label>
             <input
               type="text"
-              autoFocus
               maxLength={5}
               placeholder="04/28"
-              className={`${errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
+              className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.expiresIn", {
                 onChange: (e) => { handleExpiryChange(e) },
                 required: true
               })}
             />
-            {errors.userCard?.cardNumber && <ErrorMessage message="Requerido" className="mt-1 ml-2" />}
+            {useCardMethodSelected && errors.userCard?.cardNumber && (
+              <ErrorMessage message="Requerido" className="mt-1 ml-2" />
+            )}
           </div>
 
           <div className="flex w-32 flex-col mb-2">
@@ -114,12 +125,14 @@ export const PaymentForm = () => {
             <input
               maxLength={3}
               type="text"
-              autoFocus
+
               placeholder='323'
-              className={`${errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
+              className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cvv", { required: true })}
             />
-            {errors.userCard?.cardNumber && <ErrorMessage message="Requerido" className="mt-1 ml-2" />}
+            {useCardMethodSelected && errors.userCard?.cardNumber && (
+              <ErrorMessage message="Requerido" className="mt-1 ml-2" />
+            )}
           </div>
         </div>
       </section>
@@ -137,9 +150,9 @@ export const PaymentForm = () => {
               name={option.name}
               description={option.description}
               imageSrc={option.imageSrc}
-              checked={selectedPayment === option.method}
+              checked={paymentGatewayOption === option.method}
               onClick={() => handleSelect(option.method)}
-              register={register("paymentGateway", { required: true })}
+              register={register("paymentGateway")}
             />
           ))}
         </div>
