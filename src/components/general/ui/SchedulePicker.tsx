@@ -1,8 +1,9 @@
 'use client'
 
-import { Hour, SchedulesOptions } from "@/interfaces"
 import { useState } from "react"
+import { Hour, SchedulesOptions } from "@/interfaces"
 import { ErrorMessage } from "./ErrorMessage"
+import { ButtonOptions } from '@/components';
 
 interface Props {
   onChange: (value: Hour) => void
@@ -25,16 +26,13 @@ export const SchedulePicker = ({ onChange, error }: Props) => {
 
         <div className="relative grid grid-cols-2 w-full gap-4 mt-4 py-2">
           {SchedulesOptions.map((item, index) => (
-            <button
-              type="button"
+            <ButtonOptions
               key={item.hour + index}
+              item={item.hour}
+              current={item.hour}
+              selected={hourSelected}
               onClick={() => handleSelect(item.hour)}
-              className={`w-full h-12 max-w-42 rounded-xl transition-colors duration-300 ${hourSelected === item.hour ?
-                'bg-primaryBlue-900 border-none text-white' :
-                'bg-white border border-primaryBlue-900 text-primaryBlue-900'}`}
-            >
-              <p className="text-center font-light">{item.hour}</p>
-            </button>
+            />
           ))}
         </div>
 

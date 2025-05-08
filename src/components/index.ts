@@ -3,6 +3,7 @@ export * from './checkout/PromotionCard';
 export * from './checkout/Summary';
 export * from './general/buttons/BookingHeaderButton';
 export * from './general/buttons/BookingServiceButton';
+export * from './general/buttons/ButtonOptions';
 export * from './general/buttons/InformationButton';
 export * from './general/buttons/RadioButton';
 export * from './general/buttons/ServicePageButtons';
