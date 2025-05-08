@@ -1,6 +1,6 @@
 import { PaymentMethods } from "@/interfaces";
 
-export type PaymentFormInputs = {
+export type PaymentMethodFormInputs = {
   cardNumber: string;
   ownerName: string;
   expiresIn: string;

@@ -3,16 +3,16 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { PaymentForm } from './PaymentForm'
 import { PaymentSummary } from './PaymentSummary'
-import { PaymentFormInputs } from '@/interfaces'
+import { PaymentMethodFormInputs } from '@/interfaces'
 
 export const PaymentFormWrapper = () => {
-  const methods = useForm<PaymentFormInputs>({
+  const methods = useForm<PaymentMethodFormInputs>({
     defaultValues: {
       paymentMethod: ''
     }
   })
 
-  const onSubmit = (data: PaymentFormInputs) => {
+  const onSubmit = (data: PaymentMethodFormInputs) => {
     console.log(data)
   }
 

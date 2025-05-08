@@ -1,15 +1,14 @@
 "use client"
 
-import clsx from "clsx";
 import { useFormContext } from "react-hook-form";
 
-import { RenderCardIcon, PaymentOption } from '@/components';
+import { RenderCardIcon, PaymentOption, ErrorMessage } from '@/components';
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
-import { PaymentMethods } from "@/interfaces";
+import { PaymentMethodFormInputs, PaymentMethods } from "@/interfaces";
 
 export const PaymentForm = () => {
-  const { watch, setValue, register, formState: { errors } } = useFormContext()
+  const { watch, setValue, register, formState: { errors } } = useFormContext<PaymentMethodFormInputs>()
 
   const cardNumber = watch("cardNumber") || "";
   const selectedPayment = watch("paymentMethod")
@@ -59,7 +58,7 @@ export const PaymentForm = () => {
               autoFocus
               placeholder="1234 5678 9012 3456"
               maxLength={19}
-              className={clsx("payment-input-form", { "border-red-400": errors.cardNumber })}
+              className={`${errors.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("cardNumber", {
                 onChange: (e) => { handleCardNumberChange(e) },
                 required: true
@@ -70,7 +69,7 @@ export const PaymentForm = () => {
               <RenderCardIcon cardType={cardType} />
             </div>
           </div>
-
+          {errors.cardNumber && <ErrorMessage message="Escriba el numero de su tarjeta" className="mt-1 ml-2" />}
         </div>
 
         <div className="flex w-full flex-col mb-2">
@@ -81,9 +80,10 @@ export const PaymentForm = () => {
             type="text"
             autoFocus
             placeholder='John Doe'
-            className={clsx("payment-input-form", { "border-red-400": errors.ownerName })}
+            className={`${errors.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
             {...register("ownerName", { required: true })}
           />
+          {errors.cardNumber && <ErrorMessage message="Escriba el nombre del titular de la tarjeta" className="mt-1 ml-2" />}
         </div>
 
         {/* Expiry and CVV card  */}
@@ -97,12 +97,13 @@ export const PaymentForm = () => {
               autoFocus
               maxLength={5}
               placeholder="04/28"
-              className={clsx("payment-input-form", { "border-red-400": errors.expiresIn })}
+              className={`${errors.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("expiresIn", {
                 onChange: (e) => { handleExpiryChange(e) },
                 required: true
               })}
             />
+            {errors.cardNumber && <ErrorMessage message="Requerido" className="mt-1 ml-2" />}
           </div>
 
           <div className="flex w-32 flex-col mb-2">
@@ -114,9 +115,10 @@ export const PaymentForm = () => {
               type="text"
               autoFocus
               placeholder='323'
-              className={clsx("payment-input-form", { "border-red-400": errors.cvv })}
+              className={`${errors.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("cvv", { required: true })}
             />
+            {errors.cardNumber && <ErrorMessage message="Requerido" className="mt-1 ml-2" />}
           </div>
         </div>
       </section>
