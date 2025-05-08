@@ -19,7 +19,7 @@ export const ButtonOptions = ({ item, onClick, selected, className, current }: P
           ${selected === current ? 'button-option-selected' : 'button-option'}
         `}
       >
-        <p className="text-center font-light">{item}</p>
+        <p className="text-center font-normal">{item}</p>
       </button>
     </>
   )
