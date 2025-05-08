@@ -34,7 +34,8 @@ import {
   ReviewsInterface,
   ServicesInterface,
   ServicesPagesFAQs,
-  StepsServicesPagesInterface
+  StepsServicesPagesInterface,
+  VehicleMileagesOptions
 } from "@/interfaces";
 
 const srvPath = '/services'
@@ -470,4 +471,17 @@ export const AddMoreServices: { name: string, price: number }[] = [
   { name: "Gestión de revisión técnica", price: 48990 },
   { name: "Diagnostico automotriz", price: 65990 },
   { name: "Servicio de frenos", price: 35990 }
+]
+
+export const MileagesOptions: VehicleMileagesOptions[] = [
+  { quantity: "10.000 kms" },
+  { quantity: "20.000 kms" },
+  { quantity: "30.000 kms" },
+  { quantity: "40.000 kms" },
+  { quantity: "50.000 kms" },
+  { quantity: "60.000 kms" },
+  { quantity: "70.000 kms" },
+  { quantity: "80.000 kms" },
+  { quantity: "90.000 kms" },
+  { quantity: "Otro" }
 ]
