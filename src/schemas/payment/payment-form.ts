@@ -1,5 +1,6 @@
 import { z } from 'zod'
 
+// TODO: Mejorar errores personalizados colocando correctamente el path
 const userCardSchema = z.object({
   cardNumber: z.string().min(12, 'numero de tarjeta invalido'),
   ownerName: z.string().min(3, 'Nombre requerido'),

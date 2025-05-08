@@ -66,10 +66,8 @@ export const PaymentForm = () => {
               maxLength={19}
               className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cardNumber", {
-                onChange: (e) => {
-                  handleCardNumberChange(e)
-                },
-                required: true
+                onChange: handleCardNumberChange,
+                required: useCardMethodSelected ?? false
               })}
             />
 
@@ -78,7 +76,7 @@ export const PaymentForm = () => {
             </div>
           </div>
           {useCardMethodSelected && errors.userCard?.cardNumber && (
-            <ErrorMessage message="Escriba el numero de su tarjeta" className="mt-1 ml-2" />
+            <ErrorMessage message={errors.userCard.cardNumber.message ?? 'Requerido'} className="mt-1 ml-2" />
           )}
         </div>
 
@@ -89,11 +87,13 @@ export const PaymentForm = () => {
           <input
             type="text"
             placeholder='John Doe'
-            className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
-            {...register("userCard.ownerName", { required: true })}
+            className={`${useCardMethodSelected && errors.userCard?.ownerName ? 'payment-input-error-form' : 'payment-input-form'}`}
+            {...register("userCard.ownerName", {
+              required: useCardMethodSelected ?? false
+            })}
           />
-          {useCardMethodSelected && errors.userCard?.cardNumber && (
-            <ErrorMessage message="Escriba el nombre del titular de la tarjeta" className="mt-1 ml-2" />
+          {useCardMethodSelected && errors.userCard?.ownerName && (
+            <ErrorMessage message={errors.userCard.ownerName.message ?? 'Requerido'} className="mt-1 ml-2" />
           )}
         </div>
 
@@ -107,14 +107,14 @@ export const PaymentForm = () => {
               type="text"
               maxLength={5}
               placeholder="04/28"
-              className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
+              className={`${useCardMethodSelected && errors.userCard?.expiresIn ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.expiresIn", {
-                onChange: (e) => { handleExpiryChange(e) },
-                required: true
+                onChange: handleExpiryChange,
+                required: useCardMethodSelected ?? false
               })}
             />
-            {useCardMethodSelected && errors.userCard?.cardNumber && (
-              <ErrorMessage message="Requerido" className="mt-1 ml-2" />
+            {useCardMethodSelected && errors.userCard?.expiresIn && (
+              <ErrorMessage message={errors.userCard.expiresIn.message ?? 'Requerido'} className="mt-1 ml-2" />
             )}
           </div>
 
@@ -125,13 +125,14 @@ export const PaymentForm = () => {
             <input
               maxLength={3}
               type="text"
-
               placeholder='323'
-              className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
-              {...register("userCard.cvv", { required: true })}
+              className={`${useCardMethodSelected && errors.userCard?.cvv ? 'payment-input-error-form' : 'payment-input-form'}`}
+              {...register("userCard.cvv", {
+                required: useCardMethodSelected ?? false
+              })}
             />
-            {useCardMethodSelected && errors.userCard?.cardNumber && (
-              <ErrorMessage message="Requerido" className="mt-1 ml-2" />
+            {useCardMethodSelected && errors.userCard?.cvv && (
+              <ErrorMessage message={errors.userCard.cvv.message ?? 'Requerido'} className="mt-1 ml-2" />
             )}
           </div>
         </div>
