@@ -1,13 +1,13 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 
-import { FeatureIconsMap, SegmentNameMap } from "@/constants"
-import { licensePlateKey } from "@/keys"
+import { FeatureIconsMap } from "@/constants"
 import { useLicensePlateOnChangeStorage } from "@/hooks"
+import { getBreadcrumbs } from "@/utils"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 
@@ -68,28 +68,22 @@ export const TopBanner = ({
                   Inicio
                   <span className="px-2">{">"}</span>
                 </Link>
-                {pathSegments.map((segment, index) => {
-                  const href = "/" + pathSegments.slice(0, index + 1).join("/")
-                  const name = SegmentNameMap[segment] || decodeURIComponent(segment)
-                  const isLast = index === pathSegments.length - 1
-
-                  return (
-                    <div key={href} className="flex items-center">
-                      {!isLast ? (
-                        <>
-                          <Link href={href} className="hover:font-medium duration-200">
-                            {name.charAt(0).toUpperCase() + name.slice(1)}
-                          </Link>
-                          <span className="px-2">{">"}</span>
-                        </>
-                      ) : (
-                        <span>
-                          {name.charAt(0).toUpperCase() + name.slice(1)}
-                        </span> // last element no clickeable
-                      )}
-                    </div>
-                  )
-                })}
+                {getBreadcrumbs(pathname).map((crumb, index) => (
+                  <div key={index} className="flex items-center">
+                    {crumb.isEllipsis ? (
+                      <span className="px-2 text-white">...</span>
+                    ) : !crumb.isLast ? (
+                      <>
+                        <Link href={crumb.href!} className="hover:font-medium duration-200">
+                          {crumb.name}
+                        </Link>
+                        <span className="px-2">{">"}</span>
+                      </>
+                    ) : (
+                      <span>{crumb.name}</span>
+                    )}
+                  </div>
+                ))}
               </div>
               <div>
 
