@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 
 interface Props {
   children: ReactNode // elemento que aparecera al activarse HoverPortal
-  anchorRef: React.RefObject<HTMLElement> // referencia al elemento trigger - el que dispara el hover
+  anchorRef?: React.RefObject<HTMLElement> // referencia al elemento trigger - el que dispara el hover
 }
 
 export const HoverPortal = ({ children, anchorRef }: Props) => {
@@ -16,7 +16,7 @@ export const HoverPortal = ({ children, anchorRef }: Props) => {
   useEffect(() => {
     // calcula la posición del anchorRef
     const updatePosition = () => {
-      if (anchorRef.current) {
+      if (anchorRef?.current) {
         const rect = anchorRef.current.getBoundingClientRect() // obtiene la posición del elemento en la pantalla
         setPosition({
           top: rect.bottom + window.scrollY + 8, // ajusta a top del botón + scroll + 8px
