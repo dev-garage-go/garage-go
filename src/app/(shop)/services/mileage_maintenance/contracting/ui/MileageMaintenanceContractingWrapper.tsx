@@ -24,7 +24,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   const licensePlate = useLicensePlateOnChangeStorage()
 
   useEffect(() => {
-    if (!!licensePlate) {
+    if (!licensePlate) {
       setModalIsOpen(true)
     }
   }, [licensePlate])
