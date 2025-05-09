@@ -55,7 +55,7 @@ export const TopBanner = ({
 
   return (
     <>
-      <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 xl:pb-7 pt-28 sm:pt-32 bg-primaryBlue-300">
+      <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 sm:pb-8 xl:pb-10 pt-28 sm:pt-32 bg-primaryBlue-300">
         <div className="flex justify-center items-center w-full">
           <div className="grid grid-cols-6">
             <div className={

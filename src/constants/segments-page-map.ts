@@ -9,5 +9,5 @@ export const SegmentNameMap: Record<string, string> = {
   tires_change: "Cambio de cubiertas",
   checkout: "Agendamiento",
   payment: "Pasarela de pago",
-  quotes: "Cotización",
+  contracting: "Contratación",
 }
