@@ -7,6 +7,7 @@ import { usePathname, useRouter } from "next/navigation"
 
 import { FeatureIconsMap, SegmentNameMap } from "@/constants"
 import { licensePlateKey } from "@/keys"
+import { useLicensePlateOnChangeStorage } from "@/hooks"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 
@@ -43,22 +44,14 @@ export const TopBanner = ({
   const pathSegments = pathname.split("/").filter(Boolean) // remove empty strings
 
   // Vehicle logic
-  const [hasLicensePlate, setHasLicensePlate] = useState(false)
-  const [licensePlate, setLicensePlate] = useState<string | null>(null)
+  const licensePlate = useLicensePlateOnChangeStorage()
+  const licensePlateTxt = licensePlate ? licensePlate : '-'
 
   // TODO: const vehicleData = getVehiculeByLicensePlate(id: string) -> import {} from "@actions"
 
   useEffect(() => {
-    // Vehicle lincense plate
-    const stored = sessionStorage.getItem(licensePlateKey)
-    setLicensePlate(stored)
-    setHasLicensePlate(!!stored)
-
-    // Breadcrums
     setHasBreadCrumbs(pathSegments.length > 0)
   }, [pathSegments.length])
-
-  const licensePlateTxt = hasLicensePlate ? licensePlate : '-'
 
   return (
     <>

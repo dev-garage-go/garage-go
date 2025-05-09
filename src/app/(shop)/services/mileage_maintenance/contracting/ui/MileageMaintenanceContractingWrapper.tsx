@@ -6,8 +6,7 @@ import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContracti
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 import { HoverPortal, LicensePlateModal } from "@/components"
 import { MileageMaintenanceFormInputs } from "@/interfaces"
-import { licensePlateKey } from "@/keys"
-import { useRouter } from "next/navigation"
+import { useLicensePlateOnChangeStorage } from "@/hooks"
 
 export const MileageMaintenanceContractingWrapper = () => {
   const methods = useForm<MileageMaintenanceFormInputs>({
@@ -19,35 +18,15 @@ export const MileageMaintenanceContractingWrapper = () => {
   })
 
   const ref = useRef<HTMLDivElement>(null)
-  const router = useRouter()
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-  const [licensePlate, setLicensePlate] = useState<string | null>()
+  const licensePlate = useLicensePlateOnChangeStorage()
 
   useEffect(() => {
-    const readSessionStorage = () => {
-      const plate = sessionStorage.getItem(licensePlateKey)
-      setLicensePlate(plate)
-    }
-
-    readSessionStorage() // lee el storage
     if (!licensePlate) {
       setModalIsOpen(true)
     }
-
-    const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === licensePlateKey) {
-        readSessionStorage()
-        router.refresh()
-      }
-    }
-
-    // escucha cuando el storage recibe cambios
-    window.addEventListener("storage", handleStorageChange)
-    return () => {
-      window.removeEventListener("storage", handleStorageChange) // remueve el listener para evitar perdida de memoria
-    }
-  }, [router])
+  }, [licensePlate])
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceFormInputs) => {
