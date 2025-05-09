@@ -7,6 +7,7 @@ import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContra
 import { HoverPortal, LicensePlateModal } from "@/components"
 import { MileageMaintenanceFormInputs } from "@/interfaces"
 import { useLicensePlateOnChangeStorage } from "@/hooks"
+import { useRouter } from "next/navigation"
 
 export const MileageMaintenanceContractingWrapper = () => {
   const methods = useForm<MileageMaintenanceFormInputs>({
@@ -23,7 +24,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   const licensePlate = useLicensePlateOnChangeStorage()
 
   useEffect(() => {
-    if (!licensePlate) {
+    if (!!licensePlate) {
       setModalIsOpen(true)
     }
   }, [licensePlate])
