@@ -3,7 +3,7 @@ import { MileageMaintenanceContractingWrapper } from "./ui";
 
 export default function MileageMaintenanceContractingPage() {
   return (
-    <div>
+    <div className="relative">
       <TopBanner
         hasVehicleData
         vehicleName="Haval H6 GT"
