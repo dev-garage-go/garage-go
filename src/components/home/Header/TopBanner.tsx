@@ -37,17 +37,28 @@ export const TopBanner = ({
 }: Props) => {
   const router = useRouter()
   const pathname = usePathname()
-  const [hasBreadCrumbs, setHasBreadCrumbs] = useState(false)
 
+  // Breadcrums
+  const [hasBreadCrumbs, setHasBreadCrumbs] = useState(false)
   const pathSegments = pathname.split("/").filter(Boolean) // remove empty strings
 
   // Vehicle logic
-  const licensePlate = sessionStorage.getItem(licensePlateKey) ?? "-"
+  const [hasLicensePlate, setHasLicensePlate] = useState(false)
+  const [licensePlate, setLicensePlate] = useState<string | null>(null)
+
   // TODO: const vehicleData = getVehiculeByLicensePlate(id: string) -> import {} from "@actions"
 
   useEffect(() => {
+    // Vehicle lincense plate
+    const stored = sessionStorage.getItem(licensePlateKey)
+    setLicensePlate(stored)
+    setHasLicensePlate(!!stored)
+
+    // Breadcrums
     setHasBreadCrumbs(pathSegments.length > 0)
-  }, [pathSegments.length, licensePlate])
+  }, [pathSegments.length])
+
+  const licensePlateTxt = hasLicensePlate ? licensePlate : '-'
 
   return (
     <>
@@ -98,7 +109,7 @@ export const TopBanner = ({
                   <>
                     <h2 className="text-2xl md:text-2xl xl:text-4xl font-bold text-white">
                       Patente:
-                      <span className="uppercase">{" " + licensePlate}</span>
+                      <span className="uppercase">{" " + licensePlateTxt}</span>
                     </h2>
                     <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
                       <p className="text-base sm:text-lg xl:text-xl uppercase text-white">{vehicleName}</p>

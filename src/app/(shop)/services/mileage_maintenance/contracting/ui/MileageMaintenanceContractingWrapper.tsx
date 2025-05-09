@@ -1,11 +1,13 @@
 'use client'
 
-import { useRef, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 import { HoverPortal, LicensePlateModal } from "@/components"
 import { MileageMaintenanceFormInputs } from "@/interfaces"
+import { licensePlateKey } from "@/keys"
+import { useRouter } from "next/navigation"
 
 export const MileageMaintenanceContractingWrapper = () => {
   const methods = useForm<MileageMaintenanceFormInputs>({
@@ -17,7 +19,35 @@ export const MileageMaintenanceContractingWrapper = () => {
   })
 
   const ref = useRef<HTMLDivElement>(null)
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
+  const router = useRouter()
+
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+  const [licensePlate, setLicensePlate] = useState<string | null>()
+
+  useEffect(() => {
+    const readSessionStorage = () => {
+      const plate = sessionStorage.getItem(licensePlateKey)
+      setLicensePlate(plate)
+    }
+
+    readSessionStorage() // lee el storage
+    if (!licensePlate) {
+      setModalIsOpen(true)
+    }
+
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === licensePlateKey) {
+        readSessionStorage()
+        router.refresh()
+      }
+    }
+
+    // escucha cuando el storage recibe cambios
+    window.addEventListener("storage", handleStorageChange)
+    return () => {
+      window.removeEventListener("storage", handleStorageChange) // remueve el listener para evitar perdida de memoria
+    }
+  }, [router])
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceFormInputs) => {
@@ -26,7 +56,7 @@ export const MileageMaintenanceContractingWrapper = () => {
 
   return (
     <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
-      {modalIsOpen &&
+      {!licensePlate && modalIsOpen &&
         <HoverPortal>
           <LicensePlateModal isOpen={modalIsOpen} setClose={setModalIsOpen} />
         </HoverPortal>
