@@ -2,6 +2,7 @@
 
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "./ErrorMessage"
+import { licensePlateKey } from "@/keys"
 
 interface ModalInputs {
   licensePlate: string
@@ -17,7 +18,7 @@ export const LicensePlateModal = ({ isOpen, setClose }: Props) => {
 
   const onCloseModal = () => {
     if (licensePlate != '') {
-      sessionStorage.setItem("licensePlate", licensePlate.toLocaleUpperCase())
+      sessionStorage.setItem(licensePlateKey, licensePlate.toLocaleUpperCase())
       setClose(false)
       return
     }

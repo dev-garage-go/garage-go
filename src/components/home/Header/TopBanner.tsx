@@ -6,15 +6,16 @@ import Link from "next/link"
 import { usePathname, useRouter } from "next/navigation"
 
 import { FeatureIconsMap, SegmentNameMap } from "@/constants"
+import { licensePlateKey } from "@/keys"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 
 interface Props {
   title?: string
   description?: string
-  hasVehicleData?: boolean
-  vehicleName?: string
-  vehiclePatent?: string
+  hasVehicleData?: boolean      // TODO: Change name to typeVehicle
+  vehicleName?: string          // TODO: Delete it, the vehicle data it will be obtained in this component calling back actions
+  vehiclePatent?: string        // TODO: Delete it, the vehicle data it will be obtained in this component calling back actions
   withImage?: boolean
   imageSrc?: string
   imageAlt?: string
@@ -40,9 +41,13 @@ export const TopBanner = ({
 
   const pathSegments = pathname.split("/").filter(Boolean) // remove empty strings
 
+  // Vehicle logic
+  const licensePlate = sessionStorage.getItem(licensePlateKey) ?? "-"
+  // TODO: const vehicleData = getVehiculeByLicensePlate(id: string) -> import {} from "@actions"
+
   useEffect(() => {
     setHasBreadCrumbs(pathSegments.length > 0)
-  }, [pathSegments.length])
+  }, [pathSegments.length, licensePlate])
 
   return (
     <>
@@ -93,7 +98,7 @@ export const TopBanner = ({
                   <>
                     <h2 className="text-2xl md:text-2xl xl:text-4xl font-bold text-white">
                       Patente:
-                      <span className="uppercase">{" " + vehiclePatent}</span>
+                      <span className="uppercase">{" " + licensePlate}</span>
                     </h2>
                     <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
                       <p className="text-base sm:text-lg xl:text-xl uppercase text-white">{vehicleName}</p>
