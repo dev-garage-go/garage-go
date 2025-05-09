@@ -165,7 +165,7 @@ export const QuotesForm = () => {
         <div className="flex flex-col gap-4 my-10">
           <h4 className="title-h4">¿Quieres agregar algo mas?</h4>
 
-          <div className="flex flex-col gap-4 w-full">
+          <div className="flex flex-col gap-6 w-full">
             {AddMoreServices.map((service, index) => (
               <AddServiceCard
                 key={service.name + index}
