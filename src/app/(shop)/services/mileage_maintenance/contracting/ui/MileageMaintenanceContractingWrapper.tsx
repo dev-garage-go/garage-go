@@ -1,11 +1,11 @@
 'use client'
 
-import { MileageMaintenanceFormInputs } from "@/interfaces"
-import { FormProvider, useForm } from "react-hook-form"
-import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
-import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
 import { useRef, useState } from "react"
+import { FormProvider, useForm } from "react-hook-form"
+import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
+import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 import { HoverPortal, LicensePlateModal } from "@/components"
+import { MileageMaintenanceFormInputs } from "@/interfaces"
 
 export const MileageMaintenanceContractingWrapper = () => {
   const methods = useForm<MileageMaintenanceFormInputs>({
@@ -17,7 +17,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   })
 
   const ref = useRef<HTMLDivElement>(null)
-  const [hasModal, setHasModal] = useState<boolean>(true)
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true)
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceFormInputs) => {
@@ -25,10 +25,10 @@ export const MileageMaintenanceContractingWrapper = () => {
   }
 
   return (
-    <section ref={ref} className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
-      {hasModal &&
+    <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
+      {modalIsOpen &&
         <HoverPortal>
-          <LicensePlateModal />
+          <LicensePlateModal isOpen={modalIsOpen} setClose={setModalIsOpen} />
         </HoverPortal>
       }
       <FormProvider {...methods}>
