@@ -10,6 +10,7 @@ export const useLicensePlateOnChangeStorage = () => {
   const hasRefreshed = useRef(false)
   const [licensePlate, setLicensePlate] = useState<string | null>(null)
 
+  // obtain the 'licensePlat' from session storage
   const readSessionStorage = () => {
     const plate = sessionStorage.getItem(licensePlateKey)
     setLicensePlate(prev => {
@@ -22,18 +23,21 @@ export const useLicensePlateOnChangeStorage = () => {
   useEffect(() => {
     readSessionStorage()
 
+    // this will be calling when an event in the session storage happened
     const handleStorageChange = (e: StorageEvent) => {
       if (e.key === licensePlateKey) {
         readSessionStorage()
       }
     }
 
+    // this will be calling when a custom event 'customLicensePlateUpdateEvent' happened
+    // Important: this event will shotting in LicensePlateModal -> setLicensePlate(value: string)
     const handleCustomEvent = () => {
       readSessionStorage()
     }
 
     window.addEventListener("storage", handleStorageChange)
-    window.addEventListener(customLicensePlateUpdateEvent, handleCustomEvent) // event in LicensePlateModal -> setLicensePlate(value: string)
+    window.addEventListener(customLicensePlateUpdateEvent, handleCustomEvent)
 
     return () => {
       window.removeEventListener("storage", handleStorageChange)
@@ -42,7 +46,7 @@ export const useLicensePlateOnChangeStorage = () => {
   }, [router])
 
   useEffect(() => {
-    // Evitá refrescar si todavía no tenés un valor o si ya refrescaste por ese valor
+    // hasRefreshed or ref, it's a flag to avoid refreshing if you do not yet have a value or if you have already refreshed for that value
     if (licensePlate && !hasRefreshed.current) {
       hasRefreshed.current = true
       router.refresh()
