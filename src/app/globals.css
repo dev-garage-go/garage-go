@@ -124,6 +124,12 @@
   @apply absolute top-full mt-2 -left-5 z-50 opacity-0 scale-95 pointer-events-none group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto transition-all duration-300 ease-out origin-top;
 }
 
+/* Buttons */
+
+.primary-button {
+  @apply w-full py-2 bg-primaryBlue-500 hover:bg-primaryBlue-700 duration-300 transition-colors text-white font-normal rounded-2xl;
+}
+
 .button-option {
   @apply w-full h-12 max-w-44 rounded-xl transition-colors duration-300 hover:bg-primaryBlue-50 bg-white border border-primaryBlue-900 text-primaryBlue-900;
 }
