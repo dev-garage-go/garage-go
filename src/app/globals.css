@@ -135,7 +135,7 @@
 }
 
 .button-option-bg-transparent {
-  @apply w-full font-medium rounded-xl border border-primaryBlue-900 text-primaryBlue-900 transition-colors duration-300 hover:bg-primaryBlue-300 hover:border-primaryBlue-300 hover:text-white;
+  @apply w-full font-medium rounded-xl border border-primaryBlue-600 text-primaryBlue-600 transition-colors duration-300 hover:bg-primaryBlue-300 hover:border-primaryBlue-300 hover:text-white;
 }
 
 .button-option-selected {

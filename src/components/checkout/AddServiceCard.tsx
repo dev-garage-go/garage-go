@@ -17,19 +17,14 @@ interface Props {
 
 export const AddServiceCard = ({ name, price, details }: Props) => {
   const baseBtnStyle = "text-sm text-center bg-transparent border border-primaryBlue-500 text-primaryBlue-500 rounded-xl w-full md:w-auto md:px-6 py-2 hover:bg-primaryBlue-500 hover:text-white duration-200 transition-all"
-  const [showDetails, setShowDetails] = useState<boolean>(true)
+
+  const { mainOptions = [], switchOptions = [] } = details || {}
+  const [showDetails, setShowDetails] = useState<boolean>(false)
   const [mainOptSelected, setMainOptSelected] = useState<string>('')
   const [switchOptSelected, setSwitchOptSelected] = useState<string[]>([])
 
-  let mainOptions
-  let switchOptions
 
-  if (details) {
-    mainOptions = details.mainOptions
-    switchOptions = details.switchOptions
-  }
-
-  const getLastArrayItem = (arr: []) => {
+  const getLastArrayItem = (arr: any[]) => {
     const result = arr.length - 1;
     return result
   }
@@ -51,13 +46,17 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
             ${formatNumberWithDots(price)}
           </p>
 
-          <button className={`${baseBtnStyle} md:hidden mt-4`}>
+          {/* Mobile button */}
+          <button
+            onClick={() => setShowDetails(!showDetails)}
+            className={`button-option-bg-transparent py-1 max-w-32 md:hidden mt-4`}>
             Agregar
           </button>
         </div>
+        {/* Desktop button */}
         <button
-          onClick={() => setShowDetails(true)}
-          className={`${baseBtnStyle} hidden md:block`}>
+          onClick={() => setShowDetails(!showDetails)}
+          className={`button-option-bg-transparent py-1 max-w-32 hidden md:block`}>
           Agregar
         </button>
       </div>
