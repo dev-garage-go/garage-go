@@ -52,6 +52,7 @@ export const MileageMaintenanceContractingForm = () => {
               {/* Buttons */}
               {MileagesOptions.map((item, index) => (
                 <ButtonOptions
+                  className='h-12'
                   key={item.quantity + index}
                   current={item.quantity}
                   selected={mileagesSelected}

@@ -1,5 +1,7 @@
 'use client'
 
+import clsx from "clsx"
+
 interface Props {
   item: any
   current: string
@@ -14,12 +16,12 @@ export const ButtonOptions = ({ item, onClick, selected, className, current }: P
       <button
         type="button"
         onClick={onClick}
-        className={`
-          ${className}
-          ${selected === current ? 'button-option-selected' : 'button-option'}
-        `}
+        className={clsx(
+          selected === current ? 'button-option-selected' : 'button-option',
+          className
+        )}
       >
-        <p className="text-center font-normal">{item}</p>
+        <p className="text-center">{item}</p>
       </button>
     </>
   )

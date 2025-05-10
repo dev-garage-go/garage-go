@@ -131,9 +131,9 @@
 }
 
 .button-option {
-  @apply w-full h-12 max-w-44 rounded-xl transition-colors duration-300 hover:bg-primaryBlue-50 bg-white border border-primaryBlue-900 text-primaryBlue-900;
+  @apply w-full font-medium max-w-44 rounded-xl transition-colors duration-300 hover:bg-primaryBlue-50 bg-white border border-primaryBlue-900 text-primaryBlue-900;
 }
 
 .button-option-selected {
-  @apply w-full h-12 max-w-44 rounded-xl transition-colors duration-300 bg-primaryBlue-900 border-none text-white;
+  @apply w-full font-medium max-w-44 rounded-xl transition-colors duration-300 bg-primaryBlue-900 border-none text-white;
 }

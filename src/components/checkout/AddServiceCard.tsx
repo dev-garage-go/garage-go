@@ -1,7 +1,7 @@
 'use client'
 
 import { DetailServiceOptions } from '@/interfaces'
-import { formatNumberWithDots } from '@/utils'
+import { firstLetterUppercase, formatNumberWithDots } from '@/utils'
 import { useState } from 'react'
 import { ButtonOptions, SwitchButton } from '@/components';
 
@@ -58,16 +58,17 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
       </div>
       {showDetails && (
         <div className='flex w-full flex-col bg-red-200'>
-          <div className='flex flex-col justify-start items-center w-full bg-gray-100 py-4 px-6'>
+          <div className='flex flex-col justify-center items-start w-full bg-gray-100 py-4 px-6'>
             <h4 className="font-semibold text-primaryBlue-500">
               Detalla tu servicio
             </h4>
-            <div className='flex w-full gap-4'>
+            <div className='flex w-full gap-4 mt-4'>
               {mainOptions?.map((item, index) => (
                 <ButtonOptions
+                  className='h-10'
                   key={item.detailName + index}
                   current={item.detailName}
-                  item={item.detailName}
+                  item={firstLetterUppercase(item.detailName)}
                   onClick={() => setMainOptSelected(item.detailName)}
                   selected={mainOptSelected}
                 />
