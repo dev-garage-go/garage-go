@@ -19,7 +19,7 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
   const baseBtnStyle = "text-sm text-center bg-transparent border border-primaryBlue-500 text-primaryBlue-500 rounded-xl w-full md:w-auto md:px-6 py-2 hover:bg-primaryBlue-500 hover:text-white duration-200 transition-all"
   const [showDetails, setShowDetails] = useState<boolean>(true)
   const [mainOptSelected, setMainOptSelected] = useState<string>('')
-  const [switchOptSelected, setSwitchOptSelected] = useState<string>('')
+  const [switchOptSelected, setSwitchOptSelected] = useState<string[]>([])
 
   let mainOptions
   let switchOptions
@@ -83,11 +83,18 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
                 className={`flex w-full px-6 py-4 h-full justify-between items-center
                   ${isEven(index) ? 'bg-white' : 'bg-gray-100'}`}
               >
-                <p>{item.detailName}</p>
+                <p className='text-primaryBlue-900'>{item.detailName}</p>
                 <SwitchButton
+                  multiSelect
                   value={item.detailName}
-                  setValueSelected={() => setSwitchOptSelected(item.detailName)}
                   valueSelected={switchOptSelected}
+                  setValueSelected={(value: string) => {
+                    setSwitchOptSelected((prev) =>
+                      prev.includes(value)
+                        ? prev.filter((v) => v !== value) // si el valor ya estaba en el array lo quitamos (desactivamos el btn)
+                        : [...prev, value]  // si no estaba, lo agregamos junto con los otros
+                    )
+                  }}
                 />
               </div>
             ))}

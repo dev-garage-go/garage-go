@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { AddServiceCard, ButtonOptions } from '@/components'
 import { MileagesOptions } from '@/constants'
 import { ExtraServices, VehicleMileages } from '@/interfaces'
+import { boolean } from 'zod'
 
 
 
@@ -26,10 +27,10 @@ const extraServices: ExtraServices[] = [
         { detailName: 'solo trasero', detailPrice: 20 }
       ],
       switchOptions: [
-        { detailName: 'Revisión y limpieza', detailPrice: 20 },
-        { detailName: 'Cambio de pastillas', detailPrice: 20 },
-        { detailName: 'Cambio de discos (Cotizar)', detailPrice: 20 },
-        { detailName: 'Rectificación de discos', detailPrice: 20 }
+        { detailName: 'Revisión y limpieza', detailPrice: 20, selected: false },
+        { detailName: 'Cambio de pastillas', detailPrice: 20, selected: false },
+        { detailName: 'Cambio de discos (Cotizar)', detailPrice: 20, selected: false },
+        { detailName: 'Rectificación de discos', detailPrice: 20, selected: false }
       ]
     }
   },

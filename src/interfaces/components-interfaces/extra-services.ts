@@ -1,6 +1,7 @@
 export interface DetailServiceOptions {
   detailName: string,
   detailPrice: number
+  selected?: boolean
 }
 
 export interface ExtraServices {
