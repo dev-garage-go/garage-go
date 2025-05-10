@@ -1,14 +1,38 @@
 "use client"
 
-import React, { useRef, useState } from 'react'
-import { AddServiceCard, ButtonOptions, HoverPortal, LicensePlateModal } from '@/components'
+import { useState } from 'react'
+import { AddServiceCard, ButtonOptions } from '@/components'
 import { MileagesOptions } from '@/constants'
-import { VehicleMileages } from '@/interfaces'
+import { ExtraServices, VehicleMileages } from '@/interfaces'
 
-const extraServices = [
-  { name: "Gestion de revision tecnica", price: 48990 },
-  { name: "Diagnostico automotriz", price: 45990 },
-  { name: "Servicio de frenos", price: 24990 },
+
+
+const extraServices: ExtraServices[] = [
+  {
+    name: "Gestion de revision tecnica",
+    price: 48990,
+  },
+  {
+    name: "Diagnostico automotriz",
+    price: 45990,
+  },
+  {
+    name: "Servicio de frenos",
+    price: 24990,
+    details: {
+      mainOptions: [
+        { detailName: 'ambos ejes', detailPrice: 20 },
+        { detailName: 'solo delantero', detailPrice: 20 },
+        { detailName: 'solo trasero', detailPrice: 20 }
+      ],
+      switchOptions: [
+        { detailName: 'Revisión y limpieza', detailPrice: 20 },
+        { detailName: 'Cambio de pastillas', detailPrice: 20 },
+        { detailName: 'Cambio de discos (Cotizar)', detailPrice: 20 },
+        { detailName: 'Rectificación de discos', detailPrice: 20 }
+      ]
+    }
+  },
 ]
 
 export const MileageMaintenanceContractingForm = () => {
@@ -45,8 +69,7 @@ export const MileageMaintenanceContractingForm = () => {
                   {extraServices.map((item, index) => (
                     <AddServiceCard
                       key={item.name + index}
-                      name={item.name}
-                      price={item.price}
+                      {...item}
                     />
                   ))}
                 </div>

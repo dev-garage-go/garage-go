@@ -1,5 +1,6 @@
 export * from './components-interfaces/banner-disccounts';
 export * from './components-interfaces/benefits';
+export * from './components-interfaces/extra-services';
 export * from './components-interfaces/faqs-data';
 export * from './components-interfaces/header-options';
 export * from './components-interfaces/reviews';
