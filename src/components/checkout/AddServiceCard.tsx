@@ -29,6 +29,11 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
     switchOptions = details.switchOptions
   }
 
+  const getLastArrayItem = (arr: []) => {
+    const result = arr.length - 1;
+    return result
+  }
+
   const isEven = (index: number) => {
     if (index % 2 === 0) { return true }
     else { return false }
@@ -37,7 +42,7 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
   return (
     <div className='flex flex-col w-full'>
 
-      <div className={`flex justify-between items-center w-full bg-gray-100 py-4 px-6 ${showDetails ? 'rounded-t-xl' : 'rounded-xl'}`}>
+      <div className={`flex justify-between items-center w-full bg-customGray-200 py-4 px-6 ${showDetails ? 'rounded-t-xl' : 'rounded-xl'}`}>
         <div className="flex flex-col w-full">
           <h4 className="font-semibold text-primaryBlue-500">
             {name}
@@ -57,15 +62,16 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
         </button>
       </div>
       {showDetails && (
-        <div className='flex w-full flex-col bg-red-200'>
-          <div className='flex flex-col justify-center items-start w-full bg-gray-100 py-4 px-6'>
+        <div className='flex w-full flex-col'>
+          <div className='flex flex-col justify-center items-start w-full bg-customGray-200 py-4 px-6'>
             <h4 className="font-semibold text-primaryBlue-500">
               Detalla tu servicio
             </h4>
-            <div className='flex w-full gap-4 mt-4'>
+            <div className='flex flex-col md:flex-row w-full gap-4 mt-4'>
               {mainOptions?.map((item, index) => (
                 <ButtonOptions
-                  className='h-10'
+                  withBgColor={false}
+                  className='h-10 max-w-none'
                   key={item.detailName + index}
                   current={item.detailName}
                   item={firstLetterUppercase(item.detailName)}
@@ -81,10 +87,11 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
             {switchOptions?.map((item, index) => (
               <div
                 key={item.detailName + index}
-                className={`flex w-full px-6 py-4 h-full justify-between items-center
-                  ${isEven(index) ? 'bg-white' : 'bg-gray-100'}`}
+                className={`flex w-full px-6 py-4 h-full justify-between items-center 
+                  ${index === getLastArrayItem(switchOptions) ? 'rounded-b-xl' : 'rounded-none'}
+                  ${isEven(index) ? 'bg-customGray-50' : 'bg-customGray-200'}`}
               >
-                <p className='text-primaryBlue-900'>{item.detailName}</p>
+                <p className='font-normal text-primaryBlue-900'>{item.detailName}</p>
                 <SwitchButton
                   multiSelect
                   value={item.detailName}

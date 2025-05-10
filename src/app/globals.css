@@ -131,9 +131,13 @@
 }
 
 .button-option {
-  @apply w-full font-medium max-w-44 rounded-xl transition-colors duration-300 hover:bg-primaryBlue-50 bg-white border border-primaryBlue-900 text-primaryBlue-900;
+  @apply w-full font-medium rounded-xl bg-white border border-primaryBlue-900 text-primaryBlue-900 transition-colors duration-300 hover:bg-primaryBlue-300 hover:border-primaryBlue-300 hover:text-white;
+}
+
+.button-option-bg-transparent {
+  @apply w-full font-medium rounded-xl border border-primaryBlue-900 text-primaryBlue-900 transition-colors duration-300 hover:bg-primaryBlue-300 hover:border-primaryBlue-300 hover:text-white;
 }
 
 .button-option-selected {
-  @apply w-full font-medium max-w-44 rounded-xl transition-colors duration-300 bg-primaryBlue-900 border-none text-white;
+  @apply w-full font-medium rounded-xl bg-primaryBlue-900 border-none text-white transition-colors duration-300;
 }

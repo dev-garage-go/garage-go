@@ -7,17 +7,20 @@ interface Props {
   current: string
   selected: string
   className?: string
+  withBgColor?: boolean
   onClick: () => void
 }
 
-export const ButtonOptions = ({ item, onClick, selected, className, current }: Props) => {
+export const ButtonOptions = ({ item, onClick, selected, className, current, withBgColor = true }: Props) => {
   return (
     <>
       <button
         type="button"
         onClick={onClick}
         className={clsx(
-          selected === current ? 'button-option-selected' : 'button-option',
+          selected === current ? 'button-option-selected'
+            : !withBgColor ? 'button-option-bg-transparent'
+              : 'button-option',
           className
         )}
       >
