@@ -15,7 +15,7 @@ export const PaymentForm = () => {
   const paymentGatewaySelected = watch("paymentGateway")
   const paymentMethodSelected = watch("methodSelected")
 
-  const useCardMethodSelected = paymentMethodSelected === "user-card"
+  const shouldValidateCardFields = paymentMethodSelected === "user-card"
 
   // Payment utils funcs
   // Detect the type of card - ex: visa or mastercard
@@ -33,13 +33,9 @@ export const PaymentForm = () => {
     setValue("userCard.expiresIn", formatted);
   };
 
-  // Allows that user can diselect a payment method
-  const handleSelect = (method: PaymentGatewayMethods) => {
-    if (paymentGatewaySelected === method) {
-      setValue("paymentGateway", undefined); // If it is already selected, deselect it
-    } else {
-      setValue("paymentGateway", method);
-    }
+  // Allows that user can diselect a payment gateway option
+  const toggleGateway = (method: PaymentGatewayMethods) => {
+    setValue("paymentGateway", paymentGatewaySelected === method ? undefined : method);
   };
 
   return (
@@ -62,10 +58,10 @@ export const PaymentForm = () => {
               placeholder="1234 5678 9012 3456"
               minLength={19}
               maxLength={19}
-              className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
+              className={`${shouldValidateCardFields && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cardNumber", {
                 onChange: handleCardNumberChange,
-                required: useCardMethodSelected ? true : false,
+                required: shouldValidateCardFields ? true : false,
               })}
             />
 
@@ -73,7 +69,7 @@ export const PaymentForm = () => {
               <RenderCardIcon cardType={cardType} />
             </div>
           </div>
-          {useCardMethodSelected && errors.userCard?.cardNumber && (
+          {shouldValidateCardFields && errors.userCard?.cardNumber && (
             <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
           )}
         </div>
@@ -86,12 +82,12 @@ export const PaymentForm = () => {
             type="text"
             minLength={2}
             placeholder='John Doe'
-            className={`${useCardMethodSelected && errors.userCard?.ownerName ? 'payment-input-error-form' : 'payment-input-form'}`}
+            className={`${shouldValidateCardFields && errors.userCard?.ownerName ? 'payment-input-error-form' : 'payment-input-form'}`}
             {...register("userCard.ownerName", {
-              required: useCardMethodSelected ? true : false
+              required: shouldValidateCardFields ? true : false
             })}
           />
-          {useCardMethodSelected && errors.userCard?.ownerName && (
+          {shouldValidateCardFields && errors.userCard?.ownerName && (
             <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
           )}
         </div>
@@ -107,13 +103,13 @@ export const PaymentForm = () => {
               minLength={5}
               maxLength={5}
               placeholder="04/28"
-              className={`${useCardMethodSelected && errors.userCard?.expiresIn ? 'payment-input-error-form' : 'payment-input-form'}`}
+              className={`${shouldValidateCardFields && errors.userCard?.expiresIn ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.expiresIn", {
                 onChange: handleExpiryChange,
-                required: useCardMethodSelected ? true : false
+                required: shouldValidateCardFields ? true : false
               })}
             />
-            {useCardMethodSelected && errors.userCard?.expiresIn && (
+            {shouldValidateCardFields && errors.userCard?.expiresIn && (
               <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
             )}
           </div>
@@ -127,12 +123,12 @@ export const PaymentForm = () => {
               maxLength={3}
               type="text"
               placeholder='323'
-              className={`${useCardMethodSelected && errors.userCard?.cvv ? 'payment-input-error-form' : 'payment-input-form'}`}
+              className={`${shouldValidateCardFields && errors.userCard?.cvv ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cvv", {
-                required: useCardMethodSelected ? true : false
+                required: shouldValidateCardFields ? true : false
               })}
             />
-            {useCardMethodSelected && errors.userCard?.cvv && (
+            {shouldValidateCardFields && errors.userCard?.cvv && (
               <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
             )}
           </div>
@@ -153,7 +149,7 @@ export const PaymentForm = () => {
               description={option.description}
               imageSrc={option.imageSrc}
               checked={paymentGatewaySelected === option.method}
-              onClick={() => handleSelect(option.method)}
+              onClick={() => toggleGateway(option.method)}
               register={register("paymentGateway")}
             />
           ))}
@@ -162,16 +158,14 @@ export const PaymentForm = () => {
         {/* Terms and conditions */}
         <div className="flex flex-col justify-start items-start mt-4 mb-10">
           {errors.checkTermsAndConditions && (<ErrorMessage message='Se requiere que acepte los terminos' className="mb-2 ml-2" />)}
-          <div className="flex justify-center items-start w-full gap-2 ">
+          <label className="flex justify-center items-start w-full gap-2 text-xs font-normal text-primaryBlue-900 cursor-pointer select-none">
             <input
               type="checkbox"
               className="h-4 w-4 accent-primaryBlue-500"
               {...register("checkTermsAndConditions", { required: true })}
             />
-            <p className=" text-xs font-normal text-primaryBlue-900">
-              Acepto los términos y condiciones y políticas de privacidad de Garage Go.
-            </p>
-          </div>
+            Acepto los términos y condiciones y políticas de privacidad de Garage Go.
+          </label>
         </div>
       </section>
     </div>
