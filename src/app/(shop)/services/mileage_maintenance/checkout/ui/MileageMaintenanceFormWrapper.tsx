@@ -4,6 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import { MileageMaintenanceForm } from "./MileageMaintenanceForm";
 import { MileageMaintenanceSummary } from "./MileageMaintenanceSummary";
 import { MileageMaintenanceFormInputs } from "@/interfaces";
+import { useRouter } from "next/navigation";
 
 export const MileageMaintenanceFormWrapper = () => {
   const methods = useForm<MileageMaintenanceFormInputs>({
@@ -14,9 +15,13 @@ export const MileageMaintenanceFormWrapper = () => {
     }
   })
 
+  // TODO: Router temporal para mostrar
+  const router = useRouter()
+
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceFormInputs) => {
     console.log(data)
+    router.push("/payment")
   }
 
   return (

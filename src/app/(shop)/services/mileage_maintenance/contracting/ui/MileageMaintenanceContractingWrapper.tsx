@@ -18,7 +18,10 @@ export const MileageMaintenanceContractingWrapper = () => {
     }
   })
 
+
+  // TODO: Router temporal para mostrar
   const ref = useRef<HTMLDivElement>(null)
+  const router = useRouter()
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const licensePlate = useLicensePlateOnChangeStorage()
@@ -32,6 +35,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceFormInputs) => {
     console.log(data)
+    router.push(`/services/mileage_maintenance/checkout`)
   }
 
   return (

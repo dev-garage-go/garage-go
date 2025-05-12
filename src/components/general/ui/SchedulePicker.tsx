@@ -32,6 +32,7 @@ export const SchedulePicker = ({ onChange, error }: Props) => {
               current={item.hour}
               selected={hourSelected}
               onClick={() => handleSelect(item.hour)}
+              className="py-3"
             />
           ))}
         </div>
