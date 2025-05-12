@@ -15,7 +15,7 @@ export const PaymentFormWrapper = () => {
     }
   })
 
-  const { setValue, handleSubmit, getValues, watch } = methods
+  const { setValue, handleSubmit, trigger, getValues, watch } = methods
 
   const hasPaymentGateway = watch("paymentGateway");
   const card = watch("userCard");
@@ -44,6 +44,10 @@ export const PaymentFormWrapper = () => {
     } else {
       setValue("methodSelected", undefined);
     }
+
+    // revalidate fields of form to throw errors if exist
+    const isValid = trigger("userCard");
+    if (!isValid) return;
 
     // validate complete data card
     if (hasCard && !hasCompletedCardData()) {

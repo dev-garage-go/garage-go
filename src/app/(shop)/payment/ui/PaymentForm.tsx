@@ -9,10 +9,10 @@ import { PaymentFormSchema, PaymentGatewayMethods } from "@/interfaces";
 
 
 export const PaymentForm = () => {
-  const { watch, setValue, register, trigger, formState: { errors } } = useFormContext<PaymentFormSchema>()
+  const { watch, setValue, register, formState: { errors } } = useFormContext<PaymentFormSchema>()
 
   const cardNumber = watch("userCard.cardNumber") || "";
-  const paymentGatewayOption = watch("paymentGateway")
+  const paymentGatewaySelected = watch("paymentGateway")
   const paymentMethodSelected = watch("methodSelected")
 
   const useCardMethodSelected = paymentMethodSelected === "user-card"
@@ -35,7 +35,7 @@ export const PaymentForm = () => {
 
   // Allows that user can diselect a payment method
   const handleSelect = (method: PaymentGatewayMethods) => {
-    if (paymentGatewayOption === method) {
+    if (paymentGatewaySelected === method) {
       setValue("paymentGateway", undefined); // If it is already selected, deselect it
     } else {
       setValue("paymentGateway", method);
@@ -148,7 +148,7 @@ export const PaymentForm = () => {
               name={option.name}
               description={option.description}
               imageSrc={option.imageSrc}
-              checked={paymentGatewayOption === option.method}
+              checked={paymentGatewaySelected === option.method}
               onClick={() => handleSelect(option.method)}
               register={register("paymentGateway")}
             />
