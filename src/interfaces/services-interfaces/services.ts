@@ -1,10 +1,10 @@
-interface ButtonProps {
+export interface ButtonProps {
   text: string;
   variant: string;
   icon?: string;
 }
 
-interface ServicesInterface {
+export interface ServicesInterface {
   title: string,
   price?: number,
   image: string,

@@ -4,12 +4,16 @@ import clsx from "clsx"
 
 interface Props<T> {
   value: T,
-  valueSelected: T,
-  setValueSelected: React.Dispatch<React.SetStateAction<T>>
+  valueSelected: T[] | T,
+  setValueSelected: (value: T) => void
+  multiSelect?: boolean
 }
 
-export const SwitchButton = <T,>({ value, valueSelected, setValueSelected }: Props<T>) => {
-  const isActive = value === valueSelected
+export const SwitchButton = <T,>({ value, valueSelected, setValueSelected, multiSelect = false }: Props<T>) => {
+  const isActive = multiSelect
+    ? (valueSelected as T[]).includes(value)
+    : value === valueSelected
+
   return (
     <button
       onClick={() => setValueSelected(value)}

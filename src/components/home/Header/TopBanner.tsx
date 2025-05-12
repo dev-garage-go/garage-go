@@ -1,20 +1,22 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 import Link from "next/link"
+import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 
-import { FeatureIconsMap, SegmentNameMap } from "@/constants"
+import { FeatureIconsMap } from "@/constants"
+import { useLicensePlateOnChangeStorage } from "@/hooks"
+import { getBreadcrumbs } from "@/utils"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 
 interface Props {
   title?: string
   description?: string
-  hasVehicleData?: boolean
-  vehicleName?: string
-  vehiclePatent?: string
+  hasVehicleData?: boolean      // TODO: Change name to typeVehicle
+  vehicleName?: string          // TODO: Delete it, the vehicle data it will be obtained in this component calling back actions
+  vehiclePatent?: string        // TODO: Delete it, the vehicle data it will be obtained in this component calling back actions
   withImage?: boolean
   imageSrc?: string
   imageAlt?: string
@@ -36,9 +38,16 @@ export const TopBanner = ({
 }: Props) => {
   const router = useRouter()
   const pathname = usePathname()
-  const [hasBreadCrumbs, setHasBreadCrumbs] = useState(false)
 
+  // Breadcrums
+  const [hasBreadCrumbs, setHasBreadCrumbs] = useState(false)
   const pathSegments = pathname.split("/").filter(Boolean) // remove empty strings
+
+  // Vehicle logic
+  const licensePlate = useLicensePlateOnChangeStorage()
+  const licensePlateTxt = licensePlate ? licensePlate : '-'
+
+  // TODO: const vehicleData = getVehiculeByLicensePlate(id: string) -> import {} from "@actions"
 
   useEffect(() => {
     setHasBreadCrumbs(pathSegments.length > 0)
@@ -46,7 +55,7 @@ export const TopBanner = ({
 
   return (
     <>
-      <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 xl:pb-7 pt-28 sm:pt-32 bg-primaryBlue-300">
+      <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 sm:pb-8 xl:pb-10 pt-28 sm:pt-32 bg-primaryBlue-300">
         <div className="flex justify-center items-center w-full">
           <div className="grid grid-cols-6">
             <div className={
@@ -59,28 +68,22 @@ export const TopBanner = ({
                   Inicio
                   <span className="px-2">{">"}</span>
                 </Link>
-                {pathSegments.map((segment, index) => {
-                  const href = "/" + pathSegments.slice(0, index + 1).join("/")
-                  const name = SegmentNameMap[segment] || decodeURIComponent(segment)
-                  const isLast = index === pathSegments.length - 1
-
-                  return (
-                    <div key={href} className="flex items-center">
-                      {!isLast ? (
-                        <>
-                          <Link href={href} className="hover:font-medium duration-200">
-                            {name.charAt(0).toUpperCase() + name.slice(1)}
-                          </Link>
-                          <span className="px-2">{">"}</span>
-                        </>
-                      ) : (
-                        <span>
-                          {name.charAt(0).toUpperCase() + name.slice(1)}
-                        </span> // last element no clickeable
-                      )}
-                    </div>
-                  )
-                })}
+                {getBreadcrumbs(pathname).map((crumb, index) => (
+                  <div key={index} className="flex items-center">
+                    {crumb.isEllipsis ? (
+                      <span className="px-2 text-white">...</span>
+                    ) : !crumb.isLast ? (
+                      <>
+                        <Link href={crumb.href!} className="hover:font-medium duration-200">
+                          {crumb.name}
+                        </Link>
+                        <span className="px-2">{">"}</span>
+                      </>
+                    ) : (
+                      <span>{crumb.name}</span>
+                    )}
+                  </div>
+                ))}
               </div>
               <div>
 
@@ -93,7 +96,7 @@ export const TopBanner = ({
                   <>
                     <h2 className="text-2xl md:text-2xl xl:text-4xl font-bold text-white">
                       Patente:
-                      <span className="uppercase">{" " + vehiclePatent}</span>
+                      <span className="uppercase">{" " + licensePlateTxt}</span>
                     </h2>
                     <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
                       <p className="text-base sm:text-lg xl:text-xl uppercase text-white">{vehicleName}</p>

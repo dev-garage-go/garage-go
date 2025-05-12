@@ -42,7 +42,7 @@ const config: Config = {
         },
         // grises personalizados
         customGray: {
-          // 50: '',
+          50: '#F6F6F6',
           100: '#EFEFEF',
           200: '#E8E8E8',
           // 300: '',

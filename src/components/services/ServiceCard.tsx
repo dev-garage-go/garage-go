@@ -1,6 +1,7 @@
 "use client"
 
 import { FeatureIconsMap } from "@/constants";
+import { ButtonProps } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -46,7 +47,7 @@ export const ServiceCard = ({
           />
           {/* Discount symbol */}
           {discount && (
-            <span className="absolute top-4 left-4 bg-pink-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+            <span className="absolute top-4 left-4 bg-primaryPink-500 text-white px-3 py-1 rounded-full text-sm font-medium">
               {discount}
             </span>
           )}

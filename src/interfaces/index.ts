@@ -1,3 +1,16 @@
-
+export * from './components-interfaces/banner-disccounts';
+export * from './components-interfaces/benefits';
+export * from './components-interfaces/extra-services';
+export * from './components-interfaces/faqs-data';
+export * from './components-interfaces/header-options';
+export * from './components-interfaces/reviews';
+export * from './components-interfaces/select-options';
+export * from './components-interfaces/suppliers-images';
 export * from './components-interfaces/tires-change';
-
+export * from './forms/mileage-maintenance';
+export * from './forms/schedules';
+export * from './forms/vehicle-mileages';
+export * from './payment/payment-methods';
+export * from './services-interfaces/faqs_mileage_maintenance';
+export * from './services-interfaces/services';
+export * from './services-interfaces/steps_mileage_maintenance';

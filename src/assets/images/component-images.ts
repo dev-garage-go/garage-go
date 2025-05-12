@@ -26,6 +26,12 @@ export const ServicioDomicilio = `${pathImages}/servicio_domicilio.jpg`
 export const EntregaDomicilio = `${pathImages}/entrega_domicilio.jpg`
 export const RevisionTecnica = `${pathImages}/revision_tecnica.jpg`
 
+// Benefits
+export const Benefits30Percent = `${pathImages}/benefits-30.png`
+export const Benefits15Percent = `${pathImages}/benefits-15.png`
+export const Benefits4x3Tires = `${pathImages}/benefits-4x3.png`
+export const BenefitsTechnical = `${pathImages}/benefits-technical.png`
+
 
 // Brand carousel
 export const Audi = `${carsLogos}/audi.png`

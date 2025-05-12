@@ -1,35 +1,21 @@
 "use client"
 
-import clsx from "clsx";
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
-import { RenderCardIcon, PaymentOption } from '@/components';
+import { RenderCardIcon, PaymentOption, ErrorMessage } from '@/components';
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
+import { PaymentFormSchema, PaymentGatewayMethods } from "@/interfaces";
 
-type FormInputs = {
-  cardNumber: string;
-  ownerName: string;
-  expiresIn: string;
-  cvv: number;
-  paymentMethod: PaymentMethods;
-}
 
 export const PaymentForm = () => {
-  const {
-    register,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormInputs>({
-    defaultValues: {
-      paymentMethod: '' // El metodo de pago comienza siendo ''
-    }
-  })
+  const { watch, setValue, register, formState: { errors } } = useFormContext<PaymentFormSchema>()
 
-  const cardNumber = watch("cardNumber") || "";
-  const selectedPayment = watch("paymentMethod")
+  const cardNumber = watch("userCard.cardNumber") || "";
+  const paymentGatewaySelected = watch("paymentGateway")
+  const paymentMethodSelected = watch("methodSelected")
+
+  const shouldValidateCardFields = paymentMethodSelected === "user-card"
 
   // Payment utils funcs
   // Detect the type of card - ex: visa or mastercard
@@ -38,34 +24,28 @@ export const PaymentForm = () => {
   // Every 4 digits leave a spaces - ex: 1234 5678
   const handleCardNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatCardNumber(e.target.value);
-    setValue("cardNumber", formatted);
+    setValue("userCard.cardNumber", formatted);
   };
 
   // Write a slash / in the MM/YY format - ex: 04/28
   const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = formatExpiry(e.target.value);
-    setValue("expiresIn", formatted);
+    setValue("userCard.expiresIn", formatted);
   };
 
-  // Allows that user can diselect a payment method
-  const handleSelect = (method: PaymentMethods) => {
-    if (selectedPayment === method) {
-      setValue("paymentMethod", ''); // If it is already selected, deselect it
-    } else {
-      setValue("paymentMethod", method);
-    }
-  };
 
-  // Function that will be executed when the form is submitted
-  const onSumbit = (data: FormInputs) => {
-    console.log(data)
+  const handleCardCVV = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onlyDigits = e.target.value.replace(/\D/g, "");
+    setValue("userCard.cvv", onlyDigits)
   }
 
+  // Allows that user can diselect a payment gateway option
+  const toggleGateway = (method: PaymentGatewayMethods) => {
+    setValue("paymentGateway", paymentGatewaySelected === method ? undefined : method);
+  };
+
   return (
-    <form
-      className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10"
-      onSubmit={handleSubmit(onSumbit)}
-    >
+    <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10">
       <section className="flex flex-col gap-4">
         <div className="flex flex-col justify-center items-start gap-6 mb-4">
           <h4 className="font-medium text-primaryBlue-900">Selecciona el metodo de pago</h4>
@@ -81,13 +61,13 @@ export const PaymentForm = () => {
           <div className="relative">
             <input
               type="text"
-              autoFocus
               placeholder="1234 5678 9012 3456"
+              minLength={19}
               maxLength={19}
-              className={clsx("payment-input-form", { "border-red-400": errors.cardNumber })}
-              {...register("cardNumber", {
-                onChange: (e) => { handleCardNumberChange(e) },
-                required: true
+              className={`${shouldValidateCardFields && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
+              {...register("userCard.cardNumber", {
+                onChange: handleCardNumberChange,
+                required: shouldValidateCardFields ? true : false,
               })}
             />
 
@@ -95,7 +75,9 @@ export const PaymentForm = () => {
               <RenderCardIcon cardType={cardType} />
             </div>
           </div>
-
+          {shouldValidateCardFields && errors.userCard?.cardNumber && (
+            <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
+          )}
         </div>
 
         <div className="flex w-full flex-col mb-2">
@@ -104,11 +86,16 @@ export const PaymentForm = () => {
           </label>
           <input
             type="text"
-            autoFocus
+            minLength={2}
             placeholder='John Doe'
-            className={clsx("payment-input-form", { "border-red-400": errors.ownerName })}
-            {...register("ownerName", { required: true })}
+            className={`${shouldValidateCardFields && errors.userCard?.ownerName ? 'payment-input-error-form' : 'payment-input-form'}`}
+            {...register("userCard.ownerName", {
+              required: shouldValidateCardFields ? true : false
+            })}
           />
+          {shouldValidateCardFields && errors.userCard?.ownerName && (
+            <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
+          )}
         </div>
 
         {/* Expiry and CVV card  */}
@@ -119,15 +106,18 @@ export const PaymentForm = () => {
             </label>
             <input
               type="text"
-              autoFocus
+              minLength={5}
               maxLength={5}
               placeholder="04/28"
-              className={clsx("payment-input-form", { "border-red-400": errors.expiresIn })}
-              {...register("expiresIn", {
-                onChange: (e) => { handleExpiryChange(e) },
-                required: true
+              className={`${shouldValidateCardFields && errors.userCard?.expiresIn ? 'payment-input-error-form' : 'payment-input-form'}`}
+              {...register("userCard.expiresIn", {
+                onChange: handleExpiryChange,
+                required: shouldValidateCardFields ? true : false
               })}
             />
+            {shouldValidateCardFields && errors.userCard?.expiresIn && (
+              <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
+            )}
           </div>
 
           <div className="flex w-32 flex-col mb-2">
@@ -135,13 +125,19 @@ export const PaymentForm = () => {
               CVV
             </label>
             <input
+              minLength={3}
               maxLength={3}
               type="text"
-              autoFocus
               placeholder='323'
-              className={clsx("payment-input-form", { "border-red-400": errors.cvv })}
-              {...register("cvv", { required: true })}
+              className={`${shouldValidateCardFields && errors.userCard?.cvv ? 'payment-input-error-form' : 'payment-input-form'}`}
+              {...register("userCard.cvv", {
+                required: shouldValidateCardFields ? true : false,
+                onChange: handleCardCVV,
+              })}
             />
+            {shouldValidateCardFields && errors.userCard?.cvv && (
+              <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
+            )}
           </div>
         </div>
       </section>
@@ -154,29 +150,31 @@ export const PaymentForm = () => {
         <div className="flex flex-col w-full gap-4">
           {PaymentMethodsOptions.map((option, index) => (
             <PaymentOption
-              key={option.method + index}
-              method={option.method}
+              key={option.method! + index}
+              method={option.method!}
               name={option.name}
               description={option.description}
               imageSrc={option.imageSrc}
-              checked={selectedPayment === option.method}
-              onClick={() => handleSelect(option.method)}
-              register={register("paymentMethod", { required: true })}
+              checked={paymentGatewaySelected === option.method}
+              onClick={() => toggleGateway(option.method)}
+              register={register("paymentGateway")}
             />
           ))}
         </div>
 
         {/* Terms and conditions */}
-        <div className="flex justify-center items-start w-full gap-2 mt-4 mb-10">
-          <input
-            type="checkbox"
-            className="h-4 w-4 accent-primaryBlue-500"
-          />
-          <p className=" text-xs font-normal text-primaryBlue-900">
+        <div className="flex flex-col justify-start items-start mt-4 mb-10">
+          {errors.checkTermsAndConditions && (<ErrorMessage message='Se requiere que acepte los terminos' className="mb-2 ml-2" />)}
+          <label className="flex justify-center items-start w-full gap-2 text-xs font-normal text-primaryBlue-900 cursor-pointer select-none">
+            <input
+              type="checkbox"
+              className="h-4 w-4 accent-primaryBlue-500"
+              {...register("checkTermsAndConditions", { required: true })}
+            />
             Acepto los términos y condiciones y políticas de privacidad de Garage Go.
-          </p>
+          </label>
         </div>
       </section>
-    </form>
+    </div>
   )
 }

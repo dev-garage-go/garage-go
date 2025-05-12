@@ -1,7 +1,5 @@
 import { IoClose } from "react-icons/io5"
 import { formatNumberWithDots } from '@/utils';
-import { redirect, useRouter } from "next/navigation";
-import Link from "next/link";
 
 interface Props {
   mainService: {
@@ -142,12 +140,11 @@ export const Summary = ({ mainService, secundaryService, coupon, summary }: Prop
         <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
 
         <div className="flex justify-center items-center w-full mt-10">
-          {/* TODO: Evaluar si tengo que hacer client component para manejar de diferentes formas este boton */}
-          <Link
-            href={'/payment'}
+          <button
+            type="submit"
             className="px-10 py-2 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
             {summary.btnString}
-          </Link>
+          </button>
         </div>
       </div>
     </section>

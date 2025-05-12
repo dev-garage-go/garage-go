@@ -1,6 +1,10 @@
 import {
   Aceite,
   AgendaCotiza,
+  Benefits15Percent,
+  Benefits30Percent,
+  Benefits4x3Tires,
+  BenefitsTechnical,
   CambioNeumaticos,
   CambioParabrisas,
   ChequeoPreventivo,
@@ -24,7 +28,19 @@ import {
   ServicioDomicilio,
   SuperCheck,
 } from "@/assets";
-import { QuantityTires, TypesTiresOptions } from "@/interfaces";
+
+import {
+  BannerDisccountsInterface,
+  BenefitsInterface,
+  FAQsInterface,
+  HeaderOptionInterface,
+  QuantityTires,
+  ReviewsInterface,
+  ServicesInterface,
+  ServicesPagesFAQs,
+  StepsServicesPagesInterface,
+  VehicleMileagesOptions
+} from "@/interfaces";
 
 const srvPath = '/services'
 
@@ -35,7 +51,7 @@ export const FeatureIconsMap: Record<string, string> = {
   'garantia': Garantia,
 };
 
-
+// Header options to navigate
 export const HeaderLinksOptions: HeaderOptionInterface[] = [
   {
     title: "Inicio",
@@ -139,37 +155,22 @@ export const BenefitsData: BenefitsInterface[] = [
   {
     name: "30% en Mantencion por kilometraje",
     btnString: "Agenda ahora",
-    image: Revision
+    image: Benefits30Percent
   },
   {
     name: "15% en Cambio de aceita",
     btnString: "Agenda ahora",
-    image: Revision
+    image: Benefits15Percent
   },
   {
     name: "Gestion de Revision Tecnica",
     btnString: "Cotiza ahora",
-    image: Revision
+    image: BenefitsTechnical
   },
   {
     name: "4x3 en Neumaticos",
     btnString: "Cotiza ahora",
-    image: Revision
-  },
-  {
-    name: "20% Cambio de bateria",
-    btnString: "Cotiza ahora",
-    image: Revision
-  },
-  {
-    name: "15% Chequeo preventivo",
-    btnString: "Cotiza ahora",
-    image: Revision
-  },
-  {
-    name: "10% Revision tecnica",
-    btnString: "Cotiza ahora",
-    image: Revision
+    image: Benefits4x3Tires
   },
 ]
 
@@ -455,14 +456,21 @@ export const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
   { label: "Cuatro cubiertas", value: 4 },
 ]
 
-export const TypesTires: { label: string; value: TypesTiresOptions }[] = [
-  { label: 'Ciudad', value: 'ciudad' },
-  { label: 'Offroad', value: 'offroad' },
-  { label: 'Intermedio', value: 'intermedio' }
-]
-
 export const AddMoreServices: { name: string, price: number }[] = [
   { name: "Gestión de revisión técnica", price: 48990 },
   { name: "Diagnostico automotriz", price: 65990 },
   { name: "Servicio de frenos", price: 35990 }
+]
+
+export const MileagesOptions: VehicleMileagesOptions[] = [
+  { quantity: "10.000 kms" },
+  { quantity: "20.000 kms" },
+  { quantity: "30.000 kms" },
+  { quantity: "40.000 kms" },
+  { quantity: "50.000 kms" },
+  { quantity: "60.000 kms" },
+  { quantity: "70.000 kms" },
+  { quantity: "80.000 kms" },
+  { quantity: "90.000 kms" },
+  { quantity: "Otro" }
 ]

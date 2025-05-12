@@ -16,19 +16,19 @@ export const BenefitsCard = ({ btnString, image, name }: Props) => {
         </p>
       </div>
 
-      <div className='py-4 px-5 md:p-6 md:px-7'>
+      <div className='p-4'>
         {/* Main image */}
-        <div className='relative h-52 md:h-60 xl:h-72 w-full'>
+        <div className='relative h-52 md:h-64 xl:h-80 w-full rounded-3xl'>
           <Image
             fill
             src={image}
             alt={name}
-            className='object-cover rounded-3xl w-auto h-auto'
+            className='object-contain rounded-3xl w-auto h-auto'
           />
         </div>
 
         <div className='w-full flex justify-center items-center my-4'>
-          <button className='text-sm md:text-base text-center text-primaryBlue-500 w-full max-w-sm p-2 rounded'>
+          <button className='text-sm md:text-base text-center font-medium text-primaryBlue-600 w-full max-w-sm p-2 rounded hover:font-semibold transition-all duration-300'>
             {btnString}
           </button>
         </div>

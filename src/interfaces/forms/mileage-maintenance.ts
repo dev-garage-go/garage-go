@@ -1,0 +1,26 @@
+import { Dayjs } from 'dayjs';
+
+export type MileageMaintenanceFormInputs = {
+  user: {
+    name: string;
+    lastName: string;
+    phone: string;
+    email: string;
+    address: string,
+    typeAddress: string
+    additionalInfo?: string
+  },
+  vehicle: {
+    licensePlate?: string
+    carBrand: string;
+    carModel: string;
+    carKm: string;
+    carYear: number;
+  },
+  booking: {
+    serviceName: string,
+    date: Dayjs,
+    time: string,
+    extraOptions?: {}
+  }
+}

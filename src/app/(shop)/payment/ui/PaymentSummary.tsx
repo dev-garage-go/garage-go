@@ -1,6 +1,12 @@
+import { ErrorMessage } from "@/components"
 import { IoClose } from "react-icons/io5"
 
-export const PaymentSummary = () => {
+interface Props {
+  hasCompletedPaymentData: boolean
+  errorBothMethods: boolean
+}
+
+export const PaymentSummary = ({ hasCompletedPaymentData, errorBothMethods }: Props) => {
   return (
     <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
       <h4 className="font-semibold ml-4 md:ml-6 text-primaryBlue-900">
@@ -70,13 +76,22 @@ export const PaymentSummary = () => {
       </div>
 
       {/* Pay button */}
-      <div className="flex justify-center items-center w-full mt-10">
-        <button
-          // TODO: onClick={() => console.log('Ejecuta logica de pago')}
-          className="block text-center w-full max-w-lg py-2 bg-primaryBlue-900 text-white font-semibold rounded-md
-          hover:brightness-125 hover:scale-105 transition-all duration-200">
-          Ir a pagar
-        </button>
+      <div className="flex flex-col justify-center items-center gap-2 mt-10 w-full">
+        <div className="flex justify-center items-center w-full ">
+          <button
+            disabled={!hasCompletedPaymentData}
+            type="submit"
+            className="payment-form-button">
+            Ir a pagar
+          </button>
+        </div>
+        {
+          errorBothMethods && (
+            <div className="flex justify-center items-center w-full max-w-md bg-red-100 rounded-md py-4 mt-5">
+              <ErrorMessage message={'Solo puede seleccionar un metodo de pago'} className="w-fit" />
+            </div>
+          )
+        }
       </div>
     </section>
   )
