@@ -33,6 +33,12 @@ export const PaymentForm = () => {
     setValue("userCard.expiresIn", formatted);
   };
 
+
+  const handleCardCVV = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const onlyDigits = e.target.value.replace(/\D/g, "");
+    setValue("userCard.cvv", onlyDigits)
+  }
+
   // Allows that user can diselect a payment gateway option
   const toggleGateway = (method: PaymentGatewayMethods) => {
     setValue("paymentGateway", paymentGatewaySelected === method ? undefined : method);
@@ -125,7 +131,8 @@ export const PaymentForm = () => {
               placeholder='323'
               className={`${shouldValidateCardFields && errors.userCard?.cvv ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cvv", {
-                required: shouldValidateCardFields ? true : false
+                required: shouldValidateCardFields ? true : false,
+                onChange: handleCardCVV,
               })}
             />
             {shouldValidateCardFields && errors.userCard?.cvv && (
