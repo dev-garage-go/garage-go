@@ -23,9 +23,9 @@ export const PaymentFormWrapper = () => {
 
   const { setValue, handleSubmit, trigger, getValues, watch } = methods
 
-  const paymentMethod = watch("methodSelected")
-  const paymentGateway = watch("paymentGateway");
   const card = watch("userCard");
+  const paymentGateway = watch("paymentGateway");
+  const paymentMethod = watch("methodSelected")
   const termsChecked = watch("checkTermsAndConditions")
 
   // validators
@@ -56,7 +56,7 @@ export const PaymentFormWrapper = () => {
   // validate payment data when change
   useEffect(() => {
     const dataCompleted = hasCompletedPaymentData();
-    if (dataCompleted && termsChecked) {
+    if (dataCompleted) {
       setEnableButton(true);
     } else {
       setEnableButton(false);
@@ -93,7 +93,7 @@ export const PaymentFormWrapper = () => {
     if (!isValid) return;
 
     const dataCompleted = hasCompletedPaymentData()
-    if (dataCompleted) return;
+    if (!dataCompleted) return;
 
     const newValues = getValues()
     console.log(newValues)
