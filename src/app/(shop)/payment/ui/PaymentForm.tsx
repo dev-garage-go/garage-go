@@ -60,11 +60,12 @@ export const PaymentForm = () => {
             <input
               type="text"
               placeholder="1234 5678 9012 3456"
+              minLength={19}
               maxLength={19}
               className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cardNumber", {
                 onChange: handleCardNumberChange,
-                required: useCardMethodSelected ? true : false
+                required: useCardMethodSelected ? true : false,
               })}
             />
 
@@ -83,6 +84,7 @@ export const PaymentForm = () => {
           </label>
           <input
             type="text"
+            minLength={2}
             placeholder='John Doe'
             className={`${useCardMethodSelected && errors.userCard?.ownerName ? 'payment-input-error-form' : 'payment-input-form'}`}
             {...register("userCard.ownerName", {
@@ -102,6 +104,7 @@ export const PaymentForm = () => {
             </label>
             <input
               type="text"
+              minLength={5}
               maxLength={5}
               placeholder="04/28"
               className={`${useCardMethodSelected && errors.userCard?.expiresIn ? 'payment-input-error-form' : 'payment-input-form'}`}
@@ -120,6 +123,7 @@ export const PaymentForm = () => {
               CVV
             </label>
             <input
+              minLength={3}
               maxLength={3}
               type="text"
               placeholder='323'

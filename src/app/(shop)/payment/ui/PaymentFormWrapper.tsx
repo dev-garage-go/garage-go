@@ -34,7 +34,13 @@ export const PaymentFormWrapper = () => {
   }
 
   const hasValidCardData = (): boolean => {
-    return !!card?.cardNumber && !!card?.expiresIn && !!card?.cvv && !!card?.ownerName
+    const validCard = card?.cardNumber && card.cardNumber.length === 19
+    const validCVV = card?.cvv && card.cvv.length === 3
+    const validExpiry = card?.expiresIn && card.expiresIn.length === 5
+    const validOwnerName = card?.ownerName && card.ownerName.length >= 2
+
+    if (validCard && validCVV && validExpiry && validOwnerName) { return true }
+    else { return false }
   }
 
   const hasValidPaymentGateway = (): boolean => {
