@@ -1,6 +1,10 @@
 import {
   Aceite,
   AgendaCotiza,
+  Benefits15Percent,
+  Benefits30Percent,
+  Benefits4x3Tires,
+  BenefitsTechnical,
   CambioNeumaticos,
   CambioParabrisas,
   ChequeoPreventivo,
@@ -151,37 +155,22 @@ export const BenefitsData: BenefitsInterface[] = [
   {
     name: "30% en Mantencion por kilometraje",
     btnString: "Agenda ahora",
-    image: Revision
+    image: Benefits30Percent
   },
   {
     name: "15% en Cambio de aceita",
     btnString: "Agenda ahora",
-    image: Revision
+    image: Benefits15Percent
   },
   {
     name: "Gestion de Revision Tecnica",
     btnString: "Cotiza ahora",
-    image: Revision
+    image: BenefitsTechnical
   },
   {
     name: "4x3 en Neumaticos",
     btnString: "Cotiza ahora",
-    image: Revision
-  },
-  {
-    name: "20% Cambio de bateria",
-    btnString: "Cotiza ahora",
-    image: Revision
-  },
-  {
-    name: "15% Chequeo preventivo",
-    btnString: "Cotiza ahora",
-    image: Revision
-  },
-  {
-    name: "10% Revision tecnica",
-    btnString: "Cotiza ahora",
-    image: Revision
+    image: Benefits4x3Tires
   },
 ]
 
