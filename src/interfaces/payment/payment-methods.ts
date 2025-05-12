@@ -17,5 +17,6 @@ interface UserCard {
 export interface PaymentFormSchema {
   methodSelected?: 'user-card' | 'payment-gateway'
   userCard?: UserCard
-  paymentGateway?: PaymentGatewayMethods 
+  paymentGateway?: PaymentGatewayMethods
+  checkTermsAndConditions: boolean
 }

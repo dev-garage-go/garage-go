@@ -156,14 +156,18 @@ export const PaymentForm = () => {
         </div>
 
         {/* Terms and conditions */}
-        <div className="flex justify-center items-start w-full gap-2 mt-4 mb-10">
-          <input
-            type="checkbox"
-            className="h-4 w-4 accent-primaryBlue-500"
-          />
-          <p className=" text-xs font-normal text-primaryBlue-900">
-            Acepto los términos y condiciones y políticas de privacidad de Garage Go.
-          </p>
+        <div className="flex flex-col justify-start items-start mt-4 mb-10">
+          {errors.checkTermsAndConditions && (<ErrorMessage message='Se requiere que acepte los terminos' className="mb-2 ml-2" />)}
+          <div className="flex justify-center items-start w-full gap-2 ">
+            <input
+              type="checkbox"
+              className="h-4 w-4 accent-primaryBlue-500"
+              {...register("checkTermsAndConditions", { required: true })}
+            />
+            <p className=" text-xs font-normal text-primaryBlue-900">
+              Acepto los términos y condiciones y políticas de privacidad de Garage Go.
+            </p>
+          </div>
         </div>
       </section>
     </div>

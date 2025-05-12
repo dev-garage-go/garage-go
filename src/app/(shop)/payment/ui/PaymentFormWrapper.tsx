@@ -12,6 +12,7 @@ export const PaymentFormWrapper = () => {
       methodSelected: undefined,
       userCard: undefined,
       paymentGateway: undefined,
+      checkTermsAndConditions: false
     }
   })
 
@@ -19,6 +20,7 @@ export const PaymentFormWrapper = () => {
 
   const hasPaymentGateway = watch("paymentGateway");
   const card = watch("userCard");
+  const termsChecked = watch("checkTermsAndConditions")
 
   const hasCardData = () => {
     return !!card?.cardNumber || !!card?.expiresIn || !!card?.cvv || !!card?.ownerName
@@ -43,6 +45,8 @@ export const PaymentFormWrapper = () => {
   }
 
   const onSubmit = (data: PaymentFormSchema) => {
+    if (!termsChecked) return;
+
     const hasCard = hasCardData()
     const hasGateway = hasPaymentGateway != undefined
 
