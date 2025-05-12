@@ -4,6 +4,8 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { PaymentForm } from './PaymentForm'
 import { PaymentSummary } from './PaymentSummary'
 import { PaymentFormSchema } from '@/interfaces'
+import { PaymentGatewayMethods } from '../../../../interfaces/payment/payment-methods';
+import { useEffect, useState } from 'react'
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormSchema>({
@@ -16,19 +18,44 @@ export const PaymentFormWrapper = () => {
     }
   })
 
+  const [enableButton, setEnableButton] = useState<boolean>(false)
+
   const { setValue, handleSubmit, trigger, getValues, watch } = methods
 
-  const hasPaymentGateway = watch("paymentGateway");
+  const paymentMethod = watch("methodSelected")
+  const paymentGateway = watch("paymentGateway");
   const card = watch("userCard");
   const termsChecked = watch("checkTermsAndConditions")
 
-  const hasCardData = () => {
+  const hasCardData = (): boolean => {
     return !!card?.cardNumber || !!card?.expiresIn || !!card?.cvv || !!card?.ownerName
   }
 
-  const hasCompletedCardData = () => {
+  const hasValidCardData = (): boolean => {
     return !!card?.cardNumber && !!card?.expiresIn && !!card?.cvv && !!card?.ownerName
   }
+
+  const hasValidPaymentGateway = (): boolean => {
+    return ["getnet", "mercado-pago", "webpay"].includes(paymentGateway ?? "");
+  }
+
+  const hasCompletedPaymentData = (): boolean => {
+    if (hasValidCardData()) { return true }
+    else if (hasValidPaymentGateway()) { return true }
+    else { return false }
+  }
+
+
+  // validate payment data when change
+  useEffect(() => {
+    const dataCompleted = hasCompletedPaymentData();
+    if (dataCompleted && termsChecked) {
+      setEnableButton(true);
+    } else {
+      setEnableButton(false);
+    }
+  }, [card?.cardNumber, card?.cvv, card?.expiresIn, card?.ownerName, paymentGateway, paymentMethod, termsChecked]);
+
 
   const setPaymentMethod = (hasCard: boolean, hasGateway: boolean) => {
     if (!hasCard && hasGateway) {
@@ -48,7 +75,7 @@ export const PaymentFormWrapper = () => {
     if (!termsChecked) return;
 
     const hasCard = hasCardData()
-    const hasGateway = hasPaymentGateway != undefined
+    const hasGateway = paymentGateway != undefined
 
     // set method
     setPaymentMethod(hasCard, hasGateway)
@@ -57,10 +84,8 @@ export const PaymentFormWrapper = () => {
     const isValid = trigger("userCard");
     if (!isValid) return;
 
-    // validate complete data card
-    if (hasCard && !hasCompletedCardData()) {
-      return new Error("Se requieren todos los campos de su tarjeta de debito/credito")
-    }
+    const dataCompleted = hasCompletedPaymentData()
+    if (dataCompleted) return;
 
     const newValues = getValues()
     console.log(newValues)
@@ -73,7 +98,7 @@ export const PaymentFormWrapper = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <PaymentForm />
-            <PaymentSummary />
+            <PaymentSummary hasCompletedPaymentData={enableButton} />
           </div>
         </form>
       </FormProvider>

@@ -1,6 +1,10 @@
 import { IoClose } from "react-icons/io5"
 
-export const PaymentSummary = () => {
+interface Props {
+  hasCompletedPaymentData: boolean
+}
+
+export const PaymentSummary = ({ hasCompletedPaymentData }: Props) => {
   return (
     <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
       <h4 className="font-semibold ml-4 md:ml-6 text-primaryBlue-900">
@@ -72,9 +76,9 @@ export const PaymentSummary = () => {
       {/* Pay button */}
       <div className="flex justify-center items-center w-full mt-10">
         <button
+          disabled={!hasCompletedPaymentData}
           type="submit"
-          className="block text-center w-full max-w-lg py-2 bg-primaryBlue-900 text-white font-semibold rounded-md
-          hover:brightness-125 hover:scale-105 transition-all duration-200">
+          className="payment-form-button">
           Ir a pagar
         </button>
       </div>
