@@ -1,11 +1,11 @@
 "use client"
 
+import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+
 import { PaymentForm } from './PaymentForm'
 import { PaymentSummary } from './PaymentSummary'
 import { PaymentFormSchema } from '@/interfaces'
-import { PaymentGatewayMethods } from '../../../../interfaces/payment/payment-methods';
-import { useEffect, useState } from 'react'
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormSchema>({
@@ -19,6 +19,7 @@ export const PaymentFormWrapper = () => {
   })
 
   const [enableButton, setEnableButton] = useState<boolean>(false)
+  const [errorBothMethods, setErrorBothMethods] = useState<boolean>(false)
 
   const { setValue, handleSubmit, trigger, getValues, watch } = methods
 
@@ -27,6 +28,7 @@ export const PaymentFormWrapper = () => {
   const card = watch("userCard");
   const termsChecked = watch("checkTermsAndConditions")
 
+  // validators
   const hasCardData = (): boolean => {
     return !!card?.cardNumber || !!card?.expiresIn || !!card?.cvv || !!card?.ownerName
   }
@@ -36,15 +38,20 @@ export const PaymentFormWrapper = () => {
   }
 
   const hasValidPaymentGateway = (): boolean => {
-    return ["getnet", "mercado-pago", "webpay"].includes(paymentGateway ?? "");
+    if (paymentGateway != undefined) {
+      return ["getnet", "mercado-pago", "webpay"].includes(paymentGateway);
+    } else { return false }
   }
 
   const hasCompletedPaymentData = (): boolean => {
-    if (hasValidCardData()) { return true }
-    else if (hasValidPaymentGateway()) { return true }
+    // the user cant choose both payment methods
+    if (hasValidCardData() && hasValidPaymentGateway()) {
+      setErrorBothMethods(true)
+      return false
+    }
+    else if (hasValidCardData() || hasValidPaymentGateway()) { return true }
     else { return false }
   }
-
 
   // validate payment data when change
   useEffect(() => {
@@ -57,6 +64,7 @@ export const PaymentFormWrapper = () => {
   }, [card?.cardNumber, card?.cvv, card?.expiresIn, card?.ownerName, paymentGateway, paymentMethod, termsChecked]);
 
 
+  // before sumbit
   const setPaymentMethod = (hasCard: boolean, hasGateway: boolean) => {
     if (!hasCard && hasGateway) {
       setValue("methodSelected", "payment-gateway");
@@ -98,7 +106,10 @@ export const PaymentFormWrapper = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <PaymentForm />
-            <PaymentSummary hasCompletedPaymentData={enableButton} />
+            <PaymentSummary
+              hasCompletedPaymentData={enableButton}
+              errorBothMethods={errorBothMethods}
+            />
           </div>
         </form>
       </FormProvider>
