@@ -6,6 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { PaymentForm } from './PaymentForm'
 import { PaymentSummary } from './PaymentSummary'
 import { PaymentFormSchema } from '@/interfaces'
+import { hasCardData, hasCompletedPaymentData, hasValidCardData, hasValidPaymentGateway } from '@/utils'
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormSchema>({
@@ -17,51 +18,20 @@ export const PaymentFormWrapper = () => {
       checkTermsAndConditions: false
     }
   })
-
-  const [enableButton, setEnableButton] = useState<boolean>(false)
-  const [errorBothMethods, setErrorBothMethods] = useState<boolean>(false)
-
   const { setValue, handleSubmit, trigger, getValues, watch } = methods
-
+  // view form data
   const card = watch("userCard");
   const paymentGateway = watch("paymentGateway");
   const paymentMethod = watch("methodSelected")
   const termsChecked = watch("checkTermsAndConditions")
 
-  // validators
-  const hasCardData = (): boolean => {
-    return !!card?.cardNumber || !!card?.expiresIn || !!card?.cvv || !!card?.ownerName
-  }
-
-  const hasValidCardData = (): boolean => {
-    const validCard = card?.cardNumber && card.cardNumber.length === 19
-    const validCVV = card?.cvv && card.cvv.length === 3
-    const validExpiry = card?.expiresIn && card.expiresIn.length === 5
-    const validOwnerName = card?.ownerName && card.ownerName.length >= 2
-
-    if (validCard && validCVV && validExpiry && validOwnerName) { return true }
-    else { return false }
-  }
-
-  const hasValidPaymentGateway = (): boolean => {
-    if (paymentGateway != undefined) {
-      return ["getnet", "mercado-pago", "webpay"].includes(paymentGateway);
-    } else { return false }
-  }
-
-  const hasCompletedPaymentData = (): boolean => {
-    // the user cant choose both payment methods
-    if (hasValidCardData() && hasValidPaymentGateway()) {
-      setErrorBothMethods(true)
-      return false
-    }
-    else if (hasValidCardData() || hasValidPaymentGateway()) { return true }
-    else { return false }
-  }
+  // handle errors
+  const [enableButton, setEnableButton] = useState<boolean>(false)
+  const showErrorBothMethods = hasValidCardData(card) && hasValidPaymentGateway(paymentGateway)
 
   // validate payment data when change
   useEffect(() => {
-    const dataCompleted = hasCompletedPaymentData();
+    const dataCompleted = hasCompletedPaymentData(paymentGateway, card);
     if (dataCompleted) {
       setEnableButton(true);
     } else {
@@ -88,7 +58,7 @@ export const PaymentFormWrapper = () => {
   const onSubmit = (data: PaymentFormSchema) => {
     if (!termsChecked) return;
 
-    const hasCard = hasCardData()
+    const hasCard = hasCardData(card)
     const hasGateway = paymentGateway != undefined
 
     // set method
@@ -96,11 +66,9 @@ export const PaymentFormWrapper = () => {
 
     // revalidate fields of form to throw errors if exist
     const isValid = trigger("userCard");
-    if (!isValid) return;
+    if (!isValid || !hasCompletedPaymentData(paymentGateway, card)) return;
 
-    const dataCompleted = hasCompletedPaymentData()
-    if (!dataCompleted) return;
-
+    // obtain new values with 'methodPayment' setted
     const newValues = getValues()
     console.log(newValues)
   }
@@ -114,7 +82,7 @@ export const PaymentFormWrapper = () => {
             <PaymentForm />
             <PaymentSummary
               hasCompletedPaymentData={enableButton}
-              errorBothMethods={errorBothMethods}
+              errorBothMethods={showErrorBothMethods}
             />
           </div>
         </form>

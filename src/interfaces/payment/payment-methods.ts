@@ -7,7 +7,7 @@ export interface PaymentGatewayMethodsOptionsInterface {
   imageSrc: string
 }
 
-interface UserCard {
+export interface UserCard {
   cardNumber: string
   ownerName: string
   expiresIn: string
