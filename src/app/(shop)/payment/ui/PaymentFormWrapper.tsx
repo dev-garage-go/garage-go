@@ -3,28 +3,19 @@
 import { FormProvider, useForm } from 'react-hook-form'
 import { PaymentForm } from './PaymentForm'
 import { PaymentSummary } from './PaymentSummary'
-import { PaymentFormData, paymentFormSchema } from '@/schemas'
-import { zodResolver } from '@hookform/resolvers/zod'
+import { PaymentFormSchema } from '@/interfaces'
 
 export const PaymentFormWrapper = () => {
-  const methods = useForm<PaymentFormData>({
-    resolver: zodResolver(paymentFormSchema),
+  const methods = useForm<PaymentFormSchema>({
     shouldFocusError: true,
     defaultValues: {
       methodSelected: undefined,
-      userCard: {
-        cardNumber: "",
-        ownerName: "",
-        expiresIn: "",
-        cvv: "",
-      },
+      userCard: undefined,
       paymentGateway: undefined,
     }
   })
 
-  const { setValue, handleSubmit, watch } = methods
-
-  // TODO: Hacer que el calendario funcione
+  const { setValue, handleSubmit, getValues, watch } = methods
 
   const hasPaymentGateway = watch("paymentGateway");
   const card = watch("userCard");
@@ -33,31 +24,34 @@ export const PaymentFormWrapper = () => {
     return !!card?.cardNumber || !!card?.expiresIn || !!card?.cvv || !!card?.ownerName
   }
 
-  const onSubmit = (data: PaymentFormData) => {
-    console.log(data)
+  const hasCompletedCardData = () => {
+    return !!card?.cardNumber && !!card?.expiresIn && !!card?.cvv && !!card?.ownerName
+  }
 
+  const onSubmit = (data: PaymentFormSchema) => {
     const hasCard = hasCardData()
-    const hasGateway = !!hasPaymentGateway
+    const hasGateway = hasPaymentGateway != undefined
 
-    if (hasCard && !hasGateway) {
-      setValue("methodSelected", "user-card")
-    } else if (!hasCard && hasGateway) {
-      setValue("methodSelected", "payment-gateway")
-    } else if (!hasCard && !hasGateway) {
-      setValue("methodSelected", undefined)
+    // set method
+    if (!hasCard && hasGateway) {
+      setValue("methodSelected", "payment-gateway");
+      setValue("userCard", undefined)
+
+    } else if (hasCard && !hasGateway) {
+      setValue("methodSelected", "user-card");
+      setValue("paymentGateway", undefined)
+
+    } else {
+      setValue("methodSelected", undefined);
     }
 
-    console.log("punto 1")
-    const result = methods.trigger() // vuelve a ejecutar la validación con Zod
+    // validate complete data card
+    if (hasCard && !hasCompletedCardData()) {
+      return new Error("Se requieren todos los campos de su tarjeta de debito/credito")
+    }
 
-    console.log("punto 2")
-    result.then(valid => {
-      if (valid) {
-        console.log("✅ DATA VÁLIDA:", methods.getValues())
-      } else {
-        console.log("❌ ERRORES EN EL FORMULARIO")
-      }
-    })
+    const newValues = getValues()
+    console.log(newValues)
   }
 
 

@@ -11,7 +11,7 @@ type PaymentOptionProps = {
   imageSrc: string;
   checked: boolean;
   register: UseFormRegisterReturn;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 export const PaymentOption = ({ method, name, description, imageSrc, checked, register, onClick }: PaymentOptionProps) => {

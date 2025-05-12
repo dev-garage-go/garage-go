@@ -5,12 +5,11 @@ import { useFormContext } from "react-hook-form";
 import { RenderCardIcon, PaymentOption, ErrorMessage } from '@/components';
 import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
-import { PaymentGatewayMethods } from "@/interfaces";
-import { PaymentFormData } from "@/schemas";
+import { PaymentFormSchema, PaymentGatewayMethods } from "@/interfaces";
 
 
 export const PaymentForm = () => {
-  const { watch, setValue, register, formState: { errors } } = useFormContext<PaymentFormData>()
+  const { watch, setValue, register, trigger, formState: { errors } } = useFormContext<PaymentFormSchema>()
 
   const cardNumber = watch("userCard.cardNumber") || "";
   const paymentGatewayOption = watch("paymentGateway")
@@ -65,7 +64,7 @@ export const PaymentForm = () => {
               className={`${useCardMethodSelected && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cardNumber", {
                 onChange: handleCardNumberChange,
-                required: useCardMethodSelected ?? false
+                required: useCardMethodSelected ? true : false
               })}
             />
 
@@ -74,7 +73,7 @@ export const PaymentForm = () => {
             </div>
           </div>
           {useCardMethodSelected && errors.userCard?.cardNumber && (
-            <ErrorMessage message={errors.userCard.cardNumber.message ?? 'Requerido'} className="mt-1 ml-2" />
+            <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
           )}
         </div>
 
@@ -87,11 +86,11 @@ export const PaymentForm = () => {
             placeholder='John Doe'
             className={`${useCardMethodSelected && errors.userCard?.ownerName ? 'payment-input-error-form' : 'payment-input-form'}`}
             {...register("userCard.ownerName", {
-              required: useCardMethodSelected ?? false
+              required: useCardMethodSelected ? true : false
             })}
           />
           {useCardMethodSelected && errors.userCard?.ownerName && (
-            <ErrorMessage message={errors.userCard.ownerName.message ?? 'Requerido'} className="mt-1 ml-2" />
+            <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
           )}
         </div>
 
@@ -108,11 +107,11 @@ export const PaymentForm = () => {
               className={`${useCardMethodSelected && errors.userCard?.expiresIn ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.expiresIn", {
                 onChange: handleExpiryChange,
-                required: useCardMethodSelected ?? false
+                required: useCardMethodSelected ? true : false
               })}
             />
             {useCardMethodSelected && errors.userCard?.expiresIn && (
-              <ErrorMessage message={errors.userCard.expiresIn.message ?? 'Requerido'} className="mt-1 ml-2" />
+              <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
             )}
           </div>
 
@@ -126,11 +125,11 @@ export const PaymentForm = () => {
               placeholder='323'
               className={`${useCardMethodSelected && errors.userCard?.cvv ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cvv", {
-                required: useCardMethodSelected ?? false
+                required: useCardMethodSelected ? true : false
               })}
             />
             {useCardMethodSelected && errors.userCard?.cvv && (
-              <ErrorMessage message={errors.userCard.cvv.message ?? 'Requerido'} className="mt-1 ml-2" />
+              <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
             )}
           </div>
         </div>
