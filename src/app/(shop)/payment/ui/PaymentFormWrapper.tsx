@@ -37,7 +37,7 @@ export const PaymentFormWrapper = () => {
     } else {
       setEnableButton(false);
     }
-  }, [card?.cardNumber, card?.cvv, card?.expiresIn, card?.ownerName, paymentGateway, paymentMethod, termsChecked]);
+  }, [card, card?.cardNumber, card?.cvv, card?.expiresIn, card?.ownerName, paymentGateway, paymentMethod, termsChecked]);
 
 
   // before sumbit

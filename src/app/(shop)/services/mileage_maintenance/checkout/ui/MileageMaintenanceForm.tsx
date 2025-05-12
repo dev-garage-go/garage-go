@@ -21,21 +21,17 @@ export const MileageMaintenanceForm = () => {
   const scheduleError = errors.booking?.time
   const calendarError = errors.booking?.date
 
-  const handleSwitchErrors = () => {
-    // Si hay un error en el calendario se le muestra el calendario al usuario para que seleccione una fecha
+
+  useEffect(() => {
+    // If there is an error in the calendar, the user is shown the calendar to select a date.
     if (calendarError) {
       setCalendarPicker(true)
       setSchedulePicker(false)
-
     } else if (scheduleError) {
-      // Si ya selecciono una fecha en el calendario pero no un horario, se le muestra el selector de horarios
+      // If the user has already selected a date in the calendar but not a timetable, the timetable selector is displayed.
       setSchedulePicker(true)
       setCalendarPicker(false)
     }
-  }
-
-  useEffect(() => {
-    handleSwitchErrors()
   }, [scheduleError, calendarError])
 
   return (
