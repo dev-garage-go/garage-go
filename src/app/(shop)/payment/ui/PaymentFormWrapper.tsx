@@ -28,11 +28,7 @@ export const PaymentFormWrapper = () => {
     return !!card?.cardNumber && !!card?.expiresIn && !!card?.cvv && !!card?.ownerName
   }
 
-  const onSubmit = (data: PaymentFormSchema) => {
-    const hasCard = hasCardData()
-    const hasGateway = hasPaymentGateway != undefined
-
-    // set method
+  const setPaymentMethod = (hasCard: boolean, hasGateway: boolean) => {
     if (!hasCard && hasGateway) {
       setValue("methodSelected", "payment-gateway");
       setValue("userCard", undefined)
@@ -44,6 +40,14 @@ export const PaymentFormWrapper = () => {
     } else {
       setValue("methodSelected", undefined);
     }
+  }
+
+  const onSubmit = (data: PaymentFormSchema) => {
+    const hasCard = hasCardData()
+    const hasGateway = hasPaymentGateway != undefined
+
+    // set method
+    setPaymentMethod(hasCard, hasGateway)
 
     // revalidate fields of form to throw errors if exist
     const isValid = trigger("userCard");
