@@ -3,8 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form'
 
-import { TiresCheckoutForm } from './TiresContractingForm';
-import { TiresCheckoutSummary } from './TiresContractingSummary';
+import { TiresContractingForm } from './TiresContractingForm';
+import { TiresContractingSummary } from './TiresContractingSummary';
 
 import { TiresChangeData } from '@/interfaces';
 
@@ -32,8 +32,8 @@ export const TiresContractingWrapper = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
-            <TiresCheckoutForm />
-            <TiresCheckoutSummary />
+            <TiresContractingForm />
+            <TiresContractingSummary />
           </div>
         </form>
       </FormProvider>

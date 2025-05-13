@@ -10,7 +10,7 @@ import { TiresQuantitySelector } from "./TiresQuantitySelector";
 import { AddServiceCard, InformationButton, SwitchButton, PromotionCard } from "@/components";
 
 
-export const TiresCheckoutForm = () => {
+export const TiresContractingForm = () => {
   const { register, watch, setValue, formState: { errors } } = useFormContext<TiresChangeData>()
 
   const promotion = watch("promotion")
