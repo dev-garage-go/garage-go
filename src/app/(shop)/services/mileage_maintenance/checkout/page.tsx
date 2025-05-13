@@ -1,5 +1,5 @@
 import { TopBanner } from "@/components";
-import { MileageMaintenanceFormWrapper } from "./ui";
+import { MileageCheckoutFormWrapper } from "./ui";
 
 export default function MileageMaintenanceCheckoutPage() {
   return (
@@ -10,7 +10,7 @@ export default function MileageMaintenanceCheckoutPage() {
         vehiclePatent="TGPL67"
       />
 
-      <MileageMaintenanceFormWrapper />
+      <MileageCheckoutFormWrapper />
     </div>
   );
 }

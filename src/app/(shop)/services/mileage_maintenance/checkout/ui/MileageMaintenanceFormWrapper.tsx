@@ -1,13 +1,13 @@
 "use client"
 
 import { FormProvider, useForm } from "react-hook-form";
-import { MileageMaintenanceForm } from "./MileageMaintenanceForm";
-import { MileageMaintenanceSummary } from "./MileageMaintenanceSummary";
-import { MileageMaintenanceFormInputs } from "@/interfaces";
+import { MileageCheckoutForm } from "./MileageMaintenanceForm";
+import { MileageCheckoutSummary } from "./MileageMaintenanceSummary";
+import { MileageCheckoutFormInputs } from "@/interfaces";
 import { useRouter } from "next/navigation";
 
-export const MileageMaintenanceFormWrapper = () => {
-  const methods = useForm<MileageMaintenanceFormInputs>({
+export const MileageCheckoutFormWrapper = () => {
+  const methods = useForm<MileageCheckoutFormInputs>({
     defaultValues: {
       booking: {
         serviceName: "mantencion por kilometraje"
@@ -19,9 +19,9 @@ export const MileageMaintenanceFormWrapper = () => {
   const router = useRouter()
 
   // Funcion que se ejecuta al enviar el formulario
-  const onSubmit = (data: MileageMaintenanceFormInputs) => {
+  const onSubmit = (data: MileageCheckoutFormInputs) => {
     console.log(data)
-    router.push("/payment")
+    // router.push("/payment")
   }
 
   return (
@@ -29,8 +29,8 @@ export const MileageMaintenanceFormWrapper = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
-            <MileageMaintenanceForm />
-            <MileageMaintenanceSummary />
+            <MileageCheckoutForm />
+            <MileageCheckoutSummary />
           </div>
         </form>
       </FormProvider>

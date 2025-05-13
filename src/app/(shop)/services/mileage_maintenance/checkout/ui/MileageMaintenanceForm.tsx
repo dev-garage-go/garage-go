@@ -6,12 +6,12 @@ import { useEffect, useState } from "react";
 // useFormContext -> permite acceder al contexto del formulario y que otros componentes {children} reciban las props o los valoros que espera el <form>
 import { Controller, useFormContext } from "react-hook-form";
 
-import { MileageMaintenanceFormInputs } from "@/interfaces";
+import { MileageCheckoutFormInputs } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, InformationButton, SchedulePicker, Select } from "@/components";
 import { AddressTypes } from "@/constants";
 
-export const MileageMaintenanceForm = () => {
-  const { register, control, formState: { errors } } = useFormContext<MileageMaintenanceFormInputs>()
+export const MileageCheckoutForm = () => {
+  const { register, control, formState: { errors } } = useFormContext<MileageCheckoutFormInputs>()
 
   // Switch calendar y schedule pickers
   const [calendarPicker, setCalendarPicker] = useState(true)
