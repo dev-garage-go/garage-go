@@ -9,6 +9,7 @@ import { Controller, useFormContext } from "react-hook-form";
 import { CheckoutFormData } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, InformationButton, SchedulePicker, Select } from "@/components";
 import { AddressTypes } from "@/constants";
+import { OtherLicensePlateButton } from "./OtherLicensePlateButton";
 
 
 interface Props {
@@ -117,9 +118,7 @@ export const CheckoutForm = ({ withBooking }: Props) => {
             <p className="font-medium text-primaryBlue-500">10.000 kms.</p>
           </div>
           <div>
-            <button className="text-xs mt-4 lg:mt-0 text-primaryBlue-500 hover:font-medium duration-200 transition-all">
-              Ingresar otra patente
-            </button>
+            <OtherLicensePlateButton />
           </div>
         </div>
       </section>
