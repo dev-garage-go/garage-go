@@ -134,14 +134,26 @@ export const TiresContractingForm = () => {
         {/* Tires size input */}
         <div className="flex flex-col gap-2 w-full mt-4">
           <h4 className="title-h4">Ingresa tu medida</h4>
+
+          {errors.tireSize && (
+            <ErrorMessage
+              message={errors.tireSize?.message ?? 'Requerido'}
+              className="mt-2"
+            />)}
           <div className="flex justify-center items-center gap-2 p-2 rounded-xl shadow-lg bg-white w-full ">
             <input
               className="py-2 px-4 border w-full rounded-md bg-gray-100 placeholder-primaryBlue-400 placeholder:font-light placeholder:text-customGray-400"
               placeholder="Ancho / Perfil / Aro"
               type="text"
               {...register("tireSize", {
-                minLength: 13,
-                maxLength: 13,
+                minLength: {
+                  value: 13,
+                  message: "Formato invalido"
+                },
+                maxLength: {
+                  value: 13,
+                  message: "Formato invalido"
+                },
                 required: true,
                 onChange: (e) => handleTireSizes(e.target.value as string),
               })}
@@ -152,7 +164,6 @@ export const TiresContractingForm = () => {
               className="py-2 px-3 md:px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
               Aceptar
             </button>
-            {errors.tireSize?.message && (<ErrorMessage message="Requerido" />)}
           </div>
           <div className="mt-2">
             <InformationButton
