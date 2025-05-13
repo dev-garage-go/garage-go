@@ -104,7 +104,7 @@ export const PaymentForm = () => {
             })}
           />
           {shouldValidateCardFields && errors.userCard?.ownerName && (
-            <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
+            <ErrorMessage message={errors.userCard?.ownerName.message ?? 'Requerido'} className="mt-1 ml-2" />
           )}
         </div>
 
@@ -132,7 +132,7 @@ export const PaymentForm = () => {
               })}
             />
             {shouldValidateCardFields && errors.userCard?.expiresIn && (
-              <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
+              <ErrorMessage message={errors.userCard?.expiresIn.message ?? 'Requerido'} className="mt-1 ml-2" />
             )}
           </div>
 
@@ -158,7 +158,7 @@ export const PaymentForm = () => {
               })}
             />
             {shouldValidateCardFields && errors.userCard?.cvv && (
-              <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
+              <ErrorMessage message={errors.userCard?.cvv.message ?? 'Requerido'} className="mt-1 ml-2" />
             )}
           </div>
         </div>
