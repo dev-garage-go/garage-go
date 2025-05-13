@@ -48,6 +48,7 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
 
           {/* Mobile button */}
           <button
+            type='button'
             onClick={() => setShowDetails(!showDetails)}
             className={`button-option-bg-transparent py-1 max-w-32 md:hidden mt-4`}>
             Agregar
@@ -55,6 +56,7 @@ export const AddServiceCard = ({ name, price, details }: Props) => {
         </div>
         {/* Desktop button */}
         <button
+          type='button'
           onClick={() => setShowDetails(!showDetails)}
           className={`button-option-bg-transparent py-1 max-w-32 hidden md:block`}>
           Agregar

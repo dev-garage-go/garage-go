@@ -1,6 +1,6 @@
 import { Summary } from "@/components"
 
-export const QuotesSummary = () => {
+export const TiresContractingSummary = () => {
   return (
     <Summary
       mainService={{

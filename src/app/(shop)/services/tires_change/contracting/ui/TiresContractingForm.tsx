@@ -1,39 +1,23 @@
 "use client"
 
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import { InfoRuedas, Promotion4x3Tires } from "@/assets";
-import { QuantityTires, TypesTiresOptions } from "@/interfaces";
+import { QuantityTires, TiresChangeData, TypesTiresOptions } from "@/interfaces";
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
-import { AddServiceCard, InformationButton, SwitchButton, PromotionCard } from "@/components";
+import { AddServiceCard, InformationButton, SwitchButton, PromotionCard, ErrorMessage } from "@/components";
 
-type FormInputs = {
-  promotion: boolean;
-  quantityTires: QuantityTires;
-  typeTires: TypesTiresOptions;
-}
 
-export const QuotesForm = () => {
-  const {
-    register,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormInputs>({
-    defaultValues: {
-      promotion: false,
-      quantityTires: 0,
-      typeTires: 'ciudad'
-    }
-  })
+export const TiresContractingForm = () => {
+  const { register, watch, setValue, formState: { errors } } = useFormContext<TiresChangeData>()
 
   const promotion = watch("promotion")
   const quantityTires = watch("quantityTires")
   const typeTires = watch("typeTires")
 
+  // type tires
   const handleTypeTires = (type: TypesTiresOptions) => {
     if (typeTires === type) {
       setValue("typeTires", "ciudad")
@@ -42,6 +26,7 @@ export const QuotesForm = () => {
     }
   }
 
+  // promotion 4x3
   const handleSelectPromotion = (state: boolean) => {
     if (promotion === state) {
       setValue("promotion", false)
@@ -50,6 +35,7 @@ export const QuotesForm = () => {
     }
   }
 
+  // quantity tires
   const handleSelectQuantityTires = (quantity: QuantityTires) => {
     if (quantityTires === quantity) {
       setValue("quantityTires", 0)
@@ -58,16 +44,26 @@ export const QuotesForm = () => {
     }
   }
 
-  // Function that will be executed when the form is submitted
-  const onSumbit = (data: FormInputs) => {
-    console.log(data)
+  // tire size
+  const handleTireSizes = (size: string) => {
+    // delete everything that is not a number
+    const cleaned = size.replace(/\D/g, "");
+
+    // split into parts
+    const width = cleaned.slice(0, 3);
+    const profile = cleaned.slice(3, 5);
+    const ring = cleaned.slice(5, 7);
+
+    let formatted = width;
+    if (profile) formatted += ` / ${profile}`;
+    if (ring) formatted += ` / ${ring}`;
+
+    setValue("tireSize", formatted)
   }
 
+
   return (
-    <form
-      className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10 overflow-visible"
-      onSubmit={handleSubmit(onSumbit)}
-    >
+    <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10 overflow-visible"    >
       <section className="flex flex-col gap-4">
         <div className="flex flex-col justify-center items-start mb-4">
 
@@ -105,16 +101,21 @@ export const QuotesForm = () => {
             <h4 className="text-primaryBlue-900 font-semibold">Cantidad de neumaticos</h4>
 
             {/* Selects quantity of tires - inputs radios */}
-            <div className="flex w-full justify-start gap-8 items-center px-2">
-              {QuantityTiresOptions.map((option, index) => (
-                <TiresQuantitySelector
-                  key={option.label + index}
-                  quantity={option.value}
-                  checked={quantityTires === option.value}
-                  register={register("quantityTires")}
-                  onClick={() => handleSelectQuantityTires(option.value)}
-                />
-              ))}
+            <div>
+              {errors.quantityTires && (<ErrorMessage message={'Requerido'} className="mb-4" />)}
+              <div className="flex w-full justify-start gap-8 items-center px-2">
+                {QuantityTiresOptions.map((option, index) => (
+                  <TiresQuantitySelector
+                    key={option.label + index}
+                    quantity={option.value}
+                    checked={quantityTires === option.value}
+                    register={register("quantityTires", {
+                      required: true
+                    })}
+                    onClick={() => handleSelectQuantityTires(option.value)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
@@ -138,14 +139,34 @@ export const QuotesForm = () => {
         {/* Tires size input */}
         <div className="flex flex-col gap-2 w-full mt-4">
           <h4 className="title-h4">Ingresa tu medida</h4>
+
+          {errors.tireSize && (
+            <ErrorMessage
+              message={errors.tireSize?.type === "minLength" ? errors.tireSize.message! : 'Requerido'}
+              className="mt-2"
+            />)}
           <div className="flex justify-center items-center gap-2 p-2 rounded-xl shadow-lg bg-white w-full ">
             <input
               className="py-2 px-4 border w-full rounded-md bg-gray-100 placeholder-primaryBlue-400 placeholder:font-light placeholder:text-customGray-400"
               placeholder="Ancho / Perfil / Aro"
               type="text"
+              {...register("tireSize", {
+                minLength: {
+                  value: 13,
+                  message: "Formato invalido"
+                },
+                maxLength: {
+                  value: 13,
+                  message: "Formato invalido"
+                },
+                required: true,
+                onChange: (e) => handleTireSizes(e.target.value as string),
+              })}
             />
 
-            <button className="py-2 px-3 md:px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
+            <button
+              type="button"
+              className="py-2 px-3 md:px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
               Aceptar
             </button>
           </div>
@@ -175,6 +196,6 @@ export const QuotesForm = () => {
           </div>
         </div>
       </section>
-    </form>
+    </div>
   )
 }

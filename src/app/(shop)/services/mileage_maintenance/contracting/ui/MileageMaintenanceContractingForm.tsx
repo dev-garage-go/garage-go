@@ -1,11 +1,9 @@
 "use client"
 
-import { useState } from 'react'
+import { useFormContext } from 'react-hook-form'
 import { AddServiceCard, ButtonOptions } from '@/components'
 import { MileagesOptions } from '@/constants'
-import { ExtraServices, VehicleMileages } from '@/interfaces'
-import { boolean } from 'zod'
-
+import { ExtraServices, MileageContractingForm, VehicleMileages } from '@/interfaces'
 
 
 const extraServices: ExtraServices[] = [
@@ -37,7 +35,14 @@ const extraServices: ExtraServices[] = [
 ]
 
 export const MileageMaintenanceContractingForm = () => {
-  const [mileagesSelected, setMileagesSelected] = useState<VehicleMileages>("10.000 kms")
+  const { setValue, watch } = useFormContext<MileageContractingForm>()
+
+  const mileages = watch("mileages")
+
+  const handleMileages = (quantity: VehicleMileages) => {
+    setValue("mileages", quantity)
+  }
+
 
   return (
     <div className="form-container">
@@ -55,8 +60,8 @@ export const MileageMaintenanceContractingForm = () => {
                   className='h-12'
                   key={item.quantity + index}
                   current={item.quantity}
-                  selected={mileagesSelected}
-                  onClick={() => setMileagesSelected(item.quantity)}
+                  selected={mileages}
+                  onClick={() => handleMileages(item.quantity)}
                   item={item.quantity}
                 />
               ))}

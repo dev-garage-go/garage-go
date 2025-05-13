@@ -1,13 +1,13 @@
 import { Dayjs } from 'dayjs';
 
-export type MileageMaintenanceFormInputs = {
+export type CheckoutFormData = {
   user: {
     name: string;
     lastName: string;
     phone: string;
     email: string;
     address: string,
-    typeAddress: string
+    typeAddress: '' | 'casa' | 'oficina' | 'depto'
     additionalInfo?: string
   },
   vehicle: {

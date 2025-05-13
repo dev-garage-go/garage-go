@@ -1,6 +1,6 @@
 import { Summary } from "@/components"
 
-export const MileageMaintenanceSummary = () => {
+export const CheckoutSummary = () => {
   return (
     <Summary
       mainService={{

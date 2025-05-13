@@ -10,7 +10,7 @@ import { firstLetterUppercase } from '@/utils';
 interface Props {
   options: SelectOptions[]
   label: string
-  value: string
+  value?: string
   onChange: (value: string) => void
   error?: string
 }
