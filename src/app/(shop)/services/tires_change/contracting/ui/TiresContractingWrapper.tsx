@@ -15,7 +15,9 @@ export const TiresContractingWrapper = () => {
     defaultValues: {
       promotion: false,
       quantityTires: 0,
-      typeTires: 'ciudad'
+      typeTires: 'ciudad',
+      tireSize: '',
+      extraServices: undefined
     }
   })
 

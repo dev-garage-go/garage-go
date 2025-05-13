@@ -41,6 +41,25 @@ export const TiresContractingForm = () => {
     }
   }
 
+  // Tire size
+  const tireSizeRegex = /^\d{3}\/\d{2}\/\d{2}$/;
+
+  const handleTireSizes = (size: string) => {
+    // delete everything that is not a number
+    const cleaned = size.replace(/\D/g, "");
+
+    // split into parts
+    const width = cleaned.slice(0, 3);
+    const profile = cleaned.slice(3, 5);
+    const ring = cleaned.slice(5, 7);
+
+    let formatted = width;
+    if (profile) formatted += ` / ${profile}`;
+    if (ring) formatted += ` / ${ring}`;
+
+    setValue("tireSize", formatted)
+  }
+
 
   return (
     <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10 overflow-visible"    >
@@ -119,9 +138,19 @@ export const TiresContractingForm = () => {
               className="py-2 px-4 border w-full rounded-md bg-gray-100 placeholder-primaryBlue-400 placeholder:font-light placeholder:text-customGray-400"
               placeholder="Ancho / Perfil / Aro"
               type="text"
+              {...register("tireSize", {
+                required: true,
+                onChange: (e) => handleTireSizes(e.target.value as string),
+                pattern: {
+                  value: tireSizeRegex,
+                  message: "Formato inválido. Usa el formato 275 / 40 / 18",
+                }
+              })}
             />
 
-            <button className="py-2 px-3 md:px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
+            <button
+              type="button"
+              className="py-2 px-3 md:px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
               Aceptar
             </button>
           </div>
