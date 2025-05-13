@@ -1,4 +1,5 @@
-import { QuantityTires, TypesTiresOptions } from "../components-interfaces/tires-change";
+export type QuantityTires = 0 | 1 | 2 | 3 | 4
+export type TypesTiresOptions = 'ciudad' | 'offroad' | 'intermedio'
 
 export interface TiresChangeData {
   promotion: boolean;

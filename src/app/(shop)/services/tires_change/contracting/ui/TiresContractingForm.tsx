@@ -1,6 +1,6 @@
 "use client"
 
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 import { InfoRuedas, Promotion4x3Tires } from "@/assets";
 import { QuantityTires, TiresChangeData, TypesTiresOptions } from "@/interfaces";
@@ -11,7 +11,7 @@ import { AddServiceCard, InformationButton, SwitchButton, PromotionCard } from "
 
 
 export const TiresCheckoutForm = () => {
-  const { register, watch, setValue, handleSubmit, formState: { errors } } = useForm<TiresChangeData>()
+  const { register, watch, setValue, formState: { errors } } = useFormContext<TiresChangeData>()
 
   const promotion = watch("promotion")
   const quantityTires = watch("quantityTires")
