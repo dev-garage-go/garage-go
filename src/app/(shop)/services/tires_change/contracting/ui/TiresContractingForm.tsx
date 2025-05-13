@@ -101,16 +101,21 @@ export const TiresContractingForm = () => {
             <h4 className="text-primaryBlue-900 font-semibold">Cantidad de neumaticos</h4>
 
             {/* Selects quantity of tires - inputs radios */}
-            <div className="flex w-full justify-start gap-8 items-center px-2">
-              {QuantityTiresOptions.map((option, index) => (
-                <TiresQuantitySelector
-                  key={option.label + index}
-                  quantity={option.value}
-                  checked={quantityTires === option.value}
-                  register={register("quantityTires")}
-                  onClick={() => handleSelectQuantityTires(option.value)}
-                />
-              ))}
+            <div>
+              {errors.quantityTires && (<ErrorMessage message={'Requerido'} className="mb-4" />)}
+              <div className="flex w-full justify-start gap-8 items-center px-2">
+                {QuantityTiresOptions.map((option, index) => (
+                  <TiresQuantitySelector
+                    key={option.label + index}
+                    quantity={option.value}
+                    checked={quantityTires === option.value}
+                    register={register("quantityTires", {
+                      required: true
+                    })}
+                    onClick={() => handleSelectQuantityTires(option.value)}
+                  />
+                ))}
+              </div>
             </div>
           </div>
 
