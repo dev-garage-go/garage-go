@@ -1,8 +1,8 @@
 "use client"
 
 import { FormProvider, useForm } from "react-hook-form";
-import { MileageCheckoutForm } from "./MileageMaintenanceForm";
-import { MileageCheckoutSummary } from "./MileageMaintenanceSummary";
+import { MileageCheckoutForm } from "./MileageCheckoutForm";
+import { MileageCheckoutSummary } from "./MileageCheckoutSummary";
 import { MileageCheckoutFormInputs } from "@/interfaces";
 import { useRouter } from "next/navigation";
 
