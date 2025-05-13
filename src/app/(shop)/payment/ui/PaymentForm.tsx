@@ -82,7 +82,10 @@ export const PaymentForm = () => {
             </div>
           </div>
           {shouldValidateCardFields && errors.userCard?.cardNumber && (
-            <ErrorMessage message={errors.userCard.cardNumber.message ?? 'Requerido'} className="mt-1 ml-2" />
+            <ErrorMessage
+              message={errors.userCard?.cardNumber.type === "minLength" ? errors.userCard.cardNumber.message! : 'Requerido'}
+              className="mt-1 ml-2"
+            />
           )}
         </div>
 
@@ -100,11 +103,14 @@ export const PaymentForm = () => {
                 value: 2,
                 message: 'Debe tener al menos 2 caracteres'
               },
-              
+
             })}
           />
           {shouldValidateCardFields && errors.userCard?.ownerName && (
-            <ErrorMessage message={errors.userCard?.ownerName.message ?? 'Requerido'} className="mt-1 ml-2" />
+            <ErrorMessage
+              message={errors.userCard?.ownerName.type === "minLength" ? errors.userCard.ownerName.message! : 'Requerido'}
+              className="mt-1 ml-2"
+            />
           )}
         </div>
 
@@ -132,7 +138,10 @@ export const PaymentForm = () => {
               })}
             />
             {shouldValidateCardFields && errors.userCard?.expiresIn && (
-              <ErrorMessage message={errors.userCard?.expiresIn.message ?? 'Requerido'} className="mt-1 ml-2" />
+              <ErrorMessage
+                message={errors.userCard?.expiresIn.type === "minLength" ? errors.userCard.expiresIn.message! : 'Requerido'}
+                className="mt-1 ml-2"
+              />
             )}
           </div>
 
@@ -158,7 +167,10 @@ export const PaymentForm = () => {
               })}
             />
             {shouldValidateCardFields && errors.userCard?.cvv && (
-              <ErrorMessage message={errors.userCard?.cvv.message ?? 'Requerido'} className="mt-1 ml-2" />
+              <ErrorMessage
+                message={errors.userCard?.cvv.type === "minLength" ? errors.userCard.cvv.message! : 'Requerido'}
+                className="mt-1 ml-2"
+              />
             )}
           </div>
         </div>

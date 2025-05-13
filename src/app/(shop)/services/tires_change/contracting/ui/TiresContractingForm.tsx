@@ -137,7 +137,7 @@ export const TiresContractingForm = () => {
 
           {errors.tireSize && (
             <ErrorMessage
-              message={errors.tireSize?.message ?? 'Requerido'}
+              message={errors.tireSize?.type === "minLength" ? errors.tireSize.message! : 'Requerido'}
               className="mt-2"
             />)}
           <div className="flex justify-center items-center gap-2 p-2 rounded-xl shadow-lg bg-white w-full ">
