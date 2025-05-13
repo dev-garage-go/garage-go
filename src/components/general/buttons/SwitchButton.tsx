@@ -16,6 +16,7 @@ export const SwitchButton = <T,>({ value, valueSelected, setValueSelected, multi
 
   return (
     <button
+      type="button"
       onClick={() => setValueSelected(value)}
       className={clsx(
         'relative w-12 h-6 rounded-full transition-colors duration-300',

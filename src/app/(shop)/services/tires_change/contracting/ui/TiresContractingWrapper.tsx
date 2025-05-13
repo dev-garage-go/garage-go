@@ -6,16 +6,11 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { TiresCheckoutForm } from './TiresContractingForm';
 import { TiresCheckoutSummary } from './TiresContractingSummary';
 
-import { QuantityTires, TypesTiresOptions } from '@/interfaces';
+import { TiresChangeData } from '@/interfaces';
 
-type FormInputs = {
-  promotion: boolean;
-  quantityTires: QuantityTires;
-  typeTires: TypesTiresOptions;
-}
 
 export const TiresContractingWrapper = () => {
-  const methods = useForm<FormInputs>({
+  const methods = useForm<TiresChangeData>({
     shouldFocusError: true,
     defaultValues: {
       promotion: false,
@@ -27,7 +22,7 @@ export const TiresContractingWrapper = () => {
   const router = useRouter()
 
   // Function that will be executed when the form is submitted
-  const onSubmit = (data: FormInputs) => {
+  const onSubmit = (data: TiresChangeData) => {
     console.log(data)
     router.push(`/services/tires_change/checkout`)
   }

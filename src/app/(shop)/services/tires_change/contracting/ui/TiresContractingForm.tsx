@@ -3,33 +3,15 @@
 import { useForm } from "react-hook-form";
 
 import { InfoRuedas, Promotion4x3Tires } from "@/assets";
-import { QuantityTires, TypesTiresOptions } from "@/interfaces";
+import { QuantityTires, TiresChangeData, TypesTiresOptions } from "@/interfaces";
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
 import { AddServiceCard, InformationButton, SwitchButton, PromotionCard } from "@/components";
 
-type FormInputs = {
-  promotion: boolean;
-  quantityTires: QuantityTires;
-  typeTires: TypesTiresOptions;
-}
 
 export const TiresCheckoutForm = () => {
-  const {
-    register,
-    watch,
-    setValue,
-    handleSubmit,
-    formState: { errors }
-  } = useForm<FormInputs>({
-    shouldFocusError: true,
-    defaultValues: {
-      promotion: false,
-      quantityTires: 0,
-      typeTires: 'ciudad'
-    }
-  })
+  const { register, watch, setValue, handleSubmit, formState: { errors } } = useForm<TiresChangeData>()
 
   const promotion = watch("promotion")
   const quantityTires = watch("quantityTires")
@@ -59,16 +41,9 @@ export const TiresCheckoutForm = () => {
     }
   }
 
-  // Function that will be executed when the form is submitted
-  const onSumbit = (data: FormInputs) => {
-    console.log(data)
-  }
 
   return (
-    <form
-      className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10 overflow-visible"
-      onSubmit={handleSubmit(onSumbit)}
-    >
+    <div className="border border-customGray-600 rounded-3xl w-full py-4 px-4 md:px-6 lg:px-10 overflow-visible"    >
       <section className="flex flex-col gap-4">
         <div className="flex flex-col justify-center items-start mb-4">
 
@@ -176,6 +151,6 @@ export const TiresCheckoutForm = () => {
           </div>
         </div>
       </section>
-    </form>
+    </div>
   )
 }

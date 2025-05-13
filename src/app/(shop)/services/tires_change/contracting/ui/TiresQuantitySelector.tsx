@@ -14,6 +14,7 @@ interface Props {
 export const TiresQuantitySelector = ({ quantity, register, checked, onClick }: Props) => {
   return (
     <button
+      type="button"
       className="flex flex-col gap-4 justify-center items-center"
       onClick={onClick}
     >
