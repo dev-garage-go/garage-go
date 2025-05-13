@@ -23,6 +23,7 @@ export const QuotesForm = () => {
     handleSubmit,
     formState: { errors }
   } = useForm<FormInputs>({
+    shouldFocusError: true,
     defaultValues: {
       promotion: false,
       quantityTires: 0,

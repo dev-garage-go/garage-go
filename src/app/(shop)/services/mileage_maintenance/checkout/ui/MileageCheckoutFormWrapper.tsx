@@ -26,7 +26,7 @@ export const MileageCheckoutFormWrapper = () => {
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageCheckoutFormInputs) => {
     console.log(data)
-    // router.push("/payment")
+    router.push("/payment")
   }
 
   return (

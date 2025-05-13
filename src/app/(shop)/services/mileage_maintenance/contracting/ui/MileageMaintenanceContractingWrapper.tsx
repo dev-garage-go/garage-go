@@ -14,6 +14,7 @@ import { useLicensePlateOnChangeStorage } from "@/hooks"
 
 export const MileageMaintenanceContractingWrapper = () => {
   const methods = useForm<MileageContractingForm>({
+    shouldFocusError: true,
     defaultValues: {
       mileages: "10.000 kms",
       extraServices: undefined
