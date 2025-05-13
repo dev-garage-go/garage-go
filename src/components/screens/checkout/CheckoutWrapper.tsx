@@ -6,13 +6,14 @@ import { CheckoutFormData } from "@/interfaces";
 import { useRouter } from "next/navigation";
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
+import { useGetServiceName } from "@/hooks";
 
 export const CheckoutFormWrapper = () => {
   const methods = useForm<CheckoutFormData>({
     shouldFocusError: true,
     defaultValues: {
       booking: {
-        serviceName: "mantencion por kilometraje"
+        serviceName: useGetServiceName()
       },
       user: {
         typeAddress: '',
@@ -21,7 +22,7 @@ export const CheckoutFormWrapper = () => {
     }
   })
 
-  // TODO: Router temporal para mostrar
+  // TODO: action/calcAmountByService(service: string, data: {})
   const router = useRouter()
 
   // Funcion que se ejecuta al enviar el formulario
