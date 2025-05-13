@@ -62,12 +62,18 @@ export const PaymentForm = () => {
             <input
               type="text"
               placeholder="1234 5678 9012 3456"
-              minLength={19}
-              maxLength={19}
               className={`${shouldValidateCardFields && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cardNumber", {
                 onChange: handleCardNumberChange,
                 required: shouldValidateCardFields ? true : false,
+                minLength: {
+                  value: 19,
+                  message: 'Formato invalido'
+                },
+                maxLength: {
+                  value: 19,
+                  message: 'Formato invalido'
+                },
               })}
             />
 
@@ -76,7 +82,7 @@ export const PaymentForm = () => {
             </div>
           </div>
           {shouldValidateCardFields && errors.userCard?.cardNumber && (
-            <ErrorMessage message={'Requerido'} className="mt-1 ml-2" />
+            <ErrorMessage message={errors.userCard.cardNumber.message ?? 'Requerido'} className="mt-1 ml-2" />
           )}
         </div>
 
@@ -86,11 +92,15 @@ export const PaymentForm = () => {
           </label>
           <input
             type="text"
-            minLength={2}
             placeholder='John Doe'
             className={`${shouldValidateCardFields && errors.userCard?.ownerName ? 'payment-input-error-form' : 'payment-input-form'}`}
             {...register("userCard.ownerName", {
-              required: shouldValidateCardFields ? true : false
+              required: shouldValidateCardFields ? true : false,
+              minLength: {
+                value: 2,
+                message: 'Debe tener al menos 2 caracteres'
+              },
+              
             })}
           />
           {shouldValidateCardFields && errors.userCard?.ownerName && (
@@ -106,13 +116,19 @@ export const PaymentForm = () => {
             </label>
             <input
               type="text"
-              minLength={5}
-              maxLength={5}
               placeholder="04/28"
               className={`${shouldValidateCardFields && errors.userCard?.expiresIn ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.expiresIn", {
                 onChange: handleExpiryChange,
-                required: shouldValidateCardFields ? true : false
+                required: shouldValidateCardFields ? true : false,
+                minLength: {
+                  value: 5,
+                  message: 'Formato invalido'
+                },
+                maxLength: {
+                  value: 5,
+                  message: 'Formato invalido'
+                },
               })}
             />
             {shouldValidateCardFields && errors.userCard?.expiresIn && (
@@ -125,14 +141,20 @@ export const PaymentForm = () => {
               CVV
             </label>
             <input
-              minLength={3}
-              maxLength={3}
               type="text"
               placeholder='323'
               className={`${shouldValidateCardFields && errors.userCard?.cvv ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cvv", {
                 required: shouldValidateCardFields ? true : false,
                 onChange: handleCardCVV,
+                minLength: {
+                  value: 3,
+                  message: 'Formato invalido'
+                },
+                maxLength: {
+                  value: 3,
+                  message: 'Formato invalido'
+                },
               })}
             />
             {shouldValidateCardFields && errors.userCard?.cvv && (
