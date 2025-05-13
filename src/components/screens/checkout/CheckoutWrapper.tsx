@@ -10,7 +10,7 @@ import { HoverPortal, LicensePlateModal } from "@/components";
 
 import { CheckoutFormData } from "@/interfaces";
 import { useGetServiceName, useLicensePlateOnChangeStorage } from "@/hooks";
-import { useLicensePlateContext } from "@/context";
+import { useLicensePlateContext } from "@/contexts";
 
 interface Props {
   withBooking: boolean
@@ -44,7 +44,7 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
       {!licensePlate && licensePlateModalIsOpen &&
         <HoverPortal>
-          <LicensePlateModal isOpen={licensePlateModalIsOpen} setClose={setLicensePlateModalIsOpen} />
+          <LicensePlateModal setClose={setLicensePlateModalIsOpen} />
         </HoverPortal>
       }
       <FormProvider {...methods}>

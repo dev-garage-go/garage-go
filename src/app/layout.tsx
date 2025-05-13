@@ -5,7 +5,7 @@ import { CompanyDescription, CompanyName } from "@/constants";
 import { montserrat } from "@/config/fonts";
 
 import "./globals.css";
-import { ContextsProvider } from "@/context/ContextsProvider";
+import { ContextsProvider } from "@/contexts/ContextsProvider";
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
 

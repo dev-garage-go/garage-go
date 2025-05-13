@@ -1,6 +1,6 @@
 "use client"
 
-import { useLicensePlateContext } from "@/context"
+import { useLicensePlateContext } from "@/contexts"
 
 
 export const OtherLicensePlateButton = () => {

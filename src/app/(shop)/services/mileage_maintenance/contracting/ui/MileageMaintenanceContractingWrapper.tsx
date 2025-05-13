@@ -8,8 +8,9 @@ import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContracti
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 import { HoverPortal, LicensePlateModal } from "@/components"
 
-import { MileageContractingForm} from "@/interfaces"
+import { MileageContractingForm } from "@/interfaces"
 import { useLicensePlateOnChangeStorage } from "@/hooks"
+import { useLicensePlateContext } from "@/contexts"
 
 
 export const MileageMaintenanceContractingWrapper = () => {
@@ -25,15 +26,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   // TODO: Router temporal para mostrar
   const ref = useRef<HTMLDivElement>(null)
   const router = useRouter()
-
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-  const licensePlate = useLicensePlateOnChangeStorage()
-
-  useEffect(() => {
-    if (!licensePlate) {
-      setModalIsOpen(true)
-    }
-  }, [licensePlate])
+  const { licensePlate, setLicensePlateModalIsOpen, licensePlateModalIsOpen } = useLicensePlateContext()
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageContractingForm) => {
@@ -43,9 +36,9 @@ export const MileageMaintenanceContractingWrapper = () => {
 
   return (
     <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
-      {!licensePlate && modalIsOpen &&
+      {!licensePlate && licensePlateModalIsOpen &&
         <HoverPortal>
-          <LicensePlateModal isOpen={modalIsOpen} setClose={setModalIsOpen} />
+          <LicensePlateModal setClose={setLicensePlateModalIsOpen} />
         </HoverPortal>
       }
       <FormProvider {...methods}>
