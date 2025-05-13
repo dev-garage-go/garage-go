@@ -7,7 +7,7 @@ import { QuantityTires, TiresChangeData, TypesTiresOptions } from "@/interfaces"
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
-import { AddServiceCard, InformationButton, SwitchButton, PromotionCard } from "@/components";
+import { AddServiceCard, InformationButton, SwitchButton, PromotionCard, ErrorMessage } from "@/components";
 
 
 export const TiresContractingForm = () => {
@@ -17,6 +17,7 @@ export const TiresContractingForm = () => {
   const quantityTires = watch("quantityTires")
   const typeTires = watch("typeTires")
 
+  // type tires
   const handleTypeTires = (type: TypesTiresOptions) => {
     if (typeTires === type) {
       setValue("typeTires", "ciudad")
@@ -25,6 +26,7 @@ export const TiresContractingForm = () => {
     }
   }
 
+  // promotion 4x3
   const handleSelectPromotion = (state: boolean) => {
     if (promotion === state) {
       setValue("promotion", false)
@@ -33,6 +35,7 @@ export const TiresContractingForm = () => {
     }
   }
 
+  // quantity tires
   const handleSelectQuantityTires = (quantity: QuantityTires) => {
     if (quantityTires === quantity) {
       setValue("quantityTires", 0)
@@ -41,9 +44,7 @@ export const TiresContractingForm = () => {
     }
   }
 
-  // Tire size
-  const tireSizeRegex = /^\d{3}\/\d{2}\/\d{2}$/;
-
+  // tire size
   const handleTireSizes = (size: string) => {
     // delete everything that is not a number
     const cleaned = size.replace(/\D/g, "");
@@ -139,12 +140,10 @@ export const TiresContractingForm = () => {
               placeholder="Ancho / Perfil / Aro"
               type="text"
               {...register("tireSize", {
+                minLength: 13,
+                maxLength: 13,
                 required: true,
                 onChange: (e) => handleTireSizes(e.target.value as string),
-                pattern: {
-                  value: tireSizeRegex,
-                  message: "Formato inválido. Usa el formato 275 / 40 / 18",
-                }
               })}
             />
 
@@ -153,6 +152,7 @@ export const TiresContractingForm = () => {
               className="py-2 px-3 md:px-6 lg:px-10 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
               Aceptar
             </button>
+            {errors.tireSize?.message && (<ErrorMessage message="Requerido" />)}
           </div>
           <div className="mt-2">
             <InformationButton

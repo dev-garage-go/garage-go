@@ -5,6 +5,6 @@ export interface TiresChangeData {
   promotion: boolean;
   quantityTires: QuantityTires;
   typeTires: TypesTiresOptions;
-  tireSize: string,
-  extraServices: {}
+  tireSize?: string,
+  extraServices?: {}
 }
