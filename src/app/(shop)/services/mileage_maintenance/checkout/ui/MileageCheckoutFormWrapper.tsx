@@ -8,9 +8,14 @@ import { useRouter } from "next/navigation";
 
 export const MileageCheckoutFormWrapper = () => {
   const methods = useForm<MileageCheckoutFormInputs>({
+    shouldFocusError: true,
     defaultValues: {
       booking: {
         serviceName: "mantencion por kilometraje"
+      },
+      user: {
+        typeAddress: '',
+        additionalInfo: ''
       }
     }
   })

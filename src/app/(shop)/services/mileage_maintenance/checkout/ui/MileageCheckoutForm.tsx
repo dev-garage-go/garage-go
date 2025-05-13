@@ -61,7 +61,6 @@ export const MileageCheckoutForm = () => {
             </label>
             <input
               type="text"
-              autoFocus
               placeholder="Doe"
               className={`${errors.user?.lastName ? "input-form-error" : "input-form"}`}
               {...register("user.lastName", { required: true })}
@@ -78,7 +77,6 @@ export const MileageCheckoutForm = () => {
             </label>
             <input
               type="text"
-              autoFocus
               placeholder="+56912345678"
               className={`${errors.user?.phone ? "input-form-error" : "input-form"}`}
               {...register("user.phone", { required: true })}
@@ -92,7 +90,6 @@ export const MileageCheckoutForm = () => {
             </label>
             <input
               type="text"
-              autoFocus
               placeholder="john-doe@gmail.com"
               className={`${errors.user?.email ? "input-form-error" : "input-form"}`}
               {...register("user.email", { required: true })}
@@ -133,6 +130,7 @@ export const MileageCheckoutForm = () => {
             description: "Se requiere que seleccione una fecha y luego un horario para poder agendar su servicio",
           }}
         />
+
         {/* Switch calendar and hour */}
         <div className="flex justify-start items-center gap-4">
           <button
@@ -184,8 +182,6 @@ export const MileageCheckoutForm = () => {
           )}
         >
         </Controller>
-
-
       </section>
 
       {/* Direccion del usuario */}
@@ -200,7 +196,6 @@ export const MileageCheckoutForm = () => {
             </label>
             <input
               type="text"
-              autoFocus
               placeholder="Calle, numero y comuna"
               className={`${errors.user?.address ? "input-form-error" : "input-form"}`}
               {...register("user.address", { required: true })}
@@ -234,7 +229,7 @@ export const MileageCheckoutForm = () => {
             </label>
             <input
               type="text"
-              autoFocus
+
               placeholder="Nº depto, oficina, piso"
               className={"input-form"}
               {...register("user.additionalInfo")}

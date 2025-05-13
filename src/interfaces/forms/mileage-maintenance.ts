@@ -7,7 +7,7 @@ export type MileageCheckoutFormInputs = {
     phone: string;
     email: string;
     address: string,
-    typeAddress: string
+    typeAddress: '' | 'casa' | 'oficina' | 'depto'
     additionalInfo?: string
   },
   vehicle: {
