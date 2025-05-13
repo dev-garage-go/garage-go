@@ -1,12 +1,15 @@
 'use client'
 
 import { useLicensePlateOnChangeStorage } from "@/hooks"
+import { customLicensePlateUpdateEvent, licensePlateKey } from "@/keys"
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
 
 interface LicensePlateContextType {
   licensePlateModalIsOpen: boolean
   setLicensePlateModalIsOpen: React.Dispatch<SetStateAction<boolean>>
   licensePlate: string | null
+  setLicensePlate: (value: string) => void
+  deleteLicensePlate: () => void
 }
 
 
@@ -30,6 +33,17 @@ export const LicensePlateProvider = ({ children }: Props) => {
   const [licensePlateModalIsOpen, setLicensePlateModalIsOpen] = useState<boolean>(false)
   const licensePlate = useLicensePlateOnChangeStorage()
 
+  const setLicensePlate = (value: string) => {
+    sessionStorage.setItem(licensePlateKey, value)
+    window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
+  }
+
+  const deleteLicensePlate = () => {
+    sessionStorage.removeItem(licensePlateKey)
+    window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
+  }
+
+
   useEffect(() => {
     if (!licensePlate) {
       setLicensePlateModalIsOpen(true)
@@ -41,7 +55,9 @@ export const LicensePlateProvider = ({ children }: Props) => {
     value={{
       licensePlateModalIsOpen,
       setLicensePlateModalIsOpen,
-      licensePlate
+      licensePlate,
+      setLicensePlate,
+      deleteLicensePlate
     }}
   >
     {children}

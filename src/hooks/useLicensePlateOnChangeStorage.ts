@@ -32,6 +32,7 @@ export const useLicensePlateOnChangeStorage = () => {
 
     // this will be calling when a custom event 'customLicensePlateUpdateEvent' happened
     // Important: this event will shotting in LicensePlateModal -> setLicensePlate(value: string)
+    // Important: the function that will shoting this event it's in -> context/LicensePlateContext.tsx
     const handleCustomEvent = () => {
       readSessionStorage()
     }

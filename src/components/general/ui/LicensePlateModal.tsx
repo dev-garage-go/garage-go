@@ -3,6 +3,7 @@
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "./ErrorMessage"
 import { customLicensePlateUpdateEvent, licensePlateKey } from "@/keys"
+import { useLicensePlateContext } from "@/context"
 
 interface ModalInputs {
   licensePlate: string
@@ -16,11 +17,7 @@ export const LicensePlateModal = ({ isOpen, setClose }: Props) => {
   const { register, watch, formState: { errors }, handleSubmit } = useForm<ModalInputs>()
   const licensePlate = watch("licensePlate")
 
-  // setting license plate and dispatch a event tu update session storage
-  const setLicensePlate = (value: string) => {
-    sessionStorage.setItem(licensePlateKey, value)
-    window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
-  }
+  const { setLicensePlate } = useLicensePlateContext()
 
   const onCloseModal = () => {
     if (licensePlate) {
