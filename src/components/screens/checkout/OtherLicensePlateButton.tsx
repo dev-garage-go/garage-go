@@ -1,8 +1,17 @@
 "use client"
 
+import { useLicensePlateOnChangeStorage } from "@/hooks"
 import { licensePlateKey } from "@/keys"
+import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 export const OtherLicensePlateButton = () => {
+  const router = useRouter()
+  const licensePlate = useLicensePlateOnChangeStorage()
+
+  useEffect(() => {
+    router.refresh()
+  }, [licensePlate])
 
   const handleLicensePlate = () => {
     sessionStorage.removeItem(licensePlateKey)

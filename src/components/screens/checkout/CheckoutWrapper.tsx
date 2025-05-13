@@ -1,12 +1,15 @@
 "use client"
 
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
-import { CheckoutFormData } from "@/interfaces";
 import { useRouter } from "next/navigation";
+
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
-import { useGetServiceName } from "@/hooks";
+import { HoverPortal, LicensePlateModal } from "@/components";
+
+import { CheckoutFormData } from "@/interfaces";
+import { useGetServiceName, useLicensePlateOnChangeStorage } from "@/hooks";
 
 interface Props {
   withBooking: boolean
@@ -28,8 +31,16 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   // TODO: action/calcAmountByService(service: string, data: {})
   const router = useRouter()
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
+  const licensePlate = useLicensePlateOnChangeStorage()
 
-  // Funcion que se ejecuta al enviar el formulario
+  useEffect(() => {
+    if (!licensePlate) {
+      setModalIsOpen(true)
+    }
+  }, [licensePlate])
+
+  // Func that will be executed when form its submitted
   const onSubmit = (data: CheckoutFormData) => {
     console.log(data)
     router.push("/payment")
@@ -37,6 +48,11 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   return (
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
+      {!licensePlate && modalIsOpen &&
+        <HoverPortal>
+          <LicensePlateModal isOpen={modalIsOpen} setClose={setModalIsOpen} />
+        </HoverPortal>
+      }
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
