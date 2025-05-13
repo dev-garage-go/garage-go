@@ -8,7 +8,11 @@ import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
 import { useGetServiceName } from "@/hooks";
 
-export const CheckoutFormWrapper = () => {
+interface Props {
+  withBooking: boolean
+}
+
+export const CheckoutFormWrapper = ({ withBooking }: Props) => {
   const methods = useForm<CheckoutFormData>({
     shouldFocusError: true,
     defaultValues: {
@@ -36,7 +40,7 @@ export const CheckoutFormWrapper = () => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
-            <CheckoutForm />
+            <CheckoutForm withBooking={withBooking} />
             <CheckoutSummary />
           </div>
         </form>

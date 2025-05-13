@@ -10,7 +10,12 @@ import { CheckoutFormData } from "@/interfaces";
 import { CalendarPicker, ErrorMessage, InformationButton, SchedulePicker, Select } from "@/components";
 import { AddressTypes } from "@/constants";
 
-export const CheckoutForm = () => {
+
+interface Props {
+  withBooking: boolean
+}
+
+export const CheckoutForm = ({ withBooking }: Props) => {
   const { register, control, formState: { errors } } = useFormContext<CheckoutFormData>()
 
   // Switch calendar y schedule pickers
@@ -119,127 +124,130 @@ export const CheckoutForm = () => {
         </div>
       </section>
 
-      {/* Calendario y selector de hora */}
-      <section className="flex flex-col gap-4">
-        <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">2. Día y horario</h4>
-        <InformationButton
-          text="Conocer más detalles"
-          hasModal
-          modalInfo={{
-            title: "Agendamiento",
-            description: "Se requiere que seleccione una fecha y luego un horario para poder agendar su servicio",
-          }}
-        />
-
-        {/* Switch calendar and hour */}
-        <div className="flex justify-start items-center gap-4">
-          <button
-            type="button"
-            onClick={() => {
-              setCalendarPicker(true)
-              setSchedulePicker(false)
-            }}
-            className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${calendarPicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
-            Calendario
-          </button>
-          <button
-            type="button"
-            onClick={() => {
-              setSchedulePicker(true)
-              setCalendarPicker(false)
-            }}
-            className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${schedulePicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
-            Horario
-          </button>
-        </div>
-
-        <Controller
-          name="booking.date" // equivalente a register("booking.date")
-          control={control}
-          rules={{ required: 'Seleccione una fecha de agendamiento' }}
-          render={({ field, fieldState }) => (
-            calendarPicker ? (
-              <CalendarPicker
-                error={fieldState.error?.message}
-                onChange={field.onChange}
-              />
-            ) : <></>
-          )}
-        >
-        </Controller>
-
-        <Controller
-          name="booking.time" // equivalente a register("booking.time")
-          control={control}
-          rules={{ required: 'Seleccione un horario de agendamiento' }}
-          render={({ field, fieldState }) => (
-            schedulePicker ? (
-              <SchedulePicker
-                error={fieldState.error?.message}
-                onChange={field.onChange}
-              />
-            ) : <></>
-          )}
-        >
-        </Controller>
-      </section>
-
-      {/* Direccion del usuario */}
-      <section className="flex flex-col gap-4">
-        <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">3. Dirección</h4>
-
-        {/* Direccion y tipo de domicilio */}
-        <div className="input-form-container">
-          <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-4">
-              Ingresa tu dirección
-            </label>
-            <input
-              type="text"
-              placeholder="Calle, numero y comuna"
-              className={`${errors.user?.address ? "input-form-error" : "input-form"}`}
-              {...register("user.address", { required: true })}
+      {withBooking && (
+        <>
+          {/* Calendario y selector de hora */}
+          <section className="flex flex-col gap-4">
+            <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">2. Día y horario</h4>
+            <InformationButton
+              text="Conocer más detalles"
+              hasModal
+              modalInfo={{
+                title: "Agendamiento",
+                description: "Se requiere que seleccione una fecha y luego un horario para poder agendar su servicio",
+              }}
             />
-            {errors.user?.address && <ErrorMessage message="Se requiere su dirección" className="mt-1 ml-2" />}
-          </div>
+            {/* Switch calendar and hour */}
+            <div className="flex justify-start items-center gap-4">
+              <button
+                type="button"
+                onClick={() => {
+                  setCalendarPicker(true)
+                  setSchedulePicker(false)
+                }}
+                className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${calendarPicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
+                Calendario
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSchedulePicker(true)
+                  setCalendarPicker(false)
+                }}
+                className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${schedulePicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
+                Horario
+              </button>
+            </div>
 
-          <div className="flex w-full max-w-44 flex-col mb-2">
             <Controller
-              name="user.typeAddress"
+              name="booking.date" // equivalente a register("booking.date")
               control={control}
-              rules={{ required: 'Seleccione una opción' }}
+              rules={{ required: 'Seleccione una fecha de agendamiento' }}
               render={({ field, fieldState }) => (
-                <Select
-                  value={field.value}
-                  onChange={field.onChange}
-                  error={fieldState.error?.message}
-                  label="Selecciona"
-                  options={AddressTypes}
-                />
+                calendarPicker ? (
+                  <CalendarPicker
+                    error={fieldState.error?.message}
+                    onChange={field.onChange}
+                  />
+                ) : <></>
               )}
-            />
-          </div>
-        </div>
+            >
+            </Controller>
 
-        {/* Info adicional */}
-        <div className="input-form-container">
-          <div className="flex w-full flex-col mb-2">
-            <label className="text-sm ml-4">
-              Información adicional
-            </label>
-            <input
-              type="text"
+            <Controller
+              name="booking.time" // equivalente a register("booking.time")
+              control={control}
+              rules={{ required: 'Seleccione un horario de agendamiento' }}
+              render={({ field, fieldState }) => (
+                schedulePicker ? (
+                  <SchedulePicker
+                    error={fieldState.error?.message}
+                    onChange={field.onChange}
+                  />
+                ) : <></>
+              )}
+            >
+            </Controller>
+          </section>
 
-              placeholder="Nº depto, oficina, piso"
-              className={"input-form"}
-              {...register("user.additionalInfo")}
-            />
-          </div>
+          {/* Direccion del usuario */}
+          <section className="flex flex-col gap-4">
+            <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">3. Dirección</h4>
 
-          {/* Div vacio para mantener el mismo espacio */}
-          <div className="flex w-full" />
-        </div>
-      </section>
+            {/* Direccion y tipo de domicilio */}
+            <div className="input-form-container">
+              <div className="flex w-full flex-col mb-2">
+                <label className="text-sm ml-4">
+                  Ingresa tu dirección
+                </label>
+                <input
+                  type="text"
+                  placeholder="Calle, numero y comuna"
+                  className={`${errors.user?.address ? "input-form-error" : "input-form"}`}
+                  {...register("user.address", { required: true })}
+                />
+                {errors.user?.address && <ErrorMessage message="Se requiere su dirección" className="mt-1 ml-2" />}
+              </div>
+
+              <div className="flex w-full max-w-44 flex-col mb-2">
+                <Controller
+                  name="user.typeAddress"
+                  control={control}
+                  rules={{ required: 'Seleccione una opción' }}
+                  render={({ field, fieldState }) => (
+                    <Select
+                      value={field.value}
+                      onChange={field.onChange}
+                      error={fieldState.error?.message}
+                      label="Selecciona"
+                      options={AddressTypes}
+                    />
+                  )}
+                />
+              </div>
+            </div>
+
+            {/* Info adicional */}
+            <div className="input-form-container">
+              <div className="flex w-full flex-col mb-2">
+                <label className="text-sm ml-4">
+                  Información adicional
+                </label>
+                <input
+                  type="text"
+
+                  placeholder="Nº depto, oficina, piso"
+                  className={"input-form"}
+                  {...register("user.additionalInfo")}
+                />
+              </div>
+
+              {/* Div vacio para mantener el mismo espacio */}
+              <div className="flex w-full" />
+            </div>
+          </section>
+        </>
+      )}
     </div>
   )
 }

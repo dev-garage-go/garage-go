@@ -1,7 +1,7 @@
 import { TopBanner } from "@/components";
 import { CheckoutFormWrapper } from "@/components/screens";
 
-export default function MileageMaintenanceCheckoutPage() {
+export default function TiresChangeCheckoutPage() {
   return (
     <div>
       <TopBanner
@@ -10,7 +10,7 @@ export default function MileageMaintenanceCheckoutPage() {
         vehiclePatent="TGPL67"
       />
 
-      <CheckoutFormWrapper withBooking />
+      <CheckoutFormWrapper withBooking={false} />
     </div>
   );
 }
