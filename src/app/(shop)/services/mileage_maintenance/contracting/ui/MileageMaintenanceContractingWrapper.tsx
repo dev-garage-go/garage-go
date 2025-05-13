@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
+import { useRef } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
 
@@ -9,7 +9,6 @@ import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContra
 import { HoverPortal, LicensePlateModal } from "@/components"
 
 import { MileageContractingForm } from "@/interfaces"
-import { useLicensePlateOnChangeStorage } from "@/hooks"
 import { useLicensePlateContext } from "@/contexts"
 
 
