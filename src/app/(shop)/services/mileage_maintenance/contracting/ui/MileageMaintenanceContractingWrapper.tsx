@@ -2,19 +2,21 @@
 
 import { useEffect, useRef, useState } from "react"
 import { FormProvider, useForm } from "react-hook-form"
+import { useRouter } from "next/navigation"
+
 import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 import { HoverPortal, LicensePlateModal } from "@/components"
-import { MileageMaintenanceFormInputs } from "@/interfaces"
+
+import { MileageContractingForm} from "@/interfaces"
 import { useLicensePlateOnChangeStorage } from "@/hooks"
-import { useRouter } from "next/navigation"
+
 
 export const MileageMaintenanceContractingWrapper = () => {
-  const methods = useForm<MileageMaintenanceFormInputs>({
+  const methods = useForm<MileageContractingForm>({
     defaultValues: {
-      booking: {
-        serviceName: "mantencion por kilometraje"
-      }
+      mileages: "10.000 kms",
+      extraServices: undefined
     }
   })
 
@@ -33,7 +35,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   }, [licensePlate])
 
   // Funcion que se ejecuta al enviar el formulario
-  const onSubmit = (data: MileageMaintenanceFormInputs) => {
+  const onSubmit = (data: MileageContractingForm) => {
     console.log(data)
     router.push(`/services/mileage_maintenance/checkout`)
   }
