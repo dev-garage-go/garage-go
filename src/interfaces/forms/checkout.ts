@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 
-export type MileageCheckoutFormInputs = {
+export type CheckoutFormData = {
   user: {
     name: string;
     lastName: string;

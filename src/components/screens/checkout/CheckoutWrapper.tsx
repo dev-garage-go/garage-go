@@ -2,13 +2,13 @@
 
 import { FormProvider, useForm } from "react-hook-form";
 
-import { MileageCheckoutFormInputs } from "@/interfaces";
+import { CheckoutFormData } from "@/interfaces";
 import { useRouter } from "next/navigation";
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
 
 export const CheckoutFormWrapper = () => {
-  const methods = useForm<MileageCheckoutFormInputs>({
+  const methods = useForm<CheckoutFormData>({
     shouldFocusError: true,
     defaultValues: {
       booking: {
@@ -25,7 +25,7 @@ export const CheckoutFormWrapper = () => {
   const router = useRouter()
 
   // Funcion que se ejecuta al enviar el formulario
-  const onSubmit = (data: MileageCheckoutFormInputs) => {
+  const onSubmit = (data: CheckoutFormData) => {
     console.log(data)
     router.push("/payment")
   }
