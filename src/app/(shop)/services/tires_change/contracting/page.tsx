@@ -1,5 +1,5 @@
 import { TopBanner } from "@/components";
-import { TiresCheckoutForm, TiresCheckoutSummary } from "./ui";
+import { TiresContractingWrapper } from "./ui";
 
 export default function TiresCheckoutPage() {
   return (
@@ -10,12 +10,7 @@ export default function TiresCheckoutPage() {
         vehiclePatent="TGPL67"
       />
 
-      <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
-          <TiresCheckoutForm />
-          <TiresCheckoutSummary />
-        </div>
-      </section>
+      <TiresContractingWrapper />
     </div>
   );
 }
