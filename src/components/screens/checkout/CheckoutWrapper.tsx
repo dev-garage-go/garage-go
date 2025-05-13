@@ -10,6 +10,7 @@ import { HoverPortal, LicensePlateModal } from "@/components";
 
 import { CheckoutFormData } from "@/interfaces";
 import { useGetServiceName, useLicensePlateOnChangeStorage } from "@/hooks";
+import { useLicensePlateContext } from "@/context";
 
 interface Props {
   withBooking: boolean
@@ -31,14 +32,7 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   // TODO: action/calcAmountByService(service: string, data: {})
   const router = useRouter()
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-  const licensePlate = useLicensePlateOnChangeStorage()
-
-  useEffect(() => {
-    if (!licensePlate) {
-      setModalIsOpen(true)
-    }
-  }, [licensePlate])
+  const { licensePlate, licensePlateModalIsOpen, setLicensePlateModalIsOpen } = useLicensePlateContext()
 
   // Func that will be executed when form its submitted
   const onSubmit = (data: CheckoutFormData) => {
@@ -48,9 +42,9 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   return (
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
-      {!licensePlate && modalIsOpen &&
+      {!licensePlate && licensePlateModalIsOpen &&
         <HoverPortal>
-          <LicensePlateModal isOpen={modalIsOpen} setClose={setModalIsOpen} />
+          <LicensePlateModal isOpen={licensePlateModalIsOpen} setClose={setLicensePlateModalIsOpen} />
         </HoverPortal>
       }
       <FormProvider {...methods}>
