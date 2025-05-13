@@ -1,7 +1,7 @@
 import { TopBanner } from "@/components";
-import { QuotesForm, QuotesSummary } from "./ui";
+import { TiresCheckoutForm, TiresCheckoutSummary } from "./ui";
 
-export default function TiresQuotesPage() {
+export default function TiresCheckoutPage() {
   return (
     <div>
       <TopBanner
@@ -12,8 +12,8 @@ export default function TiresQuotesPage() {
 
       <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
         <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
-          <QuotesForm />
-          <QuotesSummary />
+          <TiresCheckoutForm />
+          <TiresCheckoutSummary />
         </div>
       </section>
     </div>

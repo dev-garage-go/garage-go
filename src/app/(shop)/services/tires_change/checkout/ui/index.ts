@@ -1,3 +1,3 @@
-export * from './QuotesForm';
-export * from './QuotesSummary';
+export * from './TiresCheckoutForm';
+export * from './TiresCheckoutSummary';
 export * from './TiresQuantitySelector';

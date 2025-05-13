@@ -15,7 +15,7 @@ type FormInputs = {
   typeTires: TypesTiresOptions;
 }
 
-export const QuotesForm = () => {
+export const TiresCheckoutForm = () => {
   const {
     register,
     watch,

@@ -3,7 +3,7 @@ import { IoInformationCircleOutline } from 'react-icons/io5';
 
 import { BookingServiceButton, FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
 import { StepsTiresChange, TiresChangeFAQs } from '@/constants';
-import { ChangeTiresPromotion, Mantencion, ServicioDomicilio } from '@/assets';
+import { ChangeTiresPromotion, Mantencion } from '@/assets';
 
 export default function TiresChangePage() {
   return (
