@@ -31,14 +31,6 @@ export const BrandsAndLocation = () => {
         {/* Map */}
         <div className='relative w-full h-60 sm:h-72 xl:h-[550px]'>
           <GoogleMapComponent />
-          {/* <Image
-            fill
-            priority
-            alt='location of company'
-            src={CompanyLocation}
-            className='object-cover w-auto h-auto'
-          />
-          */}
         </div>
       </div>
 

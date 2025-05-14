@@ -1,12 +1,13 @@
 'use client'
 
-import { GoogleMap, Marker, useJsApiLoader } from "@react-google-maps/api";
+import { CompanyName } from "@/constants";
+import { GoogleMap, Marker, OverlayView, useJsApiLoader } from "@react-google-maps/api";
 
 export const GoogleMapComponent = () => {
   const apiKey = process.env.NEXT_PUBLIC_MAPS_API_KEY as string
 
-  const lat = -34.6037;
-  const lng = -58.3816;
+  const lat = -33.379367338182476;
+  const lng = -70.76571012655519;
   const location = { lat, lng }
 
   const { isLoaded } = useJsApiLoader({
@@ -33,7 +34,23 @@ export const GoogleMapComponent = () => {
       zoom={15}
       options={mapOptions}
     >
-      <Marker position={location} />
+      <OverlayView
+        position={location}
+        mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+      >
+        <div className="flex justify-center items-center translate-x-[-50%] translate-y-[-250%]">
+          <p className="font-medium text-sm tracking-wider text-nowrap bg-primaryBlue-400 text-white py-1 px-2 rounded">
+            {CompanyName}
+          </p>
+        </div>
+      </OverlayView>
+      <Marker
+        position={location}
+        title={CompanyName}
+      />
     </GoogleMap>
   );
 };
+
+
+
