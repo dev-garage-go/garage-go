@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { CompanyLocation } from '@/assets'
-import { SuppliersBrandsCarousel } from '@/components';
+import { GoogleMapComponent, SuppliersBrandsCarousel } from '@/components';
 
 export const BrandsAndLocation = () => {
   return (
@@ -30,13 +30,15 @@ export const BrandsAndLocation = () => {
 
         {/* Map */}
         <div className='relative w-full h-60 sm:h-72 xl:h-[550px]'>
-          <Image
+          <GoogleMapComponent />
+          {/* <Image
             fill
             priority
             alt='location of company'
             src={CompanyLocation}
             className='object-cover w-auto h-auto'
           />
+          */}
         </div>
       </div>
 
