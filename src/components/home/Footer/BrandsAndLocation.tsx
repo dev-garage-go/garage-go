@@ -1,6 +1,3 @@
-import Image from 'next/image'
-
-import { CompanyLocation } from '@/assets'
 import { GoogleMapComponent, SuppliersBrandsCarousel } from '@/components';
 
 export const BrandsAndLocation = () => {
