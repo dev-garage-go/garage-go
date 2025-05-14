@@ -34,6 +34,7 @@ export const GoogleMapComponent = () => {
   const [userLocation, setUserLocation] = useState<google.maps.LatLngLiteral | null>(null)
   const [distance, setDistance] = useState<number | null>(null)
 
+  //TODO: Hacer que esto funcione -> geometry library is undefined
   const handlePlaceChanged = () => {
     if (!autocompleteRef.current) return;
     const place = autocompleteRef.current.getPlace()
