@@ -37,11 +37,7 @@ export const TiresContractingForm = () => {
 
   // quantity tires
   const handleSelectQuantityTires = (quantity: QuantityTires) => {
-    if (quantityTires === quantity) {
-      setValue("quantityTires", 0)
-    } else {
-      setValue("quantityTires", quantity)
-    }
+    setValue("quantityTires", quantity)
   }
 
   // tire size
@@ -109,10 +105,8 @@ export const TiresContractingForm = () => {
                     key={option.label + index}
                     quantity={option.value}
                     checked={quantityTires === option.value}
-                    register={register("quantityTires", {
-                      required: true
-                    })}
                     onClick={() => handleSelectQuantityTires(option.value)}
+                    register={register("quantityTires")}
                   />
                 ))}
               </div>
