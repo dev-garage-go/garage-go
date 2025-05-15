@@ -1,23 +1,29 @@
-import { Db, MongoClient } from "mongodb"
+// lib/mongodb.ts
+import { MongoClient, Db } from 'mongodb'
 
-const dbURI = process.env.DATABASE_URI
+const uri = process.env.DATABASE_URI || 'mongodb://localhost:27017'
 const dbName = process.env.DATABASE_NAME
 
-const uri = dbURI || 'mongodb://localhost:27017' // cambiar en prod
-const client = new MongoClient(uri)
+let client: MongoClient
+let clientPromise: Promise<MongoClient>
 
-// evita que 
+// avoids multiple database connections
 declare global {
   var _mongoClientPromise: Promise<MongoClient> | undefined
 }
 
-if (!global._mongoClientPromise) {
-  const client = new MongoClient(uri)
-  global._mongoClientPromise = client.connect()
+if (process.env.NODE_ENV === 'development') {
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri)
+    global._mongoClientPromise = client.connect()
+  }
+  clientPromise = global._mongoClientPromise
+} else {
+  client = new MongoClient(uri)
+  clientPromise = client.connect()
 }
 
 export const connectDatabase = async (): Promise<Db> => {
-  await client.connect()
-  const db = client.db(dbName)
-  return db
+  const client = await clientPromise
+  return client.db(dbName)
 }
