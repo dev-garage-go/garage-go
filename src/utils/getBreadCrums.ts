@@ -1,5 +1,5 @@
 import { SegmentNameMap } from "@/constants"
-import { firstLetterUppercase } from "./firstLetterUppercase"
+import { firstLetterUppercase } from "./inputs-utils"
 
 export interface Breadcrumb {
   name: string

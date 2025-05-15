@@ -14,7 +14,7 @@ export const TiresContractingWrapper = () => {
     shouldFocusError: true,
     defaultValues: {
       promotion: false,
-      quantityTires: 0,
+      quantityTires: 1,
       typeTires: 'ciudad',
       tireSize: undefined,
       extraServices: undefined

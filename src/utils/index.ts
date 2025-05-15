@@ -1,4 +1,3 @@
-export * from './firstLetterUppercase';
-export * from './formatNumberWithDots';
 export * from './getBreadCrums';
+export * from './inputs-utils';
 export * from './paymentCardUtils';
