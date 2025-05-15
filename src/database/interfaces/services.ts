@@ -1,8 +1,10 @@
 import { QuantityTires, TypesTiresOptions, VehicleMileages } from "@/interfaces"
+import { Promotion } from "./promotions"
 
 export interface BaseService {
   name: string
   price: number
+  promotion?: Promotion
 }
 
 export interface TiresChangeService extends BaseService {
