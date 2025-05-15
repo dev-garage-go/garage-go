@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form";
 
 import { RenderCardIcon, PaymentOption, ErrorMessage } from '@/components';
-import { detectCardType, formatCardNumber, formatExpiry } from "@/utils";
+import { deleteNumbersInString, detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
 import { PaymentFormSchema, PaymentGatewayMethods } from "@/interfaces";
 
@@ -26,6 +26,12 @@ export const PaymentForm = () => {
     const formatted = formatCardNumber(e.target.value);
     setValue("userCard.cardNumber", formatted);
   };
+
+  // Delete numbers if exist
+  const handleOwnerNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = deleteNumbersInString(e.target.value)
+    setValue("userCard.ownerName", formatted)
+  }
 
   // Write a slash / in the MM/YY format - ex: 04/28
   const handleExpiryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,6 +67,8 @@ export const PaymentForm = () => {
           <div className="relative">
             <input
               type="text"
+              minLength={19}
+              maxLength={19}
               placeholder="1234 5678 9012 3456"
               className={`${shouldValidateCardFields && errors.userCard?.cardNumber ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cardNumber", {
@@ -96,14 +104,15 @@ export const PaymentForm = () => {
           <input
             type="text"
             placeholder='John Doe'
+            minLength={2}
             className={`${shouldValidateCardFields && errors.userCard?.ownerName ? 'payment-input-error-form' : 'payment-input-form'}`}
             {...register("userCard.ownerName", {
               required: shouldValidateCardFields ? true : false,
+              onChange: handleOwnerNameChange,
               minLength: {
                 value: 2,
                 message: 'Debe tener al menos 2 caracteres'
               },
-
             })}
           />
           {shouldValidateCardFields && errors.userCard?.ownerName && (
@@ -123,6 +132,8 @@ export const PaymentForm = () => {
             <input
               type="text"
               placeholder="04/28"
+              minLength={5}
+              maxLength={5}
               className={`${shouldValidateCardFields && errors.userCard?.expiresIn ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.expiresIn", {
                 onChange: handleExpiryChange,
@@ -151,6 +162,8 @@ export const PaymentForm = () => {
             </label>
             <input
               type="text"
+              minLength={3}
+              maxLength={3}
               placeholder='323'
               className={`${shouldValidateCardFields && errors.userCard?.cvv ? 'payment-input-error-form' : 'payment-input-form'}`}
               {...register("userCard.cvv", {
