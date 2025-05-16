@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "./ErrorMessage"
 
@@ -16,8 +16,33 @@ export const LicensePlateModal = ({ setClose }: Props) => {
   const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleModalForm>()
   const licensePlate = watch("licensePlate")
 
-  const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(false)
+  const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(true)
+  const [showModalToCompleteData, setShowModalToCompleteData] = useState<boolean>(false)
   const { setLicensePlateInStorage, setVehicleDataInStorage } = useLicensePlateContext()
+
+  /* TODO:
+    const getVehicleDataByLicensePlate = (value: string) => {
+    try{
+      setVehicleDataInStorage(data)
+    } catch (error) {
+      mostrar algo al usuario en la UI
+      console.log(error)
+      setVehicleDataFounded(false)
+     }
+    }
+  */
+
+  useEffect(() => {
+    try {
+
+    } catch (error) {
+
+    }
+    if (!vehicleDataFounded) {
+      setShowModalToCompleteData(true)
+    }
+  }, [vehicleDataFounded])
+
 
   const onSumbit = (data: VehicleModalForm) => {
     if (vehicleDataFounded && licensePlate) {
@@ -36,13 +61,13 @@ export const LicensePlateModal = ({ setClose }: Props) => {
   }
 
   const handleMileage = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const mileageFormmated = formatNumberWithDots(e.target.value)
-    setValue("mileage", mileageFormmated)
+    const formatted = formatNumberWithDots(e.target.value)
+    setValue("mileage", formatted)
   }
 
   return (
     <>
-      {vehicleDataFounded ? (
+      {!showModalToCompleteData ? (
         <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-white bg-opacity-90">
           <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10
        rounded-2xl w-full h-full max-w-xl max-h-72 bg-opacity-100 shadow-lg shadow-customGray-400 mx-4">
@@ -83,7 +108,7 @@ export const LicensePlateModal = ({ setClose }: Props) => {
         </div>
       ) : (
         <div>
-          <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-blue-200 bg-opacity-90">
+          <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-white bg-opacity-90">
             <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10
        rounded-2xl w-full h-full max-w-2xl max-h-[500px] bg-opacity-100 shadow-lg shadow-customGray-400 mx-4">
 
