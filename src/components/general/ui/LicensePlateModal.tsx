@@ -6,7 +6,7 @@ import { ErrorMessage } from "./ErrorMessage"
 
 import { useLicensePlateContext } from "@/contexts"
 import { VehicleModalForm } from "@/interfaces"
-import { formatNumberWithDots } from "@/utils"
+import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
 interface Props {
   setClose: React.Dispatch<boolean>
@@ -28,6 +28,11 @@ export const LicensePlateModal = ({ setClose }: Props) => {
       setVehicleDataInStorage(data)
       setClose(false)
     }
+  }
+
+  const handleYear = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = allowOnlyNumbers(e.target.value)
+    setValue("year", formatted)
   }
 
   const handleMileage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -143,18 +148,23 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                       <label className="text-sm text-customGray-500 w-full">
                         Año
                         <input
-                          min={1960}
-                          max={2025}
+                          inputMode="numeric"
                           minLength={4}
                           maxLength={4}
-                          type="number"
+                          type="text"
                           className="input-form uppercase appearance-none"
-                          {...register("year", { required: true, minLength: 4, maxLength: 4 })}
+                          {...register("year", {
+                            required: true,
+                            minLength: 4,
+                            maxLength: 4,
+                            onChange: handleYear
+                          })}
                         />
                       </label>
                       <label className="text-sm text-customGray-500 w-full">
                         Kilometros
                         <input
+                          inputMode="numeric"
                           minLength={3}
                           maxLength={7}
                           type="text"

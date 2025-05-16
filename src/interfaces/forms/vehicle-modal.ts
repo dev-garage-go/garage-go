@@ -2,6 +2,6 @@ export interface VehicleModalForm {
   licensePlate: string
   brand: string
   model: string
-  year: number
+  year: string
   mileage: string
 }

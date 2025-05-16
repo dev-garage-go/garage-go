@@ -1,10 +1,15 @@
-export const firstLetterUppercase = (value: string) => {
+export const firstLetterUppercase = (value: string): string => {
   const formatted = value.at(0)?.toUpperCase() + value.slice(1)
   return formatted
 }
 
-export const deleteNumbersInString = (value: string): string => {
+export const allowOnlyLetters = (value: string): string => {
   const formatted = value.replace(/[0-9]/g, '')
+  return formatted
+}
+
+export const allowOnlyNumbers = (value: string): string => {
+  const formatted = value.replace(/[^0-9]/g, '')
   return formatted
 }
 

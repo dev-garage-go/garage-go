@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form";
 
 import { RenderCardIcon, PaymentOption, ErrorMessage } from '@/components';
-import { deleteNumbersInString, detectCardType, formatCardNumber, formatExpiry } from "@/utils";
+import { allowOnlyLetters, detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 import { PaymentMethodsOptions } from "@/constants";
 import { PaymentFormSchema, PaymentGatewayMethods } from "@/interfaces";
 
@@ -29,7 +29,7 @@ export const PaymentForm = () => {
 
   // Delete numbers if exist
   const handleOwnerNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const formatted = deleteNumbersInString(e.target.value)
+    const formatted = allowOnlyLetters(e.target.value)
     setValue("userCard.ownerName", formatted)
   }
 
