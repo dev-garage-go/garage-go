@@ -59,7 +59,7 @@ export const TopBanner = ({
         <div className="flex justify-center items-center w-full">
           <div className="grid grid-cols-6">
             <div className={
-              `flex flex-wrap ${hasVehicleData
+              `flex flex-wrap overflow-x-visible ${hasVehicleData
                 ? 'col-start-1 col-end-6 xl:col-end-3'
                 : 'col-start-1 col-end-6 xl:col-start-2 xl:col-end-4'}`}>
               {/* Breadcrumbs */}
