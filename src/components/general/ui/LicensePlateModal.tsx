@@ -17,7 +17,7 @@ export const LicensePlateModal = ({ setClose }: Props) => {
   const licensePlate = watch("licensePlate")
 
   const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(true)
-  const [showModalToCompleteData, setShowModalToCompleteData] = useState<boolean>(false)
+  const [showModalToCompleteData, setShowModalToCompleteData] = useState<boolean>(true) // default value must be: false
   const { setLicensePlateInStorage, setVehicleDataInStorage } = useLicensePlateContext()
 
   /* TODO:
@@ -33,11 +33,6 @@ export const LicensePlateModal = ({ setClose }: Props) => {
   */
 
   useEffect(() => {
-    try {
-
-    } catch (error) {
-
-    }
     if (!vehicleDataFounded) {
       setShowModalToCompleteData(true)
     }
