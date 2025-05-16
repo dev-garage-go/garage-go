@@ -14,10 +14,10 @@ interface Props {
 
 export const LicensePlateModal = ({ setClose }: Props) => {
   const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleModalForm>()
-  const licensePlate = watch("licensePlate")
+  const hasLicensePlate = watch("licensePlate")
 
-  const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(true)
-  const [showModalToCompleteData, setShowModalToCompleteData] = useState<boolean>(true) // default value must be: false
+  const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(false) // switch para setear si se encuentra o no data en el backend del auto
+  const [showModalToCompleteData, setShowModalToCompleteData] = useState<boolean>(true) // por defecto es false hasta que el backend diga que no encontro data del auto
   const { setLicensePlateInStorage, setVehicleDataInStorage } = useLicensePlateContext()
 
   /* TODO:
@@ -36,15 +36,19 @@ export const LicensePlateModal = ({ setClose }: Props) => {
     if (!vehicleDataFounded) {
       setShowModalToCompleteData(true)
     }
-  }, [vehicleDataFounded])
+  }, [vehicleDataFounded,])
 
 
   const onSumbit = (data: VehicleModalForm) => {
-    if (vehicleDataFounded && licensePlate) {
-      setLicensePlateInStorage(licensePlate.toLocaleUpperCase())
+    if (vehicleDataFounded && hasLicensePlate) {
+      console.log(errors)
+      console.log("se encontro datos el vehiculo en el backend")
+      setLicensePlateInStorage(hasLicensePlate.toLocaleUpperCase()) // esto debe cambiarse por setVehicleDataInStorage cuando haya un backend
       setClose(false)
       return
-    } else if (!vehicleDataFounded) {
+    } else if (!vehicleDataFounded && showModalToCompleteData) {
+      console.log(errors)
+      console.log("no existe informacion en el backend del vehiculo", data)
       setVehicleDataInStorage(data)
       setClose(false)
     }
@@ -105,7 +109,7 @@ export const LicensePlateModal = ({ setClose }: Props) => {
         <div>
           <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-white bg-opacity-90">
             <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10
-       rounded-2xl w-full h-full max-w-2xl max-h-[500px] bg-opacity-100 shadow-lg shadow-customGray-400 mx-4">
+       rounded-2xl w-full h-full max-w-xl xl:max-w-3xl max-h-[600px] bg-opacity-100 shadow-lg shadow-customGray-400 mx-4">
 
               <form
                 onSubmit={handleSubmit(onSumbit)}
@@ -118,14 +122,10 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                 </p>
 
                 <div className="flex flex-col justify-center items-center w-full gap-4">
-                  {errors.licensePlate && (
-                    <ErrorMessage message={"Escriba la patente de su vehiculo"} className="mb-1" />
-                  )}
-
                   {/* License plate */}
                   <div className="flex flex-col sm:flex-row justify-start items-center gap-4 w-full">
                     <div className="flex gap-4 justify-center items-center w-full">
-                      <div className="flex flex-col gap-2 w-full">
+                      <div className="flex flex-col gap-1 w-full">
                         <label htmlFor="licensePlate" className="text-sm text-customGray-500 w-full cursor-pointer">
                           <p className="ml-2">Patente</p>
                         </label>
@@ -137,10 +137,13 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                           className="input-form uppercase"
                           {...register("licensePlate", {
                             required: true,
-                            minLength: { value: 4, message: "Debe tener 6 digitos" },
+                            minLength: { value: 6, message: "Debe tener 6 digitos" },
                             maxLength: { value: 6, message: "Debe tener 6 digitos" }
                           })}
                         />
+                        {errors.licensePlate && (
+                          <ErrorMessage message={errors.licensePlate.message || 'Requerido'} />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -148,7 +151,7 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                   {/* Brand and model */}
                   <div className="flex flex-col sm:flex-row justify-start items-center gap-4 w-full">
                     <div className="flex gap-4 justify-center items-center w-full">
-                      <div className="flex flex-col gap-2 w-full">
+                      <div className="flex flex-col gap-1 w-full">
                         <label htmlFor="brand" className="text-sm text-customGray-500 w-full cursor-pointer" >
                           <p className="ml-2">Marca</p>
                         </label>
@@ -162,9 +165,12 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                             minLength: { value: 3, message: "Debe tener 3 cifras" }
                           })}
                         />
+                        {errors.brand && (
+                          <ErrorMessage message={errors.brand.message || 'Requerido'} />
+                        )}
                       </div>
 
-                      <div className="flex flex-col gap-2 w-full">
+                      <div className="flex flex-col gap-1 w-full">
                         <label htmlFor="model" className="text-sm text-customGray-500 w-full cursor-pointer">
                           <p className="ml-2">Modelo</p>
                         </label>
@@ -178,6 +184,9 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                             minLength: { value: 2, message: "Debe tener 2 cifras" }
                           })}
                         />
+                        {errors.model && (
+                          <ErrorMessage message={errors.model.message || 'Requerido'} />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -186,7 +195,7 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                   <div className="flex flex-col sm:flex-row justify-start items-center gap-4 w-full">
                     <div className="flex gap-4 justify-center items-center w-full">
 
-                      <div className="flex flex-col gap-2 w-full">
+                      <div className="flex flex-col gap-1 w-full">
                         <label htmlFor="year" className="text-sm text-customGray-500 w-full cursor-pointer" >
                           <p className="ml-2">Año</p>
                         </label>
@@ -204,9 +213,12 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                             onChange: handleYear
                           })}
                         />
+                        {errors.year && (
+                          <ErrorMessage message={errors.year.message || 'Requerido'} />
+                        )}
                       </div>
 
-                      <div className="flex flex-col gap-2 w-full">
+                      <div className="flex flex-col gap-1 w-full">
                         <label htmlFor="mileage" className="text-sm text-customGray-500 w-full cursor-pointer">
                           <p>Kilometros</p>
                         </label>
@@ -220,10 +232,13 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                           {...register("mileage", {
                             required: true,
                             minLength: { value: 3, message: "Debe tener 3 cifras" },
-                            maxLength: { value: 4, message: "El maximo son 7 cifras" },
+                            maxLength: { value: 7, message: "El maximo son 7 cifras" },
                             onChange: handleMileage
                           })}
                         />
+                        {errors.mileage && (
+                          <ErrorMessage message={errors.mileage.message || 'Requerido'} />
+                        )}
                       </div>
 
                     </div>
