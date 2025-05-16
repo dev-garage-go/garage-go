@@ -12,6 +12,7 @@ interface LicensePlateContextType {
   setLicensePlateInStorage: (value: string) => void
   deleteLicensePlate: () => void
   setVehicleDataInStorage: (data: VehicleModalForm) => void
+  getVehicleDataInStorage: () => { exist: boolean; data?: VehicleModalForm }
 }
 
 
@@ -34,16 +35,26 @@ export const LicensePlateProvider = ({ children }: Props) => {
   const [licensePlateModalIsOpen, setLicensePlateModalIsOpen] = useState<boolean>(false)
   const licensePlate = useLicensePlateOnChangeStorage()
 
-  // sets license plate in the session storage
+  // sessionStorage: Only the license plate
   const setLicensePlateInStorage = (value: string) => {
     sessionStorage.setItem(licensePlateKey, value)
     window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
   }
 
-  // sets license plate in the session storage
+  // localStorage: All vehicle data
   const setVehicleDataInStorage = (data: VehicleModalForm) => {
-    sessionStorage.setItem(vehicleKey, JSON.stringify(data))
+    localStorage.setItem(vehicleKey, JSON.stringify(data))
     window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
+  }
+
+  // localStorage: Get vehicle data
+  const getVehicleDataInStorage = (): { exist: boolean; data?: VehicleModalForm } => {
+    const data = localStorage.getItem(vehicleKey)
+    if (data) {
+      return { exist: true, data: JSON.parse(data) }
+    } else {
+      return { exist: false, data: undefined }
+    }
   }
 
   // deletes license plate from the session storage, so that others can be entered
@@ -68,7 +79,8 @@ export const LicensePlateProvider = ({ children }: Props) => {
       licensePlate,
       setLicensePlateInStorage,
       deleteLicensePlate,
-      setVehicleDataInStorage
+      setVehicleDataInStorage,
+      getVehicleDataInStorage
     }}
   >
     {children}

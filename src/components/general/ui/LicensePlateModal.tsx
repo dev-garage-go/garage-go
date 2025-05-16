@@ -41,14 +41,13 @@ export const LicensePlateModal = ({ setClose }: Props) => {
 
   const onSumbit = (data: VehicleModalForm) => {
     if (vehicleDataFounded && hasLicensePlate) {
-      console.log(errors)
-      console.log("se encontro datos el vehiculo en el backend")
+      // se encontro datos el vehiculo en el backend
       setLicensePlateInStorage(hasLicensePlate.toLocaleUpperCase()) // esto debe cambiarse por setVehicleDataInStorage cuando haya un backend
       setClose(false)
       return
+      
     } else if (!vehicleDataFounded && showModalToCompleteData) {
-      console.log(errors)
-      console.log("no existe informacion en el backend del vehiculo", data)
+      // no existe informacion en el backend del vehiculo
       setVehicleDataInStorage(data)
       setClose(false)
     }
