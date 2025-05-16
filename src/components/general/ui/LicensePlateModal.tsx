@@ -104,50 +104,74 @@ export const LicensePlateModal = ({ setClose }: Props) => {
 
                   {/* License plate */}
                   <div className="flex flex-col sm:flex-row justify-start items-center gap-4 w-full">
-                    <div className="flex gap-2 justify-center items-center bg-orange-100 w-full">
-                      <label className="text-sm text-customGray-500 w-full">
-                        Patente
+                    <div className="flex gap-4 justify-center items-center w-full">
+                      <div className="flex flex-col gap-2 w-full">
+                        <label htmlFor="licensePlate" className="text-sm text-customGray-500 w-full cursor-pointer">
+                          <p className="ml-2">Patente</p>
+                        </label>
                         <input
+                          id="licensePlate"
                           minLength={6}
                           maxLength={6}
                           type="text"
                           className="input-form uppercase"
-                          {...register("licensePlate", { required: true, minLength: 6, maxLength: 6 })}
+                          {...register("licensePlate", {
+                            required: true,
+                            minLength: { value: 4, message: "Debe tener 6 digitos" },
+                            maxLength: { value: 6, message: "Debe tener 6 digitos" }
+                          })}
                         />
-                      </label>
+                      </div>
                     </div>
                   </div>
 
                   {/* Brand and model */}
                   <div className="flex flex-col sm:flex-row justify-start items-center gap-4 w-full">
-                    <div className="flex gap-2 justify-center items-center bg-orange-100 w-full">
-                      <label className="text-sm text-customGray-500 w-full">
-                        Marca
+                    <div className="flex gap-4 justify-center items-center w-full">
+                      <div className="flex flex-col gap-2 w-full">
+                        <label htmlFor="brand" className="text-sm text-customGray-500 w-full cursor-pointer" >
+                          <p className="ml-2">Marca</p>
+                        </label>
                         <input
+                          id="brand"
                           minLength={3}
                           type="text"
                           className="input-form uppercase"
-                          {...register("brand", { required: true, minLength: 3 })}
+                          {...register("brand", {
+                            required: true,
+                            minLength: { value: 3, message: "Debe tener 3 cifras" }
+                          })}
                         />
-                      </label>
-                      <label className="text-sm text-customGray-500 w-full">
-                        Modelo
+                      </div>
+
+                      <div className="flex flex-col gap-2 w-full">
+                        <label htmlFor="model" className="text-sm text-customGray-500 w-full cursor-pointer">
+                          <p className="ml-2">Modelo</p>
+                        </label>
                         <input
+                          id="model"
                           minLength={2}
                           type="text"
                           className="input-form uppercase"
-                          {...register("model", { required: true, minLength: 2 })}
+                          {...register("model", {
+                            required: true,
+                            minLength: { value: 2, message: "Debe tener 2 cifras" }
+                          })}
                         />
-                      </label>
+                      </div>
                     </div>
                   </div>
 
                   {/* Year and mileage */}
                   <div className="flex flex-col sm:flex-row justify-start items-center gap-4 w-full">
-                    <div className="flex gap-2 justify-center items-center bg-orange-100 w-full">
-                      <label className="text-sm text-customGray-500 w-full">
-                        Año
+                    <div className="flex gap-4 justify-center items-center w-full">
+
+                      <div className="flex flex-col gap-2 w-full">
+                        <label htmlFor="year" className="text-sm text-customGray-500 w-full cursor-pointer" >
+                          <p className="ml-2">Año</p>
+                        </label>
                         <input
+                          id="year"
                           inputMode="numeric"
                           minLength={4}
                           maxLength={4}
@@ -155,15 +179,19 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                           className="input-form uppercase appearance-none"
                           {...register("year", {
                             required: true,
-                            minLength: 4,
-                            maxLength: 4,
+                            minLength: { value: 4, message: "Debe tener 4 cifras" },
+                            maxLength: { value: 4, message: "Debe tener 4 cifras" },
                             onChange: handleYear
                           })}
                         />
-                      </label>
-                      <label className="text-sm text-customGray-500 w-full">
-                        Kilometros
+                      </div>
+
+                      <div className="flex flex-col gap-2 w-full">
+                        <label htmlFor="mileage" className="text-sm text-customGray-500 w-full cursor-pointer">
+                          <p>Kilometros</p>
+                        </label>
                         <input
+                          id="mileage"
                           inputMode="numeric"
                           minLength={3}
                           maxLength={7}
@@ -171,12 +199,13 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                           className="input-form uppercase appearance-none"
                           {...register("mileage", {
                             required: true,
-                            minLength: 3,
-                            maxLength: 7,
+                            minLength: { value: 3, message: "Debe tener 3 cifras" },
+                            maxLength: { value: 4, message: "El maximo son 7 cifras" },
                             onChange: handleMileage
                           })}
                         />
-                      </label>
+                      </div>
+
                     </div>
                   </div>
                 </div>
