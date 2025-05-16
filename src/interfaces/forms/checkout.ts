@@ -23,11 +23,11 @@ export type CheckoutFormData = {
     additionalInfo?: string
   },
   vehicle: {
-    licensePlate?: string
-    carBrand: string;
-    carModel: string;
-    carKm: string;
-    carYear: number;
+    licensePlate: string
+    brand: string;
+    model: string;
+    mileage: string;
+    year: number;
   },
   appointment: {
     date: Dayjs,
