@@ -24,8 +24,8 @@ export const CheckoutForm = ({ withBooking }: Props) => {
   const [schedulePicker, setSchedulePicker] = useState(false)
 
   // Errors
-  const scheduleError = errors.booking?.time
-  const calendarError = errors.booking?.date
+  const scheduleError = errors.appointment?.time
+  const calendarError = errors.appointment?.date
 
 
   useEffect(() => {
@@ -159,7 +159,7 @@ export const CheckoutForm = ({ withBooking }: Props) => {
             </div>
 
             <Controller
-              name="booking.date" // equivalente a register("booking.date")
+              name="appointment.date" // equivalente a register("appointment.date")
               control={control}
               rules={{ required: 'Seleccione una fecha de agendamiento' }}
               render={({ field, fieldState }) => (
@@ -174,7 +174,7 @@ export const CheckoutForm = ({ withBooking }: Props) => {
             </Controller>
 
             <Controller
-              name="booking.time" // equivalente a register("booking.time")
+              name="appointment.time" // equivalente a register("booking.time")
               control={control}
               rules={{ required: 'Seleccione un horario de agendamiento' }}
               render={({ field, fieldState }) => (

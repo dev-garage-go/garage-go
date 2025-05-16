@@ -1,15 +1,13 @@
 "use client"
 
-import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import { useRouter } from "next/navigation";
 
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
 import { HoverPortal, LicensePlateModal } from "@/components";
 
-import { CheckoutFormData } from "@/interfaces";
-import { useGetServiceName, useLicensePlateOnChangeStorage } from "@/hooks";
+import { CheckoutFormData, ServicesNames, TypeServicesMap } from "@/interfaces";
+import { useGetServiceName } from "@/hooks";
 import { useLicensePlateContext } from "@/contexts";
 
 interface Props {
@@ -17,11 +15,13 @@ interface Props {
 }
 
 export const CheckoutFormWrapper = ({ withBooking }: Props) => {
+  const serviceName = useGetServiceName() as ServicesNames
   const methods = useForm<CheckoutFormData>({
     shouldFocusError: true,
     defaultValues: {
-      booking: {
-        serviceName: useGetServiceName()
+      services: {
+        name: serviceName,
+        type: TypeServicesMap[serviceName]
       },
       user: {
         typeAddress: '',
@@ -31,13 +31,12 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
   })
 
   // TODO: action/calcAmountByService(service: string, data: {})
-  const router = useRouter()
   const { licensePlate, licensePlateModalIsOpen, setLicensePlateModalIsOpen } = useLicensePlateContext()
 
   // Func that will be executed when form its submitted
   const onSubmit = (data: CheckoutFormData) => {
     console.log(data)
-    router.push("/payment")
+
   }
 
   return (

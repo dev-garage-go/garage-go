@@ -1,6 +1,18 @@
 import { Dayjs } from 'dayjs';
 
+export type ServicesNames = 'mileage_maintenance' | 'tires_change'
+export type ServicesTypes = 'mileage' | 'tires'
+
+export const TypeServicesMap: Record<ServicesNames, ServicesTypes> = {
+  "mileage_maintenance": "mileage",
+  "tires_change": "tires"
+}
+
 export type CheckoutFormData = {
+  services: {
+    name: ServicesNames,
+    type: ServicesTypes,
+  },
   user: {
     name: string;
     lastName: string;
@@ -17,10 +29,8 @@ export type CheckoutFormData = {
     carKm: string;
     carYear: number;
   },
-  booking: {
-    serviceName: string,
+  appointment: {
     date: Dayjs,
     time: string,
-    extraOptions?: {}
   }
 }
