@@ -10,6 +10,7 @@ export * from './forms/checkout';
 export * from './forms/mileage-contractic';
 export * from './forms/schedules';
 export * from './forms/tires-change-contracting';
+export * from './forms/vehicle-modal';
 export * from './payment/payment-methods';
 export * from './services-interfaces/faqs_mileage_maintenance';
 export * from './services-interfaces/services';

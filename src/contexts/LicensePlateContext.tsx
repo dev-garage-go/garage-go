@@ -1,15 +1,17 @@
 'use client'
 
 import { useLicensePlateOnChangeStorage } from "@/hooks"
-import { customLicensePlateUpdateEvent, licensePlateKey } from "@/keys"
+import { VehicleModalForm } from "@/interfaces"
+import { customLicensePlateUpdateEvent, licensePlateKey, vehicleKey } from "@/keys"
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
 
 interface LicensePlateContextType {
   licensePlateModalIsOpen: boolean
   setLicensePlateModalIsOpen: React.Dispatch<SetStateAction<boolean>>
   licensePlate: string | null
-  setLicensePlate: (value: string) => void
+  setLicensePlateInStorage: (value: string) => void
   deleteLicensePlate: () => void
+  setVehicleDataInStorage: (data: VehicleModalForm) => void
 }
 
 
@@ -33,8 +35,14 @@ export const LicensePlateProvider = ({ children }: Props) => {
   const licensePlate = useLicensePlateOnChangeStorage()
 
   // sets license plate in the session storage
-  const setLicensePlate = (value: string) => {
+  const setLicensePlateInStorage = (value: string) => {
     sessionStorage.setItem(licensePlateKey, value)
+    window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
+  }
+
+  // sets license plate in the session storage
+  const setVehicleDataInStorage = (data: VehicleModalForm) => {
+    sessionStorage.setItem(vehicleKey, JSON.stringify(data))
     window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
   }
 
@@ -58,8 +66,9 @@ export const LicensePlateProvider = ({ children }: Props) => {
       licensePlateModalIsOpen,
       setLicensePlateModalIsOpen,
       licensePlate,
-      setLicensePlate,
-      deleteLicensePlate
+      setLicensePlateInStorage,
+      deleteLicensePlate,
+      setVehicleDataInStorage
     }}
   >
     {children}

@@ -4,32 +4,27 @@ import { useForm } from "react-hook-form"
 import { ErrorMessage } from "./ErrorMessage"
 import { useLicensePlateContext } from "@/contexts"
 import { useState } from "react"
+import { VehicleModalForm } from "@/interfaces"
 
-interface LicensePlateModalForm {
-  licensePlate: string
-  brand: string
-  model: string
-  year: number
-  mileage: number
-}
 interface Props {
   setClose: React.Dispatch<boolean>
 }
 
 export const LicensePlateModal = ({ setClose }: Props) => {
-  const { register, watch, formState: { errors }, handleSubmit } = useForm<LicensePlateModalForm>()
+  const { register, watch, formState: { errors }, handleSubmit } = useForm<VehicleModalForm>()
   const licensePlate = watch("licensePlate")
 
   const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(false)
-  const { setLicensePlate } = useLicensePlateContext()
+  const { setLicensePlateInStorage, setVehicleDataInStorage } = useLicensePlateContext()
 
-  const onSumbit = (data: LicensePlateModalForm) => {
+  const onSumbit = (data: VehicleModalForm) => {
     if (vehicleDataFounded && licensePlate) {
-      setLicensePlate(licensePlate.toLocaleUpperCase())
+      setLicensePlateInStorage(licensePlate.toLocaleUpperCase())
       setClose(false)
       return
     } else if (!vehicleDataFounded) {
       console.log(data)
+      setVehicleDataInStorage(data)
     }
   }
 
