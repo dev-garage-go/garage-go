@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const SchedulePicker = ({ onChange, error }: Props) => {
-  const [hourSelected, setHourSelected] = useState<Hour>('9:00 am')
+  const [hourSelected, setHourSelected] = useState<Hour>('9:00')
 
   const handleSelect = (value: Hour) => {
     setHourSelected(value)

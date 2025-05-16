@@ -1,13 +1,13 @@
-export type Hour = '9:00 am' | '11:00 am' | '13:00 pm' | '15:00 pm' | '17:00 pm'
+export type Hour = '9:00' | '11:00' | '13:00' | '15:00' | '17:00'
 
 interface Schedules {
   hour: Hour
 }
 
 export const SchedulesOptions: Schedules[] = [
-  { hour: "9:00 am" },
-  { hour: "11:00 am" },
-  { hour: "13:00 pm" },
-  { hour: "15:00 pm" },
-  { hour: "17:00 pm" }
+  { hour: "9:00" },
+  { hour: "11:00" },
+  { hour: "13:00" },
+  { hour: "15:00" },
+  { hour: "17:00" }
 ]

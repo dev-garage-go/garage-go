@@ -36,7 +36,8 @@ export const CalendarPicker = ({ onChange, error }: Props) => {
 
   const onSelect: CalendarProps<Dayjs>['onSelect'] = (date) => {
     setSelectedDate(date)
-    onChange(date.format('DD-MM-YY'))
+    const isoString = date.toISOString()
+    onChange(isoString)
   };
 
   return (
