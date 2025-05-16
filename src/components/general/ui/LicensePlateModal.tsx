@@ -1,17 +1,19 @@
 'use client'
 
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "./ErrorMessage"
+
 import { useLicensePlateContext } from "@/contexts"
-import { useState } from "react"
 import { VehicleModalForm } from "@/interfaces"
+import { formatNumberWithDots } from "@/utils"
 
 interface Props {
   setClose: React.Dispatch<boolean>
 }
 
 export const LicensePlateModal = ({ setClose }: Props) => {
-  const { register, watch, formState: { errors }, handleSubmit } = useForm<VehicleModalForm>()
+  const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleModalForm>()
   const licensePlate = watch("licensePlate")
 
   const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(false)
@@ -23,11 +25,15 @@ export const LicensePlateModal = ({ setClose }: Props) => {
       setClose(false)
       return
     } else if (!vehicleDataFounded) {
-      console.log(data)
       setVehicleDataInStorage(data)
+      setClose(false)
     }
   }
 
+  const handleMileage = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const mileageFormmated = formatNumberWithDots(e.target.value)
+    setValue("mileage", mileageFormmated)
+  }
 
   return (
     <>
@@ -149,13 +155,16 @@ export const LicensePlateModal = ({ setClose }: Props) => {
                       <label className="text-sm text-customGray-500 w-full">
                         Kilometros
                         <input
-                          min={500}
-                          max={1000000}
                           minLength={3}
                           maxLength={7}
-                          type="number"
+                          type="text"
                           className="input-form uppercase appearance-none"
-                          {...register("mileage", { required: true, minLength: 3, maxLength: 7 })}
+                          {...register("mileage", {
+                            required: true,
+                            minLength: 3,
+                            maxLength: 7,
+                            onChange: handleMileage
+                          })}
                         />
                       </label>
                     </div>

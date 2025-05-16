@@ -3,5 +3,5 @@ export interface VehicleModalForm {
   brand: string
   model: string
   year: number
-  mileage: number
+  mileage: string
 }
