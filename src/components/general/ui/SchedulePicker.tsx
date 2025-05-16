@@ -18,6 +18,7 @@ export const SchedulePicker = ({ onChange, error }: Props) => {
     onChange(value)
   }
 
+
   return (
     <>
       {error && (<ErrorMessage message={error} className='mt-1 ml-2' />)}
@@ -25,16 +26,22 @@ export const SchedulePicker = ({ onChange, error }: Props) => {
         <h4 className="text-sm font-medium text-primaryBlue-900">Horarios disponibles</h4>
 
         <div className="relative grid grid-cols-2 w-full gap-4 mt-4 py-2">
-          {SchedulesOptions.map((item, index) => (
-            <ButtonOptions
-              key={item.hour + index}
-              item={item.hour}
-              current={item.hour}
-              selected={hourSelected}
-              onClick={() => handleSelect(item.hour)}
-              className="py-3"
-            />
-          ))}
+          {SchedulesOptions.map((item, index) => {
+            const hourString = item.hour.split(":")[0]
+            const showAmPm = Number(hourString) < 12 ? 'am' : 'pm'
+
+            return (
+              <ButtonOptions
+                key={item.hour + index}
+                item={item.hour + " " + showAmPm}
+                current={item.hour}
+                selected={hourSelected}
+                onClick={() => handleSelect(item.hour)}
+                className="py-3"
+              />
+            )
+          }
+          )}
         </div>
 
         <p className="text-xs text-primaryBlue-500 text-wrap text-start mt-6 mb-2">
