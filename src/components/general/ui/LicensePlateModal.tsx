@@ -13,14 +13,22 @@ interface Props {
 }
 
 export const LicensePlateModal = ({ setClose }: Props) => {
+  const { setLicensePlateInStorage, setVehicleDataInStorage } = useLicensePlateContext()
+
   const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleModalForm>()
   const hasLicensePlate = watch("licensePlate")
 
-  const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(false) // switch para setear si se encuentra o no data en el backend del auto
-  const [showModalToCompleteData, setShowModalToCompleteData] = useState<boolean>(true) // por defecto es false hasta que el backend diga que no encontro data del auto
-  const { setLicensePlateInStorage, setVehicleDataInStorage } = useLicensePlateContext()
+  // en principio es 'true', define si el backend y la db encontraron informacion en base
+  // a la patente que el usuario coloco. Si no se encuentra data, el usuario debe crear ese registro
+  // cargandolo manulamente, por lo tanto esto se pondria en 'false'
+  const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(false)
 
-  /* TODO:
+  // en principio se muestra un modal solo para colocar patentes
+  // si el backend y la db no encuentran registros del auto, esto debe ser 'true'
+  // haciendo que el modal para completar manualmente los datos del vehiculo aparezca
+  const [showModalToCompleteData, setShowModalToCompleteData] = useState<boolean>(false)
+
+  /* TODO: Backend func
     const getVehicleDataByLicensePlate = (value: string) => {
     try{
       setVehicleDataInStorage(data)
@@ -32,6 +40,8 @@ export const LicensePlateModal = ({ setClose }: Props) => {
     }
   */
 
+  // queda escuchando si el backend comunico si encontro o no data del auto en la db
+  // en base a eso, se renderiza un modal u otro
   useEffect(() => {
     if (!vehicleDataFounded) {
       setShowModalToCompleteData(true)
@@ -45,7 +55,7 @@ export const LicensePlateModal = ({ setClose }: Props) => {
       setLicensePlateInStorage(hasLicensePlate.toLocaleUpperCase()) // esto debe cambiarse por setVehicleDataInStorage cuando haya un backend
       setClose(false)
       return
-      
+
     } else if (!vehicleDataFounded && showModalToCompleteData) {
       // no existe informacion en el backend del vehiculo
       setVehicleDataInStorage(data)
