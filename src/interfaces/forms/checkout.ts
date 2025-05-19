@@ -8,6 +8,22 @@ export const TypeServicesMap: Record<ServicesNames, ServicesTypes> = {
   "tires_change": "tires"
 }
 
+export interface BookingData {
+  user: {
+    name: string;
+    lastName: string;
+    phone: string;
+    email: string;
+    address: string,
+    typeAddress: '' | 'casa' | 'oficina' | 'depto'
+    additionalInfo?: string
+  },
+  appointment: {
+    date: Dayjs,
+    time: string,
+  }
+}
+
 export type CheckoutFormData = {
   services: {
     name: ServicesNames,
