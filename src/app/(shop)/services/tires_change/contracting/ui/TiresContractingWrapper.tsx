@@ -7,6 +7,7 @@ import { TiresContractingForm } from './TiresContractingForm';
 import { TiresContractingSummary } from './TiresContractingSummary';
 
 import { TiresChangeData } from '@/interfaces';
+import { useServiceContext } from '@/contexts';
 
 
 export const TiresContractingWrapper = () => {
@@ -22,11 +23,13 @@ export const TiresContractingWrapper = () => {
   })
 
   const router = useRouter()
+  const { setServicesInStorage } = useServiceContext()
 
   // Function that will be executed when the form is submitted
   const onSubmit = (data: TiresChangeData) => {
     console.log(data)
-    router.push(`/services/tires_change/checkout`)
+    setServicesInStorage(data)
+    // router.push(`/services/tires_change/checkout`)
   }
 
   return (

@@ -9,7 +9,7 @@ import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContra
 import { HoverPortal, LicensePlateModal } from "@/components"
 
 import { MileageMaintenanceData } from "@/interfaces"
-import { useVehicleContext } from "@/contexts"
+import { useServiceContext, useVehicleContext } from "@/contexts"
 
 
 export const MileageMaintenanceContractingWrapper = () => {
@@ -26,11 +26,13 @@ export const MileageMaintenanceContractingWrapper = () => {
   const ref = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const { licensePlate, setModalIsOpen, modalIsOpen } = useVehicleContext()
+  const { setServicesInStorage } = useServiceContext()
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceData) => {
     console.log(data)
-    router.push(`/services/mileage_maintenance/checkout`)
+    setServicesInStorage(data)
+    // router.push(`/services/mileage_maintenance/checkout`)
   }
 
   return (
