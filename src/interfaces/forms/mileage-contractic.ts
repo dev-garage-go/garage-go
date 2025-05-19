@@ -17,7 +17,7 @@ export interface VehicleMileagesOptions {
   quantity: VehicleMileages
 }
 
-export interface MileageContractingForm {
+export interface MileageMaintenanceData {
   mileages: VehicleMileages
   extraServices?: ExtraServices
 }

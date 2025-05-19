@@ -1,7 +1,8 @@
 "use client"
 
-import { serviceKey } from "@/keys"
 import { createContext, useContext } from "react"
+import { serviceKey } from "@/keys"
+import { MileageMaintenanceData, TiresChangeData } from "@/interfaces"
 
 
 interface ServiceContextType {
@@ -22,9 +23,12 @@ export const useServiceContext = () => {
   return context
 }
 
+// this type accepts all services forms data
+type ServicesFormsData = MileageMaintenanceData | TiresChangeData
+
 // Provider
 export const ServiceContextProvider = ({ children }: Props) => {
-  const setServiceInStorage = (data: any) => {
+  const setServiceInStorage = (data: ServicesFormsData) => {
     localStorage.setItem(serviceKey, JSON.stringify(data))
   }
 

@@ -8,12 +8,12 @@ import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContracti
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 import { HoverPortal, LicensePlateModal } from "@/components"
 
-import { MileageContractingForm } from "@/interfaces"
+import { MileageMaintenanceData } from "@/interfaces"
 import { useVehicleContext } from "@/contexts"
 
 
 export const MileageMaintenanceContractingWrapper = () => {
-  const methods = useForm<MileageContractingForm>({
+  const methods = useForm<MileageMaintenanceData>({
     shouldFocusError: true,
     defaultValues: {
       mileages: "10.000 kms",
@@ -28,7 +28,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   const { licensePlate, setModalIsOpen, modalIsOpen } = useVehicleContext()
 
   // Funcion que se ejecuta al enviar el formulario
-  const onSubmit = (data: MileageContractingForm) => {
+  const onSubmit = (data: MileageMaintenanceData) => {
     console.log(data)
     router.push(`/services/mileage_maintenance/checkout`)
   }
