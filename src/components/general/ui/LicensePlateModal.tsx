@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const LicensePlateModal = ({ setClose }: Props) => {
-  const { setLicensePlateInStorage, setVehicleDataInStorage } = useLicensePlateContext()
+  const { setLicensePlateInStorage, setVehicleInStorage } = useLicensePlateContext()
 
   const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleModalForm>()
   const hasLicensePlate = watch("licensePlate")
@@ -31,7 +31,7 @@ export const LicensePlateModal = ({ setClose }: Props) => {
   /* TODO: Backend func
     const getVehicleDataByLicensePlate = (value: string) => {
     try{
-      setVehicleDataInStorage(data)
+      setVehicleInStorage(data)
     } catch (error) {
       mostrar algo al usuario en la UI
       console.log(error)
@@ -52,13 +52,13 @@ export const LicensePlateModal = ({ setClose }: Props) => {
   const onSumbit = (data: VehicleModalForm) => {
     if (vehicleDataFounded && hasLicensePlate) {
       // se encontro datos el vehiculo en el backend
-      setLicensePlateInStorage(hasLicensePlate.toLocaleUpperCase()) // esto debe cambiarse por setVehicleDataInStorage cuando haya un backend
+      setLicensePlateInStorage(hasLicensePlate.toLocaleUpperCase()) // esto debe cambiarse por setVehicleInStorage cuando haya un backend
       setClose(false)
       return
 
     } else if (!vehicleDataFounded && showModalToCompleteData) {
       // no existe informacion en el backend del vehiculo
-      setVehicleDataInStorage(data)
+      setVehicleInStorage(data)
       setClose(false)
     }
   }

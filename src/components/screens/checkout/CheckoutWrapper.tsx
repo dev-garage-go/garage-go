@@ -31,7 +31,7 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
   })
 
   // TODO: action/calcAmountByService(service: string, data: {})
-  const { licensePlate, licensePlateModalIsOpen, setLicensePlateModalIsOpen } = useLicensePlateContext()
+  const { licensePlate, modalIsOpen, setModalIsOpen } = useLicensePlateContext()
 
   // Func that will be executed when form its submitted
   const onSubmit = (data: CheckoutFormData) => {
@@ -41,9 +41,9 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   return (
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
-      {!licensePlate && licensePlateModalIsOpen &&
+      {!licensePlate && modalIsOpen &&
         <HoverPortal>
-          <LicensePlateModal setClose={setLicensePlateModalIsOpen} />
+          <LicensePlateModal setClose={setModalIsOpen} />
         </HoverPortal>
       }
       <FormProvider {...methods}>

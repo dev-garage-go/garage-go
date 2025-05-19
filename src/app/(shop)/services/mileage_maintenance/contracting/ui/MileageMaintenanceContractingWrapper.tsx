@@ -25,7 +25,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   // TODO: Router temporal para mostrar
   const ref = useRef<HTMLDivElement>(null)
   const router = useRouter()
-  const { licensePlate, setLicensePlateModalIsOpen, licensePlateModalIsOpen } = useLicensePlateContext()
+  const { licensePlate, setModalIsOpen, modalIsOpen } = useLicensePlateContext()
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageContractingForm) => {
@@ -35,9 +35,9 @@ export const MileageMaintenanceContractingWrapper = () => {
 
   return (
     <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
-      {!licensePlate && licensePlateModalIsOpen &&
+      {!licensePlate && modalIsOpen &&
         <HoverPortal>
-          <LicensePlateModal setClose={setLicensePlateModalIsOpen} />
+          <LicensePlateModal setClose={setModalIsOpen} />
         </HoverPortal>
       }
       <FormProvider {...methods}>

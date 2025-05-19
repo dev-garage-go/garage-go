@@ -1,23 +1,21 @@
 "use client"
 
-import { VehicleModalForm } from "@/interfaces"
 import { customVehicleUpdateEvent, vehicleKey } from "@/keys"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
 
-export const useLicensePlateOnChangeStorage = () => {
+export const useGetVehicleOnChangeStorage = () => {
   const router = useRouter()
   const hasRefreshed = useRef(false)
-  const [vehicle, setVehicle] = useState<VehicleModalForm | null>(null)
+  const [vehicle, setVehicle] = useState<string | null>(null)
 
   // obtain the 'licensePlat' from session storage
   const readLocalStorage = () => {
-    const vehicleStorage = localStorage.getItem(vehicleKey) ?? ''
-    const vehicleParsed = JSON.parse(vehicleStorage)
+    const vehicle = localStorage.getItem(vehicleKey)
     setVehicle(prev => {
       if (prev !== vehicle) {
-        return vehicleParsed
+        return vehicle
       } else { return prev }
     })
   }
