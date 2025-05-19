@@ -7,6 +7,7 @@ import { MileageMaintenanceData, TiresChangeData } from "@/interfaces"
 
 interface ServiceContextType {
   setServicesInStorage: (data: any) => void
+  getServiceFromStorage: () => ServicesFormsData | null
 }
 
 interface Props {
@@ -33,9 +34,15 @@ export const ServiceContextProvider = ({ children }: Props) => {
     localStorage.setItem(serviceKey, JSON.stringify(data))
   }
 
+  const getServiceFromStorage = (): ServicesFormsData | null => {
+    const data = localStorage.getItem(serviceKey)
+    return data ? JSON.parse(data) : null
+  }
+
   return <ServiceContext.Provider
     value={{
-      setServicesInStorage
+      setServicesInStorage,
+      getServiceFromStorage
     }}
   >
     {children}

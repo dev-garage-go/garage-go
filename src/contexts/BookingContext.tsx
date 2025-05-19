@@ -4,6 +4,8 @@ import { createContext, useContext } from "react"
 import { bookingKey } from "@/keys"
 import { BookingData, CheckoutFormData } from "@/interfaces"
 import { useGetVehicleOnChangeStorage } from "@/hooks"
+import { useVehicleContext } from "./VehicleContext"
+import { useServiceContext } from "./ServiceContext"
 
 
 interface ServiceBookingType {
@@ -26,10 +28,17 @@ export const useBookingContext = () => {
 
 // Provider
 export const BookingContextProvider = ({ children }: Props) => {
-  const vehicle = useGetVehicleOnChangeStorage()
+  const { getVehicleFromStorage } = useVehicleContext()
+  const { getServiceFromStorage } = useServiceContext()
+
+  const vehicle = getVehicleFromStorage()
+  const service = getServiceFromStorage()
 
   const setBookingInStorage = (data: BookingData) => {
     localStorage.setItem(bookingKey, JSON.stringify(data))
+  }
+
+  const createBooking = (data: BookingData) => {
   }
 
   return <BookingContext.Provider

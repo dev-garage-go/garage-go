@@ -12,6 +12,7 @@ interface VehicleContextType {
   setLicensePlateInStorage: (value: string) => void
   deleteLicensePlate: () => void
   setVehicleInStorage: (data: VehicleData) => void
+  getVehicleFromStorage: () => VehicleData | null
   deleteVehicle: () => void
 }
 
@@ -56,6 +57,11 @@ export const VehicleContextProvider = ({ children }: Props) => {
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
+  const getVehicleFromStorage = (): VehicleData | null => {
+    const data = localStorage.getItem(vehicleKey)
+    return data ? JSON.parse(data) : null
+  }
+
   // deletes license plate from the session storage, so that others can be entered
   const deleteVehicle = () => {
     sessionStorage.removeItem(vehicleKey)
@@ -87,6 +93,7 @@ export const VehicleContextProvider = ({ children }: Props) => {
       setLicensePlateInStorage,
       deleteLicensePlate,
       setVehicleInStorage,
+      getVehicleFromStorage,
       deleteVehicle
     }}
   >
