@@ -10,12 +10,13 @@
 
 "use client"
 
+import { VehicleData } from "@/interfaces"
 import { customVehicleUpdateEvent, vehicleKey } from "@/keys"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
 
-export const useGetVehicleOnChangeStorage = () => {
+export const useGetVehicleOnChangeStorage = (): VehicleData | null => {
   const router = useRouter()
   const hasRefreshed = useRef(false)
   const [vehicle, setVehicle] = useState<string | null>(null)
@@ -64,5 +65,6 @@ export const useGetVehicleOnChangeStorage = () => {
     }
   }, [vehicle, router])
 
-  return vehicle
+  if (vehicle) return JSON.parse(vehicle)
+  else return null
 }

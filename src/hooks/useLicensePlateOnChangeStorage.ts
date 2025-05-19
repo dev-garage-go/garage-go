@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
 
-export const useLicensePlateOnChangeStorage = () => {
+export const useLicensePlateOnChangeStorage = (): string | null => {
   const router = useRouter()
   const hasRefreshed = useRef(false)
   const [licensePlate, setLicensePlate] = useState<string | null>(null)

@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { ErrorMessage } from "./ErrorMessage"
 
 import { useLicensePlateContext } from "@/contexts"
-import { VehicleModalForm } from "@/interfaces"
+import { VehicleData } from "@/interfaces"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
 interface Props {
@@ -15,7 +15,7 @@ interface Props {
 export const LicensePlateModal = ({ setClose }: Props) => {
   const { setLicensePlateInStorage, setVehicleInStorage } = useLicensePlateContext()
 
-  const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleModalForm>()
+  const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleData>()
   const hasLicensePlate = watch("licensePlate")
 
   // en principio es 'true', define si el backend y la db encontraron informacion en base
@@ -49,7 +49,7 @@ export const LicensePlateModal = ({ setClose }: Props) => {
   }, [vehicleDataFounded,])
 
 
-  const onSumbit = (data: VehicleModalForm) => {
+  const onSumbit = (data: VehicleData) => {
     if (vehicleDataFounded && hasLicensePlate) {
       // se encontro datos el vehiculo en el backend
       setLicensePlateInStorage(hasLicensePlate.toLocaleUpperCase()) // esto debe cambiarse por setVehicleInStorage cuando haya un backend

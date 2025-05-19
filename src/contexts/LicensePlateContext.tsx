@@ -1,7 +1,7 @@
 'use client'
 
 import { useGetVehicleOnChangeStorage, useLicensePlateOnChangeStorage } from "@/hooks"
-import { VehicleModalForm } from "@/interfaces"
+import { VehicleData } from "@/interfaces"
 import { customLicensePlateUpdateEvent, customVehicleUpdateEvent, licensePlateKey, vehicleKey } from "@/keys"
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
 
@@ -11,8 +11,7 @@ interface LicensePlateContextType {
   licensePlate: string | null
   setLicensePlateInStorage: (value: string) => void
   deleteLicensePlate: () => void
-  setVehicleInStorage: (data: VehicleModalForm) => void
-  getVehicleDataInStorage: () => { exist: boolean; data?: VehicleModalForm }
+  setVehicleInStorage: (data: VehicleData) => void
   deleteVehicle: () => void
 }
 
@@ -52,20 +51,11 @@ export const LicensePlateProvider = ({ children }: Props) => {
 
   // ? Vehicle local storage
   // localStorage: All vehicle data
-  const setVehicleInStorage = (data: VehicleModalForm) => {
+  const setVehicleInStorage = (data: VehicleData) => {
     localStorage.setItem(vehicleKey, JSON.stringify(data))
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
-  // localStorage: Get vehicle data
-  const getVehicleDataInStorage = (): { exist: boolean; data?: VehicleModalForm } => {
-    const data = localStorage.getItem(vehicleKey)
-    if (data) {
-      return { exist: true, data: JSON.parse(data) }
-    } else {
-      return { exist: false, data: undefined }
-    }
-  }
 
   // deletes license plate from the session storage, so that others can be entered
   const deleteVehicle = () => {
@@ -97,7 +87,6 @@ export const LicensePlateProvider = ({ children }: Props) => {
       setLicensePlateInStorage,
       deleteLicensePlate,
       setVehicleInStorage,
-      getVehicleDataInStorage,
       deleteVehicle
     }}
   >

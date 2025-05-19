@@ -6,7 +6,7 @@ import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 
 import { FeatureIconsMap } from "@/constants"
-import { useLicensePlateOnChangeStorage } from "@/hooks"
+import { useGetVehicleOnChangeStorage } from "@/hooks"
 import { getBreadcrumbs } from "@/utils"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
@@ -44,8 +44,11 @@ export const TopBanner = ({
   const pathSegments = pathname.split("/").filter(Boolean) // remove empty strings
 
   // Vehicle logic
-  const licensePlate = useLicensePlateOnChangeStorage()
-  const licensePlateTxt = licensePlate ? licensePlate : '-'
+  // const licensePlate = useLicensePlateOnChangeStorage()
+  // const licensePlateTxt = licensePlate ? licensePlate : '-'
+
+  const vehicle = useGetVehicleOnChangeStorage()
+  const licensePlateTxt = vehicle ? vehicle.licensePlate : '-'
 
   // TODO: const vehicleData = getVehiculeByLicensePlate(id: string) -> import {} from "@actions"
 
