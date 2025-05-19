@@ -13,6 +13,7 @@ interface LicensePlateContextType {
   deleteLicensePlate: () => void
   setVehicleInStorage: (data: VehicleModalForm) => void
   getVehicleDataInStorage: () => { exist: boolean; data?: VehicleModalForm }
+  deleteVehicle: () => void
 }
 
 
@@ -66,6 +67,12 @@ export const LicensePlateProvider = ({ children }: Props) => {
     }
   }
 
+  // deletes license plate from the session storage, so that others can be entered
+  const deleteVehicle = () => {
+    sessionStorage.removeItem(vehicleKey)
+    window.dispatchEvent(new Event(customVehicleUpdateEvent))
+  }
+
 
   // if the session storage doesn't have a license plate, open modal
   useEffect(() => {
@@ -90,7 +97,8 @@ export const LicensePlateProvider = ({ children }: Props) => {
       setLicensePlateInStorage,
       deleteLicensePlate,
       setVehicleInStorage,
-      getVehicleDataInStorage
+      getVehicleDataInStorage,
+      deleteVehicle
     }}
   >
     {children}

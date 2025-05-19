@@ -1,3 +1,15 @@
+/*
+/* Doc:
+1. Reads the sessionStorage looking for the value under licensePlateKey.
+2. Stores that value in the internal state (licensePlate).
+3. Listens for changes via:
+  - Storage events (when the sessionStorage changes from another tab or window).
+  - A custom event (customLicensePlateUpdateEvent) that you fire manually in the code when you change the sessionStorage from the same tab.
+4. When it detects a change, it rereads the sessionStorage and updates its state (licensePlate) if it changed.
+5. If it is the first time it detects a new value, it calls router.refresh(), which re-renders the server component associated to the current route in Next.js App Router.
+*/
+
+
 "use client"
 
 import { customLicensePlateUpdateEvent, licensePlateKey } from "@/keys"
