@@ -31,7 +31,7 @@ export const useVehicleContext = () => {
 }
 
 // Provider
-export const VehicleProvider = ({ children }: Props) => {
+export const VehicleContextProvider = ({ children }: Props) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const licensePlate = useLicensePlateOnChangeStorage()
   const vehicle = useGetVehicleOnChangeStorage()

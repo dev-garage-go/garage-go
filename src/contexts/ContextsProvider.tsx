@@ -1,6 +1,9 @@
 'use client'
 
-import { VehicleProvider } from "./VehicleContext"
+import {
+  ServiceContextProvider,
+  VehicleContextProvider
+} from "@/contexts"
 
 interface Props {
   children: React.ReactNode
@@ -8,8 +11,10 @@ interface Props {
 
 export const ContextsProvider = ({ children }: Props) => {
   return (
-    <VehicleProvider>
-      {children}
-    </VehicleProvider>
+    <VehicleContextProvider>
+      <ServiceContextProvider>
+        {children}
+      </ServiceContextProvider>
+    </VehicleContextProvider>
   )
 }
