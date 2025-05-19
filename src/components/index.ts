@@ -15,7 +15,7 @@ export * from './general/ui/ErrorMessage';
 export * from './general/ui/GoogleMap';
 export * from './general/ui/HoverPortal';
 export * from './general/ui/InformationModal';
-export * from './general/ui/LicensePlateModal';
+export * from './general/ui/VehicleDataModal';
 export * from './general/ui/SchedulePicker';
 export * from './general/ui/Select';
 export * from './home/Banner/Banner';

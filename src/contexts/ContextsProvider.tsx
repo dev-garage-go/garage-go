@@ -1,6 +1,6 @@
 'use client'
 
-import { VehicleProvider } from "./LicensePlateContext"
+import { VehicleProvider } from "./VehicleContext"
 
 interface Props {
   children: React.ReactNode
