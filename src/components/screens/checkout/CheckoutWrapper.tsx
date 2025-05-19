@@ -6,7 +6,7 @@ import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
 import { HoverPortal, LicensePlateModal } from "@/components";
 
-import { BookingData, CheckoutFormData, ServicesNames, TypeServicesMap } from "@/interfaces";
+import { AppointmentData, ServicesNames } from "@/interfaces";
 import { useGetServiceName } from "@/hooks";
 import { useBookingContext, useVehicleContext } from "@/contexts";
 
@@ -15,8 +15,7 @@ interface Props {
 }
 
 export const CheckoutFormWrapper = ({ withBooking }: Props) => {
-  const serviceName = useGetServiceName() as ServicesNames
-  const methods = useForm<BookingData>({
+  const methods = useForm<AppointmentData>({
     shouldFocusError: true,
     defaultValues: {
       user: {
@@ -31,7 +30,7 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
   const { setBookingInStorage } = useBookingContext()
 
   // Func that will be executed when form its submitted
-  const onSubmit = (data: BookingData) => {
+  const onSubmit = (data: AppointmentData) => {
     console.log(data)
     setBookingInStorage(data)
   }

@@ -1,52 +1,31 @@
+import { Services } from '@/database/interfaces/services';
 import { Dayjs } from 'dayjs';
+import { VehicleData } from './vehicle';
+import { Hour } from './schedules';
 
-export type ServicesNames = 'mileage_maintenance' | 'tires_change'
-export type ServicesTypes = 'mileage' | 'tires'
-
-export const TypeServicesMap: Record<ServicesNames, ServicesTypes> = {
-  "mileage_maintenance": "mileage",
-  "tires_change": "tires"
+interface User {
+  name: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  address: string,
+  typeAddress: '' | 'casa' | 'oficina' | 'depto'
+  additionalInfo?: string
 }
 
-export interface BookingData {
-  user: {
-    name: string;
-    lastName: string;
-    phone: string;
-    email: string;
-    address: string,
-    typeAddress: '' | 'casa' | 'oficina' | 'depto'
-    additionalInfo?: string
-  },
-  appointment: {
-    date: Dayjs,
-    time: string,
-  }
+interface Appointment {
+  date: Dayjs,
+  time: Hour
 }
 
-export type CheckoutFormData = {
-  services: {
-    name: ServicesNames,
-    type: ServicesTypes,
-  },
-  user: {
-    name: string;
-    lastName: string;
-    phone: string;
-    email: string;
-    address: string,
-    typeAddress: '' | 'casa' | 'oficina' | 'depto'
-    additionalInfo?: string
-  },
-  vehicle: {
-    licensePlate: string
-    brand: string;
-    model: string;
-    mileage: string;
-    year: number;
-  },
-  appointment: {
-    date: Dayjs,
-    time: string,
-  }
+export interface AppointmentData {
+  user: User
+  appointment: Appointment
+}
+
+export type BookingData = {
+  services: Services[],
+  user: User,
+  vehicle: VehicleData,
+  appointment: Appointment
 }
