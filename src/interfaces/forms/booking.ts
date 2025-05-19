@@ -23,8 +23,15 @@ export interface AppointmentData {
   appointment: Appointment
 }
 
-export type BookingData = {
+export interface BookingServicesData {
   services: Services[],
+  user: User,
+  vehicle: VehicleData,
+  appointment: Appointment
+}
+
+export interface BookingServiceData {
+  service: Services,
   user: User,
   vehicle: VehicleData,
   appointment: Appointment

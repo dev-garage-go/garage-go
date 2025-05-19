@@ -2,13 +2,14 @@
 
 import { createContext, useContext } from "react"
 import { bookingKey } from "@/keys"
-import { AppointmentData } from "@/interfaces"
+import { AppointmentData, BookingServiceData } from "@/interfaces"
 import { useVehicleContext } from "./VehicleContext"
 import { useServiceContext } from "./ServiceContext"
 
 
 interface ServiceBookingType {
   setBookingInStorage: (data: any) => void
+  createServiceBooking: (data: AppointmentData) => void
 }
 
 interface Props {
@@ -37,12 +38,23 @@ export const BookingContextProvider = ({ children }: Props) => {
     localStorage.setItem(bookingKey, JSON.stringify(data))
   }
 
-  const createBooking = (data: AppointmentData) => {
+  const createServiceBooking = (data: AppointmentData) => {
+    if (service && vehicle) {
+      const booking: BookingServiceData = {
+        service: service,
+        appointment: data.appointment,
+        vehicle: vehicle,
+        user: data.user
+      }
+
+      console.log("✅", booking)
+    }
   }
 
   return <BookingContext.Provider
     value={{
-      setBookingInStorage
+      setBookingInStorage,
+      createServiceBooking
     }}
   >
     {children}

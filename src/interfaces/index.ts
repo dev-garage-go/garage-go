@@ -6,7 +6,7 @@ export * from './components-interfaces/header-options';
 export * from './components-interfaces/reviews';
 export * from './components-interfaces/select-options';
 export * from './components-interfaces/suppliers-images';
-export * from './forms/checkout';
+export * from './forms/booking';
 export * from './forms/mileage-contractic';
 export * from './forms/schedules';
 export * from './forms/services';
