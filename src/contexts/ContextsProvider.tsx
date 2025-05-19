@@ -1,6 +1,6 @@
 'use client'
 
-import { LicensePlateProvider } from "./LicensePlateContext"
+import { VehicleProvider } from "./LicensePlateContext"
 
 interface Props {
   children: React.ReactNode
@@ -8,8 +8,8 @@ interface Props {
 
 export const ContextsProvider = ({ children }: Props) => {
   return (
-    <LicensePlateProvider>
+    <VehicleProvider>
       {children}
-    </LicensePlateProvider>
+    </VehicleProvider>
   )
 }

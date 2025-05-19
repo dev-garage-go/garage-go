@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "./ErrorMessage"
 
-import { useLicensePlateContext } from "@/contexts"
+import { useVehicleContext } from "@/contexts"
 import { VehicleData } from "@/interfaces"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const LicensePlateModal = ({ setClose }: Props) => {
-  const { setLicensePlateInStorage, setVehicleInStorage } = useLicensePlateContext()
+  const { setLicensePlateInStorage, setVehicleInStorage } = useVehicleContext()
 
   const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleData>()
   const hasLicensePlate = watch("licensePlate")

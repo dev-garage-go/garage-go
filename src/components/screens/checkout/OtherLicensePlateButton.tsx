@@ -1,10 +1,10 @@
 "use client"
 
-import { useLicensePlateContext } from "@/contexts"
+import { useVehicleContext } from "@/contexts"
 
 
 export const OtherLicensePlateButton = () => {
-  const { deleteLicensePlate } = useLicensePlateContext()
+  const { deleteLicensePlate } = useVehicleContext()
 
   return (
     <button

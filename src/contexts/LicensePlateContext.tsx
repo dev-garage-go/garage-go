@@ -5,7 +5,7 @@ import { VehicleData } from "@/interfaces"
 import { customLicensePlateUpdateEvent, customVehicleUpdateEvent, licensePlateKey, vehicleKey } from "@/keys"
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
 
-interface LicensePlateContextType {
+interface VehicleContextType {
   modalIsOpen: boolean
   setModalIsOpen: React.Dispatch<SetStateAction<boolean>>
   licensePlate: string | null
@@ -21,17 +21,17 @@ interface Props {
 }
 
 // Create the context
-const LicensePlateContext = createContext<LicensePlateContextType | null>(null)
+const VehicleContext = createContext<VehicleContextType | null>(null)
 
 // Custom hook to use context
-export const useLicensePlateContext = () => {
-  const context = useContext(LicensePlateContext)
-  if (!context) { throw new Error('useLicensePlateContext must be inside of a context') }
+export const useVehicleContext = () => {
+  const context = useContext(VehicleContext)
+  if (!context) { throw new Error('useVehicleContext must be inside of a context') }
   return context
 }
 
 // Provider
-export const LicensePlateProvider = ({ children }: Props) => {
+export const VehicleProvider = ({ children }: Props) => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const licensePlate = useLicensePlateOnChangeStorage()
   const vehicle = useGetVehicleOnChangeStorage()
@@ -56,7 +56,6 @@ export const LicensePlateProvider = ({ children }: Props) => {
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
-
   // deletes license plate from the session storage, so that others can be entered
   const deleteVehicle = () => {
     sessionStorage.removeItem(vehicleKey)
@@ -64,7 +63,8 @@ export const LicensePlateProvider = ({ children }: Props) => {
   }
 
 
-  // if the session storage doesn't have a license plate, open modal
+  // if the session storage doesn't have a license plate
+  // or if the local storage doesn't have vehicle data, open modal
   useEffect(() => {
     if (!licensePlate && !vehicle) {
       setModalIsOpen(true)      // ! -> LicensePlate deberia ser eliminado porque quiero datos del auto entero
@@ -79,7 +79,7 @@ export const LicensePlateProvider = ({ children }: Props) => {
   }, [licensePlate, vehicle])
 
 
-  return <LicensePlateContext.Provider
+  return <VehicleContext.Provider
     value={{
       modalIsOpen,
       setModalIsOpen,
@@ -91,5 +91,5 @@ export const LicensePlateProvider = ({ children }: Props) => {
     }}
   >
     {children}
-  </LicensePlateContext.Provider>
+  </VehicleContext.Provider>
 }
