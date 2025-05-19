@@ -1,2 +1,2 @@
 export * from './custom-events';
-export * from './session-storage';
+export * from './storage';
