@@ -6,9 +6,9 @@ import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
 import { HoverPortal, LicensePlateModal } from "@/components";
 
-import { CheckoutFormData, ServicesNames, TypeServicesMap } from "@/interfaces";
+import { BookingData, CheckoutFormData, ServicesNames, TypeServicesMap } from "@/interfaces";
 import { useGetServiceName } from "@/hooks";
-import { useVehicleContext } from "@/contexts";
+import { useBookingContext, useVehicleContext } from "@/contexts";
 
 interface Props {
   withBooking: boolean
@@ -16,13 +16,9 @@ interface Props {
 
 export const CheckoutFormWrapper = ({ withBooking }: Props) => {
   const serviceName = useGetServiceName() as ServicesNames
-  const methods = useForm<CheckoutFormData>({
+  const methods = useForm<BookingData>({
     shouldFocusError: true,
     defaultValues: {
-      services: {
-        name: serviceName,
-        type: TypeServicesMap[serviceName]
-      },
       user: {
         typeAddress: '',
         additionalInfo: ''
@@ -32,11 +28,12 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   // TODO: action/calcAmountByService(service: string, data: {})
   const { licensePlate, modalIsOpen, setModalIsOpen } = useVehicleContext()
+  const { setBookingInStorage } = useBookingContext()
 
   // Func that will be executed when form its submitted
-  const onSubmit = (data: CheckoutFormData) => {
+  const onSubmit = (data: BookingData) => {
     console.log(data)
-
+    setBookingInStorage(data)
   }
 
   return (

@@ -3,8 +3,6 @@
 import { createContext, useContext } from "react"
 import { bookingKey } from "@/keys"
 import { BookingData, CheckoutFormData } from "@/interfaces"
-import { useServiceContext } from "./ServiceContext"
-import { useVehicleContext } from "./VehicleContext"
 import { useGetVehicleOnChangeStorage } from "@/hooks"
 
 
@@ -27,7 +25,7 @@ export const useBookingContext = () => {
 }
 
 // Provider
-export const ServiceContextProvider = ({ children }: Props) => {
+export const BookingContextProvider = ({ children }: Props) => {
   const vehicle = useGetVehicleOnChangeStorage()
 
   const setBookingInStorage = (data: BookingData) => {
