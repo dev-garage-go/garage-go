@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form";
 
 import { InfoRuedas, Promotion4x3Tires } from "@/assets";
-import { QuantityTires, TiresChangeData, TypesTiresOptions } from "@/interfaces";
+import { QuantityTires, TiresChangeService, TypesTiresOptions } from "@/interfaces";
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
@@ -11,7 +11,7 @@ import { AddServiceCard, InformationButton, SwitchButton, PromotionCard, ErrorMe
 
 
 export const TiresContractingForm = () => {
-  const { register, watch, setValue, formState: { errors } } = useFormContext<TiresChangeData>()
+  const { register, watch, setValue, formState: { errors } } = useFormContext<TiresChangeService>()
 
   const quantityTires = watch("quantityTires")
   const typeTires = watch("typeTires")

@@ -6,13 +6,13 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { TiresContractingForm } from './TiresContractingForm';
 import { TiresContractingSummary } from './TiresContractingSummary';
 
-import { TiresChangeData } from '@/interfaces';
+import { TiresChangeService } from '@/interfaces';
 import { useServiceContext } from '@/contexts';
 
 
 export const TiresContractingWrapper = () => {
   // TODO: const hasPromotion = getPromotionByService()
-  const methods = useForm<TiresChangeData>({
+  const methods = useForm<TiresChangeService>({
     shouldFocusError: true,
     defaultValues: {
       type: 'tires',
@@ -27,7 +27,7 @@ export const TiresContractingWrapper = () => {
   const { setServiceInStorage } = useServiceContext()
 
   // Function that will be executed when the form is submitted
-  const onSubmit = (data: TiresChangeData) => {
+  const onSubmit = (data: TiresChangeService) => {
     setServiceInStorage(data)
     router.push(`/services/tires_change/checkout`)
   }

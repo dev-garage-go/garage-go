@@ -12,7 +12,7 @@ export const createBooking = async (booking: BookingServiceData) => {
     const coll = await getCollection("bookings")
     coll.insertOne(booking)
 
-    console.log("Llego a insertar")
+    console.log("Booking added in database")
   } catch (error) {
     console.error(error)
   }

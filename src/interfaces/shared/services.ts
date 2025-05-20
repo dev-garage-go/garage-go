@@ -33,10 +33,10 @@ export interface MileageMaintenanceService extends BaseService {
   mileages: VehicleMileages
 }
 
-export interface TiresChangeData extends BaseService {
+export interface TiresChangeService extends BaseService {
   quantityTires: QuantityTires;
   typeTires: TypesTiresOptions;
   tireSize: string,
 }
 
-export type ServicesData = TiresChangeData | MileageMaintenanceService
+export type ServicesData = TiresChangeService | MileageMaintenanceService
