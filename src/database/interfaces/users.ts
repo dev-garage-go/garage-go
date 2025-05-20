@@ -4,6 +4,6 @@ export interface User {
   email: string
   phone: string
   address: string
-  typeAddress: string
+  typeAddress: 'casa' | 'oficina' | 'depto'
   additionAddressInfo?: string
 }

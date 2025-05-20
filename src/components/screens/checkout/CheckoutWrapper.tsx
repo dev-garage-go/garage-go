@@ -27,12 +27,12 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   // TODO: action/calcAmountByService(service: string, data: {})
   const { licensePlate, modalIsOpen, setModalIsOpen } = useVehicleContext()
-  const { setBookingInStorage } = useBookingContext()
+  const { setBookingInStorage,createServiceBooking } = useBookingContext()
 
   // Func that will be executed when form its submitted
   const onSubmit = (data: AppointmentData) => {
     console.log(data)
-    setBookingInStorage(data)
+    createServiceBooking(data)
   }
 
   return (

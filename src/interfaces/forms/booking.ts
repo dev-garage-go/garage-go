@@ -1,4 +1,4 @@
-import { Services } from '@/database/interfaces/services';
+import { Services } from '@/database/interfaces';
 import { Dayjs } from 'dayjs';
 import { VehicleData } from './vehicle';
 import { Hour } from './schedules';

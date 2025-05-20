@@ -5,6 +5,7 @@ import { bookingKey } from "@/keys"
 import { AppointmentData, BookingServiceData } from "@/interfaces"
 import { useVehicleContext } from "./VehicleContext"
 import { useServiceContext } from "./ServiceContext"
+import { createBooking } from "@/actions"
 
 
 interface ServiceBookingType {
@@ -47,7 +48,7 @@ export const BookingContextProvider = ({ children }: Props) => {
         user: data.user
       }
 
-      console.log("✅", booking)
+      createBooking(booking)
     }
   }
 
