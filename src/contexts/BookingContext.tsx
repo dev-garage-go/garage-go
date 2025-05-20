@@ -48,7 +48,12 @@ export const BookingContextProvider = ({ children }: Props) => {
         user: data.user
       }
 
-      createBooking(booking)
+      try {
+        createBooking(booking)
+        // TODO: Detele data from local storage
+      } catch (error) {
+        console.log(error)
+      }
     }
   }
 
