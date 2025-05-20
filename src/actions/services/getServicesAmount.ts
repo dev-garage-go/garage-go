@@ -1,23 +1,24 @@
 'use server'
 
-import { ServicesData } from "@/interfaces"
-import { calcTiresChangeAmount } from "./calcTiresChangeAmount"
-import { calcMileageMaintenanceAmount } from "./calcMileageMaintenanceAmount"
+import { MileageMaintenanceService, ServicesData, TiresChangeService } from "@/interfaces"
+import { calcTiresChangeAmount, calcMileageMaintenanceAmount } from "@/actions"
 
+// Only one service
 export const getServiceAmount = (service: ServicesData): number | undefined => {
   try {
     let total = 0
     switch (service.type) {
-      case "mileage":
-        total += calcMileageMaintenanceAmount(service)
+      case 'mileage':
+        total += calcMileageMaintenanceAmount(service as MileageMaintenanceService)
         break
       case "tires":
-        total += calcTiresChangeAmount(service)
+        total += calcTiresChangeAmount(service as TiresChangeService)
         break
       default:
         return undefined
     }
 
+    console.log('total', total)
     return total
 
   } catch (error) {
@@ -25,6 +26,7 @@ export const getServiceAmount = (service: ServicesData): number | undefined => {
   }
 }
 
+// Multiple services
 export const getServicesAmount = (services: ServicesData[]): number | undefined => {
   try {
     let total = 0
@@ -32,16 +34,17 @@ export const getServicesAmount = (services: ServicesData[]): number | undefined 
     for (const service of services) {
       switch (service.type) {
         case "mileage":
-          // total += calcMileageMaintenanceAmount(service)
+          total += calcMileageMaintenanceAmount(service as MileageMaintenanceService)
           break
         case "tires":
-          // total += calcTiresChangeAmount(service)
+          total += calcTiresChangeAmount(service as TiresChangeService)
           break
         default:
           return undefined
       }
     }
 
+    console.log('total', total)
     return total
 
   } catch (error) {
