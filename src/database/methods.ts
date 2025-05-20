@@ -1,6 +1,8 @@
 import { connectDatabase } from "./connect"
 
-export type Collections = 'bookings'
+export type Collections = (
+  'bookings' | 'coupons' | 'services' | 'promotions'
+)
 
 export const getCollection = async (name: Collections) => {
   const db = connectDatabase()
