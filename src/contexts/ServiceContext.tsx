@@ -25,21 +25,22 @@ export const useServiceContext = () => {
   return context
 }
 
-// this type accepts all services forms data
-type ServicesFormsData = MileageMaintenanceService | TiresChangeData
-
 // Provider
 export const ServiceContextProvider = ({ children }: Props) => {
+  const isClient = typeof window !== 'undefined'  // avoids server errors
 
   const setServicesInStorage = (data: ServicesData[]) => {
+    if (!isClient) return
     localStorage.setItem(serviceKey, JSON.stringify(data))
   }
 
   const setServiceInStorage = (data: ServicesData) => {
+    if (!isClient) return
     localStorage.setItem(serviceKey, JSON.stringify(data))
   }
 
   const getServiceFromStorage = (): ServicesData | null => {
+    if (!isClient) return null
     const data = localStorage.getItem(serviceKey)
     return data ? JSON.parse(data) : null
   }

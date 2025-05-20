@@ -33,6 +33,8 @@ export const useVehicleContext = () => {
 
 // Provider
 export const VehicleContextProvider = ({ children }: Props) => {
+  const isClient = typeof window !== 'undefined' // avoids server errors
+
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
   const licensePlate = useLicensePlateOnChangeStorage()
   const vehicle = useGetVehicleOnChangeStorage()
@@ -40,12 +42,14 @@ export const VehicleContextProvider = ({ children }: Props) => {
   // ? LicensePlate session storage
   // sessionStorage: Only the license plate
   const setLicensePlateInStorage = (value: string) => {
+    if (!isClient) return
     sessionStorage.setItem(licensePlateKey, value)
     window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
   }
 
   // deletes license plate from the session storage, so that others can be entered
   const deleteLicensePlate = () => {
+    if (!isClient) return
     sessionStorage.removeItem(licensePlateKey)
     window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
   }
@@ -53,17 +57,20 @@ export const VehicleContextProvider = ({ children }: Props) => {
   // ? Vehicle local storage
   // localStorage: All vehicle data
   const setVehicleInStorage = (data: VehicleData) => {
+    if (!isClient) return
     localStorage.setItem(vehicleKey, JSON.stringify(data))
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
   const getVehicleFromStorage = (): VehicleData | null => {
+    if (!isClient) return null
     const data = localStorage.getItem(vehicleKey)
     return data ? JSON.parse(data) : null
   }
 
   // deletes license plate from the session storage, so that others can be entered
   const deleteVehicle = () => {
+    if (!isClient) return
     sessionStorage.removeItem(vehicleKey)
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
