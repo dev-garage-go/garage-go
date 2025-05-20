@@ -1,5 +1,5 @@
 import { QuantityTires, TypesTiresOptions, VehicleMileages } from "@/interfaces"
-import { Promotion } from "./promotions"
+import { Promotion } from "../../interfaces/shared/promotions"
 
 export interface BaseService {
   name: string

@@ -10,9 +10,9 @@ interface Props {
   className?: string
   imageSrc: string
   imageAlt: string
-  promotionChecked: boolean
-  register: UseFormRegisterReturn
-  handleSelect: () => void
+  promotionChecked?: boolean
+  register?: UseFormRegisterReturn
+  handleSelect?: () => void
   informationButtonData: {
     text: string
     hasModal?: boolean,
@@ -48,9 +48,9 @@ export const PromotionCard = ({
     >
       <div>
         <RadioButton
-          checked={promotionChecked}
+          checked={promotionChecked!} // borrar el !
           option="promotion-4x3"
-          register={register}
+          register={register!} // borrar el !
         />
       </div>
 

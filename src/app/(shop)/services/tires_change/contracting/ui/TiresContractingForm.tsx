@@ -13,7 +13,6 @@ import { AddServiceCard, InformationButton, SwitchButton, PromotionCard, ErrorMe
 export const TiresContractingForm = () => {
   const { register, watch, setValue, formState: { errors } } = useFormContext<TiresChangeData>()
 
-  const promotion = watch("promotion")
   const quantityTires = watch("quantityTires")
   const typeTires = watch("typeTires")
 
@@ -23,15 +22,6 @@ export const TiresContractingForm = () => {
       setValue("typeTires", "ciudad")
     } else {
       setValue("typeTires", type)
-    }
-  }
-
-  // promotion 4x3
-  const handleSelectPromotion = (state: boolean) => {
-    if (promotion === state) {
-      setValue("promotion", false)
-    } else {
-      setValue("promotion", true)
     }
   }
 
@@ -75,9 +65,9 @@ export const TiresContractingForm = () => {
             className="mt-4"
             imageSrc={Promotion4x3Tires}
             imageAlt="promocion 4x3 cubiertas"
-            promotionChecked={promotion}
-            register={register("promotion")}
-            handleSelect={() => handleSelectPromotion(true)}
+            // promotionChecked={promotion}
+            // register={register("promotion")}
+            // handleSelect={() => handleSelectPromotion(true)}
             informationButtonData={{
               text: "Bases y condicionies de la promocion",
               hasModal: true,

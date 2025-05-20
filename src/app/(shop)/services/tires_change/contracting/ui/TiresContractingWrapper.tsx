@@ -11,14 +11,13 @@ import { useServiceContext } from '@/contexts';
 
 
 export const TiresContractingWrapper = () => {
+  // TODO: const hasPromotion = getPromotionByService()
   const methods = useForm<TiresChangeData>({
     shouldFocusError: true,
     defaultValues: {
-      promotion: false,
       quantityTires: 1,
       typeTires: 'ciudad',
       tireSize: undefined,
-      extraServices: undefined
     }
   })
 

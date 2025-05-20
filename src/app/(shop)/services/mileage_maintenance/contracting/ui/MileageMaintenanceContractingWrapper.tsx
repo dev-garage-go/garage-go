@@ -8,11 +8,13 @@ import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContracti
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 import { HoverPortal, LicensePlateModal } from "@/components"
 
-import { MileageMaintenanceData, MileageMaintenanceService } from "@/interfaces"
+import { MileageMaintenanceService } from "@/interfaces"
 import { useServiceContext, useVehicleContext } from "@/contexts"
 
 
 export const MileageMaintenanceContractingWrapper = () => {
+  // TODO: const hasPromotion = getPromotionByService()
+
   const methods = useForm<MileageMaintenanceService>({
     shouldFocusError: true,
     defaultValues: {

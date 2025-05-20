@@ -1,5 +1,6 @@
-import { ExtraServices } from '../front/components-interfaces/extra-services';
+import { Promotion } from './promotions';
 
+// Special options of services
 export type VehicleMileages = (
   '10.000 kms' |
   '20.000 kms' |
@@ -13,37 +14,23 @@ export type VehicleMileages = (
   'Otro'
 )
 
-export interface VehicleMileagesOptions {
-  quantity: VehicleMileages
-}
-
-// TODO: Revisar si esta interfaz es correcta
-export interface MileageMaintenanceData {
-  mileages: VehicleMileages
-  extraServices?: ExtraServices
-}
-
-export interface MileageMaintenanceService {
-  type: 'mileage'
-  name: 'mantencion-kilometraje'
-  mileages: VehicleMileages
-  extras?: {} // ? Si se opta por seguir con un solo servicio a cobrar tengo que ver esto de las opciones extras
-}
-
-
-
-
-
-
-
-// ! Tires changes
 export type QuantityTires = 1 | 2 | 3 | 4
 export type TypesTiresOptions = 'ciudad' | 'offroad' | 'intermedio'
 
+// Services interfaces
+interface BaseService {
+  type: string
+  name: string
+  promotion?: Promotion
+  // extras?: {} -> Si se opta por seguir con un solo servicio a cobrar tengo que ver esto de las opciones extras
+}
+
+export interface MileageMaintenanceService extends BaseService {
+  mileages: VehicleMileages
+}
+
 export interface TiresChangeData {
-  promotion: boolean;
   quantityTires: QuantityTires;
   typeTires: TypesTiresOptions;
-  tireSize?: string,
-  extraServices?: {}
+  tireSize: string,
 }

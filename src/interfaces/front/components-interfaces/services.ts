@@ -1,3 +1,5 @@
+import { VehicleMileages } from "@/interfaces/shared/services";
+
 export interface ButtonProps {
   text: string;
   variant: string;
@@ -12,4 +14,8 @@ export interface ServicesInterface {
   features: string[],
   buttons?: ButtonProps[]
   path: string
+}
+
+export interface VehicleMileagesOptions {
+  quantity: VehicleMileages
 }
