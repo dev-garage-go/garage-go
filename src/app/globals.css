@@ -157,3 +157,13 @@ input[type="number"] {
 .payment-form-button {
   @apply block text-center w-full max-w-lg py-2 bg-primaryBlue-900 text-white font-semibold rounded-md hover:brightness-125 hover:scale-105 transition-all duration-200 disabled:bg-customGray-400 disabled:bg-opacity-60 disabled:hover:scale-100 disabled:hover:brightness-100;
 }
+
+/* Admin tables */
+
+.table-col-style {
+  @apply text-sm text-center w-fit bg-slate-100 px-6 py-4 font-semibold;
+}
+
+.table-row-style {
+  @apply text-sm text-center text-primaryBlue-900 px-6 py-4
+}
