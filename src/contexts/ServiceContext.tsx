@@ -2,7 +2,7 @@
 
 import { createContext, useContext } from "react"
 import { serviceKey } from "@/keys"
-import { MileageMaintenanceService, TiresChangeData, ServicesData } from "@/interfaces"
+import { ServicesData } from "@/interfaces"
 
 
 interface ServiceContextType {

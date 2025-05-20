@@ -6,8 +6,7 @@ import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
 import { HoverPortal, LicensePlateModal } from "@/components";
 
-import { AppointmentData, ServicesNames } from "@/interfaces";
-import { useGetServiceName } from "@/hooks";
+import { AppointmentData } from "@/interfaces";
 import { useBookingContext, useVehicleContext } from "@/contexts";
 
 interface Props {
@@ -27,7 +26,7 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   // TODO: action/calcAmountByService(service: string, data: {})
   const { licensePlate, modalIsOpen, setModalIsOpen } = useVehicleContext()
-  const { setBookingInStorage, createServiceBooking } = useBookingContext()
+  const { createServiceBooking } = useBookingContext()
 
   // Func that will be executed when form its submitted
   const onSubmit = (data: AppointmentData) => {
