@@ -6,67 +6,59 @@ import { calcTiresChangeAmount, calcMileageMaintenanceAmount } from "@/actions"
 // Only one service
 export const getServiceAmount = async (service: ServicesData): Promise<Amount | undefined> => {
   try {
-    let subtotal = 0
-    let disscount = 0
-    let total = 0
+    let result: { subtotal: number } | undefined
 
     switch (service.type) {
       case 'mileage':
-        const res = await calcMileageMaintenanceAmount(service as MileageMaintenanceService)
-        if (!res) return
-        subtotal += res.subtotal
-        disscount += res.subtotal
-        total += res.subtotal
+        result = await calcMileageMaintenanceAmount(service as MileageMaintenanceService)
         break
-      case "tires":
-        total += calcTiresChangeAmount(service as TiresChangeService)
+      case 'tires':
+        result = await calcTiresChangeAmount(service as TiresChangeService)
         break
       default:
         return undefined
     }
 
+    if (!result) return undefined
     const amount: Amount = {
-      subtotal: subtotal,
-      disscount: disscount,
-      total: total
+      subtotal: result.subtotal,
+      disscount: 0, // aplicá lógica de descuentos más adelante
+      total: result.subtotal // de momento, total == subtotal
     }
 
     console.log('amount', amount)
     return amount
 
   } catch (error) {
-    console.log(error)
+    console.error('Error en getServiceAmount:', error)
+    return undefined
   }
 }
+
 
 // Multiple services
 export const getServicesAmount = async (services: ServicesData[]): Promise<Amount | undefined> => {
   try {
-    let subtotal = 0
-    let disscount = 0
-    let total = 0
+    let result: { subtotal: number } | undefined
 
     for (const service of services) {
       switch (service.type) {
-        case "mileage":
-          const res = await calcMileageMaintenanceAmount(service as MileageMaintenanceService)
-          if (!res) return
-          subtotal += res.subtotal
-          disscount += res.subtotal
-          total += res.subtotal
+        case 'mileage':
+          result = await calcMileageMaintenanceAmount(service as MileageMaintenanceService)
           break
-        case "tires":
-          total += calcTiresChangeAmount(service as TiresChangeService)
+        case 'tires':
+          result = await calcTiresChangeAmount(service as TiresChangeService)
           break
         default:
           return undefined
       }
     }
 
+    if (!result) return undefined
     const amount: Amount = {
-      subtotal: subtotal,
-      disscount: disscount,
-      total: total
+      subtotal: result.subtotal,
+      disscount: 0,
+      total: result.subtotal
     }
 
     console.log('amount', amount)
