@@ -18,9 +18,13 @@ export type QuantityTires = 1 | 2 | 3 | 4
 export type TypesTiresOptions = 'ciudad' | 'offroad' | 'intermedio'
 
 // Services interfaces
+
+export type ServicesNames = 'tires-change' | 'mileage-maintenance'
+export type ServicesTypes = 'tires' | 'mileage'
+
 interface BaseService {
-  type: string
-  name: string
+  type: ServicesTypes
+  name: ServicesNames
   promotion?: Promotion
   // extras?: {} -> Si se opta por seguir con un solo servicio a cobrar tengo que ver esto de las opciones extras
 }
@@ -29,8 +33,10 @@ export interface MileageMaintenanceService extends BaseService {
   mileages: VehicleMileages
 }
 
-export interface TiresChangeData {
+export interface TiresChangeData extends BaseService {
   quantityTires: QuantityTires;
   typeTires: TypesTiresOptions;
   tireSize: string,
 }
+
+export type ServicesData = TiresChangeData | MileageMaintenanceService

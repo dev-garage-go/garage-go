@@ -1,23 +1,13 @@
-import { QuantityTires, TypesTiresOptions, VehicleMileages } from "@/interfaces"
-import { Promotion } from "../../interfaces/shared/promotions"
+import { TiresChangeData, MileageMaintenanceService } from '@/interfaces/shared/services'
 
-export interface BaseService {
-  name: string
+export interface TiresChangeServiceDB extends TiresChangeData {
+  _id: string
   price: number
-  promotion?: Promotion
 }
 
-export interface TiresChangeService extends BaseService {
-  type: 'tires'
-  tiresQuantity: QuantityTires
-  tiresSize: string
-  tiresType: TypesTiresOptions
+export interface MileageMaintenanceServiceDB extends MileageMaintenanceService {
+  _id: string
+  price: number
 }
 
-export interface OilChangeService extends BaseService {
-  type: 'oil'
-  vehicleMileage: VehicleMileages
-}
-
-// main type - is used in Booking collection
-export type Services = TiresChangeService | OilChangeService
+export type ServiceDB = TiresChangeServiceDB | MileageMaintenanceServiceDB

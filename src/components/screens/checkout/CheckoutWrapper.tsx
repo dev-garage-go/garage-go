@@ -19,7 +19,7 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
     shouldFocusError: true,
     defaultValues: {
       user: {
-        typeAddress: '',
+        typeAddress: 'casa',
         additionalInfo: ''
       }
     }
@@ -27,7 +27,7 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   // TODO: action/calcAmountByService(service: string, data: {})
   const { licensePlate, modalIsOpen, setModalIsOpen } = useVehicleContext()
-  const { setBookingInStorage,createServiceBooking } = useBookingContext()
+  const { setBookingInStorage, createServiceBooking } = useBookingContext()
 
   // Func that will be executed when form its submitted
   const onSubmit = (data: AppointmentData) => {

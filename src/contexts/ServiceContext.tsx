@@ -2,14 +2,13 @@
 
 import { createContext, useContext } from "react"
 import { serviceKey } from "@/keys"
-import { MileageMaintenanceData, TiresChangeData } from "@/interfaces"
-import { Services } from "@/database/interfaces/services"
+import { MileageMaintenanceService, TiresChangeData, ServicesData } from "@/interfaces"
 
 
 interface ServiceContextType {
   setServicesInStorage: (data: any) => void
   setServiceInStorage: (data: any) => void
-  getServiceFromStorage: () => Services | null
+  getServiceFromStorage: () => ServicesData | null
 }
 
 interface Props {
@@ -27,20 +26,20 @@ export const useServiceContext = () => {
 }
 
 // this type accepts all services forms data
-type ServicesFormsData = MileageMaintenanceData | TiresChangeData
+type ServicesFormsData = MileageMaintenanceService | TiresChangeData
 
 // Provider
 export const ServiceContextProvider = ({ children }: Props) => {
 
-  const setServicesInStorage = (data: Services[]) => {
+  const setServicesInStorage = (data: ServicesData[]) => {
     localStorage.setItem(serviceKey, JSON.stringify(data))
   }
 
-  const setServiceInStorage = (data: Services) => {
+  const setServiceInStorage = (data: ServicesData) => {
     localStorage.setItem(serviceKey, JSON.stringify(data))
   }
 
-  const getServiceFromStorage = (): Services | null => {
+  const getServiceFromStorage = (): ServicesData | null => {
     const data = localStorage.getItem(serviceKey)
     return data ? JSON.parse(data) : null
   }

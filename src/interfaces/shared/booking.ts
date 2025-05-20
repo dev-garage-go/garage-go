@@ -1,7 +1,7 @@
-import { Services } from '@/database/interfaces';
 import { Dayjs } from 'dayjs';
 import { VehicleData } from './vehicle';
 import { Hour } from '../front/forms/schedules';
+import { ServicesData } from './services';
 
 interface User {
   name: string;
@@ -9,7 +9,7 @@ interface User {
   phone: string;
   email: string;
   address: string,
-  typeAddress: '' | 'casa' | 'oficina' | 'depto'
+  typeAddress: 'casa' | 'oficina' | 'depto'
   additionalInfo?: string
 }
 
@@ -24,14 +24,14 @@ export interface AppointmentData {
 }
 
 export interface BookingServicesData {
-  services: Services[],
+  services: ServicesData[],
   user: User,
   vehicle: VehicleData,
   appointment: Appointment
 }
 
 export interface BookingServiceData {
-  service: Services,
+  service: ServicesData,
   user: User,
   vehicle: VehicleData,
   appointment: Appointment

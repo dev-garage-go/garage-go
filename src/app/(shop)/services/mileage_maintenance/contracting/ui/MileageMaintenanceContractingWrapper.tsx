@@ -19,7 +19,7 @@ export const MileageMaintenanceContractingWrapper = () => {
     shouldFocusError: true,
     defaultValues: {
       type: "mileage",
-      name: "mantencion-kilometraje",
+      name: "mileage-maintenance",
       mileages: "10.000 kms",
     }
   })

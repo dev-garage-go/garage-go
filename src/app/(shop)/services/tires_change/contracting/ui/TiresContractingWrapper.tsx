@@ -15,6 +15,8 @@ export const TiresContractingWrapper = () => {
   const methods = useForm<TiresChangeData>({
     shouldFocusError: true,
     defaultValues: {
+      type: 'tires',
+      name: 'tires-change',
       quantityTires: 1,
       typeTires: 'ciudad',
       tireSize: undefined,

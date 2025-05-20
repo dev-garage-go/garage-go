@@ -9,8 +9,6 @@ export * from './front/components-interfaces/suppliers-images';
 export * from './shared/booking';
 export * from './shared/services';
 export * from './front/forms/schedules';
-export * from './front/forms/services';
-export * from './front/forms/tires-change-contracting';
 export * from './shared/vehicle';
 export * from './shared/payment-methods';
 export * from './front/components-interfaces/faqs_mileage_maintenance';
