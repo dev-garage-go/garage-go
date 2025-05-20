@@ -23,16 +23,26 @@ export interface AppointmentData {
   appointment: Appointment
 }
 
-export interface BookingServicesData {
-  services: ServicesData[],
-  user: User,
-  vehicle: VehicleData,
-  appointment: Appointment
+export interface Amount {
+  subtotal: number
+  disscount: number
+  total: number
 }
 
+// Only one service
 export interface BookingServiceData {
   service: ServicesData,
   user: User,
   vehicle: VehicleData,
   appointment: Appointment
+  amount: Amount
+}
+
+// Many services
+export interface BookingServicesData {
+  services: ServicesData[],
+  user: User,
+  vehicle: VehicleData,
+  appointment: Appointment
+  amount: Amount
 }

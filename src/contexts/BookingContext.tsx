@@ -5,7 +5,7 @@ import { bookingKey } from "@/keys"
 import { AppointmentData, BookingServiceData } from "@/interfaces"
 import { useVehicleContext } from "./VehicleContext"
 import { useServiceContext } from "./ServiceContext"
-import { createBooking } from "@/actions"
+import { createBooking, getServiceAmount } from "@/actions"
 
 
 interface ServiceBookingType {
@@ -39,13 +39,17 @@ export const BookingContextProvider = ({ children }: Props) => {
     localStorage.setItem(bookingKey, JSON.stringify(data))
   }
 
-  const createServiceBooking = (data: AppointmentData) => {
+  const createServiceBooking = async (data: AppointmentData) => {
     if (service && vehicle) {
+      const amountService = await getServiceAmount(service)
+      if (!amountService) return;
+
       const booking: BookingServiceData = {
         service: service,
         appointment: data.appointment,
         vehicle: vehicle,
-        user: data.user
+        user: data.user,
+        amount: amountService
       }
 
       try {

@@ -1,12 +1,15 @@
 'use server'
 
-import { MileageMaintenanceService, ServicesData, TiresChangeService } from "@/interfaces"
+import { Amount, MileageMaintenanceService, ServicesData, TiresChangeService } from "@/interfaces"
 import { calcTiresChangeAmount, calcMileageMaintenanceAmount } from "@/actions"
 
 // Only one service
-export const getServiceAmount = (service: ServicesData): number | undefined => {
+export const getServiceAmount = async (service: ServicesData): Promise<Amount | undefined> => {
   try {
     let total = 0
+    let subtotal = 0
+    let disscount = 0
+
     switch (service.type) {
       case 'mileage':
         total += calcMileageMaintenanceAmount(service as MileageMaintenanceService)
@@ -19,7 +22,11 @@ export const getServiceAmount = (service: ServicesData): number | undefined => {
     }
 
     console.log('total', total)
-    return total
+    return {
+      subtotal: 1000,
+      disscount: 0,
+      total: 1000
+    }
 
   } catch (error) {
     console.log(error)
