@@ -1,8 +1,19 @@
 'use server'
 
+import { BookingDB } from "@/database/interfaces"
 import { getCollection } from "@/database/methods"
+import { ObjectId } from "mongodb"
 
-export const getBookings = async () => {
-  const coll = await getCollection('bookings')
-  return coll
+type RawBooking = Omit<BookingDB, "_id"> & { _id: ObjectId }
+
+export const getBookings = async (): Promise<BookingDB[]> => {
+  const rawBookings = await (await getCollection<RawBooking>('bookings')).find().toArray()
+
+  // Convertimos _id de ObjectId a string
+  const bookings: BookingDB[] = rawBookings.map(b => ({
+    ...b,
+    _id: b._id.toString()
+  }))
+
+  return bookings
 }
