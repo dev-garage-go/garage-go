@@ -15,8 +15,6 @@ interface Props {
   title?: string
   description?: string
   hasVehicleData?: boolean      // TODO: Change name to typeVehicle
-  vehicleName?: string          // TODO: Delete it, the vehicle data it will be obtained in this component calling back actions
-  vehiclePatent?: string        // TODO: Delete it, the vehicle data it will be obtained in this component calling back actions
   withImage?: boolean
   imageSrc?: string
   imageAlt?: string
@@ -28,8 +26,6 @@ interface Props {
 export const TopBanner = ({
   description,
   title,
-  vehiclePatent,
-  vehicleName,
   hasVehicleData = false,
   featuresImages,
   imageAlt,
@@ -43,12 +39,12 @@ export const TopBanner = ({
   const [hasBreadCrumbs, setHasBreadCrumbs] = useState(false)
   const pathSegments = pathname.split("/").filter(Boolean) // remove empty strings
 
-  // Vehicle logic
-  // const licensePlate = useLicensePlateOnChangeStorage()
-  // const licensePlateTxt = licensePlate ? licensePlate : '-'
-
+  // I use the hook to obtain the vehicle data because this is a dynamic component,
+  // changes the data based if exist or not the vehicle
   const vehicle = useGetVehicleOnChangeStorage()
-  const licensePlateTxt = vehicle ? vehicle.licensePlate : '-'
+  const vehicleLicensePlate = vehicle ? vehicle.licensePlate : '-'
+  const vehicleModel = vehicle ? vehicle.model : '-'
+  const vehicleBrand = vehicle ? vehicle.brand : '-'
 
   // TODO: const vehicleData = getVehiculeByLicensePlate(id: string) -> import {} from "@actions"
 
@@ -60,11 +56,11 @@ export const TopBanner = ({
     <>
       <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 sm:pb-8 xl:pb-10 pt-28 sm:pt-32 bg-primaryBlue-300">
         <div className="flex justify-center items-center w-full">
-          <div className="grid grid-cols-6">
+          <div className="grid grid-cols-9">
             <div className={
               `flex flex-wrap overflow-x-visible ${hasVehicleData
-                ? 'col-start-1 col-end-6 xl:col-end-3'
-                : 'col-start-1 col-end-6 xl:col-start-2 xl:col-end-4'}`}>
+                ? 'col-start-1 col-end-9 xl:col-start-1 xl:col-end-8'
+                : 'col-start-1 col-end-9 xl:col-start-1 xl:col-end-4'}`}>
               {/* Breadcrumbs */}
               <div className={`text-xs truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white ${hasBreadCrumbs ? "block" : "hidden"}`}>
                 <Link href="/" className="hover:font-medium duration-200">
@@ -99,10 +95,17 @@ export const TopBanner = ({
                   <>
                     <h2 className="text-2xl md:text-2xl xl:text-4xl font-bold text-white">
                       Patente:
-                      <span className="uppercase">{" " + licensePlateTxt}</span>
+                      <span className="uppercase">{" " + vehicleLicensePlate}</span>
                     </h2>
                     <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
-                      <p className="text-base sm:text-lg xl:text-xl uppercase text-white">{vehicleName}</p>
+                      <div className="flex w-full justify-start items-center gap-2.5 tracking-wide">
+                        <p className="text-base sm:text-lg xl:text-xl uppercase text-white">
+                          {vehicleBrand}
+                        </p>
+                        <p className="text-base sm:text-lg xl:text-xl uppercase text-white">
+                          {vehicleModel}
+                        </p>
+                      </div>
                       <button
                         className="hidden md:block text-sm bg-primaryBlue-900 hover:brightness-125 hover:scale-110 duration-200 transition-all px-6 xl:px-10 py-0.5 rounded-md text-white"
                         onClick={() => router.back()}
