@@ -29,13 +29,12 @@ export const MileageMaintenanceContractingWrapper = () => {
   const ref = useRef<HTMLDivElement>(null)
   const router = useRouter()
   const { licensePlate, setModalIsOpen, modalIsOpen } = useVehicleContext()
-  const { setServicesInStorage } = useServiceContext()
+  const { setServiceInStorage } = useServiceContext()
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceService) => {
-    console.log(data)
-    setServicesInStorage(data)
-    // router.push(`/services/mileage_maintenance/checkout`)
+    setServiceInStorage(data)
+    router.push(`/services/mileage_maintenance/checkout`)
   }
 
   return (

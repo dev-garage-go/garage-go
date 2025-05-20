@@ -24,13 +24,12 @@ export const TiresContractingWrapper = () => {
   })
 
   const router = useRouter()
-  const { setServicesInStorage } = useServiceContext()
+  const { setServiceInStorage } = useServiceContext()
 
   // Function that will be executed when the form is submitted
   const onSubmit = (data: TiresChangeData) => {
-    console.log(data)
-    setServicesInStorage(data)
-    // router.push(`/services/tires_change/checkout`)
+    setServiceInStorage(data)
+    router.push(`/services/tires_change/checkout`)
   }
 
   return (

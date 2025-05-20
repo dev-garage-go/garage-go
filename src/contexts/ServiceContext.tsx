@@ -6,8 +6,8 @@ import { ServicesData } from "@/interfaces"
 
 
 interface ServiceContextType {
-  setServicesInStorage: (data: any) => void
-  setServiceInStorage: (data: any) => void
+  setServicesInStorage: (data: ServicesData[]) => void
+  setServiceInStorage: (data: ServicesData) => void
   getServiceFromStorage: () => ServicesData | null
 }
 
