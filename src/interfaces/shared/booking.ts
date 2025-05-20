@@ -1,7 +1,7 @@
 import { Services } from '@/database/interfaces';
 import { Dayjs } from 'dayjs';
 import { VehicleData } from './vehicle';
-import { Hour } from './schedules';
+import { Hour } from '../front/forms/schedules';
 
 interface User {
   name: string;
