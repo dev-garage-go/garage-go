@@ -4,7 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
-import { ModalPortal, VehicleDataModal } from "@/components";
+import { ModalPortal, VehicleDataModal, ConfirmationBookingModal } from "@/components";
 
 import { AppointmentData } from "@/interfaces";
 import { useBookingContext, useVehicleContext } from "@/contexts";
@@ -26,7 +26,7 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   // TODO: action/calcAmountByService(service: string, data: {})
   const { licensePlate, modalIsOpen, setModalIsOpen } = useVehicleContext()
-  const { createServiceBooking } = useBookingContext()
+  const { createServiceBooking, bookingCreated } = useBookingContext()
 
   // Func that will be executed when form its submitted
   const onSubmit = (data: AppointmentData) => {
@@ -36,11 +36,18 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
 
   return (
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
+      {/* if vehicle data doesn't exist, the modal will be open, otherwise it will be closed */}
       {!licensePlate && modalIsOpen &&
         <ModalPortal>
           <VehicleDataModal setClose={setModalIsOpen} />
         </ModalPortal>
       }
+      {/* when the backend will responded if the booking is successfully created or not, show modal */}
+      {typeof bookingCreated === 'boolean' && (
+        <ModalPortal>
+          <ConfirmationBookingModal success={bookingCreated} />
+        </ModalPortal>
+      )}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">

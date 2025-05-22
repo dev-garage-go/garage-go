@@ -48,12 +48,7 @@ export const ModalPortal = ({ children, anchorRef }: Props) => {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -5 }}
       transition={{ duration: 0.4 }}
-      style={{
-        position: 'absolute',
-        top: position.top,
-        left: position.left,
-        zIndex: 9999,
-      }}
+      className="absolute z-[9999] top-0 left-0"
     >
       {children}
     </motion.div>,

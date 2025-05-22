@@ -1,16 +1,18 @@
 "use client"
 
-import { createContext, useContext } from "react"
+import { createContext, useContext, useState } from "react"
 import { bookingKey } from "@/keys"
 import { AppointmentData, BookingServiceData } from "@/interfaces"
 import { useVehicleContext } from "./VehicleContext"
 import { useServiceContext } from "./ServiceContext"
 import { createBooking, getServiceAmount } from "@/actions"
+import { ModalPortal } from "@/components"
 
 
 interface ServiceBookingType {
   setBookingInStorage: (data: any) => void
-  createServiceBooking: (data: AppointmentData) => void
+  createServiceBooking: (data: AppointmentData) => void,
+  bookingCreated: boolean | null
 }
 
 interface Props {
@@ -35,6 +37,8 @@ export const BookingContextProvider = ({ children }: Props) => {
   const vehicle = getVehicleFromStorage()
   const service = getServiceFromStorage()
 
+  const [bookingCreated, setBookingCreated] = useState<boolean | null>(null)
+
   const setBookingInStorage = (data: AppointmentData) => {
     localStorage.setItem(bookingKey, JSON.stringify(data))
   }
@@ -54,11 +58,15 @@ export const BookingContextProvider = ({ children }: Props) => {
 
       try {
         const err = await createBooking(booking)
-        if(!err.errorMessage) {
-          // sendConfirmationEmail() -> Send email
+        if (!err.errorMessage) {
+          // emailSent = await sendConfirmationEmail() -> Send email
+          // if(emailSent.success) {
+          setBookingCreated(true)
+          // } else {}
+
           deleteServiceFromStorage()
         } else {
-          
+          setBookingCreated(false)
         }
       } catch (error) {
         console.error(error)
@@ -69,7 +77,8 @@ export const BookingContextProvider = ({ children }: Props) => {
   return <BookingContext.Provider
     value={{
       setBookingInStorage,
-      createServiceBooking
+      createServiceBooking,
+      bookingCreated
     }}
   >
     {children}
