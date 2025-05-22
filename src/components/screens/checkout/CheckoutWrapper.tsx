@@ -4,7 +4,7 @@ import { FormProvider, useForm } from "react-hook-form";
 
 import { CheckoutForm } from "./CheckoutForm";
 import { CheckoutSummary } from "./CheckoutSummary";
-import { HoverPortal, VehicleDataModal } from "@/components";
+import { ModalPortal, VehicleDataModal } from "@/components";
 
 import { AppointmentData } from "@/interfaces";
 import { useBookingContext, useVehicleContext } from "@/contexts";
@@ -37,9 +37,9 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
   return (
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
       {!licensePlate && modalIsOpen &&
-        <HoverPortal>
+        <ModalPortal>
           <VehicleDataModal setClose={setModalIsOpen} />
-        </HoverPortal>
+        </ModalPortal>
       }
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>

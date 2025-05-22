@@ -5,11 +5,11 @@ import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
 
 interface Props {
-  children: ReactNode // elemento que aparecera al activarse HoverPortal
+  children: ReactNode // elemento que aparecera al activarse ModalPortal
   anchorRef?: React.RefObject<HTMLElement> // referencia al elemento trigger - el que dispara el hover
 }
 
-export const HoverPortal = ({ children, anchorRef }: Props) => {
+export const ModalPortal = ({ children, anchorRef }: Props) => {
   const [position, setPosition] = useState<{ top: number; left: number }>({ top: 0, left: 0 })
   const [mounted, setMounted] = useState(false)
 

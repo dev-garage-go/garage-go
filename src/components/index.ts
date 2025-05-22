@@ -13,7 +13,7 @@ export * from './general/ui/CalendarPicker';
 export * from './general/ui/Carousel';
 export * from './general/ui/ErrorMessage';
 export * from './general/ui/GoogleMap';
-export * from './general/ui/HoverPortal';
+export * from './general/ui/ModalPortal';
 export * from './general/ui/InformationModal';
 export * from './general/ui/VehicleDataModal';
 export * from './general/ui/SchedulePicker';
