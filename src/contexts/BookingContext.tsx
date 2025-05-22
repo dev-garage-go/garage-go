@@ -30,7 +30,7 @@ export const useBookingContext = () => {
 // Provider
 export const BookingContextProvider = ({ children }: Props) => {
   const { getVehicleFromStorage } = useVehicleContext()
-  const { getServiceFromStorage } = useServiceContext()
+  const { getServiceFromStorage, deleteServiceFromStorage } = useServiceContext()
 
   const vehicle = getVehicleFromStorage()
   const service = getServiceFromStorage()
@@ -53,10 +53,10 @@ export const BookingContextProvider = ({ children }: Props) => {
       }
 
       try {
-        createBooking(booking)
-        // TODO: Detele data from local storage
+        await createBooking(booking)
+        deleteServiceFromStorage()
       } catch (error) {
-        console.log(error)
+        console.error(error)
       }
     }
   }

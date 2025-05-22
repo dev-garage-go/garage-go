@@ -3,10 +3,10 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ServiceCard } from "@/components";
-import { ServicesInterface } from "@/interfaces";
+import { ServicesCardsInterface } from "@/interfaces";
 
 interface Props {
-  extraServices: ServicesInterface[]
+  extraServices: ServicesCardsInterface[]
 }
 
 export const ViewAllServices = ({ extraServices }: Props) => {

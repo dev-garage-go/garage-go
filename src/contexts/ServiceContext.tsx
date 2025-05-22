@@ -9,6 +9,7 @@ interface ServiceContextType {
   setServicesInStorage: (data: ServicesData[]) => void
   setServiceInStorage: (data: ServicesData) => void
   getServiceFromStorage: () => ServicesData | null
+  deleteServiceFromStorage: () => null | void
 }
 
 interface Props {
@@ -45,11 +46,17 @@ export const ServiceContextProvider = ({ children }: Props) => {
     return data ? JSON.parse(data) : null
   }
 
+  const deleteServiceFromStorage = (): null | void => {
+    if (!isClient) return null
+    localStorage.removeItem(serviceKey)
+  }
+
   return <ServiceContext.Provider
     value={{
       setServicesInStorage,
       setServiceInStorage,
-      getServiceFromStorage
+      getServiceFromStorage,
+      deleteServiceFromStorage
     }}
   >
     {children}

@@ -1,4 +1,4 @@
-import { VehicleMileages } from "@/interfaces/shared/services";
+import { VehicleMileages } from "@/interfaces/shared/services-data";
 
 export interface ButtonProps {
   text: string;
@@ -6,7 +6,7 @@ export interface ButtonProps {
   icon?: string;
 }
 
-export interface ServicesInterface {
+export interface ServicesCardsInterface {
   title: string,
   price?: number,
   image: string,

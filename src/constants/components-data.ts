@@ -36,7 +36,7 @@ import {
   HeaderOptionInterface,
   QuantityTires,
   ReviewsInterface,
-  ServicesInterface,
+  ServicesCardsInterface,
   ServicesPagesFAQs,
   StepsServicesPagesInterface,
   VehicleMileagesOptions
@@ -79,7 +79,7 @@ export const HeaderLinksOptions: HeaderOptionInterface[] = [
   },
 ]
 
-export const ServicesData: ServicesInterface[] = [
+export const ServicesData: ServicesCardsInterface[] = [
   {
     title: "Mantencion por kilometraje",
     price: 189900,
