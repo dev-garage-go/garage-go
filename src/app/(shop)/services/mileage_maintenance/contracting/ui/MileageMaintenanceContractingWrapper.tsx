@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 
 import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
-import { HoverPortal, LicensePlateModal } from "@/components"
+import { HoverPortal, VehicleDataModal } from "@/components"
 
 import { MileageMaintenanceService } from "@/interfaces"
 import { useServiceContext, useVehicleContext } from "@/contexts"
@@ -41,7 +41,7 @@ export const MileageMaintenanceContractingWrapper = () => {
     <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
       {!licensePlate && modalIsOpen &&
         <HoverPortal>
-          <LicensePlateModal setClose={setModalIsOpen} />
+          <VehicleDataModal setClose={setModalIsOpen} />
         </HoverPortal>
       }
       <FormProvider {...methods}>

@@ -53,8 +53,13 @@ export const BookingContextProvider = ({ children }: Props) => {
       }
 
       try {
-        await createBooking(booking)
-        deleteServiceFromStorage()
+        const err = await createBooking(booking)
+        if(!err.errorMessage) {
+          // sendConfirmationEmail() -> Send email
+          deleteServiceFromStorage()
+        } else {
+          
+        }
       } catch (error) {
         console.error(error)
       }

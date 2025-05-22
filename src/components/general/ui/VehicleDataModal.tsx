@@ -12,7 +12,7 @@ interface Props {
   setClose: React.Dispatch<boolean>
 }
 
-export const LicensePlateModal = ({ setClose }: Props) => {
+export const VehicleDataModal = ({ setClose }: Props) => {
   const { setLicensePlateInStorage, setVehicleInStorage } = useVehicleContext()
 
   const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleData>()
