@@ -1,6 +1,6 @@
 export * from './components-interfaces/banner-disccounts';
 export * from './components-interfaces/benefits';
-export * from './components-interfaces/extra-services';
+export * from './components-interfaces/extra-services-cards';
 export * from './components-interfaces/faqs-data';
 export * from './components-interfaces/faqs_mileage_maintenance';
 export * from './components-interfaces/header-options';

@@ -3,10 +3,10 @@
 import { useFormContext } from 'react-hook-form'
 import { AddServiceCard, ButtonOptions } from '@/components'
 import { MileagesOptions } from '@/constants'
-import { ExtraServices, MileageMaintenanceService, VehicleMileages } from '@/interfaces'
+import { ExtraServicesCards, MileageMaintenanceService, VehicleMileages } from '@/interfaces'
 
 
-const extraServices: ExtraServices[] = [
+const extraServices: ExtraServicesCards[] = [
   {
     name: "Gestion de revision tecnica",
     price: 48990,

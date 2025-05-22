@@ -4,7 +4,7 @@ export interface DetailServiceOptions {
   selected?: boolean
 }
 
-export interface ExtraServices {
+export interface ExtraServicesCards {
   name: string,
   price: number,
   details?: {
