@@ -43,20 +43,25 @@ export const ModalPortal = ({ children, anchorRef }: Props) => {
   if (!mounted) return null
 
   return createPortal(
-    <motion.div
-      initial={{ opacity: 0, y: -5 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -5 }}
-      transition={{ duration: 0.4 }}
-      style={{
-        position: 'absolute',
-        top: position.top,
-        left: position.left,
-        zIndex: 9999,
-      }}
-    >
-      {children}
-    </motion.div>,
+    <>
+      <div
+        className="fixed inset-0 z-[9998] backdrop-blur-sm bg-black/10"
+      />
+      <motion.div
+        initial={{ opacity: 0, y: -5 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -5 }}
+        transition={{ duration: 0.4 }}
+        style={{
+          position: 'absolute',
+          top: position.top,
+          left: position.left,
+          zIndex: 9999,
+        }}
+      >
+        {children}
+      </motion.div>,
+    </>,
     document.getElementById('modal-root')! // div que se encuentra fuera del flujo normal DOM
   )
 }
