@@ -1,7 +1,11 @@
 'use client'
 
 import { BookingDB } from "@/database/interfaces/bookings"
+import { ServicesNames } from "@/interfaces";
 import dayjs from 'dayjs';
+
+import { formatNumberWithDots } from '@/utils';
+import { PayState } from "./PayState";
 
 interface Props {
   bookings: BookingDB[]
@@ -15,10 +19,15 @@ export const BookingTable = ({ bookings }: Props) => {
     return f
   }
 
+  const ServiceNamesMap: Record<ServicesNames, string> = {
+    "mileage-maintenance": "Mantención kilometraje",
+    "tires-change": "Cambio neumaticos"
+  }
+
   return (
     <table className="min-w-full">
-      <thead className="bg-neutral-100 border-b">
-        <tr className=''>
+      <thead className="border-b">
+        <tr>
           <th scope="col" className="table-col-style">
             #ID
           </th>
@@ -40,6 +49,12 @@ export const BookingTable = ({ bookings }: Props) => {
           <th scope="col" className="table-col-style">
             Dirección
           </th>
+          <th scope="col" className="table-col-style">
+            Total
+          </th>
+          <th scope="col" className="table-col-style">
+            Estado
+          </th>
         </tr>
       </thead>
 
@@ -50,7 +65,7 @@ export const BookingTable = ({ bookings }: Props) => {
           return (
             <tr
               key={booking._id}
-              className="bg-white border-b transition duration-300 ease-in-out hover:bg-customGray-50 cursor-pointer">
+              className="bg-white border-b transition duration-300 ease-in-out hover:bg-primaryBlue-50 hover:brightness-110 cursor-pointer">
 
               <td className="table-row-style whitespace-nowrap">
                 #{booking._id.slice(0, 8)}
@@ -61,18 +76,20 @@ export const BookingTable = ({ bookings }: Props) => {
               </td>
 
               <td className="table-row-style whitespace-nowrap">
-                {booking.service.name}
+                {ServiceNamesMap[booking.service.name]}
               </td>
 
               <td className="table-row-style whitespace-nowrap">
                 <div>
-                  <p>{booking.appointment?.date ? formatDate(booking.appointment.date) : 'sin fecha'}</p>
-                  <p>{booking.appointment?.time || 'sin hora'}</p>
+                  <p>{booking.appointment?.date ? formatDate(booking.appointment.date) : '-'}</p>
+                  <p>{booking.appointment?.time || ''}</p>
                 </div>
               </td>
 
-              <td className="table-row-style whitespace-nowrap capitalize">
-                {booking.vehicle.brand + " " + booking.vehicle.model + " - " + booking.vehicle.year}
+              <td className="table-row-style text-wrap capitalize">
+                {booking.vehicle.brand + " " + booking.vehicle.model}
+                <br />
+                {booking.vehicle.year}
               </td>
 
               <td className="table-row-style">
@@ -86,8 +103,16 @@ export const BookingTable = ({ bookings }: Props) => {
                 </div>
               </td>
 
-              <td className="table-row-style max-w-40 text-wrap">
+              <td className="table-row-style text-wrap">
                 {booking.user.address}
+              </td>
+
+              <td className="table-row-style text-wrap font-semibold">
+                $ {formatNumberWithDots(booking.amount.total)}
+              </td>
+
+              <td className="table-row-style text-wrap font-semibold">
+                <PayState state="refunded" />
               </td>
 
             </tr>

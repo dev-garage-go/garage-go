@@ -161,9 +161,9 @@ input[type="number"] {
 /* Admin tables */
 
 .table-col-style {
-  @apply text-sm text-center w-fit bg-slate-100 px-6 py-4 font-semibold;
+  @apply text-sm text-center w-fit bg-customGray-50 px-6 py-4 font-semibold;
 }
 
 .table-row-style {
-  @apply text-sm text-center text-primaryBlue-900 px-6 py-4
+  @apply text-sm text-center text-primaryBlue-900 px-6 py-4;
 }
