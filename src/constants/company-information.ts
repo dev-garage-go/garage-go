@@ -14,6 +14,6 @@ export const CompanyCoords = {
 export const CompanyWhatsappLink = "https://wa.me/56997832409";
 export const CompanyPhoneNumber = "+56 9 9783 2409";
 export const CompanyEmail = "info@garageservice.cl"
-export const CompanyEmailLink = "mailto:info@garageservice.cl"
+export const CompanyEmailLink = `mailto:${CompanyEmail}?subject=Consulta&body=Hola, quería hacer una consulta sobre...`
 export const CompanyInstagram = "https://www.instagram.com/garagego.cl/"
 export const CompanyFacebook = "https://www.facebook.com/garagego.cl"

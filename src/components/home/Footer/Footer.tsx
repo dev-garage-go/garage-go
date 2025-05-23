@@ -54,10 +54,8 @@ export const Footer = () => {
                   </p>
                 </Link>
 
-                <Link
-                  rel="noopener noreferrer"
+                <a
                   href={CompanyEmailLink}
-                  target="_blank"
                   className="cursor-pointer hover:underline flex justify-center items-center gap-2 px-4 py-2">
                   <IoMailSharp
                     size={20}
@@ -66,7 +64,7 @@ export const Footer = () => {
                   <p className="text-sm xl:text-base">
                     {CompanyEmail}
                   </p>
-                </Link>
+                </a>
               </div>
 
               <div className="mt-6 sm:mt-10">
