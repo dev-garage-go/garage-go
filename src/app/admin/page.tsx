@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ErrorMessage } from "@/components";
 
 import { validateAdminPassword } from "@/actions";
-import { isAuthorized } from "@/keys";
+import { expiresIsAuthorized, isAuthorized } from "@/keys";
 
 export default function AdminPage() {
   const router = useRouter()
@@ -14,13 +14,24 @@ export default function AdminPage() {
   const [wrongPassword, setWrongPassword] = useState<boolean>(false)
   const [authorized, setAuthorized] = useState<boolean>(false);
 
-  useEffect(() => {
-    const hasAuthorized = sessionStorage.getItem(isAuthorized)
-    if (authorized || hasAuthorized) {
-      router.push("/admin/bookings")  // guard
-    }
-  }, [authorized])
+  const saveAuthorizationInStorage = () => {
+    const expiresIn = 7 * 1440 * 60 * 1000;   // 1 semana minutos en ms
+    const expiresAt = Date.now() + expiresIn;
 
+    sessionStorage.setItem(isAuthorized, "true")
+    sessionStorage.setItem(expiresIsAuthorized, expiresAt.toString());
+  }
+
+  const checkUserAuthorized = () => {
+    const hasAuthorized = sessionStorage.getItem(isAuthorized) === "true"
+    const expiresAt = parseInt(sessionStorage.getItem(expiresIsAuthorized) || "0")
+
+    if (!hasAuthorized || Date.now() < expiresAt) {
+      sessionStorage.removeItem(isAuthorized)
+      sessionStorage.removeItem(expiresIsAuthorized);
+      return false
+    } else return true
+  }
 
   const handleSumbit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -28,12 +39,20 @@ export default function AdminPage() {
     const isValid = await validateAdminPassword(password)
 
     if (isValid.success) {
-      sessionStorage.setItem(isAuthorized, "true")
+      saveAuthorizationInStorage()
       setAuthorized(true)
     } else {
       setWrongPassword(true)
     }
   }
+
+  // Verifies is user is authorized
+  useEffect(() => {
+    if (authorized || checkUserAuthorized()) {
+      router.push("/admin/bookings")  // guard
+    }
+  }, [authorized])
+
 
   return (
     <div className="flex flex-col justify-center items-center bg-primaryBlue-50 min-h-screen">
@@ -61,7 +80,7 @@ export default function AdminPage() {
           <div className="flex justify-center items-center gap-2 w-full">
             <input
               id="admin-pass"
-              type="text"
+              type="password"
               placeholder="******"
               className="input-form"
               value={password}
