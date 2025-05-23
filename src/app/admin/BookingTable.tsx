@@ -48,10 +48,12 @@ export const BookingTable = ({ bookings }: Props) => {
           if (!booking) return;
 
           return (
-            <tr className="bg-white border-b transition duration-300 ease-in-out hover:bg-customGray-50 cursor-pointer">
+            <tr
+              key={booking._id}
+              className="bg-white border-b transition duration-300 ease-in-out hover:bg-customGray-50 cursor-pointer">
 
               <td className="table-row-style whitespace-nowrap">
-                {booking._id}
+                #{booking._id.slice(0, 8)}
               </td>
 
               <td className="table-row-style whitespace-nowrap">

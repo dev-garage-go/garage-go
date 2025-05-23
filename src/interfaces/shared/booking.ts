@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { VehicleData } from './vehicle';
-import { Hour } from '../front/components-interfaces/schedules';
+import { Hour } from '../front/schedules';
 import { ServicesData } from './services-data';
 
 interface User {
