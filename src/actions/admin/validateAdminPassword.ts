@@ -6,11 +6,9 @@ export const validateAdminPassword = async (password: string): Promise<{ success
   console.log(password)
 
   if (password === secretPassword) {
-    console.log("validada")
     return { success: true }
   }
   else {
-    console.log("NO validada")
     return { success: false }
   }
 }
