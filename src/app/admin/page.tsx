@@ -1,13 +1,14 @@
 "use client"
 
-import { ErrorMessage } from "@/components";
-import { isAuthorized } from "@/keys";
-import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ErrorMessage } from "@/components";
+
+import { validateAdminPassword } from "@/actions";
+import { isAuthorized } from "@/keys";
 
 export default function AdminPage() {
   const router = useRouter()
-  const adminPasswordSecret = process.env.ADMIN_SECRET_PASSWORD
 
   const [password, setPassword] = useState("")
   const [wrongPassword, setWrongPassword] = useState<boolean>(false)
@@ -16,15 +17,19 @@ export default function AdminPage() {
   useEffect(() => {
     const hasAuthorized = sessionStorage.getItem(isAuthorized)
     if (authorized || hasAuthorized) {
-      router.push("/admin/bookings")
+      router.push("/admin/bookings")  // guard
     }
   }, [authorized])
 
-  const handleSumbit = () => {
-    if (password === adminPasswordSecret) {
+
+  const handleSumbit = async (e: React.FormEvent) => {
+    e.preventDefault()
+
+    const isValid = await validateAdminPassword(password)
+
+    if (isValid.success) {
       sessionStorage.setItem(isAuthorized, "true")
       setAuthorized(true)
-
     } else {
       setWrongPassword(true)
     }
@@ -56,7 +61,7 @@ export default function AdminPage() {
           <div className="flex justify-center items-center gap-2 w-full">
             <input
               id="admin-pass"
-              type="password"
+              type="text"
               placeholder="******"
               className="input-form"
               value={password}
