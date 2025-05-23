@@ -15,7 +15,7 @@ export default function AdminPage() {
   const [authorized, setAuthorized] = useState<boolean>(false);
 
   const saveAuthorizationInStorage = () => {
-    const expiresIn = 7 * 1440 * 60 * 1000;   // 1 semana minutos en ms
+    const expiresIn = 7 * 1440 * 60 * 1000;   // 1 semana en ms
     const expiresAt = Date.now() + expiresIn;
 
     sessionStorage.setItem(isAuthorized, "true")
