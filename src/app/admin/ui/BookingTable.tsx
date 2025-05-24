@@ -52,9 +52,10 @@ export const BookingTable = ({ bookings }: Props) => {
           <th scope="col" className="table-col-style">
             Total
           </th>
-          <th scope="col" className="table-col-style">
+          {/* TODO: Habilitar columna de estado */}
+          {/* <th scope="col" className="table-col-style">
             Estado
-          </th>
+          </th> */}
         </tr>
       </thead>
 
@@ -111,9 +112,10 @@ export const BookingTable = ({ bookings }: Props) => {
                 $ {formatNumberWithDots(booking.amount.total)}
               </td>
 
-              <td className="table-row-style text-wrap font-semibold">
+              {/* TODO: Habilitar columna de estado */}
+              {/* <td className="table-row-style text-wrap font-semibold">
                 <PayState state="refunded" />
-              </td>
+              </td> */}
 
             </tr>
           )
