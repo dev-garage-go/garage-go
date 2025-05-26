@@ -40,8 +40,7 @@ export const AdminContextProvider = ({ children }: Props) => {
   const saveAuthorizationInStorage = () => {
     if (!isClient) return;
 
-    // const expiresIn = 7 * 1440 * 60 * 1000;   // 1 week en ms
-    const expiresIn = 10 * 1000;   // 3 seconds en ms
+    const expiresIn = 1000 * 60 * 1440 * 7;   // 1 week en ms (1440 minutes = 1 day)
     const expiresAt = Date.now() + expiresIn;
 
     sessionStorage.setItem(isAuthorized, "true")
@@ -62,8 +61,10 @@ export const AdminContextProvider = ({ children }: Props) => {
 
     const hasAuthorized = sessionStorage.getItem(isAuthorized) === "true"
     const expiresAt = parseInt(sessionStorage.getItem(expiresIsAuthorized) || "0")
+    console.log(hasAuthorized)
+    console.log(expiresAt)
 
-    if (!hasAuthorized || Date.now() < expiresAt) return false
+    if (!hasAuthorized || Date.now() > expiresAt) return false
     else return true
   }
 
