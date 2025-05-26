@@ -1,7 +1,7 @@
 'use server'
 
 import { getCollection } from "@/database/methods";
-import { BookingServiceData, ErrorInterface } from "@/interfaces";
+import { BookingServiceData, ErrorInterface, HttpStatus } from "@/interfaces";
 
 export const createBooking = async (booking: BookingServiceData): Promise<ErrorInterface> => {
   try {
@@ -9,9 +9,17 @@ export const createBooking = async (booking: BookingServiceData): Promise<ErrorI
     coll.insertOne(booking)
 
     console.log("Booking added in database")
-    return { errorMessage: null }
+    return {
+      success: true,
+      status: HttpStatus.OK,
+      errorMessage: null
+    }
   } catch (error) {
     console.error(error)
-    return { errorMessage: `something went wrong: ${error}` }
+    return {
+      success: false,
+      errorMessage: `Error creating a new booking: ${error}`,
+      status: HttpStatus.INTERNAL_SERVER_ERROR
+    }
   }
 }

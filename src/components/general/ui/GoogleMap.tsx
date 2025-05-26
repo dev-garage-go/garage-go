@@ -4,7 +4,11 @@ import { CompanyCoords, CompanyName } from "@/constants";
 import { GoogleMap, Marker, OverlayView, useJsApiLoader } from "@react-google-maps/api";
 
 export const GoogleMapComponent = () => {
-  const apiKey = process.env.NEXT_PUBLIC_MAPS_API_KEY as string ?? 'google-maps key not found'
+  const apiKey = process.env.NEXT_PUBLIC_MAPS_API_KEY as string
+
+  if (!apiKey) {
+    throw new Error('Google Maps API Key not founded in process.env.NEXT_PUBLIC_MAPS_API_KEY')
+  }
 
   const { isLoaded } = useJsApiLoader({
     googleMapsApiKey: apiKey,

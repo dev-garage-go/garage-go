@@ -1,7 +1,6 @@
 "use server"
 
-import { ErrorInterface, User } from "@/interfaces"
-import { HttpStatus } from "@/interfaces/back/http-status"
+import { ErrorInterface, User, HttpStatus } from "@/interfaces"
 import sgMail from '@sendgrid/mail'
 
 export const sendEmailAction = async ({ email, name, lastName }: User): Promise<ErrorInterface> => {

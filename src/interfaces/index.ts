@@ -1,4 +1,5 @@
 export * from './back/error-message';
+export * from './back/http-status';
 export * from './front/banner-disccounts';
 export * from './front/benefits';
 export * from './front/faqs-data';
