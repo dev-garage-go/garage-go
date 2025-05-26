@@ -7,18 +7,18 @@ export const sendEmailAction = async ({ email, name, lastName }: User): Promise<
   const fullName = name + " " + lastName
   const message = "Algo a redactar"
 
-  const apiKey = process.env.SENDGRID_API_KEY || 'example-to-delete'
+  const apiKey = process.env.SENDGRID_API_KEY
   const domain = process.env.NEXT_PUBLIC_BASE_URL
 
-  if (!apiKey) {
-    throw new Error('SendGrid API Key not founded in process.env.SENDGRID_API_KEY')
-  }
+  // TODO: if (!apiKey) {
+  //   throw new Error('SendGrid API Key not founded in process.env.SENDGRID_API_KEY')
+  // }
 
   if (!domain) {
     throw new Error('Domain API Key not founded in process.env.NEXT_PUBLIC_BASE_URL')
   }
 
-  sgMail.setApiKey(apiKey)
+  sgMail.setApiKey(apiKey!)
 
   const msg = {
     to: 'tucorreo@tudominio.com',            // destinatario
