@@ -1,11 +1,7 @@
 /* Doc:
-1. Reads the sessionStorage looking for the value under vehicleKey.
-2. Stores that value in the internal state (authorization).
-3. Listens for changes via:
-  - Storage events (when the sessionStorage changes from another tab or window).
-  - A custom event (customVehicleUpdateEvent) that you fire manually in the code when you change the sessionStorage from the same tab.
-4. When it detects a change, it rereads the sessionStorage and updates its state (authorization) if it changed.
-5. If it is the first time it detects a new value, it calls router.refresh(), which re-renders the server component associated to the current route in Next.js App Router.
+1. must be used in all paths within /admin except /.
+2. It takes the expiration date of the admin token (expiresIsAuthorized) expressed in milliseconds and calculates how much time is left until that time. Subtracting the future expiration date minus the current time.
+3. If the expiration date has expired, redirect to “/admin”. If it has not expired yet, program a function that will wait for the time needed for the token to expire and then run the function to clear the token, (setTimeout).
 */
 
 "use client"
@@ -13,23 +9,37 @@
 import { useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
 import { useAdminContext } from "@/contexts"
+import { expiresIsAuthorized } from "@/keys"
 
 export const useAdminGuard = () => {
-  const { isAdminSessionValid, clearAdminSession } = useAdminContext()
+  const { clearAdminSession } = useAdminContext()
 
   const router = useRouter()
   const pathname = usePathname()
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const isValid = isAdminSessionValid()
+    const isClient = typeof window !== 'undefined'
+    if (!isClient) return;
 
-      if (!isValid && pathname.startsWith("/admin")) {
+    const expiresAt = parseInt(sessionStorage.getItem(expiresIsAuthorized) || "0", 10)
+    const now = Date.now()
+    const timeRemaining = expiresAt - now
+
+    // If it's expired, redirect
+    if (timeRemaining <= 0 && pathname.startsWith("/admin")) {
+      clearAdminSession()
+      router.push("/admin")
+      return
+    }
+
+    const timeout = setTimeout(() => {
+      if (pathname.startsWith("/admin")) {
         clearAdminSession()
         router.push("/admin")
+        return
       }
-    }, 1000)
+    }, timeRemaining)
 
-    return () => clearInterval(interval)
+    return () => clearTimeout(timeout)
   }, [pathname, router])
 }
