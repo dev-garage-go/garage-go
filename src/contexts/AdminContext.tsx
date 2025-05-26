@@ -2,7 +2,7 @@
 
 import { validateAdminPassword } from "@/actions"
 import { expiresIsAuthorized, isAuthorized } from "@/keys"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
 
 interface AdminContextInterface {
@@ -12,6 +12,8 @@ interface AdminContextInterface {
   setWrongPassword: React.Dispatch<SetStateAction<boolean>>
   authorized: boolean
   isValidPassword: (password: string) => Promise<void>
+  isAdminSessionValid: () => boolean | void,
+  clearAdminSession: () => void
 }
 
 interface Props {
@@ -27,6 +29,7 @@ export const useAdminContext = () => {
 }
 
 export const AdminContextProvider = ({ children }: Props) => {
+  const isClient = typeof window !== 'undefined' // avoids server errors
   const router = useRouter();
 
   const [password, setPassword] = useState("")
@@ -35,23 +38,33 @@ export const AdminContextProvider = ({ children }: Props) => {
 
   // save the authorization in the session storage with a time stamp
   const saveAuthorizationInStorage = () => {
-    const expiresIn = 7 * 1440 * 60 * 1000;   // 1 week en ms
+    if (!isClient) return;
+
+    // const expiresIn = 7 * 1440 * 60 * 1000;   // 1 week en ms
+    const expiresIn = 10 * 1000;   // 3 seconds en ms
     const expiresAt = Date.now() + expiresIn;
 
     sessionStorage.setItem(isAuthorized, "true")
     sessionStorage.setItem(expiresIsAuthorized, expiresAt.toString());
   }
 
+  // delete admin authorization
+  const clearAdminSession = () => {
+    if (!isClient) return;
+
+    sessionStorage.removeItem(isAuthorized);
+    sessionStorage.removeItem(expiresIsAuthorized);
+  };
+
   // verifies if the user is authorized
-  const checkUserAuthorized = () => {
+  const isAdminSessionValid = (): boolean | void => {
+    if (!isClient) return;
+
     const hasAuthorized = sessionStorage.getItem(isAuthorized) === "true"
     const expiresAt = parseInt(sessionStorage.getItem(expiresIsAuthorized) || "0")
 
-    if (!hasAuthorized || Date.now() < expiresAt) {
-      sessionStorage.removeItem(isAuthorized)
-      sessionStorage.removeItem(expiresIsAuthorized);
-      return false
-    } else return true
+    if (!hasAuthorized || Date.now() < expiresAt) return false
+    else return true
   }
 
   // verifies if the password entered is correct
@@ -68,7 +81,7 @@ export const AdminContextProvider = ({ children }: Props) => {
 
   // Verifies is user is authorized
   useEffect(() => {
-    if (authorized || checkUserAuthorized()) {
+    if (authorized) {
       router.push("/admin/bookings")  // guard
     }
   }, [authorized])
@@ -81,7 +94,9 @@ export const AdminContextProvider = ({ children }: Props) => {
         password,
         setPassword,
         authorized,
-        isValidPassword
+        isValidPassword,
+        isAdminSessionValid,
+        clearAdminSession
       }}
     >
       {children}

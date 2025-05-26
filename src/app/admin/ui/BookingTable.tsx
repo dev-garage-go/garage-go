@@ -6,12 +6,14 @@ import dayjs from 'dayjs';
 
 import { formatNumberWithDots } from '@/utils';
 import { PayState } from "./PayState";
+import { useAdminGuard } from "@/hooks/useAdminGuard";
 
 interface Props {
   bookings: BookingDB[]
 }
 
 export const BookingTable = ({ bookings }: Props) => {
+  useAdminGuard()
   if (!bookings) return;
 
   const formatDate = (data: any): string => {
