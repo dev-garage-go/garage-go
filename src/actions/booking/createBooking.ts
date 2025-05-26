@@ -1,9 +1,9 @@
 'use server'
 
 import { getCollection } from "@/database/methods";
-import { BookingServiceData, ErrorMessage } from "@/interfaces";
+import { BookingServiceData, ErrorInterface } from "@/interfaces";
 
-export const createBooking = async (booking: BookingServiceData): Promise<ErrorMessage> => {
+export const createBooking = async (booking: BookingServiceData): Promise<ErrorInterface> => {
   try {
     const coll = await getCollection("bookings")
     coll.insertOne(booking)
