@@ -41,5 +41,5 @@ export const useAdminGuard = () => {
     }, timeRemaining)
 
     return () => clearTimeout(timeout)
-  }, [pathname, router])
+  }, [pathname, router, clearAdminSession])
 }

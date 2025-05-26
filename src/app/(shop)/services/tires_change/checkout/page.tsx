@@ -4,12 +4,7 @@ import { CheckoutFormWrapper } from "@/components/screens";
 export default function TiresChangeCheckoutPage() {
   return (
     <div>
-      <TopBanner
-        hasVehicleData
-        vehicleName="Haval H6 GT"
-        vehiclePatent="TGPL67"
-      />
-
+      <TopBanner hasVehicleData />
       <CheckoutFormWrapper withBooking={false} />
     </div>
   );

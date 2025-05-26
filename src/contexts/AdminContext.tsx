@@ -85,7 +85,7 @@ export const AdminContextProvider = ({ children }: Props) => {
     if (authorized) {
       router.push("/admin/bookings")  // guard
     }
-  }, [authorized])
+  }, [authorized, router])
 
   return (
     <AdminContext.Provider
