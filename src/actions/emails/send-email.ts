@@ -4,10 +4,10 @@ import { ErrorInterface, User, HttpStatus } from "@/interfaces"
 import sgMail from '@sendgrid/mail'
 
 export const sendEmailAction = async ({ email, name, lastName }: User): Promise<ErrorInterface> => {
-  const fullName = email + " " + lastName
+  const fullName = name + " " + lastName
   const message = "Algo a redactar"
 
-  const apiKey = process.env.SENDGRID_API_KEY
+  const apiKey = process.env.SENDGRID_API_KEY || 'example-to-delete'
   const domain = process.env.NEXT_PUBLIC_BASE_URL
 
   if (!apiKey) {
