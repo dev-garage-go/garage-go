@@ -61,8 +61,6 @@ export const AdminContextProvider = ({ children }: Props) => {
 
     const hasAuthorized = sessionStorage.getItem(isAuthorized) === "true"
     const expiresAt = parseInt(sessionStorage.getItem(expiresIsAuthorized) || "0")
-    console.log(hasAuthorized)
-    console.log(expiresAt)
 
     if (!hasAuthorized || Date.now() > expiresAt) return false
     else return true
@@ -79,6 +77,15 @@ export const AdminContextProvider = ({ children }: Props) => {
       setWrongPassword(true)
     }
   }
+
+  // clean wrong password when it changes
+  useEffect(() => {
+    if (wrongPassword && password.length) {
+      setTimeout(() => {
+        setWrongPassword(false)
+      }, 1000)
+    }
+  }, [password.length])
 
   // Verifies is user is authorized
   useEffect(() => {
