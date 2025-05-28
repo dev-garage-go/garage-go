@@ -29,6 +29,7 @@ export const Hero = () => {
             <Image
               fill
               priority
+              sizes="(min-width: 1024px) 896px, 100vw"
               src={Mujer}
               alt="Mujer conduciendo feliz"
               className="absolute bottom-0 object-contain w-auto h-auto"
