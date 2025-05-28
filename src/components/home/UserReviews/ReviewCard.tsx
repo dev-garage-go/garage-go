@@ -19,6 +19,7 @@ export const ReviewCard = ({ name, opinion, profilePicture, score }: Props) => {
           <div className='flex justify-center items-center relative h-12 w-12 ring-2 ring-white ring-offset-2 ring-offset-blue-600 rounded-full'>
             <Image
               fill
+              sizes='48px'
               src={profilePicture}
               alt='user profile pictures'
               className='object-cover rounded-full w-auto h-auto'

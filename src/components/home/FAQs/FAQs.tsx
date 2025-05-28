@@ -17,6 +17,7 @@ export const FAQs = () => {
             <Image
               src={HavalH6Circle}
               alt='haval h6'
+              sizes='(min-width: 1024px) 50vw, 100vw'
               fill
               priority
               className='object-contain w-auto h-auto'

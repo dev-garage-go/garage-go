@@ -30,6 +30,7 @@ const BrandLogo = ({ logo }: { logo: { id: string; image: string } }) => (
   <div className='relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16'>
     <Image
       fill
+      sizes="(min-width: 768px) 64px, (min-width: 640px) 56px, 48px"
       src={logo.image}
       alt={logo.id}
       className="w-auto h-auto object-contain grayscale hover:grayscale-0 transition-all"
