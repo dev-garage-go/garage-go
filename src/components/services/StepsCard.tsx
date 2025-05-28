@@ -12,6 +12,7 @@ export const StepsCard = ({ imageUrl, imageAlt, description, title }: Props) => 
       <div className='relative h-60 w-full'>
         <Image
           fill
+          sizes="(min-width: 580px) 447px, (min-width: 460px) calc(51vw + 161px), calc(10vw + 332px)"
           src={imageUrl}
           alt={imageAlt}
           className='object-cover w-auto h-auto rounded-xl'

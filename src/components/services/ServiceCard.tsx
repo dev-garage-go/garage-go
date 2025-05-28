@@ -63,7 +63,7 @@ export const ServiceCard = ({
                 className="relative h-10 w-14">
                 <Image
                   fill
-                  sizes="100vw"
+                  sizes="56px"
                   key={index + feature}
                   src={FeatureIconsMap[feature]}
                   alt={feature}

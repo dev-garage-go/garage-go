@@ -125,20 +125,26 @@ export const TopBanner = ({
           <Image
             src={imageSrc!}
             alt={imageAlt!}
+            sizes="(min-width: 560px) 100vw, calc(12.08vw + 475px)"
             fill
             className="object-cover w-auto h-auto"
           />
 
           <div className="absolute bottom-0 h-12 sm:h-14 md:h-16 bg-white opacity-80 w-full flex justify-center items-center gap-10 sm:gap-12 md:gap-14">
             {featuresImages?.map((feature, index) => (
-              <Image
-                height={24}
-                width={50}
-                key={index + feature}
-                src={FeatureIconsMap[feature]}
-                alt={feature}
-                className="object-contain z-20 opacity-100 p-1 sm:p-0"
-              />
+              <div
+                key={feature}
+                className="relative z-20 flex items-center justify-center h-11 md:h-12 w-16 md:w-20"
+              >
+                <Image
+                  fill
+                  sizes="calc(min-width: 768px) 80px, 64px"
+                  key={index + feature}
+                  src={FeatureIconsMap[feature]}
+                  alt={feature}
+                  className="object-contain p-1 sm:p-0"
+                />
+              </div>
             ))}
           </div>
         </div>
