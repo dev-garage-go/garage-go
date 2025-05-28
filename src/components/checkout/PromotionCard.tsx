@@ -42,7 +42,7 @@ export const PromotionCard = ({
     <div
       onClick={handleSelect}
       className={clsx(`${className} flex justify-start items-center cursor-pointer gap-4 w-full bg-customGray-100
-         hover:scale-105 transition-all duration-300 rounded-xl py-4 md:py-2 px-4`, {
+         hover:scale-105 transition-all duration-300 rounded-xl py-4 md:py-3 px-4`, {
         "bg-primaryBlue-50": promotionChecked
       })}
     >
@@ -73,9 +73,10 @@ export const PromotionCard = ({
 
         <div className="hidden md:block relative h-14 w-14">
           <Image
+            fill
+            sizes='56px'
             src={imageSrc}
             alt={imageAlt}
-            fill
             className="object-contain w-auto h-auto"
           />
         </div>

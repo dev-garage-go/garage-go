@@ -69,7 +69,7 @@ export const TiresContractingForm = () => {
             // register={register("promotion")}
             // handleSelect={() => handleSelectPromotion(true)}
             informationButtonData={{
-              text: "Bases y condicionies de la promocion",
+              text: "Condiciones de la promocion",
               hasModal: true,
               modal: {
                 title: "Condiciones",
