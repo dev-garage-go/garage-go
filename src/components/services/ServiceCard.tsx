@@ -41,6 +41,7 @@ export const ServiceCard = ({
         <div className="relative w-full h-56">
           <Image
             fill
+            sizes="(min-width: 750px) calc(8.33vw + 260px), calc(5.63vw + 296px)"
             src={image}
             alt={title}
             className="object-cover w-auto h-auto rounded-3xl p-2"
@@ -57,14 +58,18 @@ export const ServiceCard = ({
         <div className="p-6 flex flex-col flex-1">
           <div className="flex gap-4 mb-auto">
             {features.map((feature, index) => (
-              <Image
-                height={24}
-                width={50}
-                key={index + feature}
-                src={FeatureIconsMap[feature]}
-                alt={feature}
-                className="object-contain"
-              />
+              <div
+                key={feature}
+                className="relative h-10 w-14">
+                <Image
+                  fill
+                  sizes="100vw"
+                  key={index + feature}
+                  src={FeatureIconsMap[feature]}
+                  alt={feature}
+                  className="object-contain w-auto h-auto"
+                />
+              </div>
             ))}
           </div>
 

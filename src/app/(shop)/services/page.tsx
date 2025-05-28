@@ -14,11 +14,12 @@ export default function ServicesPage() {
       {/* Main image */}
       <div className="hidden xl:block absolute top-20 right-72 w-[600px] h-[400px]">
         <Image
-          src={Services}
-          alt="persona feliz con los servicios"
           fill
           priority
-          className="object-contain w-auto h-auto"
+          src={Services}
+          alt="persona feliz con los servicios"
+          sizes="600px"
+          className="object-cover w-auto h-auto"
         />
       </div>
 

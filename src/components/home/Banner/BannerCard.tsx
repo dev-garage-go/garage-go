@@ -50,10 +50,11 @@ export const BannerCard = ({
         {/* Image */}
         <div className='hidden lg:block absolute bottom-0 right-0 h-full w-1/2'>
           <Image
+            fill
+            sizes='(min-width: 1024px) 768px'
             priority
             src={image}
             alt={imageAlt}
-            fill
             className='object-contain w-auto h-auto pt-2'
           />
         </div>
