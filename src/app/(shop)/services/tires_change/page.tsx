@@ -52,9 +52,10 @@ export default function TiresChangePage() {
             <div className="relative h-60 w-60 md:h-80 md:w-80 rounded-3xl bg-white flex items-center justify-center overflow-hidden shadow-xl">
               <div className="relative h-56 w-56 md:w-72 md:h-72 rounded-2xl overflow-hidden">
                 <Image
+                  fill
+                  sizes='calc(min-width: 768px) 288px, 224px'
                   src={ChangeTiresPromotion}
                   alt="promocion de cambio de cubiertas"
-                  fill
                   className="object-cover w-auto h-auto"
                 />
               </div>

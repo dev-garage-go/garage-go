@@ -139,7 +139,6 @@ export const TopBanner = ({
                 <Image
                   fill
                   sizes="calc(min-width: 768px) 80px, 64px"
-                  key={index + feature}
                   src={FeatureIconsMap[feature]}
                   alt={feature}
                   className="object-contain p-1 sm:p-0"

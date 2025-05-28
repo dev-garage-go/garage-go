@@ -50,6 +50,7 @@ export const FAQsDisclosure = ({ answer, question, hasAnswerItems, answersItems,
               <div className='relative w-full h-48 rounded-xl mt-4'>
                 <Image
                   fill
+                  sizes='640px'
                   src={imageSrc}
                   alt={imageAlt ?? 'information image'}
                   className='object-cover w-auto h-auto rounded-xl'
