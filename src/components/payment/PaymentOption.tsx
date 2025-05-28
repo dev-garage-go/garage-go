@@ -25,9 +25,10 @@ export const PaymentOption = ({ method, name, description, imageSrc, checked, re
 
       <div className="relative flex h-16 w-24 md:h-20 md:w-28 items-center">
         <Image
+          fill
+          sizes="calc(6.67vw + 40px)"
           src={imageSrc}
           alt={name}
-          fill
           className="w-auto h-auto object-contain"
         />
       </div>
