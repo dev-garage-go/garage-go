@@ -1,9 +1,9 @@
 'use client'
 
-import { useGetVehicleOnChangeStorage, useLicensePlateOnChangeStorage } from "@/hooks"
-import { VehicleData } from "@/interfaces"
-import { customLicensePlateUpdateEvent, customVehicleUpdateEvent, licensePlateKey, vehicleKey } from "@/keys"
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
+import { useGetVehicleOnChangeStorage, useLicensePlateOnChangeStorage } from "../hooks"
+import { customLicensePlateUpdateEvent, customVehicleUpdateEvent, licensePlateKey, vehicleKey } from "@/keys"
+import { VehicleData } from "../interfaces/vehicle"
 
 interface VehicleContextType {
   modalIsOpen: boolean

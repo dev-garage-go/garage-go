@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation"
 import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 import { ModalPortal } from "@/components"
-import { LazyVehicleDataModal } from "@/components/lazy/VehicleDataModal.lazy"
+import { LazyVehicleDataModal } from "@/features/vehicle/components/lazy/VehicleDataModal.lazy"
 
 import { MileageMaintenanceService } from "@/interfaces"
 import { useServiceContext, useVehicleContext } from "@/contexts"

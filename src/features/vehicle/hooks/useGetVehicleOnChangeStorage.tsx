@@ -10,10 +10,10 @@
 
 "use client"
 
-import { VehicleData } from "@/interfaces"
 import { customVehicleUpdateEvent, vehicleKey } from "@/keys"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
+import { VehicleData } from "../interfaces/vehicle"
 
 
 export const useGetVehicleOnChangeStorage = (): VehicleData | null => {

@@ -19,7 +19,7 @@ export * from './shared/Loader';
 export * from './general/ui/ModalPortal';
 export * from './general/ui/SchedulePicker';
 export * from './general/ui/Select';
-export * from './general/ui/VehicleDataModal';
+export * from '../features/vehicle/components/VehicleDataModal';
 // export * from '../features/home/Banner/Banner';
 // export * from '../features/home/Banner/BannerCard';
 // export * from '../features/home/Banner/BannerSlider';

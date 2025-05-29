@@ -6,8 +6,8 @@ import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 
 import { FeatureIconsMap } from "@/constants"
-import { useGetVehicleOnChangeStorage } from "@/hooks"
 import { getBreadcrumbs } from "@/utils"
+import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 

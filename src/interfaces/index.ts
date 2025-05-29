@@ -13,4 +13,4 @@ export * from './shared/booking';
 export * from './shared/payment-methods';
 export * from './shared/promotions';
 export * from './shared/services-data';
-export * from './shared/vehicle';
+// export * from '../features/vehicle/interfaces/vehicle';

@@ -1,6 +1,6 @@
 import { Dayjs } from 'dayjs';
-import { VehicleData } from './vehicle';
 import { Hour } from '../front/schedules';
+import { VehicleData } from '@/features/vehicle';
 import { ServicesData } from './services-data';
 
 export interface User {

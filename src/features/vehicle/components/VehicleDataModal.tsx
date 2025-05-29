@@ -2,11 +2,11 @@
 
 import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { ErrorMessage } from "./ErrorMessage"
+import { ErrorMessage } from "@/components"
 
 import { useVehicleContext } from "@/contexts"
-import { VehicleData } from "@/interfaces"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
+import { VehicleData } from "../interfaces/vehicle"
 
 interface Props {
   setClose: React.Dispatch<boolean>
