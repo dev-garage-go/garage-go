@@ -1,6 +1,6 @@
 "use server"
 
-import { ErrorInterface, HttpStatus } from "@/backend"
+import { ErrorInterface, HttpStatus } from "@/backend/interfaces"
 import sgMail from '@sendgrid/mail'
 
 import { User } from "@/features/bookings"

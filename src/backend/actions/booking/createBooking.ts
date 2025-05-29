@@ -1,7 +1,8 @@
 'use server'
 
+import { getCollection } from "@/backend/database";
+import { ErrorInterface, HttpStatus } from "@/backend/interfaces";
 import { BookingServiceData } from "@/features/bookings";
-import { getCollection, ErrorInterface, HttpStatus } from "@/backend";
 
 export const createBooking = async (booking: BookingServiceData): Promise<ErrorInterface> => {
   try {
