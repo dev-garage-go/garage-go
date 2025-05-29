@@ -7,7 +7,8 @@ import { QuantityTires, TiresChangeService, TypesTiresOptions } from "@/interfac
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
-import { AddServiceCard, InformationButton, SwitchButton, PromotionCard, ErrorMessage } from "@/components";
+import { InformationButton, SwitchButton, ErrorMessage } from "@/components";
+import { AddServiceCard, PromotionCard } from "@/features";
 
 
 export const TiresContractingForm = () => {

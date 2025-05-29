@@ -1,4 +1,4 @@
-import { Summary } from "@/components"
+import { Summary } from "@/features"
 
 export const TiresContractingSummary = () => {
   return (

@@ -6,10 +6,11 @@ import { useEffect, useState } from "react";
 // useFormContext -> permite acceder al contexto del formulario y que otros componentes {children} reciban las props o los valoros que espera el <form>
 import { Controller, useFormContext } from "react-hook-form";
 
-import { BookingServicesData } from "@/interfaces";
+import { OtherLicensePlateButton } from "@/features/checkout/components";
 import { CalendarPicker, ErrorMessage, InformationButton, SchedulePicker, Select } from "@/components";
+
 import { AddressTypes } from "@/constants";
-import { OtherLicensePlateButton } from "./OtherLicensePlateButton";
+import { BookingServicesData } from "@/interfaces";
 
 
 interface Props {
