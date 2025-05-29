@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { CompanyFacebook, CompanyInstagram, } from '@/constants';
 
-import { Instagram, Facebook, GarageGoLogo } from '@/assets/logos';
+import { obtainLogo } from '@/assets/helpers';
 import { WhatsAppButton, BookingHeaderButton } from '@/components';
 
 export const TopMenu = () => {
@@ -15,7 +15,7 @@ export const TopMenu = () => {
         className="relative h-8 w-20 sm:w-28 sm:h-10 flex justify-start"
       >
         <Image
-          src={GarageGoLogo}
+          src={obtainLogo('company', 'logo')}
           fill
           priority
           alt="Garage Go"
@@ -32,7 +32,7 @@ export const TopMenu = () => {
           >
             <div className='relative w-4 h-4 md:w-5 md:h-5'>
               <Image
-                src={Instagram}
+                src={obtainLogo('socialNetworks', 'instagram')}
                 fill
                 alt="Instagram"
                 className="object-contain w-auto h-auto"
@@ -45,7 +45,7 @@ export const TopMenu = () => {
           >
             <div className='relative w-4 h-4 md:w-5 md:h-5'>
               <Image
-                src={Facebook}
+                src={obtainLogo('socialNetworks', 'facebook')}
                 fill
                 alt="Facebook"
                 className="object-contain w-auto h-auto"

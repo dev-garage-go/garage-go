@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { CompanyLogoMetadata } from "@/assets/logos";
+import { obtainLogo } from "@/assets/helpers";
 import { CompanyDescription, CompanyName } from "@/constants";
 import { montserrat } from "@/config/fonts";
 
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: titleMetadata,
     description: CompanyDescription,
-    images: [CompanyLogoMetadata]
+    images: [obtainLogo('company', 'logoMetadata')]
   }
 };
 

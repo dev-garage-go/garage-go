@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from 'next/image'
 
-import { GarageGoLogoFooter, MediosPago } from '@/assets/logos';
+import { obtainLogo } from '@/assets/helpers';
 import { IoArrowForward, IoCall, IoLogoFacebook, IoLogoInstagram, IoMailSharp } from "react-icons/io5";
 import {
   CompanyEmail,
@@ -24,7 +24,7 @@ export const Footer = () => {
           {/* Garage Go image */}
           <div className="relative w-full max-w-48 sm:max-w-xs h-10 sm:h-16 md:h-28 mb-10 xl:mb-20">
             <Image
-              src={GarageGoLogoFooter}
+              src={obtainLogo('company', 'logoFooter')}
               alt="Descripción"
               fill
               className="object-contain w-auto h-auto"
@@ -97,7 +97,7 @@ export const Footer = () => {
             {/* Payment method */}
             <div className="relative mt-6 sm:mt-10 xl:mt-20 w-full h-20">
               <Image
-                src={MediosPago}
+                src={obtainLogo('payment', 'methods')}
                 fill
                 alt="medios de pago"
                 className="object-contain w-auto h-auto"

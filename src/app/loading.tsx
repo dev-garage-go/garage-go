@@ -1,4 +1,4 @@
-import { GarageGoLogo } from "@/assets/logos"
+import { obtainLogo } from "@/assets/helpers"
 import Image from "next/image"
 
 export default function LoadingPage() {
@@ -8,7 +8,7 @@ export default function LoadingPage() {
       <div className="flex flex-col items-center justify-center max-w-xl gap-10 mx-8">
         <div className="relative w-full h-10">
           <Image
-            src={GarageGoLogo}
+            src={obtainLogo('company', 'logo')}
             alt="logo garage go"
             fill
             className="object-contain w-auto h-auto"

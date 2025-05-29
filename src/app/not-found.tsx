@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { GarageGoLogo } from "@/assets/logos";
+import { obtainLogo } from "@/assets/helpers";
 import Link from "next/link";
 
 export default function NotFoundPage() {
@@ -25,7 +25,7 @@ export default function NotFoundPage() {
         <div className="relative w-40 h-28 md:w-56 md:h-28">
           <Image
             fill
-            src={GarageGoLogo}
+            src={obtainLogo('company', 'logo')}
             alt="logo de garage go"
             className="object-contain w-auto h-auto"
           />
