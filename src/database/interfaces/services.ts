@@ -1,4 +1,4 @@
-import { TiresChangeService, MileageMaintenanceService } from '@/interfaces/shared/services-data'
+import { TiresChangeService, MileageMaintenanceService } from '@/features/services/interfaces/services-data'
 
 export interface TiresChangeServiceDB extends TiresChangeService {
   _id: string

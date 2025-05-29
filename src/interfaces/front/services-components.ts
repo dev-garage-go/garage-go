@@ -1,4 +1,4 @@
-import { VehicleMileages } from "@/interfaces/shared/services-data";
+import { VehicleMileages } from "@/features/services/interfaces/services-data";
 
 export interface ButtonProps {
   text: string;

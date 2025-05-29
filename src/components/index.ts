@@ -2,11 +2,11 @@
 // export * from '../features/checkout/components/PromotionCard';
 // export * from '../features/checkout/components/Summary';
 export * from './general/buttons/BookingHeaderButton';
-export * from '../features/services/BookingServiceButton';
+// export * from '../features/services/components/BookingServiceButton';
 export * from './general/buttons/ButtonOptions';
 export * from './general/buttons/InformationButton';
 export * from './general/buttons/RadioButton';
-export * from '../features/services/ServicePageButtons';
+// export * from '../features/services/components/ServicePageButtons';
 export * from './general/buttons/SwitchButton';
 export * from './general/buttons/WhatsAppButton';
 export * from './general/ui/CalendarPicker';

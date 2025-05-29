@@ -11,6 +11,6 @@ export * from './front/services-components';
 export * from './front/suppliers-images';
 export * from './shared/booking';
 export * from './shared/payment-methods';
-export * from './shared/promotions';
-export * from './shared/services-data';
+export * from '../features/services/interfaces/promotions';
+export * from '../features/services/interfaces/services-data';
 // export * from '../features/vehicle/interfaces/vehicle';
