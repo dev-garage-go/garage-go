@@ -1,10 +1,10 @@
-export * from './checkout/components/AddServiceCard';
-export * from './checkout/components/OtherLicensePlateButton';
-export * from './checkout/components/PromotionCard';
-export * from './checkout/components/Summary';
-export * from './checkout/screens/CheckoutForm';
-export * from './checkout/screens/CheckoutSummary';
-export * from './checkout/screens/CheckoutWrapper';
+// export * from './checkout/components/AddServiceCard';
+// export * from './checkout/components/OtherLicensePlateButton';
+// export * from './checkout/components/PromotionCard';
+// export * from './checkout/components/Summary';
+// export * from './checkout/screens/CheckoutForm';
+// export * from './checkout/screens/CheckoutSummary';
+// export * from './checkout/screens/CheckoutWrapper';
 export * from './home/components/Banner/Banner';
 export * from './home/components/Banner/BannerCard';
 export * from './home/components/Banner/BannerSlider';

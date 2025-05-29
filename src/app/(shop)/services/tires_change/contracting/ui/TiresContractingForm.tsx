@@ -8,7 +8,7 @@ import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
 import { InformationButton, SwitchButton, ErrorMessage } from "@/components";
-import { AddServiceCard, PromotionCard } from "@/features";
+import { AddServiceCard, PromotionCard } from "@/features/bookings";
 
 
 export const TiresContractingForm = () => {

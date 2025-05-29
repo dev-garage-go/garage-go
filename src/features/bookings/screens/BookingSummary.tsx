@@ -1,6 +1,6 @@
-import { Summary } from "@/features"
+import { Summary } from "@/features/bookings"
 
-export const CheckoutSummary = () => {
+export const BookingSummary = () => {
   return (
     <Summary
       mainService={{

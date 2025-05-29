@@ -1,7 +1,7 @@
 import { Dayjs } from 'dayjs';
-import { Hour } from '../front/schedules';
+import { Hour } from '../../../interfaces/front/schedules';
 import { VehicleData } from '@/features/vehicle';
-import { ServicesData } from '../../features/services/interfaces/services-data';
+import { ServicesData } from '../../services/interfaces/services-data';
 
 export interface User {
   name: string;

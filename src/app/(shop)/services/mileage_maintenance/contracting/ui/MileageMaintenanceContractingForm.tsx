@@ -5,7 +5,7 @@ import { MileagesOptions } from '@/constants'
 import { ExtraServicesCards, MileageMaintenanceService, VehicleMileages } from '@/interfaces'
 
 import { ButtonOptions } from '@/components'
-import { AddServiceCard } from '@/features'
+import { AddServiceCard } from '@/features/bookings'
 
 
 const extraServices: ExtraServicesCards[] = [

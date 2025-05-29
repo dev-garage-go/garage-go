@@ -9,7 +9,7 @@ export * from './front/schedules';
 export * from './front/select-options';
 export * from '../features/services/interfaces/services-components';
 export * from '../features/home/interfaces/suppliers-images';
-export * from './shared/booking';
+export * from '../features/bookings/interfaces/booking';
 export * from '../features/payment/interfaces/payment-methods';
 export * from '../features/services/interfaces/promotions';
 export * from '../features/services/interfaces/services-data';

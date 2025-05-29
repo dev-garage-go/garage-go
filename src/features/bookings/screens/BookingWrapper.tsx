@@ -2,8 +2,8 @@
 
 import { FormProvider, useForm } from "react-hook-form";
 
-import { CheckoutForm } from "./CheckoutForm";
-import { CheckoutSummary } from "./CheckoutSummary";
+import { BookingForm } from "./BookingForm";
+import { BookingSummary } from "./BookingSummary";
 import { ModalPortal, VehicleDataModal, ConfirmationBookingModal } from "@/components";
 
 import { AppointmentData } from "@/interfaces";
@@ -13,7 +13,7 @@ interface Props {
   withBooking: boolean
 }
 
-export const CheckoutFormWrapper = ({ withBooking }: Props) => {
+export const BookingFormWrapper = ({ withBooking }: Props) => {
   const methods = useForm<AppointmentData>({
     shouldFocusError: true,
     defaultValues: {
@@ -51,8 +51,8 @@ export const CheckoutFormWrapper = ({ withBooking }: Props) => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
-            <CheckoutForm withBooking={withBooking} />
-            <CheckoutSummary />
+            <BookingForm withBooking={withBooking} />
+            <BookingSummary />
           </div>
         </form>
       </FormProvider>

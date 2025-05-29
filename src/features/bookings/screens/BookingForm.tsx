@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 // useFormContext -> permite acceder al contexto del formulario y que otros componentes {children} reciban las props o los valoros que espera el <form>
 import { Controller, useFormContext } from "react-hook-form";
 
-import { OtherLicensePlateButton } from "@/features/checkout/components";
+import { OtherLicensePlateButton } from "@/features/bookings";
 import { CalendarPicker, ErrorMessage, InformationButton, SchedulePicker, Select } from "@/components";
 
 import { AddressTypes } from "@/constants";
@@ -17,7 +17,7 @@ interface Props {
   withBooking: boolean
 }
 
-export const CheckoutForm = ({ withBooking }: Props) => {
+export const BookingForm = ({ withBooking }: Props) => {
   const { register, control, formState: { errors } } = useFormContext<BookingServicesData>()
 
   // Switch calendar y schedule pickers
