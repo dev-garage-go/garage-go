@@ -12,7 +12,7 @@
 
 "use client"
 
-import { customLicensePlateUpdateEvent, licensePlateKey } from "@/keys"
+import { customLicensePlateUpdateEvent, licensePlateKey } from "@/features/vehicle"
 import { useRouter } from "next/navigation"
 import { useEffect, useRef, useState } from "react"
 
