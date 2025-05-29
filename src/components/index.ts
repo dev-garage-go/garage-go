@@ -15,6 +15,7 @@ export * from './general/ui/ConfirmationBookingModal';
 export * from './general/ui/ErrorMessage';
 export * from './general/ui/GoogleMap';
 export * from './general/ui/InformationModal';
+export * from './general/ui/Loader';
 export * from './general/ui/ModalPortal';
 export * from './general/ui/SchedulePicker';
 export * from './general/ui/Select';

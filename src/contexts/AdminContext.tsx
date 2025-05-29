@@ -85,7 +85,7 @@ export const AdminContextProvider = ({ children }: Props) => {
         setWrongPassword(false)
       }, 1000)
     }
-  }, [password.length])
+  }, [wrongPassword, password.length])
 
   // Verifies is user is authorized
   useEffect(() => {
