@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ServiceCard } from "@/components";
+import { ServiceCard } from "@/features";
 import { ServicesCardsInterface } from "@/interfaces";
 
 interface Props {

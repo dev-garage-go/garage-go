@@ -1,5 +1,5 @@
 import { Mujer } from '@/assets';
-import { HeroButtons } from '@/components';
+import { HeroButtons } from '@/features';
 import { CompanyDescription } from '@/constants';
 import Image from 'next/image';
 

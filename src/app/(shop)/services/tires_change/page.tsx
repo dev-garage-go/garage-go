@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 
-import { BookingServiceButton, FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
+import { BookingServiceButton, FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/features';
 import { StepsTiresChange, TiresChangeFAQs } from '@/constants';
 import { ChangeTiresPromotion, Mantencion } from '@/assets';
 

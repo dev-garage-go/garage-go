@@ -1,4 +1,4 @@
-import { Banner, Benefits, FAQs, Hero, CarsBrandsCarousel, Services, UserReviews } from "@/components";
+import { Banner, Benefits, FAQs, Hero, CarsBrandsCarousel, Services, UserReviews } from "@/features";
 
 export default function HomePage() {
   return (

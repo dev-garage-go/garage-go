@@ -1,6 +1,6 @@
 import Image from 'next/image'
 
-import { FAQsDisclosure } from '@/components'
+import { FAQsDisclosure } from '@/features'
 import { HavalH6Circle } from '@/assets'
 import { FAQsData } from '@/constants'
 

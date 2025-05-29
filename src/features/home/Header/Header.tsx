@@ -1,4 +1,4 @@
-import { TopMenu, NavBar } from '@/components';
+import { TopMenu, NavBar } from '@/features';
 
 export const Header = () => {
   return (

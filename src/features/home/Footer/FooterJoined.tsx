@@ -1,5 +1,5 @@
 import React from 'react'
-import { Footer, BrandsAndLocation } from '@/components';
+import { Footer, BrandsAndLocation } from '@/features';
 
 export const FooterJoined = () => {
   return (

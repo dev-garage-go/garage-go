@@ -1,4 +1,4 @@
-import { BookingServiceButton, FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/components';
+import { BookingServiceButton, FAQsDisclosure, OtherServices, ServicePageButtons, StepsCard, TopBanner } from '@/features';
 import { StepsTechnicalRevision, TechnicalRevisionFAQs } from '@/constants';
 import { Mantencion } from '@/assets';
 

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { BannerCard } from '@/components';
+import { BannerCard } from '@/features';
 import { BannerInformation } from '@/constants';
 
 // Import Swiper React components

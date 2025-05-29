@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { HombreServicios, Services } from "@/assets";
-import { TopBanner, ServicesGrid, BannerCard } from "@/components";
+import { TopBanner, ServicesGrid, BannerCard } from "@/features";
 
 export default function ServicesPage() {
   return (

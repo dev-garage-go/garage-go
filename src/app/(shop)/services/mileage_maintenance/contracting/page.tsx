@@ -1,4 +1,4 @@
-import { TopBanner } from "@/components";
+import { TopBanner } from "@/features";
 import { MileageMaintenanceContractingWrapper } from "./ui";
 
 export default function MileageMaintenanceContractingPage() {

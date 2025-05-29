@@ -1,7 +1,7 @@
 "use client"
 
-import { BenefitsCard } from '@/components';
-import { BenefitsData } from '@/constants';
+import { ReviewCard } from '@/features';
+import { UserReviewsData } from '@/constants';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -29,11 +29,11 @@ const SliderBreakpoints = {
   },
   1024: {
     slidesPerView: 2.4,
-    spaceBetween: 23,
+    spaceBetween: 25,
   },
   1920: {
     slidesPerView: 3.4,
-    spaceBetween: 23,
+    spaceBetween: 28,
   },
   2560: {
     slidesPerView: 4.2,
@@ -41,7 +41,7 @@ const SliderBreakpoints = {
   },
 }
 
-export const BenefitsSlider = () => {
+export const ReviewSlider = () => {
   return (
     <div className="w-full p-6 sm:px-10 xl:px-20">
       <Swiper
@@ -51,12 +51,12 @@ export const BenefitsSlider = () => {
         modules={[FreeMode, Pagination]}
         breakpoints={SliderBreakpoints}
       >
-        {BenefitsData.map((benefit, index) => (
+        {UserReviewsData.map((item, index) => (
           <SwiperSlide
-            key={index + benefit.name}
+            key={index + item.name}
             className="pb-14"
           >
-            <BenefitsCard {...benefit} />
+            <ReviewCard {...item} />
           </SwiperSlide>
         ))}
       </Swiper>

@@ -1,4 +1,4 @@
-import { BannerSlider } from '@/components'
+import { BannerSlider } from '@/features'
 
 export const Banner = () => {
   return (

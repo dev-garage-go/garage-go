@@ -1,4 +1,4 @@
-import { TopBanner } from "@/components";
+import { TopBanner } from "@/features";
 import { CheckoutFormWrapper } from "@/components/screens";
 
 export default function TiresChangeCheckoutPage() {

@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { IoReorderThreeOutline } from "react-icons/io5"
 
-import { HeaderOption, SideBar } from "@/components"
+import { HeaderOption, SideBar } from "@/features"
 import { HeaderLinksOptions } from "@/constants"
 
 export const NavBar = () => {
