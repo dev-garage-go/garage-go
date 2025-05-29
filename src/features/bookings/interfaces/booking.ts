@@ -1,5 +1,5 @@
 import { Dayjs } from 'dayjs';
-import { Hour } from '../../../interfaces/front/schedules';
+import { Hour } from '../../../components/interfaces/schedules';
 import { VehicleData } from '@/features/vehicle';
 import { ServicesData } from '../../services/interfaces/services-data';
 
