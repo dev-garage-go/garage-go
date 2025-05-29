@@ -1,7 +1,7 @@
+import Image from 'next/image';
 import { obtainImage } from '@/assets/helpers';
 import { HeroButtons } from '@/features/home';
 import { CompanyDescription } from '@/constants';
-import Image from 'next/image';
 
 export const Hero = () => {
   return (
@@ -30,7 +30,7 @@ export const Hero = () => {
               fill
               priority
               sizes="(min-width: 1024px) 896px, 100vw"
-              src={obtainImage('hero', 'mujer')}
+              src={obtainImage('ui', 'mujer')}
               alt="Mujer conduciendo feliz"
               className="absolute bottom-0 object-contain w-auto h-auto"
             />
