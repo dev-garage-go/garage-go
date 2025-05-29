@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation"
 
 import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
-import { ModalPortal, VehicleDataModal } from "@/components"
+import { ModalPortal } from "@/components"
+import { LazyVehicleDataModal } from "@/components/lazy/VehicleDataModal.lazy"
 
 import { MileageMaintenanceService } from "@/interfaces"
 import { useServiceContext, useVehicleContext } from "@/contexts"
@@ -41,7 +42,7 @@ export const MileageMaintenanceContractingWrapper = () => {
     <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
       {!licensePlate && modalIsOpen &&
         <ModalPortal>
-          <VehicleDataModal setClose={setModalIsOpen} />
+          <LazyVehicleDataModal setClose={setModalIsOpen} />
         </ModalPortal>
       }
       <FormProvider {...methods}>
