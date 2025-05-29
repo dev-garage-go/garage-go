@@ -7,7 +7,7 @@ export * from '../features/home/interfaces/header-options';
 export * from '../features/home/interfaces/reviews';
 export * from './front/schedules';
 export * from './front/select-options';
-export * from './front/services-components';
+export * from '../features/services/interfaces/services-components';
 export * from '../features/home/interfaces/suppliers-images';
 export * from './shared/booking';
 export * from '../features/payment/interfaces/payment-methods';

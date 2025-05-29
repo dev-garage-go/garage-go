@@ -1,8 +1,7 @@
 "use client"
 
 import { createContext, useContext } from "react"
-import { serviceKey } from "@/keys"
-import { ServicesData } from "@/interfaces"
+import { serviceKey, ServicesData } from "@/features/services"
 
 
 interface ServiceContextType {

@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react"
 import { bookingKey } from "@/keys"
 import { AppointmentData, BookingServiceData } from "@/interfaces"
 import { useVehicleContext } from "../features/vehicle/context/VehicleContext"
-import { useServiceContext } from "./ServiceContext"
+import { useServiceContext } from "../features/services/context/ServiceContext"
 import { createBooking, getServiceAmount } from "@/actions"
 import { ModalPortal } from "@/components"
 
