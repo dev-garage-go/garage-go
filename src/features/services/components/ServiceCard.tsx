@@ -1,9 +1,10 @@
 "use client"
 
-import { FeatureIconsMap } from "@/constants";
-import { ButtonProps } from "@/interfaces";
 import Image from "next/image";
 import Link from "next/link";
+
+import { FeatureIconsMap } from "@/constants";
+import { ButtonProps } from "@/features/services";
 
 interface Props {
   title: string

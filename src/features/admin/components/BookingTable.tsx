@@ -1,7 +1,7 @@
 'use client'
 
 import { BookingDB } from "@/backend/database/interfaces/bookings"
-import { ServicesNames } from "@/interfaces";
+import { ServicesNames } from "@/features/services";
 import dayjs from 'dayjs';
 
 import { formatNumberWithDots } from '@/utils';

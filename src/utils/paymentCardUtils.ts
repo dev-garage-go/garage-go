@@ -1,4 +1,4 @@
-import { PaymentGatewayMethods, UserCard } from "@/interfaces";
+import { PaymentGatewayMethods, UserCard } from "@/features/payment";
 
 type typeCards = "visa" | "mastercard" | "amex" | "unknown"
 

@@ -1,9 +1,8 @@
 'use client'
 
 import { useState } from "react"
-import { Hour, SchedulesOptions } from "@/interfaces"
 import { ErrorMessage } from "./ErrorMessage"
-import { ButtonOptions } from '@/components';
+import { ButtonOptions, Hour, SchedulesOptions } from '@/components';
 
 interface Props {
   onChange: (value: Hour) => void

@@ -2,10 +2,17 @@
 
 import { useFormContext } from "react-hook-form";
 
-import { RenderCardIcon, PaymentOption, ErrorMessage } from '@/components';
 import { allowOnlyLetters, detectCardType, formatCardNumber, formatExpiry } from "@/utils";
+
 import { PaymentMethodsOptions } from "@/constants";
-import { PaymentFormSchema, PaymentGatewayMethods } from "@/interfaces";
+import { ErrorMessage } from '@/components';
+import {
+  PaymentFormSchema,
+  PaymentGatewayMethods,
+  RenderCardIcon,
+  PaymentOption
+} from "@/features/payment";
+
 
 
 export const PaymentForm = () => {

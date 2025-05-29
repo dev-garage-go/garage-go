@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState } from "react"
-import { AppointmentData, BookingServiceData } from "@/interfaces"
+import { AppointmentData, BookingServiceData } from "@/features/bookings"
 
 import { createBooking, getServiceAmount } from "@/backend/actions"
 

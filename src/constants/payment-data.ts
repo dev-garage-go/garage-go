@@ -1,5 +1,5 @@
 import { Getnet, MercadoPago, Webpay } from "@/assets";
-import { PaymentGatewayMethodsOptionsInterface } from "@/interfaces";
+import { PaymentGatewayMethodsOptionsInterface } from "@/features/payment";
 
 export const PaymentMethodsOptions: PaymentGatewayMethodsOptionsInterface[] = [
   {

@@ -34,13 +34,16 @@ import {
   BenefitsInterface,
   FAQsInterface,
   HeaderOptionInterface,
-  QuantityTires,
   ReviewsInterface,
+  ServicesPagesFAQs
+} from "@/features/home";
+
+import {
+  QuantityTires,
   ServicesCardsInterface,
-  ServicesPagesFAQs,
   StepsServicesPagesInterface,
   VehicleMileagesOptions
-} from "@/interfaces";
+} from "@/features/services";
 
 const srvPath = '/services'
 

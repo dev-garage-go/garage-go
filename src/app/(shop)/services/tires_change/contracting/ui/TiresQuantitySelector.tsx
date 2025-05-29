@@ -2,7 +2,7 @@
 
 import { UseFormRegisterReturn } from "react-hook-form"
 import { RadioButton } from "@/components"
-import { QuantityTires } from '@/interfaces';
+import { QuantityTires } from '@/features/services';
 
 interface Props {
   quantity: QuantityTires

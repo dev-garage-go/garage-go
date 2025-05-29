@@ -1,7 +1,9 @@
 'use server'
 
-import { Amount, MileageMaintenanceService, ServicesData, TiresChangeService } from "@/interfaces"
 import { calcTiresChangeAmount, calcMileageMaintenanceAmount } from "@/backend/actions"
+
+import { Amount } from "@/features/bookings"
+import { MileageMaintenanceService, ServicesData, TiresChangeService } from "@/features/services"
 
 // Only one service
 export const getServiceAmount = async (service: ServicesData): Promise<Amount | undefined> => {

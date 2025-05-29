@@ -3,7 +3,7 @@
 import { useFormContext } from "react-hook-form";
 
 import { InfoRuedas, Promotion4x3Tires } from "@/assets";
-import { QuantityTires, TiresChangeService, TypesTiresOptions } from "@/interfaces";
+import { QuantityTires, TiresChangeService, TypesTiresOptions } from "@/features/services";
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
 import { TiresQuantitySelector } from "./TiresQuantitySelector";

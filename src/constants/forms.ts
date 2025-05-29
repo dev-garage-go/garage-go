@@ -1,4 +1,5 @@
-import { SelectOptions, TypesTiresOptions } from "@/interfaces";
+import { SelectOptions } from "@/components";
+import { TypesTiresOptions } from "@/features/services";
 
 export const AddressTypes: SelectOptions[] = [
   { id: 1, value: 'casa' },

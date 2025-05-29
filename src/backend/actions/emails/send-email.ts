@@ -1,7 +1,9 @@
 "use server"
 
-import { ErrorInterface, User, HttpStatus } from "@/interfaces"
+import { ErrorInterface, HttpStatus } from "@/backend"
 import sgMail from '@sendgrid/mail'
+
+import { User } from "@/features/bookings"
 
 export const sendEmailAction = async ({ email, name, lastName }: User): Promise<ErrorInterface> => {
   const fullName = name + " " + lastName

@@ -3,8 +3,8 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { IoChevronDown } from 'react-icons/io5'
 
+import { SelectOptions } from '@/components';
 import { ErrorMessage } from './ErrorMessage';
-import { SelectOptions } from '@/interfaces';
 import { firstLetterUppercase } from '@/utils';
 
 interface Props {

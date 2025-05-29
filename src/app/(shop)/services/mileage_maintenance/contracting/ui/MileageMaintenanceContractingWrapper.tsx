@@ -9,7 +9,7 @@ import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContra
 import { ModalPortal } from "@/components"
 import { LazyVehicleDataModal } from "@/features/vehicle/components/lazy/VehicleDataModal.lazy"
 
-import { MileageMaintenanceService } from "@/interfaces"
+import { MileageMaintenanceService } from "@/features/services"
 import { useServiceContext, useVehicleContext } from "@/contexts"
 
 

@@ -6,7 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { TiresContractingForm } from './TiresContractingForm';
 import { TiresContractingSummary } from './TiresContractingSummary';
 
-import { TiresChangeService } from '@/interfaces';
+import { TiresChangeService } from '@/features/services';
 import { useServiceContext } from '@/contexts';
 
 

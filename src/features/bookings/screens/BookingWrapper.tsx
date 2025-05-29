@@ -2,12 +2,10 @@
 
 import { FormProvider, useForm } from "react-hook-form";
 
-import { BookingForm } from "./BookingForm";
-import { BookingSummary } from "./BookingSummary";
-import { ModalPortal, VehicleDataModal, ConfirmationBookingModal } from "@/components";
+import { ModalPortal, ConfirmationBookingModal } from "@/components";
+import { BookingForm, AppointmentData, BookingSummary, useBookingContext } from "@/features/bookings"
+import { useVehicleContext, VehicleDataModal } from "@/features/vehicle";
 
-import { AppointmentData } from "@/interfaces";
-import { useBookingContext, useVehicleContext } from "@/contexts";
 
 interface Props {
   withBooking: boolean
