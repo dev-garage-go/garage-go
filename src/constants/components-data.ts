@@ -1,33 +1,4 @@
-import {
-  Aceite,
-  AgendaCotiza,
-  Benefits15Percent,
-  Benefits30Percent,
-  Benefits4x3Tires,
-  BenefitsTechnical,
-  CambioNeumaticos,
-  CambioParabrisas,
-  ChequeoPreventivo,
-  EntregaDomicilio,
-  Garantia,
-  InfoRuedas,
-  Mantencion,
-  PagaOnline,
-  PickAndDelivery,
-  PickDelivery,
-  Playero,
-  ProfilePic1,
-  ProfilePic2,
-  ProfilePic3,
-  ProfilePic4,
-  ProfilePic5,
-  RetiroDomicilio,
-  Revision,
-  RevisionTecnica,
-  SeleccionaTuServicio,
-  ServicioDomicilio,
-  SuperCheck,
-} from "@/assets";
+import { obtainImage } from '../assets/helpers/obtainImage';
 
 import {
   BannerDisccountsInterface,
@@ -49,9 +20,9 @@ const srvPath = '/services'
 
 // Map the 'features' with their images
 export const FeatureIconsMap: Record<string, string> = {
-  'pick-delivery': PickDelivery,
-  'super-check': SuperCheck,
-  'garantia': Garantia,
+  'pick-delivery': obtainImage('services', 'pickDelivery'),
+  'super-check': obtainImage('services', 'superCheck'),
+  'garantia': obtainImage('services', 'garantia'),
 };
 
 // Header options to navigate
@@ -86,7 +57,7 @@ export const ServicesData: ServicesCardsInterface[] = [
   {
     title: "Mantencion por kilometraje",
     price: 189900,
-    image: Mantencion,
+    image: obtainImage('services', 'mantencion'),
     discount: "25% Dcto",
     features: ["pick-delivery", "super-check", "garantia"],
     path: `${srvPath}/mileage_maintenance`
@@ -94,20 +65,20 @@ export const ServicesData: ServicesCardsInterface[] = [
   {
     title: "Gestión de revisión técnica",
     price: 48990,
-    image: Revision,
+    image: obtainImage('services', 'revision'),
     features: ["pick-delivery"],
     path: `${srvPath}/technical_revision`
   },
   {
     title: "Cambio de aceite",
     price: 78990,
-    image: Aceite,
+    image: obtainImage('services', 'aceite'),
     features: ["super-check", "garantia"],
     path: `${srvPath}/oil_and_filter_change`
   },
   {
     title: "Cambio de neumáticos",
-    image: CambioNeumaticos,
+    image: obtainImage('services', 'cambioNeumaticos'),
     discount: "3x4",
     features: ["pick-delivery", "super-check", "garantia"],
     buttons: [
@@ -126,14 +97,14 @@ export const ServicesData: ServicesCardsInterface[] = [
   {
     title: "Servicio de frenos",
     price: 35990,
-    image: Aceite,
+    image: obtainImage('services', 'aceite'),
     features: ["super-check", "garantia"],
     path: `${srvPath}/brake_services`
   },
   {
     title: "Cambio de batería",
     price: 65990,
-    image: Revision,
+    image: obtainImage('services', 'revision'),
     discount: "25% Dcto",
     features: ["pick-delivery", "super-check", "garantia"],
     path: `${srvPath}/battery_change`
@@ -141,14 +112,14 @@ export const ServicesData: ServicesCardsInterface[] = [
   {
     title: "Cambio de parabrisas",
     price: 125990,
-    image: CambioParabrisas,
+    image: obtainImage('services', 'cambioParabrisas'),
     features: ["pick-delivery"],
     path: `${srvPath}/windshield_replacement`
   },
   {
     title: "Checkeo preventivo",
     price: 149990,
-    image: ChequeoPreventivo,
+    image: obtainImage('services', 'chequeoPreventivo'),
     features: ["super-check"],
     path: `${srvPath}/preventive_check`
   }
@@ -158,22 +129,22 @@ export const BenefitsData: BenefitsInterface[] = [
   {
     name: "30% en Mantencion por kilometraje",
     btnString: "Agenda ahora",
-    image: Benefits30Percent
+    image: obtainImage('benefits', 'benefits30Percent')
   },
   {
     name: "15% en Cambio de aceita",
     btnString: "Agenda ahora",
-    image: Benefits15Percent
+    image: obtainImage('benefits', 'benefits15Percent')
   },
   {
     name: "Gestion de Revision Tecnica",
     btnString: "Cotiza ahora",
-    image: BenefitsTechnical
+    image: obtainImage('benefits', 'benefitsTechnical')
   },
   {
     name: "4x3 en Neumaticos",
     btnString: "Cotiza ahora",
-    image: Benefits4x3Tires
+    image: obtainImage('benefits', 'benefits4x3Tires')
   },
 ]
 
@@ -181,25 +152,25 @@ export const BannerInformation: BannerDisccountsInterface[] = [
   {
     title: "Agenda y cotiza en línea",
     description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",
-    image: AgendaCotiza,
+    image: obtainImage('banners', 'agendaCotiza'),
     imageAlt: "agenda y cotiza"
   },
   {
     title: "Pick&Delivery",
     description: "Mejor que un delivery! Al solicitar tu servicio elige Pick&delivery vamos a buscar y a retirar tu vehículo a domicilio. Al llegar a nuestro hub recibirás una llamada confirmando su llegada Y despacho de vuelta a casa",
-    image: PickAndDelivery,
+    image: obtainImage('banners', 'pickAndDelivery'),
     imageAlt: "pick and delivery"
   },
   {
     title: "Paga en Línea",
     description: "Hacer más fácil el cuidado de tu auto, también es hacer más fácil y cómodo el pago de tus servicio, cancela directo al contratar Tu servicio en nuestra web",
-    image: PagaOnline,
+    image: obtainImage('banners', 'pagaOnline'),
     imageAlt: "paga online"
   },
   {
     title: "Todo en un solo lugar",
     description: "En Garage Go! Contamos con un amplio Hub de más de 1.200 mt2 Equipado con todo lo necesario para entregar el mejor servicio. Conoce siempre la ubicación de tu auto, de casa a Garage y de garage a tu casa.",
-    image: Playero,
+    image: obtainImage('banners', 'playero'),
     imageAlt: "imagen de un playero"
   },
 ]
@@ -207,37 +178,37 @@ export const BannerInformation: BannerDisccountsInterface[] = [
 export const UserReviewsData: ReviewsInterface[] = [
   {
     name: "Valeria Avendaño",
-    profilePicture: ProfilePic1,
+    profilePicture: obtainImage('profiles', 'profilePic1'),
     score: 4.2,
     opinion: "Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos.Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos."
   },
   {
     name: "Valeria Avendaño",
-    profilePicture: ProfilePic1,
+    profilePicture: obtainImage('profiles', 'profilePic1'),
     score: 4.2,
     opinion: "Muy profesional el servicio entregado, recomienda hacer las mantenciones con ellos."
   },
   {
     name: "Alejandro Cisera",
-    profilePicture: ProfilePic2,
+    profilePicture: obtainImage('profiles', 'profilePic2'),
     score: 4,
     opinion: "Excelente, recomendado, puntuales y responsables, es primera vez que hago la mantención con retiro y entrega de mi vehiculo y aunque estaba asustada todo fue muy profesional."
   },
   {
     name: "Carlos Aventura",
-    profilePicture: ProfilePic3,
+    profilePicture: obtainImage('profiles', 'profilePic3'),
     score: 4.5,
     opinion: "excelente atención, servicio entregado en el tiempo y forma acordado, totalmente recomendado"
   },
   {
     name: "Eric Zambrano",
-    profilePicture: ProfilePic4,
+    profilePicture: obtainImage('profiles', 'profilePic4'),
     score: 4,
     opinion: "Retiraron y vinieron a dejar mi auto a la casa, sin costo Lo entregaron limpio por dentro y por fuera, siempre fueron transparentes con los procedimientos que requeria mi vehiculo"
   },
   {
     name: "Elias Maldonado",
-    profilePicture: ProfilePic5,
+    profilePicture: obtainImage('profiles', 'profilePic5'),
     score: 5,
     opinion: "Recomiendo mucho esta empresa y servicio"
   },
@@ -271,25 +242,25 @@ export const StepsMileageMaintenance: StepsServicesPagesInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
-    imageUrl: SeleccionaTuServicio,
+    imageUrl: obtainImage('services', 'seleccionaTuServicio'),
     imageAlt: 'persona seleccionando su servicio'
   },
   {
     title: '2. Retiro a domicilio',
     description: 'Una vez agendado, retiraremos tu vehículo a domicilio,',
-    imageUrl: RetiroDomicilio,
+    imageUrl: obtainImage('services', 'retiroDomicilio'),
     imageAlt: 'retiramos tu vehiculo a domicilio'
   },
   {
     title: '3. Servicio y seguimiento',
     description: 'Realizamos tu servicio directo en nuestro HUB.',
-    imageUrl: ServicioDomicilio,
+    imageUrl: obtainImage('services', 'servicioDomicilio'),
     imageAlt: 'taller de vehiculos'
   },
   {
     title: '4. Entrega a domicilio',
     description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
-    imageUrl: EntregaDomicilio,
+    imageUrl: obtainImage('services', 'entregaDomicilio'),
     imageAlt: 'entregamos el vehiculo a tu domicilio'
   },
 ]
@@ -298,25 +269,25 @@ export const StepsTechnicalRevision: StepsServicesPagesInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
-    imageUrl: SeleccionaTuServicio,
+    imageUrl: obtainImage('services', 'seleccionaTuServicio'),
     imageAlt: 'persona seleccionando su servicio'
   },
   {
     title: '2. Retiro a domicilio',
     description: 'Una vez agendado, retiraremos tu vehículo a domicilio,',
-    imageUrl: RetiroDomicilio,
+    imageUrl: obtainImage('services', 'retiroDomicilio'),
     imageAlt: 'retiramos tu vehiculo a domicilio'
   },
   {
     title: '3. Lo llevamos a la planta',
     description: 'Antes realizaremos un super check Y si no pasa, te presentaremos una cotizacion para resolverlo.',
-    imageUrl: RevisionTecnica,
+    imageUrl: obtainImage('services', 'revisionTecnica'),
     imageAlt: 'taller de vehiculos'
   },
   {
     title: '4. Entrega a domicilio',
     description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
-    imageUrl: EntregaDomicilio,
+    imageUrl: obtainImage('services', 'entregaDomicilio'),
     imageAlt: 'entregamos el vehiculo a tu domicilio'
   },
 ]
@@ -325,25 +296,25 @@ export const StepsOilAndFilterChange: StepsServicesPagesInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
-    imageUrl: SeleccionaTuServicio,
+    imageUrl: obtainImage('services', 'seleccionaTuServicio'),
     imageAlt: 'persona seleccionando su servicio'
   },
   {
     title: '2. Preséntate con tu vehiculo',
     description: 'Te esperamos directo en nuestro HUB. Consulta por Pick&delivery',
-    imageUrl: RetiroDomicilio,
+    imageUrl: obtainImage('services', 'retiroDomicilio'),
     imageAlt: 'retiramos tu vehiculo a domicilio'
   },
   {
     title: '3. Realizamos el servicio',
     description: 'Tu cambio de aceite y filtro según los requerimientos del fabricante.',
-    imageUrl: RevisionTecnica,
+    imageUrl: obtainImage('services', 'revisionTecnica'),
     imageAlt: 'taller de vehiculos'
   },
   {
     title: '4. Entrega de la unidad',
     description: 'Te avisaremos cuando tu auto este listo para que lo retires.',
-    imageUrl: EntregaDomicilio,
+    imageUrl: obtainImage('services', 'entregaDomicilio'),
     imageAlt: 'entregamos el vehiculo a tu domicilio'
   },
 ]
@@ -352,25 +323,25 @@ export const StepsTiresChange: StepsServicesPagesInterface[] = [
   {
     title: '1. Ingresa a nuestro cotizador',
     description: 'Completa los datos de ancho, perfil y aro de tus neumáticosticos',
-    imageUrl: SeleccionaTuServicio,
+    imageUrl: obtainImage('services', 'seleccionaTuServicio'),
     imageAlt: 'persona seleccionando su servicio'
   },
   {
     title: '2. Retiro a domicilio',
     description: 'Una vez agendado, retiraremos tu vehículo a domicilio.',
-    imageUrl: RetiroDomicilio,
+    imageUrl: obtainImage('services', 'retiroDomicilio'),
     imageAlt: 'retiramos tu vehiculo a domicilio'
   },
   {
     title: '3. Cambio y balanceo',
     description: 'Tus cambio incluye instalación, balanceo y servicios adicionales.',
-    imageUrl: RevisionTecnica,
+    imageUrl: obtainImage('services', 'revisionTecnica'),
     imageAlt: 'taller de vehiculos'
   },
   {
     title: '4. Entrega a domicilio',
     description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
-    imageUrl: EntregaDomicilio,
+    imageUrl: obtainImage('services', 'entregaDomicilio'),
     imageAlt: 'entregamos el vehiculo a tu domicilio'
   },
 ]
@@ -434,7 +405,7 @@ export const TiresChangeFAQs: ServicesPagesFAQs[] = [
   {
     question: '¿Qué datos necesito para cotizar?',
     answer: 'Para poder cotizar tus neumáticos es necesario contar con las medidas de ancho, perfil y aro. Esta información esta al costado de tus neumáticostico.',
-    imageSrc: InfoRuedas,
+    imageSrc: obtainImage('promotions', 'infoRuedas'),
     imageAlt: 'informacion de cubiertas'
   },
   {

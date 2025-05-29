@@ -41,7 +41,7 @@ export const assets = {
     hyundai: `${carsLogos}/hyundai.png`,
     jeep: `${carsLogos}/jeep.png`,
   },
-  banner: {
+  banners: {
     agendaCotiza: `${pathImages}/agenda_cotiza.png`,
     pickAndDelivery: `${pathImages}/pick-and-delivery.png`,
     pagaOnline: `${pathImages}/paga_en_linea.png`,
@@ -49,7 +49,7 @@ export const assets = {
     personaCelular: `${pathImages}/persona-celular.jpg`,
     hombreServicios: `${pathImages}/hombre_servicios.png`,
   },
-  profile: {
+  profiles: {
     profilePic1: `${pathImages}/profile-pic1.jpg`,
     profilePic2: `${pathImages}/profile-pic2.jpeg`,
     profilePic3: `${pathImages}/profile-pic3.jpg`,
