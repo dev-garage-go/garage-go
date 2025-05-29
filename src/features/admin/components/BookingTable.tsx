@@ -5,8 +5,7 @@ import { ServicesNames } from "@/interfaces";
 import dayjs from 'dayjs';
 
 import { formatNumberWithDots } from '@/utils';
-import { PayState } from "./PayState";
-import { useAdminGuard } from "@/hooks/useAdminGuard";
+import { useAdminGuard } from "@/features/admin/hooks/useAdminGuard";
 
 interface Props {
   bookings: BookingDB[]

@@ -1,5 +1,5 @@
 import { getBookings } from "@/actions";
-import { BookingTable } from "../ui/BookingTable";
+import { BookingTable } from "@/features/admin";
 import { BookingDB } from "@/database/interfaces";
 
 export default async function BookingAdminPage() {
