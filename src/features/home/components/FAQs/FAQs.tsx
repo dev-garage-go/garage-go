@@ -15,7 +15,7 @@ export const FAQs = () => {
           <div className='relative w-full h-full'>
             {/* Main image */}
             <Image
-              src={obtainImage('faqs', 'havalH6Circle')}
+              src={obtainImage('vehicle', 'havalH6Circle')}
               alt='haval h6'
               sizes='(min-width: 1024px) 50vw, 100vw'
               fill

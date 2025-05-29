@@ -1,4 +1,4 @@
-import { assets } from "../images/component-images"
+import { assets } from "../images/index"
 
 export type AssetCategory = keyof typeof assets
 export type AssetKey<Category extends AssetCategory> = keyof typeof assets[Category]
