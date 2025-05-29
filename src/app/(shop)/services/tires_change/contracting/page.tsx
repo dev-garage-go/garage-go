@@ -1,4 +1,4 @@
-import { TopBanner } from "@/features";
+import { TopBanner } from "@/features/home";
 import { TiresContractingWrapper } from "./ui";
 
 export default function TiresCheckoutPage() {

@@ -1,5 +1,5 @@
 import { GoogleMapComponent } from '@/components';
-import { SuppliersBrandsCarousel } from '@/features';
+import { SuppliersBrandsCarousel } from '@/features/home';
 
 export const BrandsAndLocation = () => {
   return (

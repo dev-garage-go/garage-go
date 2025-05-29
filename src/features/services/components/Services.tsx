@@ -1,7 +1,7 @@
 import Image from "next/image";
 
 import { GoogleIcon } from '@/assets';
-import { ServiceCard, ViewAllServices } from '@/features';
+import { ServiceCard, ViewAllServices } from '@/features/services';
 import { ServicesData } from '@/constants';
 
 export const Services = () => {

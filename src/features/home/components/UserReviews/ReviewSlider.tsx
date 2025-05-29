@@ -1,6 +1,6 @@
 "use client"
 
-import { ReviewCard } from '@/features';
+import { ReviewCard } from '@/features/home';
 import { UserReviewsData } from '@/constants';
 
 // Import Swiper React components

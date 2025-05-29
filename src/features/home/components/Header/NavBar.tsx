@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { IoReorderThreeOutline } from "react-icons/io5"
 
-import { HeaderOption, SideBar } from "@/features"
+import { HeaderOption, SideBar } from "@/features/home"
 import { HeaderLinksOptions } from "@/constants"
 
 export const NavBar = () => {
@@ -14,7 +14,7 @@ export const NavBar = () => {
   // If the path changes the sidebar will close.
   useEffect(() => {
     setMenuOpen(false)
-  },[pathname])
+  }, [pathname])
 
   return (
     <nav className="bg-primaryBlue-500">

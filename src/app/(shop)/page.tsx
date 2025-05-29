@@ -1,4 +1,5 @@
-import { Banner, Benefits, FAQs, Hero, CarsBrandsCarousel, Services, UserReviews } from "@/features";
+import { Banner, Benefits, CarsBrandsCarousel, FAQs, Hero, UserReviews } from "@/features/home";
+import { Services } from "@/features/services";
 
 export default function HomePage() {
   return (

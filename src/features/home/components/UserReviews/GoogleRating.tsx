@@ -1,5 +1,5 @@
 import { GoogleIcon } from '@/assets'
-import { StarRating } from '@/features'
+import { StarRating } from '@/features/home'
 import Image from 'next/image'
 
 interface Props {

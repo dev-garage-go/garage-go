@@ -1,6 +1,6 @@
 "use client"
 
-import { BenefitsCard } from '@/features';
+import { BenefitsCard } from '@/features/home';
 import { BenefitsData } from '@/constants';
 
 // Import Swiper React components

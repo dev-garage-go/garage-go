@@ -1,4 +1,4 @@
-import { BannerSlider } from '@/features'
+import { BannerSlider } from '@/features/home'
 
 export const Banner = () => {
   return (

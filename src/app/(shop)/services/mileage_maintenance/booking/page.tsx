@@ -1,4 +1,4 @@
-import { TopBanner } from "@/features";
+import { TopBanner } from "@/features/home";
 import { BookingFormWrapper } from "@/features/bookings";
 
 export default function MileageMaintenanceCheckoutPage() {

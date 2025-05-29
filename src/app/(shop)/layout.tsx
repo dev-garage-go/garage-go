@@ -1,4 +1,4 @@
-import { FooterJoined, Header } from "@/features";
+import { FooterJoined, Header } from "@/features/home";
 
 export default function HomeLayout({
   children

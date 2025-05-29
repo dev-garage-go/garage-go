@@ -1,6 +1,6 @@
 "use client"
 
-import { ServiceCard } from "@/features";
+import { ServiceCard } from "@/features/services";
 import { ServicesData } from '@/constants'
 
 export const ServicesGrid = () => {
