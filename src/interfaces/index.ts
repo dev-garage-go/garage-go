@@ -10,7 +10,7 @@ export * from './front/select-options';
 export * from './front/services-components';
 export * from './front/suppliers-images';
 export * from './shared/booking';
-export * from './shared/payment-methods';
+export * from '../features/payment/interfaces/payment-methods';
 export * from '../features/services/interfaces/promotions';
 export * from '../features/services/interfaces/services-data';
 // export * from '../features/vehicle/interfaces/vehicle';
