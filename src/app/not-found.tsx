@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { GarageGoLogo } from "@/assets";
+import { GarageGoLogo } from "@/assets/logos";
 import Link from "next/link";
 
 export default function NotFoundPage() {

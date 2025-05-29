@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { HombreServicios, Services } from "@/assets";
+import { obtainImage } from "@/assets/helpers";
 import { TopBanner, BannerCard } from "@/features/home";
 import { ServicesGrid } from "@/features/services";
 
@@ -17,7 +17,7 @@ export default function ServicesPage() {
         <Image
           fill
           priority
-          src={Services}
+          src={obtainImage('services', 'services')}
           alt="persona feliz con los servicios"
           sizes="600px"
           className="object-cover w-auto h-auto"
@@ -38,7 +38,7 @@ export default function ServicesPage() {
           <BannerCard
             title="¿BUSCAS ALGO MÁS ESPECÍFICO?"
             description="Si no encontraste el servicio que requieres Puedes hablar con uno de nuestros ejecutivos Y solicitar una diagnóstico y cotizacion de Lo que estas buscando."
-            image={HombreServicios}
+            image={obtainImage('banners', 'hombreServicios')}
             imageAlt="persona viendo su celular"
             hasButton
             buttonStyle="bg-secundaryGreen-500 hover:bg-secundaryGreen-600 duration-200"

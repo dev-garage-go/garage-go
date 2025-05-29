@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { FAQsDisclosure } from '@/features/home'
-import { HavalH6Circle } from '@/assets'
+import { obtainImage } from '@/assets/helpers'
 import { FAQsData } from '@/constants'
 
 export const FAQs = () => {
@@ -15,7 +15,7 @@ export const FAQs = () => {
           <div className='relative w-full h-full'>
             {/* Main image */}
             <Image
-              src={HavalH6Circle}
+              src={obtainImage('faqs', 'havalH6Circle')}
               alt='haval h6'
               sizes='(min-width: 1024px) 50vw, 100vw'
               fill

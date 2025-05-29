@@ -1,4 +1,4 @@
-import { GarageGoLogo } from "@/assets"
+import { GarageGoLogo } from "@/assets/logos"
 import Image from "next/image"
 
 export default function LoadingPage() {

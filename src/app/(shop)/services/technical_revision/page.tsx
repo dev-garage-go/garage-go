@@ -1,5 +1,5 @@
 import { StepsTechnicalRevision, TechnicalRevisionFAQs } from '@/constants';
-import { Mantencion } from '@/assets';
+import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
 import { BookingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
@@ -12,7 +12,7 @@ export default function TechnicalRevisionPage() {
         title='GESTIÓN DE REV. TÉCNICA'
         description='Lo llevamos, la sacamos y te lo llevamos de vuelta con su revisión al día.'
         withImage
-        imageSrc={Mantencion}
+        imageSrc={obtainImage('services', 'mantencion')}
         imageAlt='playero'
         featuresImages={['pick-delivery', 'super-check']}
       />

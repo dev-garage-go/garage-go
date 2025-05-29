@@ -1,4 +1,4 @@
-import { Getnet, MercadoPago, Webpay } from "@/assets";
+import { obtainImage } from "@/assets/helpers";
 import { PaymentGatewayMethodsOptionsInterface } from "@/features/payment";
 
 export const PaymentMethodsOptions: PaymentGatewayMethodsOptionsInterface[] = [
@@ -6,18 +6,18 @@ export const PaymentMethodsOptions: PaymentGatewayMethodsOptionsInterface[] = [
     method: "webpay",
     name: "Webpay Plus",
     description: "Tarjetas de débito, crédito y prepago.",
-    imageSrc: Webpay,
+    imageSrc: obtainImage('payment', 'webpay'),
   },
   {
     method: "getnet",
     name: "Transferencia",
     description: "Botón de pago para transferencias bancarias",
-    imageSrc: Getnet,
+    imageSrc: obtainImage('payment', 'getnet'),
   },
   {
     method: "mercado-pago",
     name: "Billetera virtual",
     description: "Tarjetas de débito, crédito y prepago.",
-    imageSrc: MercadoPago,
+    imageSrc: obtainImage('payment', 'mercadoPago'),
   },
 ];

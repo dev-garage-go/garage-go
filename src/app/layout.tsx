@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { CompanyLogoMetadata } from "@/assets";
+import { CompanyLogoMetadata } from "@/assets/logos";
 import { CompanyDescription, CompanyName } from "@/constants";
 import { montserrat } from "@/config/fonts";
 

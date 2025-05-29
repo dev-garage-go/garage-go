@@ -1,5 +1,5 @@
 import { MileageMaintenanceFAQs, StepsMileageMaintenance } from '@/constants';
-import { Mantencion } from '@/assets';
+import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
 import { BookingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
@@ -12,7 +12,7 @@ export default function MileageMaintenancePage() {
         title='MANTENCIÓN POR KILOMETRAJE'
         description='Mantencion por pauta según el fabricante, tu sevicio incluye retiro y entrega a domicilio, Super check y lavado de cortesía.'
         withImage
-        imageSrc={Mantencion}
+        imageSrc={obtainImage('services', 'mantencion')}
         imageAlt='playero'
         featuresImages={['pick-delivery', 'super-check', 'garantia']}
       />

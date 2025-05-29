@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import { GoogleIcon } from '@/assets';
+import { obtainImage } from '@/assets/helpers';
 import { ServiceCard, ViewAllServices } from '@/features/services';
 import { ServicesData } from '@/constants';
 
@@ -22,7 +22,7 @@ export const Services = () => {
             <Image
               width={20}
               height={20}
-              src={GoogleIcon}
+              src={obtainImage('services', 'googleIcon')}
               alt="Google"
               className="object-contain"
             />

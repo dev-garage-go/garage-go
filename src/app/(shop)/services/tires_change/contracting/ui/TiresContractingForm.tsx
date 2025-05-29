@@ -2,7 +2,7 @@
 
 import { useFormContext } from "react-hook-form";
 
-import { InfoRuedas, Promotion4x3Tires } from "@/assets";
+import { obtainImage } from "@/assets/helpers";
 import { QuantityTires, TiresChangeService, TypesTiresOptions } from "@/features/services";
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
@@ -64,7 +64,7 @@ export const TiresContractingForm = () => {
           <PromotionCard
             title="Promocion 4x3"
             className="mt-4"
-            imageSrc={Promotion4x3Tires}
+            imageSrc={obtainImage('promotions', 'promotion4x3Tires')}
             imageAlt="promocion 4x3 cubiertas"
             // promotionChecked={promotion}
             // register={register("promotion")}
@@ -160,7 +160,7 @@ export const TiresContractingForm = () => {
               text="Medida de tus neumaticos"
               hasModal={true}
               modalInfo={{
-                imageSrc: InfoRuedas,
+                imageSrc: obtainImage('promotions', 'infoRuedas'),
                 imageAlt: "informacion sobre el rodado de las ruedas"
               }}
             />

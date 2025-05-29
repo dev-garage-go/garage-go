@@ -4,28 +4,18 @@ import Image from 'next/image';
 import { Carousel } from '@/components';
 import { useResponsiveGap } from '@/features/home';
 
-import {
-  BoshWideImg,
-  Bridgestone,
-  Dunlop,
-  Falken,
-  Goodyear,
-  Hankook,
-  Keko,
-  Repsol,
-  Thule
-} from '@/assets';
+import { obtainImage } from '@/assets/helpers';
 
 const suppliersLogos = [
-  { id: 'bridgestone', image: Bridgestone },
-  { id: 'dunlop', image: Dunlop },
-  { id: 'falken', image: Falken },
-  { id: 'goodyear', image: Goodyear },
-  { id: 'bosh', image: BoshWideImg },
-  { id: 'hankook', image: Hankook },
-  { id: 'keko', image: Keko },
-  { id: 'repsol', image: Repsol },
-  { id: 'thule', image: Thule }
+  { id: 'bridgestone', image: obtainImage('suppliers', 'bridgestone') },
+  { id: 'dunlop', image: obtainImage('suppliers', 'dunlop') },
+  { id: 'falken', image: obtainImage('suppliers', 'falken') },
+  { id: 'goodyear', image: obtainImage('suppliers', 'goodyear') },
+  { id: 'bosh', image: obtainImage('suppliers', 'boshWideImg') },
+  { id: 'hankook', image: obtainImage('suppliers', 'hankook') },
+  { id: 'keko', image: obtainImage('suppliers', 'keko') },
+  { id: 'repsol', image: obtainImage('suppliers', 'repsol') },
+  { id: 'thule', image: obtainImage('suppliers', 'thule') }
 ];
 
 const SuppliersLogo = ({ logo }: { logo: { id: string; image: string } }) => (

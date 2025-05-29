@@ -1,4 +1,4 @@
-import { GoogleIcon } from '@/assets'
+import { obtainImage } from '@/assets/helpers'
 import { StarRating } from '@/features/home'
 import Image from 'next/image'
 
@@ -12,7 +12,7 @@ export const GoogleRating = ({ score }: Props) => {
       <Image
         height={10}
         width={10}
-        src={GoogleIcon}
+        src={obtainImage('services', 'googleIcon')}
         alt='google icon'
         className='object-contain'
       />

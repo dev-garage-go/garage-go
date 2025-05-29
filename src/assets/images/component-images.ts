@@ -76,6 +76,11 @@ export const assets = {
   footer: {
     location: `${pathImages}/company-location.png`,
   },
+  payment: {
+    mercadoPago: `${pathImages}/mercado-pago.svg`,
+    getnet: `${pathImages}/getnet.webp`,
+    webpay: `${pathImages}/webpay.webp`,
+  },
   promotions: {
     promotion4x3Tires: `${pathImages}/promotion-4x3-tires.jpg`,
     changeTiresPromotion: `${pathImages}/change-tires-promotion.jpg`,

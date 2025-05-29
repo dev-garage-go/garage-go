@@ -1,7 +1,7 @@
 import Link from "next/link"
 import Image from 'next/image'
 
-import { GarageGoLogoFooter, MediosPago } from '@/assets';
+import { GarageGoLogoFooter, MediosPago } from '@/assets/logos';
 import { IoArrowForward, IoCall, IoLogoFacebook, IoLogoInstagram, IoMailSharp } from "react-icons/io5";
 import {
   CompanyEmail,

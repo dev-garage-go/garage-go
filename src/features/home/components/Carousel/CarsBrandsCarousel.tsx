@@ -4,26 +4,17 @@ import Image from 'next/image';
 import { Carousel } from '@/components';
 import { useResponsiveGap } from '@/features/home';
 
-import {
-  Audi,
-  Bmw,
-  Chevrolet,
-  Citroen,
-  Fiat,
-  Ford,
-  Hyundai,
-  Jeep
-} from '@/assets';
+import { obtainImage } from '@/assets/helpers';
 
 const brandLogos = [
-  { id: 'audi', image: Audi },
-  { id: 'bmw', image: Bmw },
-  { id: 'chevrolet', image: Chevrolet },
-  { id: 'citroen', image: Citroen },
-  { id: 'fiat', image: Fiat },
-  { id: 'ford', image: Ford },
-  { id: 'hyundai', image: Hyundai },
-  { id: 'jeep', image: Jeep }
+  { id: 'audi', image: obtainImage('vehicleBrands', 'audi') },
+  { id: 'bmw', image: obtainImage('vehicleBrands', 'bmw') },
+  { id: 'chevrolet', image: obtainImage('vehicleBrands', 'chevrolet') },
+  { id: 'citroen', image: obtainImage('vehicleBrands', 'citroen') },
+  { id: 'fiat', image: obtainImage('vehicleBrands', 'fiat') },
+  { id: 'ford', image: obtainImage('vehicleBrands', 'ford') },
+  { id: 'hyundai', image: obtainImage('vehicleBrands', 'hyundai') },
+  { id: 'jeep', image: obtainImage('vehicleBrands', 'jeep') }
 ];
 
 const BrandLogo = ({ logo }: { logo: { id: string; image: string } }) => (

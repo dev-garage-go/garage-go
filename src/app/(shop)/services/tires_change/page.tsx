@@ -2,7 +2,7 @@ import Image from 'next/image';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 
 import { StepsTiresChange, TiresChangeFAQs } from '@/constants';
-import { ChangeTiresPromotion, Mantencion } from '@/assets';
+import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
 import { BookingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
@@ -15,7 +15,7 @@ export default function TiresChangePage() {
         title='CAMBIO DE NEUMÁTICOS'
         description='Cotiza tus neumáticos y obtén sin costo Instalación y balanceo.'
         withImage
-        imageSrc={Mantencion}
+        imageSrc={obtainImage('services', 'mantencion')}
         imageAlt='playero'
         featuresImages={['pick-delivery', 'super-check', 'garantia']}
       />
@@ -56,7 +56,7 @@ export default function TiresChangePage() {
                 <Image
                   fill
                   sizes='calc(min-width: 768px) 288px, 224px'
-                  src={ChangeTiresPromotion}
+                  src={obtainImage('promotions', 'changeTiresPromotion')}
                   alt="promocion de cambio de cubiertas"
                   className="object-cover w-auto h-auto"
                 />

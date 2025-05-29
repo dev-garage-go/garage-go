@@ -1,4 +1,4 @@
-import { Mujer } from '@/assets';
+import { obtainImage } from '@/assets/helpers';
 import { HeroButtons } from '@/features/home';
 import { CompanyDescription } from '@/constants';
 import Image from 'next/image';
@@ -30,7 +30,7 @@ export const Hero = () => {
               fill
               priority
               sizes="(min-width: 1024px) 896px, 100vw"
-              src={Mujer}
+              src={obtainImage('hero', 'mujer')}
               alt="Mujer conduciendo feliz"
               className="absolute bottom-0 object-contain w-auto h-auto"
             />

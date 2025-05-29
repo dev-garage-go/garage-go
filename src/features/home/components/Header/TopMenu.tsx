@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 import { CompanyFacebook, CompanyInstagram, } from '@/constants';
 
-import { Instagram, Facebook, GarageGoLogo } from '@/assets';
+import { Instagram, Facebook, GarageGoLogo } from '@/assets/logos';
 import { WhatsAppButton, BookingHeaderButton } from '@/components';
 
 export const TopMenu = () => {

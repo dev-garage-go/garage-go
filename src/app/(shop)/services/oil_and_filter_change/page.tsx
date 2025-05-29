@@ -1,5 +1,5 @@
 import { OildAndFilterChangeFAQs, StepsOilAndFilterChange } from '@/constants';
-import { Mantencion } from '@/assets';
+import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
 import { BookingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
@@ -12,7 +12,7 @@ export default function OilAndFilterChangePage() {
         title='CAMBIO DE ACEITE Y FILTRO'
         description='Asegura la vida de tu motor con el lubricante correcto y su cambio de filtro'
         withImage
-        imageSrc={Mantencion}
+        imageSrc={obtainImage('services', 'mantencion')}
         imageAlt='playero'
         featuresImages={['pick-delivery', 'garantia']}
       />
