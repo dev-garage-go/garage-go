@@ -1,5 +1,5 @@
-export * from './back/error-message';
-export * from './back/http-status';
+export * from '../backend/interfaces/error-message';
+export * from '../backend/interfaces/http-status';
 export * from '../features/home/interfaces/banner-disccounts';
 export * from '../features/home/interfaces/benefits';
 export * from '../features/home/interfaces/faqs-data';

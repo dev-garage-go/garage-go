@@ -1,6 +1,6 @@
 'use client'
 
-import { BookingDB } from "@/database/interfaces/bookings"
+import { BookingDB } from "@/backend/database/interfaces/bookings"
 import { ServicesNames } from "@/interfaces";
 import dayjs from 'dayjs';
 

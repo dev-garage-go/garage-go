@@ -1,6 +1,6 @@
 "use client"
 
-import { validateAdminPassword } from "@/actions"
+import { validateAdminPassword } from "@/backend/actions"
 import { useRouter } from "next/navigation"
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
 import { isAuthorized, expiresIsAuthorized } from "@/features/admin"

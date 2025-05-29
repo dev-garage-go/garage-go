@@ -1,7 +1,7 @@
 'use server'
 
-import { BookingDB } from "@/database/interfaces"
-import { getCollection } from "@/database/methods"
+import { BookingDB } from "@/backend/database/interfaces"
+import { getCollection } from "@/backend/database/methods"
 import { ObjectId } from "mongodb"
 
 type RawBooking = Omit<BookingDB, "_id"> & { _id: ObjectId }
