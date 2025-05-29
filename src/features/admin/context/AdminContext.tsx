@@ -1,9 +1,9 @@
 "use client"
 
 import { validateAdminPassword } from "@/actions"
-import { expiresIsAuthorized, isAuthorized } from "@/keys"
 import { useRouter } from "next/navigation"
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
+import { isAuthorized, expiresIsAuthorized } from "@/features/admin"
 
 interface AdminContextInterface {
   password: string,
