@@ -8,7 +8,7 @@
 
 import { useEffect } from "react"
 import { usePathname, useRouter } from "next/navigation"
-import { useAdminContext } from "@/contexts"
+import { useAdminContext } from "@/features/admin"
 import { expiresIsAuthorized } from "@/features/admin"
 
 export const useAdminGuard = () => {

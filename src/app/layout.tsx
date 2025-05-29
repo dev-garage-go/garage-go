@@ -4,7 +4,7 @@ import { CompanyLogoMetadata } from "@/assets";
 import { CompanyDescription, CompanyName } from "@/constants";
 import { montserrat } from "@/config/fonts";
 
-import { ContextsProvider } from "@/contexts";
+import { ContextsProvider } from "@/providers";
 
 import "./globals.css";
 

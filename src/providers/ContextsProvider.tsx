@@ -5,7 +5,7 @@ import {
   VehicleContextProvider,
   BookingContextProvider,
   AdminContextProvider
-} from "@/contexts"
+} from "./contexts"
 
 interface Props {
   children: React.ReactNode

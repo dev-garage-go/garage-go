@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "@/components"
 
-import { useVehicleContext } from "@/contexts"
+import { useVehicleContext } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 import { VehicleData } from "../interfaces/vehicle"
 

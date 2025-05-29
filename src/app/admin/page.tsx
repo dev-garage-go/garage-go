@@ -1,7 +1,7 @@
 "use client"
 
 import { ErrorMessage } from "@/components";
-import { useAdminContext } from "@/contexts";
+import { useAdminContext } from "@/features/admin";
 
 
 export default function AdminPage() {

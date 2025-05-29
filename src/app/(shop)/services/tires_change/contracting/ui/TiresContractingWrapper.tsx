@@ -6,9 +6,7 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { TiresContractingForm } from './TiresContractingForm';
 import { TiresContractingSummary } from './TiresContractingSummary';
 
-import { TiresChangeService } from '@/features/services';
-import { useServiceContext } from '@/contexts';
-
+import { TiresChangeService, useServiceContext } from '@/features/services';
 
 export const TiresContractingWrapper = () => {
   // TODO: const hasPromotion = getPromotionByService()

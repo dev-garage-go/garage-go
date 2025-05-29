@@ -1,16 +1,15 @@
 'use client'
 
 import { useRef } from "react"
-import { FormProvider, useForm } from "react-hook-form"
 import { useRouter } from "next/navigation"
+import { FormProvider, useForm } from "react-hook-form"
 
+import { ModalPortal } from "@/components"
 import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
-import { ModalPortal } from "@/components"
-import { LazyVehicleDataModal } from "@/features/vehicle/components/lazy/VehicleDataModal.lazy"
 
-import { MileageMaintenanceService } from "@/features/services"
-import { useServiceContext, useVehicleContext } from "@/contexts"
+import { LazyVehicleDataModal, useVehicleContext } from "@/features/vehicle"
+import { MileageMaintenanceService, useServiceContext } from "@/features/services"
 
 
 export const MileageMaintenanceContractingWrapper = () => {
