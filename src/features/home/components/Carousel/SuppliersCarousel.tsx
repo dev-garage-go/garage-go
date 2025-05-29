@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { Carousel } from '@/components';
-import { useResponsiveGap } from '@/hooks';
+import { useResponsiveGap } from '@/features/home';
 
 import {
   BoshWideImg,

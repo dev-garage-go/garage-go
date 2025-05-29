@@ -1,8 +1,8 @@
 "use client"
 
 import Image from 'next/image';
-import { useResponsiveGap } from '@/hooks';
 import { Carousel } from '@/components';
+import { useResponsiveGap } from '@/features/home';
 
 import {
   Audi,
