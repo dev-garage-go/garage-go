@@ -1,9 +1,8 @@
 "use client"
 
 import { IoCloseCircle } from "react-icons/io5"
-import { HeaderLinksOptions } from "@/constants"
 import { WhatsAppButton, BookingHeaderButton } from "@/components"
-import { HeaderOption } from "../Header/HeaderOption"
+import { HeaderLinksOptions, HeaderOption } from "@/features/home"
 
 interface SideBarProps {
   menuOpen: boolean

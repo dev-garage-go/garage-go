@@ -1,8 +1,7 @@
 import Image from 'next/image'
 
-import { FAQsDisclosure } from '@/features/home'
 import { obtainImage } from '@/assets/helpers'
-import { FAQsData } from '@/constants'
+import { FAQsDisclosure, FAQsData } from '@/features/home'
 
 export const FAQs = () => {
   return (

@@ -4,8 +4,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { IoReorderThreeOutline } from "react-icons/io5"
 
-import { HeaderOption, SideBar } from "@/features/home"
-import { HeaderLinksOptions } from "@/constants"
+import { HeaderOption, SideBar, HeaderLinksOptions } from "@/features/home"
 
 export const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
