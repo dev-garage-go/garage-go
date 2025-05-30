@@ -1,12 +1,11 @@
 "use client"
 
-import { ServiceCard } from "@/features/services";
-import { ServicesData } from '@/constants'
+import { ServiceCard, ServicesCardsData } from "@/features/services";
 
 export const ServicesGrid = () => {
   return (
     <div className="max-w-page padding-central-page grid-central-page">
-      {ServicesData.map((service, index) => (
+      {ServicesCardsData.map((service, index) => (
         <ServiceCard key={index + service.title} {...service} />
       ))}
     </div>

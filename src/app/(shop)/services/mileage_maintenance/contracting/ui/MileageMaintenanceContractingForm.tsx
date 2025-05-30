@@ -1,8 +1,13 @@
 "use client"
 
 import { useFormContext } from 'react-hook-form'
-import { MileagesOptions } from '@/constants'
-import { ExtraServicesCards, MileageMaintenanceService, VehicleMileages, AddServiceCard } from '@/features/services'
+import {
+  ExtraServicesCards,
+  MileageMaintenanceService,
+  VehicleMileages,
+  AddServiceCard,
+  MileagesOptions
+} from '@/features/services'
 
 import { ButtonOptions } from '@/components'
 

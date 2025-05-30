@@ -1,11 +1,17 @@
 import Image from 'next/image';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 
-import { StepsTiresChange, TiresChangeFAQs } from '@/constants';
 import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
-import { ContractingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
+import {
+  ContractingServiceButton,
+  OtherServices,
+  ServicePageButtons,
+  StepsCard,
+  StepsTiresChange,
+  TiresChangeFAQs
+} from '@/features/services';
 
 export default function TiresChangePage() {
   return (

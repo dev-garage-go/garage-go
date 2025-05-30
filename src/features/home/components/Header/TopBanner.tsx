@@ -5,8 +5,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 
-import { FeatureIconsMap } from "@/constants"
 import { getBreadcrumbs } from "@/utils"
+import { VehicleServicesFeaturesIconsMap } from "@/features/services"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
@@ -139,7 +139,7 @@ export const TopBanner = ({
                 <Image
                   fill
                   sizes="calc(min-width: 768px) 80px, 64px"
-                  src={FeatureIconsMap[feature]}
+                  src={VehicleServicesFeaturesIconsMap[feature]}
                   alt={feature}
                   className="object-contain p-1 sm:p-0"
                 />

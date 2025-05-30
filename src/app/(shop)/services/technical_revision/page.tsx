@@ -1,8 +1,14 @@
-import { StepsTechnicalRevision, TechnicalRevisionFAQs } from '@/constants';
 import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
-import { ContractingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
+import {
+  ContractingServiceButton,
+  OtherServices,
+  ServicePageButtons,
+  StepsCard,
+  TechnicalRevisionFAQs,
+  StepsTechnicalRevision
+} from '@/features/services';
 
 export default function TechnicalRevisionPage() {
   return (

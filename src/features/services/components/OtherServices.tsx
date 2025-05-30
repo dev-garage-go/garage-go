@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { ServiceCard } from './ServiceCard'
-import { ServicesData } from '@/constants'
+import { ServiceCard, ServicesCardsData } from '@/features/services'
 
 interface Props {
   searchServicesFrom: number
@@ -25,7 +24,7 @@ export const OtherServices = ({ searchServicesFrom, searchServicesTo }: Props) =
 
           <div className='lg:w-2/3'>
             <div className='grid grid-cols-1 md:grid-cols-2 gap-8'>
-              {ServicesData.slice(searchServicesFrom, searchServicesTo).map((service, index) => (
+              {ServicesCardsData.slice(searchServicesFrom, searchServicesTo).map((service, index) => (
                 <ServiceCard {...service} key={index + service.title} />
               ))}
             </div>

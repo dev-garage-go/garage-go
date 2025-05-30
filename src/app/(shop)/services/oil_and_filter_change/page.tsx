@@ -1,8 +1,14 @@
-import { OildAndFilterChangeFAQs, StepsOilAndFilterChange } from '@/constants';
 import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
-import { ContractingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
+import {
+  ContractingServiceButton,
+  OtherServices,
+  ServicePageButtons,
+  StepsCard,
+  StepsOilAndFilterChange,
+  OildAndFilterChangeFAQs
+} from '@/features/services';
 
 export default function OilAndFilterChangePage() {
   return (

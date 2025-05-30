@@ -6,24 +6,23 @@ import {
   FAQsInterface,
   HeaderOptionInterface,
   ReviewsInterface,
-  ServicesPagesFAQs
 } from "@/features/home";
 
-import {
-  QuantityTires,
-  ServicesCardsInterface,
-  StepsServicesPagesInterface,
-  VehicleMileagesOptions
-} from "@/features/services";
+// import {
+//   QuantityTires,
+//   ServicesCardsInterface,
+//   StepsServicesPagesInterface,
+//   VehicleMileagesOptions
+// } from "@/features/services";
 
-const srvPath = '/services'
+// const srvPath = '/services'
 
-// Map the 'features' with their images
-export const FeatureIconsMap: Record<string, string> = {
-  'pick-delivery': obtainImage('services', 'pickDelivery'),
-  'super-check': obtainImage('services', 'superCheck'),
-  'garantia': obtainImage('services', 'garantia'),
-};
+// // Map the 'features' with their images
+// export const FeatureIconsMap: Record<string, string> = {
+//   'pick-delivery': obtainImage('services', 'pickDelivery'),
+//   'super-check': obtainImage('services', 'superCheck'),
+//   'garantia': obtainImage('services', 'garantia'),
+// };
 
 // Header options to navigate
 export const HeaderLinksOptions: HeaderOptionInterface[] = [
@@ -53,77 +52,77 @@ export const HeaderLinksOptions: HeaderOptionInterface[] = [
   },
 ]
 
-export const ServicesData: ServicesCardsInterface[] = [
-  {
-    title: "Mantencion por kilometraje",
-    price: 189900,
-    image: obtainImage('services', 'mantencion'),
-    discount: "25% Dcto",
-    features: ["pick-delivery", "super-check", "garantia"],
-    path: `${srvPath}/mileage_maintenance`
-  },
-  {
-    title: "Gestión de revisión técnica",
-    price: 48990,
-    image: obtainImage('services', 'revision'),
-    features: ["pick-delivery"],
-    path: `${srvPath}/technical_revision`
-  },
-  {
-    title: "Cambio de aceite",
-    price: 78990,
-    image: obtainImage('services', 'aceite'),
-    features: ["super-check", "garantia"],
-    path: `${srvPath}/oil_and_filter_change`
-  },
-  {
-    title: "Cambio de neumáticos",
-    image: obtainImage('services', 'cambioNeumaticos'),
-    discount: "3x4",
-    features: ["pick-delivery", "super-check", "garantia"],
-    buttons: [
-      {
-        text: "Revisa tu talla",
-        variant: "primary"
-      },
-      {
-        text: "Cotizar",
-        variant: "secondary",
-        icon: "→"
-      }
-    ],
-    path: `${srvPath}/tires_change`
-  },
-  {
-    title: "Servicio de frenos",
-    price: 35990,
-    image: obtainImage('services', 'aceite'),
-    features: ["super-check", "garantia"],
-    path: `${srvPath}/brake_services`
-  },
-  {
-    title: "Cambio de batería",
-    price: 65990,
-    image: obtainImage('services', 'revision'),
-    discount: "25% Dcto",
-    features: ["pick-delivery", "super-check", "garantia"],
-    path: `${srvPath}/battery_change`
-  },
-  {
-    title: "Cambio de parabrisas",
-    price: 125990,
-    image: obtainImage('services', 'cambioParabrisas'),
-    features: ["pick-delivery"],
-    path: `${srvPath}/windshield_replacement`
-  },
-  {
-    title: "Checkeo preventivo",
-    price: 149990,
-    image: obtainImage('services', 'chequeoPreventivo'),
-    features: ["super-check"],
-    path: `${srvPath}/preventive_check`
-  }
-];
+// export const ServicesData: ServicesCardsInterface[] = [
+//   {
+//     title: "Mantencion por kilometraje",
+//     price: 189900,
+//     image: obtainImage('services', 'mantencion'),
+//     discount: "25% Dcto",
+//     features: ["pick-delivery", "super-check", "garantia"],
+//     path: `${srvPath}/mileage_maintenance`
+//   },
+//   {
+//     title: "Gestión de revisión técnica",
+//     price: 48990,
+//     image: obtainImage('services', 'revision'),
+//     features: ["pick-delivery"],
+//     path: `${srvPath}/technical_revision`
+//   },
+//   {
+//     title: "Cambio de aceite",
+//     price: 78990,
+//     image: obtainImage('services', 'aceite'),
+//     features: ["super-check", "garantia"],
+//     path: `${srvPath}/oil_and_filter_change`
+//   },
+//   {
+//     title: "Cambio de neumáticos",
+//     image: obtainImage('services', 'cambioNeumaticos'),
+//     discount: "3x4",
+//     features: ["pick-delivery", "super-check", "garantia"],
+//     buttons: [
+//       {
+//         text: "Revisa tu talla",
+//         variant: "primary"
+//       },
+//       {
+//         text: "Cotizar",
+//         variant: "secondary",
+//         icon: "→"
+//       }
+//     ],
+//     path: `${srvPath}/tires_change`
+//   },
+//   {
+//     title: "Servicio de frenos",
+//     price: 35990,
+//     image: obtainImage('services', 'aceite'),
+//     features: ["super-check", "garantia"],
+//     path: `${srvPath}/brake_services`
+//   },
+//   {
+//     title: "Cambio de batería",
+//     price: 65990,
+//     image: obtainImage('services', 'revision'),
+//     discount: "25% Dcto",
+//     features: ["pick-delivery", "super-check", "garantia"],
+//     path: `${srvPath}/battery_change`
+//   },
+//   {
+//     title: "Cambio de parabrisas",
+//     price: 125990,
+//     image: obtainImage('services', 'cambioParabrisas'),
+//     features: ["pick-delivery"],
+//     path: `${srvPath}/windshield_replacement`
+//   },
+//   {
+//     title: "Checkeo preventivo",
+//     price: 149990,
+//     image: obtainImage('services', 'chequeoPreventivo'),
+//     features: ["super-check"],
+//     path: `${srvPath}/preventive_check`
+//   }
+// ];
 
 export const BenefitsData: BenefitsInterface[] = [
   {
@@ -237,214 +236,214 @@ export const FAQsData: FAQsInterface[] = [
   },
 ]
 
-// Steps services pages
-export const StepsMileageMaintenance: StepsServicesPagesInterface[] = [
-  {
-    title: '1. Selecciona tu servicio',
-    description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
-    imageUrl: obtainImage('services', 'seleccionaTuServicio'),
-    imageAlt: 'persona seleccionando su servicio'
-  },
-  {
-    title: '2. Retiro a domicilio',
-    description: 'Una vez agendado, retiraremos tu vehículo a domicilio,',
-    imageUrl: obtainImage('services', 'retiroDomicilio'),
-    imageAlt: 'retiramos tu vehiculo a domicilio'
-  },
-  {
-    title: '3. Servicio y seguimiento',
-    description: 'Realizamos tu servicio directo en nuestro HUB.',
-    imageUrl: obtainImage('services', 'servicioDomicilio'),
-    imageAlt: 'taller de vehiculos'
-  },
-  {
-    title: '4. Entrega a domicilio',
-    description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
-    imageUrl: obtainImage('services', 'entregaDomicilio'),
-    imageAlt: 'entregamos el vehiculo a tu domicilio'
-  },
-]
+// // Steps services pages
+// export const StepsMileageMaintenance: StepsServicesPagesInterface[] = [
+//   {
+//     title: '1. Selecciona tu servicio',
+//     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
+//     imageUrl: obtainImage('services', 'seleccionaTuServicio'),
+//     imageAlt: 'persona seleccionando su servicio'
+//   },
+//   {
+//     title: '2. Retiro a domicilio',
+//     description: 'Una vez agendado, retiraremos tu vehículo a domicilio,',
+//     imageUrl: obtainImage('services', 'retiroDomicilio'),
+//     imageAlt: 'retiramos tu vehiculo a domicilio'
+//   },
+//   {
+//     title: '3. Servicio y seguimiento',
+//     description: 'Realizamos tu servicio directo en nuestro HUB.',
+//     imageUrl: obtainImage('services', 'servicioDomicilio'),
+//     imageAlt: 'taller de vehiculos'
+//   },
+//   {
+//     title: '4. Entrega a domicilio',
+//     description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
+//     imageUrl: obtainImage('services', 'entregaDomicilio'),
+//     imageAlt: 'entregamos el vehiculo a tu domicilio'
+//   },
+// ]
 
-export const StepsTechnicalRevision: StepsServicesPagesInterface[] = [
-  {
-    title: '1. Selecciona tu servicio',
-    description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
-    imageUrl: obtainImage('services', 'seleccionaTuServicio'),
-    imageAlt: 'persona seleccionando su servicio'
-  },
-  {
-    title: '2. Retiro a domicilio',
-    description: 'Una vez agendado, retiraremos tu vehículo a domicilio,',
-    imageUrl: obtainImage('services', 'retiroDomicilio'),
-    imageAlt: 'retiramos tu vehiculo a domicilio'
-  },
-  {
-    title: '3. Lo llevamos a la planta',
-    description: 'Antes realizaremos un super check Y si no pasa, te presentaremos una cotizacion para resolverlo.',
-    imageUrl: obtainImage('services', 'revisionTecnica'),
-    imageAlt: 'taller de vehiculos'
-  },
-  {
-    title: '4. Entrega a domicilio',
-    description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
-    imageUrl: obtainImage('services', 'entregaDomicilio'),
-    imageAlt: 'entregamos el vehiculo a tu domicilio'
-  },
-]
+// export const StepsTechnicalRevision: StepsServicesPagesInterface[] = [
+//   {
+//     title: '1. Selecciona tu servicio',
+//     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
+//     imageUrl: obtainImage('services', 'seleccionaTuServicio'),
+//     imageAlt: 'persona seleccionando su servicio'
+//   },
+//   {
+//     title: '2. Retiro a domicilio',
+//     description: 'Una vez agendado, retiraremos tu vehículo a domicilio,',
+//     imageUrl: obtainImage('services', 'retiroDomicilio'),
+//     imageAlt: 'retiramos tu vehiculo a domicilio'
+//   },
+//   {
+//     title: '3. Lo llevamos a la planta',
+//     description: 'Antes realizaremos un super check Y si no pasa, te presentaremos una cotizacion para resolverlo.',
+//     imageUrl: obtainImage('services', 'revisionTecnica'),
+//     imageAlt: 'taller de vehiculos'
+//   },
+//   {
+//     title: '4. Entrega a domicilio',
+//     description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
+//     imageUrl: obtainImage('services', 'entregaDomicilio'),
+//     imageAlt: 'entregamos el vehiculo a tu domicilio'
+//   },
+// ]
 
-export const StepsOilAndFilterChange: StepsServicesPagesInterface[] = [
-  {
-    title: '1. Selecciona tu servicio',
-    description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
-    imageUrl: obtainImage('services', 'seleccionaTuServicio'),
-    imageAlt: 'persona seleccionando su servicio'
-  },
-  {
-    title: '2. Preséntate con tu vehiculo',
-    description: 'Te esperamos directo en nuestro HUB. Consulta por Pick&delivery',
-    imageUrl: obtainImage('services', 'retiroDomicilio'),
-    imageAlt: 'retiramos tu vehiculo a domicilio'
-  },
-  {
-    title: '3. Realizamos el servicio',
-    description: 'Tu cambio de aceite y filtro según los requerimientos del fabricante.',
-    imageUrl: obtainImage('services', 'revisionTecnica'),
-    imageAlt: 'taller de vehiculos'
-  },
-  {
-    title: '4. Entrega de la unidad',
-    description: 'Te avisaremos cuando tu auto este listo para que lo retires.',
-    imageUrl: obtainImage('services', 'entregaDomicilio'),
-    imageAlt: 'entregamos el vehiculo a tu domicilio'
-  },
-]
+// export const StepsOilAndFilterChange: StepsServicesPagesInterface[] = [
+//   {
+//     title: '1. Selecciona tu servicio',
+//     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
+//     imageUrl: obtainImage('services', 'seleccionaTuServicio'),
+//     imageAlt: 'persona seleccionando su servicio'
+//   },
+//   {
+//     title: '2. Preséntate con tu vehiculo',
+//     description: 'Te esperamos directo en nuestro HUB. Consulta por Pick&delivery',
+//     imageUrl: obtainImage('services', 'retiroDomicilio'),
+//     imageAlt: 'retiramos tu vehiculo a domicilio'
+//   },
+//   {
+//     title: '3. Realizamos el servicio',
+//     description: 'Tu cambio de aceite y filtro según los requerimientos del fabricante.',
+//     imageUrl: obtainImage('services', 'revisionTecnica'),
+//     imageAlt: 'taller de vehiculos'
+//   },
+//   {
+//     title: '4. Entrega de la unidad',
+//     description: 'Te avisaremos cuando tu auto este listo para que lo retires.',
+//     imageUrl: obtainImage('services', 'entregaDomicilio'),
+//     imageAlt: 'entregamos el vehiculo a tu domicilio'
+//   },
+// ]
 
-export const StepsTiresChange: StepsServicesPagesInterface[] = [
-  {
-    title: '1. Ingresa a nuestro cotizador',
-    description: 'Completa los datos de ancho, perfil y aro de tus neumáticosticos',
-    imageUrl: obtainImage('services', 'seleccionaTuServicio'),
-    imageAlt: 'persona seleccionando su servicio'
-  },
-  {
-    title: '2. Retiro a domicilio',
-    description: 'Una vez agendado, retiraremos tu vehículo a domicilio.',
-    imageUrl: obtainImage('services', 'retiroDomicilio'),
-    imageAlt: 'retiramos tu vehiculo a domicilio'
-  },
-  {
-    title: '3. Cambio y balanceo',
-    description: 'Tus cambio incluye instalación, balanceo y servicios adicionales.',
-    imageUrl: obtainImage('services', 'revisionTecnica'),
-    imageAlt: 'taller de vehiculos'
-  },
-  {
-    title: '4. Entrega a domicilio',
-    description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
-    imageUrl: obtainImage('services', 'entregaDomicilio'),
-    imageAlt: 'entregamos el vehiculo a tu domicilio'
-  },
-]
+// export const StepsTiresChange: StepsServicesPagesInterface[] = [
+//   {
+//     title: '1. Ingresa a nuestro cotizador',
+//     description: 'Completa los datos de ancho, perfil y aro de tus neumáticosticos',
+//     imageUrl: obtainImage('services', 'seleccionaTuServicio'),
+//     imageAlt: 'persona seleccionando su servicio'
+//   },
+//   {
+//     title: '2. Retiro a domicilio',
+//     description: 'Una vez agendado, retiraremos tu vehículo a domicilio.',
+//     imageUrl: obtainImage('services', 'retiroDomicilio'),
+//     imageAlt: 'retiramos tu vehiculo a domicilio'
+//   },
+//   {
+//     title: '3. Cambio y balanceo',
+//     description: 'Tus cambio incluye instalación, balanceo y servicios adicionales.',
+//     imageUrl: obtainImage('services', 'revisionTecnica'),
+//     imageAlt: 'taller de vehiculos'
+//   },
+//   {
+//     title: '4. Entrega a domicilio',
+//     description: 'Nuestro servicio de Pick&deliver Asegura el trayecto ida y vuelta.',
+//     imageUrl: obtainImage('services', 'entregaDomicilio'),
+//     imageAlt: 'entregamos el vehiculo a tu domicilio'
+//   },
+// ]
 
-// FAQs services pages
-export const TechnicalRevisionFAQs: ServicesPagesFAQs[] = [
-  {
-    question: '¿Que es la Gestión de RT?',
-    answer: 'La Revisión técnica es un control obligatorio y pre requisito para acceder a los permisos municipales de circulación. En Chile es de carácter obligatorio para asegurar el correcto funcionamiento al momento de circular.'
-  },
-  {
-    question: '¿Cómo evitar el rechazo?',
-    answer: 'Antes de presentarlo realizaremos un super check de 35 puntos, en este diagnóstico nos aseguramos de que el vehículo cumpla con los estándares mínimos para circular.'
-  },
-  {
-    question: '¿Qué pasa si el vehículo no aprueba?',
-    answer: 'Con el diagnóstico presentado por la PRT, te presentaremos un presupuesto para solucionar los desperfectos y presentarlo nuevamente.'
-  },
-  {
-    question: '¿Que medios de pago aceptan?',
-    answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos via POS Getnet.'
-  },
-]
+// // FAQs services pages
+// export const TechnicalRevisionFAQs: ServicesPagesFAQs[] = [
+//   {
+//     question: '¿Que es la Gestión de RT?',
+//     answer: 'La Revisión técnica es un control obligatorio y pre requisito para acceder a los permisos municipales de circulación. En Chile es de carácter obligatorio para asegurar el correcto funcionamiento al momento de circular.'
+//   },
+//   {
+//     question: '¿Cómo evitar el rechazo?',
+//     answer: 'Antes de presentarlo realizaremos un super check de 35 puntos, en este diagnóstico nos aseguramos de que el vehículo cumpla con los estándares mínimos para circular.'
+//   },
+//   {
+//     question: '¿Qué pasa si el vehículo no aprueba?',
+//     answer: 'Con el diagnóstico presentado por la PRT, te presentaremos un presupuesto para solucionar los desperfectos y presentarlo nuevamente.'
+//   },
+//   {
+//     question: '¿Que medios de pago aceptan?',
+//     answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos via POS Getnet.'
+//   },
+// ]
 
-export const MileageMaintenanceFAQs: ServicesPagesFAQs[] = [
-  {
-    question: 'Servicios incluidos',
-    hasAnswerItems: true,
-    answersItems: ['Cambio aceite.', 'Cambio filtro de aceite.', 'Cambios filtro de polen.', 'Cambio filtro de aire.', 'Aseo de frenos.', 'Rotación de neumáticos.', 'Relleno de fluidos.', 'Lavado express de cortesía.', 'Super check de 35 puntos.', 'Retiro y entrega a domicilio.']
-  },
-  {
-    question: '¿Cuanto es la garantía del servicio?',
-    answer: 'Todos nuestros servicios cuentan con un periódo de garantía de 6 meses o 10.000 kms. A partir de la fecha de la entrega del vehículo.'
-  },
-  {
-    question: '¿Cómo cancelar un servicio?',
-    answer: 'Una vez agendado y cancelado el servicio cuentas con un periodo de 2 horas previas al retiro o entrega de la unidad para solicitar un reembolso o re agendar tu servicio.'
-  },
-  {
-    question: '¿Que medios de pago aceptan?',
-    answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
-  },
-]
+// export const MileageMaintenanceFAQs: ServicesPagesFAQs[] = [
+//   {
+//     question: 'Servicios incluidos',
+//     hasAnswerItems: true,
+//     answersItems: ['Cambio aceite.', 'Cambio filtro de aceite.', 'Cambios filtro de polen.', 'Cambio filtro de aire.', 'Aseo de frenos.', 'Rotación de neumáticos.', 'Relleno de fluidos.', 'Lavado express de cortesía.', 'Super check de 35 puntos.', 'Retiro y entrega a domicilio.']
+//   },
+//   {
+//     question: '¿Cuanto es la garantía del servicio?',
+//     answer: 'Todos nuestros servicios cuentan con un periódo de garantía de 6 meses o 10.000 kms. A partir de la fecha de la entrega del vehículo.'
+//   },
+//   {
+//     question: '¿Cómo cancelar un servicio?',
+//     answer: 'Una vez agendado y cancelado el servicio cuentas con un periodo de 2 horas previas al retiro o entrega de la unidad para solicitar un reembolso o re agendar tu servicio.'
+//   },
+//   {
+//     question: '¿Que medios de pago aceptan?',
+//     answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
+//   },
+// ]
 
-export const OildAndFilterChangeFAQs: ServicesPagesFAQs[] = [
-  {
-    question: '¿Por qué debo realizarlo?',
-    answer: 'El aceite es el corazón del motor, y su cambio regular es clave para mantenerlo en óptimas condiciones. Lubrica las piezas internas, reduce el desgaste, disipa el calor y prolonga la vida útil del motor mejorándotelas su desempeño y evitando fallas costosas a futuro.'
-  },
-  {
-    question: '¿Cada cuanto tiempo se realiza?',
-    answer: 'La frecuencia del cambio de aceite y filtro depende del tipo de aceite y el uso del vehículo. En general, se recomienda hacerlo cada 10,000 km o cada 6 meses, según las indicaciones del fabricante.'
-  },
-  {
-    question: '¿Que medios de pago aceptan?',
-    answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
-  },
-]
+// export const OildAndFilterChangeFAQs: ServicesPagesFAQs[] = [
+//   {
+//     question: '¿Por qué debo realizarlo?',
+//     answer: 'El aceite es el corazón del motor, y su cambio regular es clave para mantenerlo en óptimas condiciones. Lubrica las piezas internas, reduce el desgaste, disipa el calor y prolonga la vida útil del motor mejorándotelas su desempeño y evitando fallas costosas a futuro.'
+//   },
+//   {
+//     question: '¿Cada cuanto tiempo se realiza?',
+//     answer: 'La frecuencia del cambio de aceite y filtro depende del tipo de aceite y el uso del vehículo. En general, se recomienda hacerlo cada 10,000 km o cada 6 meses, según las indicaciones del fabricante.'
+//   },
+//   {
+//     question: '¿Que medios de pago aceptan?',
+//     answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
+//   },
+// ]
 
-export const TiresChangeFAQs: ServicesPagesFAQs[] = [
-  {
-    question: '¿Qué datos necesito para cotizar?',
-    answer: 'Para poder cotizar tus neumáticos es necesario contar con las medidas de ancho, perfil y aro. Esta información esta al costado de tus neumáticostico.',
-    imageSrc: obtainImage('promotions', 'infoRuedas'),
-    imageAlt: 'informacion de cubiertas'
-  },
-  {
-    question: '¿Qué incluye el servicio?',
-    hasAnswerItems: true,
-    answersItems: ["Instalación y balanceo de los neumáticos.", "Servicio de Pick & delivery, retiro y entrega a domicilio.", "Super Check de 35 puntos.", "Lavado express."]
-  },
-  {
-    question: '¿Cuando debo cambiarlos?',
-    answer: "Regularmente cada 60 mil kilómetros es recomendable cambiarlos, aunque depende mucho del uso y el terreno que recorras. fíjate en en el ruido que hagan sobre terrenos planos o con calor, si rechinan contra el asfalto, si notas que las huellas se han borrado o si los surcos son de menos 0,5 cm, deberías cambiarlos."
-  },
-  {
-    question: '¿Que medios de pago aceptan?',
-    answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
-  },
-]
+// export const TiresChangeFAQs: ServicesPagesFAQs[] = [
+//   {
+//     question: '¿Qué datos necesito para cotizar?',
+//     answer: 'Para poder cotizar tus neumáticos es necesario contar con las medidas de ancho, perfil y aro. Esta información esta al costado de tus neumáticostico.',
+//     imageSrc: obtainImage('promotions', 'infoRuedas'),
+//     imageAlt: 'informacion de cubiertas'
+//   },
+//   {
+//     question: '¿Qué incluye el servicio?',
+//     hasAnswerItems: true,
+//     answersItems: ["Instalación y balanceo de los neumáticos.", "Servicio de Pick & delivery, retiro y entrega a domicilio.", "Super Check de 35 puntos.", "Lavado express."]
+//   },
+//   {
+//     question: '¿Cuando debo cambiarlos?',
+//     answer: "Regularmente cada 60 mil kilómetros es recomendable cambiarlos, aunque depende mucho del uso y el terreno que recorras. fíjate en en el ruido que hagan sobre terrenos planos o con calor, si rechinan contra el asfalto, si notas que las huellas se han borrado o si los surcos son de menos 0,5 cm, deberías cambiarlos."
+//   },
+//   {
+//     question: '¿Que medios de pago aceptan?',
+//     answer: 'Aceptamos todo medio de pagos, transferencia electrónica, débito, credito, contamos con link de pago y pagos vía POS Getnet.'
+//   },
+// ]
 
-export const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
-  { label: "Una cubierta", value: 1 },
-  { label: "Dos cubiertas", value: 2 },
-  { label: "Tres cubiertas", value: 3 },
-  { label: "Cuatro cubiertas", value: 4 },
-]
+// export const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
+//   { label: "Una cubierta", value: 1 },
+//   { label: "Dos cubiertas", value: 2 },
+//   { label: "Tres cubiertas", value: 3 },
+//   { label: "Cuatro cubiertas", value: 4 },
+// ]
 
-export const AddMoreServices: { name: string, price: number }[] = [
-  { name: "Gestión de revisión técnica", price: 48990 },
-  { name: "Diagnostico automotriz", price: 65990 },
-  { name: "Servicio de frenos", price: 35990 }
-]
+// export const AddMoreServices: { name: string, price: number }[] = [
+//   { name: "Gestión de revisión técnica", price: 48990 },
+//   { name: "Diagnostico automotriz", price: 65990 },
+//   { name: "Servicio de frenos", price: 35990 }
+// ]
 
-export const MileagesOptions: VehicleMileagesOptions[] = [
-  { quantity: "10.000 kms" },
-  { quantity: "20.000 kms" },
-  { quantity: "30.000 kms" },
-  { quantity: "40.000 kms" },
-  { quantity: "50.000 kms" },
-  { quantity: "60.000 kms" },
-  { quantity: "70.000 kms" },
-  { quantity: "80.000 kms" },
-  { quantity: "90.000 kms" },
-  { quantity: "Otro" }
-]
+// export const MileagesOptions: VehicleMileagesOptions[] = [
+//   { quantity: "10.000 kms" },
+//   { quantity: "20.000 kms" },
+//   { quantity: "30.000 kms" },
+//   { quantity: "40.000 kms" },
+//   { quantity: "50.000 kms" },
+//   { quantity: "60.000 kms" },
+//   { quantity: "70.000 kms" },
+//   { quantity: "80.000 kms" },
+//   { quantity: "90.000 kms" },
+//   { quantity: "Otro" }
+// ]

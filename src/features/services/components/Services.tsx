@@ -1,12 +1,11 @@
 import Image from "next/image";
 
 import { obtainImage } from '@/assets/helpers';
-import { ServiceCard, ViewAllServices } from '@/features/services';
-import { ServicesData } from '@/constants';
+import { ServiceCard, ViewAllServices, ServicesCardsData } from '@/features/services';
 
 export const Services = () => {
-  const firstServices = ServicesData.slice(0, 5);
-  const extraServices = ServicesData.slice(5);
+  const firstServices = ServicesCardsData.slice(0, 5);
+  const extraServices = ServicesCardsData.slice(5);
 
   return (
     <section>

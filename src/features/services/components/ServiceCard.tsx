@@ -3,8 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { FeatureIconsMap } from "@/constants";
-import { ButtonProps } from "@/features/services";
+import { ButtonProps, VehicleServicesFeaturesIconsMap } from "@/features/services";
 
 interface Props {
   title: string
@@ -66,7 +65,7 @@ export const ServiceCard = ({
                   fill
                   sizes="56px"
                   key={index + feature}
-                  src={FeatureIconsMap[feature]}
+                  src={VehicleServicesFeaturesIconsMap[feature]}
                   alt={feature}
                   className="object-contain w-auto h-auto"
                 />
