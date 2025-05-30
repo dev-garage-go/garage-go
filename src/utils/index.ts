@@ -1,1 +1,1 @@
-export * from './inputs-utils';
+export * from './formatters';
