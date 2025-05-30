@@ -1,5 +1,5 @@
 import { SegmentNameMap } from "@/features/home"
-import { firstLetterUppercase } from "./inputs-utils"
+import { firstLetterUppercase } from "@/utils"
 
 export interface Breadcrumb {
   name: string
@@ -8,7 +8,7 @@ export interface Breadcrumb {
   isLast: boolean
 }
 
-export function getBreadcrumbs(pathname: string, maxVisible = 3): Breadcrumb[] {
+export function setBreadcrumbs(pathname: string, maxVisible = 3): Breadcrumb[] {
   const segments = pathname.split("/").filter(Boolean)
 
   if (segments.length <= maxVisible) {

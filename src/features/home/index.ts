@@ -27,6 +27,7 @@ export * from './components/UserReviews/UserReviews';
 export * from './constants/company';
 export * from './constants/components';
 export * from './constants/segments-map';
+export * from './helpers/show-bread-crums';
 export * from './hooks/useResponsiveGap';
 export * from './interfaces/banner-disccounts';
 export * from './interfaces/benefits';

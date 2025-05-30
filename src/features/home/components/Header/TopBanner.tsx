@@ -5,7 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 
-import { getBreadcrumbs } from "@/utils"
+import { setBreadcrumbs } from "@/features/home"
 import { VehicleServicesFeaturesIconsMap } from "@/features/services"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
 
@@ -67,7 +67,7 @@ export const TopBanner = ({
                   Inicio
                   <span className="px-2">{">"}</span>
                 </Link>
-                {getBreadcrumbs(pathname).map((crumb, index) => (
+                {setBreadcrumbs(pathname).map((crumb, index) => (
                   <div key={index} className="flex items-center">
                     {crumb.isEllipsis ? (
                       <span className="px-2 text-white">...</span>
