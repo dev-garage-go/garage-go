@@ -1,6 +1,6 @@
 'use client'
 
-import { CompanyCoords, CompanyName } from "@/constants";
+import { CompanyCoords, CompanyName } from "@/features/home";
 import { GoogleMap, Marker, OverlayView, useJsApiLoader } from "@react-google-maps/api";
 
 export const GoogleMapComponent = () => {

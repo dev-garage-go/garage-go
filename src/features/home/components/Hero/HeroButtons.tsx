@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { CompanyWhatsappLink } from '@/constants';
+import { CompanyWhatsappLink } from '@/features/home';
 
 export const HeroButtons = () => {
   return (

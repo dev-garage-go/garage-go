@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { obtainLogo } from "@/assets/helpers";
-import { CompanyDescription, CompanyName } from "@/constants";
+import { CompanyDescription, CompanyName } from "@/features/home";
 import { montserrat } from "@/config/fonts";
 
 import { ContextsProvider } from "@/providers";

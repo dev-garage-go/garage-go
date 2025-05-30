@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import { obtainImage } from '@/assets/helpers';
-import { HeroButtons } from '@/features/home';
-import { CompanyDescription } from '@/constants';
+import { HeroButtons, CompanyDescription } from '@/features/home';
 
 export const Hero = () => {
   return (

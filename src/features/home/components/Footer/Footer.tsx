@@ -13,7 +13,7 @@ import {
   CompanyPhoneNumber,
   CompanyAddress,
   CompanyCopyRight
-} from '@/constants';
+} from '@/features/home';
 
 export const Footer = () => {
   return (

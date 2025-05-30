@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { CompanyWhatsappLink } from "@/constants"
+import { CompanyWhatsappLink } from "@/features/home"
 
 export const ServicePageButtons = () => {
   const pathname = usePathname()

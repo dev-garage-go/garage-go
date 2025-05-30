@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image';
 
-import { CompanyFacebook, CompanyInstagram, } from '@/constants';
+import { CompanyFacebook, CompanyInstagram, } from '@/features/home';
 
 import { obtainLogo } from '@/assets/helpers';
 import { WhatsAppButton, BookingHeaderButton } from '@/components';
