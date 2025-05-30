@@ -25,6 +25,7 @@ export * from './components/UserReviews/ReviewSlider';
 export * from './components/UserReviews/StarRating';
 export * from './components/UserReviews/UserReviews';
 export * from './constants/company';
+export * from './constants/segments-map';
 export * from './hooks/useResponsiveGap';
 export * from './interfaces/banner-disccounts';
 export * from './interfaces/benefits';
