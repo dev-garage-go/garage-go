@@ -1,16 +1,18 @@
 "use client"
 
 import { useFormContext } from "react-hook-form";
-
-import { allowOnlyLetters, detectCardType, formatCardNumber, formatExpiry } from "@/utils";
-
+import { allowOnlyLetters } from "@/utils";
 import { ErrorMessage } from '@/components';
+
 import {
   PaymentFormSchema,
   PaymentGatewayMethods,
   RenderCardIcon,
   PaymentOption,
-  PaymentMethodsOptions
+  PaymentMethodsOptions,
+  formatCardNumber,
+  detectCardType,
+  formatExpiry
 } from "@/features/payment";
 
 

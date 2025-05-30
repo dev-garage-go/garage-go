@@ -5,9 +5,15 @@ import { FormProvider, useForm } from 'react-hook-form'
 
 import { PaymentForm } from './PaymentForm'
 import { PaymentSummary } from './PaymentSummary'
-import { PaymentFormSchema } from '@/features/payment'
 
-import { hasCardData, hasCompletedPaymentData, hasValidCardData, hasValidPaymentGateway } from '@/utils'
+import {
+  hasCardData,
+  hasCompletedPaymentData,
+  hasValidCardData,
+  hasValidPaymentGateway,
+  PaymentFormSchema
+} from '@/features/payment'
+
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormSchema>({
