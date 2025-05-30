@@ -15,4 +15,4 @@ export * from './general/ui/SchedulePicker';
 export * from './general/ui/Select';
 export * from './interfaces/schedules';
 export * from './interfaces/select-options';
-export * from './shared/Loader';
+export * from './general/shared/Loader';
