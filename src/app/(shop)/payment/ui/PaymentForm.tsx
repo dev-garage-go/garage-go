@@ -4,13 +4,13 @@ import { useFormContext } from "react-hook-form";
 
 import { allowOnlyLetters, detectCardType, formatCardNumber, formatExpiry } from "@/utils";
 
-import { PaymentMethodsOptions } from "@/constants";
 import { ErrorMessage } from '@/components';
 import {
   PaymentFormSchema,
   PaymentGatewayMethods,
   RenderCardIcon,
-  PaymentOption
+  PaymentOption,
+  PaymentMethodsOptions
 } from "@/features/payment";
 
 
