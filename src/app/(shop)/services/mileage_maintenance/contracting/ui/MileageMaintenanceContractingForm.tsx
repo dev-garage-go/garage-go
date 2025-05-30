@@ -2,10 +2,9 @@
 
 import { useFormContext } from 'react-hook-form'
 import { MileagesOptions } from '@/constants'
-import { ExtraServicesCards, MileageMaintenanceService, VehicleMileages } from '@/features/services'
+import { ExtraServicesCards, MileageMaintenanceService, VehicleMileages, AddServiceCard } from '@/features/services'
 
 import { ButtonOptions } from '@/components'
-import { AddServiceCard } from '@/features/bookings'
 
 
 const extraServices: ExtraServicesCards[] = [

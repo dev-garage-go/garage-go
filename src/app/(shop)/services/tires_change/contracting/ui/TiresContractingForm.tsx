@@ -3,12 +3,12 @@
 import { useFormContext } from "react-hook-form";
 
 import { obtainImage } from "@/assets/helpers";
-import { QuantityTires, TiresChangeService, TypesTiresOptions } from "@/features/services";
 import { AddMoreServices, QuantityTiresOptions, TypesTires } from "@/constants";
 
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
 import { InformationButton, SwitchButton, ErrorMessage } from "@/components";
-import { AddServiceCard, PromotionCard } from "@/features/bookings";
+import { QuantityTires, TiresChangeService, TypesTiresOptions, AddServiceCard } from "@/features/services";
+import { PromotionCard } from "@/features/promotions";
 
 
 export const TiresContractingForm = () => {

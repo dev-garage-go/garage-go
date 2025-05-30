@@ -3,7 +3,7 @@
 import { IoCloseCircle } from "react-icons/io5"
 import { HeaderLinksOptions } from "@/constants"
 import { WhatsAppButton, BookingHeaderButton } from "@/components"
-import { HeaderOption } from "./HeaderOption"
+import { HeaderOption } from "../Header/HeaderOption"
 
 interface SideBarProps {
   menuOpen: boolean

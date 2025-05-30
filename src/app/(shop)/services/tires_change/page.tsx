@@ -5,7 +5,7 @@ import { StepsTiresChange, TiresChangeFAQs } from '@/constants';
 import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
-import { BookingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
+import { ContractingServiceButton, OtherServices, ServicePageButtons, StepsCard } from '@/features/services';
 
 export default function TiresChangePage() {
   return (
@@ -107,7 +107,7 @@ export default function TiresChangePage() {
         </div>
 
         <div className='flex justify-center items-center w-full mb-10 md:mb-28 lg:mb-36 mt-4 md:mt-6'>
-          <BookingServiceButton />
+          <ContractingServiceButton />
         </div>
       </section>
 

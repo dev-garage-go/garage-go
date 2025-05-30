@@ -14,7 +14,7 @@ export * from './components/Footer/FooterJoined';
 export * from './components/Header/Header';
 export * from './components/Header/HeaderOption';
 export * from './components/Header/NavBar';
-export * from './components/Header/SideBar';
+export * from './components/Sidebar/SideBar';
 export * from './components/Header/TopBanner';
 export * from './components/Header/TopMenu';
 export * from './components/Hero/Hero';

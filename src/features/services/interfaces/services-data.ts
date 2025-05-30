@@ -1,4 +1,4 @@
-import { Promotion } from './promotions';
+import { Promotion } from '@/features/promotions';
 
 // Special options of services
 export type VehicleMileages = (

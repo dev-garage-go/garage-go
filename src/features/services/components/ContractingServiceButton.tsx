@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
-export const BookingServiceButton = () => {
+export const ContractingServiceButton = () => {
   const pathname = usePathname()
   const lastPath = pathname.split("/").at(-1)
 

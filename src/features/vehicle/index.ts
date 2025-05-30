@@ -1,3 +1,4 @@
+export * from './components/OtherLicensePlateButton';
 export * from './components/VehicleDataModal';
 export * from './components/lazy/VehicleDataModal.lazy';
 export * from './context/VehicleContext';

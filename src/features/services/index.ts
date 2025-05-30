@@ -1,4 +1,5 @@
-export * from './components/BookingServiceButton';
+export * from './components/AddServiceCard';
+export * from './components/ContractingServiceButton';
 export * from './components/OtherServices';
 export * from './components/ServiceCard';
 export * from './components/ServicePageButtons';
@@ -8,7 +9,6 @@ export * from './components/StepsCard';
 export * from './components/ViewAllServices';
 export * from './context/ServiceContext';
 export * from './hooks/useGetServiceName';
-export * from './interfaces/promotions';
 export * from './interfaces/services-components';
 export * from './interfaces/services-data';
 export * from './keys/storage';
