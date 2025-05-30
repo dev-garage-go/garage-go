@@ -11,7 +11,7 @@ export const vehicleBrandsImages = {
   jeep: `${carsLogos}/jeep.png`,
 }
 
-export const vehicleImags = {
+export const vehicleImages = {
   havalH6: `${pathImages}/haval_h6gt.png`,
   havalH6Circle: `${pathImages}/haval-circle.png`
 }

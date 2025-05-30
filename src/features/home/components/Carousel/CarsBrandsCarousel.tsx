@@ -7,14 +7,14 @@ import { useResponsiveGap } from '@/features/home';
 import { obtainImage } from '@/assets/helpers';
 
 const brandLogos = [
-  { id: 'audi', image: obtainImage('vehicleBrands', 'audi') },
-  { id: 'bmw', image: obtainImage('vehicleBrands', 'bmw') },
-  { id: 'chevrolet', image: obtainImage('vehicleBrands', 'chevrolet') },
-  { id: 'citroen', image: obtainImage('vehicleBrands', 'citroen') },
-  { id: 'fiat', image: obtainImage('vehicleBrands', 'fiat') },
-  { id: 'ford', image: obtainImage('vehicleBrands', 'ford') },
-  { id: 'hyundai', image: obtainImage('vehicleBrands', 'hyundai') },
-  { id: 'jeep', image: obtainImage('vehicleBrands', 'jeep') }
+  { id: 'audi', image: obtainImage('vehiclesBrands', 'audi') },
+  { id: 'bmw', image: obtainImage('vehiclesBrands', 'bmw') },
+  { id: 'chevrolet', image: obtainImage('vehiclesBrands', 'chevrolet') },
+  { id: 'citroen', image: obtainImage('vehiclesBrands', 'citroen') },
+  { id: 'fiat', image: obtainImage('vehiclesBrands', 'fiat') },
+  { id: 'ford', image: obtainImage('vehiclesBrands', 'ford') },
+  { id: 'hyundai', image: obtainImage('vehiclesBrands', 'hyundai') },
+  { id: 'jeep', image: obtainImage('vehiclesBrands', 'jeep') }
 ];
 
 const BrandLogo = ({ logo }: { logo: { id: string; image: string } }) => (

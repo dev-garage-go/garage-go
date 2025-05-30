@@ -7,14 +7,14 @@ import { promotionsImages } from "./promotions";
 import { servicesImages } from "./services";
 import { suppliersImages } from "./suppliers";
 import { uiImages } from "./ui";
-import { vehicleBrandsImages, vehicleImags } from "./vehicles";
+import { vehicleBrandsImages, vehicleImages } from "./vehicles";
 
 export const assets = {
   ui: uiImages,
   services: servicesImages,
   benefits: benefitsImages,
-  vehicle: vehicleImags,
-  vehicleBrands: vehicleBrandsImages,
+  vehiclesImages: vehicleImages,
+  vehiclesBrands: vehicleBrandsImages,
   banners: bannersImages,
   profiles: profilesImages,
   suppliers: suppliersImages,
