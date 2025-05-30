@@ -1,4 +1,5 @@
 export * from './components/Summary';
+export * from './constants/address';
 export * from './context/BookingContext';
 export * from './interfaces/booking';
 export * from './keys/storage';

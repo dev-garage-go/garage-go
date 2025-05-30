@@ -7,6 +7,7 @@ export * from './components/Services';
 export * from './components/ServicesGrid';
 export * from './components/StepsCard';
 export * from './components/ViewAllServices';
+export * from './constants/tires-change';
 export * from './context/ServiceContext';
 export * from './hooks/useGetServiceName';
 export * from './interfaces/services-components';
