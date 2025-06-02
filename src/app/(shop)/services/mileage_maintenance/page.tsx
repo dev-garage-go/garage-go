@@ -7,7 +7,7 @@ import {
   ServicePageButtons,
   StepsCard,
   StepsMileageMaintenanceData,
-  MileageMaintenanceFAQs
+  MileageMaintenanceFAQsData
 } from '@/features/services';
 
 export default function MileageMaintenancePage() {
@@ -54,7 +54,7 @@ export default function MileageMaintenancePage() {
         </h2>
 
         <div className='faqs-services-pages'>
-          {MileageMaintenanceFAQs.map((faq, index) => (
+          {MileageMaintenanceFAQsData.map((faq, index) => (
             <FAQsDisclosure {...faq} key={index + faq.question} />
           ))}
         </div>

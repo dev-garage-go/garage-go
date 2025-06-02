@@ -7,7 +7,7 @@ import {
   ServicePageButtons,
   StepsCard,
   StepsOilAndFilterChangeData,
-  OildAndFilterChangeFAQs
+  OildAndFilterChangeFAQsData
 } from '@/features/services';
 
 export default function OilAndFilterChangePage() {
@@ -54,7 +54,7 @@ export default function OilAndFilterChangePage() {
         </h2>
 
         <div className='faqs-services-pages'>
-          {OildAndFilterChangeFAQs.map((faq, index) => (
+          {OildAndFilterChangeFAQsData.map((faq, index) => (
             <FAQsDisclosure {...faq} key={index + faq.question} />
           ))}
         </div>

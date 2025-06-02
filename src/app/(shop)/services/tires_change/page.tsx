@@ -10,7 +10,7 @@ import {
   ServicePageButtons,
   StepsCard,
   StepsTiresChangeData,
-  TiresChangeFAQs
+  TiresChangeFAQsData
 } from '@/features/services';
 
 export default function TiresChangePage() {
@@ -107,7 +107,7 @@ export default function TiresChangePage() {
         </h2>
 
         <div className='faqs-services-pages'>
-          {TiresChangeFAQs.map((faq, index) => (
+          {TiresChangeFAQsData.map((faq, index) => (
             <FAQsDisclosure {...faq} key={index + faq.question} />
           ))}
         </div>

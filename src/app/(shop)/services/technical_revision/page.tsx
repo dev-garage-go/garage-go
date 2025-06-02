@@ -6,7 +6,7 @@ import {
   OtherServices,
   ServicePageButtons,
   StepsCard,
-  TechnicalRevisionFAQs,
+  TechnicalRevisionFAQsData,
   StepsTechnicalRevisionData
 } from '@/features/services';
 
@@ -54,7 +54,7 @@ export default function TechnicalRevisionPage() {
         </h2>
 
         <div className='faqs-services-pages'>
-          {TechnicalRevisionFAQs.map((faq, index) => (
+          {TechnicalRevisionFAQsData.map((faq, index) => (
             <FAQsDisclosure {...faq} key={index + faq.question} />
           ))}
         </div>

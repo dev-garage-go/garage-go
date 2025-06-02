@@ -2,7 +2,7 @@ import { obtainImage } from "@/assets/helpers"
 import { ServicesPagesFAQs } from "@/features/services"
 
 // FAQs services pages
-export const TechnicalRevisionFAQs: ServicesPagesFAQs[] = [
+export const TechnicalRevisionFAQsData: ServicesPagesFAQs[] = [
   {
     question: '¿Que es la Gestión de RT?',
     answer: 'La Revisión técnica es un control obligatorio y pre requisito para acceder a los permisos municipales de circulación. En Chile es de carácter obligatorio para asegurar el correcto funcionamiento al momento de circular.'
@@ -21,7 +21,7 @@ export const TechnicalRevisionFAQs: ServicesPagesFAQs[] = [
   },
 ]
 
-export const MileageMaintenanceFAQs: ServicesPagesFAQs[] = [
+export const MileageMaintenanceFAQsData: ServicesPagesFAQs[] = [
   {
     question: 'Servicios incluidos',
     hasAnswerItems: true,
@@ -41,7 +41,7 @@ export const MileageMaintenanceFAQs: ServicesPagesFAQs[] = [
   },
 ]
 
-export const OildAndFilterChangeFAQs: ServicesPagesFAQs[] = [
+export const OildAndFilterChangeFAQsData: ServicesPagesFAQs[] = [
   {
     question: '¿Por qué debo realizarlo?',
     answer: 'El aceite es el corazón del motor, y su cambio regular es clave para mantenerlo en óptimas condiciones. Lubrica las piezas internas, reduce el desgaste, disipa el calor y prolonga la vida útil del motor mejorándotelas su desempeño y evitando fallas costosas a futuro.'
@@ -56,7 +56,7 @@ export const OildAndFilterChangeFAQs: ServicesPagesFAQs[] = [
   },
 ]
 
-export const TiresChangeFAQs: ServicesPagesFAQs[] = [
+export const TiresChangeFAQsData: ServicesPagesFAQs[] = [
   {
     question: '¿Qué datos necesito para cotizar?',
     answer: 'Para poder cotizar tus neumáticos es necesario contar con las medidas de ancho, perfil y aro. Esta información esta al costado de tus neumáticostico.',
