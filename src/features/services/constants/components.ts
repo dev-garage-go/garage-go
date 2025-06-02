@@ -88,7 +88,7 @@ export const ServicesCardsData: ServicesCardsInterface[] = [
 ];
 
 // Steps services pages
-export const StepsMileageMaintenance: StepsServicesPagesInterface[] = [
+export const StepsMileageMaintenanceData: StepsServicesPagesInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
@@ -115,7 +115,7 @@ export const StepsMileageMaintenance: StepsServicesPagesInterface[] = [
   },
 ]
 
-export const StepsTechnicalRevision: StepsServicesPagesInterface[] = [
+export const StepsTechnicalRevisionData: StepsServicesPagesInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
@@ -142,7 +142,7 @@ export const StepsTechnicalRevision: StepsServicesPagesInterface[] = [
   },
 ]
 
-export const StepsOilAndFilterChange: StepsServicesPagesInterface[] = [
+export const StepsOilAndFilterChangeData: StepsServicesPagesInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
@@ -169,7 +169,7 @@ export const StepsOilAndFilterChange: StepsServicesPagesInterface[] = [
   },
 ]
 
-export const StepsTiresChange: StepsServicesPagesInterface[] = [
+export const StepsTiresChangeData: StepsServicesPagesInterface[] = [
   {
     title: '1. Ingresa a nuestro cotizador',
     description: 'Completa los datos de ancho, perfil y aro de tus neumáticosticos',
@@ -196,20 +196,20 @@ export const StepsTiresChange: StepsServicesPagesInterface[] = [
   },
 ]
 
-export const QuantityTiresOptions: { label: string, value: QuantityTires }[] = [
+export const QuantityTiresOptionsData: { label: string, value: QuantityTires }[] = [
   { label: "Una cubierta", value: 1 },
   { label: "Dos cubiertas", value: 2 },
   { label: "Tres cubiertas", value: 3 },
   { label: "Cuatro cubiertas", value: 4 },
 ]
 
-export const AddMoreServices: { name: string, price: number }[] = [
+export const AddMoreServicesData: { name: string, price: number }[] = [
   { name: "Gestión de revisión técnica", price: 48990 },
   { name: "Diagnostico automotriz", price: 65990 },
   { name: "Servicio de frenos", price: 35990 }
 ]
 
-export const MileagesOptions: VehicleMileagesOptions[] = [
+export const MileagesOptionsData: VehicleMileagesOptions[] = [
   { quantity: "10.000 kms" },
   { quantity: "20.000 kms" },
   { quantity: "30.000 kms" },

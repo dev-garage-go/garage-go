@@ -12,8 +12,8 @@ import {
   TypesTiresOptions,
   AddServiceCard,
   TypesTires,
-  QuantityTiresOptions,
-  AddMoreServices
+  QuantityTiresOptionsData,
+  AddMoreServicesData
 } from "@/features/services";
 import { TiresQuantitySelector } from "./TiresQuantitySelector";
 
@@ -98,7 +98,7 @@ export const TiresContractingForm = () => {
             <div>
               {errors.quantityTires && (<ErrorMessage message={'Requerido'} className="mb-4" />)}
               <div className="flex w-full justify-start gap-8 items-center px-2">
-                {QuantityTiresOptions.map((option, index) => (
+                {QuantityTiresOptionsData.map((option, index) => (
                   <TiresQuantitySelector
                     key={option.label + index}
                     quantity={option.value}
@@ -179,7 +179,7 @@ export const TiresContractingForm = () => {
           <h4 className="title-h4">¿Quieres agregar algo mas?</h4>
 
           <div className="flex flex-col gap-6 w-full">
-            {AddMoreServices.map((service, index) => (
+            {AddMoreServicesData.map((service, index) => (
               <AddServiceCard
                 key={service.name + index}
                 {...service}

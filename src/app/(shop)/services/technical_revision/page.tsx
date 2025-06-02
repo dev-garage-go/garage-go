@@ -7,7 +7,7 @@ import {
   ServicePageButtons,
   StepsCard,
   TechnicalRevisionFAQs,
-  StepsTechnicalRevision
+  StepsTechnicalRevisionData
 } from '@/features/services';
 
 export default function TechnicalRevisionPage() {
@@ -39,7 +39,7 @@ export default function TechnicalRevisionPage() {
         <p className='description-of-title-h2'>Ahorrate todo el tramite que nosotros lo llevamos por ti.</p>
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
-          {StepsTechnicalRevision.map((item, index) => (
+          {StepsTechnicalRevisionData.map((item, index) => (
             <StepsCard {...item} key={index + item.title} />
           ))}
         </div>

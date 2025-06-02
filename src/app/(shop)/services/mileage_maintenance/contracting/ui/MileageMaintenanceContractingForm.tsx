@@ -6,7 +6,7 @@ import {
   MileageMaintenanceService,
   VehicleMileages,
   AddServiceCard,
-  MileagesOptions
+  MileagesOptionsData
 } from '@/features/services'
 
 import { ButtonOptions } from '@/components'
@@ -61,7 +61,7 @@ export const MileageMaintenanceContractingForm = () => {
             <div className='grid grid-cols-2 md:grid-cols-3 gap-4'>
 
               {/* Buttons */}
-              {MileagesOptions.map((item, index) => (
+              {MileagesOptionsData.map((item, index) => (
                 <ButtonOptions
                   className='h-12'
                   key={item.quantity + index}

@@ -6,7 +6,7 @@ import {
   OtherServices,
   ServicePageButtons,
   StepsCard,
-  StepsOilAndFilterChange,
+  StepsOilAndFilterChangeData,
   OildAndFilterChangeFAQs
 } from '@/features/services';
 
@@ -39,7 +39,7 @@ export default function OilAndFilterChangePage() {
         <p className='description-of-title-h2'>Tu cambio de aceite y filtro, tal como lo exige el fabricante.</p>
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
-          {StepsOilAndFilterChange.map((item, index) => (
+          {StepsOilAndFilterChangeData.map((item, index) => (
             <StepsCard {...item} key={index + item.title} />
           ))}
         </div>

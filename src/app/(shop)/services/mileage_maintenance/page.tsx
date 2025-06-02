@@ -6,7 +6,7 @@ import {
   OtherServices,
   ServicePageButtons,
   StepsCard,
-  StepsMileageMaintenance,
+  StepsMileageMaintenanceData,
   MileageMaintenanceFAQs
 } from '@/features/services';
 
@@ -39,7 +39,7 @@ export default function MileageMaintenancePage() {
         <p className='description-of-title-h2'>Darle el mejor cuidado a tu auto es muy facil</p>
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
-          {StepsMileageMaintenance.map((item, index) => (
+          {StepsMileageMaintenanceData.map((item, index) => (
             <StepsCard {...item} key={index + item.title} />
           ))}
         </div>

@@ -9,7 +9,7 @@ import {
   OtherServices,
   ServicePageButtons,
   StepsCard,
-  StepsTiresChange,
+  StepsTiresChangeData,
   TiresChangeFAQs
 } from '@/features/services';
 
@@ -42,7 +42,7 @@ export default function TiresChangePage() {
         <p className='description-of-title-h2'>Cotiza, confirma y nos encargaremos de todo</p>
 
         <div className='max-w-page padding-central-page grid-steps-central-page'>
-          {StepsTiresChange.map((item, index) => (
+          {StepsTiresChangeData.map((item, index) => (
             <StepsCard {...item} key={index + item.title} />
           ))}
         </div>
