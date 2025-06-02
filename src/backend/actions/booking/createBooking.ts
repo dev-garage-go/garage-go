@@ -2,9 +2,9 @@
 
 import { getCollection } from "@/backend/database";
 import { ErrorInterface, HttpStatus } from "@/backend/interfaces";
-import { BookingServiceData } from "@/features/bookings";
+import { BookingServiceDataInterface } from "@/features/bookings";
 
-export const createBooking = async (booking: BookingServiceData): Promise<ErrorInterface> => {
+export const createBooking = async (booking: BookingServiceDataInterface): Promise<ErrorInterface> => {
   try {
     const coll = await getCollection("bookings")
     coll.insertOne(booking)

@@ -3,9 +3,9 @@
 import { ErrorInterface, HttpStatus } from "@/backend/interfaces"
 import sgMail from '@sendgrid/mail'
 
-import { User } from "@/features/bookings"
+import { UserInterface } from "@/features/bookings"
 
-export const sendEmailAction = async ({ email, name, lastName }: User): Promise<ErrorInterface> => {
+export const sendEmailAction = async ({ email, name, lastName }: UserInterface): Promise<ErrorInterface> => {
   const fullName = name + " " + lastName
   const message = "Algo a redactar"
 

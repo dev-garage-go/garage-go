@@ -1,10 +1,10 @@
 'use server'
 
-import { Amount } from "@/features/bookings"
+import { AmountInterface } from "@/features/bookings"
 import { TiresChangeServiceInterface } from "@/features/services"
 
 
-export const calcTiresChangeAmount = async (service: TiresChangeServiceInterface): Promise<Amount | undefined> => {
+export const calcTiresChangeAmount = async (service: TiresChangeServiceInterface): Promise<AmountInterface | undefined> => {
   try {
     console.log(service)
 

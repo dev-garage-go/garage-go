@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState } from "react"
-import { AppointmentData, BookingServiceData } from "@/features/bookings"
+import { AppointmentDataInterface, BookingServiceDataInterface } from "@/features/bookings"
 
 import { createBooking, getServiceAmount } from "@/backend/actions"
 
@@ -13,7 +13,7 @@ import { bookingKey } from "../keys/storage"
 
 interface ServiceBookingType {
   setBookingInStorage: (data: any) => void
-  createServiceBooking: (data: AppointmentData) => void,
+  createServiceBooking: (data: AppointmentDataInterface) => void,
   bookingCreated: boolean | null
 }
 
@@ -41,16 +41,16 @@ export const BookingContextProvider = ({ children }: Props) => {
 
   const [bookingCreated, setBookingCreated] = useState<boolean | null>(null)
 
-  const setBookingInStorage = (data: AppointmentData) => {
+  const setBookingInStorage = (data: AppointmentDataInterface) => {
     localStorage.setItem(bookingKey, JSON.stringify(data))
   }
 
-  const createServiceBooking = async (data: AppointmentData) => {
+  const createServiceBooking = async (data: AppointmentDataInterface) => {
     if (service && vehicle) {
       const amountService = await getServiceAmount(service)
       if (!amountService) return;
 
-      const booking: BookingServiceData = {
+      const booking: BookingServiceDataInterface = {
         service: service,
         appointment: data.appointment,
         vehicle: vehicle,

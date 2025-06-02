@@ -2,11 +2,11 @@
 
 import { calcTiresChangeAmount, calcMileageMaintenanceAmount } from "@/backend/actions"
 
-import { Amount } from "@/features/bookings"
+import { AmountInterface } from "@/features/bookings"
 import { MileageMaintenanceServiceInterface, ServicesDataType, TiresChangeServiceInterface } from "@/features/services"
 
 // Only one service
-export const getServiceAmount = async (service: ServicesDataType): Promise<Amount | undefined> => {
+export const getServiceAmount = async (service: ServicesDataType): Promise<AmountInterface | undefined> => {
   try {
     let result: { subtotal: number } | undefined
 
@@ -22,7 +22,7 @@ export const getServiceAmount = async (service: ServicesDataType): Promise<Amoun
     }
 
     if (!result) return undefined
-    const amount: Amount = {
+    const amount: AmountInterface = {
       subtotal: result.subtotal,
       disscount: 0, // aplicá lógica de descuentos más adelante
       total: result.subtotal // de momento, total == subtotal
@@ -39,7 +39,7 @@ export const getServiceAmount = async (service: ServicesDataType): Promise<Amoun
 
 
 // Multiple services
-export const getServicesAmount = async (services: ServicesDataType[]): Promise<Amount | undefined> => {
+export const getServicesAmount = async (services: ServicesDataType[]): Promise<AmountInterface | undefined> => {
   try {
     let result: { subtotal: number } | undefined
 
@@ -57,7 +57,7 @@ export const getServicesAmount = async (services: ServicesDataType[]): Promise<A
     }
 
     if (!result) return undefined
-    const amount: Amount = {
+    const amount: AmountInterface = {
       subtotal: result.subtotal,
       disscount: 0,
       total: result.subtotal

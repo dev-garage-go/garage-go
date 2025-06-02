@@ -6,7 +6,7 @@ import { ModalPortal } from "@/components";
 import { useVehicleContext, VehicleDataModal } from "@/features/vehicle";
 import {
   BookingForm,
-  AppointmentData,
+  AppointmentDataInterface,
   BookingSummary,
   useBookingContext,
   ConfirmationBookingModal,
@@ -18,7 +18,7 @@ interface Props {
 }
 
 export const BookingFormWrapper = ({ withBooking }: Props) => {
-  const methods = useForm<AppointmentData>({
+  const methods = useForm<AppointmentDataInterface>({
     shouldFocusError: true,
     defaultValues: {
       user: {
@@ -33,7 +33,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   const { createServiceBooking, bookingCreated } = useBookingContext()
 
   // Func that will be executed when form its submitted
-  const onSubmit = (data: AppointmentData) => {
+  const onSubmit = (data: AppointmentDataInterface) => {
     console.log(data)
     createServiceBooking(data)
   }

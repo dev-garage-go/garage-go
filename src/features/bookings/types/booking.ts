@@ -3,7 +3,7 @@ import { Hour } from './schedules';
 import { VehicleDataInterface } from '@/features/vehicle';
 import { ServicesDataType } from '@/features/services';
 
-export interface User {
+export interface UserInterface {
   name: string;
   lastName: string;
   phone: string;
@@ -18,31 +18,31 @@ interface Appointment {
   time: Hour
 }
 
-export interface AppointmentData {
-  user: User
+export interface AppointmentDataInterface {
+  user: UserInterface
   appointment: Appointment
 }
 
-export interface Amount {
+export interface AmountInterface {
   subtotal: number
   disscount: number
   total: number
 }
 
 // Only one service
-export interface BookingServiceData {
+export interface BookingServiceDataInterface {
   service: ServicesDataType,
-  user: User,
+  user: UserInterface,
   vehicle: VehicleDataInterface,
   appointment: Appointment
-  amount: Amount
+  amount: AmountInterface
 }
 
 // Many services
-export interface BookingServicesData {
+export interface BookingServicesDataInterface {
   services: ServicesDataType[],
-  user: User,
+  user: UserInterface,
   vehicle: VehicleDataInterface,
   appointment: Appointment
-  amount: Amount
+  amount: AmountInterface
 }
