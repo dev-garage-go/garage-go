@@ -3,4 +3,4 @@ export * from './components/RenderCardIcon';
 export * from './constants/methods-cards';
 export * from './helpers/credit-card';
 export * from './helpers/validators';
-export * from './interfaces/payment-methods';
+export * from './types/payment-methods';

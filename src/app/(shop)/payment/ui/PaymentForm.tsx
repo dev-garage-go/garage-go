@@ -6,7 +6,7 @@ import { ErrorMessage } from '@/components';
 
 import {
   PaymentFormSchema,
-  PaymentGatewayMethods,
+  PaymentGatewayMethodsType,
   RenderCardIcon,
   PaymentOption,
   PaymentMethodsOptions,
@@ -55,7 +55,7 @@ export const PaymentForm = () => {
   }
 
   // Allows that user can diselect a payment gateway option
-  const toggleGateway = (method: PaymentGatewayMethods) => {
+  const toggleGateway = (method: PaymentGatewayMethodsType) => {
     setValue("paymentGateway", paymentGatewaySelected === method ? undefined : method);
   };
 

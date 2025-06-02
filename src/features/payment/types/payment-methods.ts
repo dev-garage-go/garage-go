@@ -1,13 +1,13 @@
-export type PaymentGatewayMethods = | 'mercado-pago' | 'getnet' | 'webpay' | undefined
+export type PaymentGatewayMethodsType = | 'mercado-pago' | 'getnet' | 'webpay' | undefined
 
 export interface PaymentGatewayMethodsOptionsInterface {
-  method: PaymentGatewayMethods,
+  method: PaymentGatewayMethodsType,
   name: string,
   description: string,
   imageSrc: string
 }
 
-export interface UserCard {
+export interface UserCardInterface {
   cardNumber: string
   ownerName: string
   expiresIn: string
@@ -16,7 +16,7 @@ export interface UserCard {
 
 export interface PaymentFormSchema {
   methodSelected?: 'user-card' | 'payment-gateway'
-  userCard?: UserCard
-  paymentGateway?: PaymentGatewayMethods
+  userCard?: UserCardInterface
+  paymentGateway?: PaymentGatewayMethodsType
   checkTermsAndConditions: boolean
 }
