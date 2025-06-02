@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react"
 import { IoAlertCircleOutline } from "react-icons/io5"
-import { InformationModal, ModalPortal } from "@/components"
+import { InformationModal, ModalPortalOnHover } from "@/components"
 
 interface Props {
   text: string
@@ -37,9 +37,9 @@ export const InformationButton = ({ text, hasModal = false, modalInfo }: Props) 
       </div>
 
       {hasModal && hovered && (
-        <ModalPortal anchorRef={ref}>
+        <ModalPortalOnHover anchorRef={ref}>
           <InformationModal {...modalInfo} />
-        </ModalPortal>
+        </ModalPortalOnHover>
       )}
     </div>
   )

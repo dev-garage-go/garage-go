@@ -10,4 +10,5 @@ export * from './ui/ErrorMessage';
 export * from './ui/GoogleMap';
 export * from './ui/InformationModal';
 export * from './ui/ModalPortal';
+export * from './ui/ModalPortalOnHover';
 export * from './ui/Select';

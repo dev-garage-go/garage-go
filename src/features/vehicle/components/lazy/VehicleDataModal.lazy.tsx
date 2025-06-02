@@ -1,5 +1,5 @@
 import dynamic from "next/dynamic"
-import { ModalPortal, Loader } from "@/components"
+import { Loader, ModalPortal } from "@/components"
 
 export const LazyVehicleDataModal = dynamic(() =>
   import("@/features/vehicle/components/VehicleDataModal")
