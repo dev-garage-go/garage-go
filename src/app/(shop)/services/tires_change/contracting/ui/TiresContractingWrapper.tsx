@@ -1,6 +1,5 @@
 'use client'
 
-import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { TiresContractingForm } from './TiresContractingForm';
@@ -21,13 +20,11 @@ export const TiresContractingWrapper = () => {
     }
   })
 
-  const router = useRouter()
   const { setServiceInStorage } = useServiceContext()
 
   // Function that will be executed when the form is submitted
   const onSubmit = (data: TiresChangeServiceInterface) => {
     setServiceInStorage(data)
-    router.push(`/services/tires_change/checkout`)
   }
 
   return (

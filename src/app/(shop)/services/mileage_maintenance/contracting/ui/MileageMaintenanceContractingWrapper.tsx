@@ -1,7 +1,6 @@
 'use client'
 
 import { useRef } from "react"
-import { useRouter } from "next/navigation"
 import { FormProvider, useForm } from "react-hook-form"
 
 import { ModalPortal } from "@/components"
@@ -27,14 +26,12 @@ export const MileageMaintenanceContractingWrapper = () => {
 
   // TODO: Router temporal para mostrar
   const ref = useRef<HTMLDivElement>(null)
-  const router = useRouter()
   const { licensePlate, setModalIsOpen, modalIsOpen } = useVehicleContext()
   const { setServiceInStorage } = useServiceContext()
 
   // Funcion que se ejecuta al enviar el formulario
   const onSubmit = (data: MileageMaintenanceServiceInterface) => {
     setServiceInStorage(data)
-    router.push(`/services/mileage_maintenance/checkout`)
   }
 
   return (

@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext } from "react"
-import { serviceKey, ServicesDataType } from "@/features/services"
+import { serviceKey, ServicesDataType, useRedirectToBooking } from "@/features/services"
 
 
 interface ServiceContextType {
@@ -28,6 +28,7 @@ export const useServiceContext = () => {
 // Provider
 export const ServiceContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined'  // avoids server errors
+  const redirectToBooking = useRedirectToBooking()
 
   const setServicesInStorage = (data: ServicesDataType[]) => {
     if (!isClient) return
@@ -37,6 +38,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
   const setServiceInStorage = (data: ServicesDataType) => {
     if (!isClient) return
     localStorage.setItem(serviceKey, JSON.stringify(data))
+    redirectToBooking()
   }
 
   const getServiceFromStorage = (): ServicesDataType | null => {

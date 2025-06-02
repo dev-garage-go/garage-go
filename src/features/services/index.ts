@@ -11,7 +11,7 @@ export * from './constants/components';
 export * from './constants/faqs';
 export * from './constants/tires-change';
 export * from './context/ServiceContext';
-export * from './hooks/useGetServiceName';
+export * from './hooks/useRedirectToBooking';
 export * from './keys/storage';
 export * from './types/faqs';
 export * from './types/services-components';
