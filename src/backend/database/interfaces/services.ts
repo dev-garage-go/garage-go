@@ -1,11 +1,11 @@
-import { TiresChangeService, MileageMaintenanceService } from '@/features/services/interfaces/services-data'
+import { TiresChangeServiceInterface, MileageMaintenanceServiceInterface } from '@/features/services'
 
-export interface TiresChangeServiceDB extends TiresChangeService {
+export interface TiresChangeServiceDB extends TiresChangeServiceInterface {
   _id: string
   price: number
 }
 
-export interface MileageMaintenanceServiceDB extends MileageMaintenanceService {
+export interface MileageMaintenanceServiceDB extends MileageMaintenanceServiceInterface {
   _id: string
   price: number
 }

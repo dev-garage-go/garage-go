@@ -1,4 +1,4 @@
-export interface ServicesPagesFAQs {
+export interface ServicePageFAQsInterface {
   hasAnswerItems?: boolean,
   answersItems?: string[]
   question: string

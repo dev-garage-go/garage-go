@@ -1,6 +1,6 @@
 import { VehicleMileagesType } from "@/features/services";
 
-export interface ButtonProps {
+interface ServiceButton {
   text: string;
   variant: string;
   icon?: string;
@@ -12,7 +12,7 @@ export interface ServiceCardInterface {
   image: string,
   discount?: string,
   features: string[],
-  buttons?: ButtonProps[]
+  buttons?: ServiceButton[]
   path: string
 }
 

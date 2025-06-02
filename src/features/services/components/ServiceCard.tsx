@@ -3,17 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import { ButtonProps, VehicleServicesFeaturesIconsMap } from "@/features/services";
-
-interface Props {
-  title: string
-  price?: number
-  image: string
-  discount?: string
-  features?: string[]
-  buttons?: ButtonProps[]
-  path: string
-}
+import { ServiceCardInterface, VehicleServicesFeaturesIconsMap } from "@/features/services";
 
 export const ServiceCard = ({
   title,
@@ -23,7 +13,7 @@ export const ServiceCard = ({
   features = [],
   buttons,
   path
-}: Props) => {
+}: ServiceCardInterface) => {
 
 
   return (

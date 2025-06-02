@@ -2,9 +2,15 @@
 
 import { FormProvider, useForm } from "react-hook-form";
 
-import { ModalPortal, ConfirmationBookingModal } from "@/components";
-import { BookingForm, AppointmentData, BookingSummary, useBookingContext } from "@/features/bookings"
+import { ModalPortal } from "@/components";
 import { useVehicleContext, VehicleDataModal } from "@/features/vehicle";
+import {
+  BookingForm,
+  AppointmentData,
+  BookingSummary,
+  useBookingContext,
+  ConfirmationBookingModal,
+} from "@/features/bookings"
 
 
 interface Props {
