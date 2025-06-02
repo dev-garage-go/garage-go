@@ -1,15 +1,17 @@
 import dynamic from "next/dynamic"
-import { Loader, ModalPortal } from "@/components"
+import { Loader } from "@/components"
+import { sleep } from "@/utils/sleep"
 
 export const LazyVehicleDataModal = dynamic(() =>
-  import("@/features/vehicle/components/VehicleDataModal")
-    .then(mod => mod.VehicleDataModal),
+  sleep(500).then(() =>
+    import("../VehicleDataModal").then(mod => mod.VehicleDataModal)
+  ),
   {
     ssr: false,
     loading: () => (
-      <ModalPortal>
-        <Loader className="bg-primaryBlue-50" />
-      </ModalPortal>
+      <div className="fixed inset-0">
+        <Loader className="bg-primaryBlue-50/90" />
+      </div>
     )
   }
 )
