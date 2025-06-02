@@ -12,7 +12,7 @@
 'use client';
 
 import { useState } from 'react';
-import { ErrorMessage } from './ErrorMessage';
+import { ErrorMessage } from '@/components';
 
 import dayjs, { Dayjs } from 'dayjs';
 import localeData from 'dayjs/plugin/localeData';

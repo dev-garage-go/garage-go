@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from "react"
-import { ErrorMessage } from "./ErrorMessage"
-import { ButtonOptions, Hour, SchedulesOptions } from '@/components';
+import { ButtonOptions, ErrorMessage } from '@/components';
+import { Hour, SchedulesOptions } from "@/features/bookings";
+
 
 interface Props {
   onChange: (value: Hour) => void
@@ -39,8 +40,7 @@ export const SchedulePicker = ({ onChange, error }: Props) => {
                 className="py-3"
               />
             )
-          }
-          )}
+          })}
         </div>
 
         <p className="text-xs text-primaryBlue-500 text-wrap text-start mt-6 mb-2">
