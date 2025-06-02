@@ -8,7 +8,7 @@ import { InformationButton, SwitchButton, ErrorMessage } from "@/components";
 import { PromotionCard } from "@/features/promotions";
 import {
   QuantityTires,
-  TiresChangeService,
+  TiresChangeServiceInterface,
   TypesTiresOptions,
   AddServiceCard,
   TypesTires,
@@ -19,7 +19,7 @@ import { TiresQuantitySelector } from "./TiresQuantitySelector";
 
 
 export const TiresContractingForm = () => {
-  const { register, watch, setValue, formState: { errors } } = useFormContext<TiresChangeService>()
+  const { register, watch, setValue, formState: { errors } } = useFormContext<TiresChangeServiceInterface>()
 
   const quantityTires = watch("quantityTires")
   const typeTires = watch("typeTires")

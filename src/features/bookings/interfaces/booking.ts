@@ -1,7 +1,7 @@
 import { Dayjs } from 'dayjs';
 import { Hour } from './schedules';
 import { VehicleData } from '@/features/vehicle';
-import { ServicesData } from '@/features/services';
+import { ServicesDataType } from '@/features/services';
 
 export interface User {
   name: string;
@@ -31,7 +31,7 @@ export interface Amount {
 
 // Only one service
 export interface BookingServiceData {
-  service: ServicesData,
+  service: ServicesDataType,
   user: User,
   vehicle: VehicleData,
   appointment: Appointment
@@ -40,7 +40,7 @@ export interface BookingServiceData {
 
 // Many services
 export interface BookingServicesData {
-  services: ServicesData[],
+  services: ServicesDataType[],
   user: User,
   vehicle: VehicleData,
   appointment: Appointment

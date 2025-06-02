@@ -1,13 +1,13 @@
 "use client"
 
 import { createContext, useContext } from "react"
-import { serviceKey, ServicesData } from "@/features/services"
+import { serviceKey, ServicesDataType } from "@/features/services"
 
 
 interface ServiceContextType {
-  setServicesInStorage: (data: ServicesData[]) => void
-  setServiceInStorage: (data: ServicesData) => void
-  getServiceFromStorage: () => ServicesData | null
+  setServicesInStorage: (data: ServicesDataType[]) => void
+  setServiceInStorage: (data: ServicesDataType) => void
+  getServiceFromStorage: () => ServicesDataType | null
   deleteServiceFromStorage: () => null | void
 }
 
@@ -29,17 +29,17 @@ export const useServiceContext = () => {
 export const ServiceContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined'  // avoids server errors
 
-  const setServicesInStorage = (data: ServicesData[]) => {
+  const setServicesInStorage = (data: ServicesDataType[]) => {
     if (!isClient) return
     localStorage.setItem(serviceKey, JSON.stringify(data))
   }
 
-  const setServiceInStorage = (data: ServicesData) => {
+  const setServiceInStorage = (data: ServicesDataType) => {
     if (!isClient) return
     localStorage.setItem(serviceKey, JSON.stringify(data))
   }
 
-  const getServiceFromStorage = (): ServicesData | null => {
+  const getServiceFromStorage = (): ServicesDataType | null => {
     if (!isClient) return null
     const data = localStorage.getItem(serviceKey)
     return data ? JSON.parse(data) : null

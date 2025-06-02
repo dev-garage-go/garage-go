@@ -1,4 +1,4 @@
-import { TypesTiresOptions } from "../interfaces/services-data";
+import { TypesTiresOptions } from "@/features/services";
 
 export const TypesTires: { label: string; value: TypesTiresOptions }[] = [
   { label: 'Ciudad', value: 'ciudad' },

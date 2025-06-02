@@ -1,9 +1,9 @@
 'use server'
 
 import { Amount } from "@/features/bookings";
-import { MileageMaintenanceService } from "@/features/services";
+import { MileageMaintenanceServiceInterface } from "@/features/services";
 
-export const calcMileageMaintenanceAmount = async (service: MileageMaintenanceService): Promise<Amount | undefined> => {
+export const calcMileageMaintenanceAmount = async (service: MileageMaintenanceServiceInterface): Promise<Amount | undefined> => {
   try {
     console.log(service)
 

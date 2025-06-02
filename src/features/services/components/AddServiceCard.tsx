@@ -1,6 +1,6 @@
 'use client'
 
-import { DetailServiceOptions } from '@/features/services'
+import { DetailServiceOptionInterface } from '@/features/services'
 import { firstLetterUppercase, formatNumberWithDots } from '@/utils'
 import { useState } from 'react'
 import { ButtonOptions, SwitchButton } from '@/components';
@@ -9,8 +9,8 @@ interface Props {
   name: string
   price: number
   details?: {
-    mainOptions: DetailServiceOptions[]
-    switchOptions: DetailServiceOptions[]
+    mainOptions: DetailServiceOptionInterface[]
+    switchOptions: DetailServiceOptionInterface[]
   }
 }
 

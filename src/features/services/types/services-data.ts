@@ -11,24 +11,29 @@ export type TypesTiresOptions = 'ciudad' | 'offroad' | 'intermedio'
 
 // Services interfaces
 
-export type ServicesNames = 'tires-change' | 'mileage-maintenance'
-export type ServicesTypes = 'tires' | 'mileage'
+type ServicesNames = 'tires-change' | 'mileage-maintenance'
+type ServicesTypes = 'tires' | 'mileage'
 
-interface BaseService {
+export const ServiceNamesMap: Record<ServicesNames, string> = {
+  "mileage-maintenance": "Mantención kilometraje",
+  "tires-change": "Cambio neumaticos"
+}
+
+interface BaseServiceInterface {
   type: ServicesTypes
   name: ServicesNames
   promotion?: Promotion
   // extras?: {} -> Si se opta por seguir con un solo servicio a cobrar tengo que ver esto de las opciones extras
 }
 
-export interface MileageMaintenanceService extends BaseService {
+export interface MileageMaintenanceServiceInterface extends BaseServiceInterface {
   mileages: VehicleMileages
 }
 
-export interface TiresChangeService extends BaseService {
+export interface TiresChangeServiceInterface extends BaseServiceInterface {
   quantityTires: QuantityTires;
   typeTires: TypesTiresOptions;
   tireSize: string,
 }
 
-export type ServicesData = TiresChangeService | MileageMaintenanceService
+export type ServicesDataType = TiresChangeServiceInterface | MileageMaintenanceServiceInterface

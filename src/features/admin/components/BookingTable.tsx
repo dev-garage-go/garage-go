@@ -1,7 +1,7 @@
 'use client'
 
 import { BookingDB } from "@/backend/database/interfaces/bookings"
-import { ServicesNames } from "@/features/services";
+import { ServiceNamesMap } from "@/features/services";
 import dayjs from 'dayjs';
 
 import { formatNumberWithDots } from '@/utils';
@@ -20,10 +20,7 @@ export const BookingTable = ({ bookings }: Props) => {
     return f
   }
 
-  const ServiceNamesMap: Record<ServicesNames, string> = {
-    "mileage-maintenance": "Mantención kilometraje",
-    "tires-change": "Cambio neumaticos"
-  }
+
 
   return (
     <table className="min-w-full">

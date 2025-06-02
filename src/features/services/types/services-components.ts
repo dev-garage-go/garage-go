@@ -1,4 +1,4 @@
-import { VehicleMileages } from "@/features/services/interfaces/services-data";
+import { VehicleMileages } from "@/features/services";
 
 export interface ButtonProps {
   text: string;
@@ -6,7 +6,7 @@ export interface ButtonProps {
   icon?: string;
 }
 
-export interface ServicesCardsInterface {
+export interface ServiceCardInterface {
   title: string,
   price?: number,
   image: string,
@@ -16,26 +16,26 @@ export interface ServicesCardsInterface {
   path: string
 }
 
-export interface VehicleMileagesOptions {
+export interface VehicleMileageOptionInterface {
   quantity: VehicleMileages
 }
 
-export interface DetailServiceOptions {
+export interface DetailServiceOptionInterface {
   detailName: string,
   detailPrice: number
   selected?: boolean
 }
 
-export interface ExtraServicesCards {
+export interface ExtraServiceCardInterface {
   name: string,
   price: number,
   details?: {
-    mainOptions: DetailServiceOptions[],
-    switchOptions: DetailServiceOptions[]
+    mainOptions: DetailServiceOptionInterface[],
+    switchOptions: DetailServiceOptionInterface[]
   }
 }
 
-export interface StepsServicesPagesInterface {
+export interface StepsServicePageInterface {
   title: string
   description: string
   imageUrl: string

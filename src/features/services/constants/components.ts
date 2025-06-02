@@ -1,9 +1,9 @@
 import { obtainImage } from "@/assets/helpers";
 import {
   QuantityTires,
-  ServicesCardsInterface,
-  StepsServicesPagesInterface,
-  VehicleMileagesOptions
+  ServiceCardInterface,
+  StepsServicePageInterface,
+  VehicleMileageOptionInterface
 } from "@/features/services";
 
 const srvPath = '/services'
@@ -15,7 +15,7 @@ export const VehicleServicesFeaturesIconsMap: Record<string, string> = {
   'garantia': obtainImage('services', 'garantia'),
 };
 
-export const ServicesCardsData: ServicesCardsInterface[] = [
+export const ServicesCardsData: ServiceCardInterface[] = [
   {
     title: "Mantencion por kilometraje",
     price: 189900,
@@ -88,7 +88,7 @@ export const ServicesCardsData: ServicesCardsInterface[] = [
 ];
 
 // Steps services pages
-export const StepsMileageMaintenanceData: StepsServicesPagesInterface[] = [
+export const StepsMileageMaintenanceData: StepsServicePageInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
@@ -115,7 +115,7 @@ export const StepsMileageMaintenanceData: StepsServicesPagesInterface[] = [
   },
 ]
 
-export const StepsTechnicalRevisionData: StepsServicesPagesInterface[] = [
+export const StepsTechnicalRevisionData: StepsServicePageInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
@@ -142,7 +142,7 @@ export const StepsTechnicalRevisionData: StepsServicesPagesInterface[] = [
   },
 ]
 
-export const StepsOilAndFilterChangeData: StepsServicesPagesInterface[] = [
+export const StepsOilAndFilterChangeData: StepsServicePageInterface[] = [
   {
     title: '1. Selecciona tu servicio',
     description: 'Agenda, cotiza y reserva. Sigue los pasos y paga en línea.',
@@ -169,7 +169,7 @@ export const StepsOilAndFilterChangeData: StepsServicesPagesInterface[] = [
   },
 ]
 
-export const StepsTiresChangeData: StepsServicesPagesInterface[] = [
+export const StepsTiresChangeData: StepsServicePageInterface[] = [
   {
     title: '1. Ingresa a nuestro cotizador',
     description: 'Completa los datos de ancho, perfil y aro de tus neumáticosticos',
@@ -209,7 +209,7 @@ export const AddMoreServicesData: { name: string, price: number }[] = [
   { name: "Servicio de frenos", price: 35990 }
 ]
 
-export const MileagesOptionsData: VehicleMileagesOptions[] = [
+export const MileagesOptionsData: VehicleMileageOptionInterface[] = [
   { quantity: "10.000 kms" },
   { quantity: "20.000 kms" },
   { quantity: "30.000 kms" },

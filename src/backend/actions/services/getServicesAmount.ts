@@ -3,19 +3,19 @@
 import { calcTiresChangeAmount, calcMileageMaintenanceAmount } from "@/backend/actions"
 
 import { Amount } from "@/features/bookings"
-import { MileageMaintenanceService, ServicesData, TiresChangeService } from "@/features/services"
+import { MileageMaintenanceServiceInterface, ServicesDataType, TiresChangeServiceInterface } from "@/features/services"
 
 // Only one service
-export const getServiceAmount = async (service: ServicesData): Promise<Amount | undefined> => {
+export const getServiceAmount = async (service: ServicesDataType): Promise<Amount | undefined> => {
   try {
     let result: { subtotal: number } | undefined
 
     switch (service.type) {
       case 'mileage':
-        result = await calcMileageMaintenanceAmount(service as MileageMaintenanceService)
+        result = await calcMileageMaintenanceAmount(service as MileageMaintenanceServiceInterface)
         break
       case 'tires':
-        result = await calcTiresChangeAmount(service as TiresChangeService)
+        result = await calcTiresChangeAmount(service as TiresChangeServiceInterface)
         break
       default:
         return undefined
@@ -39,17 +39,17 @@ export const getServiceAmount = async (service: ServicesData): Promise<Amount | 
 
 
 // Multiple services
-export const getServicesAmount = async (services: ServicesData[]): Promise<Amount | undefined> => {
+export const getServicesAmount = async (services: ServicesDataType[]): Promise<Amount | undefined> => {
   try {
     let result: { subtotal: number } | undefined
 
     for (const service of services) {
       switch (service.type) {
         case 'mileage':
-          result = await calcMileageMaintenanceAmount(service as MileageMaintenanceService)
+          result = await calcMileageMaintenanceAmount(service as MileageMaintenanceServiceInterface)
           break
         case 'tires':
-          result = await calcTiresChangeAmount(service as TiresChangeService)
+          result = await calcTiresChangeAmount(service as TiresChangeServiceInterface)
           break
         default:
           return undefined

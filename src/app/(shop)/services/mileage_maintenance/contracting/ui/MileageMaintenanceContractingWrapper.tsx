@@ -9,13 +9,13 @@ import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContracti
 import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 
 import { LazyVehicleDataModal, useVehicleContext } from "@/features/vehicle"
-import { MileageMaintenanceService, useServiceContext } from "@/features/services"
+import { MileageMaintenanceServiceInterface, useServiceContext } from "@/features/services"
 
 
 export const MileageMaintenanceContractingWrapper = () => {
   // TODO: const hasPromotion = getPromotionByService()
 
-  const methods = useForm<MileageMaintenanceService>({
+  const methods = useForm<MileageMaintenanceServiceInterface>({
     shouldFocusError: true,
     defaultValues: {
       type: "mileage",
@@ -32,7 +32,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   const { setServiceInStorage } = useServiceContext()
 
   // Funcion que se ejecuta al enviar el formulario
-  const onSubmit = (data: MileageMaintenanceService) => {
+  const onSubmit = (data: MileageMaintenanceServiceInterface) => {
     setServiceInStorage(data)
     router.push(`/services/mileage_maintenance/checkout`)
   }

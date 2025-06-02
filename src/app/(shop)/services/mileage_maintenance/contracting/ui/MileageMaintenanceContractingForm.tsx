@@ -2,8 +2,8 @@
 
 import { useFormContext } from 'react-hook-form'
 import {
-  ExtraServicesCards,
-  MileageMaintenanceService,
+  ExtraServiceCardInterface,
+  MileageMaintenanceServiceInterface,
   VehicleMileages,
   AddServiceCard,
   MileagesOptionsData
@@ -12,7 +12,7 @@ import {
 import { ButtonOptions } from '@/components'
 
 
-const extraServices: ExtraServicesCards[] = [
+const extraServices: ExtraServiceCardInterface[] = [
   {
     name: "Gestion de revision tecnica",
     price: 48990,
@@ -41,7 +41,7 @@ const extraServices: ExtraServicesCards[] = [
 ]
 
 export const MileageMaintenanceContractingForm = () => {
-  const { setValue, watch } = useFormContext<MileageMaintenanceService>()
+  const { setValue, watch } = useFormContext<MileageMaintenanceServiceInterface>()
 
   const mileages = watch("mileages")
 
