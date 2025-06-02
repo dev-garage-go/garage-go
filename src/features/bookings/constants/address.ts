@@ -1,4 +1,4 @@
-import { SelectOptions } from "@/components";
+import { SelectOptions } from "@/types";
 
 export const AddressTypes: SelectOptions[] = [
   { id: 1, value: 'casa' },

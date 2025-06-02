@@ -3,9 +3,9 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react'
 import { IoChevronDown } from 'react-icons/io5'
 
-import { SelectOptions } from '@/components';
 import { ErrorMessage } from './ErrorMessage';
 import { firstLetterUppercase } from '@/utils';
+import { SelectOptions } from '@/types';
 
 interface Props {
   options: SelectOptions[]
