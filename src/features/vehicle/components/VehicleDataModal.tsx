@@ -7,6 +7,7 @@ import { ErrorMessage } from "@/components"
 import { useVehicleContext } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 import { VehicleDataInterface } from "../types/vehicle"
+import clsx from "clsx"
 
 interface Props {
   setClose: React.Dispatch<boolean>
@@ -48,6 +49,16 @@ export const VehicleDataModal = ({ setClose }: Props) => {
     }
   }, [vehicleDataFounded,])
 
+  // animacion del modal ease-out
+  const [isVisible, setIsVisible] = useState<boolean>(false)
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsVisible(true)
+    }, 20)
+
+    return () => clearTimeout(timeout)
+  }, [])
 
   const onSumbit = (data: VehicleDataInterface) => {
     if (vehicleDataFounded && hasLicensePlate) {
@@ -77,7 +88,13 @@ export const VehicleDataModal = ({ setClose }: Props) => {
     <>
       {!showModalToCompleteData ? (
         <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-black/20">
-          <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl max-h-72 bg-opacity-100 mx-4">
+          <div className={clsx(
+            "flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl max-h-72 bg-opacity-100 mx-4 transition-all duration-300 ease-out",
+            {
+              "opacity-0 scale-50": !isVisible,
+              "opacity-100 scale-100": isVisible
+            }
+          )}>
 
             <form
               onSubmit={handleSubmit(onSumbit)}
@@ -116,7 +133,13 @@ export const VehicleDataModal = ({ setClose }: Props) => {
       ) : (
         <div>
           <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-black/20">
-            <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl xl:max-w-3xl max-h-[600px] bg-opacity-100 mx-4">
+            <div className={clsx(
+              "flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl xl:max-w-3xl max-h-[600px] bg-opacity-100 mx-4 transition-all duration-300 ease-out",
+              {
+                "opacity-0 scale-50": !isVisible,
+                "opacity-100 scale-100": isVisible
+              }
+            )}>
 
               <form
                 onSubmit={handleSubmit(onSumbit)}
