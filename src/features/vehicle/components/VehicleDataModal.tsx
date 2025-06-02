@@ -76,8 +76,8 @@ export const VehicleDataModal = ({ setClose }: Props) => {
   return (
     <>
       {!showModalToCompleteData ? (
-        <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-primaryBlue-50 bg-opacity-90">
-          <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl max-h-72 bg-opacity-100 shadow-lg shadow-customGray-400 mx-4">
+        <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-black/20">
+          <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl max-h-72 bg-opacity-100 mx-4">
 
             <form
               onSubmit={handleSubmit(onSumbit)}
@@ -115,8 +115,8 @@ export const VehicleDataModal = ({ setClose }: Props) => {
         </div>
       ) : (
         <div>
-          <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-primaryBlue-50 bg-opacity-90">
-            <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl xl:max-w-3xl max-h-[600px] bg-opacity-100 shadow-lg shadow-customGray-400 mx-4">
+          <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-black/20">
+            <div className="flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl xl:max-w-3xl max-h-[600px] bg-opacity-100 mx-4">
 
               <form
                 onSubmit={handleSubmit(onSumbit)}

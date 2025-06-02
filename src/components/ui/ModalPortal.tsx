@@ -3,12 +3,14 @@
 import { ReactNode, useEffect, useState } from "react"
 import { createPortal } from "react-dom"
 import { motion } from "framer-motion"
+import { ModalColorsType } from "@/types"
 
 interface Props {
+  bgColor?: ModalColorsType
   children: ReactNode // elemento que aparecera al activarse ModalPortal
 }
 
-export const ModalPortal = ({ children }: Props) => {
+export const ModalPortal = ({ children, bgColor = 'bg-black/20' }: Props) => {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -20,7 +22,7 @@ export const ModalPortal = ({ children }: Props) => {
   return createPortal(
     <>
       <div
-        className="fixed inset-0 z-[9998] backdrop-blur-sm bg-black/10"
+        className={`fixed inset-0 z-[9998] backdrop-blur-sm ${bgColor}`}
       />
       <motion.div
         initial={{ opacity: 0, y: -5 }}
