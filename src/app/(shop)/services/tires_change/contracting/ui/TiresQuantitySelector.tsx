@@ -2,10 +2,10 @@
 
 import { UseFormRegisterReturn } from "react-hook-form"
 import { RadioButton } from "@/components"
-import { QuantityTires } from '@/features/services';
+import { QuantityTiresType } from '@/features/services';
 
 interface Props {
-  quantity: QuantityTires
+  quantity: QuantityTiresType
   register: UseFormRegisterReturn
   checked: boolean
   onClick: () => void

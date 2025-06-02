@@ -1,6 +1,6 @@
 import { obtainImage } from "@/assets/helpers";
 import {
-  QuantityTires,
+  QuantityTiresType,
   ServiceCardInterface,
   StepsServicePageInterface,
   VehicleMileageOptionInterface
@@ -196,7 +196,7 @@ export const StepsTiresChangeData: StepsServicePageInterface[] = [
   },
 ]
 
-export const QuantityTiresOptionsData: { label: string, value: QuantityTires }[] = [
+export const QuantityTiresOptionsData: { label: string, value: QuantityTiresType }[] = [
   { label: "Una cubierta", value: 1 },
   { label: "Dos cubiertas", value: 2 },
   { label: "Tres cubiertas", value: 3 },

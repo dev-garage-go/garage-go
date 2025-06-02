@@ -4,7 +4,7 @@ import { useFormContext } from 'react-hook-form'
 import {
   ExtraServiceCardInterface,
   MileageMaintenanceServiceInterface,
-  VehicleMileages,
+  VehicleMileagesType,
   AddServiceCard,
   MileagesOptionsData
 } from '@/features/services'
@@ -45,7 +45,7 @@ export const MileageMaintenanceContractingForm = () => {
 
   const mileages = watch("mileages")
 
-  const handleMileages = (quantity: VehicleMileages) => {
+  const handleMileages = (quantity: VehicleMileagesType) => {
     setValue("mileages", quantity)
   }
 

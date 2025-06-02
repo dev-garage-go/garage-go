@@ -1,4 +1,4 @@
-import { VehicleMileages } from "@/features/services";
+import { VehicleMileagesType } from "@/features/services";
 
 export interface ButtonProps {
   text: string;
@@ -17,7 +17,7 @@ export interface ServiceCardInterface {
 }
 
 export interface VehicleMileageOptionInterface {
-  quantity: VehicleMileages
+  quantity: VehicleMileagesType
 }
 
 export interface DetailServiceOptionInterface {

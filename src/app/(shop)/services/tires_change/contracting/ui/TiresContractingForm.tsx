@@ -7,9 +7,9 @@ import { obtainImage } from "@/assets/helpers";
 import { InformationButton, SwitchButton, ErrorMessage } from "@/components";
 import { PromotionCard } from "@/features/promotions";
 import {
-  QuantityTires,
+  QuantityTiresType,
   TiresChangeServiceInterface,
-  TypesTiresOptions,
+  TypesTiresOptionsType,
   AddServiceCard,
   TypesTires,
   QuantityTiresOptionsData,
@@ -25,7 +25,7 @@ export const TiresContractingForm = () => {
   const typeTires = watch("typeTires")
 
   // type tires
-  const handleTypeTires = (type: TypesTiresOptions) => {
+  const handleTypeTires = (type: TypesTiresOptionsType) => {
     if (typeTires === type) {
       setValue("typeTires", "ciudad")
     } else {
@@ -34,7 +34,7 @@ export const TiresContractingForm = () => {
   }
 
   // quantity tires
-  const handleSelectQuantityTires = (quantity: QuantityTires) => {
+  const handleSelectQuantityTires = (quantity: QuantityTiresType) => {
     setValue("quantityTires", quantity)
   }
 

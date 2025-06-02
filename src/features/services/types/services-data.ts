@@ -1,13 +1,13 @@
 import { Promotion } from '@/features/promotions';
 
 // Special options of services
-export type VehicleMileages = (
+export type VehicleMileagesType = (
   '10.000 kms' | '20.000 kms' | '30.000 kms' | '40.000 kms' | '50.000 kms' |
   '60.000 kms' | '70.000 kms' | '80.000 kms' | '90.000 kms' | 'Otro'
 )
 
-export type QuantityTires = 1 | 2 | 3 | 4
-export type TypesTiresOptions = 'ciudad' | 'offroad' | 'intermedio'
+export type QuantityTiresType = 1 | 2 | 3 | 4
+export type TypesTiresOptionsType = 'ciudad' | 'offroad' | 'intermedio'
 
 // Services interfaces
 
@@ -27,12 +27,12 @@ interface BaseServiceInterface {
 }
 
 export interface MileageMaintenanceServiceInterface extends BaseServiceInterface {
-  mileages: VehicleMileages
+  mileages: VehicleMileagesType
 }
 
 export interface TiresChangeServiceInterface extends BaseServiceInterface {
-  quantityTires: QuantityTires;
-  typeTires: TypesTiresOptions;
+  quantityTires: QuantityTiresType;
+  typeTires: TypesTiresOptionsType;
   tireSize: string,
 }
 
