@@ -38,35 +38,35 @@ export const getServiceAmount = async (service: ServicesDataType): Promise<Amoun
 }
 
 
-// Multiple services
-export const getServicesAmount = async (services: ServicesDataType[]): Promise<AmountInterface | undefined> => {
-  try {
-    let result: { subtotal: number } | undefined
+// ? Multiple services
+// export const getServicesAmount = async (services: ServicesDataType[]): Promise<AmountInterface | undefined> => {
+//   try {
+//     let result: { subtotal: number } | undefined
 
-    for (const service of services) {
-      switch (service.type) {
-        case 'mileage':
-          result = await calcMileageMaintenanceAmount(service as MileageMaintenanceServiceInterface)
-          break
-        case 'tires':
-          result = await calcTiresChangeAmount(service as TiresChangeServiceInterface)
-          break
-        default:
-          return undefined
-      }
-    }
+//     for (const service of services) {
+//       switch (service.type) {
+//         case 'mileage':
+//           result = await calcMileageMaintenanceAmount(service as MileageMaintenanceServiceInterface)
+//           break
+//         case 'tires':
+//           result = await calcTiresChangeAmount(service as TiresChangeServiceInterface)
+//           break
+//         default:
+//           return undefined
+//       }
+//     }
 
-    if (!result) return undefined
-    const amount: AmountInterface = {
-      subtotal: result.subtotal,
-      disscount: 0,
-      total: result.subtotal
-    }
+//     if (!result) return undefined
+//     const amount: AmountInterface = {
+//       subtotal: result.subtotal,
+//       disscount: 0,
+//       total: result.subtotal
+//     }
 
-    console.log('amount', amount)
-    return amount
+//     console.log('amount', amount)
+//     return amount
 
-  } catch (error) {
-    console.log(error)
-  }
-}
+//   } catch (error) {
+//     console.log(error)
+//   }
+// }

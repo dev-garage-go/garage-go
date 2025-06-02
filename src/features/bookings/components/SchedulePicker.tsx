@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 import { ButtonOptions, ErrorMessage } from '@/components';
-import { Hour, SchedulesOptions } from "@/features/bookings";
+import { Hour, SchedulesOptionsData } from "@/features/bookings";
 
 
 interface Props {
@@ -26,7 +26,7 @@ export const SchedulePicker = ({ onChange, error }: Props) => {
         <h4 className="text-sm font-medium text-primaryBlue-900">Horarios disponibles</h4>
 
         <div className="relative grid grid-cols-2 w-full gap-4 mt-4 py-2">
-          {SchedulesOptions.map((item, index) => {
+          {SchedulesOptionsData.map((item, index) => {
             const hourString = item.hour.split(":")[0]
             const showAmPm = Number(hourString) < 12 ? 'am' : 'pm'
 

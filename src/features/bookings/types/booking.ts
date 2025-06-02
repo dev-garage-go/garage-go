@@ -38,11 +38,11 @@ export interface BookingServiceDataInterface {
   amount: AmountInterface
 }
 
-// Many services
-export interface BookingServicesDataInterface {
-  services: ServicesDataType[],
-  user: UserInterface,
-  vehicle: VehicleDataInterface,
-  appointment: Appointment
-  amount: AmountInterface
-}
+// ? Many services
+// export interface BookingServicesDataInterface {
+//   services: ServicesDataType[],
+//   user: UserInterface,
+//   vehicle: VehicleDataInterface,
+//   appointment: Appointment
+//   amount: AmountInterface
+// }
