@@ -2,7 +2,7 @@
 
 import { IoCloseCircle } from "react-icons/io5"
 import { WhatsAppButton, BookingHeaderButton } from "@/components"
-import { HeaderLinksOptions, HeaderOption } from "@/features/home"
+import { HeaderLinksOptionsData, HeaderOption } from "@/features/home"
 
 interface SideBarProps {
   menuOpen: boolean
@@ -38,7 +38,7 @@ export const SideBar = ({ menuOpen, setMenuOpen }: SideBarProps) => {
 
         <ul className="flex-col mt-20 px-4">
           {
-            HeaderLinksOptions.map((opt, index) => (
+            HeaderLinksOptionsData.map((opt, index) => (
               <HeaderOption
                 mobile
                 key={index + opt.title}

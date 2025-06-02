@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useEffect, useState } from 'react';
-import { BannerCard, BannerInformation } from '@/features/home';
+import { BannerCard, BannerInformationData } from '@/features/home';
 
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -40,7 +40,7 @@ export const BannerSlider = () => {
         modules={[Pagination, Navigation]}
       >
 
-        {BannerInformation.map((item, index) => (
+        {BannerInformationData.map((item, index) => (
           <SwiperSlide key={index + item.title} className='padding-banner mb-4 sm:mb-0'>
             <BannerCard {...item} />
           </SwiperSlide>

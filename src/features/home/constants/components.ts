@@ -9,7 +9,7 @@ import {
 } from "@/features/home";
 
 // Header options to navigate
-export const HeaderLinksOptions: HeaderOptionInterface[] = [
+export const HeaderLinksOptionsData: HeaderOptionInterface[] = [
   {
     title: "Inicio",
     path: "/"
@@ -59,7 +59,7 @@ export const BenefitsData: BenefitsInterface[] = [
   },
 ]
 
-export const BannerInformation: BannerDisccountsInterface[] = [
+export const BannerInformationData: BannerDisccountsInterface[] = [
   {
     title: "Agenda y cotiza en línea",
     description: "Todo en un mismo lugar, reserva y paga tu servicio de manera fácil y rápida. Nosotros nos encargamos del resto. ¿Quieres cotizar algo adicional? Claro que sí. Nuestro equipo se pondrá en contacto a la brevedad para resolver tus necesidades.",

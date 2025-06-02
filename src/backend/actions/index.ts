@@ -12,4 +12,4 @@ export { getBookings } from './booking/getBookings';
 export { sendEmailAction } from './emails/send-email';
 export { calcMileageMaintenanceAmount } from './services/calcMileageMaintenanceAmount';
 export { calcTiresChangeAmount } from './services/calcTiresChangeAmount';
-export { getServiceAmount, getServicesAmount } from './services/getServicesAmount';
+export { getServiceAmount } from './services/getServicesAmount';

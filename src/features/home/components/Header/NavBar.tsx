@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation"
 import { useEffect, useState } from "react"
 import { IoReorderThreeOutline } from "react-icons/io5"
 
-import { HeaderOption, SideBar, HeaderLinksOptions } from "@/features/home"
+import { HeaderOption, SideBar, HeaderLinksOptionsData } from "@/features/home"
 
 export const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false)
@@ -38,7 +38,7 @@ export const NavBar = () => {
       <div className="hidden sm:flex justify-between items-center">
         <ul className="w-full bg-primaryBlue-500 flex justify-center items-center">
           {
-            HeaderLinksOptions.map((opt, index) => (
+            HeaderLinksOptionsData.map((opt, index) => (
               <HeaderOption key={index + opt.title} {...opt}
               />
             ))
