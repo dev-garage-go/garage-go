@@ -1,4 +1,4 @@
-export interface VehicleData {
+export interface VehicleDataInterface {
   licensePlate: string
   brand: string
   model: string

@@ -6,7 +6,7 @@ import { ErrorMessage } from "@/components"
 
 import { useVehicleContext } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
-import { VehicleData } from "../interfaces/vehicle"
+import { VehicleDataInterface } from "../types/vehicle"
 
 interface Props {
   setClose: React.Dispatch<boolean>
@@ -15,7 +15,7 @@ interface Props {
 export const VehicleDataModal = ({ setClose }: Props) => {
   const { setLicensePlateInStorage, setVehicleInStorage } = useVehicleContext()
 
-  const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleData>()
+  const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleDataInterface>()
   const hasLicensePlate = watch("licensePlate")
 
   // en principio es 'true', define si el backend y la db encontraron informacion en base
@@ -49,7 +49,7 @@ export const VehicleDataModal = ({ setClose }: Props) => {
   }, [vehicleDataFounded,])
 
 
-  const onSumbit = (data: VehicleData) => {
+  const onSumbit = (data: VehicleDataInterface) => {
     if (vehicleDataFounded && hasLicensePlate) {
       // se encontro datos el vehiculo en el backend
       setLicensePlateInStorage(hasLicensePlate.toLocaleUpperCase()) // esto debe cambiarse por setVehicleInStorage cuando haya un backend

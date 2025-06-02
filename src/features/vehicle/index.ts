@@ -4,6 +4,6 @@ export * from './components/lazy/VehicleDataModal.lazy';
 export * from './context/VehicleContext';
 export * from './hooks/useGetVehicleOnChangeStorage';
 export * from './hooks/useLicensePlateOnChangeStorage';
-export * from './interfaces/vehicle';
+export * from './types/vehicle';
 export * from './keys/events';
 export * from './keys/storage';

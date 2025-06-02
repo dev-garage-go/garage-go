@@ -8,7 +8,7 @@ import {
   vehicleKey,
   useGetVehicleOnChangeStorage,
   useLicensePlateOnChangeStorage,
-  VehicleData
+  VehicleDataInterface
 } from "@/features/vehicle"
 
 interface VehicleContextType {
@@ -17,8 +17,8 @@ interface VehicleContextType {
   licensePlate: string | null
   setLicensePlateInStorage: (value: string) => void
   deleteLicensePlate: () => void
-  setVehicleInStorage: (data: VehicleData) => void
-  getVehicleFromStorage: () => VehicleData | null
+  setVehicleInStorage: (data: VehicleDataInterface) => void
+  getVehicleFromStorage: () => VehicleDataInterface | null
   deleteVehicle: () => void
 }
 
@@ -62,13 +62,13 @@ export const VehicleContextProvider = ({ children }: Props) => {
 
   // ? Vehicle local storage
   // localStorage: All vehicle data
-  const setVehicleInStorage = (data: VehicleData) => {
+  const setVehicleInStorage = (data: VehicleDataInterface) => {
     if (!isClient) return
     localStorage.setItem(vehicleKey, JSON.stringify(data))
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
-  const getVehicleFromStorage = (): VehicleData | null => {
+  const getVehicleFromStorage = (): VehicleDataInterface | null => {
     if (!isClient) return null
     const data = localStorage.getItem(vehicleKey)
     return data ? JSON.parse(data) : null
