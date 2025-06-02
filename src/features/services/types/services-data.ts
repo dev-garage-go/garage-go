@@ -1,4 +1,4 @@
-import { Promotion } from '@/features/promotions';
+import { PromotionInterface } from '@/features/promotions';
 
 // Special options of services
 export type VehicleMileagesType = (
@@ -22,7 +22,7 @@ export const ServiceNamesMap: Record<ServicesNames, string> = {
 interface BaseServiceInterface {
   type: ServicesTypes
   name: ServicesNames
-  promotion?: Promotion
+  promotion?: PromotionInterface
   // extras?: {} -> Si se opta por seguir con un solo servicio a cobrar tengo que ver esto de las opciones extras
 }
 
