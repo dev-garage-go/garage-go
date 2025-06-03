@@ -62,6 +62,7 @@ export const VehicleDataModal = () => {
   }
 
 
+  // form formatters
   const handleYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = allowOnlyNumbers(e.target.value)
     setValue("year", formatted)
