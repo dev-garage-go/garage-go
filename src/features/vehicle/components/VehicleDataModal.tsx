@@ -10,36 +10,23 @@ import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
 import { getVehicleByLicensePlate } from "@/backend/actions"
 
-interface Props {
-  setOpen: React.Dispatch<boolean>
-}
-
-export const VehicleDataModal = ({ setOpen }: Props) => {
+export const VehicleDataModal = () => {
   const { register, formState: { errors }, setValue, handleSubmit } = useForm<VehicleDataInterface>()
   const { setVehicleInStorage } = useVehicleContext()
 
   // States
   const [modalIsVisible, setModalIsVisible] = useState<boolean>(false)
+  const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(false) // if the backend not found a vehicle in database, open the form to fill fields with a new car
 
-
-  // en principio se muestra un modal solo para colocar patentes
-  // si el backend y la db no encuentran registros del auto, esto debe ser 'true'
-  // haciendo que aparezca el formulario para completar los datos del auto manualmente
-  const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(false)
-
-  // se demora unos ms para que el DOM cargue las clases y se produzca la animación
+  // delays the state change by a few ms, so that the DOM can load the css classes and generate an animation.
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setModalIsVisible(true)
-    }, 20)
-
+    const timeout = setTimeout(() => setModalIsVisible(true), 20)
     return () => clearTimeout(timeout)
   }, [])
 
-  // anima el cierre del modal
+  // animates the close of modal
   const handleClose = () => {
-    setModalIsVisible(false)
-    const timeout = setTimeout(() => setOpen(false), 300)
+    const timeout = setTimeout(() => setModalIsVisible(false), 300)
     return () => clearTimeout(timeout)
   }
 

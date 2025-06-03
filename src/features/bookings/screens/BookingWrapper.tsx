@@ -30,8 +30,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
     }
   })
 
-  // TODO: action/calcAmountByService(service: string, data: {})
-  const { vehicle, showModal, setShowModal } = useVehicleContext()
+  const { vehicle, showModal } = useVehicleContext()
   const { createServiceBooking, bookingCreated } = useBookingContext()
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
@@ -51,7 +50,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
       {/* if vehicle data doesn't exist, the modal will be open, otherwise it will be closed */}
       {!vehicle &&
         <ModalPortal isOpen={showModal}>
-          <LazyVehicleDataModal setOpen={setShowModal} /> {/* the component is only imported if the conditions are met */}
+          <LazyVehicleDataModal /> {/* the component is only imported if the conditions are met */}
         </ModalPortal>
       }
       {/* when the backend will responded if the booking is successfully created or not, show modal */}
