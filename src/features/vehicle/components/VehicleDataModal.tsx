@@ -16,20 +16,20 @@ export const VehicleDataModal = () => {
 
   // states
   const [isMounted, setIsMounted] = useState<boolean>(false)
-  const [modalIsVisible, setModalIsVisible] = useState<boolean>(false)
+  const [isVisible, setIsVisible] = useState<boolean>(false)
   const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(false) // if the backend not found a vehicle in database, open the form to fill fields with a new car
 
   // delays the state change by a few ms, so that the DOM can load the css classes and generate an animation.
   useEffect(() => {
     setIsMounted(true)
-    const timeout = setTimeout(() => setModalIsVisible(true), 20)
+    const timeout = setTimeout(() => setIsVisible(true), 20)
     return () => clearTimeout(timeout)
   }, [])
 
   // animates the close of modal
   const handleClose = () => {
-    setModalIsVisible(false)
-    setTimeout(() => setIsMounted(false), 300)
+    setIsMounted(false)
+    setTimeout(() => setIsVisible(false), 300)
   }
 
   const onSumbit = async (data: VehicleDataInterface) => {
@@ -83,8 +83,8 @@ export const VehicleDataModal = () => {
         "flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl max-h-72 bg-opacity-100 mx-4 transition-all duration-300 ease-out",
         {
           "max-w-xl xl:max-w-3xl max-h-[600px]": showFormToCompleteData,
-          "opacity-0 scale-50": !modalIsVisible,
-          "opacity-100 scale-100": modalIsVisible
+          "opacity-0 scale-50": !isVisible,
+          "opacity-100 scale-100": isVisible
         }
       )}>
 
