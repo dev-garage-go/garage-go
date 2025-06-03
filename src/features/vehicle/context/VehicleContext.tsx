@@ -2,21 +2,16 @@
 
 import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
 import {
-  customLicensePlateUpdateEvent,
   customVehicleUpdateEvent,
-  licensePlateKey,
   vehicleKey,
   useGetVehicleOnChangeStorage,
-  useLicensePlateOnChangeStorage,
   VehicleDataInterface
 } from "@/features/vehicle"
 
 interface VehicleContextType {
-  modalIsOpen: boolean
-  setModalIsOpen: React.Dispatch<SetStateAction<boolean>>
-  licensePlate: string | null
-  setLicensePlateInStorage: (value: string) => void
-  deleteLicensePlate: () => void
+  showModal: boolean
+  setShowModal: React.Dispatch<SetStateAction<boolean>>
+  vehicle: VehicleDataInterface | null
   setVehicleInStorage: (data: VehicleDataInterface) => void
   getVehicleFromStorage: () => VehicleDataInterface | null
   deleteVehicle: () => void
@@ -41,24 +36,8 @@ export const useVehicleContext = () => {
 export const VehicleContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined' // avoids server errors
 
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
-  const licensePlate = useLicensePlateOnChangeStorage()
+  const [showModal, setShowModal] = useState<boolean>(false)
   const vehicle = useGetVehicleOnChangeStorage()
-
-  // ? LicensePlate session storage
-  // sessionStorage: Only the license plate
-  const setLicensePlateInStorage = (value: string) => {
-    if (!isClient) return
-    sessionStorage.setItem(licensePlateKey, value)
-    window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
-  }
-
-  // deletes license plate from the session storage, so that others can be entered
-  const deleteLicensePlate = () => {
-    if (!isClient) return
-    sessionStorage.removeItem(licensePlateKey)
-    window.dispatchEvent(new Event(customLicensePlateUpdateEvent))
-  }
 
   // ? Vehicle local storage
   // localStorage: All vehicle data
@@ -85,26 +64,17 @@ export const VehicleContextProvider = ({ children }: Props) => {
   // if the session storage doesn't have a license plate
   // or if the local storage doesn't have vehicle data, open modal
   useEffect(() => {
-    if (!licensePlate && !vehicle) {
-      setModalIsOpen(true)      // ! -> LicensePlate deberia ser eliminado porque quiero datos del auto entero
-
-    } else if (licensePlate && !vehicle) {
-      setModalIsOpen(false)
-
-    } else if (!licensePlate && vehicle) {
-      setModalIsOpen(false)
-
-    }
-  }, [licensePlate, vehicle])
+    if (!vehicle) {
+      setShowModal(true)
+    } 
+  }, [vehicle])
 
 
   return <VehicleContext.Provider
     value={{
-      modalIsOpen,
-      setModalIsOpen,
-      licensePlate,
-      setLicensePlateInStorage,
-      deleteLicensePlate,
+      showModal,
+      setShowModal,
+      vehicle,
       setVehicleInStorage,
       getVehicleFromStorage,
       deleteVehicle

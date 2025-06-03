@@ -1,9 +1,10 @@
 "use client"
 
+import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ModalPortal } from "@/components";
-import { useVehicleContext, VehicleDataModal } from "@/features/vehicle";
+import { LazyVehicleDataModal, useVehicleContext, VehicleDataModal } from "@/features/vehicle";
 import {
   BookingForm,
   AppointmentDataInterface,
@@ -11,6 +12,7 @@ import {
   useBookingContext,
   ConfirmationBookingModal,
 } from "@/features/bookings"
+import { sleep } from "@/utils";
 
 
 interface Props {
@@ -29,26 +31,32 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   })
 
   // TODO: action/calcAmountByService(service: string, data: {})
-  const { licensePlate, modalIsOpen, setModalIsOpen } = useVehicleContext()
+  const { vehicle, showModal, setShowModal } = useVehicleContext()
   const { createServiceBooking, bookingCreated } = useBookingContext()
 
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+
   // Func that will be executed when form its submitted
-  const onSubmit = (data: AppointmentDataInterface) => {
+  const onSubmit = async (data: AppointmentDataInterface) => {
     console.log(data)
     createServiceBooking(data)
+
+    setShowConfirmModal(true)
+    await sleep(2000)
+    setShowConfirmModal(false)
   }
 
   return (
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
       {/* if vehicle data doesn't exist, the modal will be open, otherwise it will be closed */}
-      {!licensePlate && modalIsOpen &&
-        <ModalPortal>
-          <VehicleDataModal setClose={setModalIsOpen} />
+      {!vehicle &&
+        <ModalPortal isOpen={showModal}>
+          <LazyVehicleDataModal setOpen={setShowModal} /> {/* the component is only imported if the conditions are met */}
         </ModalPortal>
       }
       {/* when the backend will responded if the booking is successfully created or not, show modal */}
       {typeof bookingCreated === 'boolean' && (
-        <ModalPortal>
+        <ModalPortal isOpen={showConfirmModal}>
           <ConfirmationBookingModal success={bookingCreated} />
         </ModalPortal>
       )}

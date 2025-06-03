@@ -26,7 +26,7 @@ export const MileageMaintenanceContractingWrapper = () => {
 
   // TODO: Router temporal para mostrar
   const ref = useRef<HTMLDivElement>(null)
-  const { licensePlate, setModalIsOpen, modalIsOpen } = useVehicleContext()
+  const { vehicle, showModal, setShowModal } = useVehicleContext()
   const { setServiceInStorage } = useServiceContext()
 
   // Funcion que se ejecuta al enviar el formulario
@@ -36,9 +36,9 @@ export const MileageMaintenanceContractingWrapper = () => {
 
   return (
     <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
-      {!licensePlate && modalIsOpen &&
-        <ModalPortal isOpen={modalIsOpen}>
-          <LazyVehicleDataModal setClose={setModalIsOpen} /> {/* the component is only imported if the conditions are met */}
+      {!vehicle &&
+        <ModalPortal isOpen={showModal}>
+          <LazyVehicleDataModal setOpen={setShowModal} /> {/* the component is only imported if the conditions are met */}
         </ModalPortal>
       }
       <FormProvider {...methods}>

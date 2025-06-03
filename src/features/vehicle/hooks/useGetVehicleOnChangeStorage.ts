@@ -46,8 +46,8 @@ export const useGetVehicleOnChangeStorage = (): VehicleDataInterface | null => {
     }
 
     // this will be calling when a custom event 'customVehicleUpdateEvent' happened
-    // Important: this event will shotting in LicensePlateModal -> setVehicle(value: string)
-    // Important: the function that will shoting this event it's in -> context/LicensePlateContext.tsx
+    // Important: this event will shotting in VehicleDataModal -> setVehicle(value: string)
+    // Important: the function that will shoting this event it's in -> context/VehicleContext.tsx
     const handleCustomEvent = () => {
       readLocalStorage()
     }

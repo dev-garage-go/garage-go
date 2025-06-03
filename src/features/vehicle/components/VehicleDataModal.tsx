@@ -11,10 +11,10 @@ import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 import { getVehicleByLicensePlate } from "@/backend/actions"
 
 interface Props {
-  setClose: React.Dispatch<boolean>
+  setOpen: React.Dispatch<boolean>
 }
 
-export const VehicleDataModal = ({ setClose }: Props) => {
+export const VehicleDataModal = ({ setOpen }: Props) => {
   const { register, formState: { errors }, setValue, handleSubmit } = useForm<VehicleDataInterface>()
   const { setVehicleInStorage } = useVehicleContext()
 
@@ -39,7 +39,8 @@ export const VehicleDataModal = ({ setClose }: Props) => {
   // anima el cierre del modal
   const handleClose = () => {
     setModalIsVisible(false)
-    setTimeout(() => setClose(false),)
+    const timeout = setTimeout(() => setOpen(false), 300)
+    return () => clearTimeout(timeout)
   }
 
   const onSumbit = async (data: VehicleDataInterface) => {
