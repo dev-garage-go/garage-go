@@ -3,11 +3,21 @@ Actions cannot be exported by default because next.js will generate a conflict. 
 Example: export { functionExample } from './example-file'.
 */
 
+// Admin
 export { validateAdminPassword } from './admin/validateAdminPassword';
+
+// Booking
 export { createBooking } from './booking/createBooking';
 export { getBookings } from './booking/getBookings';
+
+// Emails
 export { sendEmailAction } from './emails/send-email';
+
+// Services
 export { calcMileageMaintenanceAmount } from './services/calcMileageMaintenanceAmount';
 export { calcTiresChangeAmount } from './services/calcTiresChangeAmount';
 export { getServiceAmount } from './services/getServicesAmount';
-export { getVehicleByLicensePlate } from './vehicle/getVehicleByLicensePlata';
+
+// Vehicle
+export { getVehicleByLicensePlate } from './vehicle/getVehicleByLicensePlate';
+export { addNewVehicle } from './vehicle/addNewVehicle';

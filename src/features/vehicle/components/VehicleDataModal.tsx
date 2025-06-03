@@ -8,7 +8,7 @@ import { ErrorMessage } from "@/components"
 import { useVehicleContext, VehicleDataInterface } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
-import { getVehicleByLicensePlate } from "@/backend/actions"
+import { addNewVehicle, getVehicleByLicensePlate } from "@/backend/actions"
 
 export const VehicleDataModal = () => {
   const { register, formState: { errors }, setValue, handleSubmit } = useForm<VehicleDataInterface>()
@@ -36,17 +36,21 @@ export const VehicleDataModal = () => {
       const vehicleFounded = await getVehicleByLicensePlate(data.licensePlate)
 
       if (vehicleFounded) {
-        // se encontro datos el vehiculo en el backend
+        // vehicle founded in database
         setVehicleInStorage(vehicleFounded)
         handleClose()
         return
 
       } else if (!vehicleFounded && !showFormToCompleteData) {
-        // no existe informacion en el backend del vehiculo
+        // doesn't exist vehicle in database, show form modal
         setShowFormModalToCompleteData(true)
         return
 
       } else if (!vehicleFounded && showFormToCompleteData) {
+        // doesn't exist vehicle in database, send the new car data to backend and set in storage
+        const res = await addNewVehicle(data)
+        if (!res.success) throw new Error(res.errorMessage!)
+
         setVehicleInStorage(data)
         handleClose()
         return
