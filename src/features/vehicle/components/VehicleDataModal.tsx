@@ -75,7 +75,7 @@ export const VehicleDataModal = () => {
     setValue("mileage", formatted)
   }
 
-  // if (!isMounted) return null
+  if (!isMounted) return null
 
   return (
     <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-black/20">
