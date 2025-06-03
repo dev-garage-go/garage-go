@@ -2,7 +2,7 @@
 
 import { connectDatabase } from "./connect"
 import type { Collection } from "mongodb"
-import { BookingDB, ServiceDB, VehicleDB } from "./interfaces"
+import { BookingDB, ServiceDB, VehicleDB } from "./types"
 
 type CollectionMap = {
   vehicles: VehicleDB

@@ -1,6 +1,6 @@
 'use client'
 
-import { BookingDB } from "@/backend/database/interfaces/bookings"
+import { BookingDB } from "@/backend/database/types/bookings"
 import { ServiceNamesMap } from "@/features/services";
 import dayjs from 'dayjs';
 
@@ -67,7 +67,7 @@ export const BookingTable = ({ bookings }: Props) => {
               className="bg-white border-b transition duration-300 ease-in-out hover:bg-primaryBlue-50 hover:brightness-110 cursor-pointer">
 
               <td className="table-row-style whitespace-nowrap">
-                #{booking._id.slice(0, 8)}
+                #{booking._id?.slice(0, 8)}
               </td>
 
               <td className="table-row-style whitespace-nowrap">

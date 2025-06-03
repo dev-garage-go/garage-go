@@ -1,6 +1,6 @@
 import { getBookings } from "@/backend/actions";
 import { BookingTable } from "@/features/admin";
-import { BookingDB } from "@/backend/database/interfaces";
+import { BookingDB } from "@/backend/database/types";
 
 export default async function BookingAdminPage() {
   const bookings = await getBookings() as BookingDB[]
