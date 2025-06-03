@@ -1,14 +1,14 @@
 "use server"
 
+import { getCollection } from "@/backend/database"
 import { ErrorInterface, HttpStatus } from "@/backend/interfaces"
 import { VehicleDataInterface } from "@/features/vehicle"
-import { sleep } from "@/utils"
 
-export const addNewVehicle = async (data: VehicleDataInterface): Promise<ErrorInterface> => {
+export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<ErrorInterface> => {
   try {
-    // TODO: const newCar = await db.New(car)
+    const coll = await getCollection("vehicles")
+    await coll.insertOne(vehicle)
 
-    sleep(400)
     return {
       success: true,
       status: HttpStatus.OK,

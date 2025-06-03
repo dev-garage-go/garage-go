@@ -1,19 +1,22 @@
 // methods.ts
 
 import { connectDatabase } from "./connect"
-import type { Document, Collection } from "mongodb"
+import type { Collection } from "mongodb"
+import { BookingDB, ServiceDB, VehicleDB } from "./interfaces"
 
-export type Collections = (
-  'bookings' | 'coupons' | 'services' | 'promotions'
-)
+type CollectionMap = {
+  vehicles: VehicleDB
+  bookings: BookingDB
+  services: ServiceDB
+}
 
-export const getCollection = async <T extends Document = Document>(
-  name: Collections
-): Promise<Collection<T>> => {
+export const getCollection = async <K extends keyof CollectionMap>(
+  name: K
+): Promise<Collection<CollectionMap[K]>> => {
   const db = await connectDatabase()
   if (!db) throw new Error('Error connecting database')
 
-  const col = db.collection<T>(name)
+  const col = db.collection<CollectionMap[K]>(name)
   if (!col) throw new Error("The collection doesn't exist")
   return col
 }
