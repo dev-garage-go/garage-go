@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { BookingServiceDataInterface, AddressTypesData, SchedulePicker, CalendarPicker } from "@/features/bookings";
-import { OtherLicensePlateButton } from "@/features/vehicle";
+import { ChangeVehicleButton } from "@/features/vehicle";
 import { ErrorMessage, InformationButton, Select } from "@/components";
 
 interface Props {
@@ -116,7 +116,7 @@ export const BookingForm = ({ withBooking }: Props) => {
             <p className="font-medium text-primaryBlue-500">10.000 kms.</p>
           </div>
           <div>
-            <OtherLicensePlateButton />
+            <ChangeVehicleButton />
           </div>
         </div>
       </section>
