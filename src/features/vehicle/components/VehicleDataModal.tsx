@@ -1,78 +1,74 @@
 'use client'
 
 import React, { useEffect, useState } from "react"
+import clsx from "clsx"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "@/components"
 
-import { useVehicleContext } from "@/features/vehicle"
+import { useVehicleContext, VehicleDataInterface } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
-import { VehicleDataInterface } from "../types/vehicle"
-import clsx from "clsx"
+
+import { getVehicleByLicensePlate } from "@/backend/actions"
 
 interface Props {
   setClose: React.Dispatch<boolean>
 }
 
 export const VehicleDataModal = ({ setClose }: Props) => {
-  const { setLicensePlateInStorage, setVehicleInStorage } = useVehicleContext()
+  const { register, formState: { errors }, setValue, handleSubmit } = useForm<VehicleDataInterface>()
+  const { setVehicleInStorage } = useVehicleContext()
 
-  const { register, watch, formState: { errors }, setValue, handleSubmit } = useForm<VehicleDataInterface>()
-  const hasLicensePlate = watch("licensePlate")
+  // States
+  const [modalIsVisible, setModalIsVisible] = useState<boolean>(false)
 
-  // en principio es 'true', define si el backend y la db encontraron informacion en base
-  // a la patente que el usuario coloco. Si no se encuentra data, el usuario debe crear ese registro
-  // cargandolo manulamente, por lo tanto esto se pondria en 'false'
-  const [vehicleDataFounded, setVehicleDataFounded] = useState<boolean>(false)
 
   // en principio se muestra un modal solo para colocar patentes
   // si el backend y la db no encuentran registros del auto, esto debe ser 'true'
-  // haciendo que el modal para completar manualmente los datos del vehiculo aparezca
-  const [showModalToCompleteData, setShowModalToCompleteData] = useState<boolean>(false)
+  // haciendo que aparezca el formulario para completar los datos del auto manualmente
+  const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(false)
 
-  /* TODO: Backend func
-    const getVehicleDataByLicensePlate = (value: string) => {
-    try{
-      setVehicleInStorage(data)
-    } catch (error) {
-      mostrar algo al usuario en la UI
-      console.log(error)
-      setVehicleDataFounded(false)
-     }
-    }
-  */
-
-  // queda escuchando si el backend comunico si encontro o no data del auto en la db
-  // en base a eso, se renderiza un modal u otro
-  useEffect(() => {
-    if (!vehicleDataFounded) {
-      setShowModalToCompleteData(true)
-    }
-  }, [vehicleDataFounded,])
-
-  // animacion del modal ease-out
-  const [isVisible, setIsVisible] = useState<boolean>(false)
-
+  // se demora unos ms para que el DOM cargue las clases y se produzca la animación
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setIsVisible(true)
+      setModalIsVisible(true)
     }, 20)
 
     return () => clearTimeout(timeout)
   }, [])
 
-  const onSumbit = (data: VehicleDataInterface) => {
-    if (vehicleDataFounded && hasLicensePlate) {
-      // se encontro datos el vehiculo en el backend
-      setLicensePlateInStorage(hasLicensePlate.toLocaleUpperCase()) // esto debe cambiarse por setVehicleInStorage cuando haya un backend
-      setClose(false)
-      return
+  // anima el cierre del modal
+  const handleClose = () => {
+    setModalIsVisible(false)
+    setTimeout(() => setClose(false),)
+  }
 
-    } else if (!vehicleDataFounded && showModalToCompleteData) {
-      // no existe informacion en el backend del vehiculo
-      setVehicleInStorage(data)
-      setClose(false)
+  const onSumbit = async (data: VehicleDataInterface) => {
+    try {
+      // TODO: Cachear la respueta de vehicleFounded para no impactar innecesariamente la db
+      const vehicleFounded = await getVehicleByLicensePlate(data.licensePlate)
+
+      if (vehicleFounded) {
+        // se encontro datos el vehiculo en el backend
+        setVehicleInStorage(vehicleFounded)
+        handleClose()
+        return
+
+      } else if (!vehicleFounded && !showFormToCompleteData) {
+        // no existe informacion en el backend del vehiculo
+        setShowFormModalToCompleteData(true)
+        return
+
+      } else if (!vehicleFounded && showFormToCompleteData) {
+        setVehicleInStorage(data)
+        handleClose()
+        return
+      }
+
+    } catch (error) {
+      console.error(error)
     }
   }
+
 
   const handleYear = (e: React.ChangeEvent<HTMLInputElement>) => {
     const formatted = allowOnlyNumbers(e.target.value)
@@ -86,13 +82,13 @@ export const VehicleDataModal = ({ setClose }: Props) => {
 
   return (
     <>
-      {!showModalToCompleteData ? (
+      {!showFormToCompleteData ? (
         <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-black/20">
           <div className={clsx(
             "flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl max-h-72 bg-opacity-100 mx-4 transition-all duration-300 ease-out",
             {
-              "opacity-0 scale-50": !isVisible,
-              "opacity-100 scale-100": isVisible
+              "opacity-0 scale-50": !modalIsVisible,
+              "opacity-100 scale-100": modalIsVisible
             }
           )}>
 
@@ -136,8 +132,8 @@ export const VehicleDataModal = ({ setClose }: Props) => {
             <div className={clsx(
               "flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl xl:max-w-3xl max-h-[600px] bg-opacity-100 mx-4 transition-all duration-300 ease-out",
               {
-                "opacity-0 scale-50": !isVisible,
-                "opacity-100 scale-100": isVisible
+                "opacity-0 scale-50": !modalIsVisible,
+                "opacity-100 scale-100": modalIsVisible
               }
             )}>
 
