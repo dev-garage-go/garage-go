@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 import clsx from "clsx"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "@/components"
@@ -9,6 +9,7 @@ import { useVehicleContext, VehicleDataInterface } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
 import { addNewVehicle, getVehicleByLicensePlate } from "@/backend/actions"
+import { VehicleDB } from "@/backend/database/types"
 
 export const VehicleDataModal = () => {
   const { register, formState: { errors }, setValue, handleSubmit } = useForm<VehicleDataInterface>()
@@ -18,6 +19,9 @@ export const VehicleDataModal = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(false) // if the backend not found a vehicle in database, open the form to fill fields with a new car
+
+  // caching
+  const cachedVehicle = useRef<VehicleDB | null>(null)
 
   // delays the state change by a few ms, so that the DOM can load the css classes and generate an animation.
   useEffect(() => {
@@ -34,12 +38,17 @@ export const VehicleDataModal = () => {
 
   const onSumbit = async (data: VehicleDataInterface) => {
     try {
-      // TODO: Cachear la respuesta de vehicleFounded para no impactar innecesariamente la db
-      const vehicleFounded = await getVehicleByLicensePlate(data.licensePlate)
+      if (!cachedVehicle.current) {
+        cachedVehicle.current = await getVehicleByLicensePlate(data.licensePlate)
+      }
+
+      const vehicleFounded = cachedVehicle.current
 
       if (vehicleFounded) {
         // vehicle founded in database
-        setVehicleInStorage(vehicleFounded)
+        const { _id, ...rest } = vehicleFounded
+
+        setVehicleInStorage(rest)
         handleClose()
         return
 
