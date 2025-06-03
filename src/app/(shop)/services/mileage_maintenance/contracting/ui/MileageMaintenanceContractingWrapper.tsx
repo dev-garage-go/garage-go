@@ -37,7 +37,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   return (
     <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
       {!licensePlate && modalIsOpen &&
-        <ModalPortal>
+        <ModalPortal isOpen={modalIsOpen}>
           <LazyVehicleDataModal setClose={setModalIsOpen} /> {/* the component is only imported if the conditions are met */}
         </ModalPortal>
       }
