@@ -1,7 +1,7 @@
 'use server'
 
 import { BookingDB, getCollection } from "@/backend/database";
-import { ErrorInterface, HttpStatus } from "@/backend/interfaces";
+import { ErrorInterface, HttpStatus } from "@/backend/types";
 import { BookingServiceDataInterface } from "@/features/bookings";
 import { ObjectId } from "mongodb";
 
