@@ -3,8 +3,7 @@
 import { getCollection } from "@/backend/database"
 import { VehicleDB } from "@/backend/database/types"
 import { VehicleDataInterface } from "@/features/vehicle"
-import { ServerActionResponse } from '../../types/server-action-response';
-import { HttpStatus } from "@/backend/types";
+import { HttpStatus, ServerActionResponse } from "@/backend/types";
 
 export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<ServerActionResponse<VehicleDB>> => {
   try {
