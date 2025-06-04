@@ -3,7 +3,7 @@ import { HttpStatus } from "./http-status"
 export type ServerActionResponse<T> =
   {
     success: true
-    data: T
+    data: T | null
     httpStatus: HttpStatus
   }
   |

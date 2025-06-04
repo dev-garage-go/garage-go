@@ -1,11 +1,11 @@
 'use server'
 
 import { BookingDB, getCollection } from "@/backend/database";
-import { ErrorInterface, HttpStatus } from "@/backend/types";
+import { HttpStatus, ServerActionResponse } from "@/backend/types";
 import { BookingServiceDataInterface } from "@/features/bookings";
 import { ObjectId } from "mongodb";
 
-export const createBooking = async (booking: BookingServiceDataInterface): Promise<ErrorInterface> => {
+export const createBooking = async (booking: BookingServiceDataInterface): Promise<ServerActionResponse<void>> => {
   try {
     const coll = await getCollection("bookings")
 
@@ -22,15 +22,16 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
 
     return {
       success: true,
-      status: HttpStatus.OK,
-      errorMessage: null
+      httpStatus: HttpStatus.OK,
+      data: null
     }
+
   } catch (error) {
     console.error(error)
     return {
       success: false,
-      errorMessage: `Error creating a new booking: ${error}`,
-      status: HttpStatus.INTERNAL_SERVER_ERROR
+      error: `Error creating a new booking: ${error}`,
+      httpStatus: HttpStatus.INTERNAL_SERVER_ERROR
     }
   }
 }

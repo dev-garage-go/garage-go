@@ -8,9 +8,6 @@ import { createBooking, getServiceAmount } from "@/backend/actions"
 import { useVehicleContext, licensePlateType } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
 import { bookingKey } from "../keys/storage"
-import { ObjectId } from 'mongodb';
-
-
 
 interface ServiceBookingType {
   setBookingInStorage: (data: any) => void
@@ -59,23 +56,22 @@ export const BookingContextProvider = ({ children }: Props) => {
         amount: amountService
       }
 
-      try {
-        const err = await createBooking(booking)
-        if (!err.errorMessage) {
-          // emailSent = await sendConfirmationEmail() -> Send email
-          // if(emailSent.success) {
-          setBookingCreated(true)
-          // } else {}
+      const response = await createBooking(booking)
 
-          deleteServiceFromStorage()
-        } else {
-          setBookingCreated(false)
-        }
-      } catch (error) {
-        console.error(error)
+      if (!response.success) {
+        setBookingCreated(false)
+        // toast with error message
       }
+
+      // emailSent = await sendConfirmationEmail() -> Send email
+      // if(emailSent.success) {
+      setBookingCreated(true)
+      // } else {}
+
+      deleteServiceFromStorage()
     }
   }
+
 
   return <BookingContext.Provider
     value={{

@@ -4,7 +4,7 @@ import { BookingTable } from "@/features/admin";
 export default async function BookingAdminPage() {
   const response = await getBookingsWithVehicleData()
 
-  if (!response.success) return; // show toast with error message
+  if (!response.success || !response.data) return; // show toast with error message
   const bookings = response.data
 
   return (
