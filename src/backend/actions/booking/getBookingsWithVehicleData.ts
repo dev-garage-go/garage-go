@@ -8,7 +8,10 @@ import { getBookings } from "./getBookings"
 
 export const getBookingsWithVehicleData = async (): Promise<ServerActionResponse<BookingAdmin[]>> => {
   try {
-    const rawBookings = await getBookings();
+    const response = await getBookings();
+    if (!response.success) throw new Error(response.error);
+
+    const rawBookings = response.data
     const vehicleColl = await getCollection('vehicles');
 
     if (!rawBookings) throw new Error("error: bookings not founded");
