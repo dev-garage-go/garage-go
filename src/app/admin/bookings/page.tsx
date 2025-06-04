@@ -1,9 +1,9 @@
 import { getBookings } from "@/backend/actions";
 import { BookingTable } from "@/features/admin";
-import { BookingDB } from "@/backend/database/types";
+import { BookingAdmin } from "@/backend/database/types";
 
 export default async function BookingAdminPage() {
-  const bookings = await getBookings() as BookingDB[]
+  const bookings = await getBookings() as BookingAdmin[]
 
   return (
     <section className="min-h-screen w-full bg-customGray-200 p-10">

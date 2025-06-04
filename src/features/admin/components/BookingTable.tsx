@@ -1,6 +1,6 @@
 'use client'
 
-import { BookingDB } from "@/backend/database/types/bookings"
+import { BookingAdmin } from "@/backend/database/types/bookings"
 import { ServiceNamesMap } from "@/features/services";
 import dayjs from 'dayjs';
 
@@ -8,19 +8,22 @@ import { formatNumberWithDots } from '@/utils';
 import { useAdminGuard } from "@/features/admin/hooks/useAdminGuard";
 
 interface Props {
-  bookings: BookingDB[]
+  bookings: BookingAdmin[]
 }
 
 export const BookingTable = ({ bookings }: Props) => {
   useAdminGuard()
-  if (!bookings) return;
+
+  if (!bookings) return (
+    <div>
+      Error obteniendo las reservas
+    </div>
+  )
 
   const formatDate = (data: any): string => {
     const f = dayjs(data).format('DD/MM/YYYY')
     return f
   }
-
-  // TODO: Obtener vehiculo desde base de datos
 
   return (
     <table className="min-w-full">
@@ -59,8 +62,6 @@ export const BookingTable = ({ bookings }: Props) => {
 
       <tbody>
         {bookings.map((booking) => {
-          if (!booking) return;
-
           return (
             <tr
               key={booking._id}
@@ -86,9 +87,9 @@ export const BookingTable = ({ bookings }: Props) => {
               </td>
 
               <td className="table-row-style text-wrap capitalize">
-                {/* {booking.vehicle.brand + " " + booking.vehicle.model} */}
+                {booking.vehicle.brand + " " + booking.vehicle.model}
                 <br />
-                {/* {booking.vehicle.year} */}
+                {booking.vehicle.year}
               </td>
 
               <td className="table-row-style">
