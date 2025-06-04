@@ -2,15 +2,16 @@
 
 import { BookingAdmin } from "@/backend/database/types"
 import { getCollection } from "@/backend/database/methods"
+import { getBookings } from "./getBookings"
 
 export const getBookingsWithVehicleData = async (): Promise<BookingAdmin[]> => {
-  const bookingColl = await getCollection('bookings')
-  const vehicleColl = await getCollection('vehicles')
+  const rawBookings = await getBookings();
+  const vehicleColl = await getCollection('vehicles');
 
-  const bookingsArr = await bookingColl.find().toArray()
+  if (!rawBookings) throw new Error("error: bookings not founded");
 
   const bookings = await Promise.all(
-    bookingsArr.map(async (booking) => {
+    rawBookings.map(async (booking) => {
       const { vehicleID, _id: bId, ...restBooking } = booking
 
       // search vehicle data using the vehicleID
@@ -21,7 +22,7 @@ export const getBookingsWithVehicleData = async (): Promise<BookingAdmin[]> => {
 
       // transforms mongo ObjectsId in string
       const validVehicleID = vId.toString()
-      const validBookingId = bId.toString()
+      const validBookingId = bId!.toString()
 
       return {
         _id: validBookingId,
