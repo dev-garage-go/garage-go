@@ -5,7 +5,7 @@ import clsx from "clsx"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "@/components"
 
-import { useVehicleContext, VehicleDataInterface } from "@/features/vehicle"
+import { licensePlateType, useVehicleContext, VehicleDataInterface } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
 import { addNewVehicle, getVehicleByLicensePlate } from "@/backend/actions"
@@ -46,9 +46,7 @@ export const VehicleDataModal = () => {
 
       if (vehicleFounded) {
         // vehicle founded in database
-        const { _id, ...rest } = vehicleFounded
-
-        setVehicleInStorage(rest)
+        setVehicleInStorage(vehicleFounded)
         handleClose()
         return
 

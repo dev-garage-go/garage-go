@@ -1,7 +1,7 @@
 import { Dayjs } from 'dayjs';
 import { Hour } from './schedules';
-import { VehicleDataInterface } from '@/features/vehicle';
 import { ServicesDataType } from '@/features/services';
+import { licensePlateType } from '@/features/vehicle';
 
 export interface UserInterface {
   name: string;
@@ -33,7 +33,7 @@ export interface AmountInterface {
 export interface BookingServiceDataInterface {
   service: ServicesDataType,
   user: UserInterface,
-  vehicle: VehicleDataInterface,
+  vehicleID: licensePlateType,
   appointment: Appointment
   amount: AmountInterface
 }

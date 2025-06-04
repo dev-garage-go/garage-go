@@ -20,7 +20,7 @@ export const BookingTable = ({ bookings }: Props) => {
     return f
   }
 
-
+  // TODO: Obtener vehiculo desde base de datos
 
   return (
     <table className="min-w-full">
@@ -86,9 +86,9 @@ export const BookingTable = ({ bookings }: Props) => {
               </td>
 
               <td className="table-row-style text-wrap capitalize">
-                {booking.vehicle.brand + " " + booking.vehicle.model}
+                {/* {booking.vehicle.brand + " " + booking.vehicle.model} */}
                 <br />
-                {booking.vehicle.year}
+                {/* {booking.vehicle.year} */}
               </td>
 
               <td className="table-row-style">

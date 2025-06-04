@@ -5,7 +5,7 @@ import { AppointmentDataInterface, BookingServiceDataInterface } from "@/feature
 
 import { createBooking, getServiceAmount } from "@/backend/actions"
 
-import { useVehicleContext } from "@/features/vehicle"
+import { useVehicleContext, licensePlateType } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
 import { bookingKey } from "../keys/storage"
 
@@ -53,7 +53,7 @@ export const BookingContextProvider = ({ children }: Props) => {
       const booking: BookingServiceDataInterface = {
         service: service,
         appointment: data.appointment,
-        vehicle: vehicle,
+        vehicleID: vehicle._id!,
         user: data.user,
         amount: amountService
       }

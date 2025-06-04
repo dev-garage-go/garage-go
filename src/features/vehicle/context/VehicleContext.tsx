@@ -7,13 +7,14 @@ import {
   useGetVehicleOnChangeStorage,
   VehicleDataInterface
 } from "@/features/vehicle"
+import { VehicleDB } from "@/backend/database/types"
 
 interface VehicleContextType {
   showModal: boolean
   setShowModal: React.Dispatch<SetStateAction<boolean>>
   vehicle: VehicleDataInterface | null
   setVehicleInStorage: (data: VehicleDataInterface) => void
-  getVehicleFromStorage: () => VehicleDataInterface | null
+  getVehicleFromStorage: () => VehicleDB | null
   deleteVehicle: () => void
 }
 
@@ -47,7 +48,7 @@ export const VehicleContextProvider = ({ children }: Props) => {
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
-  const getVehicleFromStorage = (): VehicleDataInterface | null => {
+  const getVehicleFromStorage = (): VehicleDB | null => {
     if (!isClient) return null
     const data = localStorage.getItem(vehicleKey)
     return data ? JSON.parse(data) : null
@@ -66,7 +67,7 @@ export const VehicleContextProvider = ({ children }: Props) => {
   useEffect(() => {
     if (!vehicle) {
       setShowModal(true)
-    } 
+    }
   }, [vehicle])
 
 
