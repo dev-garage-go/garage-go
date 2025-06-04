@@ -3,8 +3,10 @@
 import { getCollection } from "@/backend/database"
 import { VehicleDB } from "@/backend/database/types"
 import { VehicleDataInterface } from "@/features/vehicle"
+import { ServerActionResponse } from '../../types/server-action-response';
+import { HttpStatus } from "@/backend/types";
 
-export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<VehicleDB | null> => {
+export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<ServerActionResponse<VehicleDB>> => {
   try {
     const coll = await getCollection("vehicles")
     const result = await coll.insertOne(vehicle)
@@ -12,10 +14,19 @@ export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<Vehi
     if (!coll || !result) throw new Error(`unexpected error creating a new car`)
 
     const newVehicle = await coll.findOne({ _id: result.insertedId })
-    return newVehicle
+
+    return {
+      success: true,
+      httpStatus: HttpStatus.OK,
+      data: newVehicle
+    }
 
   } catch (error) {
     console.error(error)
-    return null
+    return {
+      success: false,
+      httpStatus: HttpStatus.BAD_REQUEST,
+      error: `error creating new vehicle: ${error}`
+    }
   }
 }

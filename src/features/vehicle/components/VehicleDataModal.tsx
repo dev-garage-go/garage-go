@@ -54,10 +54,11 @@ export const VehicleDataModal = () => {
 
       } else if (!vehicleFounded && showFormToCompleteData) {
         // doesn't exist vehicle in database, send the new car data to backend and set in storage
-        const newCar = await addNewVehicle(data)
-        if (!newCar) throw new Error("error creating new car")
+        const response = await addNewVehicle(data)
 
-        setVehicleInStorage(newCar)
+        if (!response.success) throw new Error(response.error)
+
+        setVehicleInStorage(response.data!)
         handleClose()
         return
       }
