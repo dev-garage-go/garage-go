@@ -4,11 +4,21 @@ import { getCollection } from "@/backend/database"
 import { VehicleDB } from "@/backend/database/types"
 import { VehicleDataInterface } from "@/features/vehicle"
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
+import { removeDotsFromNumber } from "@/utils";
 
 export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<ServerActionResponse<VehicleDB>> => {
   try {
     const coll = await getCollection("vehicles")
-    const result = await coll.insertOne(vehicle)
+
+    const v: VehicleDB = {
+      licensePlate: vehicle.licensePlate.toUpperCase().trim(),
+      brand: vehicle.brand.toLowerCase().trim(),
+      mileage: vehicle.mileage.toLowerCase(),
+      model: vehicle.model.toLowerCase(),
+      year: removeDotsFromNumber(vehicle.year).trim()
+    }
+
+    const result = await coll.insertOne(v)
 
     if (!coll || !result) throw new Error(`unexpected error creating a new car`)
 

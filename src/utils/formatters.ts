@@ -19,3 +19,7 @@ export const formatNumberWithDots = (value: string | number): string => {
   const cleaned = str.replace(/\D/g, '');
   return cleaned.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
 }
+
+export function removeDotsFromNumber(input: string | number): string {
+  return input.toString().replace(/\./g, "");
+}
