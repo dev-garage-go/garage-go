@@ -40,11 +40,20 @@ export const VehicleContextProvider = ({ children }: Props) => {
   const [showModal, setShowModal] = useState<boolean>(false)
   const vehicle = useGetVehicleOnChangeStorage()
 
-  // ? Vehicle local storage
-  // localStorage: All vehicle data
+  // methods to impact localStorage
   const setVehicleInStorage = (data: VehicleDB): void => {
     if (!isClient) return
-    localStorage.setItem(vehicleKey, JSON.stringify(data))
+
+    // converts object id in a simple string
+    const { _id, ...rest } = data
+    const validId = _id ? _id.toString() : ''
+
+    const validObjectStorage: VehicleInStorageInterface = {
+      _id: validId,
+      ...rest
+    }
+
+    localStorage.setItem(vehicleKey, JSON.stringify(validObjectStorage))
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
