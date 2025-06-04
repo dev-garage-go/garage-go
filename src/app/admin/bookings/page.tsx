@@ -1,4 +1,5 @@
 import { getBookingsWithVehicleData } from "@/backend/actions";
+import { RefreshButton } from "@/components";
 import { BookingTable } from "@/features/admin";
 
 export default async function BookingAdminPage() {
@@ -12,6 +13,10 @@ export default async function BookingAdminPage() {
       <h1 className="title-h3 mb-6 font-semibold">
         Reservas
       </h1>
+
+      <div className="mt-10 mb-4">
+        <RefreshButton />
+      </div>
 
       <BookingTable bookings={bookings} />
     </section>

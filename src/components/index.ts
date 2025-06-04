@@ -2,6 +2,7 @@ export * from './buttons/BookingHeaderButton';
 export * from './buttons/ButtonOptions';
 export * from './buttons/InformationButton';
 export * from './buttons/RadioButton';
+export * from './buttons/RefreshButton';
 export * from './buttons/SwitchButton';
 export * from './buttons/WhatsAppButton';
 export * from './shared/Loader';
