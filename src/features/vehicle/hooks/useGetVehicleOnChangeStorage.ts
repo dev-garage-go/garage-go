@@ -16,11 +16,11 @@ import { useRouter } from "next/navigation"
 import {
   customVehicleUpdateEvent,
   vehicleKey,
-  VehicleDataInterface
+  VehicleInStorageInterface
 } from "@/features/vehicle"
 
 
-export const useGetVehicleOnChangeStorage = (): VehicleDataInterface | null => {
+export const useGetVehicleOnChangeStorage = (): VehicleInStorageInterface | null => {
   const router = useRouter()
   const hasRefreshed = useRef(false)
   const [vehicle, setVehicle] = useState<string | null>(null)

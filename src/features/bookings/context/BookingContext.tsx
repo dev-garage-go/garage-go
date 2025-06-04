@@ -54,7 +54,7 @@ export const BookingContextProvider = ({ children }: Props) => {
       const booking: BookingServiceDataInterface = {
         service: service,
         appointment: data.appointment,
-        vehicleID: vehicle._id!,
+        vehicleID: vehicle._id,
         user: data.user,
         amount: amountService
       }

@@ -1,15 +1,25 @@
 'use server'
 
-import { getCollection } from "@/backend/database";
+import { BookingDB, getCollection } from "@/backend/database";
 import { ErrorInterface, HttpStatus } from "@/backend/interfaces";
 import { BookingServiceDataInterface } from "@/features/bookings";
+import { ObjectId } from "mongodb";
 
 export const createBooking = async (booking: BookingServiceDataInterface): Promise<ErrorInterface> => {
   try {
     const coll = await getCollection("bookings")
-    coll.insertOne(booking)
 
-    console.log("Booking added in database")
+    // Convert the vehicle id in a mongo ObjectId
+    const { vehicleID, ...rest } = booking
+    const vehicleObjectId = new ObjectId(vehicleID)
+
+    const validBooking: BookingDB = {
+      vehicleID: vehicleObjectId,
+      ...rest
+    }
+
+    coll.insertOne(validBooking)
+
     return {
       success: true,
       status: HttpStatus.OK,

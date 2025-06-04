@@ -1,9 +1,9 @@
 "use server"
 
 import { getCollection } from "@/backend/database"
-import { VehicleDataInterface } from "@/features/vehicle"
+import { VehicleDB } from "@/backend/database/types"
 
-export const getVehicleByLicensePlate = async (licencePlate: string): Promise<VehicleDataInterface | null> => {
+export const getVehicleByLicensePlate = async (licencePlate: string): Promise<VehicleDB | null> => {
   try {
     const coll = await getCollection("vehicles")
     const vehicle = await coll.findOne({ licensePlate: licencePlate })

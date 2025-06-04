@@ -1,25 +1,21 @@
 "use server"
 
 import { getCollection } from "@/backend/database"
-import { ErrorInterface, HttpStatus } from "@/backend/interfaces"
+import { VehicleDB } from "@/backend/database/types"
 import { VehicleDataInterface } from "@/features/vehicle"
 
-export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<ErrorInterface> => {
+export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<VehicleDB | null> => {
   try {
     const coll = await getCollection("vehicles")
-    await coll.insertOne(vehicle)
+    const result = await coll.insertOne(vehicle)
 
-    return {
-      success: true,
-      status: HttpStatus.OK,
-      errorMessage: null
-    }
+    if (!coll || !result) throw new Error(`unexpected error creating a new car`)
+
+    const newVehicle = await coll.findOne({ _id: result.insertedId })
+    return newVehicle
+
   } catch (error) {
-    console.error
-    return {
-      success: false,
-      status: HttpStatus.INTERNAL_SERVER_ERROR,
-      errorMessage: `error creating a new vehicle ${error}`,
-    }
+    console.error(error)
+    return null
   }
 }

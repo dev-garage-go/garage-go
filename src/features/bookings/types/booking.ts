@@ -1,8 +1,6 @@
 import { Dayjs } from 'dayjs';
 import { Hour } from './schedules';
 import { ServicesDataType } from '@/features/services';
-import { licensePlateType } from '@/features/vehicle';
-import { ObjectId } from 'mongodb';
 
 export interface UserInterface {
   name: string;
@@ -34,7 +32,7 @@ export interface AmountInterface {
 export interface BookingServiceDataInterface {
   service: ServicesDataType,
   user: UserInterface,
-  vehicleID: ObjectId,
+  vehicleID: string,  // al guardarlo en localstorage el Mongo ObjectID se convierte automaticamente en string
   appointment: Appointment
   amount: AmountInterface
 }

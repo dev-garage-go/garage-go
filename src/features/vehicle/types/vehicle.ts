@@ -11,3 +11,7 @@ export type licensePlateType = z.infer<typeof licensePlate>;
     year: string
     mileage: string
   }
+
+export interface VehicleInStorageInterface extends VehicleDataInterface {
+  _id: string
+}

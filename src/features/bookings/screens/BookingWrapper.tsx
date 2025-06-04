@@ -37,7 +37,6 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
 
   // Func that will be executed when form its submitted
   const onSubmit = async (data: AppointmentDataInterface) => {
-    console.log(data)
     createServiceBooking(data)
 
     setShowConfirmModal(true)

@@ -38,11 +38,8 @@ export const VehicleDataModal = () => {
 
   const onSumbit = async (data: VehicleDataInterface) => {
     try {
-      if (!cachedVehicle.current) {
-        cachedVehicle.current = await getVehicleByLicensePlate(data.licensePlate)
-      }
+      const vehicleFounded = await getVehicleByLicensePlate(data.licensePlate)
 
-      const vehicleFounded = cachedVehicle.current
 
       if (vehicleFounded) {
         // vehicle founded in database
@@ -57,10 +54,10 @@ export const VehicleDataModal = () => {
 
       } else if (!vehicleFounded && showFormToCompleteData) {
         // doesn't exist vehicle in database, send the new car data to backend and set in storage
-        const res = await addNewVehicle(data)
-        if (!res.success) throw new Error(res.errorMessage!)
+        const newCar = await addNewVehicle(data)
+        if (!newCar) throw new Error("error creating new car")
 
-        setVehicleInStorage(data)
+        setVehicleInStorage(newCar)
         handleClose()
         return
       }

@@ -5,16 +5,16 @@ import {
   customVehicleUpdateEvent,
   vehicleKey,
   useGetVehicleOnChangeStorage,
-  VehicleDataInterface
+  VehicleInStorageInterface
 } from "@/features/vehicle"
 import { VehicleDB } from "@/backend/database/types"
 
 interface VehicleContextType {
   showModal: boolean
   setShowModal: React.Dispatch<SetStateAction<boolean>>
-  vehicle: VehicleDataInterface | null
-  setVehicleInStorage: (data: VehicleDataInterface) => void
-  getVehicleFromStorage: () => VehicleDB | null
+  vehicle: VehicleInStorageInterface | null
+  setVehicleInStorage: (data: VehicleDB) => void
+  getVehicleFromStorage: () => VehicleInStorageInterface | null
   deleteVehicle: () => void
 }
 
@@ -42,13 +42,13 @@ export const VehicleContextProvider = ({ children }: Props) => {
 
   // ? Vehicle local storage
   // localStorage: All vehicle data
-  const setVehicleInStorage = (data: VehicleDataInterface) => {
+  const setVehicleInStorage = (data: VehicleDB): void => {
     if (!isClient) return
     localStorage.setItem(vehicleKey, JSON.stringify(data))
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
-  const getVehicleFromStorage = (): VehicleDB | null => {
+  const getVehicleFromStorage = (): VehicleInStorageInterface | null => {
     if (!isClient) return null
     const data = localStorage.getItem(vehicleKey)
     return data ? JSON.parse(data) : null
