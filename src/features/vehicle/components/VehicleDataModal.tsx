@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useRef, useState } from "react"
 import clsx from "clsx"
+import { useEffect, useRef, useState } from "react"
 import { useForm } from "react-hook-form"
 import { ErrorMessage } from "@/components"
 
-import { licensePlateType, useVehicleContext, VehicleDataInterface } from "@/features/vehicle"
+import { useVehicleContext, VehicleDataInterface } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
 import { addNewVehicle, getVehicleByLicensePlate } from "@/backend/actions"
@@ -38,8 +38,9 @@ export const VehicleDataModal = () => {
 
   const onSumbit = async (data: VehicleDataInterface) => {
     try {
-      const vehicleFounded = await getVehicleByLicensePlate(data.licensePlate)
-
+      const response = await getVehicleByLicensePlate(data.licensePlate)
+      if (!response.success) throw new Error(response.error)
+      const vehicleFounded = response.data
 
       if (vehicleFounded) {
         // vehicle founded in database
