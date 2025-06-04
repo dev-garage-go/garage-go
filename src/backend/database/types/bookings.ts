@@ -1,5 +1,4 @@
 import { BookingServiceDataInterface } from "@/features/bookings"
-import { VehicleDB } from "./vehicle"
 import { ObjectId } from "mongodb"
 import { VehicleWithStringIDInterface } from "@/features/vehicle"
 
