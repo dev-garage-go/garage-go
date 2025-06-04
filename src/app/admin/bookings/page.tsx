@@ -1,9 +1,11 @@
 import { getBookingsWithVehicleData } from "@/backend/actions";
 import { BookingTable } from "@/features/admin";
-import { BookingAdmin } from "@/backend/database/types";
 
 export default async function BookingAdminPage() {
-  const bookings = await getBookingsWithVehicleData() as BookingAdmin[]
+  const response = await getBookingsWithVehicleData()
+
+  if (!response.success) return; // show toast with error message
+  const bookings = response.data
 
   return (
     <section className="min-h-screen w-full bg-customGray-200 p-10">
