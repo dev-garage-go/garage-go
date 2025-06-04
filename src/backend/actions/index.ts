@@ -8,7 +8,7 @@ export { validateAdminPassword } from './admin/validateAdminPassword';
 
 // Booking
 export { createBooking } from './booking/createBooking';
-export { getBookings } from './booking/getBookings';
+export { getBookingsWithVehicleData } from './booking/getBookingsWithVehicleData';
 
 // Emails
 export { sendEmailAction } from './emails/send-email';
