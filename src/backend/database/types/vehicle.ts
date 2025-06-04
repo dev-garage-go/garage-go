@@ -1,5 +1,6 @@
 import { VehicleDataInterface } from "@/features/vehicle"
+import { ObjectId } from "mongodb"
 
 export interface VehicleDB extends VehicleDataInterface {
-  _id?: string
+  _id?: ObjectId
 }
