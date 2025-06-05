@@ -4,7 +4,8 @@ import {
   ServiceContextProvider,
   VehicleContextProvider,
   BookingContextProvider,
-  AdminContextProvider
+  AdminContextProvider,
+  EmailContextProvider
 } from "./contexts"
 
 interface Props {
@@ -15,11 +16,13 @@ export const ContextsProvider = ({ children }: Props) => {
   return (
     <VehicleContextProvider>
       <ServiceContextProvider>
-        <BookingContextProvider>
-          <AdminContextProvider>
-            {children}
-          </AdminContextProvider>
-        </BookingContextProvider>
+        <EmailContextProvider>
+          <BookingContextProvider>
+            <AdminContextProvider>
+              {children}
+            </AdminContextProvider>
+          </BookingContextProvider>
+        </EmailContextProvider>
       </ServiceContextProvider>
     </VehicleContextProvider>
   )
