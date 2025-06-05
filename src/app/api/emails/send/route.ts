@@ -22,23 +22,24 @@ export async function POST(request: Request): Promise<NextResponse<NextAPIRespon
     const body = (await request.json()) as ConfirmationBookingEmailInterface;
     const { bookingId, firstName, service, userEmail } = body
 
-    const { data, error } = await resend.emails.send({
-      from: domainEmail!,
-      to: [userEmail],
-      subject: 'Confirmación de reserva',
-      react: ConfirmationBookingEmail({ firstName, bookingId, service }),
-    });
-
-    // ! To testing
+    // ! To prod
     // const { data, error } = await resend.emails.send({
-    //   from: 'Acme <onboarding@resend.dev>',
-    //   to: ['development@garageservice.cl'], // or can use the resend dashboard email: delivered@resend.dev
+    //   from: domainEmail!,
+    //   to: [userEmail],
     //   subject: 'Confirmación de reserva',
     //   react: ConfirmationBookingEmail({ firstName, bookingId, service }),
-    //   headers: {
-    //     'X-Resend-Development-Mode': 'true'
-    //   }
     // });
+
+    // ! To testing
+    const { data, error } = await resend.emails.send({
+      from: 'Acme <onboarding@resend.dev>',
+      to: ['development@garageservice.cl'], // or can use the resend dashboard email: delivered@resend.dev
+      subject: 'Confirmación de reserva',
+      react: ConfirmationBookingEmail({ firstName, bookingId, service }),
+      headers: {
+        'X-Resend-Development-Mode': 'true'
+      }
+    });
 
     if (error) {
       console.log(error)

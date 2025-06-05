@@ -71,14 +71,24 @@ export const BookingContextProvider = ({ children }: Props) => {
     if (!newBooking) throw new Error("error getting data of new booking")
 
     // Send confirmation booking email
-    const emailData: ConfirmationBookingEmailInterface = {
-      bookingId: newBooking._id!.toString(),
+
+    // ! To prod
+    // const emailDataProd: ConfirmationBookingEmailInterface = {
+    //   bookingId: newBooking._id,
+    //   firstName: newBooking.user.name,
+    //   service: ServiceNamesMap[newBooking.service.name],
+    //   userEmail: newBooking.user.email,
+    // }
+
+    // ! To testing
+    const emailDataTest: ConfirmationBookingEmailInterface = {
+      bookingId: newBooking._id,
       firstName: newBooking.user.name,
       service: ServiceNamesMap[newBooking.service.name],
-      userEmail: newBooking.user.email,
+      userEmail: "development@garageservice.cl",
     }
 
-    const emailResponse = await sendBookingConfirmationEmail(emailData)
+    const emailResponse = await sendBookingConfirmationEmail(emailDataTest)
 
     if (!emailResponse.ok) {
       setBookingCreated(false)

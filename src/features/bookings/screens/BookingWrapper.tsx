@@ -4,7 +4,7 @@ import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 
 import { ModalPortal } from "@/components";
-import { LazyVehicleDataModal, useVehicleContext, VehicleDataModal } from "@/features/vehicle";
+import { LazyVehicleDataModal, useVehicleContext } from "@/features/vehicle";
 import {
   BookingForm,
   AppointmentDataInterface,
@@ -12,8 +12,6 @@ import {
   useBookingContext,
   ConfirmationBookingModal,
 } from "@/features/bookings"
-import { sleep } from "@/utils";
-
 
 interface Props {
   withBooking: boolean
@@ -38,10 +36,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   // Func that will be executed when form its submitted
   const onSubmit = async (data: AppointmentDataInterface) => {
     createServiceBooking(data)
-
     setShowConfirmModal(true)
-    await sleep(2000)
-    setShowConfirmModal(false)
   }
 
   return (
