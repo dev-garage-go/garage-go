@@ -37,6 +37,10 @@ export interface BookingServiceDataInterface {
   amount: AmountInterface
 }
 
+export interface BookingWithStringIDInterface extends BookingServiceDataInterface  {
+  _id: string
+}
+
 // ? Many services
 // export interface BookingServicesDataInterface {
 //   services: ServicesDataType[],
