@@ -1,3 +1,6 @@
+// Service to send emails: Resend
+// Docs: https://resend.com/docs/send-with-nextjs
+
 import { ConfirmationBookingEmail, ConfirmationBookingEmailInterface } from '@/features/emails';
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
@@ -22,18 +25,13 @@ export async function POST(request: Request) {
       from: domainEmail!,
       to: [userEmail],
       subject: 'Confirmación de reserva',
-      react: ConfirmationBookingEmail({
-        userEmail,
-        firstName,
-        bookingId,
-        service
-      }),
+      react: ConfirmationBookingEmail({ firstName, bookingId, service }),
     });
 
+    // ! To testing
     // const { data, error } = await resend.emails.send({
     //   from: 'Acme <onboarding@resend.dev>',
-    //   // to: ['delivered@resend.dev'],
-    //   to: [userEmail],
+    //   to: ['development@garageservice.cl'], // or can use the resend dashboard email: delivered@resend.dev
     //   subject: 'Confirmación de reserva',
     //   react: ConfirmationBookingEmail({ firstName, bookingId, service }),
     //   headers: {
