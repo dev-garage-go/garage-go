@@ -13,7 +13,7 @@ export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<Serv
     const v: VehicleDB = {
       licensePlate: vehicle.licensePlate.toUpperCase().trim(),
       brand: vehicle.brand.toLowerCase().trim(),
-      mileage: vehicle.mileage.toLowerCase(),
+      mileage: removeDotsFromNumber(vehicle.mileage).trim(),
       model: vehicle.model.toLowerCase(),
       year: removeDotsFromNumber(vehicle.year).trim()
     }

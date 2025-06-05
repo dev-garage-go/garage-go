@@ -5,12 +5,18 @@ import { VehicleDB } from "@/backend/database/types"
 import { licensePlateType } from "@/features/vehicle"
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
 
-export const getVehicleByLicensePlate = async (licencePlate: licensePlateType): Promise<ServerActionResponse<VehicleDB>> => {
+export const getVehicleByLicensePlate = async (licencePlate: licensePlateType): Promise<ServerActionResponse<VehicleDB | null>> => {
   try {
     const coll = await getCollection("vehicles")
     const vehicle = await coll.findOne({ licensePlate: licencePlate })
 
-    if (!vehicle) throw new Error(`vehicle with license plate: ${licencePlate} not found`)
+    if (!vehicle) {
+      return {
+        success: true,
+        data: null,
+        httpStatus: HttpStatus.NOT_FOUND
+      }
+    }
 
     return {
       success: true,
@@ -22,7 +28,7 @@ export const getVehicleByLicensePlate = async (licencePlate: licensePlateType): 
     console.error(error)
     return {
       success: false,
-      error: ``,
+      error: `unexpected error: ${error} getting vehicle by licence plate: ${licencePlate}`,
       httpStatus: HttpStatus.INTERNAL_SERVER_ERROR
     }
   }
