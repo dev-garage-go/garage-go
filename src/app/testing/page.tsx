@@ -7,6 +7,7 @@ export default function TestingPage() {
   const [state, setState] = useState()
 
   const d: ConfirmationBookingEmailInterface = {
+    userEmail: "development@garageservice.cl",
     firstName: "Edagardo",
     bookingId: "6840a74fc92e6a7cab1d8e34",
     service: "mantencion por kilometraje"
