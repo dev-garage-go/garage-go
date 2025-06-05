@@ -1,12 +1,13 @@
 "use client"
 
 import { createContext, useContext, useState } from "react"
-import { AppointmentDataInterface, BookingServiceDataInterface } from "@/features/bookings"
+import { AppointmentDataInterface, BookingServiceDataInterface, AddressTypesData } from '@/features/bookings';
 
 import { createBooking, getServiceAmount } from "@/backend/actions"
 
-import { useVehicleContext, licensePlateType } from "@/features/vehicle"
-import { useServiceContext } from "@/features/services"
+import { useVehicleContext } from "@/features/vehicle"
+import { ServiceNamesMap, useServiceContext } from "@/features/services"
+import { ConfirmationBookingEmailInterface } from "@/features/emails"
 import { bookingKey } from "../keys/storage"
 
 interface ServiceBookingType {
@@ -44,32 +45,60 @@ export const BookingContextProvider = ({ children }: Props) => {
   }
 
   const createServiceBooking = async (data: AppointmentDataInterface) => {
-    if (service && vehicle) {
-      const amountService = await getServiceAmount(service)
-      if (!amountService) return;
+    if (!service || !vehicle) return;
+    
+    const amountService = await getServiceAmount(service)
+    if (!amountService) return;
 
-      const booking: BookingServiceDataInterface = {
-        service: service,
-        appointment: data.appointment,
-        vehicleID: vehicle._id,
-        user: data.user,
-        amount: amountService
-      }
+    const booking: BookingServiceDataInterface = {
+      service,
+      appointment: data.appointment,
+      vehicleID: vehicle._id,
+      user: data.user,
+      amount: amountService
+    }
 
-      const response = await createBooking(booking)
+    const responseBooking = await createBooking(booking)
 
-      if (!response.success) {
+    if (!responseBooking.success) {
+      setBookingCreated(false)
+      throw new Error(responseBooking.error)
+      // toast with error message
+    }
+
+    const newBooking = responseBooking.data
+    if (!newBooking) throw new Error("error getting data of new booking")
+
+    // Send confirmation booking email
+    const emailData: ConfirmationBookingEmailInterface = {
+      bookingId: newBooking._id!.toString(),
+      firstName: newBooking.user.name,
+      service: ServiceNamesMap[newBooking.service.name],
+      userEmail: newBooking.user.email,
+    }
+
+    const emailSent = async () => {
+      const response = await fetch("/api/emails/send", {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        method: 'POST',
+        body: JSON.stringify(emailData),
+      })
+
+      const data = await response.json()
+      console.log(data)
+
+      if (!response.ok) {
         setBookingCreated(false)
-        // toast with error message
+        throw new Error(`email api response with an error: ${response.status}`)
       }
 
-      // emailSent = await sendConfirmationEmail() -> Send email
-      // if(emailSent.success) {
       setBookingCreated(true)
-      // } else {}
-
       deleteServiceFromStorage()
     }
+
+    await emailSent()
   }
 
 
