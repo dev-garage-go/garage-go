@@ -7,7 +7,7 @@ import { createBooking, getServiceAmount } from "@/backend/actions"
 
 import { useVehicleContext } from "@/features/vehicle"
 import { ServiceNamesMap, useServiceContext } from "@/features/services"
-import { ConfirmationBookingEmailInterface } from "@/features/emails"
+import { ConfirmationBookingEmailInterface, useEmailContext } from "@/features/emails"
 import { bookingKey } from "../keys/storage"
 
 interface ServiceBookingType {
@@ -34,6 +34,7 @@ export const useBookingContext = () => {
 export const BookingContextProvider = ({ children }: Props) => {
   const { getVehicleFromStorage } = useVehicleContext()
   const { getServiceFromStorage, deleteServiceFromStorage } = useServiceContext()
+  const { sendBookingConfirmationEmail } = useEmailContext()
 
   const vehicle = getVehicleFromStorage()
   const service = getServiceFromStorage()
@@ -46,7 +47,7 @@ export const BookingContextProvider = ({ children }: Props) => {
 
   const createServiceBooking = async (data: AppointmentDataInterface) => {
     if (!service || !vehicle) return;
-    
+
     const amountService = await getServiceAmount(service)
     if (!amountService) return;
 
@@ -77,28 +78,16 @@ export const BookingContextProvider = ({ children }: Props) => {
       userEmail: newBooking.user.email,
     }
 
-    const emailSent = async () => {
-      const response = await fetch("/api/emails/send", {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(emailData),
-      })
+    const emailResponse = await sendBookingConfirmationEmail(emailData)
 
-      const data = await response.json()
-      console.log(data)
-
-      if (!response.ok) {
-        setBookingCreated(false)
-        throw new Error(`email api response with an error: ${response.status}`)
-      }
-
-      setBookingCreated(true)
-      deleteServiceFromStorage()
+    if (!emailResponse.ok) {
+      setBookingCreated(false)
+      throw new Error(`email API response with an error: ${emailResponse.status}`)
     }
 
-    await emailSent()
+    // show modal that confirm email sent and delete service from storage 
+    setBookingCreated(true)
+    deleteServiceFromStorage()
   }
 
 

@@ -15,7 +15,7 @@ interface Props {
 const EmailContext = createContext<EmailContextType | null>(null)
 
 // Custom hook to use context
-export const useServiceContext = () => {
+export const useEmailContext = () => {
   const context = useContext(EmailContext)
   if (!context) { throw new Error('useServiceContext must be inside of a context') }
   return context
