@@ -43,10 +43,10 @@ export const Select = <T,>({ options, label, onChange, value, error, defaultValu
                   value={option.value}
 
                   className={({ focus }) =>
-                    `cursor-pointer select-none py-2 text-center text-primaryBlue-900 ${focus && 'bg-gray-100'}`
+                    `cursor-pointer select-none py-2 text-center text-primaryBlue-900 capitalize ${focus && 'bg-gray-100'}`
                   }
                 >
-                  {firstLetterUppercase(option.value as string)}
+                  {option.value as string}
                 </ListboxOption>
               ))}
             </ListboxOptions>

@@ -19,13 +19,13 @@ export const calculateMileageCharge = async (chargeRequest: ServiceChargeInterfa
     if (!vehicle) throw new Error("vehicle not exist in the chargeRequest")
 
     switch (vehicle.type) {
-      case "City Car / Sedan":
+      case "city car / sedan":
         subtotal = 222186       // $222.186 CL 
         break
-      case "SUV / Camioneta":
+      case "suv / camioneta":
         subtotal = 263336       // $263.336 CL
         break
-      case "Alta gama":
+      case "alta gama":
         subtotal = 440533       // $440.533 CL
         break
       default: 0
