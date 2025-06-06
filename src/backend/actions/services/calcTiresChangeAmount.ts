@@ -6,7 +6,7 @@ import { ServerActionResponse } from '../../types/server-action-response';
 import { HttpStatus } from "@/backend/types";
 
 
-export const calcTiresChangeAmount = async (service: TiresChangeServiceInterface): Promise<ServerActionResponse<AmountInterface | null>> => {
+export const calcTiresChangeAmount = async (service: TiresChangeServiceInterface): Promise<ServerActionResponse<AmountInterface>> => {
   try {
     let subtotal = 0
     let disscount = 0
