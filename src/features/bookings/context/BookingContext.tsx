@@ -54,15 +54,15 @@ export const BookingContextProvider = ({ children }: Props) => {
       vehicle
     }
 
-    const amountService = await getServiceAmount(chargeRequest)
-    if (!amountService) return;
+    const chargingResult = await getServiceAmount(chargeRequest)
+    if (!chargingResult.success) throw new Error(chargingResult.error);
 
     const booking: BookingServiceDataInterface = {
       service,
       appointment: data.appointment,
       vehicleID: vehicle._id,
       user: data.user,
-      amount: amountService
+      amount: chargingResult.data!
     }
 
     const responseBooking = await createBooking(booking)

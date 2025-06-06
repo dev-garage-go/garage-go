@@ -4,7 +4,7 @@ import { AmountInterface } from "@/features/bookings";
 import { ServiceChargeInterface } from "@/features/payment";
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
 
-export const calcMileageMaintenanceAmount = async (chargeRequest: ServiceChargeInterface): Promise<ServerActionResponse<AmountInterface | null>> => {
+export const calcMileageMaintenanceAmount = async (chargeRequest: ServiceChargeInterface): Promise<ServerActionResponse<AmountInterface>> => {
   let subtotal = 0
   let disscount = 0
 
