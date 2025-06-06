@@ -13,11 +13,6 @@ export { getBookingsWithVehicleData } from './booking/getBookingsWithVehicleData
 // Emails
 export { sendEmailAction } from './emails/send-email';
 
-// Services
-export { calcMileageMaintenanceAmount } from './services/calcMileageMaintenanceAmount';
-export { calcTiresChangeAmount } from './services/calcTiresChangeAmount';
-export { getServiceAmount } from './services/getServicesAmount';
-
 // Payment
 export { calculateServiceCharge } from './payment/charges'
 
