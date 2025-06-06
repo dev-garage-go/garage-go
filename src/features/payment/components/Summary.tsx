@@ -1,33 +1,8 @@
 import { IoClose } from "react-icons/io5"
 import { formatNumberWithDots } from '@/utils';
+import { SummaryProps } from "@/features/payment";
 
-interface Props {
-  mainService: {
-    name: string,
-    description: string,
-    hasPrice: boolean,
-    price: number,
-    referenceValue: string,
-  }
-  secundaryService?: {
-    name: string,
-    description: string,
-    price: number,
-  }
-  coupon: {
-    hasCoupon: boolean,
-    number?: string,
-  }
-  summary: {
-    subtotal: number,
-    dctos: number,
-    total: number,
-    btnString: string,
-    btnAction?: () => void
-  }
-}
-
-export const Summary = ({ mainService, secundaryService, coupon, summary }: Props) => {
+export const Summary = ({ mainService, secundaryService, coupon, summary }: SummaryProps) => {
   return (
     <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
       <h4 className="font-semibold ml-4 md:ml-6 text-primaryBlue-900">

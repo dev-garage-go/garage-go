@@ -9,6 +9,7 @@ interface PaymentContextType {
   baseAmount: AmountInterface
   finalAmount: AmountInterface
   sendBaseChargeByVehicleRequest: (requestData: BaseChargeByVehicle) => Promise<void>
+  sendFinalChargeByService: (requestData: string) => Promise<void>
 }
 
 // Context
@@ -44,11 +45,16 @@ export const PaymentContextProvider = ({ children }: Props) => {
     }
   }
 
+  const sendFinalChargeByService = async (requestData: string) => {
+    console.log(requestData)
+  }
+
 
   return <PaymentContext.Provider value={{
     baseAmount,
     finalAmount,
-    sendBaseChargeByVehicleRequest
+    sendBaseChargeByVehicleRequest,
+    sendFinalChargeByService
   }}>
     {children}
   </PaymentContext.Provider>
