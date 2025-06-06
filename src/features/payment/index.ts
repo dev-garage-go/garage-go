@@ -1,6 +1,5 @@
-export * from './components/BookingPageSummary';
-export * from './components/ContratingPageSummary';
 export * from './components/PaymentOption';
+export * from './components/PaymentSummary';
 export * from './components/RenderCardIcon';
 export * from './components/Summary';
 export * from './constants/methods-cards';

@@ -1,8 +1,8 @@
-import { ContractingPageSummary } from "@/features/payment"
+import { PaymentSummary } from "@/features/payment"
 
 export const TiresContractingSummary = () => {
   return (
-    <ContractingPageSummary
+    <PaymentSummary
       serviceType="tires"
       summary={{
         mainService: {
