@@ -1,15 +1,15 @@
 "use client"
 
 import { createContext, useContext, useState } from "react"
-import { AppointmentDataInterface, BookingServiceDataInterface, AddressTypesData } from '@/features/bookings';
+import { AppointmentDataInterface, BookingServiceDataInterface } from '@/features/bookings';
+import { bookingKey } from "../keys/storage"
 
-import { calculateServiceCharge, createBooking } from "@/backend/actions"
+import { createBooking } from "@/backend/actions"
 
 import { useVehicleContext } from "@/features/vehicle"
 import { ServiceNamesMap, useServiceContext } from "@/features/services"
 import { ConfirmationBookingEmailInterface, useEmailContext } from "@/features/emails"
-import { bookingKey } from "../keys/storage"
-import { ServiceChargeInterface } from "@/features/payment";
+import { usePaymentContext } from "@/features/payment";
 
 interface ServiceBookingType {
   setBookingInStorage: (data: any) => void
@@ -36,6 +36,7 @@ export const BookingContextProvider = ({ children }: Props) => {
   const { getVehicleFromStorage } = useVehicleContext()
   const { getServiceFromStorage, deleteServiceFromStorage } = useServiceContext()
   const { sendBookingConfirmationEmail } = useEmailContext()
+  const { finalAmount } = usePaymentContext()
 
   const vehicle = getVehicleFromStorage()
   const service = getServiceFromStorage()
@@ -49,20 +50,12 @@ export const BookingContextProvider = ({ children }: Props) => {
   const createServiceBooking = async (data: AppointmentDataInterface) => {
     if (!service || !vehicle) return;
 
-    const chargeRequest: ServiceChargeInterface = {
-      service,
-      vehicle
-    }
-
-    const chargingResult = await calculateServiceCharge(chargeRequest)
-    if (!chargingResult.success) throw new Error(chargingResult.error);
-
     const booking: BookingServiceDataInterface = {
       service,
       appointment: data.appointment,
       vehicleID: vehicle._id,
       user: data.user,
-      amount: chargingResult.data!
+      amount: finalAmount
     }
 
     const responseBooking = await createBooking(booking)

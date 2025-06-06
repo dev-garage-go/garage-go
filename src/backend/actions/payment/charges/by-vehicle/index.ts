@@ -11,7 +11,7 @@ import { BaseChargeByVehicle } from "@/features/payment"
 import { calculateMileageChargeByVehicle } from "./mileage-maintenance"
 
 // Only one service
-export const calculateServiceCharge = async (chargeRequest: BaseChargeByVehicle): Promise<ServerActionResponse<AmountInterface>> => {
+export const calculateBaseChargeByVehicle = async (chargeRequest: BaseChargeByVehicle): Promise<ServerActionResponse<AmountInterface>> => {
   try {
     const serviceType = chargeRequest.serviceType
     const vehicle = chargeRequest.vehicle

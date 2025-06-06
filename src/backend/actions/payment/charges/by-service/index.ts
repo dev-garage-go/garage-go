@@ -13,7 +13,7 @@ import { ServiceChargeInterface } from "@/features/payment"
 import { MileageMaintenanceServiceInterface } from "@/features/services"
 
 // Only one service
-export const calculateServiceCharge = async (chargeRequest: ServiceChargeInterface): Promise<ServerActionResponse<AmountInterface>> => {
+export const calculateFinalChargeByService = async (chargeRequest: ServiceChargeInterface): Promise<ServerActionResponse<AmountInterface>> => {
   try {
     const service = chargeRequest.service
     const baseAmount = chargeRequest.baseAmount

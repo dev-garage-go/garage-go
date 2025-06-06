@@ -1,13 +1,14 @@
 "use client"
 
-import { calculateServiceCharge } from "@/backend/actions"
+import { calculateBaseChargeByVehicle, calculateFinalChargeByService } from "@/backend/actions"
 import { AmountInterface } from "@/features/bookings"
 import { createContext, useContext } from "react"
-import { ServiceChargeInterface } from "../types/service-charge"
+import { BaseChargeByVehicle } from "../types/service-charge"
 
 interface PaymentContextType {
-  amount: AmountInterface
-  sendChargeRequest: (requestData: ServiceChargeInterface) => Promise<void>
+  baseAmount: AmountInterface
+  finalAmount: AmountInterface
+  sendBaseChargeByVehicleRequest: (requestData: BaseChargeByVehicle) => Promise<void>
 }
 
 // Context
@@ -26,20 +27,26 @@ interface Props {
 
 // Provider
 export const PaymentContextProvider = ({ children }: Props) => {
-  let amount: AmountInterface = {
+  let baseAmount: AmountInterface = {
     subtotal: 0,
     disscount: 0,
     total: 0
   }
 
-  const sendChargeRequest = async (requestData: ServiceChargeInterface) => {
+  let finalAmount: AmountInterface = {
+    subtotal: baseAmount.subtotal + 0,
+    disscount: baseAmount.disscount + 0,
+    total: baseAmount.total + 0
+  }
+
+  const sendBaseChargeByVehicleRequest = async (requestData: BaseChargeByVehicle) => {
     try {
-      const response = await calculateServiceCharge(requestData)
+      const response = await calculateBaseChargeByVehicle(requestData)
       if (!response.success) throw new Error(response.error);
 
       const { disscount, subtotal, total } = response.data!
 
-      amount = {
+      baseAmount = {
         subtotal,
         disscount,
         total
@@ -51,8 +58,9 @@ export const PaymentContextProvider = ({ children }: Props) => {
 
 
   return <PaymentContext.Provider value={{
-    amount,
-    sendChargeRequest
+    baseAmount,
+    finalAmount,
+    sendBaseChargeByVehicleRequest
   }}>
     {children}
   </PaymentContext.Provider>
