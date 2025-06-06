@@ -8,28 +8,13 @@ export const calculateMileageCharge = async (chargeRequest: ServiceChargeInterfa
   let subtotal = 0
   let disscount = 0
 
-  console.log(chargeRequest.service)
-  console.log(chargeRequest.vehicle)
-
-
   try {
-    const { service, vehicle } = chargeRequest;
+    const { service, baseAmount } = chargeRequest;
 
     if (!service) throw new Error("service not exist in the chargeRequest")
-    if (!vehicle) throw new Error("vehicle not exist in the chargeRequest")
+    if (!baseAmount) throw new Error("base amount not exist in the chargeRequest")
 
-    switch (vehicle.type) {
-      case "city car / sedan":
-        subtotal = 222186       // $222.186 CL 
-        break
-      case "suv / camioneta":
-        subtotal = 263336       // $263.336 CL
-        break
-      case "alta gama":
-        subtotal = 440533       // $440.533 CL
-        break
-      default: 0
-    }
+    // note: below would be the logic of charging extra based on the service options the user selected
 
     const amount: AmountInterface = {
       subtotal: subtotal,

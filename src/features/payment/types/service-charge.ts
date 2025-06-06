@@ -1,9 +1,10 @@
+import { AmountInterface } from "@/features/bookings";
 import { ServicesDataType, ServicesTypes } from "@/features/services";
 import { VehicleWithStringIDInterface } from "@/features/vehicle";
 
 export interface ServiceChargeInterface {
   service: ServicesDataType
-  vehicle: VehicleWithStringIDInterface
+  baseAmount: AmountInterface
 }
 
 export interface BaseChargeByVehicle {

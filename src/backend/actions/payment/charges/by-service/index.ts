@@ -1,18 +1,22 @@
+// Docs:
+// This function must be use in "booking" services pages, 
+// because return the final amount based of vehicle amount (actions/payment/charge/by-vehicle)
+// and the service options that the user selected
+
 'use server'
 
 import { calculateMileageCharge } from "./mileage-maintenance"
-import { calculateTiresChange } from "./tires-change"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 
 import { AmountInterface } from "@/features/bookings"
 import { ServiceChargeInterface } from "@/features/payment"
-import { MileageMaintenanceServiceInterface, TiresChangeServiceInterface } from "@/features/services"
+import { MileageMaintenanceServiceInterface } from "@/features/services"
 
 // Only one service
 export const calculateServiceCharge = async (chargeRequest: ServiceChargeInterface): Promise<ServerActionResponse<AmountInterface>> => {
   try {
     const service = chargeRequest.service
-    const vehicle = chargeRequest.vehicle
+    const baseAmount = chargeRequest.baseAmount
 
     let response: ServerActionResponse<AmountInterface>
     let result: AmountInterface
@@ -20,7 +24,7 @@ export const calculateServiceCharge = async (chargeRequest: ServiceChargeInterfa
     switch (service.type) {
       case 'mileage':
         response = await calculateMileageCharge({
-          vehicle,
+          baseAmount,
           service: service as MileageMaintenanceServiceInterface,
         })
 
@@ -28,15 +32,6 @@ export const calculateServiceCharge = async (chargeRequest: ServiceChargeInterfa
           throw new Error(`error getting charge in "${service.type}" service type: ${response.error}`);
         }
         result = response.data!
-        break
-
-      case 'tires':
-        response = await calculateTiresChange(service as TiresChangeServiceInterface)
-        if (!response.success) {
-          throw new Error(`error getting charge in "${service.type}" service type: ${response.error}`);
-        }
-        result = response.data!
-
         break
       default:
         result = { disscount: 0, subtotal: 0, total: 0 }
@@ -50,8 +45,8 @@ export const calculateServiceCharge = async (chargeRequest: ServiceChargeInterfa
 
     const amount: AmountInterface = {
       subtotal: result.subtotal,
-      disscount: 0, // aplicá lógica de descuentos más adelante
-      total: result.subtotal // de momento, total == subtotal
+      disscount: 0,           // in the future I will apply the disscount logic
+      total: result.subtotal
     }
 
     console.log('amount', amount)
