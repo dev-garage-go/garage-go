@@ -1,10 +1,13 @@
 "use client"
 
+import { calculateServiceCharge } from "@/backend/actions"
 import { AmountInterface } from "@/features/bookings"
 import { createContext, useContext } from "react"
+import { ServiceChargeInterface } from "../types/service-charge"
 
 interface PaymentContextType {
   amount: AmountInterface
+  sendChargeRequest: (requestData: ServiceChargeInterface) => Promise<void>
 }
 
 // Context
@@ -23,14 +26,33 @@ interface Props {
 
 // Provider
 export const PaymentContextProvider = ({ children }: Props) => {
-  const amount: AmountInterface = {
+  let amount: AmountInterface = {
     subtotal: 0,
     disscount: 0,
     total: 0
   }
 
+  const sendChargeRequest = async (requestData: ServiceChargeInterface) => {
+    try {
+      const response = await calculateServiceCharge(requestData)
+      if (!response.success) throw new Error(response.error);
+
+      const { disscount, subtotal, total } = response.data!
+
+      amount = {
+        subtotal,
+        disscount,
+        total
+      }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+
   return <PaymentContext.Provider value={{
-    amount
+    amount,
+    sendChargeRequest
   }}>
     {children}
   </PaymentContext.Provider>

@@ -12,7 +12,7 @@ export type TypesTiresOptionsType = 'ciudad' | 'offroad' | 'intermedio'
 // Services interfaces
 
 type ServicesNames = 'tires-change' | 'mileage-maintenance'
-type ServicesTypes = 'tires' | 'mileage'
+export type ServicesTypes = 'tires' | 'mileage'
 
 export const ServiceNamesMap: Record<ServicesNames, string> = {
   "mileage-maintenance": "Mantención kilometraje",
