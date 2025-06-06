@@ -9,7 +9,7 @@ interface Props {
     price: number,
     referenceValue: string,
   }
-  secundaryService: {
+  secundaryService?: {
     name: string,
     description: string,
     price: number,
@@ -64,30 +64,32 @@ export const Summary = ({ mainService, secundaryService, coupon, summary }: Prop
       </div>
 
       {/* Secundary Service */}
-      <div className="summary-container">
-        {/* Title */}
-        <div className="flex justify-between items-center">
-          <h4 className="font-semibold text-primaryBlue-900">
-            {secundaryService.name}
-          </h4>
-          <div className="text-xs text-gray-400 flex items-center gap-1 hover:font-medium hover:text-gray-500 duration-200 transition-all cursor-pointer">
-            <p>Quitar</p>
-            <IoClose
-              size={16}
-            />
+      {secundaryService && (
+        <div className="summary-container">
+          {/* Title */}
+          <div className="flex justify-between items-center">
+            <h4 className="font-semibold text-primaryBlue-900">
+              {secundaryService.name}
+            </h4>
+            <div className="text-xs text-gray-400 flex items-center gap-1 hover:font-medium hover:text-gray-500 duration-200 transition-all cursor-pointer">
+              <p>Quitar</p>
+              <IoClose
+                size={16}
+              />
+            </div>
+          </div>
+
+          <p className="text-sm mt-2">
+            {secundaryService.description}
+          </p>
+
+          <div className="flex justify-end items-center gap-3 mt-4">
+            <p className="font-semibold">
+              ${formatNumberWithDots(secundaryService.price)}
+            </p>
           </div>
         </div>
-
-        <p className="text-sm mt-2">
-          {secundaryService.description}
-        </p>
-
-        <div className="flex justify-end items-center gap-3 mt-4">
-          <p className="font-semibold">
-            ${formatNumberWithDots(secundaryService.price)}
-          </p>
-        </div>
-      </div>
+      )}
 
       {/* Coupon */}
       {

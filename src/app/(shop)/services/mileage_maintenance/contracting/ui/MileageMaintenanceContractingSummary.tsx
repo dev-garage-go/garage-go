@@ -35,11 +35,11 @@ export const MileageMaintenanceContractingSummary = ({ serviceType }: Props) => 
         price: 189900,
         referenceValue: "Valor referencial 10.000 kms"
       }}
-      secundaryService={{
-        name: "Servicio de frenos",
-        description: "Revisión y limpieza de ambos ejes",
-        price: 35990
-      }}
+      // secundaryService={{
+      //   name: "Servicio de frenos",
+      //   description: "Revisión y limpieza de ambos ejes",
+      //   price: 35990
+      // }}
       coupon={{
         hasCoupon: true,
       }}
