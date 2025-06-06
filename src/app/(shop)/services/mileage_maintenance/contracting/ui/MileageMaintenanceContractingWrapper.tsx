@@ -5,10 +5,10 @@ import { FormProvider, useForm } from "react-hook-form"
 
 import { ModalPortal } from "@/components"
 import { MileageMaintenanceContractingForm } from "./MileageMaintenanceContractingForm"
-import { MileageMaintenanceContractingSummary } from "./MileageMaintenanceContractingSummary"
 
 import { LazyVehicleDataModal, useVehicleContext } from "@/features/vehicle"
 import { MileageMaintenanceServiceInterface, useServiceContext } from "@/features/services"
+import { PaymentSummary } from "@/features/payment"
 
 
 export const MileageMaintenanceContractingWrapper = () => {
@@ -43,7 +43,7 @@ export const MileageMaintenanceContractingWrapper = () => {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <MileageMaintenanceContractingForm />
-            <MileageMaintenanceContractingSummary />
+            <PaymentSummary />
           </div>
         </form>
       </FormProvider>

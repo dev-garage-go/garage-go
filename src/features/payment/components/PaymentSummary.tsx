@@ -2,14 +2,9 @@
 
 import { useServiceContext } from "@/features/services"
 import { usePaymentContext, Summary, SummaryInstanceProps } from "@/features/payment"
+import { setSummaryPropsByServiceType } from "../constants/summary"
 
-interface Props {
-  summary: SummaryInstanceProps
-}
-
-export const PaymentSummary = ({ summary }: Props) => {
-  const { coupon, mainService, secundaryService } = summary;
-
+export const PaymentSummary = () => {
   const { getServiceFromStorage } = useServiceContext()
   const { baseAmount, finalAmount } = usePaymentContext()
 
@@ -24,42 +19,12 @@ export const PaymentSummary = ({ summary }: Props) => {
     btnString: "Continuar",
   }
 
-  if (secundaryService) {
-    return (
-      <Summary
-        mainService={{
-          name: mainService.name,
-          description: mainService.description,
-          hasPrice: mainService.hasPrice,
-          price: mainService.price,
-          referenceValue: mainService.referenceValue
-        }}
-        coupon={{
-          hasCoupon: coupon.hasCoupon,
-        }}
-        secundaryService={{
-          name: secundaryService.name,
-          description: secundaryService.description,
-          price: secundaryService.price
-        }}
-        bill={bill}
-      />
-    )
-  }
+  const dynamicProps = setSummaryPropsByServiceType("mileage")
 
   return (
     <Summary
-      mainService={{
-        name: mainService.name,
-        description: mainService.description,
-        hasPrice: mainService.hasPrice,
-        price: mainService.price,
-        referenceValue: mainService.referenceValue
-      }}
-      coupon={{
-        hasCoupon: coupon.hasCoupon,
-      }}
       bill={bill}
+      {...dynamicProps}
     />
   )
 }
