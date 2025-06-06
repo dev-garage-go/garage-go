@@ -14,7 +14,7 @@ export { getBookingsWithVehicleData } from './booking/getBookingsWithVehicleData
 export { sendEmailAction } from './emails/send-email';
 
 // Payment
-export { calculateServiceCharge } from './payment/charges'
+export { calculateServiceCharge } from './payment/charges/service'
 
 // Vehicle
 export { getVehicleByLicensePlate } from './vehicle/getVehicleByLicensePlate';
