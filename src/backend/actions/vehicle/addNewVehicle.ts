@@ -2,7 +2,7 @@
 
 import { getCollection } from "@/backend/database"
 import { VehicleDB } from "@/backend/database/types"
-import { VehicleDataInterface } from "@/features/vehicle"
+import { VehicleDataInterface, vehicleTypes } from "@/features/vehicle"
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
 import { removeDotsFromNumber } from "@/utils";
 
@@ -15,7 +15,8 @@ export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<Serv
       brand: vehicle.brand.toLowerCase().trim(),
       mileage: removeDotsFromNumber(vehicle.mileage).trim(),
       model: vehicle.model.toLowerCase(),
-      year: removeDotsFromNumber(vehicle.year).trim()
+      year: removeDotsFromNumber(vehicle.year).trim(),
+      type: vehicle.type.toLowerCase() as vehicleTypes
     }
 
     const result = await coll.insertOne(v)
