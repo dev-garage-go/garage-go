@@ -1,34 +1,48 @@
 'use server'
 
 import { calcTiresChangeAmount, calcMileageMaintenanceAmount } from "@/backend/actions"
+import { ServerActionResponse } from "@/backend/types"
 
 import { AmountInterface } from "@/features/bookings"
 import { ServiceChargeInterface } from "@/features/payment"
 import { MileageMaintenanceServiceInterface, TiresChangeServiceInterface } from "@/features/services"
 
 // Only one service
-export const getServiceAmount = async (chargeRequest: ServiceChargeInterface): Promise<AmountInterface | undefined> => {
+export const getServiceAmount = async (chargeRequest: ServiceChargeInterface): Promise<AmountInterface | null> => {
   try {
     const service = chargeRequest.service
     const vehicle = chargeRequest.vehicle
 
-    let result: { subtotal: number } | undefined
+    let response: ServerActionResponse<AmountInterface | null>
+    let result: AmountInterface | null
 
     switch (service.type) {
       case 'mileage':
-        result = await calcMileageMaintenanceAmount({
+        response = await calcMileageMaintenanceAmount({
           vehicle,
           service: service as MileageMaintenanceServiceInterface,
         })
+
+        if (!response.success) {
+          throw new Error(`error getting charge in "${service.type}" service type`);
+        }
+        result = response.data
         break
+
       case 'tires':
-        result = await calcTiresChangeAmount(service as TiresChangeServiceInterface)
+        response = await calcTiresChangeAmount(service as TiresChangeServiceInterface)
+        if (!response.success) {
+          throw new Error(`error getting charge in "${service.type}" service type`);
+        }
+        result = response.data
+
         break
       default:
-        return undefined
+        return null
     }
 
-    if (!result) return undefined
+    if (!result) return null;
+
     const amount: AmountInterface = {
       subtotal: result.subtotal,
       disscount: 0, // aplicá lógica de descuentos más adelante
@@ -40,7 +54,7 @@ export const getServiceAmount = async (chargeRequest: ServiceChargeInterface): P
 
   } catch (error) {
     console.error('Error en getServiceAmount:', error)
-    return undefined
+    return null
   }
 }
 
