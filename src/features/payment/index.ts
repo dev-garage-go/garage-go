@@ -1,5 +1,6 @@
 export * from './components/PaymentOption';
 export * from './components/RenderCardIcon';
+export * from './components/Summary';
 export * from './constants/methods-cards';
 export * from './context/PaymentContext';
 export * from './helpers/credit-card';

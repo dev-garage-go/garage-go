@@ -1,6 +1,8 @@
-import { Summary } from "@/features/bookings"
+import { usePaymentContext, Summary } from "@/features/payment"
 
 export const BookingSummary = () => {
+  const { baseAmount } = usePaymentContext()
+
   return (
     <Summary
       mainService={{
@@ -9,11 +11,6 @@ export const BookingSummary = () => {
         hasPrice: true,
         price: 189900,
         referenceValue: "Valor referencial 10.000 kms"
-      }}
-      secundaryService={{
-        name: "Servicio de frenos",
-        description: "Revisión y limpieza de ambos ejes",
-        price: 35990
       }}
       coupon={{
         hasCoupon: true,

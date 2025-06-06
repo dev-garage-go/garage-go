@@ -1,10 +1,9 @@
 'use client'
 
-import { Summary } from "@/features/bookings"
-import { usePaymentContext } from "@/features/payment"
+import { useEffect, useState } from "react"
+import { usePaymentContext, Summary } from "@/features/payment"
 import { ServicesTypes } from "@/features/services"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
-import { useEffect, useState } from "react"
 
 interface Props {
   serviceType: ServicesTypes
@@ -35,11 +34,6 @@ export const MileageMaintenanceContractingSummary = ({ serviceType }: Props) => 
         price: 189900,
         referenceValue: "Valor referencial 10.000 kms"
       }}
-      // secundaryService={{
-      //   name: "Servicio de frenos",
-      //   description: "Revisión y limpieza de ambos ejes",
-      //   price: 35990
-      // }}
       coupon={{
         hasCoupon: true,
       }}
