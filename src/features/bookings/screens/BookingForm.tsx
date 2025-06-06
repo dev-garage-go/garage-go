@@ -214,6 +214,7 @@ export const BookingForm = ({ withBooking }: Props) => {
                   render={({ field, fieldState }) => (
                     <Select
                       value={field.value}
+                      defaultValue="Tipo de domicilio"
                       onChange={field.onChange}
                       error={fieldState.error?.message}
                       label="Selecciona"

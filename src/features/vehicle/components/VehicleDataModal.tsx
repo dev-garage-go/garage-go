@@ -1,27 +1,26 @@
 'use client'
 
 import clsx from "clsx"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
-import { ErrorMessage } from "@/components"
+import { ErrorMessage, Select } from "@/components"
 
-import { useVehicleContext, VehicleDataInterface } from "@/features/vehicle"
+import { useVehicleContext, VehicleDataInterface, VehicleTypeOptions, vehicleTypes } from "@/features/vehicle"
 import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 
 import { addNewVehicle, getVehicleByLicensePlate } from "@/backend/actions"
-import { VehicleDB } from "@/backend/database/types"
 
 export const VehicleDataModal = () => {
-  const { register, formState: { errors }, setValue, handleSubmit } = useForm<VehicleDataInterface>()
+  const { register, formState: { errors }, watch, setValue, handleSubmit } = useForm<VehicleDataInterface>()
   const { setVehicleInStorage } = useVehicleContext()
 
   // states
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const [isVisible, setIsVisible] = useState<boolean>(false)
-  const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(false) // if the backend not found a vehicle in database, open the form to fill fields with a new car
+  const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(true) // if the backend not found a vehicle in database, open the form to fill fields with a new car
 
-  // caching
-  const cachedVehicle = useRef<VehicleDB | null>(null)
+  // wathing
+  const typeVehicle = watch("type")
 
   // delays the state change by a few ms, so that the DOM can load the css classes and generate an animation.
   useEffect(() => {
@@ -257,6 +256,30 @@ export const VehicleDataModal = () => {
                     )}
                   </div>
 
+                </div>
+              </div>
+
+              {/* Type of vehicle */}
+              <div className="flex flex-col sm:flex-row justify-start items-center gap-4 w-full">
+                <div className="flex gap-4 justify-center items-center w-full">
+
+                  <div className="flex flex-col gap-1 w-full">
+                    <label htmlFor="year" className="text-sm text-customGray-500 w-full cursor-pointer" >
+                      <p className="ml-2">Tipo</p>
+                    </label>
+                    <Select
+                      value={typeVehicle}
+                      defaultValue={"City Car / Sedan" as vehicleTypes}
+                      options={VehicleTypeOptions}
+                      onChange={(value) => setValue("type", value as vehicleTypes)}
+                    />
+                    {errors.type && (
+                      <ErrorMessage message={errors.type.message || 'Requerido'} />
+                    )}
+                  </div>
+
+                  {/* Empty div */}
+                  <div className="flex flex-col gap-1 w-full" />
                 </div>
               </div>
             </div>

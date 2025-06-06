@@ -1,6 +1,7 @@
 export * from './components/ChangeVehicleButton';
 export * from './components/VehicleDataModal';
 export * from './components/lazy/VehicleDataModal.lazy';
+export * from './constants/vehicle-types';
 export * from './context/VehicleContext';
 export * from './hooks/useGetVehicleOnChangeStorage';
 export * from './keys/events';

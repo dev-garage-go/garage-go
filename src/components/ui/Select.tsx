@@ -11,21 +11,22 @@ interface Props<T> {
   options: SelectOptions<T>[]
   label?: string
   value?: string
+  defaultValue: string
   onChange: (value: string) => void
   error?: string
 }
 
-export const Select = <T,>({ options, label, onChange, value, error }: Props<T>) => {
+export const Select = <T,>({ options, label, onChange, value, error, defaultValue }: Props<T>) => {
   return (
     <div className="flex w-full flex-col mb-2">
       <label className="text-sm ml-4 text-primaryBlue-900">{label}</label>
 
-      <Listbox value={value} onChange={onChange}>
+      <Listbox value={value || defaultValue} onChange={onChange}>
         {({ open }) => (
           <div className="relative">
             <ListboxButton className={error ? 'input-form-error' : 'input-form'}>
               <span className={`block truncate text-start ${value ? 'font-medium' : 'font-normal'}`}>
-                {value ? firstLetterUppercase(value) : 'Tipo de domicilio'}
+                {value ? firstLetterUppercase(value) : defaultValue}
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
                 <IoChevronDown
