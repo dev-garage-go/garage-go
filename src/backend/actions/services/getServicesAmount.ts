@@ -16,7 +16,10 @@ export const getServiceAmount = async (chargeRequest: ServiceChargeInterface): P
 
     switch (service.type) {
       case 'mileage':
-        result = await calcMileageMaintenanceAmount(service as MileageMaintenanceServiceInterface)
+        result = await calcMileageMaintenanceAmount({
+          vehicle,
+          service: service as MileageMaintenanceServiceInterface,
+        })
         break
       case 'tires':
         result = await calcTiresChangeAmount(service as TiresChangeServiceInterface)
