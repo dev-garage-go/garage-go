@@ -2,7 +2,7 @@ import { IoClose } from "react-icons/io5"
 import { formatNumberWithDots } from '@/utils';
 import { SummaryProps } from "@/features/payment";
 
-export const Summary = ({ mainService, secundaryService, coupon, summary }: SummaryProps) => {
+export const Summary = ({ mainService, secundaryService, coupon, bill }: SummaryProps) => {
   return (
     <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
       <h4 className="font-semibold ml-4 md:ml-6 text-primaryBlue-900">
@@ -96,14 +96,14 @@ export const Summary = ({ mainService, secundaryService, coupon, summary }: Summ
             Subtotal
           </p>
           <p className="font-semibold text-primaryBlue-900">
-            ${formatNumberWithDots(summary.subtotal)}
+            ${formatNumberWithDots(bill.subtotal)}
           </p>
         </div>
         <div className="flex justify-between items-center w-full">
           <p className="font-semibold text-primaryBlue-900">
             Dctos</p>
           <p className="font-semibold text-primaryBlue-900">
-            ${formatNumberWithDots(summary.dctos)}          </p>
+            ${formatNumberWithDots(bill.dctos)}          </p>
         </div>
         <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
         <div className="flex justify-between items-center w-full">
@@ -111,7 +111,7 @@ export const Summary = ({ mainService, secundaryService, coupon, summary }: Summ
             Total a pagar
           </p>
           <p className="font-semibold text-primaryBlue-400">
-            ${formatNumberWithDots(summary.total)}
+            ${formatNumberWithDots(bill.total)}
           </p>
         </div>
         <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
@@ -120,7 +120,7 @@ export const Summary = ({ mainService, secundaryService, coupon, summary }: Summ
           <button
             type="submit"
             className="px-10 py-2 bg-primaryBlue-900 text-white font-semibold rounded-xl hover:scale-105 hover:brightness-125 transition-all duration-200">
-            {summary.btnString}
+            {bill.btnString}
           </button>
         </div>
       </div>

@@ -1,20 +1,21 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { usePaymentContext, Summary, SummaryProps } from "@/features/payment"
+import { usePaymentContext, Summary, SummaryInstanceProps } from "@/features/payment"
 import { ServicesTypes } from "@/features/services"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
 
 interface Props {
   serviceType: ServicesTypes
-  summary: SummaryProps
+  summary: SummaryInstanceProps
 }
 
-export const ContractingPageSummary = ({ serviceType }: Props) => {
+export const ContractingPageSummary = ({ serviceType, summary }: Props) => {
   const vehicle = useGetVehicleOnChangeStorage()
   const { sendBaseChargeByVehicleRequest, baseAmount } = usePaymentContext()
 
   const [mounted, setMounted] = useState(false)
+  const { coupon, mainService, secundaryService } = summary;
 
   useEffect(() => {
     setMounted(true)
@@ -26,20 +27,47 @@ export const ContractingPageSummary = ({ serviceType }: Props) => {
     }
   }, [mounted])
 
+  if (secundaryService) {
+    return (
+      <Summary
+        mainService={{
+          name: mainService.name,
+          description: mainService.description,
+          hasPrice: mainService.hasPrice,
+          price: mainService.price,
+          referenceValue: mainService.referenceValue
+        }}
+        coupon={{
+          hasCoupon: coupon.hasCoupon,
+        }}
+        secundaryService={{
+          name: secundaryService.name,
+          description: secundaryService.description,
+          price: secundaryService.price
+        }}
+        bill={{
+          subtotal: baseAmount.subtotal,
+          dctos: baseAmount.disscount,
+          total: baseAmount.total,
+          btnString: "Continuar",
+        }}
+      />
+    )
+  }
+
   return (
     <Summary
       mainService={{
-        name: "Mantención por kilometraje",
-        description: "Servicio por pauta segun...",
-        hasPrice: true,
-        price: 189900,
-        referenceValue: "Valor referencial 10.000 kms"
+        name: mainService.name,
+        description: mainService.description,
+        hasPrice: mainService.hasPrice,
+        price: mainService.price,
+        referenceValue: mainService.referenceValue
       }}
-
       coupon={{
-        hasCoupon: true,
+        hasCoupon: coupon.hasCoupon,
       }}
-      summary={{
+      bill={{
         subtotal: baseAmount.subtotal,
         dctos: baseAmount.disscount,
         total: baseAmount.total,
