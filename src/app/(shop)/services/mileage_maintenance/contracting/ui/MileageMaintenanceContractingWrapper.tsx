@@ -23,8 +23,6 @@ export const MileageMaintenanceContractingWrapper = () => {
     }
   })
 
-  const serviceType = methods.watch("type")
-
   const ref = useRef<HTMLDivElement>(null)
   const { vehicle, showModal } = useVehicleContext()
   const { setServiceInStorage } = useServiceContext()
