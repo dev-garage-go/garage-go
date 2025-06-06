@@ -3,7 +3,7 @@
 import { createContext, useContext, useState } from "react"
 import { AppointmentDataInterface, BookingServiceDataInterface, AddressTypesData } from '@/features/bookings';
 
-import { createBooking, getServiceAmount } from "@/backend/actions"
+import { calculateServiceCharge, createBooking, getServiceAmount } from "@/backend/actions"
 
 import { useVehicleContext } from "@/features/vehicle"
 import { ServiceNamesMap, useServiceContext } from "@/features/services"
@@ -54,7 +54,7 @@ export const BookingContextProvider = ({ children }: Props) => {
       vehicle
     }
 
-    const chargingResult = await getServiceAmount(chargeRequest)
+    const chargingResult = await calculateServiceCharge(chargeRequest)
     if (!chargingResult.success) throw new Error(chargingResult.error);
 
     const booking: BookingServiceDataInterface = {
