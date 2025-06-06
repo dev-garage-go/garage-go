@@ -45,7 +45,7 @@ export const MileageMaintenanceContractingWrapper = () => {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <MileageMaintenanceContractingForm />
-            <MileageMaintenanceContractingSummary serviceType={serviceType} />
+            <MileageMaintenanceContractingSummary />
           </div>
         </form>
       </FormProvider>

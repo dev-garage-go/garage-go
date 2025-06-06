@@ -1,11 +1,13 @@
 "use client"
 
-import { calculateBaseChargeByVehicle } from "@/backend/actions"
+import { createContext, useContext, useEffect, useRef, useState } from "react"
+
 import { AmountInterface } from "@/features/bookings"
-import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { BaseChargeByVehicle } from "../types/service-charge"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
+
+import { calculateBaseChargeByVehicle } from "@/backend/actions"
 
 interface PaymentContextType {
   baseAmount: AmountInterface
@@ -34,7 +36,7 @@ export const PaymentContextProvider = ({ children }: Props) => {
 
   // get vehicle from storage
   const vehicle = useGetVehicleOnChangeStorage()
-  const service = useMemo(() => getServiceFromStorage(), [])
+  const service = getServiceFromStorage()
 
   const [baseAmount, setBaseAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
   const [finalAmount, setFinalAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })

@@ -3,7 +3,6 @@ import { PaymentSummary } from "@/features/payment"
 export const TiresContractingSummary = () => {
   return (
     <PaymentSummary
-      serviceType="tires"
       summary={{
         mainService: {
           name: "Cambio de Neumáticos",

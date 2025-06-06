@@ -3,11 +3,7 @@
 import { PaymentSummary } from "@/features/payment"
 import { ServicesTypes } from "@/features/services"
 
-interface Props {
-  serviceType: ServicesTypes
-}
-
-export const MileageMaintenanceContractingSummary = ({ serviceType }: Props) => {
+export const MileageMaintenanceContractingSummary = () => {
   return (
     <PaymentSummary
       summary={{
