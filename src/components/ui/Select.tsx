@@ -7,15 +7,15 @@ import { ErrorMessage } from './ErrorMessage';
 import { firstLetterUppercase } from '@/utils';
 import { SelectOptions } from '@/types';
 
-interface Props {
-  options: SelectOptions[]
-  label: string
+interface Props<T> {
+  options: SelectOptions<T>[]
+  label?: string
   value?: string
   onChange: (value: string) => void
   error?: string
 }
 
-export const Select = ({ options, label, onChange, value, error }: Props) => {
+export const Select = <T,>({ options, label, onChange, value, error }: Props<T>) => {
   return (
     <div className="flex w-full flex-col mb-2">
       <label className="text-sm ml-4 text-primaryBlue-900">{label}</label>
@@ -45,7 +45,7 @@ export const Select = ({ options, label, onChange, value, error }: Props) => {
                     `cursor-pointer select-none py-2 text-center text-primaryBlue-900 ${focus && 'bg-gray-100'}`
                   }
                 >
-                  {firstLetterUppercase(option.value)}
+                  {firstLetterUppercase(option.value as string)}
                 </ListboxOption>
               ))}
             </ListboxOptions>

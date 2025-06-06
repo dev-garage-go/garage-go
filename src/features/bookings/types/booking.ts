@@ -2,13 +2,15 @@ import { Dayjs } from 'dayjs';
 import { Hour } from './schedules';
 import { ServicesDataType } from '@/features/services';
 
+export type TypeAddress = 'casa' | 'oficina' | 'depto'
+
 export interface UserInterface {
   name: string;
   lastName: string;
   phone: string;
   email: string;
   address: string,
-  typeAddress: 'casa' | 'oficina' | 'depto'
+  typeAddress: TypeAddress
   additionalInfo?: string
 }
 

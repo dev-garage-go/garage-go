@@ -1,4 +1,4 @@
-export interface SelectOptions {
+export interface SelectOptions<T> {
   id: string | number,
-  value: string
+  value: T
 }
