@@ -269,7 +269,7 @@ export const VehicleDataModal = () => {
                     </label>
                     <Select
                       value={typeVehicle}
-                      defaultValue={"City Car / Sedan" as vehicleTypes}
+                      defaultValue={"Seleccione"}
                       options={VehicleTypeOptions}
                       onChange={(value) => setValue("type", value as vehicleTypes)}
                     />
