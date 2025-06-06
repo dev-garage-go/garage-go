@@ -1,57 +1,22 @@
 'use client'
 
-import { useCallback, useEffect, useMemo, useState } from "react"
-import { ServicesTypes, useServiceContext } from "@/features/services"
-import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
+import { useServiceContext } from "@/features/services"
 import { usePaymentContext, Summary, SummaryInstanceProps } from "@/features/payment"
 
 interface Props {
-  serviceType: ServicesTypes
   summary: SummaryInstanceProps
 }
 
-export const PaymentSummary = ({ serviceType, summary }: Props) => {
-  const { getServiceFromStorage } = useServiceContext()
-  const {
-    sendBaseChargeByVehicleRequest,
-    sendFinalChargeByService,
-    baseAmount,
-    finalAmount } = usePaymentContext()
-
-  // vehicle and service from storage
-  const service = useMemo(() => getServiceFromStorage(), [])
-  const vehicle = useGetVehicleOnChangeStorage()
-
-  const [mounted, setMounted] = useState(false)
+export const PaymentSummary = ({ summary }: Props) => {
   const { coupon, mainService, secundaryService } = summary;
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const { getServiceFromStorage } = useServiceContext()
+  const { baseAmount, finalAmount } = usePaymentContext()
 
-  const sendChargeRequest = useCallback(async () => {
-    // if not exist service, the user is in contracting page so calculate the base charge amount by vehicle
-    if (vehicle && !service) {
-      await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
-      return
-    }
-    // if service exist, the user is in booking page so calculate the final charge amount
-    else if (vehicle && service) {
-      await sendFinalChargeByService("prueba")
-      return
-    }
-  }, [vehicle, service, serviceType, sendBaseChargeByVehicleRequest, sendFinalChargeByService])
+  // vehicle and service from storage
+  const service = getServiceFromStorage()
 
-  useEffect(() => {
-    if (!mounted) return
-    const run = async () => {
-      await sendChargeRequest()
-    }
-    run()
-  }, [mounted, sendChargeRequest])
-
-
-
+  // baseAmount and finalAmount are setted in an useEffect in PaymentContext()
   const bill = {
     subtotal: !service ? baseAmount.subtotal : finalAmount.subtotal,
     dctos: !service ? baseAmount.disscount : finalAmount.disscount,

@@ -1,9 +1,11 @@
 "use client"
 
-import { calculateBaseChargeByVehicle, calculateFinalChargeByService } from "@/backend/actions"
+import { calculateBaseChargeByVehicle } from "@/backend/actions"
 import { AmountInterface } from "@/features/bookings"
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { BaseChargeByVehicle } from "../types/service-charge"
+import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
+import { useServiceContext } from "@/features/services"
 
 interface PaymentContextType {
   baseAmount: AmountInterface
@@ -28,6 +30,12 @@ interface Props {
 
 // Provider
 export const PaymentContextProvider = ({ children }: Props) => {
+  const { getServiceFromStorage } = useServiceContext()
+
+  // get vehicle from storage
+  const vehicle = useGetVehicleOnChangeStorage()
+  const service = useMemo(() => getServiceFromStorage(), [])
+
   const [baseAmount, setBaseAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
   const [finalAmount, setFinalAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
 
@@ -46,8 +54,33 @@ export const PaymentContextProvider = ({ children }: Props) => {
   }
 
   const sendFinalChargeByService = async (requestData: string) => {
+    // action -> calculateFinalChargeByService()
     console.log(requestData)
   }
+
+  // prevent an infinite loop when the vehicle in the local storage changed
+  const lastVehicle = useRef<string | null>(null)
+
+  // execute the logic of charging
+  useEffect(() => {
+    if (!vehicle) return
+
+    const serialized = JSON.stringify(vehicle)
+    if (serialized === lastVehicle.current) return // si es el mismo vehículo que antes, no recalcula
+    lastVehicle.current = serialized
+
+    const serviceType = "mileage"
+
+    const run = async () => {
+      if (vehicle && !service) {
+        await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
+      } else if (vehicle && service) {
+        await sendFinalChargeByService("prueba")
+      }
+    }
+
+    run()
+  }, [vehicle, service])
 
 
   return <PaymentContext.Provider value={{

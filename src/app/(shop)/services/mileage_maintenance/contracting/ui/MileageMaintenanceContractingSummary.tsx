@@ -10,7 +10,6 @@ interface Props {
 export const MileageMaintenanceContractingSummary = ({ serviceType }: Props) => {
   return (
     <PaymentSummary
-      serviceType={serviceType}
       summary={{
         mainService: {
           name: "Mantención por kilometraje",
