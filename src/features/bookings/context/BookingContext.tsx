@@ -9,6 +9,7 @@ import { useVehicleContext } from "@/features/vehicle"
 import { ServiceNamesMap, useServiceContext } from "@/features/services"
 import { ConfirmationBookingEmailInterface, useEmailContext } from "@/features/emails"
 import { bookingKey } from "../keys/storage"
+import { ServiceChargeInterface } from "@/features/payment";
 
 interface ServiceBookingType {
   setBookingInStorage: (data: any) => void
@@ -48,7 +49,12 @@ export const BookingContextProvider = ({ children }: Props) => {
   const createServiceBooking = async (data: AppointmentDataInterface) => {
     if (!service || !vehicle) return;
 
-    const amountService = await getServiceAmount(service)
+    const chargeRequest: ServiceChargeInterface = {
+      service,
+      vehicle
+    }
+
+    const amountService = await getServiceAmount(chargeRequest)
     if (!amountService) return;
 
     const booking: BookingServiceDataInterface = {

@@ -3,11 +3,15 @@
 import { calcTiresChangeAmount, calcMileageMaintenanceAmount } from "@/backend/actions"
 
 import { AmountInterface } from "@/features/bookings"
-import { MileageMaintenanceServiceInterface, ServicesDataType, TiresChangeServiceInterface } from "@/features/services"
+import { ServiceChargeInterface } from "@/features/payment"
+import { MileageMaintenanceServiceInterface, TiresChangeServiceInterface } from "@/features/services"
 
 // Only one service
-export const getServiceAmount = async (service: ServicesDataType): Promise<AmountInterface | undefined> => {
+export const getServiceAmount = async (chargeRequest: ServiceChargeInterface): Promise<AmountInterface | undefined> => {
   try {
+    const service = chargeRequest.service
+    const vehicle = chargeRequest.vehicle
+
     let result: { subtotal: number } | undefined
 
     switch (service.type) {
