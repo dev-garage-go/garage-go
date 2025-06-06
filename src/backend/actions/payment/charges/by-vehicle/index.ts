@@ -22,7 +22,6 @@ export const calculateBaseChargeByVehicle = async (chargeRequest: BaseChargeByVe
     switch (serviceType) {
       case 'mileage':
         response = await calculateMileageChargeByVehicle(vehicle)
-
         if (!response.success) {
           throw new Error(`error getting vehicle-base charging in "${serviceType}" service type: ${response.error}`);
         }
@@ -40,11 +39,10 @@ export const calculateBaseChargeByVehicle = async (chargeRequest: BaseChargeByVe
 
     const amount: AmountInterface = {
       subtotal: result.subtotal,
-      disscount: 0,
+      disscount: result.disscount,
       total: result.subtotal
     }
 
-    console.log('amount', amount)
     return {
       success: true,
       data: amount,

@@ -2,7 +2,7 @@
 
 import { calculateBaseChargeByVehicle, calculateFinalChargeByService } from "@/backend/actions"
 import { AmountInterface } from "@/features/bookings"
-import { createContext, useContext } from "react"
+import { createContext, useContext, useState } from "react"
 import { BaseChargeByVehicle } from "../types/service-charge"
 
 interface PaymentContextType {
@@ -27,30 +27,18 @@ interface Props {
 
 // Provider
 export const PaymentContextProvider = ({ children }: Props) => {
-  let baseAmount: AmountInterface = {
-    subtotal: 0,
-    disscount: 0,
-    total: 0
-  }
-
-  let finalAmount: AmountInterface = {
-    subtotal: baseAmount.subtotal + 0,
-    disscount: baseAmount.disscount + 0,
-    total: baseAmount.total + 0
-  }
+  const [baseAmount, setBaseAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
+  const [finalAmount, setFinalAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
 
   const sendBaseChargeByVehicleRequest = async (requestData: BaseChargeByVehicle) => {
     try {
+      console.log(requestData)
       const response = await calculateBaseChargeByVehicle(requestData)
       if (!response.success) throw new Error(response.error);
 
       const { disscount, subtotal, total } = response.data!
+      setBaseAmount({ disscount, subtotal, total })
 
-      baseAmount = {
-        subtotal,
-        disscount,
-        total
-      }
     } catch (error) {
       console.log(error)
     }

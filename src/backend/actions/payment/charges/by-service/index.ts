@@ -49,7 +49,6 @@ export const calculateFinalChargeByService = async (chargeRequest: ServiceCharge
       total: result.subtotal
     }
 
-    console.log('amount', amount)
     return {
       success: true,
       data: amount,

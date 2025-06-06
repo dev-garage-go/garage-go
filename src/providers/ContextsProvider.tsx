@@ -18,13 +18,13 @@ export const ContextsProvider = ({ children }: Props) => {
     <VehicleContextProvider>
       <ServiceContextProvider>
         <EmailContextProvider>
-          <BookingContextProvider>
-            <AdminContextProvider>
-              <PaymentContextProvider>
+          <PaymentContextProvider>
+            <BookingContextProvider>
+              <AdminContextProvider>
                 {children}
-              </PaymentContextProvider>
-            </AdminContextProvider>
-          </BookingContextProvider>
+              </AdminContextProvider>
+            </BookingContextProvider>
+          </PaymentContextProvider>
         </EmailContextProvider>
       </ServiceContextProvider>
     </VehicleContextProvider>

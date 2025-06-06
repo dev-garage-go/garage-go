@@ -1,8 +1,31 @@
 'use client'
 
 import { Summary } from "@/features/bookings"
+import { usePaymentContext } from "@/features/payment"
+import { ServicesTypes } from "@/features/services"
+import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
+import { useEffect, useState } from "react"
 
-export const MileageMaintenanceContractingSummary = () => {
+interface Props {
+  serviceType: ServicesTypes
+}
+
+export const MileageMaintenanceContractingSummary = ({ serviceType }: Props) => {
+  const vehicle = useGetVehicleOnChangeStorage()
+  const { sendBaseChargeByVehicleRequest, baseAmount } = usePaymentContext()
+
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
+  useEffect(() => {
+    if (mounted && vehicle) {
+      sendBaseChargeByVehicleRequest({ serviceType, vehicle })
+    }
+  }, [mounted])
+
   return (
     <Summary
       mainService={{
@@ -21,9 +44,9 @@ export const MileageMaintenanceContractingSummary = () => {
         hasCoupon: true,
       }}
       summary={{
-        subtotal: 225890,
-        dctos: 0,
-        total: 225890,
+        subtotal: baseAmount.subtotal,
+        dctos: baseAmount.disscount,
+        total: baseAmount.total,
         btnString: "Continuar",
       }}
     />
