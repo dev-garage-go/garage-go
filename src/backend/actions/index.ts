@@ -18,6 +18,9 @@ export { calcMileageMaintenanceAmount } from './services/calcMileageMaintenanceA
 export { calcTiresChangeAmount } from './services/calcTiresChangeAmount';
 export { getServiceAmount } from './services/getServicesAmount';
 
+// Payment
+export { calculateServiceCharge } from './payment/charges'
+
 // Vehicle
 export { getVehicleByLicensePlate } from './vehicle/getVehicleByLicensePlate';
 export { addNewVehicle } from './vehicle/addNewVehicle';
