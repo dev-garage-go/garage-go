@@ -9,7 +9,7 @@ export const calculateMileageChargeByVehicle = async (vehicle: VehicleWithString
   let disscount = 0
 
   try {
-    if (!vehicle) throw new Error("vehicle not exist in the chargeRequest")
+    if (!vehicle) throw new Error("vehicle not exist in the charge request")
 
     switch (vehicle.type) {
       case "city car / sedan":

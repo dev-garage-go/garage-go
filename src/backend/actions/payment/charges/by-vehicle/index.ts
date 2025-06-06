@@ -24,7 +24,7 @@ export const calculateBaseChargeByVehicle = async (chargeRequest: BaseChargeByVe
         response = await calculateMileageChargeByVehicle(vehicle)
 
         if (!response.success) {
-          throw new Error(`error getting charge in "${serviceType}" service type: ${response.error}`);
+          throw new Error(`error getting vehicle-base charging in "${serviceType}" service type: ${response.error}`);
         }
         result = response.data!
         break
@@ -35,7 +35,7 @@ export const calculateBaseChargeByVehicle = async (chargeRequest: BaseChargeByVe
     if (!result) return {
       success: false,
       httpStatus: HttpStatus.INTERNAL_SERVER_ERROR,
-      error: "unexpected error charging service"
+      error: "unexpected error in vehicle-based charging"
     };
 
     const amount: AmountInterface = {

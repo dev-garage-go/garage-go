@@ -29,7 +29,7 @@ export const calculateFinalChargeByService = async (chargeRequest: ServiceCharge
         })
 
         if (!response.success) {
-          throw new Error(`error getting charge in "${service.type}" service type: ${response.error}`);
+          throw new Error(`error getting final-charge in "${service.type}" service type: ${response.error}`);
         }
         result = response.data!
         break
@@ -40,7 +40,7 @@ export const calculateFinalChargeByService = async (chargeRequest: ServiceCharge
     if (!result) return {
       success: false,
       httpStatus: HttpStatus.INTERNAL_SERVER_ERROR,
-      error: "unexpected error charging service"
+      error: "unexpected error in the final service charge"
     };
 
     const amount: AmountInterface = {
