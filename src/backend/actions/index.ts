@@ -16,6 +16,7 @@ export { sendEmailAction } from './emails/send-email';
 // Payment
 export { calculateFinalChargeByService } from './payment/charges/by-service'
 export { calculateBaseChargeByVehicle } from './payment/charges/by-vehicle'
+export { getBaseAmountInCookie, setBaseAmountInCookie } from './payment/cookies/amount'
 
 // Vehicle
 export { getVehicleByLicensePlate } from './vehicle/getVehicleByLicensePlate';
