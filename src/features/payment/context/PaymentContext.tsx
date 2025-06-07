@@ -5,7 +5,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react"
 import { AmountInterface } from "@/features/bookings"
 import { BaseChargeByVehicle } from "../types/service-charge"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
-import { ServicesTypes, useServiceContext } from "@/features/services"
+import { useServiceContext } from "@/features/services"
 
 import { calculateBaseChargeByVehicle } from "@/backend/actions"
 
@@ -52,10 +52,11 @@ export const PaymentContextProvider = ({ children }: Props) => {
     }
   }
 
-  const sendFinalChargeByService = async (requestData: string) => {
-    // action -> calculateFinalChargeByService()
-    console.log(requestData)
-  }
+  // ! if in the future the app needs calculates an extra amount 
+  // ! by service options that user has selected, execute this func
+  // const sendFinalChargeByService = async (requestData: string) => {
+  // action -> calculateFinalChargeByService()
+  // }
 
   // prevent an infinite loop when the vehicle in the local storage changed
   const lastVehicle = useRef<string | null>(null)
@@ -71,9 +72,12 @@ export const PaymentContextProvider = ({ children }: Props) => {
     const run = async () => {
       if (vehicle && !service && serviceType) {
         await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
-      } else if (vehicle && service) {
-        await sendFinalChargeByService("prueba")
       }
+
+      // ! execution of extra amount by services options
+      // else if (vehicle && service) {
+      //   await sendFinalChargeByService("prueba")
+      // }
     }
 
     run()
