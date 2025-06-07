@@ -59,3 +59,28 @@ export const getBaseAmountInCookie = async (): Promise<ServerActionResponse<Amou
     }
   }
 }
+
+export const deleteBaseAmountInCookie = async (): Promise<ServerActionResponse<null>> => {
+  try {
+    const cookieStore = cookies()
+    const value = cookieStore.get(amountCookieKey)?.value
+
+    if (value) {
+      cookieStore.delete(amountCookieKey)
+    }
+
+    return {
+      success: true,
+      data: null,
+      httpStatus: HttpStatus.OK
+    }
+
+  } catch (error) {
+    console.error(error)
+    return {
+      success: false,
+      httpStatus: HttpStatus.NOT_FOUND,
+      error: `unexpectec error getting amount cookie: ${error}`
+    }
+  }
+}
