@@ -60,43 +60,42 @@ export const PaymentContextProvider = ({ children }: Props) => {
     }
   }
 
-  // prevent an infinite loop when the vehicle in the local storage changed
+  // prevent an infinite loop when the vehicle when the local storage changed
   const lastVehicle = useRef<string | null>(null)
+  const hasCalculated = useRef<boolean>(false)
 
-  // execute the logic of charging
+  // calculate the amount in contracting page when a service doesn't exist in localStorage
   useEffect(() => {
-    if (!vehicle) return
+    if (!vehicle || !serviceType || hasCalculated.current) return;
 
-    const serialized = JSON.stringify(vehicle)
-    if (serialized === lastVehicle.current) return; // si es el mismo vehículo que antes, no recalcula
-    lastVehicle.current = serialized
-
-    const run = async () => {
-      if (vehicle && !service && serviceType) {
+    if (!service && vehicle) {
+      hasCalculated.current = true
+      const calculateAmount = async () => {
         await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
       }
+      calculateAmount()
     }
-
-    run()
   }, [vehicle, service, serviceType, amountInCookie])
 
   // if the vehicle change, delete cookie and recalculate
   useEffect(() => {
-    if (!vehicle) return;
-
+    if (!vehicle || !serviceType) return;
     const serialized = JSON.stringify(vehicle)
-    if (serialized === lastVehicle.current) {
+
+    if (serialized !== lastVehicle.current) {
       const deleteCookie = async () => {
         const response = await deleteBaseAmountInCookie()
         if (response.success) {
           setAmountInCookie(null)
+          await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
         }
       }
       deleteCookie()
     }
+
     lastVehicle.current = serialized
 
-  }, [vehicle])
+  }, [vehicle, serviceType])
 
   // verify if exist amount cookie
   useEffect(() => {
@@ -110,12 +109,7 @@ export const PaymentContextProvider = ({ children }: Props) => {
 
   // handling the amount that will be show in UI
   const handleShowAmount = (): AmountInterface => {
-    if (amountInCookie) {
-      return amountInCookie
-    }
-    else {
-      return baseAmount
-    }
+    return amountInCookie ?? baseAmount
   }
 
   return <PaymentContext.Provider value={{

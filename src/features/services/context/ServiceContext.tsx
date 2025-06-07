@@ -1,9 +1,10 @@
 "use client"
 
-import { createContext, SetStateAction, useCallback, useContext, useEffect, useRef, useState } from "react"
+import { createContext, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
 import {
+  customServiceUpdatedEvent,
   serviceKey,
   ServicesDataType,
   ServicesTypes,
@@ -12,8 +13,8 @@ import {
 } from "@/features/services"
 
 interface ServiceContextType {
-  serviceType: ServicesTypes | undefined
-  setServiceType: React.Dispatch<SetStateAction<ServicesTypes | undefined>>
+  serviceType: ServicesTypes | null
+  setServiceType: React.Dispatch<SetStateAction<ServicesTypes | null>>
   setServiceInStorage: (data: ServicesDataType) => void
   getServiceFromStorage: () => ServicesDataType | null
   deleteServiceFromStorage: () => null | void
@@ -36,29 +37,35 @@ export const useServiceContext = () => {
 // Provider
 export const ServiceContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined'  // avoids server errors
-  const redirectToBooking = useRedirectToBooking()
+  // const redirectToBooking = useRedirectToBooking()
 
   const pathname = usePathname()
   const router = useRouter()
   const hasService = useGetServiceOnChangeStorage()
 
-  const [serviceType, setServiceType] = useState<ServicesTypes>()
+  const [serviceType, setServiceType] = useState<ServicesTypes | null>(null)
 
   const setServiceInStorage = useCallback((data: ServicesDataType) => {
     if (!isClient) return
     localStorage.setItem(serviceKey, JSON.stringify(data))
-    redirectToBooking()
-  }, [isClient, redirectToBooking])
+    window.dispatchEvent(new Event(customServiceUpdatedEvent))
+
+    // router.push(`/services/${data.type}/booking`)
+    console.log(data.name)
+    router.push(`/services/mileage_maintenance/booking`)
+  }, [isClient, router])
 
   const getServiceFromStorage = useCallback((): ServicesDataType | null => {
     if (!isClient) return null
     const data = localStorage.getItem(serviceKey)
+    window.dispatchEvent(new Event(customServiceUpdatedEvent))
     return data ? JSON.parse(data) : null
   }, [isClient])
 
   const deleteServiceFromStorage = useCallback((): null | void => {
     if (!isClient) return null
     localStorage.removeItem(serviceKey)
+    window.dispatchEvent(new Event(customServiceUpdatedEvent))
   }, [isClient])
 
   // guards
@@ -66,14 +73,18 @@ export const ServiceContextProvider = ({ children }: Props) => {
   const routeVerified = useRef(false)
 
   useEffect(() => {
-    routeVerified.current = true
+    if (!isClient) return;
+    // if exist service in storage and the page is different from /booking, delete it
+    const contractingRoutePath = pathname.endsWith("/contracting")
     const bookingRoutePath = pathname.endsWith("/booking")
 
-    // if exist service in storage and the page is different from /booking, delete it
-    if (hasService && !bookingRoutePath) {
+    if (hasService && !(bookingRoutePath || contractingRoutePath)) {
       deleteServiceFromStorage()
+      router.refresh()
     }
-  }, [pathname, getServiceFromStorage, deleteServiceFromStorage, router, hasService])
+
+    routeVerified.current = true
+  }, [pathname, hasService, isClient, router])
 
   return <ServiceContext.Provider
     value={{
