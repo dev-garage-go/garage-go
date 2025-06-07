@@ -1,10 +1,12 @@
 "use client"
 
-import { createContext, useContext } from "react"
-import { serviceKey, ServicesDataType, useRedirectToBooking } from "@/features/services"
+import { createContext, SetStateAction, useContext, useState } from "react"
+import { serviceKey, ServicesDataType, ServicesTypes, useRedirectToBooking } from "@/features/services"
 
 
 interface ServiceContextType {
+  serviceType: ServicesTypes | undefined
+  setServiceType: React.Dispatch<SetStateAction<ServicesTypes | undefined>>
   setServicesInStorage: (data: ServicesDataType[]) => void
   setServiceInStorage: (data: ServicesDataType) => void
   getServiceFromStorage: () => ServicesDataType | null
@@ -30,6 +32,8 @@ export const ServiceContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined'  // avoids server errors
   const redirectToBooking = useRedirectToBooking()
 
+  const [serviceType, setServiceType] = useState<ServicesTypes>()
+
   const setServicesInStorage = (data: ServicesDataType[]) => {
     if (!isClient) return
     localStorage.setItem(serviceKey, JSON.stringify(data))
@@ -54,6 +58,8 @@ export const ServiceContextProvider = ({ children }: Props) => {
 
   return <ServiceContext.Provider
     value={{
+      serviceType,
+      setServiceType,
       setServicesInStorage,
       setServiceInStorage,
       getServiceFromStorage,

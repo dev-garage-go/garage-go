@@ -5,15 +5,13 @@ import { createContext, useContext, useEffect, useRef, useState } from "react"
 import { AmountInterface } from "@/features/bookings"
 import { BaseChargeByVehicle } from "../types/service-charge"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
-import { useServiceContext } from "@/features/services"
+import { ServicesTypes, useServiceContext } from "@/features/services"
 
 import { calculateBaseChargeByVehicle } from "@/backend/actions"
 
 interface PaymentContextType {
   baseAmount: AmountInterface
   finalAmount: AmountInterface
-  sendBaseChargeByVehicleRequest: (requestData: BaseChargeByVehicle) => Promise<void>
-  sendFinalChargeByService: (requestData: string) => Promise<void>
 }
 
 // Context
@@ -32,7 +30,7 @@ interface Props {
 
 // Provider
 export const PaymentContextProvider = ({ children }: Props) => {
-  const { getServiceFromStorage } = useServiceContext()
+  const { getServiceFromStorage, serviceType } = useServiceContext()
 
   // get vehicle from storage
   const vehicle = useGetVehicleOnChangeStorage()
@@ -43,7 +41,6 @@ export const PaymentContextProvider = ({ children }: Props) => {
 
   const sendBaseChargeByVehicleRequest = async (requestData: BaseChargeByVehicle) => {
     try {
-      console.log(requestData)
       const response = await calculateBaseChargeByVehicle(requestData)
       if (!response.success) throw new Error(response.error);
 
@@ -68,13 +65,11 @@ export const PaymentContextProvider = ({ children }: Props) => {
     if (!vehicle) return
 
     const serialized = JSON.stringify(vehicle)
-    if (serialized === lastVehicle.current) return // si es el mismo vehículo que antes, no recalcula
+    if (serialized === lastVehicle.current) return; // si es el mismo vehículo que antes, no recalcula
     lastVehicle.current = serialized
 
-    const serviceType = "mileage"
-
     const run = async () => {
-      if (vehicle && !service) {
+      if (vehicle && !service && serviceType) {
         await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
       } else if (vehicle && service) {
         await sendFinalChargeByService("prueba")
@@ -82,14 +77,12 @@ export const PaymentContextProvider = ({ children }: Props) => {
     }
 
     run()
-  }, [vehicle, service])
+  }, [vehicle, service, serviceType])
 
 
   return <PaymentContext.Provider value={{
     baseAmount,
     finalAmount,
-    sendBaseChargeByVehicleRequest,
-    sendFinalChargeByService
   }}>
     {children}
   </PaymentContext.Provider>

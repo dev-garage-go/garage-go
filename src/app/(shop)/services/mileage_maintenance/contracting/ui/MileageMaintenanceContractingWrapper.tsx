@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { FormProvider, useForm } from "react-hook-form"
 
 import { ModalPortal } from "@/components"
@@ -25,9 +25,14 @@ export const MileageMaintenanceContractingWrapper = () => {
 
   const ref = useRef<HTMLDivElement>(null)
   const { vehicle, showModal } = useVehicleContext()
-  const { setServiceInStorage } = useServiceContext()
+  const { setServiceInStorage, setServiceType } = useServiceContext()
 
-  // Funcion que se ejecuta al enviar el formulario
+  // set the service type to could charging in PaymentContext
+  useEffect(() => {
+    setServiceType("mileage")
+  }, [])
+
+  // onSubit saved the service in storage
   const onSubmit = (data: MileageMaintenanceServiceInterface) => {
     setServiceInStorage(data)
   }
