@@ -36,7 +36,7 @@ export const BookingContextProvider = ({ children }: Props) => {
   const { getVehicleFromStorage } = useVehicleContext()
   const { getServiceFromStorage, deleteServiceFromStorage } = useServiceContext()
   const { sendBookingConfirmationEmail } = useEmailContext()
-  const { baseAmount } = usePaymentContext()
+  const { handleShowAmount } = usePaymentContext()
 
   const vehicle = getVehicleFromStorage()
   const service = getServiceFromStorage()
@@ -55,7 +55,7 @@ export const BookingContextProvider = ({ children }: Props) => {
       appointment: data.appointment,
       vehicleID: vehicle._id,
       user: data.user,
-      amount: baseAmount
+      amount: handleShowAmount()
     }
 
     const responseBooking = await createBooking(booking)

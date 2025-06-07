@@ -7,11 +7,15 @@ import { AmountInterface } from "@/features/bookings"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
 
-import { calculateBaseChargeByVehicle, setBaseAmountInCookie } from "@/backend/actions"
+import {
+  calculateBaseChargeByVehicle,
+  deleteBaseAmountInCookie,
+  getBaseAmountInCookie,
+  setBaseAmountInCookie
+} from "@/backend/actions"
 
 interface PaymentContextType {
-  baseAmount: AmountInterface
-  finalAmount: AmountInterface
+  handleShowAmount: () => AmountInterface
 }
 
 // Context
@@ -37,8 +41,9 @@ export const PaymentContextProvider = ({ children }: Props) => {
   const service = getServiceFromStorage()
 
   const [baseAmount, setBaseAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
-  const [finalAmount, setFinalAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
+  const [amountInCookie, setAmountInCookie] = useState<AmountInterface | null>()
 
+  // calling function that executes charging logic
   const sendBaseChargeByVehicleRequest = async (requestData: BaseChargeByVehicle) => {
     try {
       const response = await calculateBaseChargeByVehicle(requestData)
@@ -54,12 +59,6 @@ export const PaymentContextProvider = ({ children }: Props) => {
       console.log(error)
     }
   }
-
-  // future feature: if in the future the app needs calculates an extra amount 
-  // ! by service options that user has selected, execute this func
-  // const sendFinalChargeByService = async (requestData: string) => {
-  // action -> calculateFinalChargeByService()
-  // }
 
   // prevent an infinite loop when the vehicle in the local storage changed
   const lastVehicle = useRef<string | null>(null)
@@ -79,12 +78,48 @@ export const PaymentContextProvider = ({ children }: Props) => {
     }
 
     run()
-  }, [vehicle, service, serviceType])
+  }, [vehicle, service, serviceType, amountInCookie])
 
+  // if the vehicle change, delete cookie and recalculate
+  useEffect(() => {
+    if (!vehicle) return;
+
+    const serialized = JSON.stringify(vehicle)
+    if (serialized === lastVehicle.current) {
+      const deleteCookie = async () => {
+        const response = await deleteBaseAmountInCookie()
+        if (response.success) {
+          setAmountInCookie(null)
+        }
+      }
+      deleteCookie()
+    }
+    lastVehicle.current = serialized
+
+  }, [vehicle])
+
+  // verify if exist amount cookie
+  useEffect(() => {
+    const verifyCookie = async () => {
+      const response = await getBaseAmountInCookie()
+      if (!response.success || response.data === null) return;
+      setAmountInCookie(response.data)
+    }
+    verifyCookie()
+  }, [])
+
+  // handling the amount that will be show in UI
+  const handleShowAmount = (): AmountInterface => {
+    if (amountInCookie) {
+      return amountInCookie
+    }
+    else {
+      return baseAmount
+    }
+  }
 
   return <PaymentContext.Provider value={{
-    baseAmount,
-    finalAmount,
+    handleShowAmount
   }}>
     {children}
   </PaymentContext.Provider>
