@@ -65,7 +65,9 @@ export const useGetVehicleOnChangeStorage = (): VehicleWithStringIDInterface | n
     // hasRefreshed or ref, it's a flag to avoid refreshing if you do not yet have a value or if you have already refreshed for that value
     if (vehicle && !hasRefreshed.current) {
       hasRefreshed.current = true
-      router.refresh()
+      setTimeout(() => {  // wait for everything to finish rendering and then refresh
+        router.refresh()
+      }, 0)
     }
   }, [vehicle, router])
 

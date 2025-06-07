@@ -9,7 +9,6 @@ import {
   ServicesDataType,
   ServicesTypes,
   useGetServiceOnChangeStorage,
-  useRedirectToBooking
 } from "@/features/services"
 
 interface ServiceContextType {
@@ -37,7 +36,6 @@ export const useServiceContext = () => {
 // Provider
 export const ServiceContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined'  // avoids server errors
-  // const redirectToBooking = useRedirectToBooking()
 
   const pathname = usePathname()
   const router = useRouter()

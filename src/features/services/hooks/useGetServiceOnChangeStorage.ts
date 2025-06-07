@@ -65,7 +65,9 @@ export const useGetServiceOnChangeStorage = (): ServicesDataType | null => {
     // hasRefreshed or ref, it's a flag to avoid refreshing if you do not yet have a value or if you have already refreshed for that value
     if (service && !hasRefreshed.current) {
       hasRefreshed.current = true
-      router.refresh()
+      setTimeout(() => {
+        router.refresh() // wait for everything to finish rendering and then refresh
+      }, 0)
     }
   }, [service, router])
 
