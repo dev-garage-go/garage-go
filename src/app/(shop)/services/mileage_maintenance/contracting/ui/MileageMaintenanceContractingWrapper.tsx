@@ -30,7 +30,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   // set the service type to could charging in PaymentContext
   useEffect(() => {
     setServiceType("mileage")
-  }, [])
+  }, [setServiceType])
 
   // onSubit saved the service in storage
   const onSubmit = (data: MileageMaintenanceServiceInterface) => {

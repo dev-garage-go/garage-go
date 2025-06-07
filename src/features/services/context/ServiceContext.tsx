@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, SetStateAction, useContext, useEffect, useRef, useState } from "react"
+import { createContext, SetStateAction, useCallback, useContext, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
 import {
@@ -10,12 +10,10 @@ import {
   useGetServiceOnChangeStorage,
   useRedirectToBooking
 } from "@/features/services"
-import { sleep } from "@/utils"
 
 interface ServiceContextType {
   serviceType: ServicesTypes | undefined
   setServiceType: React.Dispatch<SetStateAction<ServicesTypes | undefined>>
-  setServicesInStorage: (data: ServicesDataType[]) => void
   setServiceInStorage: (data: ServicesDataType) => void
   getServiceFromStorage: () => ServicesDataType | null
   deleteServiceFromStorage: () => null | void
@@ -46,40 +44,34 @@ export const ServiceContextProvider = ({ children }: Props) => {
 
   const [serviceType, setServiceType] = useState<ServicesTypes>()
 
-  const setServicesInStorage = (data: ServicesDataType[]) => {
-    if (!isClient) return
-    localStorage.setItem(serviceKey, JSON.stringify(data))
-  }
-
-  const setServiceInStorage = (data: ServicesDataType) => {
+  const setServiceInStorage = useCallback((data: ServicesDataType) => {
     if (!isClient) return
     localStorage.setItem(serviceKey, JSON.stringify(data))
     redirectToBooking()
-  }
+  }, [isClient, redirectToBooking])
 
-  const getServiceFromStorage = (): ServicesDataType | null => {
+  const getServiceFromStorage = useCallback((): ServicesDataType | null => {
     if (!isClient) return null
     const data = localStorage.getItem(serviceKey)
     return data ? JSON.parse(data) : null
-  }
+  }, [isClient])
 
-  const deleteServiceFromStorage = (): null | void => {
+  const deleteServiceFromStorage = useCallback((): null | void => {
     if (!isClient) return null
     localStorage.removeItem(serviceKey)
-  }
+  }, [isClient])
 
   // guards
   // prevent an infinite loop in the useEffect
   const routeVerified = useRef(false)
 
   useEffect(() => {
-    // if exist service in storage and the page is different from /booking, delete it
-    sleep(500)
     routeVerified.current = true
     const bookingRoutePath = pathname.endsWith("/booking")
 
-    if (!hasService && bookingRoutePath) {
-      router.back()
+    // if exist service in storage and the page is different from /booking, delete it
+    if (hasService && !bookingRoutePath) {
+      deleteServiceFromStorage()
     }
   }, [pathname, getServiceFromStorage, deleteServiceFromStorage, router, hasService])
 
@@ -87,7 +79,6 @@ export const ServiceContextProvider = ({ children }: Props) => {
     value={{
       serviceType,
       setServiceType,
-      setServicesInStorage,
       setServiceInStorage,
       getServiceFromStorage,
       deleteServiceFromStorage
