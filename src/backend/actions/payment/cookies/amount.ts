@@ -32,15 +32,15 @@ export const setBaseAmountInCookie = async (amount: AmountInterface): Promise<Se
   }
 }
 
-export const getBaseAmountInCookie = async (): Promise<ServerActionResponse<AmountInterface>> => {
+export const getBaseAmountInCookie = async (): Promise<ServerActionResponse<AmountInterface | null>> => {
   try {
     const cookieStore = cookies()
     const value = cookieStore.get(amountCookieKey)?.value
 
     if (!value) return {
-      success: false,
+      success: true,
       httpStatus: HttpStatus.NOT_FOUND,
-      error: "amount cookie not found"
+      data: null
     }
 
     const amount = await JSON.parse(value)

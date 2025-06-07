@@ -1,21 +1,39 @@
 'use client'
 
-import { useServiceContext } from "@/features/services"
-import { usePaymentContext, Summary, SummaryInstanceProps } from "@/features/payment"
+import { usePaymentContext, Summary } from "@/features/payment"
 import { setSummaryPropsByServiceType } from "../constants/summary"
+import { useEffect, useState } from "react"
+import { getBaseAmountInCookie } from "@/backend/actions"
+import { AmountInterface } from "@/features/bookings"
 
 export const PaymentSummary = () => {
-  const { getServiceFromStorage } = useServiceContext()
-  const { baseAmount, finalAmount } = usePaymentContext()
+  const { baseAmount } = usePaymentContext()
+  const [amountInCookie, setAmountInCookie] = useState<AmountInterface>()
 
-  // vehicle and service from storage
-  const service = getServiceFromStorage()
+  // verify cookie
+  useEffect(() => {
+    const verifyCookie = async () => {
+      const response = await getBaseAmountInCookie()
+      if (!response.success || response.data === null) return;
+      setAmountInCookie(response.data)
+    }
+    verifyCookie()
+  }, [])
 
-  // baseAmount and finalAmount are setted in an useEffect in PaymentContext()
+  // baseAmount, finalAmount and amountInCookie are setted in an useEffect in PaymentContext()
+  const handleShowAmount = (): AmountInterface => {
+    if (amountInCookie) {
+      return amountInCookie
+    }
+    else {
+      return baseAmount
+    }
+  }
+
   const bill = {
-    subtotal: !service ? baseAmount.subtotal : finalAmount.subtotal,
-    dctos: !service ? baseAmount.disscount : finalAmount.disscount,
-    total: !service ? baseAmount.total : finalAmount.total,
+    subtotal: handleShowAmount().subtotal,
+    dctos: handleShowAmount().disscount,
+    total: handleShowAmount().total,
     btnString: "Continuar",
   }
 

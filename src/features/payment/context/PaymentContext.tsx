@@ -2,12 +2,12 @@
 
 import { createContext, useContext, useEffect, useRef, useState } from "react"
 
-import { AmountInterface } from "@/features/bookings"
 import { BaseChargeByVehicle } from "../types/service-charge"
+import { AmountInterface } from "@/features/bookings"
 import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
 
-import { calculateBaseChargeByVehicle } from "@/backend/actions"
+import { calculateBaseChargeByVehicle, setBaseAmountInCookie } from "@/backend/actions"
 
 interface PaymentContextType {
   baseAmount: AmountInterface
@@ -44,15 +44,18 @@ export const PaymentContextProvider = ({ children }: Props) => {
       const response = await calculateBaseChargeByVehicle(requestData)
       if (!response.success) throw new Error(response.error);
 
-      const { disscount, subtotal, total } = response.data!
-      setBaseAmount({ disscount, subtotal, total })
+      const amount = response.data!
+      setBaseAmount(amount)
+
+      // save amount in cookies
+      await setBaseAmountInCookie(amount)
 
     } catch (error) {
       console.log(error)
     }
   }
 
-  // ! if in the future the app needs calculates an extra amount 
+  // future feature: if in the future the app needs calculates an extra amount 
   // ! by service options that user has selected, execute this func
   // const sendFinalChargeByService = async (requestData: string) => {
   // action -> calculateFinalChargeByService()
@@ -73,11 +76,6 @@ export const PaymentContextProvider = ({ children }: Props) => {
       if (vehicle && !service && serviceType) {
         await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
       }
-
-      // ! execution of extra amount by services options
-      // else if (vehicle && service) {
-      //   await sendFinalChargeByService("prueba")
-      // }
     }
 
     run()

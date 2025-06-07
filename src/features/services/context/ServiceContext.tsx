@@ -10,6 +10,7 @@ import {
   useGetServiceOnChangeStorage,
   useRedirectToBooking
 } from "@/features/services"
+import { sleep } from "@/utils"
 
 interface ServiceContextType {
   serviceType: ServicesTypes | undefined
@@ -73,6 +74,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
 
   useEffect(() => {
     // if exist service in storage and the page is different from /booking, delete it
+    sleep(500)
     routeVerified.current = true
     const bookingRoutePath = pathname.endsWith("/booking")
 
