@@ -1,7 +1,8 @@
 "use client"
 
-import { createContext, SetStateAction, useContext, useState } from "react"
+import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
 import { serviceKey, ServicesDataType, ServicesTypes, useRedirectToBooking } from "@/features/services"
+import { usePathname, useRouter } from "next/navigation"
 
 
 interface ServiceContextType {
@@ -32,6 +33,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined'  // avoids server errors
   const redirectToBooking = useRedirectToBooking()
 
+  const pathname = usePathname()
   const [serviceType, setServiceType] = useState<ServicesTypes>()
 
   const setServicesInStorage = (data: ServicesDataType[]) => {
@@ -55,6 +57,15 @@ export const ServiceContextProvider = ({ children }: Props) => {
     if (!isClient) return null
     localStorage.removeItem(serviceKey)
   }
+
+  // guards
+  useEffect(() => {
+    // if exist service in storage and the page is different from /booking, delete it
+    const bookingRoutePath = pathname.endsWith("/booking")
+    if (getServiceFromStorage() && !bookingRoutePath) {
+      deleteServiceFromStorage()
+    }
+  }, [pathname, getServiceFromStorage, deleteServiceFromStorage])
 
   return <ServiceContext.Provider
     value={{

@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-
 import { ModalPortal } from "@/components";
+
 import { LazyVehicleDataModal, useVehicleContext } from "@/features/vehicle";
 import { PaymentSummary } from "@/features/payment";
 import {
@@ -57,7 +57,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <BookingForm withBooking={withBooking} />
-            {/* <BookingPageSummary /> */}
+            <PaymentSummary />
           </div>
         </form>
       </FormProvider>
