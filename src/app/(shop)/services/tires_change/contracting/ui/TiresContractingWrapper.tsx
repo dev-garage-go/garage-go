@@ -3,9 +3,9 @@
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { TiresContractingForm } from './TiresContractingForm';
-import { TiresContractingSummary } from './TiresContractingSummary';
 
 import { TiresChangeServiceInterface, useServiceContext } from '@/features/services';
+import { PaymentSummary } from '@/features/payment';
 
 export const TiresContractingWrapper = () => {
   // TODO: const hasPromotion = getPromotionByService()
@@ -33,7 +33,7 @@ export const TiresContractingWrapper = () => {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <TiresContractingForm />
-            <TiresContractingSummary />
+            <PaymentSummary />
           </div>
         </form>
       </FormProvider>
