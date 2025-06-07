@@ -1,9 +1,15 @@
 "use client"
 
-import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
-import { serviceKey, ServicesDataType, ServicesTypes, useRedirectToBooking } from "@/features/services"
+import { createContext, SetStateAction, useContext, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
+import {
+  serviceKey,
+  ServicesDataType,
+  ServicesTypes,
+  useGetServiceOnChangeStorage,
+  useRedirectToBooking
+} from "@/features/services"
 
 interface ServiceContextType {
   serviceType: ServicesTypes | undefined
@@ -34,6 +40,9 @@ export const ServiceContextProvider = ({ children }: Props) => {
   const redirectToBooking = useRedirectToBooking()
 
   const pathname = usePathname()
+  const router = useRouter()
+  const hasService = useGetServiceOnChangeStorage()
+
   const [serviceType, setServiceType] = useState<ServicesTypes>()
 
   const setServicesInStorage = (data: ServicesDataType[]) => {
@@ -59,13 +68,18 @@ export const ServiceContextProvider = ({ children }: Props) => {
   }
 
   // guards
+  // prevent an infinite loop in the useEffect
+  const routeVerified = useRef(false)
+
   useEffect(() => {
     // if exist service in storage and the page is different from /booking, delete it
+    routeVerified.current = true
     const bookingRoutePath = pathname.endsWith("/booking")
-    if (getServiceFromStorage() && !bookingRoutePath) {
-      deleteServiceFromStorage()
+
+    if (!hasService && bookingRoutePath) {
+      router.back()
     }
-  }, [pathname, getServiceFromStorage, deleteServiceFromStorage])
+  }, [pathname, getServiceFromStorage, deleteServiceFromStorage, router, hasService])
 
   return <ServiceContext.Provider
     value={{
