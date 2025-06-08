@@ -1,6 +1,6 @@
 "use client"
 
-import { createContext, SetStateAction, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
+import { createContext, SetStateAction, useCallback, useContext, useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
 import {
@@ -8,7 +8,6 @@ import {
   serviceKey,
   ServicesDataType,
   ServicesTypes,
-  useGetServiceOnChangeStorage,
 } from "@/features/services"
 
 interface ServiceContextType {
@@ -37,11 +36,11 @@ export const useServiceContext = () => {
 export const ServiceContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined'  // avoids server errors
 
+  const [serviceType, setServiceType] = useState<ServicesTypes | null>(null)
+  const [serviceInStorage, setServiceInStorageState] = useState<ServicesDataType | null>(null)
+
   const pathname = usePathname()
   const router = useRouter()
-  const serviceInStorage = useGetServiceOnChangeStorage()
-
-  const [serviceType, setServiceType] = useState<ServicesTypes | null>(null)
 
   const setServiceInStorage = useCallback((data: ServicesDataType) => {
     if (!isClient) return
@@ -55,9 +54,12 @@ export const ServiceContextProvider = ({ children }: Props) => {
 
   const getServiceFromStorage = useCallback((): ServicesDataType | null => {
     if (!isClient) return null
-    const data = localStorage.getItem(serviceKey)
-    window.dispatchEvent(new Event(customServiceUpdatedEvent))
-    return data ? JSON.parse(data) : null
+    const raw = localStorage.getItem(serviceKey)
+    try {
+      return raw ? JSON.parse(raw) : null
+    } catch {
+      return null
+    }
   }, [isClient])
 
   const deleteServiceFromStorage = useCallback((): null | void => {
@@ -66,9 +68,41 @@ export const ServiceContextProvider = ({ children }: Props) => {
     window.dispatchEvent(new Event(customServiceUpdatedEvent))
   }, [isClient])
 
-  // guards
-  // prevent an infinite loop in the useEffect
-  const routeVerified = useRef(false)
+
+  // * Important: 
+  // update the service in storage when detects a customService event,
+  // when this custom event happened, the component <RefresListener> refresh the route
+  useEffect(() => {
+    if (!isClient) return
+
+    const updateServiceFromStorage = () => {
+      const raw = localStorage.getItem(serviceKey)
+      if (!raw) return setServiceInStorageState(null)
+
+      try {
+        const parsed = JSON.parse(raw)
+        setServiceInStorageState(parsed)
+      } catch (err) {
+        console.error("Error parsing service from storage:", err)
+        setServiceInStorageState(null)
+      }
+    }
+
+    updateServiceFromStorage()
+
+    const handler = () => updateServiceFromStorage()
+
+    window.addEventListener("storage", handler)
+    window.addEventListener(customServiceUpdatedEvent, handler)
+
+    return () => {
+      window.removeEventListener(customServiceUpdatedEvent, handler)
+    }
+  }, [isClient])
+
+
+  // ! guards
+  const routeVerified = useRef(false) // prevent an infinite loop
 
   useEffect(() => {
     if (!isClient) return;

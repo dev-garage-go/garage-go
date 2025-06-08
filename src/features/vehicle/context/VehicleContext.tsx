@@ -4,7 +4,6 @@ import { createContext, SetStateAction, useContext, useEffect, useState } from "
 import {
   customVehicleUpdateEvent,
   vehicleKey,
-  useGetVehicleOnChangeStorage,
   VehicleWithStringIDInterface
 } from "@/features/vehicle"
 import { VehicleDB } from "@/backend/database/types"
@@ -38,7 +37,7 @@ export const VehicleContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined' // avoids server errors
 
   const [showModal, setShowModal] = useState<boolean>(false)
-  const vehicleInStorage = useGetVehicleOnChangeStorage()
+  const [vehicleInStorage, setVehicleInStorageState] = useState<VehicleWithStringIDInterface | null>(null)
 
   // methods to impact localStorage
   const setVehicleInStorage = (data: VehicleDB): void => {
@@ -70,11 +69,46 @@ export const VehicleContextProvider = ({ children }: Props) => {
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
+  // * Important: 
+  // updates the vehicle in storage when detects a customVehicle event,
+  // when this custom event happened, the component <RefresListener> refresh the route
+  useEffect(() => {
+    if (!isClient) return
 
+    const updateVehicleFromStorage = () => {
+      const raw = localStorage.getItem(vehicleKey)
+      if (!raw) return setVehicleInStorageState(null)
+
+      try {
+        const parsed = JSON.parse(raw)
+        setVehicleInStorageState(parsed)
+      } catch (err) {
+        console.error("Error parsing vehicle from storage:", err)
+        setVehicleInStorageState(null)
+      }
+    }
+
+    updateVehicleFromStorage()
+
+    const handler = () => updateVehicleFromStorage()
+
+    window.addEventListener("storage", handler)
+    window.addEventListener(customVehicleUpdateEvent, handler)
+
+    return () => {
+      window.removeEventListener(customVehicleUpdateEvent, handler)
+    }
+  }, [isClient])
+
+  useEffect(() => console.log("vehicle context: ", vehicleInStorage))
+
+  // ! guards
   // if the session storage doesn't have a license plate
   // or if the local storage doesn't have vehicle data, open modal
   useEffect(() => {
-    if (!vehicleInStorage) {
+    if (vehicleInStorage) {
+      setShowModal(false)
+    } else {
       setShowModal(true)
     }
   }, [vehicleInStorage])

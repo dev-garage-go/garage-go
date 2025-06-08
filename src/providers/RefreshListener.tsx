@@ -2,6 +2,8 @@
 
 import { useEffect } from "react"
 import { useRouter } from "next/navigation"
+import { customVehicleUpdateEvent } from "@/features/vehicle"
+import { customServiceUpdatedEvent } from "@/features/services"
 
 export const refreshRequestEventKey = "request-router-refresh"
 
@@ -13,10 +15,12 @@ export const RefreshListener = () => {
       router.refresh()
     }
 
-    window.addEventListener(refreshRequestEventKey, handleRefresh)
+    window.addEventListener(customVehicleUpdateEvent, handleRefresh)
+    window.addEventListener(customServiceUpdatedEvent, handleRefresh)
 
     return () => {
-      window.removeEventListener(refreshRequestEventKey, handleRefresh)
+      window.removeEventListener(customVehicleUpdateEvent, handleRefresh)
+      window.removeEventListener(customServiceUpdatedEvent, handleRefresh)
     }
   }, [])
 
