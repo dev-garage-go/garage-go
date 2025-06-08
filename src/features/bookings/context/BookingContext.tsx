@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from "react"
 import { AppointmentDataInterface, BookingServiceDataInterface } from '@/features/bookings';
 import { bookingKey } from "../keys/storage"
 
-import { createBooking } from "@/backend/actions"
+import { createBooking, deleteBaseAmountInCookie } from "@/backend/actions"
 
 import { useVehicleContext } from "@/features/vehicle"
 import { ServiceNamesMap, useServiceContext } from "@/features/services"
@@ -93,6 +93,9 @@ export const BookingContextProvider = ({ children }: Props) => {
 
     // show modal that confirm email sent and delete service from storage 
     setBookingCreated(true)
+
+    // delete cookies when booking was created
+    await deleteBaseAmountInCookie()
   }
 
 
