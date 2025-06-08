@@ -13,10 +13,8 @@ interface VehicleContextType {
   setShowModal: React.Dispatch<SetStateAction<boolean>>
   vehicleInStorage: VehicleWithStringIDInterface | null
   setVehicleInStorage: (data: VehicleDB) => void
-  getVehicleFromStorage: () => VehicleWithStringIDInterface | null
   deleteVehicle: () => void
 }
-
 
 interface Props {
   children: React.ReactNode
@@ -56,12 +54,6 @@ export const VehicleContextProvider = ({ children }: Props) => {
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 
-  const getVehicleFromStorage = (): VehicleWithStringIDInterface | null => {
-    if (!isClient) return null
-    const data = localStorage.getItem(vehicleKey)
-    return data ? JSON.parse(data) : null
-  }
-
   // deletes license plate from the session storage, so that others can be entered
   const deleteVehicle = () => {
     if (!isClient) return
@@ -73,7 +65,7 @@ export const VehicleContextProvider = ({ children }: Props) => {
   // updates the vehicle in storage when detects a customVehicle event,
   // when this custom event happened, the component <RefresListener> refresh the route
   useEffect(() => {
-    if (!isClient) return
+    if (!isClient) return;
 
     const updateVehicleFromStorage = () => {
       const raw = localStorage.getItem(vehicleKey)
@@ -100,7 +92,6 @@ export const VehicleContextProvider = ({ children }: Props) => {
     }
   }, [isClient])
 
-  useEffect(() => console.log("vehicle context: ", vehicleInStorage))
 
   // ! guards
   // if the session storage doesn't have a license plate
@@ -120,7 +111,6 @@ export const VehicleContextProvider = ({ children }: Props) => {
       setShowModal,
       vehicleInStorage,
       setVehicleInStorage,
-      getVehicleFromStorage,
       deleteVehicle
     }}
   >
