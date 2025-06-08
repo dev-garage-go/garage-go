@@ -28,7 +28,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
     }
   })
 
-  const { vehicle, showModal } = useVehicleContext()
+  const { vehicleInStorage, showModal } = useVehicleContext()
   const { createServiceBooking, bookingCreated } = useBookingContext()
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
@@ -42,7 +42,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   return (
     <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
       {/* if vehicle data doesn't exist, the modal will be open, otherwise it will be closed */}
-      {!vehicle &&
+      {!vehicleInStorage &&
         <ModalPortal isOpen={showModal}>
           <LazyVehicleDataModal /> {/* the component is only imported if the conditions are met */}
         </ModalPortal>

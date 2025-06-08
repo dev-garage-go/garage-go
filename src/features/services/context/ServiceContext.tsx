@@ -116,7 +116,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
     }
 
     routeVerified.current = true
-  }, [pathname, serviceInStorage, isClient, router])
+  }, [pathname, serviceInStorage, isClient, router, deleteServiceFromStorage])
 
   return <ServiceContext.Provider
     value={{

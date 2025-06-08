@@ -22,7 +22,7 @@ export const RefreshListener = () => {
       window.removeEventListener(customVehicleUpdateEvent, handleRefresh)
       window.removeEventListener(customServiceUpdatedEvent, handleRefresh)
     }
-  }, [])
+  }, [router])
 
   return null
 }

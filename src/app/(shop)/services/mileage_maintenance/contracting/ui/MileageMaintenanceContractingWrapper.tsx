@@ -24,7 +24,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   })
 
   const ref = useRef<HTMLDivElement>(null)
-  const { vehicle, showModal } = useVehicleContext()
+  const { vehicleInStorage, showModal } = useVehicleContext()
   const { setServiceInStorage, setServiceType } = useServiceContext()
 
   // set the service type to could charging in PaymentContext
@@ -39,7 +39,7 @@ export const MileageMaintenanceContractingWrapper = () => {
 
   return (
     <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
-      {!vehicle &&
+      {!vehicleInStorage &&
         <ModalPortal isOpen={showModal}>
           <LazyVehicleDataModal /> {/* the component is only imported if the conditions are met */}
         </ModalPortal>
