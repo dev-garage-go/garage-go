@@ -11,7 +11,7 @@ export const addNewVehicle = async (vehicle: VehicleDataInterface): Promise<Serv
     const coll = await getCollection("vehicles")
 
     const v: VehicleDB = {
-      licensePlate: vehicle.licensePlate.toUpperCase().trim(),
+      licensePlate: vehicle.licensePlate.toLowerCase().trim(),
       brand: vehicle.brand.toLowerCase().trim(),
       mileage: removeDotsFromNumber(vehicle.mileage).trim(),
       model: vehicle.model.toLowerCase(),

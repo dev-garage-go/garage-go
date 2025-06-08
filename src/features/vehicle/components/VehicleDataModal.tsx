@@ -17,7 +17,7 @@ export const VehicleDataModal = () => {
   // states
   const [isMounted, setIsMounted] = useState<boolean>(false)
   const [isVisible, setIsVisible] = useState<boolean>(false)
-  const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(true) // if the backend not found a vehicle in database, open the form to fill fields with a new car
+  const [showFormToCompleteData, setShowFormModalToCompleteData] = useState<boolean>(false) // if the backend not found a vehicle in database, open the form to fill fields with a new car
 
   // wathing
   const typeVehicle = watch("type")

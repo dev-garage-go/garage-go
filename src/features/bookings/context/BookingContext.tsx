@@ -93,7 +93,6 @@ export const BookingContextProvider = ({ children }: Props) => {
 
     // show modal that confirm email sent and delete service from storage 
     setBookingCreated(true)
-    deleteServiceFromStorage()
   }
 
 
