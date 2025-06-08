@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { ModalPortal } from "@/components";
 
@@ -37,7 +37,9 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   const { serviceInStorage } = useServiceContext()
 
   // guard
-  if (!serviceInStorage) router.back();
+  useEffect(() => {
+    if (!serviceInStorage) router.back();
+  }, [serviceInStorage])
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
 
