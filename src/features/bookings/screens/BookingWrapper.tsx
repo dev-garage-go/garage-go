@@ -12,6 +12,8 @@ import {
   useBookingContext,
   ConfirmationBookingModal,
 } from "@/features/bookings"
+import { useServiceContext } from "@/features/services";
+import { useRouter } from "next/navigation";
 
 interface Props {
   withBooking: boolean
@@ -28,8 +30,14 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
     }
   })
 
+  const router = useRouter()
+
   const { vehicleInStorage, showModal } = useVehicleContext()
   const { createServiceBooking, bookingCreated } = useBookingContext()
+  const { serviceInStorage } = useServiceContext()
+
+  // guard
+  if (!serviceInStorage) router.back();
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
 

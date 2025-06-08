@@ -14,7 +14,7 @@ interface ServiceContextType {
   serviceType: ServicesTypes | null
   setServiceType: React.Dispatch<SetStateAction<ServicesTypes | null>>
   setServiceInStorage: (data: ServicesDataType) => void
-  getServiceFromStorage: () => ServicesDataType | null
+  serviceInStorage: ServicesDataType | null
   deleteServiceFromStorage: () => null | void
 }
 
@@ -52,15 +52,6 @@ export const ServiceContextProvider = ({ children }: Props) => {
     router.push(`/services/mileage_maintenance/booking`)
   }, [isClient, router])
 
-  const getServiceFromStorage = useCallback((): ServicesDataType | null => {
-    if (!isClient) return null
-    const raw = localStorage.getItem(serviceKey)
-    try {
-      return raw ? JSON.parse(raw) : null
-    } catch {
-      return null
-    }
-  }, [isClient])
 
   const deleteServiceFromStorage = useCallback((): null | void => {
     if (!isClient) return null
@@ -123,7 +114,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
       serviceType,
       setServiceType,
       setServiceInStorage,
-      getServiceFromStorage,
+      serviceInStorage,
       deleteServiceFromStorage
     }}
   >
