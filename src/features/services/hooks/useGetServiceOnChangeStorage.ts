@@ -5,14 +5,16 @@
   - Storage events (when the localStorage changes from another tab or window).
   - A custom event (customserviceUpdateEvent) that you fire manually in the code when you change the localStorage from the same tab.
 4. When it detects a change, it rereads the localStorage and updates its state (service) if it changed.
-5. If it is the first time it detects a new value, it calls router.refresh(), which re-renders the server component associated to the current route in Next.js App Router.
-*/
+5. If it is the first time it detects a new value, it calls shooting a new "refresh event" that will be executed
+   in the <RefreshListener>, this is a higher order component which re-renders the server component associated
+   to the current route in Next.js App Router*/
 
 "use client"
 
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/navigation"
 
+import { refreshRequestEventKey } from "@/providers"
 import {
   customServiceUpdatedEvent,
   serviceKey,
@@ -65,9 +67,7 @@ export const useGetServiceOnChangeStorage = (): ServicesDataType | null => {
     // hasRefreshed or ref, it's a flag to avoid refreshing if you do not yet have a value or if you have already refreshed for that value
     if (service && !hasRefreshed.current) {
       hasRefreshed.current = true
-      setTimeout(() => {
-        router.refresh() // wait for everything to finish rendering and then refresh
-      }, 0)
+      window.dispatchEvent(new Event(refreshRequestEventKey))
     }
   }, [service, router])
 

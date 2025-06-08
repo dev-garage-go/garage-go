@@ -8,6 +8,7 @@ import {
   EmailContextProvider,
   PaymentContextProvider
 } from "./contexts"
+import { RefreshListener } from "./RefreshListener"
 
 interface Props {
   children: React.ReactNode
@@ -15,18 +16,21 @@ interface Props {
 
 export const ContextsProvider = ({ children }: Props) => {
   return (
-    <VehicleContextProvider>
-      <ServiceContextProvider>
-        <EmailContextProvider>
-          <PaymentContextProvider>
-            <BookingContextProvider>
-              <AdminContextProvider>
-                {children}
-              </AdminContextProvider>
-            </BookingContextProvider>
-          </PaymentContextProvider>
-        </EmailContextProvider>
-      </ServiceContextProvider>
-    </VehicleContextProvider>
+    <>
+      <RefreshListener />
+      <VehicleContextProvider>
+        <ServiceContextProvider>
+          <EmailContextProvider>
+            <PaymentContextProvider>
+              <BookingContextProvider>
+                <AdminContextProvider>
+                  {children}
+                </AdminContextProvider>
+              </BookingContextProvider>
+            </PaymentContextProvider>
+          </EmailContextProvider>
+        </ServiceContextProvider>
+      </VehicleContextProvider>
+    </>
   )
 }

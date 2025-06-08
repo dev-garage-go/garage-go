@@ -39,7 +39,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
 
   const pathname = usePathname()
   const router = useRouter()
-  const hasService = useGetServiceOnChangeStorage()
+  const serviceInStorage = useGetServiceOnChangeStorage()
 
   const [serviceType, setServiceType] = useState<ServicesTypes | null>(null)
 
@@ -76,13 +76,13 @@ export const ServiceContextProvider = ({ children }: Props) => {
     const contractingRoutePath = pathname.endsWith("/contracting")
     const bookingRoutePath = pathname.endsWith("/booking")
 
-    if (hasService && !(bookingRoutePath || contractingRoutePath)) {
+    if (serviceInStorage && !(bookingRoutePath || contractingRoutePath)) {
       deleteServiceFromStorage()
       router.refresh()
     }
 
     routeVerified.current = true
-  }, [pathname, hasService, isClient, router])
+  }, [pathname, serviceInStorage, isClient, router])
 
   return <ServiceContext.Provider
     value={{
