@@ -22,43 +22,56 @@ import {
   VehicleWithStringIDInterface
 } from "@/features/vehicle"
 
+const safelyParseVehicle = (value: string | null): VehicleWithStringIDInterface | null => {
+  if (!value) return null
+  try {
+    return JSON.parse(value)
+  } catch {
+    console.warn("Invalid JSON in localStorage under key: ", vehicleKey)
+    return null
+  }
+}
 
 export const useGetVehicleOnChangeStorage = (): VehicleWithStringIDInterface | null => {
   const router = useRouter()
   const hasRefreshed = useRef(false)
-  const [vehicle, setVehicle] = useState<string | null>(null)
+  const [vehicle, setVehicle] = useState<VehicleWithStringIDInterface | null>(null)
 
   // obtain the 'vehicle' from local storage, if exist returns it, otherwise return null
-  const readLocalStorage = () => {
-    const vehicle = localStorage.getItem(vehicleKey)
+  // Relee el valor de localStorage y actualiza si cambió
+  const updateVehicleFromStorage = () => {
+    const raw = localStorage.getItem(vehicleKey)
+    const parsed = safelyParseVehicle(raw)
+
     setVehicle(prev => {
-      if (prev !== vehicle) {
-        return vehicle
-      } else { return prev }
+      const isEqual = JSON.stringify(prev) === JSON.stringify(parsed)
+      return isEqual ? prev : parsed
     })
   }
 
   useEffect(() => {
-    readLocalStorage()
+    // differ the initial read to avoid rendering issues
+    const timeout = setTimeout(() => {
+      updateVehicleFromStorage()
+    }, 0)
 
     // this will be calling when an event in the local storage happened
     const handleStorageChange = (e: StorageEvent) => {
-      if (e.key === vehicleKey) {
-        readLocalStorage()
-      }
+      if (e.key === vehicleKey) updateVehicleFromStorage()
     }
 
     // this will be calling when a custom event 'customVehicleUpdateEvent' happened
     // Important: this event will shotting in VehicleDataModal -> setVehicle(value: string)
     // Important: the function that will shoting this event it's in -> context/VehicleContext.tsx
     const handleCustomEvent = () => {
-      readLocalStorage()
+      updateVehicleFromStorage()
     }
 
     window.addEventListener("storage", handleStorageChange)
     window.addEventListener(customVehicleUpdateEvent, handleCustomEvent)
 
     return () => {
+      clearTimeout(timeout)
       window.removeEventListener("storage", handleStorageChange)
       window.removeEventListener(customVehicleUpdateEvent, handleCustomEvent)
     }
@@ -70,8 +83,7 @@ export const useGetVehicleOnChangeStorage = (): VehicleWithStringIDInterface | n
       hasRefreshed.current = true
       window.dispatchEvent(new Event(refreshRequestEventKey))
     }
-  }, [vehicle, router])
+  }, [vehicle])
 
-  if (vehicle) return JSON.parse(vehicle)
-  else return null
+  return vehicle
 }
