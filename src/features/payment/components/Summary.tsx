@@ -96,14 +96,15 @@ export const Summary = ({ mainService, secundaryService, coupon, bill }: Summary
             Subtotal
           </p>
           <p className="font-semibold text-primaryBlue-900">
-            ${formatNumberWithDots(bill.subtotal)}
+            <span className="font-normal">Desde: </span>${formatNumberWithDots(bill.subtotal)}
           </p>
         </div>
         <div className="flex justify-between items-center w-full">
           <p className="font-semibold text-primaryBlue-900">
             Dctos</p>
           <p className="font-semibold text-primaryBlue-900">
-            ${formatNumberWithDots(bill.dctos)}          </p>
+            ${formatNumberWithDots(bill.dctos)}
+          </p>
         </div>
         <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
         <div className="flex justify-between items-center w-full">

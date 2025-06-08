@@ -74,7 +74,7 @@ export const MileageMaintenanceContractingForm = () => {
             </div>
 
             {/* Add services */}
-            <div className='input-form-container mt-4'>
+            {/* <div className='input-form-container mt-4'>
               <div className="flex w-full flex-col mb-2 gap-4">
                 <h4 className="font-medium mt-14 md:mt-10 mb-4 text-primaryBlue-900">¿Quieres agregar algo más?</h4>
 
@@ -88,7 +88,7 @@ export const MileageMaintenanceContractingForm = () => {
                 </div>
 
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
