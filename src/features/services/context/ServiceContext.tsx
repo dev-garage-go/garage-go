@@ -47,9 +47,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
     localStorage.setItem(serviceKey, JSON.stringify(data))
     window.dispatchEvent(new Event(customServiceUpdatedEvent))
 
-    // router.push(`/services/${data.type}/booking`)
-    console.log(data.name)
-    router.push(`/services/mileage_maintenance/booking`)
+    router.push(`/services/${data.name}/booking`)
   }, [isClient, router])
 
 
@@ -64,7 +62,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
   // update the service in storage when detects a customService event,
   // when this custom event happened, the component <RefresListener> refresh the route
   useEffect(() => {
-    if (!isClient) return
+    if (!isClient) return;
 
     const updateServiceFromStorage = () => {
       const raw = localStorage.getItem(serviceKey)
