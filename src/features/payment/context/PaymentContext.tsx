@@ -4,7 +4,7 @@ import { createContext, useContext, useEffect, useRef, useState } from "react"
 
 import { BaseChargeByVehicle } from "../types/service-charge"
 import { AmountInterface } from "@/features/bookings"
-import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
+import { useVehicleContext } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
 
 import {
@@ -35,9 +35,9 @@ interface Props {
 // Provider
 export const PaymentContextProvider = ({ children }: Props) => {
   const { getServiceFromStorage, serviceType } = useServiceContext()
+  const { vehicleInStorage } = useVehicleContext()
 
   // get vehicle from storage
-  const vehicle = useGetVehicleOnChangeStorage()
   const service = getServiceFromStorage()
 
   const [baseAmount, setBaseAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
@@ -66,28 +66,28 @@ export const PaymentContextProvider = ({ children }: Props) => {
 
   // calculate the amount in contracting page when a service doesn't exist in localStorage
   useEffect(() => {
-    if (!vehicle || !serviceType || hasCalculated.current) return;
+    if (!vehicleInStorage || !serviceType || hasCalculated.current) return;
 
-    if (!service && vehicle) {
+    if (!service && vehicleInStorage) {
       hasCalculated.current = true
       const calculateAmount = async () => {
-        await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
+        await sendBaseChargeByVehicleRequest({ serviceType, vehicle: vehicleInStorage })
       }
       calculateAmount()
     }
-  }, [vehicle, service, serviceType, amountInCookie])
+  }, [vehicleInStorage, service, serviceType, amountInCookie])
 
   // if the vehicle change, delete cookie and recalculate
   useEffect(() => {
-    if (!vehicle || !serviceType) return;
-    const serialized = JSON.stringify(vehicle)
+    if (!vehicleInStorage || !serviceType) return;
+    const serialized = JSON.stringify(vehicleInStorage)
 
     if (serialized !== lastVehicle.current) {
       const deleteCookie = async () => {
         const response = await deleteBaseAmountInCookie()
         if (response.success) {
           setAmountInCookie(null)
-          await sendBaseChargeByVehicleRequest({ serviceType, vehicle })
+          await sendBaseChargeByVehicleRequest({ serviceType, vehicle: vehicleInStorage })
         }
       }
       deleteCookie()
@@ -95,7 +95,7 @@ export const PaymentContextProvider = ({ children }: Props) => {
 
     lastVehicle.current = serialized
 
-  }, [vehicle, serviceType])
+  }, [vehicleInStorage, serviceType])
 
   // verify if exist amount cookie
   useEffect(() => {

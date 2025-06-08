@@ -12,7 +12,7 @@ import { VehicleDB } from "@/backend/database/types"
 interface VehicleContextType {
   showModal: boolean
   setShowModal: React.Dispatch<SetStateAction<boolean>>
-  vehicle: VehicleWithStringIDInterface | null
+  vehicleInStorage: VehicleWithStringIDInterface | null
   setVehicleInStorage: (data: VehicleDB) => void
   getVehicleFromStorage: () => VehicleWithStringIDInterface | null
   deleteVehicle: () => void
@@ -38,7 +38,7 @@ export const VehicleContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined' // avoids server errors
 
   const [showModal, setShowModal] = useState<boolean>(false)
-  const vehicle = useGetVehicleOnChangeStorage()
+  const vehicleInStorage = useGetVehicleOnChangeStorage()
 
   // methods to impact localStorage
   const setVehicleInStorage = (data: VehicleDB): void => {
@@ -74,17 +74,17 @@ export const VehicleContextProvider = ({ children }: Props) => {
   // if the session storage doesn't have a license plate
   // or if the local storage doesn't have vehicle data, open modal
   useEffect(() => {
-    if (!vehicle) {
+    if (!vehicleInStorage) {
       setShowModal(true)
     }
-  }, [vehicle])
+  }, [vehicleInStorage])
 
 
   return <VehicleContext.Provider
     value={{
       showModal,
       setShowModal,
-      vehicle,
+      vehicleInStorage,
       setVehicleInStorage,
       getVehicleFromStorage,
       deleteVehicle

@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation"
 
 import { setBreadcrumbs } from "@/features/home"
 import { VehicleServicesFeaturesIconsMap } from "@/features/services"
-import { useGetVehicleOnChangeStorage } from "@/features/vehicle"
+import { useVehicleContext } from "@/features/vehicle"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 
@@ -34,6 +34,7 @@ export const TopBanner = ({
 }: Props) => {
   const router = useRouter()
   const pathname = usePathname()
+  const { vehicleInStorage } = useVehicleContext()
 
   // Breadcrums
   const [hasBreadCrumbs, setHasBreadCrumbs] = useState(false)
@@ -41,12 +42,9 @@ export const TopBanner = ({
 
   // I use the hook to obtain the vehicle data because this is a dynamic component,
   // changes the data based if exist or not the vehicle
-  const vehicle = useGetVehicleOnChangeStorage()
-  const vehicleLicensePlate = vehicle ? vehicle.licensePlate : '-'
-  const vehicleModel = vehicle ? vehicle.model : '-'
-  const vehicleBrand = vehicle ? vehicle.brand : '-'
-
-  // TODO: const vehicleData = getVehiculeByLicensePlate(id: string) -> import {} from "@actions"
+  const vehicleLicensePlate = vehicleInStorage ? vehicleInStorage.licensePlate : '-'
+  const vehicleModel = vehicleInStorage ? vehicleInStorage.model : '-'
+  const vehicleBrand = vehicleInStorage ? vehicleInStorage.brand : '-'
 
   useEffect(() => {
     setHasBreadCrumbs(pathSegments.length > 0)
