@@ -34,11 +34,8 @@ interface Props {
 
 // Provider
 export const PaymentContextProvider = ({ children }: Props) => {
-  const { getServiceFromStorage, serviceType } = useServiceContext()
+  const { serviceInStorage, serviceType } = useServiceContext()
   const { vehicleInStorage } = useVehicleContext()
-
-  // get vehicle from storage
-  const service = getServiceFromStorage()
 
   const [baseAmount, setBaseAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
   const [amountInCookie, setAmountInCookie] = useState<AmountInterface | null>()
@@ -68,14 +65,14 @@ export const PaymentContextProvider = ({ children }: Props) => {
   useEffect(() => {
     if (!vehicleInStorage || !serviceType || hasCalculated.current) return;
 
-    if (!service && vehicleInStorage) {
+    if (!serviceInStorage && vehicleInStorage) {
       hasCalculated.current = true
       const calculateAmount = async () => {
         await sendBaseChargeByVehicleRequest({ serviceType, vehicle: vehicleInStorage })
       }
       calculateAmount()
     }
-  }, [vehicleInStorage, service, serviceType, amountInCookie])
+  }, [vehicleInStorage, serviceInStorage, serviceType, amountInCookie])
 
   // if the vehicle change, delete cookie and recalculate
   useEffect(() => {

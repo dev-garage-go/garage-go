@@ -113,8 +113,8 @@ export const ServiceContextProvider = ({ children }: Props) => {
     value={{
       serviceType,
       setServiceType,
-      setServiceInStorage,
       serviceInStorage,
+      setServiceInStorage,
       deleteServiceFromStorage
     }}
   >

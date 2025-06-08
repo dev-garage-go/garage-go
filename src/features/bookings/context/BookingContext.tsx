@@ -33,13 +33,10 @@ export const useBookingContext = () => {
 
 // Provider
 export const BookingContextProvider = ({ children }: Props) => {
-  const { getVehicleFromStorage } = useVehicleContext()
-  const { getServiceFromStorage, deleteServiceFromStorage } = useServiceContext()
+  const { vehicleInStorage } = useVehicleContext()
+  const { serviceInStorage, deleteServiceFromStorage } = useServiceContext()
   const { sendBookingConfirmationEmail } = useEmailContext()
   const { handleShowAmount } = usePaymentContext()
-
-  const vehicle = getVehicleFromStorage()
-  const service = getServiceFromStorage()
 
   const [bookingCreated, setBookingCreated] = useState<boolean | null>(null)
 
@@ -48,12 +45,12 @@ export const BookingContextProvider = ({ children }: Props) => {
   }
 
   const createServiceBooking = async (data: AppointmentDataInterface) => {
-    if (!service || !vehicle) return;
+    if (!serviceInStorage || !vehicleInStorage) return;
 
     const booking: BookingServiceDataInterface = {
-      service,
+      service: serviceInStorage,
       appointment: data.appointment,
-      vehicleID: vehicle._id,
+      vehicleID: vehicleInStorage._id,
       user: data.user,
       amount: handleShowAmount()
     }
