@@ -4,6 +4,7 @@ import { BookingDB, getCollection } from "@/backend/database";
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
 import { BookingServiceDataInterface, BookingWithStringIDInterface } from "@/features/bookings";
 import { ObjectId } from "mongodb";
+import { getVehicleByID } from "../vehicle/getVehicleByID";
 
 export const createBooking = async (booking: BookingServiceDataInterface): Promise<ServerActionResponse<BookingWithStringIDInterface>> => {
   try {
@@ -12,7 +13,34 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
 
     // Convert the vehicle id in a mongo ObjectId
     const { vehicleID, ...rest } = booking
+
+    if (!ObjectId.isValid(vehicleID)) {
+      return {
+        success: false,
+        error: `Invalid ID format: ${vehicleID}`,
+        httpStatus: HttpStatus.BAD_REQUEST
+      }
+    }
+
     const vehicleObjectId = new ObjectId(vehicleID)
+
+    // Verify is the vehicle exist
+    const verifyVehicle = await getVehicleByID(vehicleObjectId)
+    if (!verifyVehicle.success) {
+      return {
+        success: false,
+        error: `error: ${verifyVehicle.error} getting the vehicle, with id: ${vehicleObjectId}`,
+        httpStatus: HttpStatus.BAD_REQUEST
+      }
+    } else if (verifyVehicle.success && !verifyVehicle.data) {
+      return {
+        success: false,
+        error: `The vehicle with ID: ${vehicleObjectId} not exist`,
+        httpStatus: HttpStatus.BAD_REQUEST
+      }
+    }
+
+    console.log("se encontro vehiculo cuando se creaba la reserva", verifyVehicle)
 
     const validBookingToDB: BookingDB = {
       vehicleID: vehicleObjectId,

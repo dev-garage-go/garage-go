@@ -20,4 +20,5 @@ export { getBaseAmountInCookie, setBaseAmountInCookie, deleteBaseAmountInCookie 
 
 // Vehicle
 export { getVehicleByLicensePlate } from './vehicle/getVehicleByLicensePlate';
+export { getVehicleByID } from './vehicle/getVehicleByID';
 export { addNewVehicle } from './vehicle/addNewVehicle';
