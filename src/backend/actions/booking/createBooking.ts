@@ -30,13 +30,13 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
       return {
         success: false,
         error: `error: ${verifyVehicle.error} getting the vehicle, with id: ${vehicleObjectId}`,
-        httpStatus: HttpStatus.BAD_REQUEST
+        httpStatus: HttpStatus.INTERNAL_SERVER_ERROR
       }
     } else if (verifyVehicle.success && !verifyVehicle.data) {
       return {
         success: false,
         error: `The vehicle with ID: ${vehicleObjectId} not exist`,
-        httpStatus: HttpStatus.BAD_REQUEST
+        httpStatus: HttpStatus.NOT_FOUND
       }
     }
 
