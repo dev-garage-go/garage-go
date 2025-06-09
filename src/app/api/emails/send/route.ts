@@ -1,10 +1,10 @@
 // Service to send emails: Resend
 // Docs: https://resend.com/docs/send-with-nextjs
 
-import { HttpStatus, NextAPIResponse, ServerActionResponse } from '@/backend/types';
+import { NextAPIResponse, ServerActionResponse } from '@/backend/types';
 import { ConfirmationBookingEmail, ConfirmationBookingEmailInterface } from '@/features/emails';
 import { NextResponse } from 'next/server';
-import { CreateEmailResponseSuccess, ErrorResponse, Resend } from 'resend';
+import { CreateEmailResponseSuccess, Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const domainEmail = process.env.DOMAIN_EMAIL
@@ -22,24 +22,36 @@ export async function POST(request: Request): Promise<NextResponse<NextAPIRespon
     const body = (await request.json()) as ConfirmationBookingEmailInterface;
     const { bookingId, firstName, service, userEmail } = body
 
-    // ! To prod
-    // const { data, error } = await resend.emails.send({
-    //   from: domainEmail!,
-    //   to: [userEmail],
-    //   subject: 'Confirmación de reserva',
-    //   react: ConfirmationBookingEmail({ firstName, bookingId, service }),
-    // });
+    const isProd = process.env.NODE_ENV === "production";
+    let data: CreateEmailResponseSuccess | null;
+    let error: Error | null;
 
-    // ! To testing
-    const { data, error } = await resend.emails.send({
-      from: 'Acme <onboarding@resend.dev>',
-      to: ['development@garageservice.cl'], // or can use the resend dashboard email: delivered@resend.dev
-      subject: 'Confirmación de reserva',
-      react: ConfirmationBookingEmail({ firstName, bookingId, service }),
-      headers: {
-        'X-Resend-Development-Mode': 'true'
-      }
-    });
+    if (isProd) {
+      const response = await resend.emails.send({
+        from: domainEmail!,
+        to: [userEmail],
+        subject: 'Confirmación de reserva',
+        react: ConfirmationBookingEmail({ firstName, bookingId, service }),
+      });
+
+      data = response.data;
+      error = response.error;
+
+    } else {
+      const response = await resend.emails.send({
+        from: 'Acme <onboarding@resend.dev>',
+        to: ['development@garageservice.cl'], // or can use the resend dashboard email: delivered@resend.dev
+        subject: 'Confirmación de reserva',
+        react: ConfirmationBookingEmail({ firstName, bookingId, service }),
+        headers: {
+          'X-Resend-Development-Mode': 'true'
+        }
+      });
+
+      data = response.data;
+      error = response.error;
+    }
+
 
     if (error) {
       console.log(error)

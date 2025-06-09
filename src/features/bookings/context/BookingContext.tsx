@@ -36,7 +36,7 @@ export const useBookingContext = () => {
 // Provider
 export const BookingContextProvider = ({ children }: Props) => {
   const { vehicleInStorage } = useVehicleContext()
-  const { serviceInStorage, deleteServiceFromStorage } = useServiceContext()
+  const { serviceInStorage } = useServiceContext()
   const { sendBookingConfirmationEmail } = useEmailContext()
   const { handleShowAmount } = usePaymentContext()
 
@@ -73,24 +73,26 @@ export const BookingContextProvider = ({ children }: Props) => {
     if (!newBooking) throw new Error("error getting data of new booking");
 
     // Send confirmation booking email
+    const isProd = process.env.NODE_ENV === "production";
+    let emailData: ConfirmationBookingEmailInterface
 
-    // ! To prod
-    // const emailDataProd: ConfirmationBookingEmailInterface = {
-    //   bookingId: newBooking._id,
-    //   firstName: newBooking.user.name,
-    //   service: ServiceNamesMap[newBooking.service.name],
-    //   userEmail: newBooking.user.email,
-    // }
-
-    // ! To testing
-    const emailDataTest: ConfirmationBookingEmailInterface = {
-      bookingId: newBooking._id,
-      firstName: newBooking.user.name,
-      service: ServiceNamesMap[newBooking.service.name],
-      userEmail: "development@garageservice.cl",
+    if (isProd) {
+      emailData = {
+        bookingId: newBooking._id,
+        firstName: newBooking.user.name,
+        service: ServiceNamesMap[newBooking.service.name],
+        userEmail: newBooking.user.email,
+      }
+    } else {
+      emailData = {
+        bookingId: newBooking._id,
+        firstName: newBooking.user.name,
+        service: ServiceNamesMap[newBooking.service.name],
+        userEmail: "development@garageservice.cl",
+      }
     }
 
-    const emailResponse = await sendBookingConfirmationEmail(emailDataTest)
+    const emailResponse = await sendBookingConfirmationEmail(emailData)
 
     if (!emailResponse.ok) {
       setBookingCreated(false)
