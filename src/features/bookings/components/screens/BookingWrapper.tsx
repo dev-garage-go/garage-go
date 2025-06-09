@@ -36,12 +36,14 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   const { createServiceBooking, bookingCreated } = useBookingContext()
   const { serviceInStorage } = useServiceContext()
 
+  const [showConfirmModal, setShowConfirmModal] = useState(false)
+
   // guard
   useEffect(() => {
-    if (!serviceInStorage && !showModal) router.back();
-  }, [serviceInStorage, router, showModal])
-
-  const [showConfirmModal, setShowConfirmModal] = useState(false)
+    if (!serviceInStorage && !showConfirmModal) {
+      router.back()
+    };
+  }, [serviceInStorage, router, showConfirmModal])
 
   // Func that will be executed when form its submitted
   const onSubmit = async (data: AppointmentDataInterface) => {

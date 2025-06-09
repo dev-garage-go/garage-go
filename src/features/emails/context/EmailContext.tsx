@@ -32,7 +32,6 @@ export const EmailContextProvider = ({ children }: Props) => {
     })
 
     const data = await response.json()
-    console.log(data)
     return response
   }
 
