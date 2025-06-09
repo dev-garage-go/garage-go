@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 // Controller -> controlador de react-hook-form recomendado para manejar para componentes externos o componentes que no contienen <inputs>
 // useFormContext -> permite acceder al contexto del formulario y que otros componentes {children} reciban las props o los valoros que espera el <form>
+import dayjs from "dayjs";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { BookingServiceDataInterface, AddressTypesData, SchedulePicker, CalendarPicker } from "@/features/bookings";
@@ -163,8 +164,15 @@ export const BookingForm = ({ withBooking }: Props) => {
               render={({ field, fieldState }) => (
                 calendarPicker ? (
                   <CalendarPicker
+                    selectedDate={field.value ? dayjs(field.value) : null}
                     error={fieldState.error?.message}
-                    onChange={field.onChange}
+                    onChange={(value) => {
+                      if (typeof value === 'string') {
+                        field.onChange(value);
+                      } else {
+                        field.onChange(value.toISOString());
+                      }
+                    }}
                   />
                 ) : <></>
               )}

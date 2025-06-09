@@ -27,15 +27,13 @@ dayjs.locale('es');
 
 
 interface Props {
+  selectedDate: Dayjs | null
   onChange: (value: Dayjs | string) => void
   error?: string
 }
 
-export const CalendarPicker = ({ onChange, error }: Props) => {
-  const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null);
-
+export const CalendarPicker = ({ onChange, error, selectedDate }: Props) => {
   const onSelect: CalendarProps<Dayjs>['onSelect'] = (date) => {
-    setSelectedDate(date)
     const isoString = date.toISOString()
     onChange(isoString)
   };
@@ -48,23 +46,27 @@ export const CalendarPicker = ({ onChange, error }: Props) => {
           Días disponibles
         </Typography.Text>
         <Calendar
+          disabledDate={(current) => current && current.isBefore(dayjs().startOf('day'))}
           fullscreen={false}
           onSelect={onSelect}
           headerRender={() => null}
           fullCellRender={(current) => {
             const isToday = current.isSame(dayjs(), 'day');
-            const isSelected = selectedDate?.isSame(current, 'day');
+            const isSelected = selectedDate ? selectedDate.isSame(current, 'day') : null;
             const isCurrentMonth = current.month() === dayjs().month();
+            const isDisabled = current.isBefore(dayjs().startOf('day'));
 
             let dayCellClass = 'flex items-center hover:bg-customGray-100 justify-center mx-2 w-8 h-8 rounded-full text-sm font-light transition-all duration-300';
 
             if (!isCurrentMonth) {
-              dayCellClass += ' text-customGray-300';
+              dayCellClass += ' text-customGray-300 hover:bg-opacity-0';
             } else if (isSelected) {
               dayCellClass += ' bg-primaryBlue-900 text-white';
             } else if (isToday) {
               dayCellClass += ' bg-primaryBlue-50 text-customGray-600';
-            } else {
+            } else if (isDisabled)
+              dayCellClass += ' bg-none text-customGray-300 hover:bg-opacity-0'
+            else {
               dayCellClass += ' text-primaryBlue-900';
             }
 
