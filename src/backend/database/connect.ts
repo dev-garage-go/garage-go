@@ -4,9 +4,13 @@ import { MongoClient, Db } from 'mongodb'
 const uri = process.env.DATABASE_URI || 'mongodb://localhost:27017'
 const dbName = process.env.DATABASE_NAME
 
-// TODO: if (!dbName) {
-//   throw new Error('Database Name Key not founded in process.env.DATABASE_NAME')
-// }
+if (!uri) {
+  throw new Error(`Database URI Key not founded in process.env.DATABASE_URI: ${uri}`)
+}
+
+if (!dbName) {
+  throw new Error(`Database Name Key not founded in process.env.DATABASE_NAME: ${dbName}`)
+}
 
 let client: MongoClient
 let clientPromise: Promise<MongoClient>
