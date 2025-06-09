@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { ModalPortal } from "@/components";
 
@@ -33,22 +33,17 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   const router = useRouter()
 
   const { vehicleInStorage, showModal } = useVehicleContext()
-  const { createServiceBooking, bookingCreated } = useBookingContext()
+  const { createServiceBooking, bookingCreated, showConfirmModal } = useBookingContext()
   const { serviceInStorage } = useServiceContext()
-
-  const [showConfirmModal, setShowConfirmModal] = useState(false)
 
   // guard
   useEffect(() => {
-    if (!serviceInStorage && !showConfirmModal) {
-      router.back()
-    };
+    if (!serviceInStorage && !showConfirmModal) router.back();
   }, [serviceInStorage, router, showConfirmModal])
 
   // Func that will be executed when form its submitted
   const onSubmit = async (data: AppointmentDataInterface) => {
     createServiceBooking(data)
-    setShowConfirmModal(true)
   }
 
   return (

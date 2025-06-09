@@ -101,7 +101,6 @@ export const ServiceContextProvider = ({ children }: Props) => {
 
     if (serviceInStorage && !(bookingRoutePath || contractingRoutePath)) {
       deleteServiceFromStorage()
-      router.refresh()
     }
 
     routeVerified.current = true

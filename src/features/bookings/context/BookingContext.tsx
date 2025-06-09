@@ -12,9 +12,11 @@ import { ConfirmationBookingEmailInterface, useEmailContext } from "@/features/e
 import { usePaymentContext } from "@/features/payment";
 
 interface ServiceBookingType {
+  bookingCreated: boolean | null
+  showConfirmModal: boolean
+  setShowConfirmModal: React.Dispatch<React.SetStateAction<boolean>>
   setBookingInStorage: (data: any) => void
   createServiceBooking: (data: AppointmentDataInterface) => void,
-  bookingCreated: boolean | null
 }
 
 interface Props {
@@ -38,7 +40,11 @@ export const BookingContextProvider = ({ children }: Props) => {
   const { sendBookingConfirmationEmail } = useEmailContext()
   const { handleShowAmount } = usePaymentContext()
 
+  // saves the successful or unsuccessful response of the backend when trying to create a booking
   const [bookingCreated, setBookingCreated] = useState<boolean | null>(null)
+
+  // display modal in the ui confirming an error or a reservation successfully created and email sent
+  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false)
 
   const setBookingInStorage = (data: AppointmentDataInterface) => {
     localStorage.setItem(bookingKey, JSON.stringify(data))
@@ -64,7 +70,7 @@ export const BookingContextProvider = ({ children }: Props) => {
     }
 
     const newBooking = responseBooking.data
-    if (!newBooking) throw new Error("error getting data of new booking")
+    if (!newBooking) throw new Error("error getting data of new booking");
 
     // Send confirmation booking email
 
@@ -93,6 +99,7 @@ export const BookingContextProvider = ({ children }: Props) => {
 
     // show modal that confirm email sent and delete service from storage 
     setBookingCreated(true)
+    setShowConfirmModal(true)
 
     // delete cookies when booking was created
     await deleteBaseAmountInCookie()
@@ -101,6 +108,8 @@ export const BookingContextProvider = ({ children }: Props) => {
 
   return <BookingContext.Provider
     value={{
+      showConfirmModal,
+      setShowConfirmModal,
       setBookingInStorage,
       createServiceBooking,
       bookingCreated
