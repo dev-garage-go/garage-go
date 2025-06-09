@@ -40,8 +40,6 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
       }
     }
 
-    console.log("se encontro vehiculo cuando se creaba la reserva", verifyVehicle)
-
     const validBookingToDB: BookingDB = {
       vehicleID: vehicleObjectId,
       ...rest
