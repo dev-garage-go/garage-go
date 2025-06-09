@@ -38,8 +38,8 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
 
   // guard
   useEffect(() => {
-    if (!serviceInStorage) router.back();
-  }, [serviceInStorage, router])
+    if (!serviceInStorage && !showModal) router.back();
+  }, [serviceInStorage, router, showModal])
 
   const [showConfirmModal, setShowConfirmModal] = useState(false)
 
