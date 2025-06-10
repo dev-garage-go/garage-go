@@ -10,9 +10,9 @@ import { SelectOptions } from '@/types';
 interface Props<T> {
   options: SelectOptions<T>[]
   label?: string
-  value?: string
+  value?: T
   defaultValue: string
-  onChange: (value: string) => void
+  onChange: (value: T) => void
   error?: string
 }
 
@@ -21,12 +21,12 @@ export const Select = <T,>({ options, label, onChange, value, error, defaultValu
     <div className="flex w-full flex-col mb-2">
       <label className="text-sm ml-4 text-primaryBlue-900">{label}</label>
 
-      <Listbox value={value || defaultValue} onChange={onChange}>
+      <Listbox value={value} onChange={onChange}>
         {({ open }) => (
           <div className="relative">
             <ListboxButton className={error ? 'input-form-error' : 'input-form'}>
               <span className={`block truncate text-start ${value ? 'font-medium' : 'font-normal'}`}>
-                {value ? firstLetterUppercase(value) : defaultValue}
+                {value ? firstLetterUppercase(String(value)) : defaultValue}
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-4 flex items-center">
                 <IoChevronDown
@@ -36,12 +36,11 @@ export const Select = <T,>({ options, label, onChange, value, error, defaultValu
               </span>
             </ListboxButton>
 
-            <ListboxOptions className="absolute z-10 mt-1 w-full rounded-xl bg-white py-2 shadow-lg ring-1 ring-black/10 focus:outline-none text-sm">
+            <ListboxOptions className="absolute z-50 mt-1 w-full rounded-xl bg-white py-2 shadow-lg ring-1 ring-black/10 focus:outline-none text-sm pointer-events-auto">
               {options?.map((option) => (
                 <ListboxOption
                   key={option.id}
                   value={option.value}
-
                   className={({ focus }) =>
                     `cursor-pointer select-none py-2 text-center text-primaryBlue-900 capitalize ${focus && 'bg-gray-100'}`
                   }
