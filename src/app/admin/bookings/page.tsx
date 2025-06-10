@@ -2,6 +2,9 @@ import { getBookingsWithVehicleData } from "@/backend/actions";
 import { RefreshButton } from "@/components";
 import { BookingTable } from "@/features/admin";
 
+// force that next not caching the page
+export const dynamic = 'force-dynamic';
+
 export default async function BookingAdminPage() {
   const response = await getBookingsWithVehicleData()
 
