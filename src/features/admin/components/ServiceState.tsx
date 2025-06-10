@@ -1,33 +1,32 @@
 'use client'
 
+import { useState } from "react"
 import { Select } from "@/components"
 import { SelectOptions } from "@/types"
-import { useState } from "react"
+
 import { BookingAdmin } from '@/backend/database';
 import { ServiceNamesMap } from '@/features/services';
 
-type states = "a ingresar" | "mantenimiento" | "finalizado"
+type ServiceStates = "a ingresar" | "mantenimiento" | "finalizado"
 
-
-const ServiceStatesOptions: SelectOptions<states>[] = [
+const ServiceStatesOptions: SelectOptions<ServiceStates>[] = [
   { id: 1, value: "a ingresar" },
   { id: 2, value: "mantenimiento" },
   { id: 3, value: "finalizado" },
 ]
-
 
 interface Props {
   booking: BookingAdmin
 }
 
 export const ServiceState = ({ booking }: Props) => {
-  const [state, setState] = useState<states>("a ingresar")
+  const [state, setState] = useState<ServiceStates>("a ingresar")
   const { service, user, vehicle, appointment } = booking;
 
   const { _id, ...restVehicle } = vehicle;
   const { typeAddress, additionalInfo, ...restUser } = user;
 
-  const handleOnChange = async (newState: states) => {
+  const handleOnChange = async (newState: ServiceStates) => {
     setState(newState)
 
     const data = {
