@@ -8,7 +8,7 @@ export * from './buttons/WhatsAppButton';
 export * from './shared/Loader';
 export * from './ui/Carousel';
 export * from './ui/ErrorMessage';
-export * from './ui/GoogleMap';
+export * from './ui/GoogleMapComponent';
 export * from './ui/InformationModal';
 export * from './ui/ModalPortal';
 export * from './ui/ModalPortalOnHover';
