@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { formatNumberWithDots } from '@/utils';
 import { useAdminGuard } from "@/features/admin/hooks/useAdminGuard";
 import { ServiceState } from "./ServiceState";
+import { firstLetterUppercase } from '../../../utils/formatters';
 
 interface Props {
   bookings: BookingAdmin[]
@@ -79,8 +80,8 @@ export const BookingTable = ({ bookings }: Props) => {
                 {booking.user.name + " " + booking.user.lastName}
               </td>
 
-              <td className="table-row-style whitespace-nowrap">
-                {ServiceNamesMap[booking.service.name]}
+              <td className="table-row-style text-wrap">
+                {firstLetterUppercase(ServiceNamesMap[booking.service.name])}
               </td>
 
               <td className="table-row-style whitespace-nowrap">

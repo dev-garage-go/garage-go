@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState } from "react"
-import { AppointmentDataInterface, BookingServiceDataInterface } from '@/features/bookings';
+import { AppointmentDataInterface, BookingServiceDataInterface, UserInterface } from '@/features/bookings';
 import { bookingKey } from "../keys/storage"
 
 import { createBooking, deleteBaseAmountInCookie } from "@/backend/actions"
@@ -52,12 +52,23 @@ export const BookingContextProvider = ({ children }: Props) => {
 
   const createServiceBooking = async (data: AppointmentDataInterface) => {
     if (!serviceInStorage || !vehicleInStorage) return;
+    const { user } = data;
+
+    const userData: UserInterface = {
+      name: user.name.toLowerCase(),
+      lastName: user.lastName.toLowerCase(),
+      email: user.email.toLowerCase(),
+      address: user.address.toLowerCase(),
+      phone: user.phone,
+      typeAddress: user.typeAddress,
+      additionalInfo: user.additionalInfo?.toLowerCase()
+    }
 
     const booking: BookingServiceDataInterface = {
       service: serviceInStorage,
       appointment: data.appointment,
       vehicleID: vehicleInStorage._id,
-      user: data.user,
+      user: userData,
       amount: handleShowAmount()
     }
 
@@ -79,14 +90,14 @@ export const BookingContextProvider = ({ children }: Props) => {
     if (isProd) {
       emailData = {
         bookingId: newBooking._id,
-        firstName: newBooking.user.name,
+        firstName: newBooking.user.name.toLowerCase(),
         service: ServiceNamesMap[newBooking.service.name],
-        userEmail: newBooking.user.email,
+        userEmail: newBooking.user.email.toLowerCase(),
       }
     } else {
       emailData = {
         bookingId: newBooking._id,
-        firstName: newBooking.user.name,
+        firstName: newBooking.user.name.toLowerCase(),
         service: ServiceNamesMap[newBooking.service.name],
         userEmail: "development@garageservice.cl",
       }
