@@ -9,11 +9,10 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "1.16.8",
     "@headlessui/react": "2.2.2",
     "@hookform/resolvers": "5.0.1",
-    "@next/bundle-analyzer": "15.3.2",
     "@react-email/components": "0.0.41",
-    "@react-google-maps/api": "2.20.6",
     "@sendgrid/mail": "8.1.5",
     "antd": "5.24.9",
     "clsx": "2.1.1",
@@ -30,6 +29,7 @@
   },
   "devDependencies": {
     "@tailwindcss/line-clamp": "0.4.4",
+    "@types/google.maps": "3.58.1",
     "@types/node": "20",
     "@types/react": "18",
     "@types/react-dom": "18",
@@ -39,5 +39,8 @@
     "react-email": "4.0.16",
     "tailwindcss": "3.4.1",
     "typescript": "5"
+  },
+  "optionalDependencies": {
+    "@next/swc-darwin-x64": "15.3.3"
   }
 }
