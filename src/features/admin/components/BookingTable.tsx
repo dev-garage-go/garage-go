@@ -6,6 +6,7 @@ import dayjs from 'dayjs';
 
 import { formatNumberWithDots } from '@/utils';
 import { useAdminGuard } from "@/features/admin/hooks/useAdminGuard";
+import { ServiceState } from "./ServiceState";
 
 interface Props {
   bookings: BookingAdmin[]
@@ -57,6 +58,9 @@ export const BookingTable = ({ bookings }: Props) => {
           {/* <th scope="col" className="table-col-style">
             Estado
           </th> */}
+          <th scope="col" className="table-col-style">
+            Estado
+          </th>
         </tr>
       </thead>
 
@@ -65,7 +69,7 @@ export const BookingTable = ({ bookings }: Props) => {
           return (
             <tr
               key={booking._id}
-              className="bg-white border-b transition duration-300 ease-in-out hover:bg-primaryBlue-50 hover:brightness-110 cursor-pointer">
+              className="bg-white border-b ease-in-out cursor-pointer hover:bg-blue-100 transition-colors duration-300">
 
               <td className="table-row-style whitespace-nowrap">
                 #{booking._id?.slice(0, 8)}
@@ -115,6 +119,10 @@ export const BookingTable = ({ bookings }: Props) => {
               {/* <td className="table-row-style text-wrap font-semibold">
                 <PayState state="refunded" />
               </td> */}
+
+              <td className="table-row-style text-wrap font-semibold">
+                <ServiceState booking={booking} />
+              </td>
 
             </tr>
           )
