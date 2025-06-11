@@ -64,8 +64,8 @@ export const VehicleContextProvider = ({ children }: Props) => {
 
   // deletes license plate from the session storage, so that others can be entered
   const deleteVehicle = () => {
-    if (!isClient) return
-    sessionStorage.removeItem(vehicleKey)
+    if (!isClient) return;
+    localStorage.removeItem(vehicleKey)
     window.dispatchEvent(new Event(customVehicleUpdateEvent))
   }
 

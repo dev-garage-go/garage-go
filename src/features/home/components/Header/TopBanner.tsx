@@ -34,7 +34,7 @@ export const TopBanner = ({
 }: Props) => {
   const router = useRouter()
   const pathname = usePathname()
-  const { vehicleInStorage } = useVehicleContext()
+  const { vehicleInStorage, deleteVehicle } = useVehicleContext()
 
   // Breadcrums
   const [hasBreadCrumbs, setHasBreadCrumbs] = useState(false)
@@ -105,10 +105,10 @@ export const TopBanner = ({
                         </p>
                       </div>
                       <button
-                        className="hidden md:block text-sm bg-primaryBlue-900 hover:brightness-125 hover:scale-110 duration-200 transition-all px-6 xl:px-10 py-0.5 rounded-md text-white"
-                        onClick={() => router.back()}
+                        className="hidden md:block text-sm bg-primaryBlue-900 hover:brightness-125 hover:scale-110 duration-200 transition-all px-6 xl:px-10 py-1 rounded-md text-white text-nowrap"
+                        onClick={() => { deleteVehicle() }}
                       >
-                        Volver
+                        Cambiar patente
                       </button>
                     </div>
                   </>
