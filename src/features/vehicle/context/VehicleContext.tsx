@@ -1,6 +1,6 @@
 'use client'
 
-import { createContext, SetStateAction, useContext, useEffect, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import {
   customVehicleUpdateEvent,
   vehicleKey,
@@ -10,10 +10,14 @@ import { VehicleDB } from "@/backend/database/types"
 
 interface VehicleContextType {
   showModal: boolean
-  setShowModal: React.Dispatch<SetStateAction<boolean>>
+  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   vehicleInStorage: VehicleWithStringIDInterface | null
   setVehicleInStorage: (data: VehicleDB) => void
   deleteVehicle: () => void
+  creatingVehicleAnimation: boolean
+  searchingVehicleAnimation: boolean
+  setCreatingVehicleAnimation: React.Dispatch<React.SetStateAction<boolean>>
+  setSearchingVehicleAnimation: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 interface Props {
@@ -36,6 +40,10 @@ export const VehicleContextProvider = ({ children }: Props) => {
 
   const [showModal, setShowModal] = useState<boolean>(false)
   const [vehicleInStorage, setVehicleInStorageState] = useState<VehicleWithStringIDInterface | null>(null)
+
+  // animations
+  const [creatingVehicleAnimation, setCreatingVehicleAnimation] = useState<boolean>(false)
+  const [searchingVehicleAnimation, setSearchingVehicleAnimation] = useState<boolean>(false)
 
   // methods to impact localStorage
   const setVehicleInStorage = (data: VehicleDB): void => {
@@ -111,7 +119,11 @@ export const VehicleContextProvider = ({ children }: Props) => {
       setShowModal,
       vehicleInStorage,
       setVehicleInStorage,
-      deleteVehicle
+      deleteVehicle,
+      creatingVehicleAnimation,
+      searchingVehicleAnimation,
+      setCreatingVehicleAnimation,
+      setSearchingVehicleAnimation
     }}
   >
     {children}

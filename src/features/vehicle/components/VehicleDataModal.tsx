@@ -12,7 +12,13 @@ import { addNewVehicle, getVehicleByLicensePlate } from "@/backend/actions"
 
 export const VehicleDataModal = () => {
   const { register, formState: { errors }, watch, setValue, handleSubmit } = useForm<VehicleDataInterface>()
-  const { setVehicleInStorage } = useVehicleContext()
+  const {
+    setVehicleInStorage,
+    setCreatingVehicleAnimation,
+    setSearchingVehicleAnimation,
+    searchingVehicleAnimation,
+    creatingVehicleAnimation
+  } = useVehicleContext()
 
   // states
   const [isMounted, setIsMounted] = useState<boolean>(false)
@@ -37,6 +43,7 @@ export const VehicleDataModal = () => {
 
   const onSumbit = async (data: VehicleDataInterface) => {
     try {
+      setSearchingVehicleAnimation(true)
       const response = await getVehicleByLicensePlate(data.licensePlate)
       if (!response.success) throw new Error(response.error)
       const vehicleFounded = response.data
@@ -44,6 +51,7 @@ export const VehicleDataModal = () => {
       if (vehicleFounded) {
         // vehicle founded in database
         setVehicleInStorage(vehicleFounded)
+        setSearchingVehicleAnimation(false)
         handleClose()
         return
 
@@ -54,11 +62,13 @@ export const VehicleDataModal = () => {
 
       } else if (!vehicleFounded && showFormToCompleteData) {
         // doesn't exist vehicle in database, send the new car data to backend and set in storage
+        setCreatingVehicleAnimation(true)
         const response = await addNewVehicle(data)
 
         if (!response.success) throw new Error(response.error)
 
         setVehicleInStorage(response.data!)
+        setCreatingVehicleAnimation(false)
         handleClose()
         return
       }
@@ -119,7 +129,14 @@ export const VehicleDataModal = () => {
                 <button
                   type="submit"
                   className="primary-button sm:max-w-40 h-full">
-                  Continuar
+                  {
+                    searchingVehicleAnimation ? (
+                      <div className="flex justify-center items-center gap-2">
+                        <div className="loader" />
+                        Buscando...
+                      </div>
+                    ) : "Continuar"
+                  }
                 </button>
               </div>
             </div>
@@ -287,7 +304,14 @@ export const VehicleDataModal = () => {
             <button
               type="submit"
               className="primary-button sm:max-w-40 h-full">
-              Continuar
+              {
+                creatingVehicleAnimation ? (
+                  <div className="flex justify-center items-center gap-2">
+                    <div className="loader" />
+                    Procesando...
+                  </div>
+                ) : "Continuar"
+              }
             </button>
 
           </form>
