@@ -17,7 +17,7 @@ interface ServiceBookingType {
   setShowConfirmModal: React.Dispatch<React.SetStateAction<boolean>>
   setBookingInStorage: (data: any) => void
   createServiceBooking: (data: AppointmentDataInterface) => void,
-  animation: boolean
+  creatingBookingAnimation: boolean
 }
 
 interface Props {
@@ -48,7 +48,7 @@ export const BookingContextProvider = ({ children }: Props) => {
   const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false)
 
   // animates btn when the booking has been creating
-  const [animation, setAnimation] = useState<boolean>(false)
+  const [creatingBookingAnimation, setCreatingBookingAnimation] = useState<boolean>(false)
 
   const setBookingInStorage = (data: AppointmentDataInterface) => {
     localStorage.setItem(bookingKey, JSON.stringify(data))
@@ -56,7 +56,7 @@ export const BookingContextProvider = ({ children }: Props) => {
 
   const createServiceBooking = async (data: AppointmentDataInterface) => {
     if (!serviceInStorage || !vehicleInStorage) return;
-    setAnimation(true)
+    setCreatingBookingAnimation(true)
 
     const { user } = data;
 
@@ -116,7 +116,7 @@ export const BookingContextProvider = ({ children }: Props) => {
       throw new Error(`email API response with an error: ${emailResponse.status}`)
     }
 
-    setAnimation(false)
+    setCreatingBookingAnimation(false)
     setBookingCreated(true) // show modal that confirm email sent and delete service from storage 
     setShowConfirmModal(true)
 
@@ -132,7 +132,7 @@ export const BookingContextProvider = ({ children }: Props) => {
       setBookingInStorage,
       createServiceBooking,
       bookingCreated,
-      animation
+      creatingBookingAnimation
     }}
   >
     {children}

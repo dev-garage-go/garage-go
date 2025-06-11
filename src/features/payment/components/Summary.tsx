@@ -7,7 +7,7 @@ import { useBookingContext } from "@/features/bookings";
 import clsx from "clsx";
 
 export const Summary = ({ mainService, secundaryService, coupon, bill }: SummaryProps) => {
-  const { animation } = useBookingContext()
+  const { creatingBookingAnimation } = useBookingContext()
 
   return (
     <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
@@ -125,14 +125,14 @@ export const Summary = ({ mainService, secundaryService, coupon, bill }: Summary
 
         <div className="flex justify-center items-center w-full mt-10">
           <button
-            disabled={animation}
+            disabled={creatingBookingAnimation}
             type="submit"
             className={clsx("px-10 py-2 bg-primaryBlue-900 text-white font-semibold rounded-xl", {
-              "hover:scale-100 hover:brightness-100": animation,
-              "hover:scale-105 hover:brightness-125 transition-all duration-200": !animation
+              "hover:scale-100 hover:brightness-100": creatingBookingAnimation,
+              "hover:scale-105 hover:brightness-125 transition-all duration-200": !creatingBookingAnimation
             })}>
             {
-              animation ? (
+              creatingBookingAnimation ? (
                 <div className="flex justify-center items-center gap-2">
                   <div className="loader" />
                   Procesando...

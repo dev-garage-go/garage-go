@@ -127,8 +127,9 @@ export const VehicleDataModal = () => {
                   {...register("licensePlate", { required: true, minLength: 6, maxLength: 6 })}
                 />
                 <button
+                  disabled={searchingVehicleAnimation}
                   type="submit"
-                  className="primary-button sm:max-w-40 h-full">
+                  className="primary-button sm:max-w-48 h-full">
                   {
                     searchingVehicleAnimation ? (
                       <div className="flex justify-center items-center gap-2">
@@ -302,8 +303,9 @@ export const VehicleDataModal = () => {
             </div>
 
             <button
+              disabled={creatingVehicleAnimation}
               type="submit"
-              className="primary-button sm:max-w-40 h-full">
+              className="primary-button sm:max-w-48 h-full">
               {
                 creatingVehicleAnimation ? (
                   <div className="flex justify-center items-center gap-2">
