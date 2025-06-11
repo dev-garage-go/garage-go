@@ -137,8 +137,7 @@ export const Summary = ({ mainService, secundaryService, coupon, bill }: Summary
                   <div className="loader" />
                   Procesando...
                 </div>
-              )
-                : bill.btnString
+              ) : bill.btnString
             }
           </button>
         </div>
