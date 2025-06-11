@@ -15,9 +15,9 @@ export const TopMenu = () => {
         className="relative h-8 w-20 sm:w-28 sm:h-10 flex justify-start"
       >
         <Image
+          priority
           src={obtainLogo('company', 'logo')}
           fill
-          priority
           alt="Garage Go"
           className="object-contain w-auto h-auto"
         />
@@ -32,6 +32,7 @@ export const TopMenu = () => {
           >
             <div className='relative w-4 h-4 md:w-5 md:h-5'>
               <Image
+                priority
                 src={obtainLogo('socialNetworks', 'instagram')}
                 fill
                 alt="Instagram"
@@ -45,6 +46,7 @@ export const TopMenu = () => {
           >
             <div className='relative w-4 h-4 md:w-5 md:h-5'>
               <Image
+                priority
                 src={obtainLogo('socialNetworks', 'facebook')}
                 fill
                 alt="Facebook"
