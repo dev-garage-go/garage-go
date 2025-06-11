@@ -60,7 +60,6 @@ export const ConfirmationBookingModal = ({ success }: Props) => {
                 >
                   Continuar
                 </Link>
-
               </div>
             </div>
           </>

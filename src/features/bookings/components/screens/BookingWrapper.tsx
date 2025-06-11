@@ -1,19 +1,19 @@
 "use client"
 
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { ModalPortal } from "@/components";
 
+import { useServiceContext } from "@/features/services";
 import { LazyVehicleDataModal, useVehicleContext } from "@/features/vehicle";
 import { PaymentSummary } from "@/features/payment";
 import {
   BookingForm,
   AppointmentDataInterface,
   useBookingContext,
-  ConfirmationBookingModal,
+  LazyConfirmationBookingModal,
 } from "@/features/bookings"
-import { useServiceContext } from "@/features/services";
-import { useRouter } from "next/navigation";
 
 interface Props {
   withBooking: boolean
@@ -57,7 +57,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
       {/* when the backend will responded if the booking is successfully created or not, show modal */}
       {typeof bookingCreated === 'boolean' && (
         <ModalPortal isOpen={showConfirmModal}>
-          <ConfirmationBookingModal success={bookingCreated} />
+          <LazyConfirmationBookingModal success={bookingCreated} />
         </ModalPortal>
       )}
       <FormProvider {...methods}>
