@@ -93,7 +93,10 @@ export const VehicleDataModal = () => {
   if (!isMounted) return null
 
   return (
-    <div className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-black/20">
+    <div
+      data-cy="cy-vehicle-modal"
+      className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-black/20"
+    >
       <div className={clsx(
         "flex flex-col justify-center items-center bg-customGray-100 p-4 md:p-6 xl:p-10 rounded-2xl w-full h-full max-w-xl max-h-72 bg-opacity-100 mx-4 transition-all duration-300 ease-out",
         {
