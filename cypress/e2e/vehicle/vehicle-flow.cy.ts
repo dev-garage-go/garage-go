@@ -14,7 +14,8 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
     })
   });
 
-
+  const existingLicensePlate = 'abc123'
+  const nonExistingLicensePlate = 'qwe456'
   // ---------
   // Test 1: Ingresar patente y validar si se esta buscando
 
@@ -29,7 +30,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
       // inside the form, searchs the input to writting de license plate
       .find('input[name="licensePlate"]')
       .should('be.visible')
-      .type('ABC123')
+      .type(existingLicensePlate)
 
 
     // selects the form again to find the submit button
@@ -50,6 +51,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
 
   // ---------
   // Test 2: Se encuentra un vehiculo en base de datos
+
   it('Se encuentra un vehiculo en la DB, con la patente ingresada', () => {
 
     // selecciona el modal
@@ -58,7 +60,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
     // escribe ABC123 en el input de la patente
     cy.get('[data-cy="cy-vehicle-modal"] input[name="licensePlate"]')
       .should('be.visible')
-      .type('abc123')
+      .type(existingLicensePlate)
 
     // clickea el boton enviando el formulario
     cy.get('[data-cy="cy-vehicle-modal"] form')
@@ -71,7 +73,44 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
       .should('exist')
       .then((value) => {
         const vehicle = JSON.parse(value as string)
-        expect(vehicle.licensePlate).to.equal('abc123')
+        expect(vehicle.licensePlate).to.equal(existingLicensePlate)
       })
+  });
+
+
+  // ---------
+  // Test 3: NO se encuentra un vehiculo en base de datos, el modal cambia
+
+  it.only('No se encuentra vehiculo en DB, cambia el formulario', () => {
+
+    // selecciona el modal
+    cy.get('[data-cy="cy-vehicle-modal"]').should('be.visible')
+
+    // escribe QWE456 en el input de la patente
+    cy.get('[data-cy="cy-vehicle-modal"] input[name="licensePlate"]')
+      .should('be.visible')
+      .type(nonExistingLicensePlate)
+
+    // clickea el boton enviando el formulario
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('button[type="submit"]')
+      .should('not.be.disabled')
+      .click()
+
+    // busca los inputs del nuevo formulario
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="licensePlate"]')
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="brand"]')
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="model"]')
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="year"]')
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="mileage"]')
   });
 });
