@@ -13,14 +13,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
     cy.request('DELETE', `/api/testing/vehicle/${nonExistingLicensePlate}`)
 
     // asegura de que el vehiculo con patente 'abc123' exista en la db
-    cy.request('POST', '/api/testing/vehicle', {
-      licensePlate: existingLicensePlate,
-      brand: 'Chevrolet',
-      model: 'Tracker LTZ AT',
-      year: '2019',
-      mileage: 80000,
-      type: 'suv / camioneta'
-    })
+    cy.createVehicle(existingLicensePlate)
   });
 
 

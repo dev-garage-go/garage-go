@@ -29,3 +29,14 @@ Cypress.Commands.add("searchExistingVehicle", (licensePlate: string) => {
     .should("exist")
     .contains(`Patente: ${licensePlate}`)
 })
+
+Cypress.Commands.add("createVehicle", (licensePlate: string) => {
+  cy.request('POST', '/api/testing/vehicle', {
+    licensePlate: licensePlate,
+    brand: 'Chevrolet',
+    model: 'Tracker LTZ AT',
+    year: '2019',
+    mileage: 80000,
+    type: 'suv / camioneta'
+  })
+})

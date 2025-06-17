@@ -6,7 +6,8 @@ declare global {
   namespace Cypress {
     interface Chainable {
       // Busca y selecciona un vehículo por patente
-      searchExistingVehicle(licensePlate: string): Chainable<void>
+      searchExistingVehicle(licensePlate: string): Chainable<void>,
+      createVehicle(licensePlate: string): Chainable<void>
     }
   }
 }
