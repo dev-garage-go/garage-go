@@ -1,15 +1,16 @@
 describe('Interacción con el Modal de Patente/Vehículo', () => {
   beforeEach(() => {
-    cy.clearAllLocalStorage() // clear local storage to assure that vehicle modal will be search the vehicle
-    cy.visit('/services/mileage_maintenance/contracting'); // visit the page
-    cy.getLocalStorage("vehicle").should('be.null') // vehicle key from @/features/vehicles
+    cy.visit('/services/mileage_maintenance/contracting');
+    cy.clearAllLocalStorage();
+    cy.getLocalStorage("vehicle").should('be.null');
   });
+
 
 
   // ---------
   // Test 1: Ingresar patente y validar si se esta buscando
 
-  it.only('Ingresar una patente y simular la búsqueda', () => {
+  it('Ingresar una patente y simular la búsqueda', () => {
     // get vehicle modal container
     cy.get('[data-cy="cy-vehicle-modal"]')
       .should('be.visible')
@@ -41,4 +42,24 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
 
   // ---------
   // Test 2: Se encuentra un vehiculo en base de datos
+  it.only('Se encuentra un vehiculo con la patente ingresada', () => {
+
+    // selecciona el modal
+    cy.get('[data-cy="cy-vehicle-modal"]').should('be.visible')
+
+    // escribe ABC123 en el input de la patente
+    cy.get('[data-cy="cy-vehicle-modal"] input[name="licensePlate"]')
+      .should('be.visible')
+      .type('ABC123')
+
+    // clickea el boton enviando el formulario
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('button[type="submit"]')
+      .should('not.be.disabled')
+      .click()
+
+    // busca el vehiculo en el local storage
+    cy.getLocalStorage('vehicle')
+      .should('exist')
+  });
 });
