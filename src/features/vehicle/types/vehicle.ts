@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import { SelectOptions } from '../../../types/select';
 
 const licensePlate = z.string().min(6).max(6)
 

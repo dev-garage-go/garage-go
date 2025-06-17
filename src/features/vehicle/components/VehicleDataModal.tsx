@@ -31,14 +31,15 @@ export const VehicleDataModal = () => {
   // delays the state change by a few ms, so that the DOM can load the css classes and generate an animation.
   useEffect(() => {
     setIsMounted(true)
+
     const timeout = setTimeout(() => setIsVisible(true), 20)
     return () => clearTimeout(timeout)
   }, [])
 
   // animates the close of modal
   const handleClose = () => {
-    setIsMounted(false)
-    setTimeout(() => setIsVisible(false), 300)
+    setIsVisible(false)
+    setTimeout(() => setIsMounted(false), 300)
   }
 
   const onSumbit = async (data: VehicleDataInterface) => {
@@ -90,7 +91,6 @@ export const VehicleDataModal = () => {
     setValue("mileage", formatted)
   }
 
-  if (!isMounted) return null
 
   return (
     <div
