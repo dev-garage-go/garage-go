@@ -1,11 +1,18 @@
 describe('Interacción con el Modal de Patente/Vehículo', () => {
+  const existingLicensePlate = 'abc123'
+  const nonExistingLicensePlate = 'qwe456'
+
   beforeEach(() => {
     cy.visit('/services/mileage_maintenance/contracting');
     cy.clearAllLocalStorage();
     cy.getLocalStorage("vehicle").should('be.null');
 
+    // asegura de que el vehiculo con patente 'qwe456' NO exista en la db
+    cy.request('DELETE', `/api/testing/vehicle/${nonExistingLicensePlate}`)
+
+    // asegura de que el vehiculo con patente 'abc123' exista en la db
     cy.request('POST', '/api/testing/vehicle', {
-      licensePlate: 'abc123',
+      licensePlate: existingLicensePlate,
       brand: 'Chevrolet',
       model: 'Tracker LTZ AT',
       year: '2019',
@@ -14,8 +21,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
     })
   });
 
-  const existingLicensePlate = 'abc123'
-  const nonExistingLicensePlate = 'qwe456'
+
   // ---------
   // Test 1: Ingresar patente y validar si se esta buscando
 
@@ -53,7 +59,6 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
   // Test 2: Se encuentra un vehiculo en base de datos
 
   it('Se encuentra un vehiculo en la DB, con la patente ingresada', () => {
-
     // selecciona el modal
     cy.get('[data-cy="cy-vehicle-modal"]').should('be.visible')
 
@@ -75,6 +80,11 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
         const vehicle = JSON.parse(value as string)
         expect(vehicle.licensePlate).to.equal(existingLicensePlate)
       })
+
+    // se asegura de que los datos se muestren en la ui
+    cy.get("h2")
+      .should("exist")
+      .contains(`Patente: ${existingLicensePlate}`)
   });
 
 
@@ -118,7 +128,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
   // ---------
   // Test 4: Se crea un vehiculo en la DB
 
-  it.only('Se crea un vehiculo en la DB', () => {
+  it('Se crea un vehiculo en la DB', () => {
 
     // selecciona el modal
     cy.get('[data-cy="cy-vehicle-modal"]').should('be.visible')

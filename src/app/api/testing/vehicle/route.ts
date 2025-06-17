@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { findVehicleByLicensePlate, insertVehicle } from "@/backend/database/queries"
+import { insertVehicle } from "@/backend/database/queries"
 
 // create a vehicle in db
 export async function POST(req: Request) {
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
     }
 
     if (!result.data) {
-      return NextResponse.json({ found: false }, { status: 200 })
+      return NextResponse.json({ found: false, error: "success result but empty data" }, { status: 200 })
     }
 
     return NextResponse.json({ found: true, vehicle: result.data }, { status: 200 })

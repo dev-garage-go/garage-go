@@ -1,14 +1,16 @@
 import { getCollection } from "@/backend/database"
-import { VehicleDB } from "@/backend/database/types"
 import { ServerActionResponse, HttpStatus } from "@/backend/types"
 import { licensePlateType } from "@/features/vehicle"
+import { findVehicleByLicensePlate } from "./findVehicleByLicensePlate"
 
-export const findVehicleByLicensePlate = async (licensePlate: licensePlateType): Promise<ServerActionResponse<VehicleDB | null>> => {
+export const deleteVehicle = async (licensePlate: licensePlateType): Promise<ServerActionResponse<null>> => {
   try {
-    const coll = await getCollection("vehicles")
-    const vehicle = await coll.findOne({ licensePlate: licensePlate.toLowerCase() })
+    const validLicensePlate = licensePlate.toLowerCase().trim()
 
-    if (!vehicle) {
+    const coll = await getCollection("vehicles")
+    const hasVehicle = await findVehicleByLicensePlate(validLicensePlate)
+
+    if (!hasVehicle) {
       return {
         success: true,
         data: null,
@@ -16,13 +18,15 @@ export const findVehicleByLicensePlate = async (licensePlate: licensePlateType):
       }
     }
 
+    await coll.deleteOne({ licensePlate: validLicensePlate })
+
     return {
       success: true,
-      data: vehicle,
+      data: null,
       httpStatus: HttpStatus.OK,
     }
   } catch (error) {
-    console.error("Error in findVehicleByLicensePlate:", error)
+    console.error("Error in deleteVehicle:", error)
     return {
       success: false,
       error: `Unexpected error: ${error}`,

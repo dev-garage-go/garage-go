@@ -1,4 +1,4 @@
-import { findVehicleByLicensePlate } from "@/backend/database/queries"
+import { deleteVehicle, findVehicleByLicensePlate } from "@/backend/database/queries"
 import { NextResponse } from "next/server"
 
 interface Params {
@@ -23,6 +23,25 @@ export async function GET(_: Request, { params }: Params) {
     }
 
     return NextResponse.json({ found: true, vehicle: result.data }, { status: 200 })
+  } catch (error) {
+    return NextResponse.json({ error: "Unexpected server error" }, { status: 500 })
+  }
+}
+
+// delete a vehicle in db
+export async function DELETE(_: Request, { params }: Params) {
+  if (process.env.NODE_ENV !== "development") {
+    return NextResponse.json({ error: "Not allowed in production" }, { status: 403 })
+  }
+
+  try {
+    const result = await deleteVehicle(params.licensePlate)
+
+    if (!result.success) {
+      return NextResponse.json({ error: result.error }, { status: 500 })
+    }
+
+    return NextResponse.json({ status: 200 })
   } catch (error) {
     return NextResponse.json({ error: "Unexpected server error" }, { status: 500 })
   }
