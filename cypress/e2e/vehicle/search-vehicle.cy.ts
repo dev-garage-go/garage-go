@@ -3,8 +3,16 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
     cy.visit('/services/mileage_maintenance/contracting');
     cy.clearAllLocalStorage();
     cy.getLocalStorage("vehicle").should('be.null');
-  });
 
+    cy.request('POST', '/api/testing/vehicle', {
+      licensePlate: 'abc123',
+      brand: 'Chevrolet',
+      model: 'Tracker LTZ AT',
+      year: '2019',
+      mileage: 80000,
+      type: 'suv / camioneta'
+    })
+  });
 
 
   // ---------
@@ -42,7 +50,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
 
   // ---------
   // Test 2: Se encuentra un vehiculo en base de datos
-  it.only('Se encuentra un vehiculo con la patente ingresada', () => {
+  it('Se encuentra un vehiculo en la DB, con la patente ingresada', () => {
 
     // selecciona el modal
     cy.get('[data-cy="cy-vehicle-modal"]').should('be.visible')
@@ -50,7 +58,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
     // escribe ABC123 en el input de la patente
     cy.get('[data-cy="cy-vehicle-modal"] input[name="licensePlate"]')
       .should('be.visible')
-      .type('ABC123')
+      .type('abc123')
 
     // clickea el boton enviando el formulario
     cy.get('[data-cy="cy-vehicle-modal"] form')
@@ -61,5 +69,9 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
     // busca el vehiculo en el local storage
     cy.getLocalStorage('vehicle')
       .should('exist')
+      .then((value) => {
+        const vehicle = JSON.parse(value as string)
+        expect(vehicle.licensePlate).to.equal('abc123')
+      })
   });
 });

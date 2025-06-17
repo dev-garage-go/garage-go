@@ -5,6 +5,7 @@ export type ServerActionResponse<T> =
     success: true
     data: T | null
     httpStatus: HttpStatus
+    error?: string
   }
   |
   {
