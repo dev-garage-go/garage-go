@@ -81,7 +81,7 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
   // ---------
   // Test 3: NO se encuentra un vehiculo en base de datos, el modal cambia
 
-  it.only('No se encuentra vehiculo en DB, cambia el formulario', () => {
+  it('No se encuentra vehiculo en DB, cambia el formulario', () => {
 
     // selecciona el modal
     cy.get('[data-cy="cy-vehicle-modal"]').should('be.visible')
@@ -112,5 +112,63 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
 
     cy.get('[data-cy="cy-vehicle-modal"] form')
       .find('input[name="mileage"]')
+  });
+
+
+  // ---------
+  // Test 4: Se crea un vehiculo en la DB
+
+  it.only('Se crea un vehiculo en la DB', () => {
+
+    // selecciona el modal
+    cy.get('[data-cy="cy-vehicle-modal"]').should('be.visible')
+
+    // escribe QWE456 en el input de la patente
+    cy.get('[data-cy="cy-vehicle-modal"] input[name="licensePlate"]')
+      .should('be.visible')
+      .type(nonExistingLicensePlate)
+
+    // clickea el boton enviando el formulario
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('button[type="submit"]')
+      .should('not.be.disabled')
+      .click()
+
+    // rellena los inputs con los datos del vehiculo del usuario
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="licensePlate"]')
+      .type(nonExistingLicensePlate)
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="brand"]')
+      .type('Ford')
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="model"]')
+      .type('Mustang')
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="year"]')
+      .type('2019')
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('input[name="mileage"]')
+      .type('25500')
+
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('button[data-cy="custom-select"]')
+      .click()
+    cy.contains('alta gama').click()
+
+    // clickea el boton enviando el formulario
+    cy.get('[data-cy="cy-vehicle-modal"] form')
+      .find('button[type="submit"]')
+      .should('not.be.disabled')
+      .click()
+
+    // verifica que los datos se estan mostrando en la UI
+    cy.get("h2")
+      .should("exist")
+      .contains(`Patente: ${nonExistingLicensePlate}`)
   });
 });

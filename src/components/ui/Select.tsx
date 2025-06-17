@@ -24,7 +24,7 @@ export const Select = <T,>({ options, label, onChange, value, error, defaultValu
       <Listbox value={value} onChange={onChange}>
         {({ open }) => (
           <div className="relative">
-            <ListboxButton className={error ? 'input-form-error' : 'input-form'}>
+            <ListboxButton data-cy="custom-select" className={error ? 'input-form-error' : 'input-form'}>
               <span className={`block truncate text-start ${value ? 'font-medium' : 'font-normal'}`}>
                 {value ? firstLetterUppercase(String(value)) : defaultValue}
               </span>
