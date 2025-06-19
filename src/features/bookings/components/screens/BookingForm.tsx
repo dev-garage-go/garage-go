@@ -40,7 +40,7 @@ export const BookingForm = ({ withBooking }: Props) => {
   }, [scheduleError, calendarError])
 
   return (
-    <div className="form-container">
+    <div data-cy="cy-booking-form" className="form-container">
       <section className="flex flex-col gap-4">
         <h4 className="font-medium text-primaryBlue-900">1. Datos personales</h4>
 
