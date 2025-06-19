@@ -38,7 +38,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
 
   // guard
   useEffect(() => {
-    if (!serviceInStorage && !showConfirmModal) router.back();
+    if (!serviceInStorage && !showConfirmModal) router.replace("/services");
   }, [serviceInStorage, router, showConfirmModal])
 
   // Func that will be executed when form its submitted
