@@ -1,8 +1,10 @@
 describe("Rellenar servicio y guardarlo en localStorage", () => {
   beforeEach(() => {
-    cy.visit('/services/mileage_maintenance/contracting');
     cy.clearAllLocalStorage();
     cy.getLocalStorage("service").should('be.null');
+    cy.getLocalStorage("vehicle").should('be.null');
+
+    cy.visit('/services/mileage_maintenance/contracting');
 
     cy.createVehicle('abc123')
     cy.searchExistingVehicle('abc123')
@@ -27,7 +29,7 @@ describe("Rellenar servicio y guardarlo en localStorage", () => {
   // ---------
   // Test 2: Interactuar con la pagina
 
-  it.only("Seleccionar kilometraje deseado", () => {
+  it("Seleccionar kilometraje deseado", () => {
     cy.get("button")
       .contains("50.000 kms")
       .click()

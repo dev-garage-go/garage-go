@@ -16,6 +16,11 @@ Cypress.Commands.add("searchExistingVehicle", (licensePlate: string) => {
     .should('not.be.disabled')
     .click()
 
+  // se asegura de que los datos se muestren en la ui
+  cy.get("h2")
+    .should("exist")
+    .contains(`Patente: ${licensePlate}`)
+
   // busca el vehiculo en el local storage
   cy.getLocalStorage('vehicle')
     .should('exist')
@@ -24,10 +29,8 @@ Cypress.Commands.add("searchExistingVehicle", (licensePlate: string) => {
       expect(vehicle.licensePlate).to.equal(licensePlate)
     })
 
-  // se asegura de que los datos se muestren en la ui
-  cy.get("h2")
-    .should("exist")
-    .contains(`Patente: ${licensePlate}`)
+  // verifica que el modal se cerró
+  cy.get('[data-cy="cy-vehicle-modal"]').should('not.exist')
 })
 
 Cypress.Commands.add("createVehicle", (licensePlate: string) => {
