@@ -44,18 +44,17 @@ Cypress.Commands.add("createVehicle", (licensePlate: string) => {
   })
 })
 
-// ! Vehicle commands
+
+// ! Services commands
 Cypress.Commands.add("loadMileageService", () => {
   cy.get("button")
     .contains("50.000 kms")
     .click()
 
+
   cy.get('button[type="submit"]')
     .contains("Continuar")
     .click()
-
-  // verifica que se haya redirigido a booking
-  cy.url().should('include', '/mileage_maintenance/booking')
 
   // verifica que exista el servicio en el local storage
   cy.getLocalStorage('service')
@@ -66,4 +65,9 @@ Cypress.Commands.add("loadMileageService", () => {
       expect(service.type).to.equal("mileage")
       expect(service.mileages).to.equal("50.000 kms")
     })
+
+  // verifica que se haya redirigido a booking
+  cy.get('[data-cy="cy-booking-form"] div')
+    .should('exist')
+  cy.url().should('include', '/mileage_maintenance/booking')
 })

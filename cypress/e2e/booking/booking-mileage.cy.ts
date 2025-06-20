@@ -1,19 +1,17 @@
 describe("Reservas: Mantencion por Kilometraje", () => {
   beforeEach(() => {
-    cy.setLocalStorage("vehicle", JSON.stringify({
-      licensePlate: 'abc123',
-      brand: 'Chevrolet',
-      model: 'Tracker LTZ AT',
-      year: '2019',
-      mileage: 80000,
-      type: 'suv / camioneta'
-    }))
+    cy.clearAllLocalStorage();
+    cy.getLocalStorage("service").should('be.null');
+    cy.getLocalStorage("vehicle").should('be.null');
 
-    cy.setLocalStorage("service", JSON.stringify({
-      name: "mileage_maintenance",
-      type: "mileage",
-      mileages: "50.000 kms"
-    }))
+    // partimos desde aqui para:
+    // 1. Simular el flujo de un usuario real
+    // 2. Para que se calcule correctamente el monto en base al vehiculo y al servicio
+    // 3. Para que la cookie 'baseAmount' desde el backend se establezca correctamente
+    cy.visit('/services/mileage_maintenance/contracting')
+    cy.createVehicle('abc123')
+    cy.searchExistingVehicle('abc123')
+    cy.loadMileageService()
 
     cy.visit('/services/mileage_maintenance/booking')
   })
@@ -49,10 +47,9 @@ describe("Reservas: Mantencion por Kilometraje", () => {
   // Test 3: Verificar inputs y completar el form con data
 
   it.only("Verificar inputs y rellenarlos", () => {
-
     // validating if exist booking form container
     cy.log("validating if the booking form exist")
-    cy.get('[data-cy="cy-booking-form"] div')
+    cy.get('[data-cy="cy-booking-form"] div', { timeout: 15000 })
       .should('exist')
 
     // User inputs
@@ -108,5 +105,31 @@ describe("Reservas: Mantencion por Kilometraje", () => {
       .first()
       .click()
 
+    // change to Hour selector
+    cy.get('button[type="button"]')
+      .contains('Horario')
+      .should('exist')
+      .click()
+
+    cy.get('button[type="button"]')
+      .contains('15:00 pm')
+      .click()
+
+    // Continue button to send submit
+    cy.get('button[type="submit"]')
+      .contains('Continuar')
+      .should('exist')
+      .click()
+
+    // Continue button to send submit
+    cy.get('button[type="submit"]')
+      .contains('Procesando...')
+      .should('be.visible')
+
+    // Validate email confirmation modal is visible
+    cy.get('[data-cy="cy-confirmation-booking-email-modal"]')
+      .should('exist')
+      .should('be.visible')
+      .contains('reserva')
   })
 })
