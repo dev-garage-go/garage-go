@@ -1,6 +1,6 @@
 import "cypress-localstorage-commands";
 
-// Vehicle commands
+// ! Vehicle commands
 Cypress.Commands.add("searchExistingVehicle", (licensePlate: string) => {
   // selecciona el modal
   cy.get('[data-cy="cy-vehicle-modal"]').should('be.visible')
@@ -42,4 +42,28 @@ Cypress.Commands.add("createVehicle", (licensePlate: string) => {
     mileage: 80000,
     type: 'suv / camioneta'
   })
+})
+
+// ! Vehicle commands
+Cypress.Commands.add("loadMileageService", () => {
+  cy.get("button")
+    .contains("50.000 kms")
+    .click()
+
+  cy.get('button[type="submit"]')
+    .contains("Continuar")
+    .click()
+
+  // verifica que se haya redirigido a booking
+  cy.url().should('include', '/mileage_maintenance/booking')
+
+  // verifica que exista el servicio en el local storage
+  cy.getLocalStorage('service')
+    .should('exist')
+    .then((value) => {
+      const service = JSON.parse(value as string)
+      expect(service.name).to.equal("mileage_maintenance")
+      expect(service.type).to.equal("mileage")
+      expect(service.mileages).to.equal("50.000 kms")
+    })
 })

@@ -8,6 +8,7 @@ declare global {
       // Busca y selecciona un vehículo por patente
       searchExistingVehicle(licensePlate: string): Chainable<void>,
       createVehicle(licensePlate: string): Chainable<void>
+      loadMileageService(): Chainable<void>
     }
   }
 }
