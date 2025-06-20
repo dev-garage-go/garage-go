@@ -43,7 +43,7 @@ export const getBaseAmountInCookie = async (): Promise<ServerActionResponse<Amou
       data: null
     }
 
-    const amount = await JSON.parse(value)
+    const amount: AmountInterface = await JSON.parse(value)
 
     return {
       data: amount,
