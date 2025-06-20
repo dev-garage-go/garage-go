@@ -1,24 +1,27 @@
 describe("Reservas: Mantencion por Kilometraje", () => {
   beforeEach(() => {
-    // visita esta pagina para simular el flujo del usuario
-    cy.visit('/services/mileage_maintenance/contracting')
-
-    cy.createVehicle('abc123')
-    cy.searchExistingVehicle('abc123')
+    cy.setLocalStorage("vehicle", JSON.stringify({
+      licensePlate: 'abc123',
+      brand: 'Chevrolet',
+      model: 'Tracker LTZ AT',
+      year: '2019',
+      mileage: 80000,
+      type: 'suv / camioneta'
+    }))
 
     cy.setLocalStorage("service", JSON.stringify({
       name: "mileage_maintenance",
       type: "mileage",
       mileages: "50.000 kms"
     }))
+
+    cy.visit('/services/mileage_maintenance/booking')
   })
 
   // ---------
   // Test 1: Verifica que exista un service en el localStorage
 
   it("Verificar que existe un 'service' en el localStorage", () => {
-    cy.visit('/services/mileage_maintenance/booking')
-
     cy.getLocalStorage('service')
       .should('exist')
       .then((value) => {
@@ -46,17 +49,15 @@ describe("Reservas: Mantencion por Kilometraje", () => {
   // Test 3: Verificar inputs y completar el form con data
 
   it.only("Verificar inputs y rellenarlos", () => {
-    cy.visit('/services/mileage_maintenance/booking')
-
-    cy.log("validating inputs")
 
     // validating if exist booking form container
+    cy.log("validating if the booking form exist")
     cy.get('[data-cy="cy-booking-form"] div')
       .should('exist')
 
-    // validating inputs
+    // User inputs
+    cy.log('validating User inputs')
 
-    // user inputs
     cy.get('[data-cy="cy-booking-form"] div')
       .find('input[name="user.name"]')
       .should('exist')
@@ -82,14 +83,30 @@ describe("Reservas: Mantencion por Kilometraje", () => {
       .should('exist')
       .type('Velazco 1983, Santiago de Chile')
 
-    cy.get('[data-cy="cy-booking-form"] div')
-      .find('button[data-cy="custom-select"]')
-      .click()
-    cy.contains('depto').click()
+    // 1. open custom select
+    cy.get('[data-cy="custom-select"]').click()
+
+    // 2. await that option are visible and click it
+    cy.contains('[role="option"]', 'depto').should('be.visible').click()
+
 
     cy.get('[data-cy="cy-booking-form"] div')
       .find('input[name="user.additionalInfo"]')
       .should('exist')
       .type('Departamento con rejas negras, segundo piso')
+
+
+    // Appointment inputs
+    cy.log('validating Appointment inputs')
+
+    // select a date in the CalendarPicker
+    cy.get('[data-cy="cy-booking-form"] div')
+      .find('.ant-picker-calendar')
+      .should('exist')
+
+    cy.get('div.text-primaryBlue-900')  // selecciona el primer dia habilitado
+      .first()
+      .click()
+
   })
 })
