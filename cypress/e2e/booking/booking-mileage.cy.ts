@@ -127,9 +127,18 @@ describe("Reservas: Mantencion por Kilometraje", () => {
       .should('be.visible')
 
     // Validate email confirmation modal is visible
-    cy.get('[data-cy="cy-confirmation-booking-email-modal"]')
+    cy.get('[data-cy="cy-confirmation-booking-email-modal"]', { timeout: 15000 })
       .should('exist')
       .should('be.visible')
       .contains('reserva')
+
+    // Click en modal and redirect
+    cy.get('[data-cy="cy-confirmation-booking-email-modal"]')
+      .get('a')
+      .contains('Continuar')
+      .should('be.visible')
+      .click()
+
+    cy.location('pathname').should('match', /\/services$/)
   })
 })
