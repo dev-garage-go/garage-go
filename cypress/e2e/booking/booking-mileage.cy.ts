@@ -46,7 +46,7 @@ describe("Reservas: Mantencion por Kilometraje", () => {
   // ---------
   // Test 3: Verificar inputs y completar el form con data
 
-  it.only("Verificar inputs y rellenarlos", () => {
+  it.only("Verificar inputs y crear reserva", () => {
     // validating if exist booking form container
     cy.log("validating if the booking form exist")
     cy.get('[data-cy="cy-booking-form"] div', { timeout: 15000 })
@@ -80,19 +80,22 @@ describe("Reservas: Mantencion por Kilometraje", () => {
       .should('exist')
       .type('Velazco 1983, Santiago de Chile')
 
-    // 1. open custom select
-    cy.get('[data-cy="custom-select"]').click()
-
-    // 2. await that option are visible and click it
-    cy.contains('[role="option"]', 'depto').should('be.visible').click()
-
+    // -------------------------
+    // custom select
+    cy.get('[data-cy="cy-booking-form"] div')
+      .find('button[data-cy="custom-select"]')
+      .should('exist')
+      .should('be.visible')
+      .should('not.be.disabled')
+      .click()
+    cy.contains('depto').click()
 
     cy.get('[data-cy="cy-booking-form"] div')
       .find('input[name="user.additionalInfo"]')
       .should('exist')
       .type('Departamento con rejas negras, segundo piso')
 
-
+    // -------------------------
     // Appointment inputs
     cy.log('validating Appointment inputs')
 
@@ -115,6 +118,7 @@ describe("Reservas: Mantencion por Kilometraje", () => {
       .contains('15:00 pm')
       .click()
 
+    // -------------------------
     // Continue button to send submit
     cy.get('button[type="submit"]')
       .contains('Continuar')
