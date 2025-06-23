@@ -34,22 +34,21 @@ export const TopBanner = ({
   imageSrc,
   withImage
 }: Props) => {
-  const router = useRouter()
   const pathname = usePathname()
   const { vehicleInStorage, deleteVehicle } = useVehicleContext()
 
   // Breadcrums
-  const [hasBreadCrumbs, setHasBreadCrumbs] = useState(false)
+  const [showBreadCrumbs, setShowBreadCrumbs] = useState(false)
   const pathSegments = pathname.split("/").filter(Boolean) // remove empty strings
 
   // I use the hook to obtain the vehicle data because this is a dynamic component,
   // changes the data based if exist or not the vehicle
-  const vehicleLicensePlate = vehicleInStorage?.licensePlate ?? <Skeleton color="light-blue" className="w-20 h-6" />
-  const vehicleBrand = vehicleInStorage?.brand ?? <Skeleton color="light-blue" className="w-20 h-6" />
+  const vehicleLicensePlate = vehicleInStorage?.licensePlate ?? <Skeleton color="light-blue" className="w-32 h-6" />
+  const vehicleBrand = vehicleInStorage?.brand ?? <Skeleton color="light-blue" className="w-24 h-6" />
   const vehicleModel = vehicleInStorage?.model ?? <Skeleton color="light-blue" className="w-28 h-6" />
 
   useEffect(() => {
-    setHasBreadCrumbs(pathSegments.length > 0)
+    setShowBreadCrumbs(pathSegments.length > 0)
   }, [pathSegments.length])
 
   return (
@@ -62,27 +61,33 @@ export const TopBanner = ({
               "col-span-4 lg:col-span-2": !hasVehicleData
             })}>
               {/* Breadcrumbs */}
-              <div className={`text-xs truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white ${hasBreadCrumbs ? "block" : "hidden"}`}>
-                <Link href="/" className="hover:font-medium duration-200">
-                  Inicio
-                  <span className="px-2">{">"}</span>
-                </Link>
-                {setBreadcrumbs(pathname).map((crumb, index) => (
-                  <div key={index} className="flex items-center">
-                    {crumb.isEllipsis ? (
-                      <span className="px-2 text-white">...</span>
-                    ) : !crumb.isLast ? (
-                      <>
-                        <Link href={crumb.href!} className="hover:font-medium duration-200">
-                          {crumb.name}
-                        </Link>
-                        <span className="px-2">{">"}</span>
-                      </>
-                    ) : (
-                      <span>{crumb.name}</span>
-                    )}
-                  </div>
-                ))}
+              <div className="text-xs truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white">
+                {showBreadCrumbs ? (
+                  <Skeleton color="light-blue" className="w-52 lg:w-96 h-6" />
+                ) : (
+                  <>
+                    <Link href="/" className="hover:font-medium duration-200">
+                      Inicio
+                      <span className="px-2">{">"}</span>
+                    </Link>
+                    {setBreadcrumbs(pathname).map((crumb, index) => (
+                      <div key={index} className="flex items-center">
+                        {crumb.isEllipsis ? (
+                          <span className="px-2 text-white">...</span>
+                        ) : !crumb.isLast ? (
+                          <>
+                            <Link href={crumb.href!} className="hover:font-medium duration-200">
+                              {crumb.name}
+                            </Link>
+                            <span className="px-2">{">"}</span>
+                          </>
+                        ) : (
+                          <span>{crumb.name}</span>
+                        )}
+                      </div>
+                    ))}
+                  </>
+                )}
               </div>
               <div>
 
@@ -119,7 +124,7 @@ export const TopBanner = ({
             </div>
           </div>
         </div>
-      </section>
+      </section >
       {withImage && (
         <div className="relative w-full h-40 sm:h-52 md:h-64">
           <Image
@@ -147,7 +152,8 @@ export const TopBanner = ({
             ))}
           </div>
         </div>
-      )}
+      )
+      }
     </>
   )
 }
