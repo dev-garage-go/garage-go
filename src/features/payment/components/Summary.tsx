@@ -1,13 +1,28 @@
 "use client"
 
-import { IoClose } from "react-icons/io5"
-import { formatNumberWithDots } from '@/utils';
-import { SummaryProps } from "@/features/payment";
-import { useBookingContext } from "@/features/bookings";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
+import { IoClose } from "react-icons/io5"
 
-export const Summary = ({ mainService, secundaryService, coupon, bill }: SummaryProps) => {
+import { formatNumberWithDots } from '@/utils';
+
+import { Skeleton } from "@/components";
+import { SummaryProps, usePaymentContext } from "@/features/payment";
+import { useBookingContext } from "@/features/bookings";
+
+export const Summary = ({ mainService, secundaryService, coupon, button }: SummaryProps) => {
+  const [billIsLoading, setBillIsLoading] = useState(true)
+
   const { creatingBookingAnimation } = useBookingContext()
+  const { amountInCookie } = usePaymentContext()
+
+  // when the bill is loaded, ending skeleton animation
+  useEffect(() => {
+    if (amountInCookie.subtotal !== 0 || amountInCookie.total !== 0) {
+      setBillIsLoading(false)
+    }
+  }, [amountInCookie.subtotal, amountInCookie.total])
+
 
   return (
     <section className='flex flex-col lg:px-4 gap-5 lg:gap-4'>
@@ -102,14 +117,31 @@ export const Summary = ({ mainService, secundaryService, coupon, bill }: Summary
             Subtotal
           </p>
           <p className="font-semibold text-primaryBlue-900">
-            <span className="font-normal">Desde: </span>${formatNumberWithDots(bill.subtotal)}
+            {
+              billIsLoading ? (
+                <Skeleton color="light-gray" className="w-32 h-6" />
+              ) : (
+                <>
+                  <span className="font-normal">Desde: </span>${formatNumberWithDots(amountInCookie.subtotal)}
+                </>
+              )
+            }
           </p>
         </div>
         <div className="flex justify-between items-center w-full">
           <p className="font-semibold text-primaryBlue-900">
-            Dctos</p>
+            Dctos
+          </p>
           <p className="font-semibold text-primaryBlue-900">
-            ${formatNumberWithDots(bill.dctos)}
+            {
+              billIsLoading ? (
+                <Skeleton color="light-gray" className="w-32 h-6" />
+              ) : (
+                <>
+                  ${formatNumberWithDots(amountInCookie.disscount)}
+                </>
+              )
+            }
           </p>
         </div>
         <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
@@ -118,7 +150,15 @@ export const Summary = ({ mainService, secundaryService, coupon, bill }: Summary
             Total a pagar
           </p>
           <p className="font-semibold text-primaryBlue-400">
-            ${formatNumberWithDots(bill.total)}
+            {
+              billIsLoading ? (
+                <Skeleton color="light-gray" className="w-32 h-6" />
+              ) : (
+                <>
+                  ${formatNumberWithDots(amountInCookie.total)}
+                </>
+              )
+            }
           </p>
         </div>
         <div className="h-0.5 rounded bg-black w-full opacity-5" />  {/* Divisor */}
@@ -137,7 +177,7 @@ export const Summary = ({ mainService, secundaryService, coupon, bill }: Summary
                   <div className="loader" />
                   Procesando...
                 </div>
-              ) : bill.btnString
+              ) : button.text
             }
           </button>
         </div>

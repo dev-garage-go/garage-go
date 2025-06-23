@@ -1,3 +1,7 @@
+export interface PaymentSummaryButton {
+  text: string,
+  onClick?: () => void
+}
 export interface SummaryProps {
   mainService: {
     name: string,
@@ -15,13 +19,7 @@ export interface SummaryProps {
     hasCoupon: boolean,
     number?: string,
   }
-  bill: {
-    subtotal: number,
-    dctos: number,
-    total: number,
-    btnString: string,
-    btnAction?: () => void
-  }
+  button: PaymentSummaryButton
 }
 
 export interface SummaryInstanceProps {
