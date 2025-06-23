@@ -1,23 +1,20 @@
 'use client'
 
-import { usePaymentContext, Summary } from "@/features/payment"
+import { PaymentSummaryButton, Summary } from "@/features/payment"
 import { setSummaryPropsByServiceType } from "../constants/summary"
+import { ServicesTypes } from "@/features/services"
 
-export const PaymentSummary = () => {
-  const { handleShowAmount } = usePaymentContext()
+interface Props {
+  serviceType: ServicesTypes,
+  button: PaymentSummaryButton
+}
 
-  const bill = {
-    subtotal: handleShowAmount().subtotal,
-    dctos: handleShowAmount().disscount,
-    total: handleShowAmount().total,
-    btnString: "Continuar",
-  }
-
-  const dynamicProps = setSummaryPropsByServiceType("mileage")
+export const PaymentSummary = ({ button, serviceType }: Props) => {
+  const dynamicProps = setSummaryPropsByServiceType(serviceType)
 
   return (
     <Summary
-      bill={bill}
+      button={{ text: button.text }}
       {...dynamicProps}
     />
   )

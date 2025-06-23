@@ -11,11 +11,11 @@ import {
   calculateBaseChargeByVehicle,
   deleteBaseAmountInCookie,
   getBaseAmountInCookie,
-  setBaseAmountInCookie
+  loadBaseAmountInCookie
 } from "@/backend/actions"
 
 interface PaymentContextType {
-  handleShowAmount: () => AmountInterface
+  amountInCookie: AmountInterface
 }
 
 // Context
@@ -37,8 +37,7 @@ export const PaymentContextProvider = ({ children }: Props) => {
   const { serviceInStorage, serviceType } = useServiceContext()
   const { vehicleInStorage } = useVehicleContext()
 
-  const [baseAmount, setBaseAmount] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
-  const [amountInCookie, setAmountInCookie] = useState<AmountInterface | null>()
+  const [amountInCookie, setAmountInCookie] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
 
   // calling function that executes charging logic
   const sendBaseChargeByVehicleRequest = async (requestData: BaseChargeByVehicle) => {
@@ -47,10 +46,9 @@ export const PaymentContextProvider = ({ children }: Props) => {
       if (!response.success) throw new Error(response.error);
 
       const amount = response.data!
-      setBaseAmount(amount)
 
       // save amount in cookies
-      await setBaseAmountInCookie(amount)
+      await loadBaseAmountInCookie(amount)
 
     } catch (error) {
       console.log(error)
@@ -83,7 +81,6 @@ export const PaymentContextProvider = ({ children }: Props) => {
       const deleteCookie = async () => {
         const response = await deleteBaseAmountInCookie()
         if (response.success) {
-          setAmountInCookie(null)
           await sendBaseChargeByVehicleRequest({ serviceType, vehicle: vehicleInStorage })
         }
       }
@@ -104,13 +101,9 @@ export const PaymentContextProvider = ({ children }: Props) => {
     verifyCookie()
   }, [])
 
-  // handling the amount that will be show in UI
-  const handleShowAmount = (): AmountInterface => {
-    return amountInCookie ?? baseAmount
-  }
 
   return <PaymentContext.Provider value={{
-    handleShowAmount
+    amountInCookie
   }}>
     {children}
   </PaymentContext.Provider>
