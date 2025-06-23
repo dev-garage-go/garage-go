@@ -8,8 +8,8 @@ import dayjs from "dayjs";
 import { Controller, useFormContext } from "react-hook-form";
 
 import { BookingServiceDataInterface, AddressTypesData, SchedulePicker, CalendarPicker } from "@/features/bookings";
-import { ChangeVehicleButton } from "@/features/vehicle";
 import { ErrorMessage, InformationButton, Select } from "@/components";
+import { VehicleDataDiv } from "../VehicleDataDiv";
 
 interface Props {
   withBooking: boolean
@@ -104,22 +104,7 @@ export const BookingForm = ({ withBooking }: Props) => {
         </div>
 
         {/* Vehicle data */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 items-end w-full bg-gray-100 rounded-2xl p-4 ">
-          <div className="flex flex-col">
-            <p className="font-medium text-primaryBlue-900">TGPL67</p>
-            <div className="flex justify-between w-full lg:hidden text-primaryBlue-500">
-              <p className="text-gray-500">Haval H6 GT</p>
-              <p>10.000 kms.</p>
-            </div>
-
-          </div>
-          <div className="hidden lg:block">
-            <p className="font-medium text-primaryBlue-500">10.000 kms.</p>
-          </div>
-          <div>
-            <ChangeVehicleButton />
-          </div>
-        </div>
+        <VehicleDataDiv />
       </section>
 
       {withBooking && (

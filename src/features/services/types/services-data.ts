@@ -9,15 +9,15 @@ export type VehicleMileagesType = (
 export type QuantityTiresType = 1 | 2 | 3 | 4
 export type TypesTiresOptionsType = 'ciudad' | 'offroad' | 'intermedio'
 
-// Services interfaces
+// Services interfaces  
 
 type ServicesNames = 'tires_change' | 'mileage_maintenance'
 export type ServicesTypes = 'tires' | 'mileage'
 
 export const ServiceNamesMap: Record<ServicesNames, string> = {
-  "mileage_maintenance": "mantención kilometraje",
-  "tires_change": "cambio neumaticos"
-}
+  "mileage_maintenance": "mantención por kilometraje",
+  "tires_change": "cambio de neumaticos"
+} as const
 
 interface BaseServiceInterface {
   type: ServicesTypes
@@ -27,10 +27,14 @@ interface BaseServiceInterface {
 }
 
 export interface MileageMaintenanceServiceInterface extends BaseServiceInterface {
+  type: 'mileage'
+  name: 'mileage_maintenance'
   mileages: VehicleMileagesType
 }
 
 export interface TiresChangeServiceInterface extends BaseServiceInterface {
+  type: 'tires'
+  name: 'tires_change'
   quantityTires: QuantityTiresType;
   typeTires: TypesTiresOptionsType;
   tireSize: string,
