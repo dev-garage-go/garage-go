@@ -8,6 +8,7 @@ import { usePathname, useRouter } from "next/navigation"
 import { setBreadcrumbs } from "@/features/home"
 import { VehicleServicesFeaturesIconsMap } from "@/features/services"
 import { useVehicleContext } from "@/features/vehicle"
+import clsx from "clsx"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 
@@ -54,11 +55,11 @@ export const TopBanner = ({
     <>
       <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 sm:pb-8 xl:pb-10 pt-28 sm:pt-32 bg-primaryBlue-300">
         <div className="flex justify-center items-center w-full">
-          <div className="grid grid-cols-9">
-            <div className={
-              `flex flex-wrap overflow-x-visible ${hasVehicleData
-                ? 'col-start-1 col-end-9 xl:col-start-1 xl:col-end-8'
-                : 'col-start-1 col-end-9 xl:col-start-1 xl:col-end-4'}`}>
+          <div className="grid grid-cols-4 w-full max-w-page">
+            <div className={clsx("flex flex-wrap overflow-x-visible", {
+              "col-span-4": hasVehicleData,
+              "col-span-4 lg:col-span-2": !hasVehicleData
+            })}>
               {/* Breadcrumbs */}
               <div className={`text-xs truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white ${hasBreadCrumbs ? "block" : "hidden"}`}>
                 <Link href="/" className="hover:font-medium duration-200">

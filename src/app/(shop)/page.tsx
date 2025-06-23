@@ -7,7 +7,7 @@ export default function HomePage() {
       <Hero />
       <Services />
       <Benefits />
-      <div className="pt-20 sm:pt-24 md:pt-28 xl:pt-32">
+      <div className="padding-section">
         <CarsBrandsCarousel />
       </div>
       <Banner />

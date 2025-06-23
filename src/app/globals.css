@@ -36,6 +36,10 @@ input[type="number"] {
   @apply px-4 sm:px-6 lg:px-8;
 }
 
+.padding-section {
+  @apply pt-20 sm:pt-24 md:pt-28 xl:pt-32
+}
+
 .container-section {
   @apply flex flex-col items-center justify-center gap-4 md:gap-6 xl:gap-10 pt-20 sm:pt-24 md:pt-28 xl:pt-32;
 }

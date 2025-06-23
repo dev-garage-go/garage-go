@@ -13,7 +13,7 @@ export default function ServicesPage() {
       />
 
       {/* Main image */}
-      <div className="hidden xl:block absolute top-20 right-72 w-[600px] h-[400px]">
+      <div className="hidden xl:block absolute top-20 xl:right-16 2xl:right-64 w-[600px] h-[400px]">
         <Image
           fill
           priority
