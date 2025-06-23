@@ -39,7 +39,7 @@ export const BookingContextProvider = ({ children }: Props) => {
   const { vehicleInStorage } = useVehicleContext()
   const { serviceInStorage } = useServiceContext()
   const { sendBookingConfirmationEmail } = useEmailContext()
-  const { handleShowAmount } = usePaymentContext()
+  const { amountInCookie } = usePaymentContext()
 
   // saves the successful or unsuccessful response of the backend when trying to create a booking
   const [bookingCreated, setBookingCreated] = useState<boolean | null>(null)
@@ -75,7 +75,7 @@ export const BookingContextProvider = ({ children }: Props) => {
       appointment: data.appointment,
       vehicleID: vehicleInStorage._id,
       user: userData,
-      amount: handleShowAmount()
+      amount: amountInCookie
     }
 
     const responseBooking = await createBooking(booking)

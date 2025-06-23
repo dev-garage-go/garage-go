@@ -64,7 +64,9 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <BookingForm withBooking={withBooking} />
-            <PaymentSummary />
+            <PaymentSummary
+              button={{ text: 'Reservar' }}
+            />
           </div>
         </form>
       </FormProvider>
