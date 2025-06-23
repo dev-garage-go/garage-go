@@ -6,6 +6,7 @@ export * from './buttons/RefreshButton';
 export * from './buttons/SwitchButton';
 export * from './buttons/WhatsAppButton';
 export * from './shared/Loader';
+export * from './shared/Skeleton';
 export * from './ui/Carousel';
 export * from './ui/ErrorMessage';
 export * from './ui/GoogleMapComponent';

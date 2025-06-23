@@ -9,6 +9,7 @@ import { setBreadcrumbs } from "@/features/home"
 import { VehicleServicesFeaturesIconsMap } from "@/features/services"
 import { useVehicleContext } from "@/features/vehicle"
 import clsx from "clsx"
+import { Skeleton } from "@/components"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 
@@ -43,9 +44,9 @@ export const TopBanner = ({
 
   // I use the hook to obtain the vehicle data because this is a dynamic component,
   // changes the data based if exist or not the vehicle
-  const vehicleLicensePlate = vehicleInStorage ? vehicleInStorage.licensePlate : '-'
-  const vehicleModel = vehicleInStorage ? vehicleInStorage.model : '-'
-  const vehicleBrand = vehicleInStorage ? vehicleInStorage.brand : '-'
+  const vehicleLicensePlate = vehicleInStorage?.licensePlate ?? <Skeleton color="light-blue" className="w-20 h-6" />
+  const vehicleBrand = vehicleInStorage?.brand ?? <Skeleton color="light-blue" className="w-20 h-6" />
+  const vehicleModel = vehicleInStorage?.model ?? <Skeleton color="light-blue" className="w-28 h-6" />
 
   useEffect(() => {
     setHasBreadCrumbs(pathSegments.length > 0)
@@ -92,9 +93,9 @@ export const TopBanner = ({
                   </>
                 ) : (
                   <>
-                    <h2 className="text-2xl md:text-2xl xl:text-4xl font-bold text-white">
-                      Patente:
-                      <span className="uppercase">{" " + vehicleLicensePlate}</span>
+                    <h2 className="flex items-center gap-2 lg:gap-4 text-2xl md:text-2xl xl:text-4xl font-bold text-white">
+                      <span>Patente:</span>
+                      <span className="uppercase">{vehicleLicensePlate}</span>
                     </h2>
                     <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
                       <div className="flex w-full justify-start items-center gap-2.5 tracking-wide">
