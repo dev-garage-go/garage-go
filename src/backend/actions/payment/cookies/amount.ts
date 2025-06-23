@@ -6,7 +6,7 @@ import { HttpStatus, ServerActionResponse } from '@/backend/types'
 
 const amountCookieKey = "baseAmunt"
 
-export const setBaseAmountInCookie = async (amount: AmountInterface): Promise<ServerActionResponse<null>> => {
+export const loadBaseAmountInCookie = async (amount: AmountInterface): Promise<ServerActionResponse<null>> => {
   try {
     const value = JSON.stringify(amount)
 
