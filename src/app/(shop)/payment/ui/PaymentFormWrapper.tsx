@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 
 import { PaymentForm } from './PaymentForm'
-import { PaymentSummary } from './PaymentSummary'
+import { PaymentSummary } from '@/features/payment'
 
 import {
   hasCardData,
@@ -13,7 +13,6 @@ import {
   hasValidPaymentGateway,
   PaymentFormSchema
 } from '@/features/payment'
-
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormSchema>({
@@ -26,6 +25,10 @@ export const PaymentFormWrapper = () => {
     }
   })
   const { setValue, handleSubmit, trigger, getValues, watch } = methods
+
+  // storage
+  // TODO: const { serviceInStorage } = useServiceContext()
+
   // view form data
   const card = watch("userCard");
   const paymentGateway = watch("paymentGateway");
@@ -88,8 +91,12 @@ export const PaymentFormWrapper = () => {
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
             <PaymentForm />
             <PaymentSummary
-              hasCompletedPaymentData={enableButton}
-              errorBothMethods={showErrorBothMethods}
+              serviceType={'mileage'}
+              button={{ text: 'Ir a pagar' }}
+              payment={{
+                hasCompletedPaymentData: enableButton,
+                errorBothMethods: showErrorBothMethods
+              }}
             />
           </div>
         </form>

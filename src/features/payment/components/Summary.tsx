@@ -6,11 +6,11 @@ import { IoClose } from "react-icons/io5"
 
 import { formatNumberWithDots } from '@/utils';
 
-import { Skeleton } from "@/components";
+import { ErrorMessage, Skeleton } from "@/components";
 import { SummaryProps, usePaymentContext } from "@/features/payment";
 import { useBookingContext } from "@/features/bookings";
 
-export const Summary = ({ mainService, secundaryService, coupon, button }: SummaryProps) => {
+export const Summary = ({ mainService, secundaryService, coupon, button, payment }: SummaryProps) => {
   const [billIsLoading, setBillIsLoading] = useState(true)
 
   const { creatingBookingAnimation } = useBookingContext()
@@ -169,7 +169,8 @@ export const Summary = ({ mainService, secundaryService, coupon, button }: Summa
             type="submit"
             className={clsx("px-10 py-2 bg-primaryBlue-900 text-white font-semibold rounded-xl", {
               "hover:scale-100 hover:brightness-100": creatingBookingAnimation,
-              "hover:scale-105 hover:brightness-125 transition-all duration-200": !creatingBookingAnimation
+              "hover:scale-105 hover:brightness-125 transition-all duration-200": !creatingBookingAnimation,
+              "hidden": payment   // if it's payment summary, hidden this button and show the bottom button
             })}>
             {
               creatingBookingAnimation ? (
@@ -182,6 +183,27 @@ export const Summary = ({ mainService, secundaryService, coupon, button }: Summa
           </button>
         </div>
       </div>
-    </section>
+
+      {/* button to pay */}
+      {payment && (
+        <div className="flex flex-col justify-center items-center gap-2 mt-10 w-full">
+          <div className="flex justify-center items-center w-full ">
+            <button
+              disabled={!payment.hasCompletedPaymentData}
+              type="submit"
+              className="payment-form-button">
+              Ir a pagar
+            </button>
+          </div>
+          {
+            payment.errorBothMethods && (
+              <div className="flex justify-center items-center w-full max-w-md bg-red-100 rounded-md py-4 mt-5">
+                <ErrorMessage message={'Solo puede seleccionar un metodo de pago'} className="w-fit" />
+              </div>
+            )
+          }
+        </div>
+      )}
+    </section >
   )
 }
