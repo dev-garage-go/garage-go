@@ -4,10 +4,9 @@ import { BookingAdmin } from "@/backend/database/types/bookings"
 import { ServiceNamesMap } from "@/features/services";
 import dayjs from 'dayjs';
 
-import { formatNumberWithDots } from '@/utils';
+import { formatNumberWithDots, firstLetterUppercase } from '@/utils';
 import { useAdminGuard } from "@/features/admin/hooks/useAdminGuard";
 import { ServiceState } from "./ServiceState";
-import { firstLetterUppercase } from '../../../utils/formatters';
 
 interface Props {
   bookings: BookingAdmin[]
