@@ -62,7 +62,7 @@ export const TopBanner = ({
             })}>
               {/* Breadcrumbs */}
               <div className="text-xs truncate overflow-hidden text-ellipsis whitespace-nowrap sm:text-sm flex w-full justify-start items-center mb-2 md:mb-4 text-white">
-                {showBreadCrumbs ? (
+                {!showBreadCrumbs ? (
                   <Skeleton color="light-blue" className="w-52 lg:w-96 h-6" />
                 ) : (
                   <>
