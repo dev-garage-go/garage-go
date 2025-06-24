@@ -13,13 +13,16 @@ const colorMap: Record<SkeletonColors, string> = {
 interface Props {
   color: SkeletonColors
   className?: string
+  inline?: boolean
 }
 
-export const Skeleton = ({ className, color }: Props) => {
+export const Skeleton = ({ className, color = 'light-gray', inline = false }: Props) => {
+  const Tag = inline ? 'span' : 'div'
+
   return (
-    <div className={clsx(
+    <Tag className={clsx(
       className ?? 'min-w-3 min-h-3',
-      'bg-gray-300 animate-pulse rounded-md', colorMap[color]
+      'bg-gray-300 animate-pulse rounded-md inline-block', colorMap[color]
     )}
     />
   )

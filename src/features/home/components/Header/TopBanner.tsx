@@ -43,9 +43,9 @@ export const TopBanner = ({
 
   // I use the hook to obtain the vehicle data because this is a dynamic component,
   // changes the data based if exist or not the vehicle
-  const vehicleLicensePlate = vehicleInStorage?.licensePlate ?? <Skeleton color="light-blue" className="w-32 h-6" />
-  const vehicleBrand = vehicleInStorage?.brand ?? <Skeleton color="light-blue" className="w-24 h-6" />
-  const vehicleModel = vehicleInStorage?.model ?? <Skeleton color="light-blue" className="w-28 h-6" />
+  const vehicleLicensePlate = vehicleInStorage?.licensePlate
+  const vehicleBrand = vehicleInStorage?.brand
+  const vehicleModel = vehicleInStorage?.model
 
   useEffect(() => {
     setShowBreadCrumbs(pathSegments.length > 0)
@@ -100,15 +100,23 @@ export const TopBanner = ({
                   <>
                     <h2 className="flex items-center gap-2 lg:gap-4 text-2xl md:text-2xl xl:text-4xl font-bold text-white">
                       <span>Patente:</span>
-                      <span className="uppercase">{vehicleLicensePlate}</span>
+                      <span className="uppercase">
+                        {vehicleLicensePlate ?? (
+                          <Skeleton inline color="light-blue" className="w-32 h-6" />
+                        )}
+                      </span>
                     </h2>
                     <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
                       <div className="flex w-full justify-start items-center gap-2.5 tracking-wide">
                         <p className="text-base sm:text-lg xl:text-xl uppercase text-white">
-                          {vehicleBrand}
+                          {vehicleBrand ?? (
+                            <Skeleton inline color="light-blue" className="w-24 h-6" />
+                          )}
                         </p>
                         <p className="text-base sm:text-lg xl:text-xl uppercase text-white">
-                          {vehicleModel}
+                          {vehicleModel ?? (
+                            <Skeleton inline color="light-blue" className="w-28 h-6" />
+                          )}
                         </p>
                       </div>
                       <button

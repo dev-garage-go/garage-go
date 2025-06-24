@@ -119,10 +119,11 @@ export const Summary = ({ mainService, secundaryService, coupon, button, payment
           <p className="font-semibold text-primaryBlue-900">
             {
               billIsLoading ? (
-                <Skeleton color="light-gray" className="w-32 h-6" />
+                <Skeleton inline color="light-gray" className="w-32 h-6" />
               ) : (
                 <>
-                  <span className="font-normal">Desde: </span>${formatNumberWithDots(amountInCookie.subtotal)}
+                  <span className="font-normal">Desde: </span>
+                  <span>${formatNumberWithDots(amountInCookie.subtotal)}</span>
                 </>
               )
             }
@@ -135,11 +136,9 @@ export const Summary = ({ mainService, secundaryService, coupon, button, payment
           <p className="font-semibold text-primaryBlue-900">
             {
               billIsLoading ? (
-                <Skeleton color="light-gray" className="w-32 h-6" />
+                <Skeleton inline color="light-gray" className="w-32 h-6" />
               ) : (
-                <>
-                  ${formatNumberWithDots(amountInCookie.disscount)}
-                </>
+                <span>${formatNumberWithDots(amountInCookie.disscount)}</span>
               )
             }
           </p>
@@ -152,11 +151,9 @@ export const Summary = ({ mainService, secundaryService, coupon, button, payment
           <p className="font-semibold text-primaryBlue-400">
             {
               billIsLoading ? (
-                <Skeleton color="light-gray" className="w-32 h-6" />
+                <Skeleton inline color="light-gray" className="w-32 h-6" />
               ) : (
-                <>
-                  ${formatNumberWithDots(amountInCookie.total)}
-                </>
+                <span>${formatNumberWithDots(amountInCookie.total)}</span>
               )
             }
           </p>
