@@ -6,8 +6,6 @@ import { createContext, SetStateAction, useContext, useEffect, useState } from "
 import { isAuthorized, expiresIsAuthorized } from "@/features/admin"
 
 interface AdminContextInterface {
-  password: string,
-  setPassword: React.Dispatch<SetStateAction<string>>
   wrongPassword: boolean
   setWrongPassword: React.Dispatch<SetStateAction<boolean>>
   authorized: boolean
@@ -32,7 +30,6 @@ export const AdminContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined' // avoids server errors
   const router = useRouter();
 
-  const [password, setPassword] = useState("")
   const [wrongPassword, setWrongPassword] = useState<boolean>(false)
   const [authorized, setAuthorized] = useState<boolean>(false);
 
@@ -78,19 +75,11 @@ export const AdminContextProvider = ({ children }: Props) => {
     }
   }
 
-  // clean wrong password when it changes
-  useEffect(() => {
-    if (wrongPassword && password.length) {
-      setTimeout(() => {
-        setWrongPassword(false)
-      }, 1000)
-    }
-  }, [wrongPassword, password.length])
-
+  // ! guards
   // Verifies is user is authorized
   useEffect(() => {
     if (authorized) {
-      router.push("/admin/bookings")  // guard
+      router.push("/admin/bookings")
     }
   }, [authorized, router])
 
@@ -99,8 +88,6 @@ export const AdminContextProvider = ({ children }: Props) => {
       value={{
         wrongPassword,
         setWrongPassword,
-        password,
-        setPassword,
         authorized,
         isValidPassword,
         isAdminSessionValid,

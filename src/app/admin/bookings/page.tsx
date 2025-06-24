@@ -1,6 +1,7 @@
 import { getBookingsWithVehicleData } from "@/backend/actions";
 import { RefreshButton } from "@/components";
 import { BookingTable } from "@/features/admin";
+import { redirect } from "next/navigation";
 
 // force that next not caching the page
 export const dynamic = 'force-dynamic';
@@ -8,8 +9,12 @@ export const dynamic = 'force-dynamic';
 export default async function BookingAdminPage() {
   const response = await getBookingsWithVehicleData()
 
-  if (!response.success || !response.data) return; // show toast with error message
-  const bookings = response.data
+  if (!response.success || !response.data) {
+    console.error(response.error)
+    redirect('/admin')
+  };
+
+  const bookings = response.data.length > 0 ? response.data : []
 
   return (
     <section className="min-h-screen w-full bg-customGray-200 p-10">

@@ -1,16 +1,29 @@
 "use client"
 
+import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@/components";
-import { useAdminContext } from "@/features/admin";
-
+import { useAdminContext, AdminForm } from "@/features/admin";
+import { useEffect } from "react";
+import { watch } from "fs";
 
 export default function AdminPage() {
-  const { password, setPassword, wrongPassword, isValidPassword } = useAdminContext()
+  const { register, handleSubmit, watch } = useForm<AdminForm>()
+  const { wrongPassword, isValidPassword, setWrongPassword } = useAdminContext()
 
-  const handleSumbit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    await isValidPassword(password)
+  const onSubmit = async (data: AdminForm) => {
+    await isValidPassword(data.password)
   }
+
+  const password = watch('password')
+
+  // clean wrong password when it changes
+  useEffect(() => {
+    if (wrongPassword && password.length) {
+      setTimeout(() => {
+        setWrongPassword(false)
+      }, 1000)
+    }
+  }, [wrongPassword, password])
 
   return (
     <div className="flex flex-col justify-center items-center bg-primaryBlue-50 min-h-screen">
@@ -26,7 +39,8 @@ export default function AdminPage() {
         </p>
 
         <form
-          onSubmit={handleSumbit}
+          data-cy="cy-form-admin"
+          onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col justify-start items-start w-full max-w-md"
         >
           <label
@@ -41,8 +55,7 @@ export default function AdminPage() {
               type="password"
               placeholder="******"
               className="input-form"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              {...register('password', { required: true })}
             />
             <button
               type="submit"
