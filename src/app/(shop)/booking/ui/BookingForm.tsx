@@ -7,9 +7,14 @@ import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import { Controller, useFormContext } from "react-hook-form";
 
-import { BookingServiceDataInterface, AddressTypesData, SchedulePicker, CalendarPicker } from "@/features/bookings";
 import { ErrorMessage, InformationButton, Select } from "@/components";
-import { VehicleDataDiv } from "../VehicleDataDiv";
+import {
+  BookingServiceDataInterface,
+  AddressTypesData,
+  SchedulePicker,
+  CalendarPicker,
+  VehicleDataDiv
+} from "@/features/bookings";
 
 interface Props {
   withBooking: boolean

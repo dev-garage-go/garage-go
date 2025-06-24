@@ -47,7 +47,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
     localStorage.setItem(serviceKey, JSON.stringify(data))
     window.dispatchEvent(new Event(customServiceUpdatedEvent))
 
-    router.push(`/services/${data.name}/booking`)
+    router.push(`/booking/${data.type}`)
   }, [isClient, router])
 
 
@@ -97,7 +97,7 @@ export const ServiceContextProvider = ({ children }: Props) => {
     if (!isClient) return;
     // if exist service in storage and the page is different from /booking, delete it
     const contractingRoutePath = pathname.endsWith("/contracting")
-    const bookingRoutePath = pathname.endsWith("/booking")
+    const bookingRoutePath = pathname.startsWith("/booking")
 
     if (serviceInStorage && !(bookingRoutePath || contractingRoutePath)) {
       deleteServiceFromStorage()

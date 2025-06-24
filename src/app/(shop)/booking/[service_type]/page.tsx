@@ -5,21 +5,24 @@ import { useRouter } from "next/navigation";
 import { FormProvider, useForm } from "react-hook-form";
 import { ModalPortal } from "@/components";
 
-import { useServiceContext } from "@/features/services";
+import { ServicesTypes, useServiceContext } from "@/features/services";
 import { LazyVehicleDataModal, useVehicleContext } from "@/features/vehicle";
 import { PaymentSummary } from "@/features/payment";
 import {
-  BookingForm,
   AppointmentDataInterface,
   useBookingContext,
   LazyConfirmationBookingModal,
 } from "@/features/bookings"
 
+import { BookingForm } from "../ui/BookingForm";
+
 interface Props {
-  withBooking: boolean
+  params: {
+    service_type: string
+  }
 }
 
-export const BookingFormWrapper = ({ withBooking }: Props) => {
+export default function BookingPage({ params }: Props) {
   const methods = useForm<AppointmentDataInterface>({
     shouldFocusError: true,
     defaultValues: {
@@ -31,6 +34,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   })
 
   const router = useRouter()
+  const serviceType = params.service_type as ServicesTypes;
 
   const { vehicleInStorage, showModal } = useVehicleContext()
   const { createServiceBooking, bookingCreated, showConfirmModal } = useBookingContext()
@@ -47,7 +51,7 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
   }
 
   return (
-    <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
+    <section className="mt-32 max-w-page padding-central-page pb-from-footer w-full">
       {/* if vehicle data doesn't exist, the modal will be open, otherwise it will be closed */}
       {!vehicleInStorage &&
         <ModalPortal isOpen={showModal}>
@@ -63,8 +67,9 @@ export const BookingFormWrapper = ({ withBooking }: Props) => {
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">
-            <BookingForm withBooking={withBooking} />
+            <BookingForm withBooking />
             <PaymentSummary
+              serviceType={serviceType}
               button={{ text: 'Reservar' }}
             />
           </div>
