@@ -13,7 +13,7 @@ describe("Reservas: Mantencion por Kilometraje", () => {
     cy.searchExistingVehicle('abc123')
     cy.loadMileageService()
 
-    cy.visit('/services/mileage_maintenance/booking')
+    cy.visit('/booking/mileage')
   })
 
   // ---------
@@ -37,7 +37,7 @@ describe("Reservas: Mantencion por Kilometraje", () => {
   it("Guard: Si no existe un service en localStorage, debe sacarme", () => {
     cy.log("delete 'service' from localStorage")
     cy.removeLocalStorage('service')
-    cy.visit('/services/mileage_maintenance/booking')
+    cy.visit('/booking/mileage')
     cy.url().should('not.include', '/booking')
     cy.url().should('include', '/services')
   })
@@ -121,7 +121,7 @@ describe("Reservas: Mantencion por Kilometraje", () => {
     // -------------------------
     // Continue button to send submit
     cy.get('button[type="submit"]')
-      .contains('Continuar')
+      .contains('Reservar')
       .should('exist')
       .click()
 

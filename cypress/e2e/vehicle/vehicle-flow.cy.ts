@@ -149,6 +149,6 @@ describe('Interacción con el Modal de Patente/Vehículo', () => {
     // verifica que los datos se estan mostrando en la UI
     cy.get("h2")
       .should("exist")
-      .contains(`Patente: ${nonExistingLicensePlate}`)
+      .contains(`Patente:${nonExistingLicensePlate}`)
   });
 });

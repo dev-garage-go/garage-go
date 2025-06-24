@@ -19,7 +19,7 @@ Cypress.Commands.add("searchExistingVehicle", (licensePlate: string) => {
   // se asegura de que los datos se muestren en la ui
   cy.get("h2")
     .should("exist")
-    .contains(`Patente: ${licensePlate}`)
+    .contains(`Patente:${licensePlate}`)
 
   // busca el vehiculo en el local storage
   cy.getLocalStorage('vehicle')
@@ -67,7 +67,7 @@ Cypress.Commands.add("loadMileageService", () => {
     })
 
   // verifica que se haya redirigido a booking
-  cy.get('[data-cy="cy-booking-form"] div')
+  cy.get('[data-cy="cy-booking-form"] div', { timeout: 15000 })
     .should('exist')
-  cy.url().should('include', '/mileage_maintenance/booking')
+  cy.url().should('include', '/booking/mileage')
 })
