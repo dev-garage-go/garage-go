@@ -21,7 +21,7 @@ export const Summary = ({ mainService, secundaryService, coupon, button, payment
     if (amountInCookie.subtotal !== 0 || amountInCookie.total !== 0) {
       setBillIsLoading(false)
     }
-  }, [amountInCookie.subtotal, amountInCookie.total])
+  }, [amountInCookie, amountInCookie.subtotal, amountInCookie.total])
 
 
   return (

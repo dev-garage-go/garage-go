@@ -22,7 +22,7 @@ export default function AdminPage() {
         setWrongPassword(false)
       }, 1000)
     }
-  }, [wrongPassword, password])
+  }, [wrongPassword, setWrongPassword, password])
 
   return (
     <div className="flex flex-col justify-center items-center bg-primaryBlue-50 min-h-screen">

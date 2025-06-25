@@ -70,6 +70,7 @@ export const VehicleDataModal = () => {
 
         setVehicleInStorage(response.data!)
         setCreatingVehicleAnimation(false)
+        setSearchingVehicleAnimation(false)
         handleClose()
         return
       }
