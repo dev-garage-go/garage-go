@@ -1,20 +1,20 @@
 // Service to send emails: Resend
 // Docs: https://resend.com/docs/send-with-nextjs
 
-import { NextAPIResponse, ServerActionResponse } from '@/backend/types';
+import { NextAPIResponse } from '@/backend/types';
 import { ConfirmationBookingEmail, ConfirmationBookingEmailInterface } from '@/features/emails';
 import { NextResponse } from 'next/server';
 import { CreateEmailResponseSuccess, Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
-const domainEmail = process.env.DOMAIN_EMAIL
+const noReplyDomainEmail = process.env.NO_REPLY_DOMAIN_EMAIL
 
 if (!process.env.RESEND_API_KEY) {
   throw new Error('RESEND_API_KEY is not defined');
 }
 
-if (!process.env.DOMAIN_EMAIL) {
-  throw new Error('DOMAIN_EMAIL is not defined');
+if (!process.env.NO_REPLY_DOMAIN_EMAIL) {
+  throw new Error('NO_REPLY_DOMAIN_EMAIL is not defined');
 }
 
 export async function POST(request: Request): Promise<NextResponse<NextAPIResponse<CreateEmailResponseSuccess>>> {
@@ -28,7 +28,7 @@ export async function POST(request: Request): Promise<NextResponse<NextAPIRespon
 
     if (isProd) {
       const response = await resend.emails.send({
-        from: domainEmail!,
+        from: `GarageGo <${noReplyDomainEmail!}>`,
         to: [userEmail],
         subject: 'Confirmación de reserva',
         react: ConfirmationBookingEmail({ firstName, bookingId, service }),
