@@ -48,6 +48,10 @@ input[type="number"] {
   @apply relative bg-white min-h-screen mt-32;
 }
 
+.mt-from-topbanner {
+  @apply mt-10;
+}
+
 .pb-from-footer {
   @apply pb-24 sm:pb-28 md:pb-32;
 }
