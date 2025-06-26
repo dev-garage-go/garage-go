@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const ConfirmationBookingEmail = ({ firstName, service, bookingId }: Props) => {
-  const imgPath = `${domain}/images/garage_go_logo_2.svg`; // Usa una URL absoluta pública
+  const imgPath = `${domain}/images/garage_go_email.png`; // Usa una URL absoluta pública
 
   return (
     <Html>

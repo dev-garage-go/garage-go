@@ -49,6 +49,7 @@ export const PaymentContextProvider = ({ children }: Props) => {
 
       // save amount in cookies
       await loadBaseAmountInCookie(amount)
+      setAmountInCookie(amount)
 
     } catch (error) {
       console.log(error)
