@@ -5,7 +5,8 @@
 // - Se sobrescribe el renderizado de cada celda con `fullCellRender()`.
 // - El día actual se marca con fondo azul claro (bg-primaryBlue-50 text-customGray-600).
 // - El día seleccionado dinámicamente se marca con fondo azul oscuro (bg-primaryBlue-900 text-white).
-// - El evento hover se marca con fondo gris claro (hover:bg-customGray-100)
+// - El evento hover se marca con fondo gris claro, solo se habilita a partir
+//     del breakpoint md, para evitar el hover el dispositivos mobiles (hover:bg-customGray-100)
 // - Se adapta a dispositivos pequeños con clases Tailwind como `max-w-sm`.
 // - El formato de fechas esta en español y es DD-MM-YYY. Ej: 09-05-2025
 
@@ -33,6 +34,14 @@ interface Props {
 }
 
 export const CalendarPicker = ({ onChange, error, selectedDate }: Props) => {
+  const [panelDate, setPanelDate] = useState(dayjs());
+
+  const disabledDate = (current: Dayjs) => {
+    const max = dayjs().add(1, 'month').endOf('month');
+    const today = dayjs().startOf('day');
+    return current.isBefore(today) || current.isAfter(max);
+  };
+
   const onSelect: CalendarProps<Dayjs>['onSelect'] = (date) => {
     const isoString = date.toISOString()
     onChange(isoString)
@@ -46,28 +55,55 @@ export const CalendarPicker = ({ onChange, error, selectedDate }: Props) => {
           Días disponibles
         </Typography.Text>
         <Calendar
-          disabledDate={(current) => current && current.isBefore(dayjs().startOf('day'))}
+          value={panelDate}
+          disabledDate={disabledDate}
           fullscreen={false}
           onSelect={onSelect}
-          headerRender={() => null}
+          onPanelChange={(v) => setPanelDate(v)}
+          headerRender={({ value }) => (
+            <div className="flex justify-between mb-2">
+              <button
+                type="button"
+                onClick={() => setPanelDate(value.clone().subtract(1, 'month'))}
+              >
+                ‹
+              </button>
+              <span className="font-medium capitalize">
+                {value.format('MMMM YYYY')}
+              </span>
+              <button
+                type="button"
+                onClick={() => setPanelDate(value.clone().add(1, 'month'))}
+              >
+                ›
+              </button>
+            </div>
+          )}
+
           fullCellRender={(current) => {
-            const isToday = current.isSame(dayjs(), 'day');
+            const isDisabled = disabledDate(current);
             const isSelected = selectedDate ? selectedDate.isSame(current, 'day') : null;
-            const isCurrentMonth = current.month() === dayjs().month();
-            const isDisabled = current.isBefore(dayjs().startOf('day'));
+            const isToday = current.isSame(dayjs(), 'day');
 
-            let dayCellClass = 'flex items-center hover:bg-customGray-100 justify-center mx-2 w-8 h-8 rounded-full text-sm font-light transition-all duration-300';
+            const isCurrentMonth = current.isSame(panelDate, 'month');
+            const isNextMonth = current.isSame(panelDate.clone().add(1, 'month'), 'month');
 
-            if (!isCurrentMonth) {
-              dayCellClass += ' text-customGray-300 hover:bg-opacity-0';
-            } else if (isSelected) {
+            let dayCellClass = 'flex items-center justify-center mx-2 w-8 h-8 rounded-full text-sm font-light transition-all duration-300';
+
+            if (isDisabled) {
+              dayCellClass += ' text-customGray-300 md:hover:bg-opacity-0';
+            }
+            else if (isSelected) {
               dayCellClass += ' bg-primaryBlue-900 text-white';
-            } else if (isToday) {
+            }
+            else if (isToday) {
               dayCellClass += ' bg-primaryBlue-50 text-customGray-600';
-            } else if (isDisabled)
-              dayCellClass += ' bg-none text-customGray-300 hover:bg-opacity-0'
+            }
+            else if (!isCurrentMonth && !isNextMonth) {
+              dayCellClass += ' text-customGray-300 md:hover:bg-opacity-0';
+            }
             else {
-              dayCellClass += ' text-primaryBlue-900';
+              dayCellClass += ' text-primaryBlue-900 md:hover:bg-customGray-100';
             }
 
             return <div className={dayCellClass}>{current.date()}</div>;
