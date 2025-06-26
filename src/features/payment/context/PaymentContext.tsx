@@ -13,6 +13,7 @@ import {
   getBaseAmountInCookie,
   loadBaseAmountInCookie
 } from "@/backend/actions"
+import { usePathname, useRouter } from "next/navigation"
 
 interface PaymentContextType {
   amountInCookie: AmountInterface
@@ -38,6 +39,9 @@ export const PaymentContextProvider = ({ children }: Props) => {
   const { vehicleInStorage } = useVehicleContext()
 
   const [amountInCookie, setAmountInCookie] = useState<AmountInterface>({ disscount: 0, subtotal: 0, total: 0 })
+
+  const router = useRouter();
+  const pathname = usePathname();
 
   // calling function that executes charging logic
   const sendBaseChargeByVehicleRequest = async (requestData: BaseChargeByVehicle) => {
@@ -71,8 +75,9 @@ export const PaymentContextProvider = ({ children }: Props) => {
       }
       calculateAmount()
     }
-  }, [vehicleInStorage, serviceInStorage, serviceType, amountInCookie])
+  }, [vehicleInStorage, serviceInStorage, serviceType])
 
+  // ! guards
   // if the vehicle change, delete cookie and recalculate
   useEffect(() => {
     if (!vehicleInStorage || !serviceType) return;
@@ -92,7 +97,7 @@ export const PaymentContextProvider = ({ children }: Props) => {
 
   }, [vehicleInStorage, serviceType])
 
-  // verify if exist amount cookie
+  // verify if exist amount cookie when the page is mounted
   useEffect(() => {
     const verifyCookie = async () => {
       const response = await getBaseAmountInCookie()
@@ -101,6 +106,14 @@ export const PaymentContextProvider = ({ children }: Props) => {
     }
     verifyCookie()
   }, [])
+
+  // if the cookie was deleted (maxAge = 1hour) because the user took
+  // too long to make the reservation, redirect to /services
+  useEffect(() => {
+    if (!amountInCookie.subtotal && pathname.startsWith('/booking')) {
+      router.push('/services')
+    }
+  }, [amountInCookie, amountInCookie.subtotal, pathname, router])
 
 
   return <PaymentContext.Provider value={{
