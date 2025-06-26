@@ -1,11 +1,12 @@
 'use client'
 
 import { useState } from "react"
-import { Select } from "@/components"
+import { ConfirmEventToast, Select } from "@/components"
 import { SelectOptions } from "@/types"
 
 import { BookingAdmin } from '@/backend/database';
 import { ServiceNamesMap } from '@/features/services';
+import { toast } from "sonner";
 
 type ServiceStates = "a ingresar" | "mantenimiento" | "finalizado"
 
@@ -27,32 +28,40 @@ export const ServiceState = ({ booking }: Props) => {
   const { typeAddress, additionalInfo, ...restUser } = user;
 
   const handleOnChange = async (newState: ServiceStates) => {
-    setState(newState)
-
-    const data = {
-      appointment,
-      user: restUser,
-      vehicle: restVehicle,
-      service: {
-        name: ServiceNamesMap[service.name].toLowerCase(),
-        state: newState,
-      },
-    }
-
-    console.log(data)
-
-    const path = process.env.NEXT_PUBLIC_SERVICE_STATE_AGENT_PATH
-    console.log(path)
-    if (!path) throw new Error("enviroment variable SERVICE_STATE_AGENT_PATH not found");
-
-    const responseWebHook = await fetch(path, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', },
-      body: JSON.stringify(data)
+    const confirm = await ConfirmEventToast({
+      message: 'Confirme que quiere actualizar el estado a ',
+      importantMessage: newState
     })
 
-    if (!responseWebHook.ok) throw new Error("unexpected error sending service state data to agent webhook");
-    console.log(responseWebHook.ok)
+    if (confirm) {
+      setState(newState)
+
+      const data = {
+        appointment,
+        user: restUser,
+        vehicle: restVehicle,
+        service: {
+          name: ServiceNamesMap[service.name].toLowerCase(),
+          state: newState + "?",
+        },
+      }
+
+      const path = process.env.NEXT_PUBLIC_SERVICE_STATE_AGENT_PATH
+      if (!path) throw new Error("enviroment variable SERVICE_STATE_AGENT_PATH not found");
+
+      const responseWebHook = await fetch(path, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', },
+        body: JSON.stringify(data)
+      })
+
+      if (!responseWebHook.ok) {
+        toast.error('Error actualizando el estado')
+        throw new Error("unexpected error sending service state data to agent webhook")
+      };
+
+      toast.success('Estado actualizado correctamente')
+    }
   }
 
   return (

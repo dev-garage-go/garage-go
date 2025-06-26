@@ -5,6 +5,7 @@ export * from './buttons/RadioButton';
 export * from './buttons/RefreshButton';
 export * from './buttons/SwitchButton';
 export * from './buttons/WhatsAppButton';
+export * from './shared/ConfirmEventToast';
 export * from './shared/Loader';
 export * from './shared/Skeleton';
 export * from './ui/Carousel';
