@@ -10,6 +10,7 @@ import { useVehicleContext } from "@/features/vehicle"
 import { ServiceNamesMap, useServiceContext } from "@/features/services"
 import { ConfirmationBookingEmailInterface, useEmailContext } from "@/features/emails"
 import { usePaymentContext } from "@/features/payment";
+import { useRouter } from "next/navigation";
 
 interface ServiceBookingType {
   bookingCreated: boolean | null
@@ -40,6 +41,8 @@ export const BookingContextProvider = ({ children }: Props) => {
   const { serviceInStorage } = useServiceContext()
   const { sendBookingConfirmationEmail } = useEmailContext()
   const { amountInCookie } = usePaymentContext()
+
+  const router = useRouter()
 
   // saves the successful or unsuccessful response of the backend when trying to create a booking
   const [bookingCreated, setBookingCreated] = useState<boolean | null>(null)
@@ -113,6 +116,8 @@ export const BookingContextProvider = ({ children }: Props) => {
 
     if (!emailResponse.ok) {
       setBookingCreated(false)
+      router.push('/')
+      setCreatingBookingAnimation(false)
       throw new Error(`email API response with an error: ${emailResponse.status}`)
     }
 
