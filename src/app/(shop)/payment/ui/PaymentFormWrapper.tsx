@@ -85,7 +85,7 @@ export const PaymentFormWrapper = () => {
 
 
   return (
-    <section className="mt-10 max-w-page padding-central-page pb-from-footer w-full">
+    <section className="max-w-page padding-central-page mt-from-topbanner pb-from-footer w-full">
       <FormProvider {...methods}>
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">

@@ -38,7 +38,7 @@ export const MileageMaintenanceContractingWrapper = () => {
   }
 
   return (
-    <section ref={ref} className={"mt-10 max-w-page padding-central-page pb-from-footer w-full"}>
+    <section ref={ref} className="max-w-page padding-central-page mt-from-topbanner pb-from-footer w-full">
       {!vehicleInStorage &&
         <ModalPortal isOpen={showModal}>
           <LazyVehicleDataModal /> {/* the component is only imported if the conditions are met */}
