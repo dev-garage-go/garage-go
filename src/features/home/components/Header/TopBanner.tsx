@@ -1,22 +1,24 @@
 "use client"
 
 import { useEffect, useState } from "react"
+import { usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
-import { usePathname, useRouter } from "next/navigation"
 
+import clsx from "clsx"
+import { IoCar } from "react-icons/io5"
+
+import { Skeleton } from "@/components"
 import { setBreadcrumbs } from "@/features/home"
 import { VehicleServicesFeaturesIconsMap } from "@/features/services"
 import { useVehicleContext } from "@/features/vehicle"
-import clsx from "clsx"
-import { Skeleton } from "@/components"
 
 type PossibleFeatures = 'pick-delivery' | 'super-check' | 'garantia';
 
 interface Props {
   title?: string
   description?: string
-  hasVehicleData?: boolean      // TODO: Change name to typeVehicle
+  hasVehicleData?: boolean
   withImage?: boolean
   imageSrc?: string
   imageAlt?: string
@@ -53,7 +55,7 @@ export const TopBanner = ({
 
   return (
     <>
-      <section className="w-full px-4 sm:px-6 xl:px-36 pb-6 sm:pb-8 xl:pb-10 pt-28 sm:pt-32 bg-primaryBlue-300">
+      <section className="w-full px-4 sm:px-6 xl:px-36 pt-32 pb-8 xl:pb-10 bg-primaryBlue-300">
         <div className="flex justify-center items-center w-full">
           <div className="grid grid-cols-4 w-full max-w-page">
             <div className={clsx("flex flex-wrap overflow-x-visible", {
@@ -66,7 +68,7 @@ export const TopBanner = ({
                   <Skeleton color="light-blue" className="w-52 lg:w-96 h-6" />
                 ) : (
                   <>
-                    <Link href="/" className="hover:font-medium duration-200">
+                    <Link href="/" className="hidden sm:block hover:font-medium duration-200">
                       Inicio
                       <span className="px-2">{">"}</span>
                     </Link>
@@ -89,8 +91,8 @@ export const TopBanner = ({
                   </>
                 )}
               </div>
-              <div>
 
+              <div className="w-full sm:w-auto">
                 {!hasVehicleData ? (
                   <>
                     <h1 className="title-h1 uppercase text-white">{title}</h1>
@@ -106,8 +108,8 @@ export const TopBanner = ({
                         )}
                       </span>
                     </h2>
-                    <div className="flex justify-between gap-6 mt-1 xl:mt-2 items-center w-full">
-                      <div className="flex w-full justify-start items-center gap-2.5 tracking-wide">
+                    <div className="flex flex-col sm:flex-row justify-start items-start sm:justify-between sm:items-center gap-4 sm:gap-6 mt-1 xl:mt-2 w-full">
+                      <div className="flex justify-start items-center w-full gap-2.5 tracking-wide">
                         <p className="text-base sm:text-lg xl:text-xl uppercase text-white">
                           {vehicleBrand ?? (
                             <Skeleton inline color="light-blue" className="w-24 h-6" />
@@ -120,9 +122,10 @@ export const TopBanner = ({
                         </p>
                       </div>
                       <button
-                        className="hidden md:block text-sm bg-primaryBlue-900 hover:brightness-125 hover:scale-110 duration-200 transition-all px-6 xl:px-10 py-1 rounded-md text-white text-nowrap"
+                        className="flex justify-center items-center gap-2 text-sm font-medium sm:font-normal bg-primaryBlue-900 hover:brightness-125 hover:scale-110 duration-200 transition-all px-6 xl:px-10 py-2 md:py-1 rounded-md text-white text-nowrap w-full sm:w-auto"
                         onClick={() => { deleteVehicle() }}
                       >
+                        <IoCar className="text-white w-5 h-5" />
                         Cambiar patente
                       </button>
                     </div>
