@@ -8,6 +8,7 @@ import { isAuthorized, expiresIsAuthorized } from "@/features/admin"
 interface AdminContextInterface {
   wrongPassword: boolean
   setWrongPassword: React.Dispatch<SetStateAction<boolean>>
+  isLoadingPassword: boolean
   authorized: boolean
   isValidPassword: (password: string) => Promise<void>
   isAdminSessionValid: () => boolean | void,
@@ -30,6 +31,7 @@ export const AdminContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined' // avoids server errors
   const router = useRouter();
 
+  const [isLoadingPassword, setIsLoadingPassword] = useState<boolean>(false);
   const [wrongPassword, setWrongPassword] = useState<boolean>(false)
   const [authorized, setAuthorized] = useState<boolean>(false);
 
@@ -65,13 +67,16 @@ export const AdminContextProvider = ({ children }: Props) => {
 
   // verifies if the password entered is correct
   const isValidPassword = async (password: string): Promise<void> => {
+    setIsLoadingPassword(true)
     const isValid = await validateAdminPassword(password)
 
     if (isValid.success) {
       saveAuthorizationInStorage()
       setAuthorized(true)
+      setIsLoadingPassword(false)
     } else {
       setWrongPassword(true)
+      setIsLoadingPassword(false)
     }
   }
 
@@ -89,6 +94,7 @@ export const AdminContextProvider = ({ children }: Props) => {
         wrongPassword,
         setWrongPassword,
         authorized,
+        isLoadingPassword,
         isValidPassword,
         isAdminSessionValid,
         clearAdminSession

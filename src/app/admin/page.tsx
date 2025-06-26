@@ -1,13 +1,13 @@
 "use client"
 
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@/components";
 import { useAdminContext, AdminForm } from "@/features/admin";
-import { useEffect } from "react";
 
 export default function AdminPage() {
   const { register, handleSubmit, watch } = useForm<AdminForm>()
-  const { wrongPassword, isValidPassword, setWrongPassword } = useAdminContext()
+  const { wrongPassword, isValidPassword, setWrongPassword, isLoadingPassword } = useAdminContext()
 
   const onSubmit = async (data: AdminForm) => {
     await isValidPassword(data.password)
@@ -58,9 +58,14 @@ export default function AdminPage() {
             />
             <button
               type="submit"
-              className="primary-button max-w-32"
+              className="primary-button max-w-40"
             >
-              Continuar
+              {isLoadingPassword ? (
+                <div className="flex justify-center items-center gap-2 w-full">
+                  <div className="loader" />
+                  Cargando...
+                </div>
+              ) : "Continuar"}
             </button>
           </div>
           {wrongPassword && (<ErrorMessage message="Contraseña incorrecta, acceso denegado" className="pt-2" />)}
