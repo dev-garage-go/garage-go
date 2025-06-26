@@ -6,13 +6,12 @@ import {
   vehicleKey,
   VehicleWithStringIDInterface
 } from "@/features/vehicle"
-import { VehicleDB } from "@/backend/database/types"
 
 interface VehicleContextType {
   showModal: boolean
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
   vehicleInStorage: VehicleWithStringIDInterface | null
-  setVehicleInStorage: (data: VehicleDB) => void
+  setVehicleInStorage: (data: VehicleWithStringIDInterface) => void
   deleteVehicle: () => void
   creatingVehicleAnimation: boolean
   searchingVehicleAnimation: boolean
@@ -46,7 +45,7 @@ export const VehicleContextProvider = ({ children }: Props) => {
   const [searchingVehicleAnimation, setSearchingVehicleAnimation] = useState<boolean>(false)
 
   // methods to impact localStorage
-  const setVehicleInStorage = (data: VehicleDB): void => {
+  const setVehicleInStorage = (data: VehicleWithStringIDInterface): void => {
     if (!isClient) return
 
     // converts object id in a simple string

@@ -1,12 +1,12 @@
 import { removeDotsFromNumber } from "@/utils"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
-import { VehicleDataInterface, vehicleTypes } from "@/features/vehicle"
+import { VehicleDataInterface, vehicleTypes, VehicleWithStringIDInterface } from "@/features/vehicle"
 
 import { getCollection } from "@/backend/database"
 import { VehicleDB } from '@/backend/database/types';
 import { findVehicleByLicensePlate } from "./findVehicleByLicensePlate";
 
-export const insertVehicle = async (vehicle: VehicleDataInterface): Promise<ServerActionResponse<VehicleDB>> => {
+export const insertVehicle = async (vehicle: VehicleDataInterface): Promise<ServerActionResponse<VehicleWithStringIDInterface>> => {
   try {
     const v: VehicleDB = {
       licensePlate: vehicle.licensePlate.toLowerCase().trim(),
@@ -25,11 +25,20 @@ export const insertVehicle = async (vehicle: VehicleDataInterface): Promise<Serv
     }
 
     // if exist a vehicle
-    if (existVehicle.success && existVehicle.data) return {
-      data: existVehicle.data,
-      success: true,
-      httpStatus: HttpStatus.CONFLICT,
-      error: "vehicle already exist"
+    if (existVehicle.success && existVehicle.data) {
+      const { _id: dbId, ...rest } = existVehicle.data;
+      // converts _id in string 
+      const clientVehicle: VehicleWithStringIDInterface = {
+        _id: dbId.toString(),
+        ...rest
+      }
+
+      return {
+        data: clientVehicle,
+        success: true,
+        httpStatus: HttpStatus.CONFLICT,
+        error: "vehicle already exist"
+      }
     }
 
     const coll = await getCollection("vehicles")
@@ -38,10 +47,23 @@ export const insertVehicle = async (vehicle: VehicleDataInterface): Promise<Serv
     if (!coll || !result) throw new Error(`unexpected error creating a new car`)
     const newVehicle = await coll.findOne({ _id: result.insertedId })
 
+    if (!newVehicle) return {
+      success: false,
+      httpStatus: HttpStatus.INTERNAL_SERVER_ERROR,
+      error: "error finding vehicle created"
+    }
+
+    // converts _id in string 
+    const { _id: dbId, ...rest } = newVehicle;
+
+    const clientVehicle: VehicleWithStringIDInterface = {
+      _id: dbId.toString(),
+      ...rest
+    }
     return {
       success: true,
       httpStatus: HttpStatus.OK,
-      data: newVehicle
+      data: clientVehicle
     }
 
   } catch (error) {

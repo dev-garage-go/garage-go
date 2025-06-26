@@ -1,11 +1,11 @@
 "use server"
 
 import { getCollection } from "@/backend/database"
-import { VehicleDB } from "@/backend/database/types"
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
+import { VehicleWithStringIDInterface } from "@/features/vehicle";
 import { ObjectId } from "mongodb";
 
-export const getVehicleByID = async (id: ObjectId): Promise<ServerActionResponse<VehicleDB | null>> => {
+export const getVehicleByID = async (id: ObjectId): Promise<ServerActionResponse<VehicleWithStringIDInterface | null>> => {
   try {
     if (!ObjectId.isValid(id)) {
       return {
@@ -26,9 +26,17 @@ export const getVehicleByID = async (id: ObjectId): Promise<ServerActionResponse
       }
     }
 
+    const { _id: dbId, ...rest } = vehicle;
+
+    // converts _id in string 
+    const clientVehicle: VehicleWithStringIDInterface = {
+      _id: dbId.toString(),
+      ...rest
+    }
+
     return {
       success: true,
-      data: vehicle,
+      data: clientVehicle,
       httpStatus: HttpStatus.OK
     }
 
