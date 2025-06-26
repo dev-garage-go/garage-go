@@ -21,26 +21,50 @@ interface Props {
 }
 
 export const BookingForm = ({ withBooking }: Props) => {
-  const { register, control, formState: { errors } } = useFormContext<BookingServiceDataInterface>()
+  const { register, control, formState: { errors }, watch } = useFormContext<BookingServiceDataInterface>()
 
   // Switch calendar y schedule pickers
-  const [calendarPicker, setCalendarPicker] = useState(true)
-  const [schedulePicker, setSchedulePicker] = useState(false)
+  const [showCalendarPicker, setShowCalendarPicker] = useState(true)
+  const [showSchedulePicker, setShowSchedulePicker] = useState(false)
 
   // Errors
   const scheduleError = errors.appointment?.time
   const calendarError = errors.appointment?.date
 
+  const date = watch('appointment.date')
+  const time = watch('appointment.time')
 
+  // automatically changes the date or time selector, if the user has already chosen one of the 2 fields
+  useEffect(() => {
+    // if the user selected a date, changes automatically to time picker
+    if (date && !time) {
+      setTimeout(() => {
+        console.log('cambiando a selector de hora')
+        setShowCalendarPicker(false)
+        setShowSchedulePicker(true)
+      }, 500)
+    }
+
+    // if the user selected a time, changes automatically to date picker (calendar)
+    if (!date && time) {
+      console.log('cambiando a selector de fecha')
+      setTimeout(() => {
+        setShowSchedulePicker(false)
+        setShowCalendarPicker(true)
+      }, 500)
+    }
+  }, [date, time, setShowSchedulePicker, setShowCalendarPicker])
+
+  // automatically changes the selector if an error exist
   useEffect(() => {
     // If there is an error in the calendar, the user is shown the calendar to select a date.
     if (calendarError) {
-      setCalendarPicker(true)
-      setSchedulePicker(false)
+      setShowCalendarPicker(true)
+      setShowSchedulePicker(false)
     } else if (scheduleError) {
       // If the user has already selected a date in the calendar but not a timetable, the timetable selector is displayed.
-      setSchedulePicker(true)
-      setCalendarPicker(false)
+      setShowSchedulePicker(true)
+      setShowCalendarPicker(false)
     }
   }, [scheduleError, calendarError])
 
@@ -130,19 +154,19 @@ export const BookingForm = ({ withBooking }: Props) => {
               <button
                 type="button"
                 onClick={() => {
-                  setCalendarPicker(true)
-                  setSchedulePicker(false)
+                  setShowCalendarPicker(true)
+                  setShowSchedulePicker(false)
                 }}
-                className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${calendarPicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
+                className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${showCalendarPicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
                 Calendario
               </button>
               <button
                 type="button"
                 onClick={() => {
-                  setSchedulePicker(true)
-                  setCalendarPicker(false)
+                  setShowSchedulePicker(true)
+                  setShowCalendarPicker(false)
                 }}
-                className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${schedulePicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
+                className={`w-full max-w-48 py-3 transition-colors duration-300 rounded-md ${showSchedulePicker ? 'bg-primaryBlue-900 text-white' : 'bg-white text-primaryBlue-900 border border-primaryBlue-900'}`}>
                 Horario
               </button>
             </div>
@@ -152,7 +176,7 @@ export const BookingForm = ({ withBooking }: Props) => {
               control={control}
               rules={{ required: 'Seleccione una fecha de agendamiento' }}
               render={({ field, fieldState }) => (
-                calendarPicker ? (
+                showCalendarPicker ? (
                   <CalendarPicker
                     selectedDate={field.value ? dayjs(field.value) : null}
                     error={fieldState.error?.message}
@@ -174,7 +198,7 @@ export const BookingForm = ({ withBooking }: Props) => {
               control={control}
               rules={{ required: 'Seleccione un horario de agendamiento' }}
               render={({ field, fieldState }) => (
-                schedulePicker ? (
+                showSchedulePicker ? (
                   <SchedulePicker
                     error={fieldState.error?.message}
                     onChange={field.onChange}
