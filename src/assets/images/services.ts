@@ -14,7 +14,7 @@ export const servicesImages = {
   pickDelivery: `${pathImages}/pick-delivery.svg`,
   seleccionaTuServicio: `${pathImages}/selecciona_servicio.jpg`,
   retiroDomicilio: `${pathImages}/retiro_domicilio.jpg`,
-  servicioDomicilio: `${pathImages}/servicio_domicilio.jpg`,
+  servicioSeguimiento: `${pathImages}/servicio_y_seguimiento.jpg`,
   entregaDomicilio: `${pathImages}/entrega_domicilio.jpg`,
   revisionTecnica: `${pathImages}/revision_tecnica.jpg`
 }

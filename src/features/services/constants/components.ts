@@ -104,7 +104,7 @@ export const StepsMileageMaintenanceData: StepsServicePageInterface[] = [
   {
     title: '3. Servicio y seguimiento',
     description: 'Realizamos tu servicio directo en nuestro HUB.',
-    imageUrl: obtainImage('services', 'servicioDomicilio'),
+    imageUrl: obtainImage('services', 'servicioSeguimiento'),
     imageAlt: 'taller de vehiculos'
   },
   {
