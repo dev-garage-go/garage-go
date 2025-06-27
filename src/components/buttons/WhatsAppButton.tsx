@@ -4,9 +4,10 @@ import { CompanyWhatsappLink, CompanyPhoneNumber } from '@/features/home'
 
 export const WhatsAppButton = () => {
   return (
-    <Link
+    <a
       href={CompanyWhatsappLink}
       target="_blank"
+      rel="noreferrer nofollow"
       className="btn-base-style bg-secundaryGreen-500 hover:bg-secundaryGreen-600 duration-300 shadow-sm"
     >
       <IoLogoWhatsapp
@@ -14,6 +15,6 @@ export const WhatsAppButton = () => {
         className='text-white'
       />
       {CompanyPhoneNumber}
-    </Link>
+    </a>
   )
 }

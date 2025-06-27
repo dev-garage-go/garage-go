@@ -26,7 +26,9 @@ export const TopMenu = () => {
       {/* Social networks */}
       <div className="hidden sm:flex justify-center items-center gap-4">
         <div className="flex items-center gap-4">
-          <Link
+          <a
+            target="_blank"
+            rel="noreferrer nofollow"
             href={CompanyInstagram}
             className="text-primaryBlue-500 hover:opacity-80 rounded-lg"
           >
@@ -39,8 +41,10 @@ export const TopMenu = () => {
                 className="object-contain w-auto h-auto"
               />
             </div>
-          </Link>
-          <Link
+          </a>
+          <a
+            target="_blank"
+            rel="noreferrer nofollow"
             href={CompanyFacebook}
             className="text-primaryBlue-500 hover:opacity-80 rounded-lg"
           >
@@ -53,7 +57,7 @@ export const TopMenu = () => {
                 className="object-contain w-auto h-auto"
               />
             </div>
-          </Link>
+          </a>
         </div>
 
         {/* Whatsapp and booking btns */}
