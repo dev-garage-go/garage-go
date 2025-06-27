@@ -14,7 +14,7 @@ export interface UserInterface {
   additionalInfo?: string
 }
 
-interface Appointment {
+export interface Appointment {
   date: Dayjs,
   time: Hour
 }

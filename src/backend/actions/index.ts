@@ -5,6 +5,7 @@ Example: export { functionExample } from './example-file'.
 
 // Admin
 export { validateAdminPassword } from './admin/validateAdminPassword';
+export { sendNewServiceState } from './admin/sendNewServiceState';
 
 // Booking
 export { createBooking } from './booking/createBooking';

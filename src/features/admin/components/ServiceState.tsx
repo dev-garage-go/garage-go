@@ -3,12 +3,14 @@
 import { useState } from "react"
 import { ConfirmEventToast, Select } from "@/components"
 import { SelectOptions } from "@/types"
-
-import { BookingAdmin } from '@/backend/database';
-import { ServiceNamesMap } from '@/features/services';
 import { toast } from "sonner";
 
-type ServiceStates = "a ingresar" | "mantenimiento" | "finalizado"
+import { BookingAdmin } from '@/backend/database';
+import { sendNewServiceState } from "@/backend/actions";
+
+import { ServiceNamesMap } from '@/features/services';
+import { DataServiceStateChanged, ServiceStates } from "@/features/admin";
+
 
 const ServiceStatesOptions: SelectOptions<ServiceStates>[] = [
   { id: 1, value: "a ingresar" },
@@ -34,32 +36,24 @@ export const ServiceState = ({ booking }: Props) => {
     })
 
     if (confirm) {
-      setState(newState)
-
-      const data = {
+      const data: DataServiceStateChanged = {
         appointment,
         user: restUser,
         vehicle: restVehicle,
         service: {
           name: ServiceNamesMap[service.name].toLowerCase(),
-          state: newState + "?",
+          state: newState,
         },
       }
 
-      const path = process.env.NEXT_PUBLIC_SERVICE_STATE_AGENT_PATH
-      if (!path) throw new Error("enviroment variable SERVICE_STATE_AGENT_PATH not found");
+      const response = await sendNewServiceState(data)
 
-      const responseWebHook = await fetch(path, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', },
-        body: JSON.stringify(data)
-      })
-
-      if (!responseWebHook.ok) {
+      if (!response.success) {
         toast.error('Error actualizando el estado')
-        throw new Error("unexpected error sending service state data to agent webhook")
+        return
       };
 
+      setState(newState)
       toast.success('Estado actualizado correctamente')
     }
   }

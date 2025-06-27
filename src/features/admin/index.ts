@@ -5,3 +5,4 @@ export * from './context/AdminContext';
 export * from './hooks/useAdminGuard';
 export * from './keys/storage';
 export * from './types/form';
+export * from './types/service-state';
