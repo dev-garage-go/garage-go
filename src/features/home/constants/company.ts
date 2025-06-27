@@ -10,10 +10,16 @@ export const CompanyCoords = {
   lng: -70.76571012655519
 }
 
-// Contact
-export const CompanyWhatsappLink = "https://wa.me/56997832409";
+// Contact 
+// Texts
 export const CompanyPhoneNumber = "+56 9 9783 2409";
 export const CompanyEmail = "info@garageservice.cl"
+
+// Links
+export const CompanyWhatsappLink = "https://wa.me/56997832409";
 export const CompanyEmailLink = `mailto:${CompanyEmail}?subject=Consulta&body=Hola, quería hacer una consulta sobre...`
-export const CompanyInstagram = "https://www.instagram.com/garagego.cl/"
-export const CompanyFacebook = "https://www.facebook.com/garagego.cl"
+export const CompanyInstagramLink = "https://www.instagram.com/garagego.cl/"
+export const CompanyFacebookLink = "https://www.facebook.com/garagego.cl"
+
+// Agent link
+export const MultiAgentWhatsAppLink = 'https://api.whatsapp.com/send/?phone=XXXXXXX&text&type=phone_number&app_absent=0'

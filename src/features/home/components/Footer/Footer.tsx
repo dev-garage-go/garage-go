@@ -6,9 +6,9 @@ import { IoArrowForward, IoCall, IoLogoFacebook, IoLogoInstagram, IoMailSharp } 
 import {
   CompanyEmail,
   CompanyEmailLink,
-  CompanyFacebook,
+  CompanyFacebookLink,
   CompanyHoursOperations,
-  CompanyInstagram,
+  CompanyInstagramLink,
   CompanyWhatsappLink,
   CompanyPhoneNumber,
   CompanyAddress,
@@ -115,7 +115,7 @@ export const Footer = () => {
             <div className="flex flex-col gap-3 sm:gap-4 items-start justify-start mt-6 sm:mt-10">
               <Link
                 rel="noopener noreferrer"
-                href={CompanyInstagram}
+                href={CompanyInstagramLink}
                 target="_blank"
                 className="flex items-center justify-center gap-2 hover:underline cursor-pointer">
                 <IoLogoInstagram
@@ -128,7 +128,7 @@ export const Footer = () => {
               </Link>
               <Link
                 rel="noopener noreferrer"
-                href={CompanyFacebook}
+                href={CompanyFacebookLink}
                 target="_blank"
                 className="flex items-center justify-center gap-2 hover:underline cursor-pointer">
                 <IoLogoFacebook

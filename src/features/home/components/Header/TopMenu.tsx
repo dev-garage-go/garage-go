@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Image from 'next/image';
 
-import { CompanyFacebook, CompanyInstagram, } from '@/features/home';
+import { CompanyFacebookLink, CompanyInstagramLink, } from '@/features/home';
 
 import { obtainLogo } from '@/assets/helpers';
 import { WhatsAppButton, BookingHeaderButton } from '@/components';
@@ -29,7 +29,7 @@ export const TopMenu = () => {
           <a
             target="_blank"
             rel="noreferrer nofollow"
-            href={CompanyInstagram}
+            href={CompanyInstagramLink}
             className="text-primaryBlue-500 hover:opacity-80 rounded-lg"
           >
             <div className='relative w-4 h-4 md:w-5 md:h-5'>
@@ -45,7 +45,7 @@ export const TopMenu = () => {
           <a
             target="_blank"
             rel="noreferrer nofollow"
-            href={CompanyFacebook}
+            href={CompanyFacebookLink}
             className="text-primaryBlue-500 hover:opacity-80 rounded-lg"
           >
             <div className='relative w-4 h-4 md:w-5 md:h-5'>
