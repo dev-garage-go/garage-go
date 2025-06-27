@@ -119,7 +119,7 @@ export const VehicleDataModal = () => {
 
             <div className="w-full">
               {errors.licensePlate && (
-                <ErrorMessage message={"Escriba la patente de su vehiculo"} className="mb-1" />
+                <ErrorMessage message={errors.licensePlate.message || "La patente debe tener 6 caracteres"} className="mb-1" />
               )}
 
               <div className="flex flex-col sm:flex-row justify-center items-center gap-4 w-full">
@@ -128,7 +128,20 @@ export const VehicleDataModal = () => {
                   maxLength={6}
                   type="text"
                   className="input-form uppercase"
-                  {...register("licensePlate", { required: true, minLength: 6, maxLength: 6 })}
+                  {...register("licensePlate", {
+                    required: "Requerido",
+                    minLength: 6,
+                    maxLength: 6,
+                    validate: (value) => {
+                      if (/\s/.test(value)) return "La patente no debe tener espacios"
+                      return true
+                    },
+                    onChange: (e) => {
+                      // Elimina espacios en tiempo real
+                      const valueWithoutSpaces = e.target.value.replace(/\s/g, "")
+                      setValue("licensePlate", valueWithoutSpaces.toUpperCase())
+                    }
+                  })}
                 />
                 <button
                   disabled={searchingVehicleAnimation}
@@ -173,13 +186,22 @@ export const VehicleDataModal = () => {
                       type="text"
                       className="input-form uppercase"
                       {...register("licensePlate", {
-                        required: true,
+                        required: "La patente es obligatoria",
                         minLength: { value: 6, message: "Debe tener 6 digitos" },
-                        maxLength: { value: 6, message: "Debe tener 6 digitos" }
+                        maxLength: { value: 6, message: "Debe tener 6 digitos" },
+                        validate: (value) => {
+                          if (/\s/.test(value)) return "La patente no debe tener espacios"
+                          return true
+                        },
+                        onChange: (e) => {
+                          // Elimina espacios en tiempo real
+                          const valueWithoutSpaces = e.target.value.replace(/\s/g, "")
+                          setValue("licensePlate", valueWithoutSpaces.toUpperCase())
+                        }
                       })}
                     />
                     {errors.licensePlate && (
-                      <ErrorMessage message={errors.licensePlate.message || 'Requerido'} />
+                      <ErrorMessage message={errors.licensePlate.message || 'La patente debe tener 6 caracteres'} />
                     )}
                   </div>
                 </div>
