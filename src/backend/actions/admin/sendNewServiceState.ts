@@ -9,13 +9,13 @@ export const sendNewServiceState = async (data: DataServiceStateChanged): Promis
     const token = process.env.SERVICE_STATE_AGENT_TOKEN
 
     if (!path) throw new Error("enviroment variable SERVICE_STATE_AGENT_PATH not found");
-    // if (!token) throw new Error("enviroment variable SERVICE_STATE_AGENT_TOKEN not found");
+    if (!token) throw new Error("enviroment variable SERVICE_STATE_AGENT_TOKEN not found");
 
     const response = await fetch(path, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify(data)
     })
