@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 import { obtainLogo } from "@/assets/helpers";
 import { CompanyDescription, CompanyName } from "@/features/home";
 import { montserrat } from "@/config/fonts";
@@ -9,6 +11,7 @@ import { ContextsProvider } from "@/providers";
 import "./globals.css";
 
 const baseURL = process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"
+const googleAnalythicsID = process.env.GOOGLE_ANALYTHICS_KEY
 
 const titleMetadata = {
   template: CompanyName + ' - %s',
@@ -34,6 +37,9 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={montserrat.className}>
+        {process.env.NODE_ENV === 'production' && googleAnalythicsID && (
+          <GoogleAnalytics gaId={googleAnalythicsID} />
+        )}
         <ContextsProvider>
           {children}
         </ContextsProvider>
