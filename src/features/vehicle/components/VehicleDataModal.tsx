@@ -11,6 +11,7 @@ import { allowOnlyNumbers, formatNumberWithDots } from "@/utils"
 import { addNewVehicle, getVehicleByLicensePlate } from "@/backend/actions"
 
 export const VehicleDataModal = () => {
+  const currentYear = new Date().getFullYear()
   const { register, formState: { errors }, watch, setValue, handleSubmit } = useForm<VehicleDataInterface>()
   const {
     setVehicleInStorage,
@@ -263,12 +264,14 @@ export const VehicleDataModal = () => {
                       inputMode="numeric"
                       minLength={4}
                       maxLength={4}
+                      max={2025}
                       type="text"
                       className="input-form uppercase appearance-none"
                       {...register("year", {
                         required: true,
                         minLength: { value: 4, message: "Debe tener 4 cifras" },
                         maxLength: { value: 4, message: "Debe tener 4 cifras" },
+                        max: { value: currentYear, message: `El año ${currentYear} es el maximo valor posible` },
                         onChange: handleYear
                       })}
                     />
