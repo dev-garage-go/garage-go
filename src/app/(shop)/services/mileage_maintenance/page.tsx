@@ -1,3 +1,4 @@
+import { Metadata } from 'next';
 import { obtainImage } from '@/assets/helpers';
 
 import { FAQsDisclosure, TopBanner } from '@/features/home';
@@ -9,6 +10,15 @@ import {
   StepsMileageMaintenanceData,
   MileageMaintenanceFAQsData
 } from '@/features/services';
+
+const metadataTitle = 'Mantención por kilometraje'
+
+export const metadata: Metadata = {
+  title: metadataTitle,
+  openGraph: {
+    title: metadataTitle,
+  }
+};
 
 export default function MileageMaintenancePage() {
   return (

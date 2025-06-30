@@ -1,8 +1,18 @@
+import { Metadata } from "next";
 import Image from "next/image";
 
 import { obtainImage } from "@/assets/helpers";
 import { TopBanner, BannerCard } from "@/features/home";
 import { ServicesGrid } from "@/features/services";
+
+const metadataTitle = 'Servicios'
+
+export const metadata: Metadata = {
+  title: metadataTitle,
+  openGraph: {
+    title: metadataTitle,
+  }
+};
 
 export default function ServicesPage() {
   return (

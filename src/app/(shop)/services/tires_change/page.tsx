@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Metadata } from 'next';
 import { IoInformationCircleOutline } from 'react-icons/io5';
 
 import { obtainImage } from '@/assets/helpers';
@@ -12,6 +13,15 @@ import {
   StepsTiresChangeData,
   TiresChangeFAQsData
 } from '@/features/services';
+
+const metadataTitle = 'Cambio de neumáticos'
+
+export const metadata: Metadata = {
+  title: metadataTitle,
+  openGraph: {
+    title: metadataTitle,
+  }
+};
 
 export default function TiresChangePage() {
   return (
