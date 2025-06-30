@@ -5,7 +5,9 @@ import { redirect } from "next/navigation";
 
 export default function PaymentPage() {
   // guard
-  redirect("/")
+  if (process.env.NODE_ENV === 'production') {
+    redirect("/")
+  }
 
   return (
     <div>
