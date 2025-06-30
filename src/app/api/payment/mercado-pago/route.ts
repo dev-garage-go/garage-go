@@ -1,7 +1,7 @@
-import { MercadoPagoConfig, Preference } from 'mercadopago';
-import { v4 as uuidv4 } from 'uuid';
-import { PreferenceMPValidator } from '@/features/payment';
 import { NextResponse } from 'next/server';
+import { v4 as uuidv4 } from 'uuid';
+import { MercadoPagoConfig, Preference } from 'mercadopago';
+import { PreferenceMPValidator } from '@/features/payment';
 
 
 export async function POST(request: Request) {
@@ -19,25 +19,31 @@ export async function POST(request: Request) {
     })
 
     const domain = process.env.NEXT_PUBLIC_BASE_URL
+    const tempDomain = 'https://3af5-181-118-99-121.ngrok-free.app' // ngrok url
+
     const orderId = uuidv4()
     const uuid = uuidv4()
-    const body = await request.json()
     const preference = new Preference(client)
 
     const newPreference = await preference.create({
       body: {
-        auto_return: 'all',                 // Retorna sin importar si el pago fue exitoso o no
-        statement_descriptor: 'Garage Go',  // Descripción en MP
-        external_reference: orderId,        // ID de la orden creada en la base de datos de la app 
-        notification_url: `${domain}/api/payment/mercado_pago/webhook`,   // URL del Webhook para que MP mande la info de la transacción
+        auto_return: 'approved',                                              // Retorna sin importar si el pago fue exitoso o no
+        statement_descriptor: 'Garage Go',                                    // Descripción en MP
+        external_reference: orderId,                                          // ID de la orden creada en la base de datos de la app 
+        notification_url: `${tempDomain}/api/payment/mercado-pago/webhook`,   // URL del Webhook para que MP mande la info de la transacción
+        back_urls: {
+          success: `${tempDomain}/services`,
+          failure: `${tempDomain}/services`,
+          pending: `${tempDomain}/services`
+        },
         items: [{
           id: uuid,
           title: "Servicios",
           category_id: "Servicios",
-          currency_id: 'CL',
+          currency_id: 'ARS',
           description: "Mantención por kilometraje | Garage Go",
           quantity: 1,
-          unit_price: 189900
+          unit_price: 10500
         }],
         payer: {
           name: 'Lisandro',
@@ -65,10 +71,10 @@ export async function POST(request: Request) {
 
     const check = PreferenceMPValidator.safeParse(newPreference)
     if (check.success) {
-      console.log('🟢 Success MP: ', newPreference)
+      // console.log('🟢 Success MP: ', newPreference)
       return NextResponse.json({
         status: newPreference.api_response.status,
-        redirectURL: newPreference.init_point
+        redirectURL: newPreference.sandbox_init_point
       })
     } else {
       console.log('🔴 Failure MP')
