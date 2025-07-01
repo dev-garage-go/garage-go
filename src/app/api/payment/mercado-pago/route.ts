@@ -43,7 +43,7 @@ export async function POST(request: Request) {
           currency_id: 'ARS',
           description: "Mantención por kilometraje | Garage Go",
           quantity: 1,
-          unit_price: 10500
+          unit_price: 100
         }],
         payer: {
           name: 'Lisandro',
@@ -74,7 +74,7 @@ export async function POST(request: Request) {
       // console.log('🟢 Success MP: ', newPreference)
       return NextResponse.json({
         status: newPreference.api_response.status,
-        redirectURL: newPreference.sandbox_init_point
+        redirectURL: newPreference.init_point
       })
     } else {
       console.log('🔴 Failure MP')
