@@ -1,3 +1,4 @@
+// Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 import { HttpStatus } from '@/backend/types';
@@ -76,11 +77,10 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       const err = await response.json()
-      return NextResponse.json({ message: 'Mercado Pago error', err }, { status: response.status })
+      return NextResponse.json({ message: 'mercado pago error', err }, { status: response.status })
     }
 
     const body = await response.json()
-    console.log('BODY:', body)
     const check = PreferenceMPValidator.safeParse(body)
 
     if (!check.success) {
@@ -90,10 +90,10 @@ export async function POST(request: Request) {
 
     const data = check.data
 
-    return NextResponse.json({
-      status: HttpStatus.OK,
-      redirectURL: data.init_point
-    })
+    return NextResponse.json(
+      { redirectURL: data.init_point },
+      { status: HttpStatus.OK, }
+    )
   }
 
   catch (error) {

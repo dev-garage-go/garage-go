@@ -1,6 +1,7 @@
 // Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
-import { MerchantOrderMPValidator, SimplifiedPaymentMPValidator } from "@/features/payment"
 import { NextRequest, NextResponse } from "next/server"
+import { HttpStatus } from "@/backend/types"
+import { MerchantOrderMPValidator, SimplifiedPaymentMPValidator } from "@/features/payment"
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
   throw new Error('the enviroment variable MERCADO_PAGO_ACCESS_TOKEN not found')
@@ -8,48 +9,72 @@ if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
 
 const token = process.env.MERCADO_PAGO_ACCESS_TOKEN
 
-const handlePaymentAPI = (paymentID: string) => {
-  fetch(`https://api.mercadopago.com/v1/payments/${paymentID}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      const check = SimplifiedPaymentMPValidator.safeParse(data)
-      if (!check.success) {
-        console.error("invalid MP payment payload", check.error);
-        return NextResponse.json({ message: 'invalid MP payment payload', error: check.error }, { status: 500 })
-      }
+// helper to manage a payment received
+const handlePayment = async (paymentID: string) => {
+  try {
+    const myHeaders = new Headers()
+    myHeaders.append('Authorization', `Bearer ${token}`)
 
-      return NextResponse.json({}, { status: 200 })
+    const response = await fetch(`https://api.mercadopago.com/v1/payments/${paymentID}`, {
+      headers: myHeaders,
     })
-    .catch(error => {
-      console.error(error)
-      return NextResponse.json({ error: error }, { status: 500 })
-    })
+
+    if (!response.ok) {
+      const err = await response.json()
+      return NextResponse.json({ message: 'mercado pago error', err }, { status: response.status })
+    }
+
+    const body = await response.json()
+    const check = SimplifiedPaymentMPValidator.safeParse(body)
+
+    if (!check.success) {
+      console.error("invalid MP payment payload", check.error);
+      return NextResponse.json({ message: 'invalid MP payment payload', error: check.error }, { status: HttpStatus.INTERNAL_SERVER_ERROR })
+    }
+
+    const payment = check.data
+    console.log('Payment: ', payment)
+
+    return NextResponse.json({}, { status: HttpStatus.OK })
+
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: error }, { status: HttpStatus.INTERNAL_SERVER_ERROR })
+  }
 }
 
-const handleOrderAPI = (orderID: string) => {
-  fetch(`https://api.mercadopago.com/merchant_orders/${orderID}`, {
-    headers: {
-      Authorization: `Bearer ${token}`
-    }
-  })
-    .then(res => res.json())
-    .then(data => {
-      const check = MerchantOrderMPValidator.safeParse(data)
-      if (!check.success) {
-        console.error("invalid MP merchant_order payload", check.error);
-        return NextResponse.json({ message: 'invalid MP merchant_order payload', error: check.error }, { status: 500 })
-      }
+// helper to manage an order received
+const handleOrder = async (orderID: string) => {
+  try {
+    const myHeaders = new Headers()
+    myHeaders.append('Authorization', `Bearer ${token}`)
 
-      return NextResponse.json({}, { status: 200 })
+    const response = await fetch(`https://api.mercadopago.com/merchant_orders/${orderID}`, {
+      headers: myHeaders,
     })
-    .catch(error => {
-      console.error(error)
-      return NextResponse.json({ error: error }, { status: 500 })
-    })
+
+    if (!response.ok) {
+      const err = await response.json()
+      return NextResponse.json({ message: 'mercado pago error', err }, { status: response.status })
+    }
+
+    const body = await response.json()
+    const check = MerchantOrderMPValidator.safeParse(body)
+
+    if (!check.success) {
+      console.error("invalid MP merchant_order payload", check.error);
+      return NextResponse.json({ message: 'invalid MP merchant_order payload', error: check.error }, { status: HttpStatus.INTERNAL_SERVER_ERROR })
+    }
+
+    const order = check.data
+    console.log('Order: ', order)
+
+    return NextResponse.json({}, { status: HttpStatus.OK })
+
+  } catch (error) {
+    console.error(error)
+    return NextResponse.json({ error: error }, { status: HttpStatus.INTERNAL_SERVER_ERROR })
+  }
 }
 
 // ? Important: 
@@ -69,16 +94,18 @@ export async function POST(request: NextRequest) {
     const topic = searchParams.get('topic')
 
     if (!id || !topic) {
-      return NextResponse.json({ error: 'parameters id o topic not found' }, { status: 400 })
+      return NextResponse.json({ error: 'parameters id or topic not found' }, { status: 400 })
     }
 
     if (id && topic === 'payment') {
-      handlePaymentAPI(id)
-    } else if (id && topic === 'merchant_order') {
-      handleOrderAPI(id)
-    } else {
-      return NextResponse.json({ error: 'Topic no reconocido' }, { status: 400 })
+      return await handlePayment(id)
     }
+
+    if (id && topic === 'merchant_order') {
+      return await handleOrder(id)
+    }
+
+    return NextResponse.json({ error: 'unknown topic sent by mp' }, { status: 400 })
 
   } catch (error) {
     console.error(error)
