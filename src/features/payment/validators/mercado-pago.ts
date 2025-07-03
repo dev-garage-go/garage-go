@@ -53,7 +53,7 @@ export const PreferenceMPValidator = z.object({
   api_response: z.object({
     status: z.number(),
     headers: z.record(z.string(), z.array(z.unknown()))
-  }).optional()
+  })
 })
 
 
