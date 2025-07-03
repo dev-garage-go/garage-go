@@ -1,4 +1,5 @@
 // Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
+import { MerchantOrderMPValidator, SimplifiedPaymentMPValidator } from "@/features/payment"
 import { NextRequest, NextResponse } from "next/server"
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
@@ -15,7 +16,12 @@ const handlePaymentAPI = (paymentID: string) => {
   })
     .then(res => res.json())
     .then(data => {
-      console.log('🟢🟢🟢 Respuesta fetch payment:', data)
+      const check = SimplifiedPaymentMPValidator.safeParse(data)
+      if (!check.success) {
+        console.error("invalid MP payment payload", check.error);
+        return NextResponse.json({ message: 'invalid MP payment payload', error: check.error }, { status: 500 })
+      }
+
       return NextResponse.json({}, { status: 200 })
     })
     .catch(error => {
@@ -25,8 +31,6 @@ const handlePaymentAPI = (paymentID: string) => {
 }
 
 const handleOrderAPI = (orderID: string) => {
-  const token = process.env.MERCADO_PAGO_ACCESS_TOKEN
-
   fetch(`https://api.mercadopago.com/merchant_orders/${orderID}`, {
     headers: {
       Authorization: `Bearer ${token}`
@@ -34,9 +38,13 @@ const handleOrderAPI = (orderID: string) => {
   })
     .then(res => res.json())
     .then(data => {
-      console.log('🟢🟢🟢 Respuesta fetch merchant_order:', data)
-      return NextResponse.json({}, { status: 200 })
+      const check = MerchantOrderMPValidator.safeParse(data)
+      if (!check.success) {
+        console.error("invalid MP merchant_order payload", check.error);
+        return NextResponse.json({ message: 'invalid MP merchant_order payload', error: check.error }, { status: 500 })
+      }
 
+      return NextResponse.json({}, { status: 200 })
     })
     .catch(error => {
       console.error(error)
