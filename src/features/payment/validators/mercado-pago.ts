@@ -50,10 +50,9 @@ export const PreferenceMPValidator = z.object({
   notification_url: z.string().optional(),
   sandbox_init_point: z.string(),
   statement_descriptor: z.string().optional(),
-  api_response: z.object({
-    status: z.number(),
-    headers: z.record(z.string(), z.array(z.unknown()))
-  })
+  total_amount: z.number().nullable(),
+  last_updated: z.number().nullable(),
+  financing_group: z.string().nullable()
 })
 
 
