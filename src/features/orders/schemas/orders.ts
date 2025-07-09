@@ -1,6 +1,7 @@
 import { z } from "zod"
 
-export const Order = z.object({
+// esquema base
+export const OrderDB = z.object({
   _id: z.string().uuid().optional(),  // mongo genera este _id
   email: z.string().email(),          // usuario no autenticado
   booking_id: z.string().uuid(),
@@ -20,6 +21,19 @@ export const Order = z.object({
   updated_at: z.date().default(new Date()),   // cuando se actualizo por ultima vez
   created_at: z.date().default(new Date()),   // cuando se creo la orden
   expires_at: z.date().default(new Date()),   // TTL
+}).strict()
+
+export type OrderDBType = z.infer<typeof OrderDB>
+
+// client request - the client should not send these fields
+export const ClientOrderSchema = OrderDB.omit({
+  _id: true,
+  net_received_amount: true,
+  paid_at: true,
+  fee: true,
+  created_at: true,
+  updated_at: true,
+  expires_at: true
 })
 
-export type OrderType = z.infer<typeof Order>
+export type ClientOrderType = z.infer<typeof ClientOrderSchema>
