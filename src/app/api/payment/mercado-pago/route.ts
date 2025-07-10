@@ -1,8 +1,9 @@
 // Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
 import { NextResponse } from 'next/server';
-import { v4 as uuidv4 } from 'uuid';
 import { HttpStatus } from '@/backend/types';
 import { PreferenceMPValidator } from '@/features/payment';
+import { insertOrder } from '@/backend/database/queries';
+import { InitialOrderType } from '@/features/orders';
 
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
@@ -19,13 +20,27 @@ const domain = isProd ? process.env.NEXT_PUBLIC_BASE_URL : 'https://9aea-181-118
 
 export async function POST(request: Request) {
   try {
-    const orderId = uuidv4()  // example of order ID - from app db
-    const serviceId = uuidv4() // example of service ID - from app db
+    const payload = await request.json()
+
+    const initialOrder: InitialOrderType = {
+      provider: 'mercado_pago',
+      email: 'arraga.alex@gmail.com',     // payload.email
+      booking_id: 'uuid-booking',         // payload.booking.id
+      pay_status: 'pending',
+      total_price: 100,                   // payload.total_price
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      expires_at: new Date(Date.now() + 1000 * 60 * 60).toISOString() // TTL = 1h
+    }
+
+    const result = await insertOrder(initialOrder)
+    if (!result.success || !result.data) throw new Error(result.error)
+    const order = result.data
 
     const preference = {
       auto_return: 'approved',                                              // Retorna sin importar si el pago fue exitoso o no
       statement_descriptor: 'Garage Go',                                    // Descripción en MP
-      external_reference: orderId,                                          // ID de la orden creada en la base de datos de la app 
+      external_reference: order._id,                                       // ID de la orden creada en la base de datos de la app 
       notification_url: `${domain}/api/payment/mercado-pago/webhook`,       // URL del Webhook para que MP mande la info de la transacción
       back_urls: {
         success: `${domain}/services`,
@@ -33,8 +48,8 @@ export async function POST(request: Request) {
         pending: `${domain}/services`
       },
       items: [{
-        id: serviceId,
-        title: "Servicios",
+        id: 'mileage',                                                      // type of service or ID of service (payload.serviceType)
+        title: "Servicios GarageGo",
         category_id: "Servicios",
         currency_id: 'ARS',
         description: "Mantención por kilometraje | Garage Go",

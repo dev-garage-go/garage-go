@@ -1,3 +1,4 @@
+import { zISOString } from "@/utils/zod-helpers"
 import { z } from "zod"
 
 // esquema base
@@ -13,19 +14,36 @@ export const OrderDB = z.object({
   pay_status_detail: z.string().optional(),
   pay_method: z.string().optional(),          // tarjeta, pix, oneclick, etc.
   pay_resource: z.string().optional(),        // wallet, credit_card, bank_transfer
-  total_price: z.number().default(0),
+  total_price: z.number().optional(),
   net_received_amount: z.number().optional(),
-  installments: z.number().default(0),
-  fee: z.number().default(0),
-  paid_at: z.date().optional(),               // cuando se completo el pago
-  updated_at: z.date().default(new Date()),   // cuando se actualizo por ultima vez
-  created_at: z.date().default(new Date()),   // cuando se creo la orden
-  expires_at: z.date().default(new Date()),   // TTL
+  installments: z.number().optional(),
+  fee: z.number().optional(),
+  paid_at: zISOString().optional(),               // cuando se completo el pago
+  updated_at: zISOString(),   // cuando se actualizo por ultima vez
+  created_at: zISOString(),   // cuando se creo la orden
+  expires_at: zISOString().nullable(),  // TTL
 }).strict()
 
 export type OrderDBType = z.infer<typeof OrderDB>
 
-// client request - the client should not send these fields
+// initial order 
+export const InitialOrderSchema = OrderDB.omit({
+  _id: true,
+  net_received_amount: true,
+  paid_at: true,
+  fee: true,
+  external_reference: true,
+  payment_id: true,
+  pay_method: true,
+  pay_resource: true,
+  pay_status_detail: true,
+  merchant_order_id: true,
+  installments: true,
+})
+
+export type InitialOrderType = z.infer<typeof InitialOrderSchema>
+
+// client request - the client should not send these fields 
 export const ClientOrderSchema = OrderDB.omit({
   _id: true,
   net_received_amount: true,

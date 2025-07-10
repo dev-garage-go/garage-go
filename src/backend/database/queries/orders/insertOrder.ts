@@ -1,13 +1,13 @@
 import { getCollection } from '@/backend/database';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
-import { ClientOrderSchema, ClientOrderType, OrderDB, OrderDBType } from '@/features/orders';
+import { InitialOrderType, OrderDB, OrderDBType } from '@/features/orders';
 
-export async function insertOrder(order: ClientOrderType): Promise<ServerActionResponse<OrderDBType>> {
+export async function insertOrder(order: InitialOrderType): Promise<ServerActionResponse<OrderDBType>> {
   try {
-    const clientOrder = ClientOrderSchema.safeParse(order)
-    if (!clientOrder.success) throw clientOrder.error;
+    const validOrder = OrderDB.safeParse(order)
+    if (!validOrder.success) throw validOrder.error;
 
-    const doc: OrderDBType = OrderDB.parse(clientOrder)
+    const doc = validOrder.data
 
     const coll = await getCollection('orders')
     const result = await coll.insertOne(doc)
