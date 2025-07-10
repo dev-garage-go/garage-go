@@ -23,11 +23,31 @@ export const useOrderContext = () => {
 export const OrderContextProvider = ({ children }: Props) => {
   // calls action to craete the initial order
   const sendInitialOrderRequest = async ({ provider, bookingId }: PayloadInitialOrder) => {
-    const initialOrder = await createInitialOrder({ provider, bookingId })
+    try {
+      const initialOrder = await createInitialOrder({ provider, bookingId })
+      if (!initialOrder.success || !initialOrder.data) throw new Error(initialOrder.error)
 
-    
-    // delete cookies when initial order was created
-    await deleteBaseAmountInCookie()
+      const myHeaders = new Headers()
+      myHeaders.append("Content-Type", "application/json")
+
+      let apiRoute: string = ""
+
+      if (provider === "mercado-pago") apiRoute = "/api/payment/mercado-pago"
+      else if (provider === "getnet") apiRoute = "/api/payment/getnet"
+      else if (provider === "webpay") apiRoute = "/api/payment/webpay"
+
+      const response = await fetch(apiRoute, {
+        headers: myHeaders,
+        body: JSON.stringify(initialOrder)
+      })
+
+      if (!response.ok) throw new Error(`error response with status ${response.status} in api route: ${apiRoute}`)
+
+      // delete cookies when initial order was created
+      await deleteBaseAmountInCookie()
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   return <OrderContext.Provider value={{

@@ -31,7 +31,6 @@ export type OrderDBType = z.infer<typeof OrderDB>
 
 // initial order 
 export const InitialOrderSchema = OrderDB.omit({
-  _id: true,
   net_received_amount: true,
   paid_at: true,
   fee: true,

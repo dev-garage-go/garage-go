@@ -2,8 +2,8 @@
 import { NextResponse } from 'next/server';
 import { HttpStatus } from '@/backend/types';
 import { PreferenceMPValidator } from '@/features/payment';
-import { insertOrder } from '@/backend/database/queries';
-import { InitialOrderType } from '@/features/orders';
+import { InitialOrderSchema, InitialOrderType } from '@/features/orders';
+import { getBookingByID } from '@/backend/actions';
 
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
@@ -20,22 +20,12 @@ const domain = isProd ? process.env.NEXT_PUBLIC_BASE_URL : 'https://9aea-181-118
 
 export async function POST(request: Request) {
   try {
-    const payload = await request.json()
+    const body: unknown = await request.json()
+    const order: InitialOrderType = InitialOrderSchema.parse(body)
 
-    const initialOrder: InitialOrderType = {
-      provider: 'mercado_pago',
-      email: 'arraga.alex@gmail.com',     // payload.email
-      booking_id: 'uuid-booking',         // payload.booking.id
-      pay_status: 'pending',
-      total_price: 100,                   // payload.total_price
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-      expires_at: new Date(Date.now() + 1000 * 60 * 60).toISOString() // TTL = 1h
-    }
-
-    const result = await insertOrder(initialOrder)
-    if (!result.success || !result.data) throw new Error(result.error)
-    const order = result.data
+    const responseBooking = await getBookingByID(order.booking_id)
+    if (!responseBooking.success || !responseBooking.data) throw new Error(responseBooking.error)
+    const booking = responseBooking.data
 
     const preference = {
       auto_return: 'approved',                                              // Retorna sin importar si el pago fue exitoso o no
@@ -48,21 +38,21 @@ export async function POST(request: Request) {
         pending: `${domain}/services`
       },
       items: [{
-        id: 'mileage',                                                      // type of service or ID of service (payload.serviceType)
+        id: booking.service.type,                                                      // type of service or ID of service (payload.serviceType)
         title: "Servicios GarageGo",
         category_id: "Servicios",
         currency_id: 'ARS',
-        description: "Mantención por kilometraje | Garage Go",
+        description: `${booking.service.name} | Garage Go`,
         quantity: 1,
-        unit_price: 100
+        unit_price: order.total_price
       }],
       payer: {
-        name: 'Lisandro',
-        surname: 'Martinez',
-        email: 'lisandromartinez@gmail.com',
+        name: booking.user.name,
+        surname: booking.user.lastName,
+        email: booking.user.email,
         phone: {
           area_code: '+56',
-          number: '123456789',
+          number: booking.user.phone,
         }
       },
       payment_methods: {
@@ -95,8 +85,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ message: 'mercado pago error', err }, { status: response.status })
     }
 
-    const body = await response.json()
-    const check = PreferenceMPValidator.safeParse(body)
+    const mpBody = await response.json()
+    const check = PreferenceMPValidator.safeParse(mpBody)
 
     if (!check.success) {
       console.error('zod error validating MP preference', check.error)
