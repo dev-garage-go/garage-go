@@ -13,6 +13,8 @@ import {
   hasValidPaymentGateway,
   PaymentFormSchema
 } from '@/features/payment'
+import { useOrderContext } from '@/features/orders/context/OrderContext'
+import { useBookingContext } from '@/features/bookings'
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormSchema>({
@@ -26,8 +28,9 @@ export const PaymentFormWrapper = () => {
   })
   const { setValue, handleSubmit, trigger, getValues, watch } = methods
 
-  // storage
-  // TODO: const { serviceInStorage } = useServiceContext()
+  // contexts
+  const { sendInitialOrderRequest } = useOrderContext()
+  const { getBookingIDInStorage } = useBookingContext()
 
   // view form data
   const card = watch("userCard");
@@ -81,6 +84,11 @@ export const PaymentFormWrapper = () => {
     // obtain new values with 'methodPayment' setted
     const newValues = getValues()
     console.log(newValues)
+
+    const bookingId = getBookingIDInStorage()
+    if (paymentMethod === "payment-gateway" && paymentGateway) {
+      sendInitialOrderRequest({ bookingId: bookingId, provider: paymentGateway })
+    }
   }
 
 
