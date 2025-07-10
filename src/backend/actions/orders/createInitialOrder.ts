@@ -1,16 +1,9 @@
 "use server"
 
-import { AmountInterface } from "@/features/bookings"
-import { getBaseAmountInCookie } from "../payment/cookies/amount"
-import { getBookingByID } from "../booking/getBookingByID"
-import { InitialOrderType, ProvidersType } from "@/features/orders"
-import { insertOrder } from "@/backend/database/queries"
+import { InitialOrderType, PayloadInitialOrder } from "@/features/orders"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
-
-interface PayloadInitialOrder {
-  bookingId: string,
-  provider: ProvidersType
-}
+import { getBaseAmountInCookie, getBookingByID } from "@/backend/actions"
+import { insertOrder } from "@/backend/database/queries"
 
 export const createInitialOrder = async ({ bookingId, provider }: PayloadInitialOrder): Promise<ServerActionResponse<InitialOrderType>> => {
   const amountResponse = await getBaseAmountInCookie()

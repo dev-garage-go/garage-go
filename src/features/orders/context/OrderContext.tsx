@@ -2,14 +2,14 @@
 
 import { createInitialOrder, deleteBaseAmountInCookie } from "@/backend/actions"
 import { createContext, useContext } from "react"
-import { ProvidersType } from "../schemas/orders"
+import { PayloadInitialOrder } from "../schemas/orders"
 
 interface Props {
   children: React.ReactNode
 }
 
 interface OrderContextType {
-  sendRequestOrder: (provider: ProvidersType, bookingId: string) => void
+  sendInitialOrderRequest: ({ provider, bookingId }: PayloadInitialOrder) => void
 }
 
 const OrderContext = createContext<OrderContextType | null>(null)
@@ -21,16 +21,17 @@ export const useOrderContext = () => {
 }
 
 export const OrderContextProvider = ({ children }: Props) => {
+  // calls action to craete the initial order
+  const sendInitialOrderRequest = async ({ provider, bookingId }: PayloadInitialOrder) => {
+    const initialOrder = await createInitialOrder({ provider, bookingId })
 
-  const sendRequestOrder = async (provider: ProvidersType, bookingId: string) => {
-    await createInitialOrder({ provider, bookingId })
-
+    
     // delete cookies when initial order was created
     await deleteBaseAmountInCookie()
   }
 
   return <OrderContext.Provider value={{
-    sendRequestOrder
+    sendInitialOrderRequest
   }}>
     {children}
   </OrderContext.Provider>

@@ -6,18 +6,18 @@ import { AppointmentDataInterface, BookingServiceDataInterface, UserInterface } 
 import { bookingKey } from "../keys/storage"
 import { toast } from "sonner";
 
-import { createBooking, deleteBaseAmountInCookie } from "@/backend/actions"
+import { createBooking } from "@/backend/actions"
 
 import { useVehicleContext } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
-import { useEmailContext } from "@/features/emails"
 import { usePaymentContext } from "@/features/payment";
 
 interface ServiceBookingType {
-  bookingCreated: boolean | null
+  getBookingIDInStorage: () => string
   setBookingIDInStorage: (id: string) => void,
   deleteBookingIDInStorage: () => void,
   createServiceBooking: (data: AppointmentDataInterface) => void,
+  bookingCreated: boolean | null,
   creatingBookingAnimation: boolean
 }
 
@@ -39,7 +39,6 @@ export const useBookingContext = () => {
 export const BookingContextProvider = ({ children }: Props) => {
   const { vehicleInStorage } = useVehicleContext()
   const { serviceInStorage } = useServiceContext()
-  const { sendBookingConfirmationEmail } = useEmailContext()
   const { amountInCookie } = usePaymentContext()
 
   const router = useRouter()
@@ -49,6 +48,12 @@ export const BookingContextProvider = ({ children }: Props) => {
 
   // animates btn when the booking has been creating
   const [creatingBookingAnimation, setCreatingBookingAnimation] = useState<boolean>(false)
+
+  const getBookingIDInStorage = (): string => {
+    const id = localStorage.getItem(bookingKey)
+    if (!id) throw new Error("booking id doesn't exist in local storage")
+    return id
+  }
 
   const setBookingIDInStorage = (id: string) => {
     localStorage.setItem(bookingKey, JSON.stringify(id))
@@ -102,6 +107,7 @@ export const BookingContextProvider = ({ children }: Props) => {
 
   return <BookingContext.Provider
     value={{
+      getBookingIDInStorage,
       setBookingIDInStorage,
       deleteBookingIDInStorage,
       createServiceBooking,

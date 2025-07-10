@@ -43,6 +43,11 @@ export const InitialOrderSchema = OrderDB.omit({
   installments: true,
 })
 
+export interface PayloadInitialOrder {
+  bookingId: string,
+  provider: ProvidersType
+}
+
 export type InitialOrderType = z.infer<typeof InitialOrderSchema>
 
 // client request - the client should not send these fields 
