@@ -97,9 +97,6 @@ export const BookingContextProvider = ({ children }: Props) => {
     // save the booking id in local storage and redirect
     setBookingIDInStorage(newBooking._id)
     router.push('/payment')
-
-    // delete cookies when booking was created
-    await deleteBaseAmountInCookie()
   }
 
 

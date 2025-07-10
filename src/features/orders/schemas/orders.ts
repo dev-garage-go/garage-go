@@ -1,13 +1,16 @@
 import { zISOString } from "@/utils/zod-helpers"
 import { z } from "zod"
 
+export const Providers = z.enum(["mercado-pago", "getnet", "webpay"])
+export type ProvidersType = z.infer<typeof Providers>
+
 // esquema base
 export const OrderDB = z.object({
   _id: z.string().uuid().optional(),  // mongo genera este _id
   email: z.string().email(),          // usuario no autenticado
   booking_id: z.string().uuid(),
   external_reference: z.string().optional(),  // referencia para vincular un registro de la app con el gateway
-  provider: z.enum(["mercado_pago", "getnet", "webpay_plus"]),
+  provider: Providers,
   payment_id: z.string().optional(),          // ID del pago
   merchant_order_id: z.string().optional(),   // ID merchant_order u orden remota
   pay_status: z.enum(["pending", "approved", "rejected", "refunded"]),
@@ -32,7 +35,6 @@ export const InitialOrderSchema = OrderDB.omit({
   net_received_amount: true,
   paid_at: true,
   fee: true,
-  external_reference: true,
   payment_id: true,
   pay_method: true,
   pay_resource: true,
