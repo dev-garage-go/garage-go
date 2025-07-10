@@ -37,13 +37,13 @@ export const BookingFormWrapper = ({ params }: Props) => {
   const serviceType = params.service_type as ServicesTypes;
 
   const { vehicleInStorage, showModal } = useVehicleContext()
-  const { createServiceBooking, bookingCreated, showConfirmModal } = useBookingContext()
+  const { createServiceBooking } = useBookingContext()
   const { serviceInStorage } = useServiceContext()
 
   // guard
   useEffect(() => {
-    if (!serviceInStorage && !showConfirmModal) router.replace("/services");
-  }, [serviceInStorage, router, showConfirmModal])
+    if (!serviceInStorage) router.replace("/services");
+  }, [serviceInStorage, router])
 
   // Func that will be executed when form its submitted
   const onSubmit = async (data: AppointmentDataInterface) => {
@@ -58,12 +58,6 @@ export const BookingFormWrapper = ({ params }: Props) => {
           <LazyVehicleDataModal /> {/* the component is only imported if the conditions are met */}
         </ModalPortal>
       }
-      {/* when the backend will responded if the booking is successfully created or not, show modal */}
-      {typeof bookingCreated === 'boolean' && (
-        <ModalPortal isOpen={showConfirmModal}>
-          <LazyConfirmationBookingModal success={bookingCreated} />
-        </ModalPortal>
-      )}
       <FormProvider {...methods}>
         <form onSubmit={methods.handleSubmit(onSubmit)}>
           <div className="grid grid-cols-1 lg:grid-cols-2 w-full gap-6">

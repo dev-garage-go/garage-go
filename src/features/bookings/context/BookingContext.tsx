@@ -1,22 +1,22 @@
 "use client"
 
+import { useRouter } from "next/navigation";
 import { createContext, useContext, useState } from "react"
 import { AppointmentDataInterface, BookingServiceDataInterface, UserInterface } from '@/features/bookings';
 import { bookingKey } from "../keys/storage"
+import { toast } from "sonner";
 
 import { createBooking, deleteBaseAmountInCookie } from "@/backend/actions"
 
 import { useVehicleContext } from "@/features/vehicle"
-import { ServiceNamesMap, useServiceContext } from "@/features/services"
-import { ConfirmationBookingEmailInterface, useEmailContext } from "@/features/emails"
+import { useServiceContext } from "@/features/services"
+import { useEmailContext } from "@/features/emails"
 import { usePaymentContext } from "@/features/payment";
-import { useRouter } from "next/navigation";
 
 interface ServiceBookingType {
   bookingCreated: boolean | null
-  showConfirmModal: boolean
-  setShowConfirmModal: React.Dispatch<React.SetStateAction<boolean>>
-  setBookingInStorage: (data: any) => void
+  setBookingIDInStorage: (id: string) => void,
+  deleteBookingIDInStorage: () => void,
   createServiceBooking: (data: AppointmentDataInterface) => void,
   creatingBookingAnimation: boolean
 }
@@ -47,14 +47,15 @@ export const BookingContextProvider = ({ children }: Props) => {
   // saves the successful or unsuccessful response of the backend when trying to create a booking
   const [bookingCreated, setBookingCreated] = useState<boolean | null>(null)
 
-  // display modal in the ui confirming an error or a reservation successfully created and email sent
-  const [showConfirmModal, setShowConfirmModal] = useState<boolean>(false)
-
   // animates btn when the booking has been creating
   const [creatingBookingAnimation, setCreatingBookingAnimation] = useState<boolean>(false)
 
-  const setBookingInStorage = (data: AppointmentDataInterface) => {
-    localStorage.setItem(bookingKey, JSON.stringify(data))
+  const setBookingIDInStorage = (id: string) => {
+    localStorage.setItem(bookingKey, JSON.stringify(id))
+  }
+
+  const deleteBookingIDInStorage = () => {
+    localStorage.removeItem(bookingKey)
   }
 
   const createServiceBooking = async (data: AppointmentDataInterface) => {
@@ -85,45 +86,17 @@ export const BookingContextProvider = ({ children }: Props) => {
 
     if (!responseBooking.success) {
       setBookingCreated(false)
+      toast.error('Ocurrio un error inesperado creando su reserva')
       throw new Error(responseBooking.error)
-      // toast with error message
     }
 
     const newBooking = responseBooking.data
     if (!newBooking) throw new Error("error getting data of new booking");
-
-    // Send confirmation booking email
-    const isProd = process.env.NODE_ENV === "production";
-    let emailData: ConfirmationBookingEmailInterface
-
-    if (isProd) {
-      emailData = {
-        bookingId: newBooking._id,
-        firstName: newBooking.user.name.toLowerCase(),
-        service: ServiceNamesMap[newBooking.service.name],
-        userEmail: newBooking.user.email.toLowerCase(),
-      }
-    } else {
-      emailData = {
-        bookingId: newBooking._id,
-        firstName: newBooking.user.name.toLowerCase(),
-        service: ServiceNamesMap[newBooking.service.name],
-        userEmail: "development@garageservice.cl",
-      }
-    }
-
-    const emailResponse = await sendBookingConfirmationEmail(emailData)
-
-    if (!emailResponse.ok) {
-      setBookingCreated(false)
-      router.push('/')
-      setCreatingBookingAnimation(false)
-      throw new Error(`email API response with an error: ${emailResponse.status}`)
-    }
-
     setCreatingBookingAnimation(false)
-    setBookingCreated(true) // show modal that confirm email sent and delete service from storage 
-    setShowConfirmModal(true)
+
+    // save the booking id in local storage and redirect
+    setBookingIDInStorage(newBooking._id)
+    router.push('/payment')
 
     // delete cookies when booking was created
     await deleteBaseAmountInCookie()
@@ -132,9 +105,8 @@ export const BookingContextProvider = ({ children }: Props) => {
 
   return <BookingContext.Provider
     value={{
-      showConfirmModal,
-      setShowConfirmModal,
-      setBookingInStorage,
+      setBookingIDInStorage,
+      deleteBookingIDInStorage,
       createServiceBooking,
       bookingCreated,
       creatingBookingAnimation

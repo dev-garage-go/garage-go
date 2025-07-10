@@ -3,13 +3,17 @@
 import Link from "next/link"
 import { IoCheckmarkCircle, IoWarning } from "react-icons/io5"
 import { useBookingContext } from "../context/BookingContext"
+import { useState } from "react"
 
 interface Props {
   success: boolean
 }
 
 export const ConfirmationBookingModal = ({ success }: Props) => {
-  const { setShowConfirmModal } = useBookingContext()
+  // ? No se va a usar mas este modal, es necesario borrarlo?
+  // const { setShowConfirmModal } = useBookingContext() --> Flujo anterior
+
+  const [showConfirmModal, setShowConfirmModal] = useState(false) // ! temp code to avoid errors
 
   return (
     <div data-cy="cy-confirmation-booking-email-modal" className="fixed z-10 top-0 left-0 flex justify-center items-center w-screen h-full min-h-screen bg-primaryBlue-50 bg-opacity-90">
