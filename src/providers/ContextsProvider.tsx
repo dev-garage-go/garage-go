@@ -6,7 +6,8 @@ import {
   BookingContextProvider,
   AdminContextProvider,
   EmailContextProvider,
-  PaymentContextProvider
+  PaymentContextProvider,
+  OrderContextProvider
 } from "./contexts"
 import { RefreshListener } from "./RefreshListener"
 import { Toaster } from 'sonner';
@@ -30,9 +31,11 @@ export const ContextsProvider = ({ children }: Props) => {
           <EmailContextProvider>
             <PaymentContextProvider>
               <BookingContextProvider>
-                <AdminContextProvider>
-                  {children}
-                </AdminContextProvider>
+                <OrderContextProvider>
+                  <AdminContextProvider>
+                    {children}
+                  </AdminContextProvider>
+                </OrderContextProvider>
               </BookingContextProvider>
             </PaymentContextProvider>
           </EmailContextProvider>
