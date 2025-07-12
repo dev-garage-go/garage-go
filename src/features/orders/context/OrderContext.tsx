@@ -9,7 +9,7 @@ interface Props {
 }
 
 interface OrderContextType {
-  sendInitialOrderRequest: ({ provider, bookingId }: PayloadInitialOrder) => void
+  sendInitialOrderRequest: ({ provider, bookingId }: PayloadInitialOrder) => Promise<void>
 }
 
 const OrderContext = createContext<OrderContextType | null>(null)
@@ -35,6 +35,7 @@ export const OrderContextProvider = ({ children }: Props) => {
       if (provider === "mercado-pago") apiRoute = "/api/payment/mercado-pago"
       else if (provider === "getnet") apiRoute = "/api/payment/getnet"
       else if (provider === "webpay") apiRoute = "/api/payment/webpay"
+      else throw new Error(`the provider ${provider} doesn't exist`)
 
       const response = await fetch(apiRoute, {
         headers: myHeaders,
