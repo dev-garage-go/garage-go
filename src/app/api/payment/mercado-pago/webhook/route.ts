@@ -1,7 +1,10 @@
 // Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
 import { NextRequest, NextResponse } from "next/server"
+import { updateInitialOrder } from "@/backend/actions"
+
 import { HttpStatus } from "@/backend/types"
 import { MerchantOrderMPValidator, SimplifiedPaymentMPValidator } from "@/features/payment"
+import { OrderToUpdateType, PayStatusType } from "@/features/orders"
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
   throw new Error('the enviroment variable MERCADO_PAGO_ACCESS_TOKEN not found')
@@ -33,7 +36,34 @@ const handlePayment = async (paymentID: string) => {
     }
 
     const payment = check.data
-    console.log('Payment: ', payment)
+    console.log('Payment ⚪️ webhook: ', payment)
+
+    // data to update order
+    const successfullyPayment = payment.status === 'approved' && payment.status_detail === 'accredited'
+    const orderId = payment.external_reference
+    const merchantOrderId = payment.order?.id
+    const paidAt = successfullyPayment ? new Date(Date.now()).toISOString() : null
+    const fee = payment.transaction_amount - payment.transaction_details.net_received_amount
+    const expiresAt = successfullyPayment ? null : new Date(Date.now() + 1000 * 60 * 60 * 72).toISOString()   // new TTL -> 3 days
+
+    const updateOrder: OrderToUpdateType = {
+      _id: orderId,
+      pay_status: payment.status as PayStatusType,
+      pay_status_detail: payment.status_detail,
+      payment_id: payment.id.toString(),
+      merchant_order_id: merchantOrderId,
+      fee: fee,
+      installments: payment.installments,
+      net_received_amount: payment.transaction_details.net_received_amount,
+      pay_method: payment.payment_method.id,
+      pay_resource: payment.payment_method.type,
+      paid_at: paidAt,
+      updated_at: new Date(Date.now()).toISOString(),
+      expires_at: expiresAt,
+    }
+
+    const result = await updateInitialOrder(updateOrder)
+    if (!result.success || !result.data) throw result.error
 
     return NextResponse.json({}, { status: HttpStatus.OK })
 
@@ -44,7 +74,7 @@ const handlePayment = async (paymentID: string) => {
 }
 
 // helper to manage an order received
-const handleOrder = async (orderID: string) => {
+const handleMerchantOrder = async (orderID: string) => {
   try {
     const myHeaders = new Headers()
     myHeaders.append('Authorization', `Bearer ${token}`)
@@ -67,7 +97,8 @@ const handleOrder = async (orderID: string) => {
     }
 
     const order = check.data
-    console.log('Order: ', order)
+    console.log('Merchant Order ⚪️ webhook: ', order)
+
 
     return NextResponse.json({}, { status: HttpStatus.OK })
 
@@ -102,7 +133,7 @@ export async function POST(request: NextRequest) {
     }
 
     if (id && topic === 'merchant_order') {
-      return await handleOrder(id)
+      return await handleMerchantOrder(id)
     }
 
     return NextResponse.json({ error: 'unknown topic sent by mp' }, { status: 400 })

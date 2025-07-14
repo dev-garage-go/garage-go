@@ -4,6 +4,12 @@ import { zISOString, zObjectIdSchema } from "@/utils/zod-helpers"
 export const Providers = z.enum(["mercado-pago", "getnet", "webpay"])
 export type ProvidersType = z.infer<typeof Providers>
 
+export const PayStatus = z.enum(["approved", "in_process", "pending", "authorized", "cancelled", "refunded", "charged_back", "rejected"])
+export type PayStatusType = z.infer<typeof PayStatus>
+
+export const PayStatusDetail = z.enum(["accredited", "pending_capture", "partially_refunded", "expired", "in_process", "bank_error", "cc_rejected_blacklist"])
+export type PayStatusDetailType = z.infer<typeof PayStatusDetail>
+
 
 // --------------------------- · ---------------------------
 // base database schema
@@ -15,7 +21,7 @@ export const OrderDB = z.object({
   provider: Providers,
   payment_id: z.string().optional(),          // ID del pago
   merchant_order_id: z.string().optional(),   // ID merchant_order u orden remota
-  pay_status: z.enum(["pending", "approved", "rejected", "refunded"]),
+  pay_status: PayStatus,
   pay_status_detail: z.string().optional(),
   pay_method: z.string().optional(),          // tarjeta, pix, oneclick, etc.
   pay_resource: z.string().optional(),        // wallet, credit_card, bank_transfer
@@ -23,7 +29,7 @@ export const OrderDB = z.object({
   net_received_amount: z.number().optional(),
   installments: z.number().optional(),
   fee: z.number().optional(),
-  paid_at: zISOString.optional(),               // cuando se completo el pago
+  paid_at: zISOString.nullable(),               // cuando se completo el pago
   updated_at: zISOString,   // cuando se actualizo por ultima vez
   created_at: zISOString,   // cuando se creo la orden
   expires_at: zISOString.nullable(),  // TTL
@@ -57,7 +63,6 @@ export type InitialOrderType = z.infer<typeof InitialOrderSchema>
 // --------------------------- · ---------------------------
 // ! order updated by gateway response
 export const OrderToUpdateSchema = OrderDB.omit({
-  _id: true,
   booking_id: true,
   email: true,
   provider: true,
@@ -66,7 +71,7 @@ export const OrderToUpdateSchema = OrderDB.omit({
   created_at: true
 })
 
-export type OrderToUpdateType = z.infer<typeof InitialOrderSchema>
+export type OrderToUpdateType = z.infer<typeof OrderToUpdateSchema>
 
 // --------------------------- · ---------------------------
 // server response with _id as string
