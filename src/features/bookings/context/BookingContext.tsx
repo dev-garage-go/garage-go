@@ -50,13 +50,13 @@ export const BookingContextProvider = ({ children }: Props) => {
   const [creatingBookingAnimation, setCreatingBookingAnimation] = useState<boolean>(false)
 
   const getBookingIDInStorage = (): string => {
-    const id = localStorage.getItem(bookingKey)
-    if (!id) throw new Error("booking id doesn't exist in local storage")
-    return id
+    const raw = localStorage.getItem(bookingKey)
+    if (!raw) throw new Error("booking id doesn't exist in local storage")
+    return JSON.parse(raw)
   }
 
   const setBookingIDInStorage = (id: string) => {
-    localStorage.setItem(bookingKey, JSON.stringify(id))
+    localStorage.setItem(bookingKey, id)
   }
 
   const deleteBookingIDInStorage = () => {
