@@ -39,7 +39,6 @@ export const BookingForm = ({ withBooking }: Props) => {
     // if the user selected a date, changes automatically to time picker
     if (date && !time) {
       setTimeout(() => {
-        console.log('cambiando a selector de hora')
         setShowCalendarPicker(false)
         setShowSchedulePicker(true)
       }, 500)
@@ -47,7 +46,6 @@ export const BookingForm = ({ withBooking }: Props) => {
 
     // if the user selected a time, changes automatically to date picker (calendar)
     if (!date && time) {
-      console.log('cambiando a selector de fecha')
       setTimeout(() => {
         setShowSchedulePicker(false)
         setShowCalendarPicker(true)
