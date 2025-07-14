@@ -9,7 +9,7 @@ interface Props {
 }
 
 interface OrderContextType {
-  sendInitialOrderRequest: ({ provider, bookingId }: PayloadInitialOrder) => Promise<void>
+  sendInitialOrderRequest: ({ provider, booking_id }: PayloadInitialOrder) => Promise<void>
 }
 
 const OrderContext = createContext<OrderContextType | null>(null)
@@ -22,9 +22,9 @@ export const useOrderContext = () => {
 
 export const OrderContextProvider = ({ children }: Props) => {
   // calls action to craete the initial order
-  const sendInitialOrderRequest = async ({ provider, bookingId }: PayloadInitialOrder) => {
+  const sendInitialOrderRequest = async ({ provider, booking_id }: PayloadInitialOrder) => {
     try {
-      const result = await createInitialOrder({ provider, bookingId })
+      const result = await createInitialOrder({ provider, booking_id: booking_id })
       if (!result.success || !result.data) throw new Error(result.error)
       const initialOrder = result.data
 

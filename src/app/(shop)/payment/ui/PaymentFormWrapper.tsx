@@ -91,7 +91,7 @@ export const PaymentFormWrapper = () => {
     if (!parsed.success || !parsed.data) throw parsed.error
 
     if (newValues.methodSelected === "payment-gateway" && paymentGateway !== undefined) {
-      await sendInitialOrderRequest({ bookingId: parsed.data, provider: paymentGateway })
+      await sendInitialOrderRequest({ booking_id: parsed.data, provider: paymentGateway })
     }
   }
 

@@ -47,11 +47,26 @@ export const InitialOrderSchema = OrderDB.omit({
 })
 
 export interface PayloadInitialOrder {
-  bookingId: string,
+  booking_id: string,
   provider: ProvidersType
 }
 
 export type InitialOrderType = z.infer<typeof InitialOrderSchema>
+
+
+// --------------------------- · ---------------------------
+// ! order updated by gateway response
+export const OrderToUpdateSchema = OrderDB.omit({
+  _id: true,
+  booking_id: true,
+  email: true,
+  provider: true,
+  external_reference: true,
+  total_price: true,
+  created_at: true
+})
+
+export type OrderToUpdateType = z.infer<typeof InitialOrderSchema>
 
 // --------------------------- · ---------------------------
 // server response with _id as string

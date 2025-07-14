@@ -5,13 +5,13 @@ import { HttpStatus, ServerActionResponse } from "@/backend/types"
 import { getBaseAmountInCookie, getBookingByID } from "@/backend/actions"
 import { insertOrder } from "@/backend/database/queries"
 
-export const createInitialOrder = async ({ bookingId, provider }: PayloadInitialOrder): Promise<ServerActionResponse<InitialOrderType>> => {
+export const createInitialOrder = async ({ booking_id, provider }: PayloadInitialOrder): Promise<ServerActionResponse<InitialOrderType>> => {
   try {
     const amountResponse = await getBaseAmountInCookie()
     if (!amountResponse.success || !amountResponse.data) throw new Error(amountResponse.error)
     const amount = amountResponse.data
 
-    const bookingResponse = await getBookingByID(bookingId)
+    const bookingResponse = await getBookingByID(booking_id)
     if (!bookingResponse.success || !bookingResponse.data) throw new Error(bookingResponse.error)
 
     const booking = bookingResponse.data
