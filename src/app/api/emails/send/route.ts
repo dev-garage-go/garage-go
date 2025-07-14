@@ -1,7 +1,7 @@
 // Service to send emails: Resend
 // Docs: https://resend.com/docs/send-with-nextjs
 
-import { NextAPIResponse } from '@/backend/types';
+import { APIResponse } from '@/backend/types';
 import { ConfirmationBookingEmail, ConfirmationBookingEmailInterface } from '@/features/emails';
 import { NextResponse } from 'next/server';
 import { CreateEmailResponseSuccess, Resend } from 'resend';
@@ -17,7 +17,7 @@ if (!process.env.NO_REPLY_DOMAIN_EMAIL) {
   throw new Error('NO_REPLY_DOMAIN_EMAIL is not defined');
 }
 
-export async function POST(request: Request): Promise<NextResponse<NextAPIResponse<CreateEmailResponseSuccess>>> {
+export async function POST(request: Request): Promise<NextResponse<APIResponse<CreateEmailResponseSuccess>>> {
   try {
     const body = (await request.json()) as ConfirmationBookingEmailInterface;
     const { bookingId, firstName, service, userEmail } = body

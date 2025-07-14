@@ -1,4 +1,4 @@
-export type NextAPIResponse<T> =
+export type APIResponse<T> =
   {
     success: true
     data: T | null
