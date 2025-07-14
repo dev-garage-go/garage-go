@@ -3,6 +3,8 @@
 import { createInitialOrder, deleteBaseAmountInCookie } from "@/backend/actions"
 import { createContext, useContext } from "react"
 import { PayloadInitialOrder } from "../schemas/orders"
+import { useRouter } from "next/navigation"
+import { APIResponse, EndpointResponse } from '@/backend/types';
 
 interface Props {
   children: React.ReactNode
@@ -21,6 +23,7 @@ export const useOrderContext = () => {
 }
 
 export const OrderContextProvider = ({ children }: Props) => {
+  const router = useRouter()
   // calls action to craete the initial order
   const sendInitialOrderRequest = async ({ provider, booking_id }: PayloadInitialOrder) => {
     try {
@@ -45,9 +48,17 @@ export const OrderContextProvider = ({ children }: Props) => {
       })
 
       if (!response.ok) throw new Error(`error response with status ${response.status} in api route: ${apiRoute}`)
+      const body: APIResponse<EndpointResponse> = await response.json()
+
+      if (!body.success) throw new Error(body.error)
+      if (!body.data) throw new Error("error getting path of redirectURL")
+
+      const checkoutUrl = body.data.redirectURL
 
       // delete cookies when initial order was created
       await deleteBaseAmountInCookie()
+      router.push(checkoutUrl)
+
     } catch (error) {
       console.error(error)
     }
