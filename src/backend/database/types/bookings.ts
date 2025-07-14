@@ -15,3 +15,7 @@ export interface BookingAdmin extends Omit<BookingDB, 'vehicleID' | '_id'> {
   _id: string
   vehicle: VehicleWithStringIDInterface
 }
+
+export interface BookingResponse extends Omit<BookingDB, '_id'> {
+  _id: string
+}

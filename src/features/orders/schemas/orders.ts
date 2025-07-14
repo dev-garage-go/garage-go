@@ -1,10 +1,13 @@
 import { zISOString } from "@/utils/zod-helpers"
+import { ObjectId } from "mongodb"
 import { z } from "zod"
 
 export const Providers = z.enum(["mercado-pago", "getnet", "webpay"])
 export type ProvidersType = z.infer<typeof Providers>
 
-// esquema base
+
+// --------------------------- · ---------------------------
+// base database schema
 export const OrderDB = z.object({
   _id: z.string().uuid().optional(),  // mongo genera este _id
   email: z.string().email(),          // usuario no autenticado
@@ -29,6 +32,8 @@ export const OrderDB = z.object({
 
 export type OrderDBType = z.infer<typeof OrderDB>
 
+
+// --------------------------- · ---------------------------
 // initial order 
 export const InitialOrderSchema = OrderDB.omit({
   net_received_amount: true,
@@ -49,15 +54,10 @@ export interface PayloadInitialOrder {
 
 export type InitialOrderType = z.infer<typeof InitialOrderSchema>
 
-// client request - the client should not send these fields 
-export const ClientOrderSchema = OrderDB.omit({
-  _id: true,
-  net_received_amount: true,
-  paid_at: true,
-  fee: true,
-  created_at: true,
-  updated_at: true,
-  expires_at: true
+// --------------------------- · ---------------------------
+// server response with _id as string
+export const OrderServerResponse = OrderDB.extend({
+  _id: z.string()
 })
 
-export type ClientOrderType = z.infer<typeof ClientOrderSchema>
+export type OrderServerResponseType = z.infer<typeof OrderServerResponse>
