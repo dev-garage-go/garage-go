@@ -1,18 +1,27 @@
 "use server"
 
-import { BookingDB, getCollection } from "@/backend/database"
+import { BookingResponse, getCollection } from "@/backend/database"
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
 import { ObjectId } from "mongodb";
 
-export const getBookingByID = async (id: string): Promise<ServerActionResponse<BookingDB | null>> => {
+export const getBookingByID = async (id: string): Promise<ServerActionResponse<BookingResponse | null>> => {
   try {
-    const coll = await getCollection("bookings")
     const validID = new ObjectId(id)
+    const coll = await getCollection("bookings")
+    if (!coll) throw new Error('error getting bookings collection')
+
     const booking = await coll.findOne({ _id: validID })
+    if (!booking) throw new Error('error getting booking by id')
+    const { _id, ...rest } = booking
+
+    const bookingResponse: BookingResponse = {
+      _id: booking._id.toString(),
+      ...rest
+    }
 
     return {
       success: true,
-      data: booking,
+      data: bookingResponse,
       httpStatus: HttpStatus.OK,
     }
 
@@ -20,7 +29,7 @@ export const getBookingByID = async (id: string): Promise<ServerActionResponse<B
     console.error(error)
     return {
       success: false,
-      error: `error getting collections: ${error}`,
+      error: `unexpected error getting booking: ${error}`,
       httpStatus: HttpStatus.INTERNAL_SERVER_ERROR,
     }
   }
