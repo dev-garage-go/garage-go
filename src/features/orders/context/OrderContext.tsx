@@ -38,6 +38,7 @@ export const OrderContextProvider = ({ children }: Props) => {
       else throw new Error(`the provider ${provider} doesn't exist`)
 
       const response = await fetch(apiRoute, {
+        method: 'POST',
         headers: myHeaders,
         body: JSON.stringify(initialOrder)
       })
