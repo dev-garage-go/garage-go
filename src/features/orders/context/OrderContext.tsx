@@ -56,7 +56,7 @@ export const OrderContextProvider = ({ children }: Props) => {
       const checkoutUrl = body.data.redirectURL
 
       // delete cookies when initial order was created
-      await deleteBaseAmountInCookie()
+      // TODO: await deleteBaseAmountInCookie()
       router.push(checkoutUrl)
 
     } catch (error) {

@@ -44,10 +44,10 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<E
       },
       items: [{
         id: booking.service.type,                                                      // type of service or ID of service (payload.serviceType)
-        title: "Servicios Garage Go",
+        title: `Garage Go - ${serviceName}`,
         category_id: "Servicios",
         currency_id: 'ARS',
-        description: `${serviceName} | Garage Go`,
+        description: `${serviceName} | Servicios Garage Go`,
         quantity: 1,
         unit_price: order.total_price
       }],
