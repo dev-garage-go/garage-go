@@ -43,7 +43,7 @@ export const getBaseAmountInCookie = async (): Promise<ServerActionResponse<Amou
       data: null
     }
 
-    const amount: AmountInterface = await JSON.parse(value)
+    const amount: AmountInterface = JSON.parse(value)
 
     return {
       data: amount,
@@ -55,7 +55,7 @@ export const getBaseAmountInCookie = async (): Promise<ServerActionResponse<Amou
     return {
       success: false,
       httpStatus: HttpStatus.NOT_FOUND,
-      error: `unexpectec error getting amount cookie: ${error}`
+      error: `unexpected error retrieving amount cookie: ${(error as Error).message}`
     }
   }
 }
@@ -80,7 +80,7 @@ export const deleteBaseAmountInCookie = async (): Promise<ServerActionResponse<n
     return {
       success: false,
       httpStatus: HttpStatus.NOT_FOUND,
-      error: `unexpectec error getting amount cookie: ${error}`
+      error: `unexpected error deleting amount cookie: ${(error as Error).message}`
     }
   }
 }
