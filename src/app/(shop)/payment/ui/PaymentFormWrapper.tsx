@@ -15,6 +15,7 @@ import {
 } from '@/features/payment'
 import { useOrderContext } from '@/features/orders/context/OrderContext'
 import { useBookingContext } from '@/features/bookings'
+import { zObjectIdSchema } from '@/utils/zod-helpers'
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormSchema>({
@@ -68,7 +69,7 @@ export const PaymentFormWrapper = () => {
     }
   }
 
-  const onSubmit = (data: PaymentFormSchema) => {
+  const onSubmit = async (data: PaymentFormSchema) => {
     if (!termsChecked) return;
 
     const hasCard = hasCardData(card)
@@ -86,8 +87,11 @@ export const PaymentFormWrapper = () => {
     console.log(newValues)
 
     const bookingId = getBookingIDInStorage()
-    if (paymentMethod === "payment-gateway" && paymentGateway) {
-      sendInitialOrderRequest({ bookingId: bookingId, provider: paymentGateway })
+    const parsed = zObjectIdSchema.safeParse(bookingId)
+    if (!parsed.success || !parsed.data) throw parsed.error
+
+    if (newValues.methodSelected === "payment-gateway" && paymentGateway !== undefined) {
+      await sendInitialOrderRequest({ bookingId: parsed.data, provider: paymentGateway })
     }
   }
 
