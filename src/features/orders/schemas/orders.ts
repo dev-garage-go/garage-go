@@ -1,6 +1,5 @@
-import { zISOString } from "@/utils/zod-helpers"
-import { ObjectId } from "mongodb"
 import { z } from "zod"
+import { zISOString, zObjectIdSchema } from "@/utils/zod-helpers"
 
 export const Providers = z.enum(["mercado-pago", "getnet", "webpay"])
 export type ProvidersType = z.infer<typeof Providers>
@@ -9,9 +8,9 @@ export type ProvidersType = z.infer<typeof Providers>
 // --------------------------- · ---------------------------
 // base database schema
 export const OrderDB = z.object({
-  _id: z.string().uuid().optional(),  // mongo genera este _id
+  _id: zObjectIdSchema.optional(),  // mongo genera este _id
   email: z.string().email(),          // usuario no autenticado
-  booking_id: z.string().uuid(),
+  booking_id: zObjectIdSchema,
   external_reference: z.string().optional(),  // referencia para vincular un registro de la app con el gateway
   provider: Providers,
   payment_id: z.string().optional(),          // ID del pago
@@ -24,10 +23,10 @@ export const OrderDB = z.object({
   net_received_amount: z.number().optional(),
   installments: z.number().optional(),
   fee: z.number().optional(),
-  paid_at: zISOString().optional(),               // cuando se completo el pago
-  updated_at: zISOString(),   // cuando se actualizo por ultima vez
-  created_at: zISOString(),   // cuando se creo la orden
-  expires_at: zISOString().nullable(),  // TTL
+  paid_at: zISOString.optional(),               // cuando se completo el pago
+  updated_at: zISOString,   // cuando se actualizo por ultima vez
+  created_at: zISOString,   // cuando se creo la orden
+  expires_at: zISOString.nullable(),  // TTL
 }).strict()
 
 export type OrderDBType = z.infer<typeof OrderDB>
