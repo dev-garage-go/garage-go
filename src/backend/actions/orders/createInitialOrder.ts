@@ -31,12 +31,12 @@ export const createInitialOrder = async ({ bookingId, provider }: PayloadInitial
 
     const result = await insertOrder(initialOrder)
     if (!result.success || !result.data) throw new Error(result.error)
-    const { _id, ...rest } = result.data
+    const order = result.data
 
     return {
       success: true,
       httpStatus: HttpStatus.OK,
-      data: rest
+      data: order
     }
   } catch (error) {
     console.error(error)

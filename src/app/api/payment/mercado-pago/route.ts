@@ -1,9 +1,13 @@
 // Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
 import { NextResponse } from 'next/server';
+
 import { HttpStatus } from '@/backend/types';
+import { getBookingByID } from '@/backend/actions';
+import { firstLetterUppercase } from '@/utils/formatters';
+
+import { ServiceNamesMap } from "@/features/services";
 import { PreferenceMPValidator } from '@/features/payment';
 import { InitialOrderSchema, InitialOrderType } from '@/features/orders';
-import { getBookingByID } from '@/backend/actions';
 
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
@@ -26,6 +30,7 @@ export async function POST(request: Request) {
     const responseBooking = await getBookingByID(order.booking_id)
     if (!responseBooking.success || !responseBooking.data) throw new Error(responseBooking.error)
     const booking = responseBooking.data
+    const serviceName = firstLetterUppercase(ServiceNamesMap[booking.service.name])
 
     const preference = {
       auto_return: 'approved',                                              // Retorna sin importar si el pago fue exitoso o no
@@ -39,10 +44,10 @@ export async function POST(request: Request) {
       },
       items: [{
         id: booking.service.type,                                                      // type of service or ID of service (payload.serviceType)
-        title: "Servicios GarageGo",
+        title: "Servicios Garage Go",
         category_id: "Servicios",
         currency_id: 'ARS',
-        description: `${booking.service.name} | Garage Go`,
+        description: `${serviceName} | Garage Go`,
         quantity: 1,
         unit_price: order.total_price
       }],
@@ -94,6 +99,7 @@ export async function POST(request: Request) {
     }
 
     const data = check.data
+    console.log("⚪️ Data of MP", data)
 
     return NextResponse.json(
       { redirectURL: data.init_point },

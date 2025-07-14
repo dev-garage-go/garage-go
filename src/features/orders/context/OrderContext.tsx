@@ -24,8 +24,9 @@ export const OrderContextProvider = ({ children }: Props) => {
   // calls action to craete the initial order
   const sendInitialOrderRequest = async ({ provider, bookingId }: PayloadInitialOrder) => {
     try {
-      const initialOrder = await createInitialOrder({ provider, bookingId })
-      if (!initialOrder.success || !initialOrder.data) throw new Error(initialOrder.error)
+      const result = await createInitialOrder({ provider, bookingId })
+      if (!result.success || !result.data) throw new Error(result.error)
+      const initialOrder = result.data
 
       const myHeaders = new Headers()
       myHeaders.append("Content-Type", "application/json")
