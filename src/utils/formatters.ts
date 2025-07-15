@@ -23,3 +23,8 @@ export const formatNumberWithDots = (value: string | number): string => {
 export function removeDotsFromNumber(input: string | number): string {
   return input.toString().replace(/\./g, "");
 }
+
+export const roundedDecimals = (num: number, decimals: number = 2): number => {
+  const factor = Math.pow(10, decimals)
+  return Math.ceil(num * factor) / factor
+}

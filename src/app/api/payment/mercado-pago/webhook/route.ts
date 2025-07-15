@@ -1,6 +1,7 @@
 // Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
 import { NextRequest, NextResponse } from "next/server"
 import { updateInitialOrder } from "@/backend/actions"
+import { roundedDecimals } from "@/utils"
 
 import { HttpStatus } from "@/backend/types"
 import { MerchantOrderMPValidator, SimplifiedPaymentMPValidator } from "@/features/payment"
@@ -42,8 +43,10 @@ const handlePayment = async (paymentID: string) => {
     const orderId = payment.external_reference
     const merchantOrderId = payment.order ? payment.order.id : undefined
     const paidAt = successfullyPayment ? new Date(Date.now()).toISOString() : null
-    const fee = Math.ceil(payment.transaction_amount - payment.transaction_details.net_received_amount)
-    const expiresAt = successfullyPayment ? null : new Date(Date.now() + 1000 * 60 * 60 * 72).toISOString()   // new TTL -> 3 days
+    const fee = roundedDecimals(payment.transaction_amount - payment.transaction_details.net_received_amount)
+
+    const threeDaysTTL = new Date(Date.now() + 1000 * 60 * 60 * 72).toISOString()
+    const expiresAt = successfullyPayment ? null : threeDaysTTL   // new TTL -> 3 days
 
     const updateOrder: OrderToUpdateType = {
       pay_status: payment.status as PayStatusType,
