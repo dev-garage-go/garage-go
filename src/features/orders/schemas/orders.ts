@@ -64,6 +64,7 @@ export type InitialOrderType = z.infer<typeof InitialOrderSchema>
 // --------------------------- · ---------------------------
 // ! order updated by gateway response
 export const OrderToUpdateSchema = OrderInputsSchema.omit({
+  _id: true,
   booking_id: true,
   email: true,
   provider: true,

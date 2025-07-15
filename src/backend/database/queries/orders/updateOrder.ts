@@ -1,6 +1,8 @@
+import { ObjectId } from 'mongodb';
 import { getCollection } from '@/backend/database';
+import { OrderServerResponseType } from '@/backend/database/schemas';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
-import { OrderServerResponseType, OrderToUpdateSchema, OrderToUpdateType } from '@/features/orders';
+import { OrderToUpdateSchema, OrderToUpdateType } from '@/features/orders';
 import { zObjectIdSchema } from '@/utils/zod-helpers';
 
 interface Params {
@@ -12,6 +14,7 @@ export async function updateOrder({ id, data }: Params): Promise<ServerActionRes
   try {
     const checkId = zObjectIdSchema.safeParse(id)
     if (!checkId.success) throw checkId.error
+    const objectId = new ObjectId(checkId.data)
 
     const validOrder = OrderToUpdateSchema.safeParse(data)
     if (!validOrder.success) throw validOrder.error;
@@ -22,14 +25,16 @@ export async function updateOrder({ id, data }: Params): Promise<ServerActionRes
     if (!coll) throw new Error("unexpected error obtaining collection")
 
     const updatedOrder = await coll.findOneAndUpdate(
-      { _id: id },
-      { $set: newData }
+      { _id: objectId },
+      { $set: newData },
+      { returnDocument: "after" }
     )
     if (!updatedOrder) throw new Error("unexpected error getting the new order created")
-    const { _id, ...rest } = updatedOrder
+    const { _id, booking_id, ...rest } = updatedOrder
 
     const response: OrderServerResponseType = {
-      _id: updatedOrder._id.toString(),
+      _id: _id.toString(),
+      booking_id: booking_id.toString(),
       ...rest
     }
 
@@ -48,12 +53,3 @@ export async function updateOrder({ id, data }: Params): Promise<ServerActionRes
     }
   }
 }
-
-/*
-    const updatedOrder = await coll.findOneAndUpdate(
-      { _id: id },
-      { $set: newData }
-    )
-    if (!updatedOrder) throw new Error("unexpected error getting the new order created")
-    const { _id, ...rest } = updatedOrder
-*/
