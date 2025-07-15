@@ -12,8 +12,8 @@ export type PayStatusDetailType = z.infer<typeof PayStatusDetail>
 
 
 // --------------------------- · ---------------------------
-// base database schema
-export const OrderDB = z.object({
+// schema de inputs que se ira completando en la orden del lado cliente
+export const OrderInputsSchema = z.object({
   _id: zObjectIdSchema.optional(),  // mongo genera este _id
   email: z.string().email(),          // usuario no autenticado
   booking_id: zObjectIdSchema,
@@ -29,18 +29,19 @@ export const OrderDB = z.object({
   net_received_amount: z.number().optional(),
   installments: z.number().optional(),
   fee: z.number().optional(),
-  paid_at: zISOString.nullable(),               // cuando se completo el pago
+  paid_at: zISOString.optional().nullable(),               // cuando se completo el pago
   updated_at: zISOString,   // cuando se actualizo por ultima vez
   created_at: zISOString,   // cuando se creo la orden
   expires_at: zISOString.nullable(),  // TTL
 }).strict()
 
-export type OrderDBType = z.infer<typeof OrderDB>
+export type OrderInputsType = z.infer<typeof OrderInputsSchema>
 
 
 // --------------------------- · ---------------------------
 // initial order 
-export const InitialOrderSchema = OrderDB.omit({
+export const InitialOrderSchema = OrderInputsSchema.omit({
+  _id: true,
   net_received_amount: true,
   paid_at: true,
   fee: true,
@@ -50,7 +51,7 @@ export const InitialOrderSchema = OrderDB.omit({
   pay_status_detail: true,
   merchant_order_id: true,
   installments: true,
-})
+}).strict()
 
 export interface PayloadInitialOrder {
   booking_id: string,
@@ -62,7 +63,7 @@ export type InitialOrderType = z.infer<typeof InitialOrderSchema>
 
 // --------------------------- · ---------------------------
 // ! order updated by gateway response
-export const OrderToUpdateSchema = OrderDB.omit({
+export const OrderToUpdateSchema = OrderInputsSchema.omit({
   booking_id: true,
   email: true,
   provider: true,
@@ -72,11 +73,3 @@ export const OrderToUpdateSchema = OrderDB.omit({
 })
 
 export type OrderToUpdateType = z.infer<typeof OrderToUpdateSchema>
-
-// --------------------------- · ---------------------------
-// server response with _id as string
-export const OrderServerResponse = OrderDB.extend({
-  _id: z.string()
-})
-
-export type OrderServerResponseType = z.infer<typeof OrderServerResponse>

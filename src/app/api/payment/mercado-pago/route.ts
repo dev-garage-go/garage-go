@@ -1,13 +1,13 @@
 // Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
 import { NextResponse } from 'next/server';
 
+import { InitialOrderServerResponse, InitialOrderServerResponseType } from '@/backend/database/schemas';
 import { HttpStatus, APIResponse, EndpointResponse } from '@/backend/types';
 import { getBookingByID } from '@/backend/actions';
 import { firstLetterUppercase } from '@/utils/formatters';
 
 import { ServiceNamesMap } from "@/features/services";
 import { PreferenceMPValidator } from '@/features/payment';
-import { InitialOrderSchema, InitialOrderType } from '@/features/orders';
 
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
@@ -25,7 +25,7 @@ const domain = isProd ? process.env.NEXT_PUBLIC_BASE_URL : 'https://bd1a8bc16aa5
 export async function POST(request: Request): Promise<NextResponse<APIResponse<EndpointResponse | null>>> {
   try {
     const body: unknown = await request.json()
-    const order: InitialOrderType = InitialOrderSchema.parse(body)
+    const order: InitialOrderServerResponseType = InitialOrderServerResponse.parse(body)
 
     const responseBooking = await getBookingByID(order.booking_id)
     if (!responseBooking.success || !responseBooking.data) throw new Error(responseBooking.error)

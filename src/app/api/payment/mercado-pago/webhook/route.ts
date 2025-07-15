@@ -36,18 +36,16 @@ const handlePayment = async (paymentID: string) => {
     }
 
     const payment = check.data
-    console.log('Payment ⚪️ webhook: ', payment)
 
     // data to update order
     const successfullyPayment = payment.status === 'approved' && payment.status_detail === 'accredited'
     const orderId = payment.external_reference
-    const merchantOrderId = payment.order?.id
+    const merchantOrderId = payment.order ? payment.order.id : undefined
     const paidAt = successfullyPayment ? new Date(Date.now()).toISOString() : null
-    const fee = payment.transaction_amount - payment.transaction_details.net_received_amount
+    const fee = Math.ceil(payment.transaction_amount - payment.transaction_details.net_received_amount)
     const expiresAt = successfullyPayment ? null : new Date(Date.now() + 1000 * 60 * 60 * 72).toISOString()   // new TTL -> 3 days
 
     const updateOrder: OrderToUpdateType = {
-      _id: orderId,
       pay_status: payment.status as PayStatusType,
       pay_status_detail: payment.status_detail,
       payment_id: payment.id.toString(),
@@ -62,8 +60,8 @@ const handlePayment = async (paymentID: string) => {
       expires_at: expiresAt,
     }
 
-    const result = await updateInitialOrder(updateOrder)
-    if (!result.success || !result.data) throw result.error
+    const result = await updateInitialOrder({ id: orderId, data: updateOrder })
+    if (!result.success) throw result.error
 
     return NextResponse.json({}, { status: HttpStatus.OK })
 
@@ -97,8 +95,6 @@ const handleMerchantOrder = async (orderID: string) => {
     }
 
     const order = check.data
-    console.log('Merchant Order ⚪️ webhook: ', order)
-
 
     return NextResponse.json({}, { status: HttpStatus.OK })
 
