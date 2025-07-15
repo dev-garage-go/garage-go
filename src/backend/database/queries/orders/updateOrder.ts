@@ -1,23 +1,31 @@
 import { getCollection } from '@/backend/database';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
 import { OrderServerResponseType, OrderToUpdateSchema, OrderToUpdateType } from '@/features/orders';
+import { zObjectIdSchema } from '@/utils/zod-helpers';
 
-export async function updateOrder(order: OrderToUpdateType): Promise<ServerActionResponse<OrderServerResponseType>> {
+interface Params {
+  id: string,
+  data: OrderToUpdateType
+}
+
+export async function updateOrder({ id, data }: Params): Promise<ServerActionResponse<OrderServerResponseType>> {
   try {
-    const validOrder = OrderToUpdateSchema.safeParse(order)
+    const checkId = zObjectIdSchema.safeParse(id)
+    if (!checkId.success) throw checkId.error
+
+    const validOrder = OrderToUpdateSchema.safeParse(data)
     if (!validOrder.success) throw validOrder.error;
 
-    const { _id: order_id, ...restOrder } = validOrder.data
+    const newData = validOrder.data
 
     const coll = await getCollection('orders')
-    if (!coll) throw new Error("unexpected error inserting a new order")
+    if (!coll) throw new Error("unexpected error obtaining collection")
 
     const updatedOrder = await coll.findOneAndUpdate(
-      { _id: order_id },
-      { $set: restOrder }
+      { _id: id },
+      { $set: newData }
     )
     if (!updatedOrder) throw new Error("unexpected error getting the new order created")
-    console.log("Updated Order ⚪️ updateOrder", updatedOrder)
     const { _id, ...rest } = updatedOrder
 
     const response: OrderServerResponseType = {
@@ -32,11 +40,20 @@ export async function updateOrder(order: OrderToUpdateType): Promise<ServerActio
     }
 
   } catch (error) {
-    console.error(`error ${error} updating order with ID: ${order._id?.toString()}`, error)
+    console.error(`error ${error} updating order with ID: ${id.toString()}`, error)
     return {
       success: false,
       httpStatus: HttpStatus.BAD_REQUEST,
-      error: `error ${error} updating order with ID: ${order._id?.toString()}`
+      error: `error ${error} updating order with ID: ${id.toString()}`
     }
   }
 }
+
+/*
+    const updatedOrder = await coll.findOneAndUpdate(
+      { _id: id },
+      { $set: newData }
+    )
+    if (!updatedOrder) throw new Error("unexpected error getting the new order created")
+    const { _id, ...rest } = updatedOrder
+*/

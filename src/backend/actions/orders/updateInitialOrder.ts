@@ -2,22 +2,25 @@
 
 import { updateOrder } from "@/backend/database/queries"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
-import { OrderDBType, OrderToUpdateSchema, OrderToUpdateType } from "@/features/orders"
+import { OrderToUpdateSchema, OrderToUpdateType } from "@/features/orders"
 
-export const updateInitialOrder = async (order: OrderToUpdateType): Promise<ServerActionResponse<OrderDBType>> => {
+interface Params {
+  id: string,
+  data: OrderToUpdateType
+}
+
+export const updateInitialOrder = async ({ id, data }: Params): Promise<ServerActionResponse<null>> => {
   try {
-    const validOrder = OrderToUpdateSchema.safeParse(order)
-    if (!validOrder.success || validOrder.data) throw validOrder.error;
+    const check = OrderToUpdateSchema.safeParse(data)
+    if (!check.success || !check.data) throw check.error;
+    const newData = check.data
 
-    const response = await updateOrder(validOrder)
-    if (!response.success || response.data) throw response.error
-
-    const updatedOrder = response.data
-    console.log("Updated Order ⚪️ updateInitialOrder", updatedOrder)
+    const response = await updateOrder({ id, data: newData })
+    if (!response.success || !response.data) throw response.error
 
     return {
       success: true,
-      data: updatedOrder,
+      data: null,
       httpStatus: HttpStatus.OK
     }
 
