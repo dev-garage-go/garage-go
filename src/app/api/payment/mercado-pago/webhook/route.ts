@@ -80,14 +80,31 @@ const handlePayment = async (paymentID: string) => {
     const merchantOrderId = payment.order ? payment.order.id : undefined
     const currentPaymentId = payment.id.toString()
 
-    const currentOrder = await getOrderByID(orderId)
+    const res = await getOrderByID(orderId)
 
-    if (!currentOrder.success || !currentOrder.data) {
-      return NextResponse.json({ error: currentOrder.error }, { status: HttpStatus.NOT_FOUND })
+    if (!res.success || !res.data) {
+      return NextResponse.json({ error: res.error }, { status: HttpStatus.NOT_FOUND })
+    }
+
+    const currentOrder = res.data
+
+    // ? Validations
+    // external_reference debe ser exactamente igual al id de la order
+    if (payment.external_reference !== currentOrder._id) {
+      console.warn(`Payment ${payment.id} external_reference does not match order ${currentOrder._id}`)
+      return NextResponse.json({ error: 'external_reference mismatch' }, { status: HttpStatus.BAD_REQUEST })
+    }
+
+    // net_received_amount debe ser !== 0
+    // evitar actualizar una orden con un pago que se aprobó pero nunca se acreditó,
+    // por errores de cuenta bancaria o retenciones
+    if (payment.transaction_details.net_received_amount <= 0) {
+      console.warn(`Net received amount is 0 for payment ${payment.id}`)
+      return NextResponse.json({ error: 'zero net received amount' }, { status: HttpStatus.BAD_REQUEST })
     }
 
     // if the order has already been updated with this payment_id, return and do nothing
-    if (currentOrder.data.payment_id === currentPaymentId) {
+    if (currentOrder.payment_id === currentPaymentId) {
       console.log(`Payment ${currentPaymentId} already processed for order ${orderId}`)
       return NextResponse.json({}, { status: HttpStatus.OK })
     }
