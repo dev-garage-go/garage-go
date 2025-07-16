@@ -13,6 +13,8 @@ if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
 
 const token = process.env.MERCADO_PAGO_ACCESS_TOKEN
 
+// TODO: Ver como integrar la logica de las Merchant_Orders en handleMerchantOrder
+
 // ? Important: 
 // MP hace un POST a este webhook enviando una URL con los query params 'id' y 'topic'
 // lo importante es definir un comportamiento en base a estos 2 campos ya que el body de la request en algunos casos esta vacio,
@@ -129,13 +131,28 @@ const handleMerchantOrder = async (orderID: string) => {
     const check = MerchantOrderMPValidator.safeParse(body)
 
     if (!check.success) {
-      console.error("invalid MP merchant_order payload", check.error);
-      return NextResponse.json({ message: 'invalid MP merchant_order payload', error: check.error }, { status: HttpStatus.INTERNAL_SERVER_ERROR })
+      console.error("error validating merchant_order payload from mercado pago", check.error);
+      return NextResponse.json({
+        message: 'error validating merchant_order payload from mercado pago',
+        error: check.error
+      }, { status: HttpStatus.INTERNAL_SERVER_ERROR })
     }
 
-    const order = check.data
+    const merchantOrder = check.data
 
-    return NextResponse.json({}, { status: HttpStatus.OK })
+    // filter approved payments
+    const approvedPayments = merchantOrder.payments.find(p =>
+      p.status === "approved" && p.status_detail === "accredited"
+    )
+
+    if (!approvedPayments) {
+      console.log(`Merchant Order ${orderID} received, but no approved/accredited payment found`) // nothing to do
+      return NextResponse.json({}, { status: HttpStatus.OK })
+    }
+
+    // Derive handlePayment() with found payment_id
+    const paymentId = approvedPayments.id.toString()
+    return await handlePayment(paymentId)
 
   } catch (error) {
     console.error(error)
