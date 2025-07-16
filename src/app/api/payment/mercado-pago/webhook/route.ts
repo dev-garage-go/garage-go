@@ -13,8 +13,6 @@ if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
 
 const token = process.env.MERCADO_PAGO_ACCESS_TOKEN
 
-// TODO: Ver como integrar la logica de las Merchant_Orders en handleMerchantOrder
-
 // ? Important: 
 // MP hace un POST a este webhook enviando una URL con los query params 'id' y 'topic'
 // lo importante es definir un comportamiento en base a estos 2 campos ya que el body de la request en algunos casos esta vacio,

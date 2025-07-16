@@ -11,15 +11,29 @@ export const calculateMileageChargeByVehicle = async (vehicle: VehicleWithString
   try {
     if (!vehicle) throw new Error("vehicle not exist in the charge request")
 
+    // TODO: poner en vigencia nuevamente los valores
+    // switch (vehicle.type) {
+    //   case "city car / sedan":
+    //     subtotal = 222186       // $222.186 CL 
+    //     break
+    //   case "suv / camioneta":
+    //     subtotal = 263336       // $263.336 CL
+    //     break
+    //   case "alta gama":
+    //     subtotal = 440533       // $440.533 CL
+    //     break
+    //   default: 0
+    // }
+
     switch (vehicle.type) {
       case "city car / sedan":
-        subtotal = 222186       // $222.186 CL 
+        subtotal = 100       // $222.186 CL 
         break
       case "suv / camioneta":
-        subtotal = 263336       // $263.336 CL
+        subtotal = 110       // $263.336 CL
         break
       case "alta gama":
-        subtotal = 440533       // $440.533 CL
+        subtotal = 120       // $440.533 CL
         break
       default: 0
     }
