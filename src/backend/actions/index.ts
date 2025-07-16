@@ -30,3 +30,4 @@ export { addNewVehicle } from './vehicle/addNewVehicle';
 // Orders
 export { createInitialOrder } from './orders/createInitialOrder'
 export { updateInitialOrder } from './orders/updateInitialOrder'
+export { getOrderByID } from './orders/getOrderByID'
