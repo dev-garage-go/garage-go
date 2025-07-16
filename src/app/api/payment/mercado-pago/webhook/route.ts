@@ -13,15 +13,28 @@ if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
 
 const token = process.env.MERCADO_PAGO_ACCESS_TOKEN
 
-// ? Important: 
-// MP hace un POST a este webhook enviando una URL con los query params 'id' y 'topic'
-// lo importante es definir un comportamiento en base a estos 2 campos ya que el body de la request en algunos casos esta vacio,
-// cuando no lo esta es de tipo (@/features/payment -> WebhookMPType), pero si convertimos siempre el body en json y validamos con Zod
-// obtendremos en mas de una ocasion errores en el tipeo de datos que espera Zod y los que la app recibe realmente
+/*
+? Important: 
 
-// Example URLs
-// URL: https://localhost:3000/api/payment/mercado-pago/webhook?id=117032201618&topic=payment
-// URL: https://localhost:3000/api/payment/mercado-pago/webhook?id=32102273571&topic=merchant_order
+  Mercado Pago hace un POST a este webhook enviando una URL con los query params 'id' y 'topic', 
+  donde topic puede ser de tipo 'payment' o 'merchant_order', lo importante es definir un comportamiento en base a estos 2 campos
+  (ya que el body de la request en algunos casos esta vacio), por lo tanto no tiene sentido obtener su body haciendo req.json().
+  Es importante manejar la lógica tanto si 'topic=payment' como si 'topic=merchant_order' ya que a veces topic=payment puede no venir
+  debido a errores propios de Mercado Pago, por lo que en estos casos merchant_order termina siendo algo mas confiable.
+
+  La lógica en si es encontrar los pagos que se realizaron y actualizar la orden con los datos del pago.
+  Para ello vamos a crear una función handlePayment que se encargara de actualizar la orden con los nuevos campos del pago,
+  y en caso de que no venga topic=payment, buscaremos en la merchant_order si existen pagos aprobados,
+  en caso de que si le pasamos su id a handlePayment para que actualice los datos. 
+  De esta manera manejamos ambos escenarios pero derivamos siempre la lógica de actualizar la orden a una sola función (handlePayment),
+  evitando duplicar logica.
+
+  Example URLs sent by Mercado Pago, method: POST
+  URL: https://localhost:3000/api/payment/mercado-pago/webhook?id=117032201618&topic=payment
+  URL: https://localhost:3000/api/payment/mercado-pago/webhook?id=32102273571&topic=merchant_order
+
+*/
+
 
 export async function POST(request: NextRequest) {
   try {
