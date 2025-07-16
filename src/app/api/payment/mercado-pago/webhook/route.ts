@@ -1,6 +1,6 @@
 // Postman Docs: https://documenter.getpostman.com/view/15366798/2sAXjKasp4#intro -> CheckoutPro
 import { NextRequest, NextResponse } from "next/server"
-import { updateInitialOrder } from "@/backend/actions"
+import { getOrderByID, updateInitialOrder } from "@/backend/actions"
 import { roundedDecimals } from "@/utils"
 
 import { HttpStatus } from "@/backend/types"
@@ -76,10 +76,24 @@ const handlePayment = async (paymentID: string) => {
 
     const payment = check.data
 
-    // data to update order
-    const successfullyPayment = payment.status === 'approved' && payment.status_detail === 'accredited'
     const orderId = payment.external_reference
     const merchantOrderId = payment.order ? payment.order.id : undefined
+    const currentPaymentId = payment.id.toString()
+
+    const currentOrder = await getOrderByID(orderId)
+
+    if (!currentOrder.success || !currentOrder.data) {
+      return NextResponse.json({ error: currentOrder.error }, { status: HttpStatus.NOT_FOUND })
+    }
+
+    // if the order has already been updated with this payment_id, return and do nothing
+    if (currentOrder.data.payment_id === currentPaymentId) {
+      console.log(`Payment ${currentPaymentId} already processed for order ${orderId}`)
+      return NextResponse.json({}, { status: HttpStatus.OK })
+    }
+
+    // data to update order
+    const successfullyPayment = payment.status === 'approved' && payment.status_detail === 'accredited'
     const paidAt = successfullyPayment ? new Date(Date.now()).toISOString() : null
     const fee = roundedDecimals(payment.transaction_amount - payment.transaction_details.net_received_amount)
 
