@@ -1,11 +1,13 @@
 // Service to send emails: Resend
 // Docs: https://resend.com/docs/send-with-nextjs
 
+import { NextResponse } from 'next/server';
 import { APIResponse } from '@/backend/types';
+import { CreateEmailResponseSuccess, Resend } from 'resend';
+
+import { ServicesNames } from '@/features/services';
 import { OrderEmailComponent } from '@/features/emails';
 import { OrderEmailSchema, OrderEmailType } from '@/features/emails/schemas/emails';
-import { NextResponse } from 'next/server';
-import { CreateEmailResponseSuccess, Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 const noReplyDomainEmail = process.env.NO_REPLY_DOMAIN_EMAIL
@@ -25,6 +27,7 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<C
     if (!check.success) throw check.error
 
     const { email, name, secure_token, service_name } = body
+    const serviceName = service_name as ServicesNames
 
     const isProd = process.env.NODE_ENV === "production";
     let data: CreateEmailResponseSuccess | null;
@@ -34,8 +37,8 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<C
       const response = await resend.emails.send({
         from: `GarageGo <${noReplyDomainEmail!}>`,
         to: [email],
-        subject: 'Confirmación de reserva',
-        react: OrderEmailComponent({ name, service_name, secure_token }),
+        subject: 'Consulte el estado de su Orden',
+        react: OrderEmailComponent({ name, service_name: serviceName, secure_token }),
       });
 
       data = response.data;
@@ -45,8 +48,8 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<C
       const response = await resend.emails.send({
         from: 'Acme <onboarding@resend.dev>',
         to: ['development@garageservice.cl'], // or can use the resend dashboard email: delivered@resend.dev
-        subject: 'Confirmación de reserva',
-        react: OrderEmailComponent({ name, service_name, secure_token }),
+        subject: 'Consulte el estado de su Orden',
+        react: OrderEmailComponent({ name, service_name: serviceName, secure_token }),
         headers: {
           'X-Resend-Development-Mode': 'true'
         }
