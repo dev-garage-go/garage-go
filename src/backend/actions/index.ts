@@ -15,9 +15,6 @@ export { getBookings } from './booking/getBookings';
 export { getBookingByID } from './booking/getBookingByID';
 export { updateBookingWithOrderID } from './booking/updateBookingWithOrderId';
 
-// Emails
-export { sendEmailAction } from './emails/send-email';
-
 // Payment
 export { calculateFinalChargeByService } from './payment/charges/by-service'
 export { calculateBaseChargeByVehicle } from './payment/charges/by-vehicle'

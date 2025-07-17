@@ -1,3 +1,2 @@
-export * from './components/ConfirmationBookingEmail';
+export * from './components/OrderEmail';
 export * from './context/EmailContext';
-export * from './types/confirmation';
