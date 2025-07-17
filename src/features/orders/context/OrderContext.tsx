@@ -5,6 +5,7 @@ import { createContext, useContext } from "react"
 import { ParamsToCreateInitialOrder } from "../schemas/orders"
 import { useRouter } from "next/navigation"
 import { APIResponse, EndpointResponse } from '@/backend/types';
+import { useEmailContext } from "@/features/emails"
 
 interface Props {
   children: React.ReactNode
@@ -24,6 +25,8 @@ export const useOrderContext = () => {
 
 export const OrderContextProvider = ({ children }: Props) => {
   const router = useRouter()
+  const { sendOrderStateEmail } = useEmailContext()
+
   // calls action to craete the initial order
   const sendInitialOrderRequest = async ({ provider, booking_id }: ParamsToCreateInitialOrder) => {
     try {
@@ -31,6 +34,7 @@ export const OrderContextProvider = ({ children }: Props) => {
       if (!result.success || !result.data) throw new Error(result.error)
       const initialOrder = result.data
 
+      // send request to gateway endpoint selected
       const myHeaders = new Headers()
       myHeaders.append("Content-Type", "application/json")
 
@@ -53,11 +57,12 @@ export const OrderContextProvider = ({ children }: Props) => {
       if (!body.success) throw new Error(body.error)
       if (!body.data) throw new Error("error getting path of redirectURL")
 
+      // redirect to gateway checkout
       const checkoutUrl = body.data.redirectURL
-
-      // delete cookies when initial order was created
-      // TODO: await deleteBaseAmountInCookie()
       router.push(checkoutUrl)
+
+      // TODO: delete cookies when initial order was created
+      // await deleteBaseAmountInCookie()
 
     } catch (error) {
       console.error(error)
