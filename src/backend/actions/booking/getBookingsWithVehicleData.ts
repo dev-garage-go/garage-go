@@ -18,7 +18,7 @@ export const getBookingsWithVehicleData = async (): Promise<ServerActionResponse
 
     const bookings = await Promise.all(
       rawBookings.map(async (booking) => {
-        const { vehicle_id, _id: bId, ...restBooking } = booking
+        const { vehicle_id, _id: bId, order_id, ...restBooking } = booking
 
         // search vehicle data using the vehicleID
         const vehicle = await vehicleColl.findOne({ _id: vehicle_id })
@@ -32,6 +32,7 @@ export const getBookingsWithVehicleData = async (): Promise<ServerActionResponse
 
         return {
           _id: validBookingId,
+          order_id: order_id ? order_id.toString() : null,
           vehicle: {
             _id: validVehicleID,
             ...restVehicle

@@ -41,6 +41,7 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
     }
 
     const validBookingToDB: BookingDB = {
+      order_id: null,
       vehicle_id: vehicleObjectId,
       ...rest
     }

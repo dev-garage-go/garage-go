@@ -13,6 +13,7 @@ export { createBooking } from './booking/createBooking';
 export { getBookingsWithVehicleData } from './booking/getBookingsWithVehicleData';
 export { getBookings } from './booking/getBookings';
 export { getBookingByID } from './booking/getBookingByID';
+export { updateBookingWithOrderID } from './booking/updateBookingWithOrderId';
 
 // Emails
 export { sendEmailAction } from './emails/send-email';

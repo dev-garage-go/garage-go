@@ -2,7 +2,7 @@
 
 import { InitialOrderType, ParamsToCreateInitialOrder } from "@/features/orders"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
-import { getBaseAmountInCookie, getBookingByID } from "@/backend/actions"
+import { getBaseAmountInCookie, getBookingByID, updateBookingWithOrderID } from "@/backend/actions"
 import { ServerOrderResponseType } from "@/backend/database/schemas"
 import { insertOrder } from "@/backend/database/queries"
 
@@ -36,6 +36,9 @@ export const createInitialOrder = async ({ booking_id, provider }: ParamsToCreat
     const result = await insertOrder(initialOrder)
     if (!result.success || !result.data) throw new Error(result.error)
     const order = result.data
+
+    const response = await updateBookingWithOrderID({ booking_id: booking._id, order_id: order._id })
+    if (!response.success) throw response.error
 
     return {
       success: true,

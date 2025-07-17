@@ -12,11 +12,12 @@ export const getBookingByID = async (id: string): Promise<ServerActionResponse<B
 
     const booking = await coll.findOne({ _id: validID })
     if (!booking) throw new Error('error getting booking by id')
-    const { _id, vehicle_id, ...rest } = booking
+    const { _id, vehicle_id, order_id, ...rest } = booking
 
     const bookingResponse: BookingResponse = {
-      _id: booking._id.toString(),
-      vehicle_id: booking.vehicle_id.toString(),
+      _id: _id.toString(),
+      vehicle_id: vehicle_id.toString(),
+      order_id: order_id ? order_id.toString() : null,
       ...rest
     }
 
