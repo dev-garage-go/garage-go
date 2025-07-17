@@ -1,7 +1,7 @@
 import { ObjectId } from 'mongodb';
 import { getCollection } from '@/backend/database';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
-import { FinalOrderType, ServerOrderResponseType } from '@/backend/database/schemas';
+import { DatabaseOrderType, ServerOrderResponseType } from '@/backend/database/schemas';
 import { InitialOrderSchema, InitialOrderType } from '@/features/orders';
 
 export async function insertOrder(order: InitialOrderType): Promise<ServerActionResponse<ServerOrderResponseType>> {
@@ -12,7 +12,7 @@ export async function insertOrder(order: InitialOrderType): Promise<ServerAction
     const data = validOrder.data
     const { booking_id, ...restData } = data
 
-    const doc: FinalOrderType = {
+    const doc: DatabaseOrderType = {
       _id: new ObjectId(),
       booking_id: new ObjectId(booking_id),
       ...restData,

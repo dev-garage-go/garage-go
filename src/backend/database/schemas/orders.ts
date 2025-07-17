@@ -5,7 +5,7 @@ import { InitialOrderSchema, UpdateOrderFromWebhookSchema } from '@/features/ord
 import { zObjectIdSchema } from '@/utils/zod-helpers'
 
 // ................................................
-export const FinalOrderSchema = InitialOrderSchema.merge(UpdateOrderFromWebhookSchema)
+export const DatabaseOrderSchema = InitialOrderSchema.merge(UpdateOrderFromWebhookSchema)
   .omit({
     booking_id: true
   })
@@ -13,10 +13,10 @@ export const FinalOrderSchema = InitialOrderSchema.merge(UpdateOrderFromWebhookS
     _id: z.instanceof(ObjectId),
     booking_id: z.instanceof(ObjectId)
   }).strict()
-export type FinalOrderType = z.infer<typeof FinalOrderSchema>
+export type DatabaseOrderType = z.infer<typeof DatabaseOrderSchema>
 
 // ................................................
-export const ServerOrderResponseSchema = FinalOrderSchema.omit({
+export const ServerOrderResponseSchema = DatabaseOrderSchema.omit({
   _id: true,
   booking_id: true
 }).extend({
