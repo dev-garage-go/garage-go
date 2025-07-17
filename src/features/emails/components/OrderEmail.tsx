@@ -12,23 +12,26 @@ import {
   Section,
   Text,
 } from '@react-email/components';
+import { ServiceNamesMap, ServicesNames } from '@/features/services';
 
 const domain = process.env.NEXT_PUBLIC_BASE_URL
 if (!domain) throw new Error("domain in process.NEXT_PUBLIC_BASE_URL not found")
 
 interface Props {
-  firstName: string
-  service: string
-  bookingId: string
+  name: string
+  service_name: ServicesNames
+  secure_token: string
 }
 
-export const ConfirmationBookingEmail = ({ firstName, service, bookingId }: Props) => {
-  const imgPath = `${domain}/images/garage_go_email.png`; // Usa una URL absoluta pública
+export const OrderEmailComponent = ({ name, secure_token, service_name }: Props) => {
+  const imgPath = `${domain}/images/garage_go_email.png`;   // Usa una URL absoluta pública
+  const orderStateUrl = `${domain}/orders/${secure_token}`  // path para ver estado de la orden
+  const serviceName = ServiceNamesMap[service_name]
 
   return (
     <Html>
       <Head />
-      <Preview>Tu reserva en Garage Go fue confirmada</Preview>
+      <Preview>Tu orden en Garage Go ha sido creada con exito</Preview>
 
       <Body style={{ backgroundColor: '#ffffff', margin: 0, padding: 0, fontFamily: "sans-serif" }}>
         <Container style={{ width: "100%", maxWidth: "100%", margin: '0 auto', padding: '10px' }}>
@@ -42,14 +45,14 @@ export const ConfirmationBookingEmail = ({ firstName, service, bookingId }: Prop
           </Section>
 
           <Section style={{ marginTop: '32px' }}>
-            <Text style={{ fontSize: '22px', fontWeight: 'bold' }}>¡Hola {firstName}!</Text>
+            <Text style={{ fontSize: '22px', fontWeight: 'bold' }}>¡Hola {name}!</Text>
 
             <Text style={{ fontSize: '16px', lineHeight: '1.5' }}>
-              Queremos confirmarte que tu reserva de <strong>{service}</strong> se ha realizado con éxito. Estamos encantados de que nos hayas elegido y estamos listos para ofrecerte el mejor servicio.
+              Queremos confirmarte que tu orden de <strong>{serviceName}</strong> se ha creado con éxito. Estamos encantados de que nos hayas elegido y estamos listos para ofrecerte el mejor servicio.
             </Text>
 
             <Text style={{ margin: '24px 0', fontSize: '16px' }}>
-              El ID de tu reserva es: <strong>#{bookingId}</strong>
+              Puede visitar el estado de su orden con este link: <strong>{orderStateUrl}</strong>
             </Text>
 
             <Section style={{ backgroundColor: '#EFF6FF', padding: '10px', borderRadius: '12px' }}>
