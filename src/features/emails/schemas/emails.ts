@@ -5,5 +5,5 @@ export const OrderEmailSchema = z.object({
   name: z.string(),
   secure_token: z.string().uuid(),
   service_name: z.string()
-})
+}).strict()
 export type OrderEmailType = z.infer<typeof OrderEmailSchema>

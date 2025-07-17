@@ -2,7 +2,8 @@
 // Docs: https://resend.com/docs/send-with-nextjs
 
 import { APIResponse } from '@/backend/types';
-import { ConfirmationBookingEmail, ConfirmationBookingEmailInterface } from '@/features/emails';
+import { OrderEmailComponent } from '@/features/emails';
+import { OrderEmailSchema, OrderEmailType } from '@/features/emails/schemas/emails';
 import { NextResponse } from 'next/server';
 import { CreateEmailResponseSuccess, Resend } from 'resend';
 
@@ -19,8 +20,11 @@ if (!process.env.NO_REPLY_DOMAIN_EMAIL) {
 
 export async function POST(request: Request): Promise<NextResponse<APIResponse<CreateEmailResponseSuccess>>> {
   try {
-    const body = (await request.json()) as ConfirmationBookingEmailInterface;
-    const { bookingId, firstName, service, userEmail } = body
+    const body: OrderEmailType = await request.json();
+    const check = OrderEmailSchema.safeParse(body)
+    if (!check.success) throw check.error
+
+    const { email, name, secure_token, service_name } = body
 
     const isProd = process.env.NODE_ENV === "production";
     let data: CreateEmailResponseSuccess | null;
@@ -29,9 +33,9 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<C
     if (isProd) {
       const response = await resend.emails.send({
         from: `GarageGo <${noReplyDomainEmail!}>`,
-        to: [userEmail],
+        to: [email],
         subject: 'Confirmación de reserva',
-        react: ConfirmationBookingEmail({ firstName, bookingId, service }),
+        react: OrderEmailComponent({ name, service_name, secure_token }),
       });
 
       data = response.data;
@@ -42,7 +46,7 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<C
         from: 'Acme <onboarding@resend.dev>',
         to: ['development@garageservice.cl'], // or can use the resend dashboard email: delivered@resend.dev
         subject: 'Confirmación de reserva',
-        react: ConfirmationBookingEmail({ firstName, bookingId, service }),
+        react: OrderEmailComponent({ name, service_name, secure_token }),
         headers: {
           'X-Resend-Development-Mode': 'true'
         }
