@@ -33,10 +33,12 @@ export const createInitialOrder = async ({ booking_id, provider }: ParamsToCreat
       expires_at: new Date(Date.now() + 1000 * 60 * 60).toISOString() // TTL = 1h
     }
 
+    // insert the initial order in database
     const result = await insertOrder(initialOrder)
     if (!result.success || !result.data) throw new Error(result.error)
     const order = result.data
 
+    // set the boooking with order._id
     const response = await updateBookingWithOrderID({ booking_id: booking._id, order_id: order._id })
     if (!response.success) throw response.error
 
