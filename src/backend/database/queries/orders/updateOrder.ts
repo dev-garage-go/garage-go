@@ -3,21 +3,16 @@ import { getCollection } from '@/backend/database';
 import { ServerOrderResponseType } from '@/backend/database/schemas';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
 
-import { UpdateOrderFromPaymentSchema, UpdateOrderFromPaymentType } from '@/features/orders';
+import { ParamsToUpdateOrder, UpdateOrderFromWebhookSchema } from '@/features/orders';
 import { zObjectIdSchema } from '@/utils/zod-helpers';
 
-interface Params {
-  id: string,
-  data: UpdateOrderFromPaymentType
-}
-
-export async function updateOrder({ id, data }: Params): Promise<ServerActionResponse<ServerOrderResponseType>> {
+export async function updateOrder({ id, data }: ParamsToUpdateOrder): Promise<ServerActionResponse<ServerOrderResponseType>> {
   try {
     const checkId = zObjectIdSchema.safeParse(id)
     if (!checkId.success) throw checkId.error
     const objectId = new ObjectId(checkId.data)
 
-    const validOrder = UpdateOrderFromPaymentSchema.safeParse(data)
+    const validOrder = UpdateOrderFromWebhookSchema.safeParse(data)
     if (!validOrder.success) throw validOrder.error;
 
     const newData = validOrder.data

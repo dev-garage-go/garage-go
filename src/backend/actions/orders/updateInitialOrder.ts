@@ -2,16 +2,11 @@
 
 import { updateOrder } from "@/backend/database/queries"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
-import { UpdateOrderFromPaymentSchema, UpdateOrderFromPaymentType } from "@/features/orders"
+import { ParamsToUpdateOrder, UpdateOrderFromWebhookSchema } from "@/features/orders"
 
-interface Params {
-  id: string,
-  data: UpdateOrderFromPaymentType
-}
-
-export const updateInitialOrder = async ({ id, data }: Params): Promise<ServerActionResponse<null>> => {
+export const updateInitialOrder = async ({ id, data }: ParamsToUpdateOrder): Promise<ServerActionResponse<null>> => {
   try {
-    const check = UpdateOrderFromPaymentSchema.safeParse(data)
+    const check = UpdateOrderFromWebhookSchema.safeParse(data)
     if (!check.success || !check.data) throw check.error;
     const newData = check.data
 

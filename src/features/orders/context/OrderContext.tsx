@@ -2,7 +2,7 @@
 
 import { createInitialOrder, deleteBaseAmountInCookie } from "@/backend/actions"
 import { createContext, useContext } from "react"
-import { PayloadInitialOrder } from "../schemas/orders"
+import { ParamsToCreateInitialOrder } from "../schemas/orders"
 import { useRouter } from "next/navigation"
 import { APIResponse, EndpointResponse } from '@/backend/types';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 interface OrderContextType {
-  sendInitialOrderRequest: ({ provider, booking_id }: PayloadInitialOrder) => Promise<void>
+  sendInitialOrderRequest: ({ provider, booking_id }: ParamsToCreateInitialOrder) => Promise<void>
 }
 
 const OrderContext = createContext<OrderContextType | null>(null)
@@ -25,7 +25,7 @@ export const useOrderContext = () => {
 export const OrderContextProvider = ({ children }: Props) => {
   const router = useRouter()
   // calls action to craete the initial order
-  const sendInitialOrderRequest = async ({ provider, booking_id }: PayloadInitialOrder) => {
+  const sendInitialOrderRequest = async ({ provider, booking_id }: ParamsToCreateInitialOrder) => {
     try {
       const result = await createInitialOrder({ provider, booking_id })
       if (!result.success || !result.data) throw new Error(result.error)

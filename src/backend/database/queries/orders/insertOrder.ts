@@ -2,11 +2,11 @@ import { ObjectId } from 'mongodb';
 import { getCollection } from '@/backend/database';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
 import { FinalOrderType, ServerOrderResponseType } from '@/backend/database/schemas';
-import { CreateOrderInputSchema, CreateOrderInputType } from '@/features/orders';
+import { InitialOrderSchema, InitialOrderType } from '@/features/orders';
 
-export async function insertOrder(order: CreateOrderInputType): Promise<ServerActionResponse<ServerOrderResponseType>> {
+export async function insertOrder(order: InitialOrderType): Promise<ServerActionResponse<ServerOrderResponseType>> {
   try {
-    const validOrder = CreateOrderInputSchema.safeParse(order)
+    const validOrder = InitialOrderSchema.safeParse(order)
     if (!validOrder.success) throw validOrder.error;
 
     const data = validOrder.data

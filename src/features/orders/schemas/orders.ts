@@ -12,12 +12,12 @@ export type PayStatusDetailType = z.infer<typeof PayStatusDetail>
 
 
 // ................................................
-export interface PayloadInitialOrder {
+export interface ParamsToCreateInitialOrder {
   booking_id: string,
   provider: ProvidersType
 }
 
-export const CreateOrderInputSchema = z.object({
+export const InitialOrderSchema = z.object({
   provider: Providers,
   email: z.string().email(),
   booking_id: zObjectIdSchema,
@@ -28,10 +28,15 @@ export const CreateOrderInputSchema = z.object({
   updated_at: zISOString,
   expires_at: zISOString,
 }).strict();
-export type CreateOrderInputType = z.infer<typeof CreateOrderInputSchema>
+export type InitialOrderType = z.infer<typeof InitialOrderSchema>
 
 // ................................................
-export const UpdateOrderFromPaymentSchema = z.object({
+export interface ParamsToUpdateOrder {
+  id: string,
+  data: UpdateOrderFromWebhookType
+}
+
+export const UpdateOrderFromWebhookSchema = z.object({
   payment_id: z.string().optional(),
   merchant_order_id: z.string().optional(),
   pay_status: PayStatus,
@@ -45,4 +50,4 @@ export const UpdateOrderFromPaymentSchema = z.object({
   updated_at: zISOString,
   expires_at: zISOString.nullable(),
 }).strict();
-export type UpdateOrderFromPaymentType = z.infer<typeof UpdateOrderFromPaymentSchema>
+export type UpdateOrderFromWebhookType = z.infer<typeof UpdateOrderFromWebhookSchema>

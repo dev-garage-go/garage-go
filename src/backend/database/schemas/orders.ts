@@ -1,11 +1,11 @@
 import { z } from 'zod'
 import { ObjectId } from 'mongodb'
 
-import { CreateOrderInputSchema, UpdateOrderFromPaymentSchema } from '@/features/orders'
+import { InitialOrderSchema, UpdateOrderFromWebhookSchema } from '@/features/orders'
 import { zObjectIdSchema } from '@/utils/zod-helpers'
 
 // ................................................
-export const FinalOrderSchema = CreateOrderInputSchema.merge(UpdateOrderFromPaymentSchema)
+export const FinalOrderSchema = InitialOrderSchema.merge(UpdateOrderFromWebhookSchema)
   .omit({
     booking_id: true
   })
