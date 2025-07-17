@@ -3,7 +3,7 @@
 import { randomUUID } from "crypto"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 import { ServerOrderResponseType } from "@/backend/database/schemas"
-import { getBaseAmountInCookie, getBookingByID, updateBookingWithOrderID } from "@/backend/actions"
+import { getBaseAmountInCookie, getBookingByID, sendOrderStateEmail, updateBookingWithOrderID } from "@/backend/actions"
 import { insertOrder } from "@/backend/database/queries"
 
 import { InitialOrderType, ParamsToCreateInitialOrder } from "@/features/orders"
@@ -45,6 +45,16 @@ export const createInitialOrder = async ({ booking_id, provider }: ParamsToCreat
     const response = await updateBookingWithOrderID({ booking_id: booking._id, order_id: order._id })
     if (!response.success) throw response.error
 
+    // send email with order to the user
+    const sendEmail = await sendOrderStateEmail({
+      email: booking.user.email,
+      name: booking.user.name,
+      service_name: booking.service.name,
+      secure_token: order.secure_token,
+    })
+
+    if (!sendEmail.success) throw new Error(`error sending email: ${sendEmail.error}`)
+
     return {
       success: true,
       httpStatus: HttpStatus.OK,
@@ -55,7 +65,7 @@ export const createInitialOrder = async ({ booking_id, provider }: ParamsToCreat
     return {
       success: false,
       httpStatus: HttpStatus.INTERNAL_SERVER_ERROR,
-      error: error as string
+      error: (error as Error).message
     }
   }
 }

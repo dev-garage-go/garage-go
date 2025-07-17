@@ -6,6 +6,7 @@ import { ParamsToCreateInitialOrder } from "../schemas/orders"
 import { useRouter } from "next/navigation"
 import { APIResponse, EndpointResponse } from '@/backend/types';
 import { useEmailContext } from "@/features/emails"
+import { toast } from "sonner"
 
 interface Props {
   children: React.ReactNode
@@ -25,13 +26,19 @@ export const useOrderContext = () => {
 
 export const OrderContextProvider = ({ children }: Props) => {
   const router = useRouter()
-  const { sendOrderStateEmail } = useEmailContext()
 
   // calls action to craete the initial order
   const sendInitialOrderRequest = async ({ provider, booking_id }: ParamsToCreateInitialOrder) => {
     try {
       const result = await createInitialOrder({ provider, booking_id })
-      if (!result.success || !result.data) throw new Error(result.error)
+      if (!result.success || !result.data) {
+        if (result.error?.includes("email")) {
+          toast.error("Error enviando el email del estado de su Orden")
+          throw new Error(result.error)
+        }
+        throw new Error(result.error)
+      }
+
       const initialOrder = result.data
 
       // send request to gateway endpoint selected
