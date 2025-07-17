@@ -1,8 +1,8 @@
 'use server'
 
 import { updateOrder } from "@/backend/database/queries"
-import { UpdateOrderFromPaymentSchema, UpdateOrderFromPaymentType } from "@/backend/database/schemas"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
+import { UpdateOrderFromPaymentSchema, UpdateOrderFromPaymentType } from "@/features/orders"
 
 interface Params {
   id: string,

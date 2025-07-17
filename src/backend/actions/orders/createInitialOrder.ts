@@ -1,9 +1,9 @@
 "use server"
 
-import { PayloadInitialOrder } from "@/features/orders"
+import { CreateOrderInputType, PayloadInitialOrder } from "@/features/orders"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 import { getBaseAmountInCookie, getBookingByID } from "@/backend/actions"
-import { ServerOrderResponseType, CreateOrderInputType } from "@/backend/database/schemas"
+import { ServerOrderResponseType } from "@/backend/database/schemas"
 import { insertOrder } from "@/backend/database/queries"
 
 export const createInitialOrder = async ({ booking_id, provider }: PayloadInitialOrder): Promise<ServerActionResponse<ServerOrderResponseType>> => {

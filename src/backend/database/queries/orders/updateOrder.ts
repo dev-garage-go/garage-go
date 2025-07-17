@@ -1,7 +1,9 @@
 import { ObjectId } from 'mongodb';
 import { getCollection } from '@/backend/database';
-import { ServerOrderResponseType, UpdateOrderFromPaymentSchema, UpdateOrderFromPaymentType } from '@/backend/database/schemas';
+import { ServerOrderResponseType } from '@/backend/database/schemas';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
+
+import { UpdateOrderFromPaymentSchema, UpdateOrderFromPaymentType } from '@/features/orders';
 import { zObjectIdSchema } from '@/utils/zod-helpers';
 
 interface Params {

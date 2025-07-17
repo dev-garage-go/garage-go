@@ -1,7 +1,8 @@
 import { ObjectId } from 'mongodb';
 import { getCollection } from '@/backend/database';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
-import { CreateOrderInputSchema, CreateOrderInputType, FinalOrderType, ServerOrderResponseType } from '@/backend/database/schemas';
+import { FinalOrderType, ServerOrderResponseType } from '@/backend/database/schemas';
+import { CreateOrderInputSchema, CreateOrderInputType } from '@/features/orders';
 
 export async function insertOrder(order: CreateOrderInputType): Promise<ServerActionResponse<ServerOrderResponseType>> {
   try {

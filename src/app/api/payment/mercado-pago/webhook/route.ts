@@ -5,8 +5,7 @@ import { roundedDecimals } from "@/utils"
 
 import { HttpStatus } from "@/backend/types"
 import { MerchantOrderMPValidator, SimplifiedPaymentMPValidator } from "@/features/payment"
-import { PayStatusType } from "@/features/orders"
-import { UpdateOrderFromPaymentType } from "@/backend/database/schemas"
+import { PayStatusType, UpdateOrderFromPaymentType } from "@/features/orders"
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
   throw new Error('the enviroment variable MERCADO_PAGO_ACCESS_TOKEN not found')
