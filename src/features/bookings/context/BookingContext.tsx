@@ -39,7 +39,6 @@ export const useBookingContext = () => {
 export const BookingContextProvider = ({ children }: Props) => {
   const { vehicleInStorage } = useVehicleContext()
   const { serviceInStorage } = useServiceContext()
-  const { amountInCookie } = usePaymentContext()
 
   const router = useRouter()
 
