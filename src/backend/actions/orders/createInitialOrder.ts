@@ -1,10 +1,12 @@
 "use server"
 
-import { InitialOrderType, ParamsToCreateInitialOrder } from "@/features/orders"
+import { randomUUID } from "crypto"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
-import { getBaseAmountInCookie, getBookingByID, updateBookingWithOrderID } from "@/backend/actions"
 import { ServerOrderResponseType } from "@/backend/database/schemas"
+import { getBaseAmountInCookie, getBookingByID, updateBookingWithOrderID } from "@/backend/actions"
 import { insertOrder } from "@/backend/database/queries"
+
+import { InitialOrderType, ParamsToCreateInitialOrder } from "@/features/orders"
 
 export const createInitialOrder = async ({ booking_id, provider }: ParamsToCreateInitialOrder): Promise<ServerActionResponse<ServerOrderResponseType>> => {
   try {
@@ -22,6 +24,7 @@ export const createInitialOrder = async ({ booking_id, provider }: ParamsToCreat
     const initialOrder: InitialOrderType = {
       provider: provider,                           // mercado-pago | getnet | webpay
       email: booking.user.email,
+      secure_token: randomUUID(),
       booking_id: booking._id,                      // payload.booking.id
       external_reference: booking.service.type,     // service type
       subtotal: amount.subtotal,

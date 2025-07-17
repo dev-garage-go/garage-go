@@ -31,6 +31,7 @@ export const InitialOrderSchema = z.object({
   provider: Providers,
   email: z.string().email(),
   booking_id: zObjectIdSchema,
+  secure_token: z.string().uuid(),
   external_reference: z.string(),
   currency: Currencies.optional().default("CLP").optional(),   // TODO: implementar en el futuro, detectando el pais del usuario con su IP
   subtotal: z.number(),
@@ -52,7 +53,6 @@ export interface ParamsToUpdateOrder {
 
 export const UpdateOrderFromWebhookSchema = z.object({
   payment_id: z.string().optional(),
-  secure_token: z.string().uuid(),
   merchant_order_id: z.string().optional(),
   pay_status: PayStatus,
   pay_status_detail: z.string().optional(),
