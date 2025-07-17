@@ -5,7 +5,7 @@ import { HttpStatus, ServerActionResponse } from "@/backend/types"
 
 import { zObjectIdSchema } from "@/utils/zod-helpers"
 
-export const getOrderByID = async (id: string): Promise<ServerActionResponse<OrderServerResponseType>> => {
+export const findOrderByID = async (id: string): Promise<ServerActionResponse<OrderServerResponseType>> => {
   try {
     const checkId = zObjectIdSchema.safeParse(id)
     if (!checkId.success) throw checkId.error

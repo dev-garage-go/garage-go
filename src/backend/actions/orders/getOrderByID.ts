@@ -1,5 +1,6 @@
 "use server"
 
+import { findOrderByID } from "@/backend/database/queries"
 import { OrderServerResponseType } from "@/backend/database/schemas"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 import { zObjectIdSchema } from "@/utils/zod-helpers"
@@ -9,7 +10,7 @@ export const getOrderByID = async (id: string): Promise<ServerActionResponse<Ord
     const checkId = zObjectIdSchema.safeParse(id)
     if (!checkId.success) throw checkId.error
 
-    const result = await getOrderByID(id)
+    const result = await findOrderByID(id)
     if (!result.success) throw result.error
 
     return {
