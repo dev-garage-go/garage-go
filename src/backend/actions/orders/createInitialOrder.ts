@@ -24,6 +24,8 @@ export const createInitialOrder = async ({ booking_id, provider }: ParamsToCreat
       email: booking.user.email,
       booking_id: booking._id,                      // payload.booking.id
       external_reference: booking.service.type,     // service type
+      subtotal: amount.subtotal,
+      disscount: amount.disscount,
       total_price: amount.total,                    // payload.total_price
       pay_status: 'pending',
       created_at: new Date().toISOString(),
