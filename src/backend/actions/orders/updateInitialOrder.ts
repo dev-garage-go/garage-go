@@ -1,17 +1,17 @@
 'use server'
 
 import { updateOrder } from "@/backend/database/queries"
+import { UpdateOrderFromPaymentSchema, UpdateOrderFromPaymentType } from "@/backend/database/schemas"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
-import { OrderToUpdateSchema, OrderToUpdateType } from "@/features/orders"
 
 interface Params {
   id: string,
-  data: OrderToUpdateType
+  data: UpdateOrderFromPaymentType
 }
 
 export const updateInitialOrder = async ({ id, data }: Params): Promise<ServerActionResponse<null>> => {
   try {
-    const check = OrderToUpdateSchema.safeParse(data)
+    const check = UpdateOrderFromPaymentSchema.safeParse(data)
     if (!check.success || !check.data) throw check.error;
     const newData = check.data
 

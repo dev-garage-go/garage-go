@@ -1,11 +1,11 @@
 import { ObjectId } from "mongodb"
 import { getCollection } from "@/backend/database/methods"
-import { OrderServerResponseType } from "@/backend/database/schemas"
+import { ServerOrderResponseType } from "@/backend/database/schemas"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 
 import { zObjectIdSchema } from "@/utils/zod-helpers"
 
-export const findOrderByID = async (id: string): Promise<ServerActionResponse<OrderServerResponseType>> => {
+export const findOrderByID = async (id: string): Promise<ServerActionResponse<ServerOrderResponseType>> => {
   try {
     const checkId = zObjectIdSchema.safeParse(id)
     if (!checkId.success) throw checkId.error
@@ -17,7 +17,7 @@ export const findOrderByID = async (id: string): Promise<ServerActionResponse<Or
     if (!order) throw new Error(`the order with id ${id} doesn't exist`)
     const { _id, booking_id, ...rest } = order
 
-    const response: OrderServerResponseType = {
+    const response: ServerOrderResponseType = {
       _id: _id.toString(),
       booking_id: booking_id.toString(),
       ...rest

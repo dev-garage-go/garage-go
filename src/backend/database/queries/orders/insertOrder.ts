@@ -1,21 +1,20 @@
 import { ObjectId } from 'mongodb';
 import { getCollection } from '@/backend/database';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
-import { OrderDBType, OrderServerResponseType } from '@/backend/database/schemas';
-import { InitialOrderSchema, InitialOrderType } from '@/features/orders';
+import { CreateOrderInputSchema, CreateOrderInputType, FinalOrderType, ServerOrderResponseType } from '@/backend/database/schemas';
 
-export async function insertOrder(order: InitialOrderType): Promise<ServerActionResponse<OrderServerResponseType>> {
+export async function insertOrder(order: CreateOrderInputType): Promise<ServerActionResponse<ServerOrderResponseType>> {
   try {
-    const validOrder = InitialOrderSchema.safeParse(order)
+    const validOrder = CreateOrderInputSchema.safeParse(order)
     if (!validOrder.success) throw validOrder.error;
 
     const data = validOrder.data
     const { booking_id, ...restData } = data
 
-    const doc: OrderDBType = {
+    const doc: FinalOrderType = {
       _id: new ObjectId(),
       booking_id: new ObjectId(booking_id),
-      ...restData
+      ...restData,
     }
 
     const coll = await getCollection('orders')
@@ -26,7 +25,7 @@ export async function insertOrder(order: InitialOrderType): Promise<ServerAction
     if (!newOrder) throw new Error("unexpected error getting the new order created")
     const { _id: newOrderId, booking_id: bId, ...rest } = newOrder
 
-    const response: OrderServerResponseType = {
+    const response: ServerOrderResponseType = {
       _id: newOrderId.toString(),
       booking_id: bId.toString(),
       ...rest

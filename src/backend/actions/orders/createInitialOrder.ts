@@ -1,12 +1,12 @@
 "use server"
 
-import { InitialOrderType, PayloadInitialOrder } from "@/features/orders"
+import { PayloadInitialOrder } from "@/features/orders"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 import { getBaseAmountInCookie, getBookingByID } from "@/backend/actions"
-import { InitialOrderServerResponseType } from "@/backend/database/schemas"
+import { ServerOrderResponseType, CreateOrderInputType } from "@/backend/database/schemas"
 import { insertOrder } from "@/backend/database/queries"
 
-export const createInitialOrder = async ({ booking_id, provider }: PayloadInitialOrder): Promise<ServerActionResponse<InitialOrderServerResponseType>> => {
+export const createInitialOrder = async ({ booking_id, provider }: PayloadInitialOrder): Promise<ServerActionResponse<ServerOrderResponseType>> => {
   try {
     const amountResponse = await getBaseAmountInCookie()
     if (!amountResponse.success || !amountResponse.data) throw new Error(amountResponse.error)
@@ -18,8 +18,8 @@ export const createInitialOrder = async ({ booking_id, provider }: PayloadInitia
     const booking = bookingResponse.data
     if (!booking._id) throw new Error("couldn't find the booking id")
 
-    // TODO: Ver que hago con el external_reference
-    const initialOrder: InitialOrderType = {
+    // creates initial order
+    const initialOrder: CreateOrderInputType = {
       provider: provider,                           // mercado-pago | getnet | webpay
       email: booking.user.email,
       booking_id: booking._id,                      // payload.booking.id

@@ -5,7 +5,8 @@ import { roundedDecimals } from "@/utils"
 
 import { HttpStatus } from "@/backend/types"
 import { MerchantOrderMPValidator, SimplifiedPaymentMPValidator } from "@/features/payment"
-import { OrderToUpdateType, PayStatusType } from "@/features/orders"
+import { PayStatusType } from "@/features/orders"
+import { UpdateOrderFromPaymentType } from "@/backend/database/schemas"
 
 if (!process.env.MERCADO_PAGO_ACCESS_TOKEN) {
   throw new Error('the enviroment variable MERCADO_PAGO_ACCESS_TOKEN not found')
@@ -128,7 +129,7 @@ const handlePayment = async (paymentID: string) => {
     const threeDaysTTL = new Date(Date.now() + 1000 * 60 * 60 * 72).toISOString()
     const expiresAt = successfullyPayment ? null : threeDaysTTL   // new TTL -> 3 days
 
-    const updateOrder: OrderToUpdateType = {
+    const updateOrder: UpdateOrderFromPaymentType = {
       pay_status: payment.status as PayStatusType,
       pay_status_detail: payment.status_detail,
       payment_id: payment.id.toString(),

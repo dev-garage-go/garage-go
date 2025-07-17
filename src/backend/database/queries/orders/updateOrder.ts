@@ -1,22 +1,21 @@
 import { ObjectId } from 'mongodb';
 import { getCollection } from '@/backend/database';
-import { OrderServerResponseType } from '@/backend/database/schemas';
+import { ServerOrderResponseType, UpdateOrderFromPaymentSchema, UpdateOrderFromPaymentType } from '@/backend/database/schemas';
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
-import { OrderToUpdateSchema, OrderToUpdateType } from '@/features/orders';
 import { zObjectIdSchema } from '@/utils/zod-helpers';
 
 interface Params {
   id: string,
-  data: OrderToUpdateType
+  data: UpdateOrderFromPaymentType
 }
 
-export async function updateOrder({ id, data }: Params): Promise<ServerActionResponse<OrderServerResponseType>> {
+export async function updateOrder({ id, data }: Params): Promise<ServerActionResponse<ServerOrderResponseType>> {
   try {
     const checkId = zObjectIdSchema.safeParse(id)
     if (!checkId.success) throw checkId.error
     const objectId = new ObjectId(checkId.data)
 
-    const validOrder = OrderToUpdateSchema.safeParse(data)
+    const validOrder = UpdateOrderFromPaymentSchema.safeParse(data)
     if (!validOrder.success) throw validOrder.error;
 
     const newData = validOrder.data
@@ -32,7 +31,7 @@ export async function updateOrder({ id, data }: Params): Promise<ServerActionRes
     if (!updatedOrder) throw new Error("unexpected error getting the new order created")
     const { _id, booking_id, ...rest } = updatedOrder
 
-    const response: OrderServerResponseType = {
+    const response: ServerOrderResponseType = {
       _id: _id.toString(),
       booking_id: booking_id.toString(),
       ...rest

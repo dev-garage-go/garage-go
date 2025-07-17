@@ -3,13 +3,13 @@
 import { connectDatabase } from "./connect"
 import type { Collection } from "mongodb"
 import { BookingDB, ServiceDB, VehicleDB } from "./types"
-import { OrderDBType } from "./schemas"
+import { FinalOrderType } from "./schemas"
 
 type CollectionMap = {
   vehicles: VehicleDB
   bookings: BookingDB
   services: ServiceDB
-  orders: OrderDBType
+  orders: FinalOrderType
 }
 
 export const getCollection = async <K extends keyof CollectionMap>(
