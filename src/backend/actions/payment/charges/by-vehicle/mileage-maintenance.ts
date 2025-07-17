@@ -2,9 +2,9 @@
 
 import { AmountInterface } from "@/features/bookings";
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
-import { VehicleWithStringIDInterface } from "@/features/vehicle";
+import { ServerVehicleResponse } from "@/features/vehicle";
 
-export const calculateMileageChargeByVehicle = async (vehicle: VehicleWithStringIDInterface): Promise<ServerActionResponse<AmountInterface>> => {
+export const calculateMileageChargeByVehicle = async (vehicle: ServerVehicleResponse): Promise<ServerActionResponse<AmountInterface>> => {
   let subtotal = 0
   let disscount = 0
 

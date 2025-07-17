@@ -14,6 +14,6 @@ export interface VehicleDataInterface {
   type: vehicleTypes
 }
 
-export interface VehicleWithStringIDInterface extends VehicleDataInterface {
+export interface ServerVehicleResponse extends VehicleDataInterface {
   _id: string
 }

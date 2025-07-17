@@ -111,9 +111,9 @@ export const BookingTable = ({ bookings }: Props) => {
                 {booking.user.address}
               </td>
 
-              <td className="table-row-style text-wrap font-semibold">
+              {/* <td className="table-row-style text-wrap font-semibold">
                 $ {formatNumberWithDots(booking.amount.total)}
-              </td>
+              </td> */}
 
               {/* TODO: Habilitar columna de estado */}
               {/* <td className="table-row-style text-wrap font-semibold">

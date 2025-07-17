@@ -82,9 +82,8 @@ export const BookingContextProvider = ({ children }: Props) => {
     const booking: BookingServiceDataInterface = {
       service: serviceInStorage,
       appointment: data.appointment,
-      vehicleID: vehicleInStorage._id,
+      vehicle_id: vehicleInStorage._id,
       user: userData,
-      amount: amountInCookie
     }
 
     const responseBooking = await createBooking(booking)

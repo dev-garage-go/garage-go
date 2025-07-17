@@ -18,11 +18,11 @@ export const getBookingsWithVehicleData = async (): Promise<ServerActionResponse
 
     const bookings = await Promise.all(
       rawBookings.map(async (booking) => {
-        const { vehicleID, _id: bId, ...restBooking } = booking
+        const { vehicle_id, _id: bId, ...restBooking } = booking
 
         // search vehicle data using the vehicleID
-        const vehicle = await vehicleColl.findOne({ _id: vehicleID })
-        if (!vehicle) throw new Error(`vehicle with id: ${vehicleID} not found`)
+        const vehicle = await vehicleColl.findOne({ _id: vehicle_id })
+        if (!vehicle) throw new Error(`vehicle with id: ${vehicle_id} not found`)
 
         const { _id: vId, ...restVehicle } = vehicle;
 

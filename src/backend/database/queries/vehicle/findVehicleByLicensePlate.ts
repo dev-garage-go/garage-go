@@ -1,8 +1,8 @@
 import { getCollection } from "@/backend/database"
 import { ServerActionResponse, HttpStatus } from "@/backend/types"
-import { licensePlateType, VehicleWithStringIDInterface } from "@/features/vehicle"
+import { licensePlateType, ServerVehicleResponse } from "@/features/vehicle"
 
-export const findVehicleByLicensePlate = async (licensePlate: licensePlateType): Promise<ServerActionResponse<VehicleWithStringIDInterface | null>> => {
+export const findVehicleByLicensePlate = async (licensePlate: licensePlateType): Promise<ServerActionResponse<ServerVehicleResponse | null>> => {
   try {
     const coll = await getCollection("vehicles")
     const vehicle = await coll.findOne({ licensePlate: licensePlate.toLowerCase() })
@@ -18,7 +18,7 @@ export const findVehicleByLicensePlate = async (licensePlate: licensePlateType):
     const { _id: dbId, ...rest } = vehicle;
 
     // converts _id in string 
-    const clientVehicle: VehicleWithStringIDInterface = {
+    const clientVehicle: ServerVehicleResponse = {
       _id: dbId.toString(),
       ...rest
     }

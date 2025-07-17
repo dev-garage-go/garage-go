@@ -12,17 +12,17 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
     if (!coll) throw new Error("error getting bookings collection")
 
     // Convert the vehicle id in a mongo ObjectId
-    const { vehicleID, ...rest } = booking
+    const { vehicle_id, ...rest } = booking
 
-    if (!ObjectId.isValid(vehicleID)) {
+    if (!ObjectId.isValid(vehicle_id)) {
       return {
         success: false,
-        error: `Invalid ID format: ${vehicleID}`,
+        error: `Invalid ID format: ${vehicle_id}`,
         httpStatus: HttpStatus.BAD_REQUEST
       }
     }
 
-    const vehicleObjectId = new ObjectId(vehicleID)
+    const vehicleObjectId = new ObjectId(vehicle_id)
 
     // Verify is the vehicle exist
     const verifyVehicle = await getVehicleByID(vehicleObjectId)
@@ -41,7 +41,7 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
     }
 
     const validBookingToDB: BookingDB = {
-      vehicleID: vehicleObjectId,
+      vehicle_id: vehicleObjectId,
       ...rest
     }
 
@@ -53,11 +53,11 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
 
     // Only plain objects can be passed to Client Components from Server Components
     // Mongo ObjectId are converted to strings
-    const { _id: newBookingID, vehicleID: newBookingVehicleID, ...restBookingCreated } = bookingCreated
+    const { _id: newBookingID, vehicle_id: newBookingVehicleID, ...restBookingCreated } = bookingCreated
 
     const validBookingToClient: BookingWithStringIDInterface = {
       _id: newBookingID.toString(),
-      vehicleID: newBookingVehicleID.toString(),
+      vehicle_id: newBookingVehicleID.toString(),
       ...restBookingCreated
     }
 

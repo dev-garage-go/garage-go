@@ -1,12 +1,12 @@
 import { removeDotsFromNumber } from "@/utils"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
-import { VehicleDataInterface, vehicleTypes, VehicleWithStringIDInterface } from "@/features/vehicle"
+import { VehicleDataInterface, vehicleTypes, ServerVehicleResponse } from "@/features/vehicle"
 
 import { getCollection } from "@/backend/database"
 import { VehicleDB } from '@/backend/database/types';
 import { findVehicleByLicensePlate } from "./findVehicleByLicensePlate";
 
-export const insertVehicle = async (vehicle: VehicleDataInterface): Promise<ServerActionResponse<VehicleWithStringIDInterface>> => {
+export const insertVehicle = async (vehicle: VehicleDataInterface): Promise<ServerActionResponse<ServerVehicleResponse>> => {
   try {
     const v: VehicleDB = {
       licensePlate: vehicle.licensePlate.toLowerCase().trim(),
@@ -28,7 +28,7 @@ export const insertVehicle = async (vehicle: VehicleDataInterface): Promise<Serv
     if (existVehicle.success && existVehicle.data) {
       const { _id: dbId, ...rest } = existVehicle.data;
       // converts _id in string 
-      const clientVehicle: VehicleWithStringIDInterface = {
+      const clientVehicle: ServerVehicleResponse = {
         _id: dbId.toString(),
         ...rest
       }
@@ -56,7 +56,7 @@ export const insertVehicle = async (vehicle: VehicleDataInterface): Promise<Serv
     // converts _id in string 
     const { _id: dbId, ...rest } = newVehicle;
 
-    const clientVehicle: VehicleWithStringIDInterface = {
+    const clientVehicle: ServerVehicleResponse = {
       _id: dbId.toString(),
       ...rest
     }

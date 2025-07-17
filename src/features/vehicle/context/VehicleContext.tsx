@@ -4,14 +4,14 @@ import { createContext, useContext, useEffect, useState } from "react"
 import {
   customVehicleUpdateEvent,
   vehicleKey,
-  VehicleWithStringIDInterface
+  ServerVehicleResponse
 } from "@/features/vehicle"
 
 interface VehicleContextType {
   showModal: boolean
   setShowModal: React.Dispatch<React.SetStateAction<boolean>>
-  vehicleInStorage: VehicleWithStringIDInterface | null
-  setVehicleInStorage: (data: VehicleWithStringIDInterface) => void
+  vehicleInStorage: ServerVehicleResponse | null
+  setVehicleInStorage: (data: ServerVehicleResponse) => void
   deleteVehicle: () => void
   creatingVehicleAnimation: boolean
   searchingVehicleAnimation: boolean
@@ -38,21 +38,21 @@ export const VehicleContextProvider = ({ children }: Props) => {
   const isClient = typeof window !== 'undefined' // avoids server errors
 
   const [showModal, setShowModal] = useState<boolean>(false)
-  const [vehicleInStorage, setVehicleInStorageState] = useState<VehicleWithStringIDInterface | null>(null)
+  const [vehicleInStorage, setVehicleInStorageState] = useState<ServerVehicleResponse | null>(null)
 
   // animations
   const [creatingVehicleAnimation, setCreatingVehicleAnimation] = useState<boolean>(false)
   const [searchingVehicleAnimation, setSearchingVehicleAnimation] = useState<boolean>(false)
 
   // methods to impact localStorage
-  const setVehicleInStorage = (data: VehicleWithStringIDInterface): void => {
+  const setVehicleInStorage = (data: ServerVehicleResponse): void => {
     if (!isClient) return
 
     // converts object id in a simple string
     const { _id, ...rest } = data
     const validId = _id ? _id.toString() : ''
 
-    const validObjectStorage: VehicleWithStringIDInterface = {
+    const validObjectStorage: ServerVehicleResponse = {
       _id: validId,
       ...rest
     }

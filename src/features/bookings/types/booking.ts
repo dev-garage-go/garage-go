@@ -34,12 +34,11 @@ export interface AmountInterface {
 export interface BookingServiceDataInterface {
   service: ServicesDataType,
   user: UserInterface,
-  vehicleID: string,  // al guardarlo en localstorage el Mongo ObjectID se convierte automaticamente en string
+  vehicle_id: string,  // al guardarlo en localstorage el Mongo ObjectID se convierte automaticamente en string
   appointment: Appointment
-  amount: AmountInterface
 }
 
-export interface BookingWithStringIDInterface extends BookingServiceDataInterface  {
+export interface BookingWithStringIDInterface extends BookingServiceDataInterface {
   _id: string
 }
 

@@ -2,10 +2,10 @@
 
 import { getCollection } from "@/backend/database"
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
-import { VehicleWithStringIDInterface } from "@/features/vehicle";
+import { ServerVehicleResponse } from "@/features/vehicle";
 import { ObjectId } from "mongodb";
 
-export const getVehicleByID = async (id: ObjectId): Promise<ServerActionResponse<VehicleWithStringIDInterface | null>> => {
+export const getVehicleByID = async (id: ObjectId): Promise<ServerActionResponse<ServerVehicleResponse | null>> => {
   try {
     if (!ObjectId.isValid(id)) {
       return {
@@ -29,7 +29,7 @@ export const getVehicleByID = async (id: ObjectId): Promise<ServerActionResponse
     const { _id: dbId, ...rest } = vehicle;
 
     // converts _id in string 
-    const clientVehicle: VehicleWithStringIDInterface = {
+    const clientVehicle: ServerVehicleResponse = {
       _id: dbId.toString(),
       ...rest
     }
