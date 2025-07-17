@@ -1,10 +1,11 @@
 'use server'
 
+import { ObjectId } from "mongodb";
 import { BookingDB, getCollection } from "@/backend/database";
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
+import { getVehicleByID } from "@/backend/actions";
+
 import { BookingServiceDataInterface, BookingWithStringIDInterface } from "@/features/bookings";
-import { ObjectId } from "mongodb";
-import { getVehicleByID } from "../vehicle/getVehicleByID";
 
 export const createBooking = async (booking: BookingServiceDataInterface): Promise<ServerActionResponse<BookingWithStringIDInterface>> => {
   try {
@@ -17,7 +18,7 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
     if (!ObjectId.isValid(vehicle_id)) {
       return {
         success: false,
-        error: `Invalid ID format: ${vehicle_id}`,
+        error: `invalid vehicle id: ${vehicle_id}`,
         httpStatus: HttpStatus.BAD_REQUEST
       }
     }
@@ -35,7 +36,7 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
     } else if (verifyVehicle.success && !verifyVehicle.data) {
       return {
         success: false,
-        error: `The vehicle with ID: ${vehicleObjectId} not exist`,
+        error: `vehicle with id: ${vehicleObjectId} doens't exist`,
         httpStatus: HttpStatus.NOT_FOUND
       }
     }
@@ -44,6 +45,13 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
       order_id: null,
       vehicle_id: vehicleObjectId,
       ...rest
+    }
+
+    const existBooking = await coll.findOne({ _id: validBookingToDB })
+    if (existBooking) return {
+      success: false,
+      error: "error getting the booking created",
+      httpStatus: HttpStatus.CONFLICT
     }
 
     const result = await coll.insertOne(validBookingToDB)
