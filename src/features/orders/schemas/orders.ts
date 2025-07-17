@@ -52,6 +52,7 @@ export interface ParamsToUpdateOrder {
 
 export const UpdateOrderFromWebhookSchema = z.object({
   payment_id: z.string().optional(),
+  secure_token: z.string().uuid(),
   merchant_order_id: z.string().optional(),
   pay_status: PayStatus,
   pay_status_detail: z.string().optional(),

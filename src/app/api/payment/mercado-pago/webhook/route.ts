@@ -2,6 +2,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { getOrderByID, updateInitialOrder } from "@/backend/actions"
 import { roundedDecimals } from "@/utils"
+import { randomUUID } from "crypto"
 
 import { HttpStatus } from "@/backend/types"
 import { MerchantOrderMPValidator, SimplifiedPaymentMPValidator } from "@/features/payment"
@@ -132,6 +133,7 @@ const handlePayment = async (paymentID: string) => {
       pay_status: payment.status as PayStatusType,
       pay_status_detail: payment.status_detail,
       payment_id: payment.id.toString(),
+      secure_token: randomUUID(),
       merchant_order_id: merchantOrderId,
       fee: fee,
       installments: payment.installments,
