@@ -10,7 +10,7 @@ export type PayStatusType = z.infer<typeof PayStatus>
 export const PayStatusDetail = z.enum(["accredited", "pending_capture", "partially_refunded", "expired", "in_process", "bank_error", "cc_rejected_blacklist"])
 export type PayStatusDetailType = z.infer<typeof PayStatusDetail>
 
-export const Currencies = z.enum(["ARS", "CLS"])
+export const Currencies = z.enum(["ARS", "CLP"])
 export type CurrenciesType = z.infer<typeof Currencies>
 
 // ? Disccount types
@@ -32,10 +32,10 @@ export const InitialOrderSchema = z.object({
   email: z.string().email(),
   booking_id: zObjectIdSchema,
   external_reference: z.string(),
-  currency: Currencies.optional(),                  // TODO: implementar en el futuro
+  currency: Currencies.optional().default("CLP").optional(),   // TODO: implementar en el futuro, detectando el pais del usuario con su IP
   subtotal: z.number(),
   disscount: z.number(),
-  disccount_type: DisscountTypes.optional(),        // TODO: implementar en el futuro
+  disccount_type: DisscountTypes.optional(),                   // TODO: implementar en el futuro
   total_price: z.number(),
   pay_status: PayStatus.default("pending"),
   created_at: zISOString,
