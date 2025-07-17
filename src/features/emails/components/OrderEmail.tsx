@@ -8,6 +8,7 @@ import {
   Head,
   Html,
   Img,
+  Link,
   Preview,
   Section,
   Text,
@@ -31,7 +32,7 @@ export const OrderEmailComponent = ({ name, secure_token, service_name }: Props)
   return (
     <Html>
       <Head />
-      <Preview>Tu orden en Garage Go ha sido creada con exito</Preview>
+      <Preview>Tu Orden de pago ha sido creada con exito</Preview>
 
       <Body style={{ backgroundColor: '#ffffff', margin: 0, padding: 0, fontFamily: "sans-serif" }}>
         <Container style={{ width: "100%", maxWidth: "100%", margin: '0 auto', padding: '10px' }}>
@@ -52,7 +53,7 @@ export const OrderEmailComponent = ({ name, secure_token, service_name }: Props)
             </Text>
 
             <Text style={{ margin: '24px 0', fontSize: '16px' }}>
-              Puede visitar el estado de su orden con este link: <strong>{orderStateUrl}</strong>
+              Puede visitar el estado de su orden con este link: <Link href={orderStateUrl}><strong>Ver Orden</strong></Link>
             </Text>
 
             <Section style={{ backgroundColor: '#EFF6FF', padding: '10px', borderRadius: '12px' }}>
