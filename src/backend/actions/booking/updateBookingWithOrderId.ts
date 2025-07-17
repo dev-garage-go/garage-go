@@ -14,27 +14,25 @@ export const updateBookingWithOrderID = async ({ booking_id, order_id }: Params)
   try {
     // verify the correct format of IDs
     const checkOrderId = zObjectIdSchema.safeParse(order_id)
-    if (!checkOrderId.success) throw new Error("error validating order id: ", checkOrderId.error)
+    if (!checkOrderId.success) throw new Error(`error validating order id: ${checkOrderId.error}`)
     const orderObjectId = new ObjectId(checkOrderId.data)
 
-    const checkBookingId = zObjectIdSchema.safeParse(order_id)
-    if (!checkBookingId.success) throw new Error("error validating booking id: ", checkBookingId.error)
+    const checkBookingId = zObjectIdSchema.safeParse(booking_id)
+    if (!checkBookingId.success) throw new Error(`error validating booking id: ${checkBookingId.error}`)
     const bookingObjectId = new ObjectId(checkBookingId.data)
 
     // obtain booking and orders collections
     const ordersColl = await getCollection("orders")
     const bookingsColl = await getCollection("bookings")
-
-    // verify if order exist
-    const existOrder = await ordersColl.findOne({ _id: bookingObjectId })
-    if (!existOrder) throw new Error(`order with id ${order_id} doesn't exist`)
+    if (!ordersColl || !bookingsColl) throw new Error("unexpected error getting bookings or orders collection")
 
     // if the order exist, update the booking with order_id
-    const existBooking = await bookingsColl.findOneAndUpdate(
+    const updatedBooking = await bookingsColl.updateOne(
       { _id: bookingObjectId },
-      { $set: { order_id: orderObjectId } }
+      { $set: { order_id: orderObjectId } },
     )
-    if (!existBooking) throw new Error(`booking with id ${booking_id} doesn't exist`)
+
+    if (updatedBooking.modifiedCount === 0) throw new Error(`error updating booking with id: ${booking_id}`)
 
     return {
       success: true,
