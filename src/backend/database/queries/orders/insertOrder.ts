@@ -11,16 +11,27 @@ export async function insertOrder(order: InitialOrderType): Promise<ServerAction
 
     const data = validOrder.data
     const { booking_id, ...restData } = data
+    const validBookingId = new ObjectId(booking_id)
 
     const doc: DatabaseOrderType = {
       _id: new ObjectId(),
-      booking_id: new ObjectId(booking_id),
+      booking_id: validBookingId,
       ...restData,
     }
 
     const coll = await getCollection('orders')
+    if (!coll) throw new Error("unexpected error obtaining orders collection")
+
+    const existOrder = await coll.findOne({ booking_id: validBookingId })
+    if (existOrder) {
+      return {
+        success: false,
+        error: "the order already exist",
+        httpStatus: HttpStatus.CONFLICT
+      }
+    }
+
     const result = await coll.insertOne(doc)
-    if (!coll || !result) throw new Error("unexpected error inserting a new order")
 
     const newOrder = await coll.findOne({ _id: result.insertedId })
     if (!newOrder) throw new Error("unexpected error getting the new order created")
@@ -34,7 +45,7 @@ export async function insertOrder(order: InitialOrderType): Promise<ServerAction
 
     return {
       success: true,
-      httpStatus: HttpStatus.OK,
+      httpStatus: HttpStatus.CREATED,
       data: response
     }
 
