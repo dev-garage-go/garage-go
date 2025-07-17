@@ -7,6 +7,7 @@ export interface BookingDB extends Omit<BookingServiceDataInterface, 'vehicle_id
   _id?: ObjectId  // debe ser opcional porque de esa forma mongodb se encarga de crearlo al impactar la db
   price?: number
   vehicle_id: ObjectId
+  order_id?: ObjectId
 }
 
 // objeto de como deberian ver los vendedores una reserva, ignorando el vehicleID 
