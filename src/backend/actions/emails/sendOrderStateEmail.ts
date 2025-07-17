@@ -3,6 +3,9 @@
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
 import { OrderEmailType } from "@/features/emails"
 
+const domain = process.env.NEXT_PUBLIC_BASE_URL
+if (!domain) throw new Error("domain in process.NEXT_PUBLIC_BASE_URL not found")
+
 export const sendOrderStateEmail = async ({ email, name, secure_token, service_name }: OrderEmailType): Promise<ServerActionResponse<null>> => {
   try {
     const emailData: OrderEmailType = {
@@ -12,7 +15,9 @@ export const sendOrderStateEmail = async ({ email, name, secure_token, service_n
       service_name
     }
 
-    const response = await fetch("/api/emails/order", {
+    const apiRoute = `${domain}/api/emails/orders`
+
+    const response = await fetch(apiRoute, {
       headers: { 'Content-Type': 'application/json', },
       method: 'POST',
       body: JSON.stringify(emailData),
