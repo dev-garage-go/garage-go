@@ -22,6 +22,7 @@ export const ContextsProvider = ({ children }: Props) => {
       <Toaster
         richColors
         position="bottom-center"
+        duration={4000}
       />
       <RefreshListener />
 

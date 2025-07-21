@@ -89,7 +89,7 @@ export const BookingContextProvider = ({ children }: Props) => {
 
     if (!responseBooking.success) {
       setBookingCreated(false)
-      toast.error('Ocurrio un error inesperado creando su reserva')
+      toast.error(`Ocurrio un error inesperado creando su reserva: ${responseBooking.error}`)
       throw new Error(responseBooking.error)
     }
 
