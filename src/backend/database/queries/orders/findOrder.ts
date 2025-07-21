@@ -49,7 +49,12 @@ export const findOrderBySecureToken = async (token: string): Promise<ServerActio
     const coll = await getCollection("orders")
     const order = await coll.findOne({ secure_token: validToken })
 
-    if (!order) throw new Error(`the order with token ${token} doesn't exist`)
+    if (!order) return {
+      success: false,
+      error: `the order with token ${token} doesn't exist`,
+      httpStatus: HttpStatus.NOT_FOUND
+    }
+
     const { _id, booking_id, ...rest } = order
 
     const response: ServerOrderResponseType = {
