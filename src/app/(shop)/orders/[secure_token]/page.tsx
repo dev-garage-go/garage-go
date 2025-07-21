@@ -1,6 +1,5 @@
 import { getOrderBySecureToken } from "@/backend/actions";
 import { ErrorMessage } from "@/components";
-import { toast } from "sonner";
 
 interface Props {
   params: {
