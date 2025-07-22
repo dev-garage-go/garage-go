@@ -86,8 +86,8 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<M
     })
 
     if (!response.ok) {
-      const err = await response.json()
-      return NextResponse.json<APIResponse<null>>({
+      const err: Error = await response.json()
+      return NextResponse.json<APIResponse<Error>>({
         success: false,
         error: `mercado pago error ${err}`
       }, { status: response.status })
@@ -98,7 +98,7 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<M
 
     if (!check.success) {
       console.error('zod error validating MP preference', check.error)
-      return NextResponse.json<APIResponse<null>>({
+      return NextResponse.json<APIResponse<Error>>({
         success: false,
         error: check.error.message
       }, { status: response.status })
@@ -115,7 +115,7 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<M
 
   catch (error) {
     console.error(error)
-    return NextResponse.json<APIResponse<null>>({
+    return NextResponse.json<APIResponse<Error>>({
       success: false,
       error: error as string
     }, { status: HttpStatus.INTERNAL_SERVER_ERROR })
