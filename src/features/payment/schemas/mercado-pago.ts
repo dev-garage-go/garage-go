@@ -55,6 +55,12 @@ export const PreferenceMPValidator = z.object({
   financing_group: z.string().nullable()
 })
 
+// -----------------------------
+// Custom response
+
+export interface MpRedirect {
+  redirectURL: string
+}
 
 // -----------------------------
 // WebHook - objects sent from MP
