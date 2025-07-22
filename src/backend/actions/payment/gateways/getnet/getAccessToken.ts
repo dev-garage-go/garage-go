@@ -1,5 +1,6 @@
-import { NextResponse } from "next/server";
-import { APIResponse, HttpStatus } from "@/backend/types";
+'use server'
+
+import { HttpStatus, ServerActionResponse } from "@/backend/types";
 import { GetnetAuthTokenSchema, GetnetAuthTokenType } from "@/features/payment";
 
 const clientId = process.env.GETNET_CLIENT_ID
@@ -8,8 +9,8 @@ if (!clientId) throw new Error("the enviroment variable GETNET_CLIENT_ID doesn't
 const clientSecret = process.env.GETNET_CLIENT_SECRET
 if (!clientSecret) throw new Error("the enviroment variable GETNET_CLIENT_SECRET doesn't exist")
 
-// generates the token to authenticate in Getnet
-export async function POST(request: Request): Promise<NextResponse<APIResponse<GetnetAuthTokenType | Error>>> {
+// obtain an access token to authenticate in Getnet
+export async function getAccessToken(): Promise<ServerActionResponse<GetnetAuthTokenType>> {
   try {
     const authUrl = process.env.GETNET_AUTH_API_URL
     if (!authUrl) throw new Error("the enviroment variable GETNET_AUTH_API_URL doesn't exist")
@@ -35,16 +36,18 @@ export async function POST(request: Request): Promise<NextResponse<APIResponse<G
 
     const data = check.data
 
-    return NextResponse.json<APIResponse<GetnetAuthTokenType>>({
+    return {
       success: true,
-      data: data
-    }, { status: HttpStatus.CREATED })
+      data: data,
+      httpStatus: HttpStatus.OK
+    }
 
   } catch (error) {
     console.error(error)
-    return NextResponse.json<APIResponse<null>>({
+    return {
       success: false,
-      error: error as string
-    }, { status: HttpStatus.INTERNAL_SERVER_ERROR })
+      error: error as string,
+      httpStatus: HttpStatus.INTERNAL_SERVER_ERROR
+    }
   }
 }
