@@ -8,7 +8,7 @@ if (!clientId) throw new Error("the enviroment variable GETNET_CLIENT_ID doesn't
 const clientSecret = process.env.GETNET_CLIENT_SECRET
 if (!clientSecret) throw new Error("the enviroment variable GETNET_CLIENT_SECRET doesn't exist")
 
-// generates the token to encrypt the user credit/debit cards
+// generates the token to authenticate in Getnet
 export async function POST(request: Request): Promise<NextResponse<APIResponse<GetnetAuthTokenType | Error>>> {
   try {
     const authUrl = process.env.GETNET_AUTH_API_URL
