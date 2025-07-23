@@ -42,7 +42,7 @@ export const createTransaction = async (params: PaymentParamsType): Promise<Serv
     return {
       success: true,
       data: token,
-      httpStatus: HttpStatus.OK
+      httpStatus: HttpStatus.CREATED
     }
 
   } catch (error) {
