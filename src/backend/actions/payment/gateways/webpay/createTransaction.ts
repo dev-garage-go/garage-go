@@ -12,7 +12,7 @@ if (!commerceCode) throw new Error("the enviroment variable WEBPAY_COMMERCE_CODE
 const apiKey = process.env.WEBPAY_API_KEY
 if (!apiKey) throw new Error("the enviroment variable WEBPAY_API_KEY doesn't exist")
 
-export const createTransaction = async (params: PaymentParamsType): Promise<ServerActionResponse<null>> => {
+export const createTransaction = async (params: PaymentParamsType): Promise<ServerActionResponse<string>> => {
   try {
     const check = PaymentParamsSchema.safeParse(params)
     if (!check.success || !check.data) throw check.error
@@ -32,14 +32,16 @@ export const createTransaction = async (params: PaymentParamsType): Promise<Serv
     })
 
     if (!response.ok) throw new Error(`webpay api responded with an error, status: ${response.status}`)
-    const data = await response.json()
+    const token = await response.json()
 
-    console.log(data)
-    // TODO: Update application order
+
+    // TODO: Webpay retorna un token y con este token debemos hacer un commit transaction
+    // esto quiere decir que nosotros hacemos una request para solicitar el estado del pago
+    console.log(token)
 
     return {
       success: true,
-      data: null,
+      data: token,
       httpStatus: HttpStatus.OK
     }
 

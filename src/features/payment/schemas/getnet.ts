@@ -29,6 +29,7 @@ export const PaymentParamsSchema = z.object({
   userOrderId: zObjectIdSchema,
   amount: z.number(),
   cardNumber: z.string(),
+  return_url: z.string().optional(),      // Webpay needs a return url to send a POST request and redirect to user
   cardHolderName: z.string(),
   expirationMonth: z.string(),
   expirationYear: z.string(),
