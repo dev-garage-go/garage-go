@@ -23,6 +23,7 @@ export { calculateFinalChargeByService } from './payment/charges/by-service'
 export { calculateBaseChargeByVehicle } from './payment/charges/by-vehicle'
 export { getBaseAmountInCookie, loadBaseAmountInCookie, deleteBaseAmountInCookie } from './payment/cookies/amount'
 export { makeCreditCardPayment } from './payment/gateways/getnet/makeCreditCardPayment'
+export { createTransaction } from './payment/gateways/webpay/createTransaction'
 
 // Vehicle
 export { getVehicleByLicensePlate } from './vehicle/getVehicleByLicensePlate';
