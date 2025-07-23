@@ -13,7 +13,7 @@ if (!apiKey) throw new Error("the enviroment variable WEBPAY_API_KEY doesn't exi
 
 export const commitTransaction = async (token: string): Promise<ServerActionResponse<null>> => {
   try {
-    // commit 
+    // commit endpoint
     const apiEndpoint = `${baseApiUrl}/rswebpaytransaction/api/webpay/v1.3/transactions/${token}`
 
     const myHeaders = new Headers()
