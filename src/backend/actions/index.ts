@@ -1,5 +1,5 @@
-import { getBookingByID } from './booking/getBookingByID';
-/*
+/* 
+! Important
 Actions cannot be exported by default because next.js will generate a conflict. This file must contain only exports named
 Example: export { functionExample } from './example-file'.
 */
