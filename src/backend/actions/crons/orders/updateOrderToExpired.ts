@@ -13,21 +13,21 @@ export async function updateOrderToExpired(): Promise<ServerActionResponse<strin
 
     const expiredTime = new Date(Date.now() - oneHour)
 
-    const expiredOrders = await coll.find({
+    const pendingOrders = await coll.find({
       pay_status: 'pending',
       expires_at: expiredTime
     }).toArray()
 
-    if (expiredOrders.length === 0) {
-      console.log("Expired orders not found")
+    if (pendingOrders.length === 0) {
+      console.log('orders with "pending" status not found')
       return {
         success: true,
-        data: "expired orders not found",
+        data: "perding orders not found",
         httpStatus: HttpStatus.NOT_FOUND
       }
     }
 
-    for (const order of expiredOrders) {
+    for (const order of pendingOrders) {
       const newTTL = (new Date(Date.now() + threeDays)).toISOString()
       await coll.updateOne(
         { _id: order._id },
@@ -41,11 +41,11 @@ export async function updateOrderToExpired(): Promise<ServerActionResponse<strin
       )
     }
 
-    console.log(`ordenes vencidas actualizadas: ${expiredOrders.length}`)
+    console.log(`ordenes con status "pending" marcadas como "expired": ${pendingOrders.length}`)
 
     return {
       success: true,
-      data: `expires orders updated: ${expiredOrders.length}`,
+      data: `pending orders marks as expired: ${pendingOrders.length}`,
       httpStatus: HttpStatus.OK
     }
 
@@ -53,7 +53,7 @@ export async function updateOrderToExpired(): Promise<ServerActionResponse<strin
     console.error(error)
     return {
       success: false,
-      error: `error in cron job in charge of updating expired orders: ${error}`,
+      error: `error in cron job in charge of mark pending orders as expired: ${error}`,
       httpStatus: HttpStatus.INTERNAL_SERVER_ERROR
     }
   }

@@ -19,7 +19,7 @@ export async function updateOrderToSoftDelete(): Promise<ServerActionResponse<st
     }).toArray()
 
     if (expiredOrders.length === 0) {
-      console.log("Expired orders not found")
+      console.log('orders with "expired" status not found')
       return {
         success: true,
         data: "expired orders not found",
@@ -41,11 +41,11 @@ export async function updateOrderToSoftDelete(): Promise<ServerActionResponse<st
       )
     }
 
-    console.log(`ordenes vencidas actualizadas: ${expiredOrders.length}`)
+    console.log(`ordenes vencidas marcadas como soft-delete: ${expiredOrders.length}`)
 
     return {
       success: true,
-      data: `expires orders updated: ${expiredOrders.length}`,
+      data: `expires orders marks as soft-delete: ${expiredOrders.length}`,
       httpStatus: HttpStatus.OK
     }
 
@@ -53,7 +53,7 @@ export async function updateOrderToSoftDelete(): Promise<ServerActionResponse<st
     console.error(error)
     return {
       success: false,
-      error: `error in cron job in charge of updating expired orders: ${error}`,
+      error: `error in cron job in charge of mark expired orders as soft-delete: ${error}`,
       httpStatus: HttpStatus.INTERNAL_SERVER_ERROR
     }
   }
