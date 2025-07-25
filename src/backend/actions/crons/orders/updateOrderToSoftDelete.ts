@@ -11,11 +11,11 @@ export async function updateOrderToSoftDelete(): Promise<ServerActionResponse<st
     const threeDays = 1000 * 60 * 60 * 72
     const fourtyFiveDays = 1000 * 60 * 60 * 24 * 45   // 45 days
 
-    const expiredTime = new Date(Date.now() - threeDays)
+    const expiredTime = new Date(Date.now() - threeDays).toISOString()
 
     const expiredOrders = await coll.find({
       pay_status: 'expired',
-      expires_at: expiredTime
+      expires_at: { $lt: expiredTime }
     }).toArray()
 
     if (expiredOrders.length === 0) {
@@ -33,7 +33,7 @@ export async function updateOrderToSoftDelete(): Promise<ServerActionResponse<st
         { _id: order._id },
         {
           $set: {
-            pay_status: 'soft-detele',
+            pay_status: 'soft-delete',
             expires_at: newTTL,
             updated_at: new Date().toISOString()
           }

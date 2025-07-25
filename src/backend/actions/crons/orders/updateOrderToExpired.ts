@@ -11,11 +11,11 @@ export async function updateOrderToExpired(): Promise<ServerActionResponse<strin
     const oneHour = 1000 * 60 * 60
     const threeDays = 1000 * 60 * 60 * 72
 
-    const expiredTime = new Date(Date.now() - oneHour)
+    const expiredTime = new Date(Date.now() - oneHour).toISOString()
 
     const pendingOrders = await coll.find({
       pay_status: 'pending',
-      expires_at: expiredTime
+      expires_at: { $lt: expiredTime }
     }).toArray()
 
     if (pendingOrders.length === 0) {
