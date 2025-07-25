@@ -4,7 +4,7 @@ import { zISOString, zObjectIdSchema } from "@/utils/zod-helpers"
 export const Providers = z.enum(["mercado-pago", "getnet", "webpay"])
 export type ProvidersType = z.infer<typeof Providers>
 
-export const PayStatus = z.enum(["approved", "in_process", "pending", "authorized", "cancelled", "refunded", "charged_back", "rejected"])
+export const PayStatus = z.enum(["approved", "in_process", "pending", "authorized", "cancelled", "refunded", "charged_back", "rejected", "expired", "soft-detele"])
 export type PayStatusType = z.infer<typeof PayStatus>
 
 export const PayStatusDetail = z.enum(["accredited", "pending_capture", "partially_refunded", "expired", "in_process", "bank_error", "cc_rejected_blacklist"])

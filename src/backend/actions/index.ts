@@ -36,3 +36,6 @@ export { createInitialOrder } from './orders/createInitialOrder'
 export { updateInitialOrder } from './orders/updateInitialOrder'
 export { getOrderByID } from './orders/getOrderByID'
 export { getOrderBySecureToken } from './orders/getOrderBySecureToken'
+
+// Crons
+export { updateOrderToExpired } from './crons/orders/updateOrderToExpired'
