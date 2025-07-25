@@ -40,3 +40,4 @@ export { getOrderBySecureToken } from './orders/getOrderBySecureToken'
 // Crons
 export { updateOrderToExpired } from './crons/orders/updateOrderToExpired'
 export { updateOrderToSoftDelete } from './crons/orders/updateOrderToSoftDelete'
+export { purgeSoftDeleteOrders } from './crons/orders/purgeSoftDeleteOrders'
