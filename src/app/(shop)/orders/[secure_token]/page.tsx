@@ -1,7 +1,10 @@
-import { getOrderBySecureToken } from "@/backend/actions";
-import { ErrorMessage } from "@/components";
-import { ServicesTypes, ServiceTypesMap } from "@/features/services";
 import { firstLetterUppercase } from "@/utils";
+import { ErrorMessage } from "@/components";
+
+import { getOrderBySecureToken } from "@/backend/actions";
+
+import { OrderStatusDetailMap, OrderStatusMap, PayStatusDetailType, PayStatusType } from "@/features/orders";
+import { ServicesTypes, ServiceTypesMap } from "@/features/services";
 
 interface Props {
   params: {
@@ -23,16 +26,25 @@ export default async function OrderSecureTokenPage({ params }: Props) {
 
   const order = response.data
 
-  const paidDate = order.paid_at ? new Date(order.paid_at).toLocaleDateString('es-CL') : 'No pagado'
+  const paidDate = order.paid_at ? new Date(order.paid_at).toLocaleDateString('es-CL', {
+    dateStyle: "long"
+  }) : 'No pagado'
+
+  const paidHour = order.paid_at ? new Date(order.paid_at).toLocaleTimeString('es-CL', {
+    timeStyle: "short"
+  }) : '-';
+
   const serviceContracted = firstLetterUppercase(ServiceTypesMap[order.external_reference as ServicesTypes])
   const provider = firstLetterUppercase(order.provider.replace("-", " "))
+  const paymentStatus = OrderStatusMap[order.pay_status as PayStatusType]
+  const paymentStatusDetail = OrderStatusDetailMap[order.pay_status_detail as PayStatusDetailType]
 
   return (
     <section className="new-page max-w-page padding-central-page w-full">
-      <div className="bg-primaryBlue-50 rounded-lg p-6">
+      <div className="bg-primaryBlue-100 rounded-lg p-6">
         <h1 className="title-h2 font-semibold">Orden: #{order._id.slice(0, 10)}</h1>
 
-        <div className="bg-primaryBlue-100 rounded-lg p-4 mt-4">
+        <div className="bg-primaryBlue-50 rounded-lg p-4 mt-4">
           <ul className="flex flex-col gap-2">
             <li>
               <span className="font-medium text-primaryBlue-700">Servicio:</span> {serviceContracted}
@@ -41,15 +53,15 @@ export default async function OrderSecureTokenPage({ params }: Props) {
               <span className="font-medium text-primaryBlue-700">Proveedor:</span> <span className="capitalize">{provider}</span>
             </li>
             <li>
-              <span className="font-medium text-primaryBlue-700">Estado del pago:</span> {order.pay_status}
+              <span className="font-medium text-primaryBlue-700">Estado del pago:</span> {paymentStatus}
             </li>
             <li>
-              <span className="font-medium text-primaryBlue-700">Detalle:</span> {order.pay_status_detail}
+              <span className="font-medium text-primaryBlue-700">Detalle:</span> {paymentStatusDetail}
             </li>
           </ul>
         </div>
 
-        <div className="bg-primaryBlue-100 rounded-lg p-4 mt-4">
+        <div className="bg-primaryBlue-50 rounded-lg p-4 mt-4">
           <ul className="flex flex-col gap-2">
             <li>
               <span className="font-medium text-primaryBlue-700">Subtotal:</span> {order.subtotal.toLocaleString('es-CL', {
@@ -80,6 +92,9 @@ export default async function OrderSecureTokenPage({ params }: Props) {
             </li>
             <li>
               <span className="font-medium text-primaryBlue-700">Pagado el:</span> {paidDate}
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">Hora del pago:</span> {paidHour}
             </li>
           </ul>
         </div>
