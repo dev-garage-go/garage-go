@@ -1,5 +1,5 @@
 import { SelectOptions } from "@/types";
-import { TypeAddress } from "../types/booking";
+import { TypeAddress } from "@/features/bookings";
 
 export const AddressTypesData: SelectOptions<TypeAddress>[] = [
   { id: 1, value: 'casa' },

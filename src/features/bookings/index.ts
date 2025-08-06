@@ -9,3 +9,4 @@ export * from './context/BookingContext';
 export * from './keys/storage';
 export * from './types/booking';
 export * from './types/schedules';
+export * from './types/user';

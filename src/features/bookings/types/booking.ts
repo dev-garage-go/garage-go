@@ -1,28 +1,7 @@
-import { Dayjs } from 'dayjs';
-import { Hour } from './schedules';
+import { AppointmentDate } from './schedules';
+import { UserInterface } from './user';
 import { ServicesDataType } from '@/features/services';
 
-export type TypeAddress = 'casa' | 'oficina' | 'depto'
-
-export interface UserInterface {
-  name: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  address: string,
-  typeAddress: TypeAddress
-  additionalInfo?: string
-}
-
-export interface AppointmentDate {
-  date: Dayjs,
-  time: Hour
-}
-
-export interface UserAppointment {
-  user: UserInterface
-  appointment: AppointmentDate
-}
 
 export interface AmountInterface {
   subtotal: number
