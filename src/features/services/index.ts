@@ -11,6 +11,7 @@ export * from './constants/components';
 export * from './constants/faqs';
 export * from './constants/tires-change';
 export * from './context/ServiceContext';
+export * from './helpers/ui-maps';
 export * from './keys/events';
 export * from './keys/storage';
 export * from './types/faqs';

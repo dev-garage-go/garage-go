@@ -1,5 +1,7 @@
 import { getOrderBySecureToken } from "@/backend/actions";
 import { ErrorMessage } from "@/components";
+import { ServicesTypes, ServiceTypesMap } from "@/features/services";
+import { firstLetterUppercase } from "@/utils";
 
 interface Props {
   params: {
@@ -21,13 +23,67 @@ export default async function OrderSecureTokenPage({ params }: Props) {
 
   const order = response.data
 
+  const paidDate = order.paid_at ? new Date(order.paid_at).toLocaleDateString('es-CL') : 'No pagado'
+  const serviceContracted = firstLetterUppercase(ServiceTypesMap[order.external_reference as ServicesTypes])
+  const provider = firstLetterUppercase(order.provider.replace("-", " "))
+
   return (
     <section className="new-page max-w-page padding-central-page w-full">
-      <div>
-        <h1>Orden: #{order._id.slice(0, 10)}</h1>
-        <pre>
-          {JSON.stringify(order, null, 2)}
-        </pre>
+      <div className="bg-primaryBlue-50 rounded-lg p-6">
+        <h1 className="title-h2 font-semibold">Orden: #{order._id.slice(0, 10)}</h1>
+
+        <div className="bg-primaryBlue-100 rounded-lg p-4 mt-4">
+          <ul className="flex flex-col gap-2">
+            <li>
+              <span className="font-medium text-primaryBlue-700">Servicio:</span> {serviceContracted}
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">Proveedor:</span> <span className="capitalize">{provider}</span>
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">Estado del pago:</span> {order.pay_status}
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">Detalle:</span> {order.pay_status_detail}
+            </li>
+          </ul>
+        </div>
+
+        <div className="bg-primaryBlue-100 rounded-lg p-4 mt-4">
+          <ul className="flex flex-col gap-2">
+            <li>
+              <span className="font-medium text-primaryBlue-700">Subtotal:</span> {order.subtotal.toLocaleString('es-CL', {
+                style: 'currency',
+                currency: 'CLP',
+                minimumFractionDigits: 0
+              })}
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">Descuento:</span> {order.disscount.toLocaleString('es-CL', {
+                style: 'currency',
+                currency: 'CLP',
+                minimumFractionDigits: 0
+              })}
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">Total:</span> {order.total_price.toLocaleString('es-CL', {
+                style: 'currency',
+                currency: 'CLP',
+                minimumFractionDigits: 0
+              })}
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">ID del pago:</span> {order.payment_id}
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">ID de su reserva:</span> {order.booking_id.slice(0, 10)}
+            </li>
+            <li>
+              <span className="font-medium text-primaryBlue-700">Pagado el:</span> {paidDate}
+            </li>
+          </ul>
+        </div>
+
       </div>
     </section>
   );
