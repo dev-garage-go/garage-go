@@ -1,19 +1,17 @@
 "use client"
 
-import { useRouter } from "next/navigation";
-import { createContext, useContext, useState } from "react"
-import { AppointmentDataInterface, BookingServiceDataInterface, UserInterface } from '@/features/bookings';
-import { bookingKey } from "../keys/storage"
+import { createContext, useContext, useEffect, useState } from "react"
+import { usePathname, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import { createBooking } from "@/backend/actions"
 
+import { AppointmentDataInterface, BookingServiceDataInterface, UserInterface, bookingKey } from '@/features/bookings';
 import { useVehicleContext } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
-import { usePaymentContext } from "@/features/payment";
 
 interface ServiceBookingType {
-  getBookingIDInStorage: () => string
+  getBookingIDInStorage: () => string | null
   setBookingIDInStorage: (id: string) => void,
   deleteBookingIDInStorage: () => void,
   createServiceBooking: (data: AppointmentDataInterface) => void,
@@ -41,16 +39,14 @@ export const BookingContextProvider = ({ children }: Props) => {
   const { serviceInStorage } = useServiceContext()
 
   const router = useRouter()
+  const pahtname = usePathname()
 
-  // saves the successful or unsuccessful response of the backend when trying to create a booking
-  const [bookingCreated, setBookingCreated] = useState<boolean | null>(null)
+  const [bookingCreated, setBookingCreated] = useState<boolean | null>(null) // saves the successful or unsuccessful response of the backend when trying to create a booking
+  const [creatingBookingAnimation, setCreatingBookingAnimation] = useState<boolean>(false) // animates btn when the booking has been creating
 
-  // animates btn when the booking has been creating
-  const [creatingBookingAnimation, setCreatingBookingAnimation] = useState<boolean>(false)
-
-  const getBookingIDInStorage = (): string => {
+  const getBookingIDInStorage = (): string | null => {
     const id = localStorage.getItem(bookingKey)
-    if (!id) throw new Error("booking id doesn't exist in local storage")
+    if (!id) return null
     return id
   }
 
@@ -102,6 +98,14 @@ export const BookingContextProvider = ({ children }: Props) => {
     router.push('/payment')
   }
 
+  // ! guard
+  useEffect(() => {
+    const hasId = getBookingIDInStorage()
+
+    if (hasId && !(pahtname.startsWith('/booking') || pahtname.startsWith('/payment'))) {
+      deleteBookingIDInStorage()
+    }
+  }, [pahtname])
 
   return <BookingContext.Provider
     value={{
