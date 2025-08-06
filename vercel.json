@@ -5,8 +5,7 @@
     "autoJobCancelation": true,
     "productionBranch": "main",
     "allowedBranches": [
-      "main",
-      "dev"
+      "main"
     ]
   }
 }
