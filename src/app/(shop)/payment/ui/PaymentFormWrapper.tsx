@@ -2,20 +2,21 @@
 
 import { useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import { zObjectIdSchema } from '@/utils/zod-helpers'
 
 import { PaymentForm } from './PaymentForm'
-import { PaymentSummary } from '@/features/payment'
 
 import {
+  PaymentSummary,
   hasCardData,
   hasCompletedPaymentData,
   hasValidCardData,
   hasValidPaymentGateway,
   PaymentFormSchema
 } from '@/features/payment'
-import { useOrderContext } from '@/features/orders/context/OrderContext'
+import { useOrderContext } from '@/features/orders'
 import { useBookingContext } from '@/features/bookings'
-import { zObjectIdSchema } from '@/utils/zod-helpers'
 
 export const PaymentFormWrapper = () => {
   const methods = useForm<PaymentFormSchema>({
@@ -87,11 +88,16 @@ export const PaymentFormWrapper = () => {
     console.log(newValues)
 
     const bookingId = getBookingIDInStorage()
-    const parsed = zObjectIdSchema.safeParse(bookingId)
-    if (!parsed.success || !parsed.data) throw parsed.error
 
-    if (newValues.methodSelected === "payment-gateway" && paymentGateway !== undefined) {
-      await sendInitialOrderRequest({ booking_id: parsed.data, provider: paymentGateway })
+    if (bookingId) {
+      const parsed = zObjectIdSchema.safeParse(bookingId)
+      if (!parsed.success || !parsed.data) throw parsed.error
+
+      if (newValues.methodSelected === "payment-gateway" && paymentGateway !== undefined) {
+        await sendInitialOrderRequest({ booking_id: parsed.data, provider: paymentGateway })
+      }
+    } else {
+      toast.error("No se pudo establecer correctamente su reserva")
     }
   }
 
