@@ -2,10 +2,16 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
     "enabled": true,
+    "deploymentEnabled": {
+      "*": false,
+      "dev": true,
+      "main": true
+    },
     "autoJobCancelation": true,
     "productionBranch": "main",
     "allowedBranches": [
-      "main"
+      "main",
+      "dev"
     ]
   }
 }
