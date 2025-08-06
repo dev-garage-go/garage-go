@@ -7,5 +7,23 @@
       "dev": true,
       "main": true
     }
-  }
+  },
+  "crons": [
+    {
+      "path": "/api/crons/orders/expired",
+      "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/api/crons/orders/soft-delete",
+      "schedule": "0 */6 * * *"
+    },
+    {
+      "path": "/api/crons/orders/clean",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/crons/bookings/clean",
+      "schedule": "* */2 * * *"
+    }
+  ]
 }
