@@ -22,7 +22,7 @@ export async function updateOrderToExpired(): Promise<ServerActionResponse<strin
       console.log('orders with "pending" status not found')
       return {
         success: true,
-        data: "perding orders not found",
+        data: "pending orders not found",
         httpStatus: HttpStatus.NOT_FOUND
       }
     }

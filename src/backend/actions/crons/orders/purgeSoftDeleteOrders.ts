@@ -2,9 +2,8 @@
 
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 import { getCollection } from "@/backend/database"
-import { DeleteResult } from "mongodb"
 
-export async function purgeSoftDeleteOrders(): Promise<ServerActionResponse<null>> {
+export async function purgeSoftDeleteOrders(): Promise<ServerActionResponse<string>> {
   try {
     const ordersColl = await getCollection("orders")
     const bookingsColl = await getCollection("bookings")
@@ -22,7 +21,7 @@ export async function purgeSoftDeleteOrders(): Promise<ServerActionResponse<null
       console.log('orders with "soft-delete" status not found')
       return {
         success: true,
-        data: null,
+        data: 'orders with "soft-delete" status not found',
         httpStatus: HttpStatus.NOT_FOUND
       }
     }
@@ -46,7 +45,7 @@ export async function purgeSoftDeleteOrders(): Promise<ServerActionResponse<null
 
     return {
       success: true,
-      data: null,
+      data: `orders purged: ${deletedOrders}, bookings purged: ${deletedBookings}`,
       httpStatus: HttpStatus.OK
     }
 
