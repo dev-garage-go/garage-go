@@ -1,0 +1,11 @@
+{
+  "github": {
+    "enabled": true,
+    "autoJobCancelation": true,
+    "productionBranch": "main",
+    "allowedBranches": [
+      "main",
+      "dev"
+    ]
+  }
+}
