@@ -3,7 +3,7 @@
   "crons": [
     {
       "path": "/api/crons/expired",
-      "schedule": "*/30 * * *"
+      "schedule": "*/30 * * * *"
     },
     {
       "path": "/api/crons/soft-delete",
