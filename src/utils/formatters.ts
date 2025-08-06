@@ -28,3 +28,9 @@ export const roundedDecimals = (num: number, decimals: number = 2): number => {
   const factor = Math.pow(10, decimals)
   return Math.ceil(num * factor) / factor
 }
+
+// Validate ISO string
+export const validISOString = (date: string) => {
+  const regex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/
+  return regex.test(date) && !isNaN(Date.parse(date))
+}

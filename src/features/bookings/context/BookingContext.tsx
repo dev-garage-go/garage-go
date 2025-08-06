@@ -6,7 +6,7 @@ import { toast } from "sonner";
 
 import { createBooking } from "@/backend/actions"
 
-import { AppointmentDataInterface, BookingServiceDataInterface, UserInterface, bookingKey } from '@/features/bookings';
+import { UserAppointment, BookingInterface, UserInterface, bookingKey } from '@/features/bookings';
 import { useVehicleContext } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
 
@@ -14,7 +14,7 @@ interface ServiceBookingType {
   getBookingIDInStorage: () => string | null
   setBookingIDInStorage: (id: string) => void,
   deleteBookingIDInStorage: () => void,
-  createServiceBooking: (data: AppointmentDataInterface) => void,
+  createServiceBooking: (data: UserAppointment) => void,
   bookingCreated: boolean | null,
   creatingBookingAnimation: boolean
 }
@@ -58,11 +58,11 @@ export const BookingContextProvider = ({ children }: Props) => {
     localStorage.removeItem(bookingKey)
   }
 
-  const createServiceBooking = async (data: AppointmentDataInterface) => {
+  const createServiceBooking = async (data: UserAppointment) => {
     if (!serviceInStorage || !vehicleInStorage) return;
     setCreatingBookingAnimation(true)
 
-    const { user } = data;
+    const { user, appointment } = data;
 
     const userData: UserInterface = {
       name: user.name.toLowerCase(),
@@ -74,11 +74,14 @@ export const BookingContextProvider = ({ children }: Props) => {
       additionalInfo: user.additionalInfo?.toLowerCase()
     }
 
-    const booking: BookingServiceDataInterface = {
+    const bookingTTL = new Date(Date.now() + 1000 * 60 * 90).toISOString() // 1.30 h
+    const booking: BookingInterface = {
       service: serviceInStorage,
-      appointment: data.appointment,
+      appointment: appointment,
       vehicle_id: vehicleInStorage._id,
       user: userData,
+      created_at: new Date(Date.now()).toISOString(),
+      expires_at: bookingTTL
     }
 
     const responseBooking = await createBooking(booking)

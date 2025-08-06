@@ -8,6 +8,6 @@ export const zISOString = z.string().refine((val) =>
 
 /** Zod string que debe ser un formato de ObjectID **/
 export const zObjectIdSchema = z.string().refine(val =>
-  /^[a-f\d]{24}$/i.test(val), {
+  /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(val), {
   message: "Invalid ObjectId string format"
 })

@@ -14,14 +14,14 @@ export interface UserInterface {
   additionalInfo?: string
 }
 
-export interface Appointment {
+export interface AppointmentDate {
   date: Dayjs,
   time: Hour
 }
 
-export interface AppointmentDataInterface {
+export interface UserAppointment {
   user: UserInterface
-  appointment: Appointment
+  appointment: AppointmentDate
 }
 
 export interface AmountInterface {
@@ -31,14 +31,16 @@ export interface AmountInterface {
 }
 
 // Only one service
-export interface BookingServiceDataInterface {
+export interface BookingInterface {
   service: ServicesDataType,
   user: UserInterface,
   vehicle_id: string,  // al guardarlo en localstorage el Mongo ObjectID se convierte automaticamente en string
-  appointment: Appointment
+  appointment: AppointmentDate
+  expires_at: string, // ISO string
+  created_at: string  // ISO string
 }
 
-export interface BookingWithStringIDInterface extends BookingServiceDataInterface {
+export interface BookingResponse extends BookingInterface {
   _id: string
 }
 

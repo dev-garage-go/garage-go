@@ -5,9 +5,9 @@ import { BookingDB, getCollection } from "@/backend/database";
 import { HttpStatus, ServerActionResponse } from "@/backend/types";
 import { getVehicleByID } from "@/backend/actions";
 
-import { BookingServiceDataInterface, BookingWithStringIDInterface } from "@/features/bookings";
+import { BookingInterface, BookingResponse } from "@/features/bookings";
 
-export const createBooking = async (booking: BookingServiceDataInterface): Promise<ServerActionResponse<BookingWithStringIDInterface>> => {
+export const createBooking = async (booking: BookingInterface): Promise<ServerActionResponse<BookingResponse>> => {
   try {
     const coll = await getCollection("bookings")
     if (!coll) throw new Error("error getting bookings collection")
@@ -64,7 +64,7 @@ export const createBooking = async (booking: BookingServiceDataInterface): Promi
     // Mongo ObjectId are converted to strings
     const { _id: newBookingID, vehicle_id: newBookingVehicleID, ...restBookingCreated } = bookingCreated
 
-    const validBookingToClient: BookingWithStringIDInterface = {
+    const validBookingToClient: BookingResponse = {
       _id: newBookingID.toString(),
       vehicle_id: newBookingVehicleID.toString(),
       ...restBookingCreated

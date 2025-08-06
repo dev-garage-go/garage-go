@@ -9,7 +9,7 @@ import { ServicesTypes, useServiceContext } from "@/features/services";
 import { LazyVehicleDataModal, useVehicleContext } from "@/features/vehicle";
 import { PaymentSummary } from "@/features/payment";
 import {
-  AppointmentDataInterface,
+  UserAppointment,
   useBookingContext,
   LazyConfirmationBookingModal,
 } from "@/features/bookings"
@@ -23,7 +23,7 @@ interface Props {
 }
 
 export const BookingFormWrapper = ({ params }: Props) => {
-  const methods = useForm<AppointmentDataInterface>({
+  const methods = useForm<UserAppointment>({
     shouldFocusError: true,
     defaultValues: {
       user: {
@@ -46,7 +46,7 @@ export const BookingFormWrapper = ({ params }: Props) => {
   }, [serviceInStorage, router])
 
   // Func that will be executed when form its submitted
-  const onSubmit = async (data: AppointmentDataInterface) => {
+  const onSubmit = async (data: UserAppointment) => {
     createServiceBooking(data)
   }
 

@@ -9,7 +9,7 @@ import { Controller, useFormContext } from "react-hook-form";
 
 import { ErrorMessage, InformationButton, Select } from "@/components";
 import {
-  BookingServiceDataInterface,
+  BookingInterface,
   AddressTypesData,
   SchedulePicker,
   CalendarPicker,
@@ -21,7 +21,7 @@ interface Props {
 }
 
 export const BookingForm = ({ withBooking }: Props) => {
-  const { register, control, formState: { errors }, watch } = useFormContext<BookingServiceDataInterface>()
+  const { register, control, formState: { errors }, watch } = useFormContext<BookingInterface>()
 
   // Switch calendar y schedule pickers
   const [showCalendarPicker, setShowCalendarPicker] = useState(true)

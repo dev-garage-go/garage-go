@@ -1,9 +1,9 @@
-import { BookingServiceDataInterface } from "@/features/bookings"
+import { BookingInterface } from "@/features/bookings"
 import { ObjectId } from "mongodb"
 import { ServerVehicleResponse } from "@/features/vehicle"
 
 // objeto de como queda la reserva en base de datos, con el vehicle id siendo un ObjectID de Mongo
-export interface BookingDB extends Omit<BookingServiceDataInterface, 'vehicle_id'> {
+export interface BookingDB extends Omit<BookingInterface, 'vehicle_id'> {
   _id?: ObjectId  // debe ser opcional porque de esa forma mongodb se encarga de crearlo al impactar la db
   vehicle_id: ObjectId
   order_id: ObjectId | null
