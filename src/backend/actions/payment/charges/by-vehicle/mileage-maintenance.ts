@@ -1,7 +1,7 @@
 'use server'
 
-import { AmountInterface } from "@/features/bookings";
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
+import { AmountInterface } from "@/features/payment";
 import { ServerVehicleResponse } from "@/features/vehicle";
 
 export const calculateMileageChargeByVehicle = async (vehicle: ServerVehicleResponse): Promise<ServerActionResponse<AmountInterface>> => {

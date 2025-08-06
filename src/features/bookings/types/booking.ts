@@ -2,13 +2,6 @@ import { AppointmentDate } from './schedules';
 import { UserInterface } from './user';
 import { ServicesDataType } from '@/features/services';
 
-
-export interface AmountInterface {
-  subtotal: number
-  disscount: number
-  total: number
-}
-
 // Only one service
 export interface BookingInterface {
   service: ServicesDataType,

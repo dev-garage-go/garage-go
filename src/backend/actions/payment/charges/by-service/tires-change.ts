@@ -1,9 +1,10 @@
 'use server'
 
-import { AmountInterface } from "@/features/bookings"
-import { TiresChangeServiceInterface } from "@/features/services"
-import { ServerActionResponse } from '@/backend/types';
 import { HttpStatus } from "@/backend/types";
+import { ServerActionResponse } from '@/backend/types';
+
+import { AmountInterface } from "@/features/payment"
+import { TiresChangeServiceInterface } from "@/features/services"
 
 
 export const calculateTiresChange = async (service: TiresChangeServiceInterface): Promise<ServerActionResponse<AmountInterface>> => {

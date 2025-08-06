@@ -8,8 +8,7 @@
 import { calculateMileageCharge } from "./mileage-maintenance"
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 
-import { AmountInterface } from "@/features/bookings"
-import { ServiceChargeInterface } from "@/features/payment"
+import { ServiceChargeInterface, AmountInterface } from "@/features/payment"
 import { MileageMaintenanceServiceInterface } from "@/features/services"
 
 // Only one service

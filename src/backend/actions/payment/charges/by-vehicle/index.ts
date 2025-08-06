@@ -6,8 +6,7 @@
 
 import { HttpStatus, ServerActionResponse } from "@/backend/types"
 
-import { AmountInterface } from "@/features/bookings"
-import { BaseChargeByVehicle } from "@/features/payment"
+import { BaseChargeByVehicle, AmountInterface } from "@/features/payment"
 import { calculateMileageChargeByVehicle } from "./mileage-maintenance"
 
 // Only one service

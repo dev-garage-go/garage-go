@@ -1,10 +1,10 @@
 'use server'
 
 import { cookies } from 'next/headers'
-import { AmountInterface } from "@/features/bookings"
+import { AmountInterface } from "@/features/payment"
 import { HttpStatus, ServerActionResponse } from '@/backend/types'
 
-const amountCookieKey = "baseAmunt"
+const amountCookieKey = "baseAmount"
 
 export const loadBaseAmountInCookie = async (amount: AmountInterface): Promise<ServerActionResponse<null>> => {
   try {

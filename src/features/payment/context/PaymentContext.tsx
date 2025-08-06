@@ -3,7 +3,7 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react"
 
 import { BaseChargeByVehicle } from "../types/service-charge"
-import { AmountInterface } from "@/features/bookings"
+import { AmountInterface } from "@/features/payment"
 import { useVehicleContext } from "@/features/vehicle"
 import { useServiceContext } from "@/features/services"
 

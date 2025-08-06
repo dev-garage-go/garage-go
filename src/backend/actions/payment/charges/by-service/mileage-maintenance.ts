@@ -1,7 +1,6 @@
 'use server'
 
-import { AmountInterface } from "@/features/bookings";
-import { ServiceChargeInterface } from "@/features/payment";
+import { ServiceChargeInterface, AmountInterface } from "@/features/payment";
 import { HttpStatus, ServerActionResponse } from '@/backend/types';
 
 export const calculateMileageCharge = async (chargeRequest: ServiceChargeInterface): Promise<ServerActionResponse<AmountInterface>> => {
